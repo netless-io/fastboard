@@ -1,11 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@hyrious/rimraf': ^0.1.0
   '@netless/window-manager': ^0.2.19
   '@types/react': ^17.0.35
   '@types/react-dom': ^17.0.11
   react: ^17.0.2
   react-dom: ^17.0.2
+  rollup-plugin-peer-deps-external: ^2.2.4
   vite: ^2.6.14
   white-web-sdk: ^2.15.4
 
@@ -13,10 +15,12 @@ dependencies:
   '@netless/window-manager': 0.2.19_white-web-sdk@2.15.4
 
 devDependencies:
+  '@hyrious/rimraf': 0.1.0
   '@types/react': 17.0.35
   '@types/react-dom': 17.0.11
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  rollup-plugin-peer-deps-external: 2.2.4
   vite: 2.6.14
   white-web-sdk: 2.15.4
 
@@ -28,6 +32,12 @@ packages:
     dependencies:
       regenerator-runtime: 0.13.9
     dev: false
+
+  /@hyrious/rimraf/0.1.0:
+    resolution: {integrity: sha512-EvPZVRkyJTzoBHOswuVK2hSAFGIfu9E0S7sCfOc7mvA+l2t1PxNZPVAflZuU/FJIzmV7wZAO57ISqf1j3wxFjA==}
+    engines: {node: '>=14.14.0'}
+    hasBin: true
+    dev: true
 
   /@juggle/resize-observer/3.3.1:
     resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
@@ -811,6 +821,12 @@ packages:
     resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
     engines: {node: '>= 4'}
     dev: false
+
+  /rollup-plugin-peer-deps-external/2.2.4:
+    resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
+    peerDependencies:
+      rollup: '*'
+    dev: true
 
   /rollup/2.60.0:
     resolution: {integrity: sha512-cHdv9GWd58v58rdseC8e8XIaPUo8a9cgZpnCMMDGZFDZKEODOiPPEQFXLriWr/TjXzhPPmG5bkAztPsOARIcGQ==}

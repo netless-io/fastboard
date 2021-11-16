@@ -4,10 +4,13 @@
   "description": "An open source sdk based on white-web-sdk.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./src/index.ts",
+  "types": "./src/index.tsx",
   "sideEffects": false,
   "scripts": {
-    "build": "echo 1"
+    "lint": "tsc",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "cleanup": "rimraf ./dist"
   },
   "repository": "netless-io/agora-whiteboard-web-sdk",
   "keywords": [
@@ -20,8 +23,8 @@
       "email": "hyrious@outlook.com"
     },
     {
-        "name": "l1shen",
-        "email": "lishen1635@gmail.com"
+      "name": "l1shen",
+      "email": "lishen1635@gmail.com"
     }
   ],
   "license": "MIT",
@@ -34,10 +37,12 @@
     "@netless/window-manager": "^0.2.19"
   },
   "devDependencies": {
+    "@hyrious/rimraf": "^0.1.0",
     "@types/react": "^17.0.35",
     "@types/react-dom": "^17.0.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "vite": "^2.6.14",
     "white-web-sdk": "^2.15.4"
   }
