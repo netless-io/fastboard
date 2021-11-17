@@ -1,0 +1,37 @@
+$ns: "agora-whiteboard";
+$z-main: 1;
+$z-tool-box: 10;
+
+.#{$ns}-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.#{$ns}-placeholder {
+  border: 1px solid blue;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$ns}-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: $z-main;
+}
+
+.#{$ns}-tool-box {
+  position: absolute;
+  &.left {
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: $z-tool-box;
+  }
+}

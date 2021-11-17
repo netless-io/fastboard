@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "playground"],
   "compilerOptions": {
     "jsx": "react",
     "noEmit": true,

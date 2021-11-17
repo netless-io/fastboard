@@ -16,12 +16,14 @@ export default defineConfig(({ mode }) => {
       sourcemap: isProd,
       outDir: "dist",
       rollupOptions: {
+        external: ["@netless/window-manager"],
         plugins: [peerDepsExternal()],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
             "white-web-sdk": "WhiteWebSdk",
+            "@netless/window-manager": "WindowManager",
           },
         },
       },
