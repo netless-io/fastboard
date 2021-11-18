@@ -13,12 +13,33 @@ export class WhiteboardApp {
   room: Room | null = null;
   manager: WindowManager | null = null;
 
+  private destroyed = true;
+  private restProps: Omit<Config, "target">;
+
   constructor({ target, ...restProps }: Config) {
     this.target = target;
-    ReactDOM.render(<App {...restProps} instance={this} />, target);
+    this.restProps = restProps;
+    this.initialize();
+  }
+
+  initialize() {
+    if (this.destroyed) {
+      this.destroyed = false;
+      ReactDOM.render(<App {...this.restProps} instance={this} />, this.target);
+    }
+  }
+
+  accept({ sdk, room, manager }: { sdk: WhiteWebSdk; room: Room; manager: WindowManager }) {
+    this.sdk = sdk;
+    this.room = room;
+    this.manager = manager;
   }
 
   destroy() {
-    ReactDOM.unmountComponentAtNode(this.target);
+    if (!this.destroyed) {
+      this.destroyed = true;
+      ReactDOM.unmountComponentAtNode(this.target);
+      this.sdk = this.room = this.manager = null;
+    }
   }
 }

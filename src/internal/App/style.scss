@@ -1,6 +1,4 @@
-$ns: "agora-whiteboard";
-$z-main: 1;
-$z-tool-box: 10;
+@import "../../variables.scss";
 
 .#{$ns}-container {
   width: 100%;
@@ -24,14 +22,4 @@ $z-tool-box: 10;
   height: 100%;
   overflow: hidden;
   z-index: $z-main;
-}
-
-.#{$ns}-tool-box {
-  position: absolute;
-  &.left {
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: $z-tool-box;
-  }
 }
