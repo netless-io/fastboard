@@ -1,8 +1,8 @@
-import type { AppProps } from "./internal/App";
+import type { MountWhiteboardParams } from "./internal";
 
 import { WhiteboardApp } from "./internal/App/instance";
 
-export type Config = Omit<AppProps, "instance"> & {
+export type Config = MountWhiteboardParams & {
   target: HTMLElement;
 };
 

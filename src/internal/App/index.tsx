@@ -1,22 +1,19 @@
 import style from "./style.scss?inline";
 
+import type { NamedExoticComponent } from "react";
 import type { WhiteboardProps } from "../../components";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { ToolBox, Whiteboard } from "../../components";
-import { classNames, injectStyle } from "../../helpers/utils";
+import { classNames } from "../../helpers/utils";
+import { useStyleLoader } from "../hooks";
 
 export { WhiteboardApp } from "./instance";
 
 export type AppProps = WhiteboardProps;
 
 export function App(props: AppProps) {
-  useEffect(() => {
-    const styleElement = injectStyle(style);
-    return () => {
-      styleElement && document.head.removeChild(styleElement);
-    };
-  }, []);
+  useStyleLoader(style);
 
   return (
     <div className={classNames("container")}>
@@ -26,4 +23,4 @@ export function App(props: AppProps) {
   );
 }
 
-App.displayName = "WhiteboardApp";
+(App as NamedExoticComponent).displayName = "WhiteboardApp";

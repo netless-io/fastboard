@@ -28,6 +28,7 @@ export async function mountWhiteboard(
     ...joinRoom,
     invisiblePlugins: [WindowManager],
     useMultiViews: true,
+    disableNewPencil: false,
     disableMagixEventDispatchLimit: true,
   });
 
