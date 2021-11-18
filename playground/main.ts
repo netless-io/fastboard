@@ -1,3 +1,4 @@
+import { DeviceType } from "white-web-sdk";
 import { createWhiteboardApp } from "../src";
 import { createRoom, getUID } from "./common";
 
@@ -48,7 +49,9 @@ async function prepare(): Promise<{ uuid: string; roomToken: string }> {
 prepare().then(({ uuid, roomToken }) => {
   let app = createWhiteboardApp({
     target: document.getElementById("app")!,
-    appIdentifier: VITE_APPID,
+    sdkConfig: {
+      appIdentifier: VITE_APPID,
+    },
     joinRoom: {
       uid: getUID(),
       uuid,
