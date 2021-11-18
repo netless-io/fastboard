@@ -5,7 +5,7 @@ const config = {
     browser: true,
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react-hooks"],
+  plugins: ["@typescript-eslint", "react-hooks", "html"],
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   rules: {
     // TODO: wait for `import { type A }`
