@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       lib: {
-        entry: path.resolve(process.cwd(), "src/index.tsx"),
+        entry: path.resolve(process.cwd(), "src/index.ts"),
         formats: ["cjs", "es", "iife"],
         fileName: "index",
         name: "AgoraWhiteboardSdk",

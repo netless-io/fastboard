@@ -4,7 +4,7 @@
   "description": "An open source sdk based on white-web-sdk.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./src/index.tsx",
+  "types": "./src/index.ts",
   "exports": {
     "node": {
       "import": "./dist/index.es.js",
