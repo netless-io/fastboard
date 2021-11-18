@@ -1,8 +1,12 @@
 import style from "./style.scss?inline";
 
+import type { WhiteboardProps } from "../../components";
+
 import React, { useEffect } from "react";
-import { ToolBox, Whiteboard, WhiteboardProps } from "./components";
-import { classNames, injectStyle } from "./helpers/utils";
+import { ToolBox, Whiteboard } from "../../components";
+import { classNames, injectStyle } from "../../helpers/utils";
+
+export { WhiteboardApp } from "./instance";
 
 export type AppProps = WhiteboardProps;
 

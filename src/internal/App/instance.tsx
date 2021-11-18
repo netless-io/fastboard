@@ -1,13 +1,10 @@
+import type { WindowManager } from "@netless/window-manager";
+import type { WhiteWebSdk, Room } from "white-web-sdk";
+import type { Config } from "../..";
+
 import React from "react";
 import ReactDOM from "react-dom";
-import { Room, WhiteWebSdk } from "white-web-sdk";
-import { WindowManager } from "@netless/window-manager";
-
-import { App, AppProps } from "./App";
-
-export type Config = Omit<AppProps, "instance"> & {
-  target: HTMLElement;
-};
+import { App } from ".";
 
 export class WhiteboardApp {
   target: Config["target"];
@@ -24,8 +21,4 @@ export class WhiteboardApp {
   destroy() {
     ReactDOM.unmountComponentAtNode(this.target);
   }
-}
-
-export function createWhiteboardApp(config: Config) {
-  return new WhiteboardApp(config);
 }

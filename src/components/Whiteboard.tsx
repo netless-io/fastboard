@@ -1,33 +1,28 @@
+import style from "@netless/window-manager/dist/style.css?inline";
+
+import type { MountWhiteboardParams } from "../internal";
+import type { WhiteboardApp } from "../internal/App";
+
 import React, { useCallback, useEffect } from "react";
 import { classNames, injectStyle } from "../helpers/utils";
 import { mountWhiteboard } from "../internal";
-import { WhiteboardApp } from "..";
-import style from "@netless/window-manager/dist/style.css?inline";
-import type { WhiteWebSdkConfiguration, JoinRoomParams } from "white-web-sdk";
-import { MountParams } from "@netless/window-manager";
 
-export type JoinRoom = Omit<JoinRoomParams, "useMultiViews" | "disableMagixEventDispatchLimit">;
-export type WhiteWindowSDKConfiguration = Omit<WhiteWebSdkConfiguration, "useMobXState">;
-
-export interface WhiteboardProps {
-  sdkConfig: WhiteWindowSDKConfiguration;
-  joinRoom: JoinRoom;
+export type WhiteboardProps = MountWhiteboardParams & {
   instance: WhiteboardApp;
-  managerConfig?: Omit<MountParams, "room" | "container">;
-}
+};
 
-export function Whiteboard(props: WhiteboardProps) {
+export function Whiteboard({ instance, ...params }: WhiteboardProps) {
   const useWhiteboard = useCallback(
     async (container: HTMLDivElement | null) => {
       if (container) {
-        const essentials = await mountWhiteboard(props, container);
-        Object.assign(props.instance, essentials);
+        const essentials = await mountWhiteboard(params, container);
+        Object.assign(instance, essentials);
       } else {
-        const { room } = props.instance;
+        const { room } = instance;
         room && room.disconnect();
       }
     },
-    [props, props.instance]
+    [instance, params]
   );
 
   useEffect(() => {

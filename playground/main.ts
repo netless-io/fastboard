@@ -1,4 +1,3 @@
-import { DeviceType } from "white-web-sdk";
 import { createWhiteboardApp } from "../src";
 import { createRoom, getUID } from "./common";
 
@@ -14,8 +13,8 @@ async function prepare(): Promise<{ uuid: string; roomToken: string }> {
 
   const query = new URLSearchParams(location.search);
   if (query.has("uuid") && query.has("roomToken")) {
-    uuid = query.get("uuid")!;
-    roomToken = query.get("roomToken")!;
+    uuid = query.get("uuid") as string;
+    roomToken = query.get("roomToken") as string;
   }
 
   if (!uuid || !roomToken) {
@@ -47,8 +46,8 @@ async function prepare(): Promise<{ uuid: string; roomToken: string }> {
 }
 
 prepare().then(({ uuid, roomToken }) => {
-  let app = createWhiteboardApp({
-    target: document.getElementById("app")!,
+  const app = createWhiteboardApp({
+    target: document.getElementById("app") as HTMLElement,
     sdkConfig: {
       appIdentifier: VITE_APPID,
     },

@@ -1,11 +1,13 @@
-import { default as origClassNames, Argument } from "classnames";
+import type { Argument } from "classnames";
+
+import origClassNames from "classnames";
 
 export const isServer = typeof document === "undefined";
 
 export function injectStyle(styleText: string) {
   if (isServer) return undefined;
-  var styleElement = document.createElement("style");
-  var textNode = document.createTextNode(styleText);
+  const styleElement = document.createElement("style");
+  const textNode = document.createTextNode(styleText);
   styleElement.appendChild(textNode);
   return document.head.appendChild(styleElement);
 }
