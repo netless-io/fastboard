@@ -1,18 +1,19 @@
-import style from "@netless/window-manager/dist/style.css?inline";
-
 import React, { useCallback, useEffect } from "react";
 import { classNames, injectStyle } from "../helpers/utils";
 import { mountWhiteboard } from "../internal";
 import { WhiteboardApp } from "..";
+import style from "@netless/window-manager/dist/style.css?inline";
+import type { WhiteWebSdkConfiguration, JoinRoomParams } from "white-web-sdk";
+import { MountParams } from "@netless/window-manager";
+
+export type JoinRoom = Omit<JoinRoomParams, "useMultiViews" | "disableMagixEventDispatchLimit">;
+export type WhiteWindowSDKConfiguration = Omit<WhiteWebSdkConfiguration, "useMobXState">;
 
 export interface WhiteboardProps {
-  appIdentifier: string;
-  joinRoom: {
-    uid: string;
-    uuid: string;
-    roomToken: string;
-  };
+  sdkConfig: WhiteWindowSDKConfiguration;
+  joinRoom: JoinRoom;
   instance: WhiteboardApp;
+  managerConfig?: Omit<MountParams, "room" | "container">;
 }
 
 export function Whiteboard(props: WhiteboardProps) {

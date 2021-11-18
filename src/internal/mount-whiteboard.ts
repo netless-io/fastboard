@@ -1,26 +1,26 @@
 import { WindowManager } from "@netless/window-manager";
-import { DeviceType, WhiteWebSdk } from "white-web-sdk";
+import { WhiteWebSdk } from "white-web-sdk";
 import { WhiteboardProps } from "../components/Whiteboard";
 
 export async function mountWhiteboard(
-  { appIdentifier, joinRoom }: WhiteboardProps,
+  { sdkConfig, joinRoom, managerConfig = { cursor: true } }: WhiteboardProps,
   container: HTMLDivElement
 ) {
   const sdk = new WhiteWebSdk({
-    appIdentifier,
-    deviceType: DeviceType.Surface,
+    ...sdkConfig,
+    appIdentifier: sdkConfig.appIdentifier,
     useMobXState: true,
   });
   const room = await sdk.joinRoom({
     ...joinRoom,
     invisiblePlugins: [WindowManager],
-    disableNewPencil: false,
     useMultiViews: true,
+    disableMagixEventDispatchLimit: true,
   });
   const manager = await WindowManager.mount({
+    ...managerConfig,
     room,
     container,
-    cursor: true,
     debug: import.meta.env.DEV,
   });
   return { sdk, room, manager };
