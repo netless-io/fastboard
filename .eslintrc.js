@@ -5,8 +5,14 @@ const config = {
     browser: true,
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react-hooks", "html"],
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  plugins: ["@typescript-eslint", "react-hooks", "html", "import"],
+  extends: [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+  ],
   rules: {
     // TODO: wait for `import { type A }`
     // https://github.com/typescript-eslint/typescript-eslint/issues/3950
@@ -15,6 +21,29 @@ const config = {
     "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "warn",
+    "import/order": [
+      "warn",
+      {
+        groups: [
+          "type",
+          "builtin",
+          "external",
+          "internal",
+          ["index", "sibling", "parent", "object"],
+        ],
+        pathGroups: [
+          {
+            pattern: "*.scss?inline",
+            group: "internal",
+            patternOptions: { matchBase: true },
+            position: "after",
+          },
+        ],
+        "newlines-between": "always",
+        alphabetize: { order: "asc", caseInsensitive: true },
+      },
+    ],
+    "import/no-unresolved": ["warn", { ignore: ["\\.scss\\?inline$"] }],
   },
 };
 

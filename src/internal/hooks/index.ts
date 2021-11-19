@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import { injectStyle } from "../../helpers/utils";
+
+export const EMPTY_ARRAY: never[] = [];
 
 export function useStyleLoader(cssText: string) {
   useEffect(() => {
@@ -7,7 +10,12 @@ export function useStyleLoader(cssText: string) {
     return () => {
       styleElement && document.head.removeChild(styleElement);
     };
-    // cssText will never change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, EMPTY_ARRAY);
+}
+
+export function useForceUpdate() {
+  const [, setState] = useState([]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useCallback(() => setState([]), EMPTY_ARRAY);
 }

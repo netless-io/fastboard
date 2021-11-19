@@ -1,29 +1,24 @@
 import type { MountWhiteboardParams, WhiteboardApp } from "../internal";
 
 import React, { useCallback } from "react";
+
 import { classNames } from "../helpers/utils";
-import { mountWhiteboard } from "../internal";
+import { EMPTY_ARRAY, mountWhiteboard } from "../internal";
 
 export type WhiteboardProps = MountWhiteboardParams & {
   instance: WhiteboardApp;
-  onMount?: () => void;
-  onDestroy?: () => void;
 };
 
-export function Whiteboard({ instance, onMount, onDestroy, ...params }: WhiteboardProps) {
+export function Whiteboard({ instance, ...params }: WhiteboardProps) {
   const useWhiteboard = useCallback(async (container: HTMLDivElement | null) => {
     if (container) {
-      const essentials = await mountWhiteboard(params, container);
-      instance.accept(essentials);
-      onMount && onMount();
+      instance.accept(await mountWhiteboard(params, container));
     } else {
-      const { room } = instance;
-      room && room.disconnect();
-      onDestroy && onDestroy();
+      instance.room && instance.room.disconnect();
     }
     // props will never change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, EMPTY_ARRAY);
 
   return <div className={classNames("main")} ref={useWhiteboard}></div>;
 }

@@ -6,15 +6,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { App } from ".";
 
+export interface AcceptParams {
+  readonly sdk: WhiteWebSdk;
+  readonly room: Room;
+  readonly manager: WindowManager;
+}
+
 export class WhiteboardApp {
-  target: Config["target"];
+  readonly target: Config["target"];
 
   sdk: WhiteWebSdk | null = null;
   room: Room | null = null;
   manager: WindowManager | null = null;
 
+  private readonly restProps: Omit<Config, "target">;
   private destroyed = true;
-  private restProps: Omit<Config, "target">;
 
   constructor({ target, ...restProps }: Config) {
     this.target = target;
@@ -25,14 +31,19 @@ export class WhiteboardApp {
   initialize() {
     if (this.destroyed) {
       this.destroyed = false;
-      ReactDOM.render(<App {...this.restProps} instance={this} />, this.target);
+      this.forceUpdate();
     }
   }
 
-  accept({ sdk, room, manager }: { sdk: WhiteWebSdk; room: Room; manager: WindowManager }) {
+  forceUpdate() {
+    ReactDOM.render(<App {...this.restProps} instance={this} />, this.target);
+  }
+
+  accept({ sdk, room, manager }: AcceptParams) {
     this.sdk = sdk;
     this.room = room;
     this.manager = manager;
+    this.forceUpdate();
   }
 
   destroy() {

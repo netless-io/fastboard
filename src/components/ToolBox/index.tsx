@@ -1,12 +1,13 @@
 import type { MouseEvent } from "react";
-import type { WhiteboardApp } from "../../internal";
+import type { Room, RoomState } from "white-web-sdk";
 
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { ApplianceNames } from "white-web-sdk";
+
 import { classNames } from "../../helpers/utils";
 
 export interface ToolBoxProps {
-  instance: WhiteboardApp;
+  room: Room;
   position?: "left" | "top";
 }
 
@@ -16,16 +17,29 @@ const DefaultTools: ApplianceNames[] = [
   ApplianceNames.pencil,
 ];
 
-export function ToolBox({ instance, position = "left" }: ToolBoxProps) {
+export function ToolBox({ room, position = "left" }: ToolBoxProps) {
+  const [currentTool, setTool] = useState(room.state.memberState.currentApplianceName);
+
+  // listen to the change of the selected tool
+  useEffect(() => {
+    const listener = (e: Partial<RoomState>) => {
+      e.memberState && setTool(e.memberState.currentApplianceName);
+    };
+    room.callbacks.on("onRoomStateChanged", listener);
+    return () => {
+      room.callbacks.off("onRoomStateChanged", listener);
+    };
+  }, [room]);
+
   const onClickTool = useCallback(
     (ev: MouseEvent<HTMLButtonElement>) => {
       const tool = ev.currentTarget.dataset.tool as ApplianceNames;
-      instance.room && instance.room.setMemberState({ currentApplianceName: tool });
+      if (tool in ApplianceNames) {
+        room.setMemberState({ currentApplianceName: tool });
+      }
     },
-    [instance]
+    [room]
   );
-
-  const currentTool = instance.room?.state.memberState.currentApplianceName;
 
   return (
     <div className={classNames("tool-box", position)}>
