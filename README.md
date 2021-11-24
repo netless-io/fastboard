@@ -15,7 +15,9 @@ import { createWhiteboardApp } from "agora-whiteboard-sdk";
 
 let app = createWhiteboardApp({
   target: document.getElementById("whiteboard"),
-  appIdentifier: "whiteboard-appid",
+  sdkConfig: {
+    appIdentifier: "whiteboard-appid",
+  },
   joinRoom: {
     uid: "unique_id_for_each_client",
     uuid: "room-uuid",

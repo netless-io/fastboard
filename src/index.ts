@@ -1,11 +1,7 @@
-import type { MountWhiteboardParams } from "./internal";
+import type { WhiteboardAppConfig } from "./WhiteboardApp";
 
-import { WhiteboardApp } from "./internal/App/instance";
+import { WhiteboardApp } from "./WhiteboardApp";
 
-export type Config = MountWhiteboardParams & {
-  target: HTMLElement;
-};
-
-export function createWhiteboardApp(config: Config) {
+export function createWhiteboardApp(config: WhiteboardAppConfig): WhiteboardApp {
   return new WhiteboardApp(config);
 }
