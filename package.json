@@ -21,8 +21,8 @@
     "collaboration"
   ],
   "scripts": {
-    "prettier": "prettier --write . && eslint --ext .ts,.tsx --fix",
-    "lint": "eslint --ext .ts,.tsx . && prettier --check . && tsc",
+    "prettier": "prettier --write . && eslint --ext .ts,.svelte --fix",
+    "lint": "eslint --ext .ts,.svelte . && prettier --check . && tsc",
     "preinstall": "npx only-allow pnpm",
     "build": "vite build",
     "build:dev": "vite build --mode development",
@@ -41,8 +41,6 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
     "white-web-sdk": "*"
   },
   "dependencies": {
@@ -51,22 +49,20 @@
   "devDependencies": {
     "@hyrious/rimraf": "^0.1.0",
     "@loadable/component": "^5.15.0",
-    "@types/loadable__component": "^5.13.4",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "classnames": "^2.3.1",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-svelte3": "^3.2.1",
     "prettier": "^2.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "prettier-plugin-svelte": "^2.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "sass": "^1.43.5",
+    "side-effect-manager": "^0.1.5",
+    "svelte": "^3.44.2",
     "typescript": "^4.5.2",
     "vite": "^2.6.14",
     "white-web-sdk": "^2.15.7"
