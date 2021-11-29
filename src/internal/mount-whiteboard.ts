@@ -1,24 +1,22 @@
+import type { Essentials } from "../WhiteboardApp";
 import type { MountParams } from "@netless/window-manager";
-import type { JoinRoomParams, Room, WhiteWebSdkConfiguration } from "white-web-sdk";
+import type { JoinRoomParams, WhiteWebSdkConfiguration } from "white-web-sdk";
 
 import { WindowManager } from "@netless/window-manager";
 import { DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
 
-export type SdkConfig = Omit<WhiteWebSdkConfiguration, "useMobXState">;
+export type SdkConfig = Omit<
+  WhiteWebSdkConfiguration,
+  "useMobXState" | "disableNewPencil" | "disableMagixEventDispatchLimit"
+>;
 export type JoinRoom = Omit<JoinRoomParams, "useMultiViews" | "disableMagixEventDispatchLimit">;
 export type ManagerConfig = Omit<MountParams, "room">;
-
-export interface MountWhiteboardResult {
-  sdk: WhiteWebSdk;
-  room: Room;
-  manager: WindowManager;
-}
 
 export async function mountWhiteboard(
   sdkConfig: SdkConfig,
   joinRoom: JoinRoom,
   managerConfig: ManagerConfig
-): Promise<MountWhiteboardResult> {
+): Promise<Essentials> {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
@@ -27,8 +25,6 @@ export async function mountWhiteboard(
   joinRoom.invisiblePlugins = [...(joinRoom.invisiblePlugins || []), WindowManager];
   const room = await sdk.joinRoom({
     floatBar: true,
-    disableNewPencil: false,
-    disableMagixEventDispatchLimit: true,
     hotKeys: {
       ...DefaultHotKeys,
       changeToSelector: "s",
@@ -44,6 +40,8 @@ export async function mountWhiteboard(
     },
     ...joinRoom,
     useMultiViews: true,
+    disableNewPencil: false,
+    disableMagixEventDispatchLimit: true,
   });
 
   const manager = await WindowManager.mount({

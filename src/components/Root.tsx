@@ -18,7 +18,6 @@ export default function Root() {
           ...managerConfig,
           container,
         });
-        // `_resolveReady` is marked private
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (app as any)._resolveReady(essentials);
       }

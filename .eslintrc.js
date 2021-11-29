@@ -1,5 +1,5 @@
 /** @type {import("eslint").Linter.Config} */
-const config = {
+module.exports = {
   root: true,
   env: {
     browser: true,
@@ -18,7 +18,10 @@ const config = {
     // https://github.com/typescript-eslint/typescript-eslint/issues/3950
     "@typescript-eslint/consistent-type-imports": "warn",
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { ignoreRestSiblings: true, argsIgnorePattern: "^_" },
+    ],
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "warn",
     "import/order": [
@@ -46,6 +49,3 @@ const config = {
     "import/no-unresolved": ["warn", { ignore: ["\\.scss\\?inline$"] }],
   },
 };
-
-// eslint-disable-next-line no-undef
-module.exports = config;

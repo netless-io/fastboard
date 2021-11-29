@@ -15,26 +15,22 @@ export interface WhiteboardAppConfig {
   readonly managerConfig?: Omit<ManagerConfig, "container">;
 }
 
-export interface EssentialProps {
+export interface Essentials {
   readonly sdk: WhiteWebSdk;
   readonly room: Room;
   readonly manager: WindowManager;
+  // TODO: add fields like "hotkeys" for future usage (in toolbar)
 }
 
 export class WhiteboardApp {
   static readonly Context = createContext<WhiteboardApp | null>(null);
 
-  // we put `readonly` here to tell users not writing it
   readonly ready = false;
-
-  // we put `private` here to let users not seeing it in vscode
-  private _resolveReady!: (props: EssentialProps) => void;
-
+  private _resolveReady!: (props: Essentials) => void;
   readonly readyPromise = new Promise<void>(resolve => {
-    this._resolveReady = (props: EssentialProps) => {
+    this._resolveReady = (props: Essentials) => {
       this._resolveReady = noop;
       Object.assign(this, props);
-      // we have to use type cast to make typescript happy
       (this.ready as boolean) = true;
       resolve();
     };
