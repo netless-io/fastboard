@@ -5,7 +5,7 @@ module.exports = {
     browser: true,
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["svelte3", "@typescript-eslint"],
+  plugins: ["@typescript-eslint", "svelte3"],
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
   rules: {
     // TODO: wait for `import { type A }`
@@ -22,5 +22,8 @@ module.exports = {
   ],
   settings: {
     "svelte3/typescript": true,
+    "svelte3/ignore-styles": ({ lang }) => {
+      return lang === "scss";
+    },
   },
 };
