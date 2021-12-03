@@ -3,18 +3,26 @@
   import Card from "./Card.svelte";
 </script>
 
-<Card title="Toolbar">
-  <Toolbar position="left" />
-  <Toolbar position="top" />
-</Card>
-<Card title="Hello world!" />
-<Card title="Hello world!" />
-<Card title="Hello world!" />
-<Card title="Hello world!" />
+<div class="container">
+  <Card title="Toolbar">
+    <Toolbar position="left" />
+    <Toolbar position="top" />
+  </Card>
+  <Card title="Hello world!" />
+  <Card title="Hello world!" />
+  <Card title="Hello world!" />
+  <Card title="Hello world!" />
+</div>
 
 <style>
   :global(body) {
     margin: 0;
     background-color: #eee;
+  }
+  .container {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 </style>

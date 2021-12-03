@@ -29,7 +29,7 @@
   <div class="card" style="width: {width}px; height: {height}px">
     <slot />
     <h3>{title}</h3>
-    <span class="drag-handler" bind:this={drag_handler} />
+    <span class="drag-handler" class:dragging bind:this={drag_handler} />
     <samp class="size">{width}x{height}</samp>
   </div>
 </div>
@@ -39,7 +39,7 @@
 <style lang="scss">
   .card-wrapper {
     position: relative;
-    margin: 8px;
+    touch-action: none;
   }
   .card {
     position: relative;
@@ -71,6 +71,9 @@
     cursor: grab;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
+    &.dragging {
+      cursor: grabbing;
+    }
   }
   .drag-handler:hover {
     opacity: 1;

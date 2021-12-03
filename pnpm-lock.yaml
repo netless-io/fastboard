@@ -18,10 +18,10 @@ specifiers:
   svelte-preprocess: ^4.9.8
   typescript: ^4.5.2
   vite: ^2.6.14
-  white-web-sdk: ^2.15.9
+  white-web-sdk: ^2.15.10
 
 dependencies:
-  '@netless/window-manager': 0.3.7_white-web-sdk@2.15.9
+  '@netless/window-manager': 0.3.7_white-web-sdk@2.15.10
 
 devDependencies:
   '@hyrious/rimraf': 0.1.0
@@ -40,7 +40,7 @@ devDependencies:
   svelte-preprocess: 4.9.8_ad042b75a3657988945d4012dfb6d62a
   typescript: 4.5.2
   vite: 2.6.14_sass@1.44.0
-  white-web-sdk: 2.15.9
+  white-web-sdk: 2.15.10
 
 packages:
 
@@ -118,7 +118,7 @@ packages:
       value-enhancer: 0.0.8
     dev: false
 
-  /@netless/window-manager/0.3.7_white-web-sdk@2.15.9:
+  /@netless/window-manager/0.3.7_white-web-sdk@2.15.10:
     resolution: {integrity: sha512-b8euZcrz5sAU1qfppHA4BiHJ24pkw2cadhFk1NcYBoixWn3VowtB9Cs8ujTmCLxWlP5pWkI4dqn0V8zYuotgpg==}
     peerDependencies:
       white-web-sdk: ^2.13.16
@@ -132,7 +132,7 @@ packages:
       p-retry: 4.6.1
       uuid: 7.0.3
       video.js: 7.17.0
-      white-web-sdk: 2.15.9
+      white-web-sdk: 2.15.10
     dev: false
 
   /@netless/xml-js/1.6.15:
@@ -2127,8 +2127,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /white-web-sdk/2.15.9:
-    resolution: {integrity: sha512-0LeLCVUGVn7eTem6325JZKRB/lqiu/p5D8yYhhY8SsrWgzGWUOExEuhwyk9G7iLNpKpSKcGn0W41d6v95/bxxQ==}
+  /white-web-sdk/2.15.10:
+    resolution: {integrity: sha512-8om5NrbqRbyZM8AU8FkTjy0ZP+5kYZnSm3lMwda1+98PYEjvfr2fdJRn8V+sZcxwPxIXc/Cf0kpBIbCZIXUrSw==}
     dependencies:
       '@juggle/resize-observer': 3.3.1
       '@netless/canvas-polyfill': 0.0.4
