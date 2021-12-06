@@ -1,0 +1,26 @@
+{
+  "name": "@netless/components",
+  "version": "0.0.0",
+  "description": "Reusable front-end components for whiteboard.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.global.js",
+  "jsdelivr": "./dist/index.global.js",
+  "types": "./src/index.ts",
+  "type": "module",
+  "repository": "netless-io/agora-whiteboard-web-sdk",
+  "scripts": {
+    "build": "rimraf dist && esbuild-dev ./scripts/build.ts"
+  },
+  "peerDependencies": {
+    "@netless/window-manager": "*",
+    "react": "*",
+    "vue": "*",
+    "white-web-sdk": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.37",
+    "react": "^17.0.2",
+    "vue": "^3.2.24"
+  }
+}

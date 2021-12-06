@@ -1,15 +1,22 @@
-/** @type {import("eslint").Linter.Config} */
-module.exports = {
+// @ts-check
+const { defineConfig } = require("eslint-define-config");
+
+module.exports = defineConfig({
   root: true,
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   env: {
+    es2021: true,
     browser: true,
   },
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "svelte3"],
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 2021,
+  },
+  plugins: ["svelte3", "@typescript-eslint"],
   rules: {
-    // TODO: wait for `import { type A }`
-    // https://github.com/typescript-eslint/typescript-eslint/issues/3950
+    "prefer-const": ["warn", { destructuring: "all" }],
+
     "@typescript-eslint/consistent-type-imports": "warn",
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
@@ -26,4 +33,4 @@ module.exports = {
       return lang === "scss";
     },
   },
-};
+});
