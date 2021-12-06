@@ -1,69 +1,37 @@
 {
-  "name": "agora-whiteboard-sdk",
-  "version": "0.0.0",
-  "description": "An open sourced sdk based on white-web-sdk.",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./src/index.ts",
-  "exports": {
-    "node": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    },
-    "default": "./dist/index.es.js"
-  },
-  "unpkg": "./dist/index.iife.js",
-  "jsdelivr": "./dist/index.iife.js",
-  "sideEffects": false,
-  "repository": "netless-io/agora-whiteboard-web-sdk",
-  "keywords": [
-    "whiteboard",
-    "collaboration"
-  ],
+  "name": "agora-whiteboard-sdk-monorepo",
+  "private": true,
   "scripts": {
-    "prettier": "prettier --write . && eslint --ext .ts,.svelte --fix",
-    "lint": "eslint --ext .ts,.svelte . && prettier --check . && tsc",
     "preinstall": "npx only-allow pnpm",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
-    "cleanup": "rimraf ./dist",
-    "dev": "vite --open"
-  },
-  "contributors": [
-    {
-      "name": "hyrious",
-      "email": "hyrious@outlook.com"
-    },
-    {
-      "name": "l1shen",
-      "email": "lishen1635@gmail.com"
-    }
-  ],
-  "license": "MIT",
-  "peerDependencies": {
-    "white-web-sdk": "*"
-  },
-  "dependencies": {
-    "@netless/window-manager": "^0.3.7",
-    "tippy.js": "^6.3.7"
+    "format": "prettier --write .",
+    "lint": "eslint --ext .ts,.tsx,.svelte .",
+    "build-all": "echo 1"
   },
   "devDependencies": {
+    "@hyrious/esbuild-dev": "^0.6.2",
     "@hyrious/rimraf": "^0.1.0",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
-    "@typescript-eslint/eslint-plugin": "^5.5.0",
-    "@typescript-eslint/parser": "^5.5.0",
-    "eslint": "^8.3.0",
-    "eslint-config-prettier": "^8.3.0",
+    "@netless/window-manager": "^0.3.9",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.31",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "esbuild": "^0.14.2",
+    "eslint": "^8.4.1",
+    "eslint-define-config": "^1.2.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "prettier": "^2.5.0",
-    "prettier-plugin-svelte": "^2.5.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "sass": "^1.44.0",
-    "side-effect-manager": "^0.1.5",
+    "npm-run-all": "^4.1.5",
+    "prettier": "2.5.1",
+    "prettier-plugin-svelte": "^2.5.1",
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.9.8",
     "typescript": "^4.5.2",
-    "vite": "^2.6.14",
-    "white-web-sdk": "^2.15.10"
+    "vite": "^2.7.1",
+    "white-web-sdk": "^2.15.11"
+  },
+  "packageManager": "pnpm@6.23.6",
+  "pnpm": {
+    "overrides": {
+      "@netless/components": "workspace:*"
+    }
   }
 }
