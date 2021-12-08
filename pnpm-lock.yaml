@@ -16,12 +16,14 @@ specifiers:
   side-effect-manager: ^0.1.5
   svelte: ^3.44.2
   svelte-preprocess: ^4.9.8
+  tippy.js: ^6.3.7
   typescript: ^4.5.2
   vite: ^2.6.14
   white-web-sdk: ^2.15.10
 
 dependencies:
   '@netless/window-manager': 0.3.7_white-web-sdk@2.15.10
+  tippy.js: 6.3.7
 
 devDependencies:
   '@hyrious/rimraf': 0.1.0
@@ -173,6 +175,10 @@ packages:
       hey-listen: 1.0.8
       style-value-types: 3.2.0
       tslib: 1.14.1
+    dev: false
+
+  /@popperjs/core/2.11.0:
+    resolution: {integrity: sha512-zrsUxjLOKAzdewIDRWy9nsV1GQsKBCWaGwsZQlCgr6/q+vjyZhFgqedLfFBuI9anTPEUT4APq9Mu0SZBTzIcGQ==}
     dev: false
 
   /@protobufjs/aspromise/1.1.2:
@@ -1987,6 +1993,12 @@ packages:
   /tiny-emitter/2.1.0:
     resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
     dev: true
+
+  /tippy.js/6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.0
+    dev: false
 
   /to-regex-range/5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}

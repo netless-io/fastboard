@@ -21,7 +21,12 @@
 <div class="{name} {position}" style="{position}: {margin}px">
   <div class="{name}-container">
     {#each enabledTools as tool (tool)}
-      <ToolbarItem {tool} active={activeTool === tool} on:click={on_click_item} />
+      <ToolbarItem
+        {tool}
+        active={activeTool === tool}
+        on:click={on_click_item}
+        placement={position}
+      />
     {/each}
   </div>
 </div>

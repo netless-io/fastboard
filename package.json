@@ -44,7 +44,8 @@
     "white-web-sdk": "*"
   },
   "dependencies": {
-    "@netless/window-manager": "^0.3.7"
+    "@netless/window-manager": "^0.3.7",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@hyrious/rimraf": "^0.1.0",

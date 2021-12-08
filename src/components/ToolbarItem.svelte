@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+  import type { Placement } from "tippy.js";
   import { ToolbarIcons } from "../internal/const";
 
   export const name = "agora-whiteboard-toolbar-item";
@@ -7,9 +8,11 @@
 <script lang="ts">
   import type { Tool } from "../internal/typings";
   import { createEventDispatcher } from "svelte";
+  import { tooltip } from "../actions/tooltip";
 
   export let tool: Tool;
   export let active = false;
+  export let placement: Placement = "right";
 
   const [d, s, more] = ToolbarIcons[tool] ?? [];
   const dispatch = createEventDispatcher();
@@ -21,7 +24,16 @@
   $: color = active ? "#3381FF" : "#1A1E21";
 </script>
 
-<button class="{name} {tool}" class:active data-tool={tool} on:click={on_click}>
+<button
+  class="{name} {tool}"
+  class:active
+  data-tool={tool}
+  on:click={on_click}
+  use:tooltip={{
+    content: tool,
+    placement,
+  }}
+>
   <svg viewBox="0 0 24 24">
     {#if s == "fill"}
       <path {d} fill={color} />
