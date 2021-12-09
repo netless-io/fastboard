@@ -21,6 +21,7 @@ importers:
       npm-run-all: ^4.1.5
       prettier: 2.5.1
       prettier-plugin-svelte: ^2.5.1
+      sass: ^1.44.0
       svelte: ^3.44.2
       svelte-preprocess: ^4.9.8
       typescript: ^4.5.2
@@ -41,14 +42,18 @@ importers:
       npm-run-all: 4.1.5
       prettier: 2.5.1
       prettier-plugin-svelte: 2.5.1_prettier@2.5.1+svelte@3.44.2
+      sass: 1.44.0
       svelte: 3.44.2
-      svelte-preprocess: 4.9.8_svelte@3.44.2+typescript@4.5.2
+      svelte-preprocess: 4.9.8_ad042b75a3657988945d4012dfb6d62a
       typescript: 4.5.2
-      vite: 2.7.1
+      vite: 2.7.1_sass@1.44.0
       white-web-sdk: 2.15.11
 
   packages/agora-whiteboard-sdk:
-    specifiers: {}
+    specifiers:
+      '@netless/components': workspace:*
+    dependencies:
+      '@netless/components': link:../components
 
   packages/components:
     specifiers:
@@ -61,7 +66,13 @@ importers:
       vue: 3.2.24
 
   packages/playground:
-    specifiers: {}
+    specifiers:
+      '@netless/components': workspace:*
+      vite: ^2.7.1
+    dependencies:
+      '@netless/components': link:../components
+    devDependencies:
+      vite: 2.7.1_sass@1.44.0
 
 packages:
 
@@ -282,7 +293,7 @@ packages:
       require-relative: 0.8.7
       svelte: 3.44.2
       svelte-hmr: 0.14.7_svelte@3.44.2
-      vite: 2.7.1
+      vite: 2.7.1_sass@1.44.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -614,6 +625,14 @@ packages:
       color-convert: 2.0.1
     dev: true
 
+  /anymatch/3.1.2:
+    resolution: {integrity: sha512-P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==}
+    engines: {node: '>= 8'}
+    dependencies:
+      normalize-path: 3.0.0
+      picomatch: 2.3.0
+    dev: true
+
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: true
@@ -635,6 +654,11 @@ packages:
 
   /bezier-js/2.6.1:
     resolution: {integrity: sha512-jelZM33eNzcZ9snJ/5HqJLw3IzXvA8RFcBjkdOB8SDYyOvW8Y2tTosojAiBTnD1MhbHoWUYNbxUXxBl61TxbRg==}
+    dev: true
+
+  /binary-extensions/2.2.0:
+    resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
+    engines: {node: '>=8'}
     dev: true
 
   /brace-expansion/1.1.11:
@@ -682,6 +706,21 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
+
+  /chokidar/3.5.2:
+    resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
+    engines: {node: '>= 8.10.0'}
+    dependencies:
+      anymatch: 3.1.2
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.3
+      normalize-path: 3.0.0
+      readdirp: 3.6.0
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /color-convert/1.9.3:
@@ -1590,6 +1629,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immutable/4.0.0:
+    resolution: {integrity: sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw==}
+    dev: true
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -1639,6 +1682,13 @@ packages:
     resolution: {integrity: sha512-zB9CruMamjym81i2JZ3UMn54PKGsQzsJeo6xvN3HJJ4CAsQNB6iRutp2To77OfCNuoxspsIhzaPoO1zyCEhFOg==}
     dependencies:
       has-bigints: 1.0.1
+    dev: true
+
+  /is-binary-path/2.1.0:
+    resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
+    engines: {node: '>=8'}
+    dependencies:
+      binary-extensions: 2.2.0
     dev: true
 
   /is-boolean-object/1.1.2:
@@ -1982,6 +2032,11 @@ packages:
       validate-npm-package-license: 3.0.4
     dev: true
 
+  /normalize-path/3.0.0:
+    resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /npm-run-all/4.1.5:
     resolution: {integrity: sha512-Oo82gJDAVcaMdi3nuoKFavkIHBRVqQ1qvMb+9LHk/cF4P6B2m8aP04hGf7oL6wZ9BuGwX1onlLhpuoofSyoQDQ==}
     engines: {node: '>= 4'}
@@ -2253,6 +2308,13 @@ packages:
       path-type: 3.0.0
     dev: true
 
+  /readdirp/3.6.0:
+    resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
+    engines: {node: '>=8.10.0'}
+    dependencies:
+      picomatch: 2.3.0
+    dev: true
+
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
     dev: true
@@ -2339,6 +2401,15 @@ packages:
       graceful-fs: 4.2.8
       mkdirp: 0.5.5
       rimraf: 2.7.1
+    dev: true
+
+  /sass/1.44.0:
+    resolution: {integrity: sha512-0hLREbHFXGQqls/K8X+koeP+ogFRPF4ZqetVB19b7Cst9Er8cOR0rc6RU7MaI4W1JmUShd1BPgPoeqmmgMMYFw==}
+    engines: {node: '>=8.9.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.2
+      immutable: 4.0.0
     dev: true
 
   /scheduler/0.19.1:
@@ -2561,7 +2632,7 @@ packages:
       svelte: 3.44.2
     dev: true
 
-  /svelte-preprocess/4.9.8_svelte@3.44.2+typescript@4.5.2:
+  /svelte-preprocess/4.9.8_ad042b75a3657988945d4012dfb6d62a:
     resolution: {integrity: sha512-EQS/oRZzMtYdAprppZxY3HcysKh11w54MgA63ybtL+TAZ4hVqYOnhw41JVJjWN9dhPnNjjLzvbZ2tMhTsla1Og==}
     engines: {node: '>= 9.11.2'}
     requiresBuild: true
@@ -2606,6 +2677,7 @@ packages:
       '@types/sass': 1.43.1
       detect-indent: 6.1.0
       magic-string: 0.25.7
+      sass: 1.44.0
       sorcery: 0.10.0
       strip-indent: 3.0.0
       svelte: 3.44.2
@@ -2753,7 +2825,7 @@ packages:
       global: 4.4.0
     dev: true
 
-  /vite/2.7.1:
+  /vite/2.7.1_sass@1.44.0:
     resolution: {integrity: sha512-TDXXhcu5lyQ6uosK4ZWaOyB4VzOiizk0biitRzDzaEtgSUi8rVYPc4k1xgOjLSf0OuceDJmojFKXHOX9DB1WuQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -2773,6 +2845,7 @@ packages:
       postcss: 8.4.4
       resolve: 1.20.0
       rollup: 2.60.1
+      sass: 1.44.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

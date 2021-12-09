@@ -1,5 +1,20 @@
 {
   "name": "agora-whiteboard-sdk",
   "version": "0.0.0",
-  "description": "An open sourced sdk based on white-web-sdk."
+  "description": "An open sourced sdk based on white-web-sdk.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "run-s build-esm build-cjs",
+    "build-esm": "esbuild src/index.ts --bundle --format=esm --outfile=dist/index.mjs --sourcemap --external:@netless/components",
+    "build-cjs": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/index.js --sourcemap --external:@netless/components"
+  },
+  "peerDependencies": {
+    "@netless/window-manager": "*",
+    "white-web-sdk": "*"
+  },
+  "dependencies": {
+    "@netless/components": "workspace:*"
+  }
 }

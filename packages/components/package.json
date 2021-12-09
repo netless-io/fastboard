@@ -6,6 +6,32 @@
   "module": "./dist/index.mjs",
   "unpkg": "./dist/index.global.js",
   "jsdelivr": "./dist/index.global.js",
+  "exports": {
+    ".": {
+      "node": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.js"
+      },
+      "default": "./dist/index.mjs",
+      "types": "./src/index.ts"
+    },
+    "./vue": {
+      "node": {
+        "import": "./dist/vue/index.mjs",
+        "require": "./dist/vue/index.js"
+      },
+      "default": "./dist/vue/index.mjs",
+      "types": "./src/vue/index.tsx"
+    },
+    "./react": {
+      "node": {
+        "import": "./dist/react/index.mjs",
+        "require": "./dist/react/index.js"
+      },
+      "default": "./dist/react/index.mjs",
+      "types": "./src/react/index.tsx"
+    }
+  },
   "types": "./src/index.ts",
   "type": "module",
   "repository": "netless-io/agora-whiteboard-web-sdk",

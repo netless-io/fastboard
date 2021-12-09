@@ -19,7 +19,7 @@ export const RedoUndo = defineComponent({
     manager: Object,
   },
   setup(props) {
-    const wrapper = ref<HTMLDivElement | null>(null);
+    const wrapper = ref<any>(null); // eslint-disable-line
     let instance: SvelteRedoUndo | undefined;
     onMounted(() => {
       if (wrapper.value) {

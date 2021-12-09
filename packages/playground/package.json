@@ -1,4 +1,13 @@
 {
   "name": "playground",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "vite dev"
+  },
+  "dependencies": {
+    "@netless/components": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^2.7.1"
+  }
 }
