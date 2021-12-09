@@ -1,8 +1,48 @@
-import type { Location, Plugin } from "esbuild";
-import type { Warning } from "svelte/types/compiler/interfaces";
+import type { Loader, Location, Plugin } from "esbuild";
+import esbuild from "esbuild";
+import sass from "sass";
 import fs from "fs";
 import path from "path";
-import { compile } from "svelte/compiler";
+import { compile, preprocess } from "svelte/compiler";
+import type { Warning } from "svelte/types/compiler/interfaces";
+import type { PreprocessorGroup } from "svelte/types/compiler/preprocess";
+
+const preprocessorGroup: PreprocessorGroup = {
+  markup({ content, filename }) {
+    return preprocess(
+      content,
+      {
+        async script({ attributes, content, filename = "" }) {
+          return await esbuild.transform(content, {
+            sourcemap: true,
+            sourcefile: filename,
+            loader: attributes.lang as Loader,
+            tsconfigRaw: {
+              compilerOptions: {
+                useDefineForClassFields: true,
+                preserveValueImports: true,
+              },
+            },
+          });
+        },
+        async style({ attributes, content, filename = "" }) {
+          const lang = attributes.lang as string;
+          const moduleId = `${filename}.${lang}`;
+          const result = await new Promise<sass.Result>((resolve, reject) =>
+            sass.render(
+              { data: content, file: moduleId, outFile: moduleId },
+              (err, res) => {
+                err ? reject(err) : resolve(res);
+              }
+            )
+          );
+          return { code: result.css.toString(), map: result.map };
+        },
+      },
+      { filename }
+    );
+  },
+};
 
 // https://esbuild.github.io/plugins/#svelte-plugin
 export const svelte: Plugin = {
@@ -33,9 +73,11 @@ export const svelte: Plugin = {
 
       // Convert Svelte syntax to JavaScript
       try {
-        const { js, warnings } = compile(source, {
+        const temp = await preprocess(source, preprocessorGroup, { filename });
+        const { js, warnings } = compile(temp.code, {
           filename,
           generate: "dom",
+          sourcemap: temp.map,
           css: true,
           dev: true,
         });

@@ -1,8 +1,0 @@
-{
-  "extends": "../../../../tsconfig.base.json",
-  "include": [".", "../shim.d.ts"],
-  "compilerOptions": {
-    "jsx": "react",
-    "types": ["react"]
-  }
-}

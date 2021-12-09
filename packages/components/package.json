@@ -14,22 +14,6 @@
       },
       "default": "./dist/index.mjs",
       "types": "./src/index.ts"
-    },
-    "./vue": {
-      "node": {
-        "import": "./dist/vue/index.mjs",
-        "require": "./dist/vue/index.js"
-      },
-      "default": "./dist/vue/index.mjs",
-      "types": "./src/vue/index.tsx"
-    },
-    "./react": {
-      "node": {
-        "import": "./dist/react/index.mjs",
-        "require": "./dist/react/index.js"
-      },
-      "default": "./dist/react/index.mjs",
-      "types": "./src/react/index.tsx"
     }
   },
   "types": "./src/index.ts",
@@ -38,15 +22,19 @@
   "scripts": {
     "build": "rimraf dist && esbuild-dev ./scripts/build.ts"
   },
+  "contributors": [
+    {
+      "name": "hyrious",
+      "email": "hyrious@outlook.com"
+    },
+    {
+      "name": "l1shen",
+      "email": "lishen1635@gmail.com"
+    }
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@netless/window-manager": "*",
-    "react": "*",
-    "vue": "*",
     "white-web-sdk": "*"
-  },
-  "devDependencies": {
-    "@types/react": "^17.0.37",
-    "react": "^17.0.2",
-    "vue": "^3.2.24"
   }
 }

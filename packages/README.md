@@ -10,21 +10,8 @@
   // -- vanilla
   const redo_undo = new RedoUndo({ target: $el, props: { room, manager } });
   redo_undo.$destroy(); // remove it from $el
-
+  // -- svelte
   <RedoUndo {room} {manager} />;
-
-  // as react component
-  import { RedoUndo } from "@netless/components/react";
-  const element = <RedoUndo room={room} manager={manager} />;
-
-  // as vue component
-  <redo-undo />;
-  // -- in <script setup>
-  import { RedoUndo } from "@netless/components/vue";
-  // -- in global (not recommended)
-  import netless from "@netless/components/vue";
-  const app = createApp(App);
-  app.use(netless);
   ```
 
 - agora-whiteboard-sdk
