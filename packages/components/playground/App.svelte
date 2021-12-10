@@ -50,8 +50,15 @@
     inset: 0;
     background-color: #fff;
     &.dark {
-      background-color: #111;
+      background-color: #121212;
     }
+  }
+  $unit: 8px;
+  .bottom-left {
+    position: absolute;
+    bottom: $unit;
+    left: $unit;
+    padding: $unit;
   }
   .bottom-hang {
     position: absolute;

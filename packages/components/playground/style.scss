@@ -4,12 +4,3 @@
   height: 400px;
   border: 1px solid rgba($color: gray, $alpha: 0.5);
 }
-
-$unit: 8px;
-
-.bottom-left {
-  position: absolute;
-  bottom: $unit;
-  left: $unit;
-  padding: $unit;
-}
