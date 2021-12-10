@@ -76,6 +76,7 @@
   $name: "agora-whiteboard-redo-undo";
   div {
     display: inline-flex;
+    align-items: center;
     gap: 8px;
     padding: 5px;
     border-radius: 4px;
@@ -114,7 +115,7 @@
     background-color: #333;
     border: 1px solid rgba(0, 0, 0, 0.45);
 
-    button:hover {
+    button:not(:disabled):hover {
       background-color: rgba(51, 129, 255, 0.25);
     }
   }

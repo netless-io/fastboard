@@ -21,11 +21,8 @@
 
   let scale = 1;
 
-  const updateScale = (s: number) => (scale = s);
-
   onMount(() => {
-    const cameraListener = (camera: Camera) => updateScale(camera.scale);
-
+    const cameraListener = (camera: Camera) => (scale = camera.scale);
     manager?.mainView.callbacks.on("onCameraUpdated", cameraListener);
     return () => {
       manager?.mainView.callbacks.off("onCameraUpdated", cameraListener);
@@ -41,7 +38,7 @@
   };
 </script>
 
-<div class="{name} {theme} wrapper">
+<div class="{name} {theme}">
   <button class="{name} reset" on:click={resetCamera}>
     {#if resetIcon}
       <Icon icon={resetIcon} alt="[reset]" type="normal" />
@@ -71,20 +68,15 @@
 
 <style lang="scss">
   $name: "agora-whiteboard-zoom-control";
-
-  .wrapper {
-    align-items: center;
-  }
-
   div {
     display: inline-flex;
+    align-items: center;
     gap: 8px;
     padding: 5px;
     border-radius: 4px;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
-
   button {
     appearance: none;
     cursor: pointer;
@@ -117,7 +109,7 @@
     background-color: #333;
     border: 1px solid rgba(0, 0, 0, 0.45);
 
-    button:hover {
+    button:not(:disabled):hover {
       background-color: rgba(51, 129, 255, 0.25);
     }
   }
@@ -127,7 +119,7 @@
     width: 0.5px;
   }
   .cut-line.dark {
-    background-color: rgba(51, 129, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.15);
   }
   .percent {
     opacity: 0.6;

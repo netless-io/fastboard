@@ -3,7 +3,8 @@
   import { room, trigger } from "./mock/room";
 
   let dark = false;
-  let redoUndo = true;
+  let redo_undo = true;
+  let zoom_control = true;
 
   $: document.documentElement.style.colorScheme = dark ? "dark" : "light";
 </script>
@@ -14,23 +15,19 @@
   </div>
 
   <div class="bottom-left">
-    <div class="redo-undo">
-      {#if redoUndo}<RedoUndo theme={dark ? "dark" : "light"} {room} />{/if}
-    </div>
-    <div class="page-control">
-      <ZoomControl theme={dark ? "dark" : "light"} />
-    </div>
+    {#if redo_undo}<RedoUndo theme={dark ? "dark" : "light"} {room} />{/if}
+    {#if zoom_control}<ZoomControl theme={dark ? "dark" : "light"} />{/if}
     <div class="resize" />
   </div>
 
   <div class="bottom-hang">
     <label>
       <input type="checkbox" bind:checked={dark} />
-      DARK
+      Dark
     </label><br />
     <label>
-      <input type="checkbox" bind:checked={redoUndo} />
-      REDO UNDO
+      <input type="checkbox" bind:checked={redo_undo} />
+      RedoUndo
     </label>
     <button on:click={() => trigger("onCanUndoStepsUpdate", 1)}>
       SET UNDO 1
@@ -43,7 +40,11 @@
     </button>
     <button on:click={() => trigger("onCanRedoStepsUpdate", 0)}>
       SET REDO 0
-    </button>
+    </button><br />
+    <label>
+      <input type="checkbox" bind:checked={zoom_control} />
+      Zoom
+    </label>
   </div>
 </div>
 
@@ -58,6 +59,8 @@
   }
   $unit: 8px;
   .bottom-left {
+    display: flex;
+    gap: 10px;
     position: absolute;
     bottom: $unit;
     left: $unit;
@@ -66,15 +69,10 @@
   .bottom-hang {
     position: absolute;
     top: 100%;
-    padding: 8px;
+    padding-top: 8px;
     user-select: none;
     label {
       cursor: pointer;
     }
-  }
-
-  .bottom-left {
-    display: flex;
-    gap: 10px;
   }
 </style>
