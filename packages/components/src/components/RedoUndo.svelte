@@ -77,7 +77,7 @@
   div {
     display: inline-flex;
     gap: 8px;
-    padding: 8px;
+    padding: 5px;
     border-radius: 4px;
     background-color: #fff;
     border: 1px solid rgba(0, 0, 0, 0.15);

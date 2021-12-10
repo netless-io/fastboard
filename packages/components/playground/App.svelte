@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { RedoUndo } from "../src";
+  import { RedoUndo, ZoomControl } from "../src";
   import { room, trigger } from "./mock/room";
 
   let dark = false;
@@ -16,6 +16,9 @@
   <div class="bottom-left">
     <div class="redo-undo">
       {#if redoUndo}<RedoUndo theme={dark ? "dark" : "light"} {room} />{/if}
+    </div>
+    <div class="page-control">
+      <ZoomControl theme={dark ? "dark" : "light"} />
     </div>
     <div class="resize" />
   </div>
@@ -68,5 +71,10 @@
     label {
       cursor: pointer;
     }
+  }
+
+  .bottom-left {
+    display: flex;
+    gap: 10px;
   }
 </style>

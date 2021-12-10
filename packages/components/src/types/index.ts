@@ -21,3 +21,9 @@ export type RedoUndoProps = CommonProps & {
   undoIcon?: Icon;
   redoIcon?: Icon;
 };
+
+export type ZoomControlProps = CommonProps & {
+  resetIcon?: Icon;
+  lessIcon?: Icon;
+  plusIcon?: Icon;
+};

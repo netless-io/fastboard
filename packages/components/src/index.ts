@@ -1,4 +1,5 @@
 import RedoUndo from "./components/RedoUndo.svelte";
+import ZoomControl from "./components/ZoomControl.svelte";
 import version from "./version";
 
 export type {
@@ -6,7 +7,8 @@ export type {
   Icon,
   IconType,
   RedoUndoProps,
+  ZoomControlProps,
   Theme,
 } from "./types";
 
-export { version, RedoUndo };
+export { version, RedoUndo, ZoomControl };
