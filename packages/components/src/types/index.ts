@@ -9,11 +9,15 @@ export interface CommonProps {
   theme?: Theme;
 }
 
-export type GenericIcon<T extends string> = Record<T, string> &
-  Partial<Record<`${T}Active`, string>> &
-  Partial<Record<`${T}Disable`, string>>;
+export interface Icon {
+  normal: string;
+  disable?: string;
+  active?: string;
+}
+
+export type IconType = keyof Icon;
 
 export type RedoUndoProps = CommonProps & {
-  undoIcon: GenericIcon<"undo">;
-  redoIcon: GenericIcon<"redo">;
+  undoIcon?: Icon;
+  redoIcon?: Icon;
 };

@@ -6,7 +6,7 @@
     "format": "prettier --write .",
     "lint": "eslint --ext .ts,.tsx,.svelte .",
     "build-all": "pnpm build --recursive",
-    "dev": "pnpm dev --filter playground"
+    "dev": "pnpm dev --filter components"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.6.2",
@@ -26,14 +26,9 @@
     "sass": "^1.44.0",
     "svelte": "^3.44.2",
     "svelte-preprocess": "^4.9.8",
-    "typescript": "^4.5.2",
+    "typescript": "^4.5.3",
     "vite": "^2.7.1",
-    "white-web-sdk": "^2.15.11"
+    "white-web-sdk": "^2.15.12"
   },
-  "packageManager": "pnpm@6.23.6",
-  "pnpm": {
-    "overrides": {
-      "@netless/components": "workspace:*"
-    }
-  }
+  "packageManager": "pnpm@6.23.6"
 }
