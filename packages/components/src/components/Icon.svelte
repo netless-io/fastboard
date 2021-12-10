@@ -3,9 +3,9 @@
 
   export const icon: Icon = { normal: "" };
   export const type: IconType = "normal";
+  export let alt = "";
 
   const src = icon[type] || icon.normal;
-  export const alt = "";
 </script>
 
 <img {src} {alt} />

@@ -46,7 +46,11 @@
     on:click={() => room && room.undo()}
   >
     {#if undoIcon}
-      <Icon icon={undoIcon} type={undoSteps === 0 ? "disable" : "normal"} />
+      <Icon
+        icon={undoIcon}
+        type={undoSteps === 0 ? "disable" : "normal"}
+        alt="[undo]"
+      />
     {:else}
       <Undo {theme} />
     {/if}
@@ -57,7 +61,11 @@
     on:click={() => room && room.redo()}
   >
     {#if redoIcon}
-      <Icon icon={redoIcon} type={redoSteps === 0 ? "disable" : "normal"} />
+      <Icon
+        icon={redoIcon}
+        type={redoSteps === 0 ? "disable" : "normal"}
+        alt="[redo]"
+      />
     {:else}
       <Redo {theme} />
     {/if}
