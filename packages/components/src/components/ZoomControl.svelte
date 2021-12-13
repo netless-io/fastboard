@@ -39,7 +39,7 @@
 </script>
 
 <div class="{name} {theme}">
-  <button class="{name} reset" on:click={resetCamera}>
+  <button class="{name}-item reset" on:click={resetCamera}>
     {#if resetIcon}
       <Icon icon={resetIcon} alt="[reset]" type="normal" />
     {:else}
@@ -47,17 +47,15 @@
     {/if}
   </button>
   <span class="cut-line {theme}" />
-  <button class="{name} less">
+  <button class="{name}-item less">
     {#if lessIcon}
       <Icon icon={lessIcon} alt="[less]" type="normal" />
     {:else}
       <Less {theme} />
     {/if}
   </button>
-
   <span>{Math.ceil(scale * 100)}</span> <span class="{name} percent">%</span>
-
-  <button class="{name} plus">
+  <button class="{name}-item plus">
     {#if plusIcon}
       <Icon icon={plusIcon} alt="[plus]" type="normal" />
     {:else}
@@ -105,6 +103,11 @@
       height: 1em;
     }
   }
+  .cut-line {
+    background-color: #e7e7e7;
+    height: 24px;
+    width: 0.5px;
+  }
   div.dark {
     background-color: #333;
     border: 1px solid rgba(0, 0, 0, 0.45);
@@ -112,14 +115,10 @@
     button:not(:disabled):hover {
       background-color: rgba(51, 129, 255, 0.25);
     }
-  }
-  .cut-line {
-    background-color: #e7e7e7;
-    height: 24px;
-    width: 0.5px;
-  }
-  .cut-line.dark {
-    background-color: rgba(255, 255, 255, 0.15);
+
+    .cut-line {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
   }
   .percent {
     opacity: 0.6;

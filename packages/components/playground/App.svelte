@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { RedoUndo, ZoomControl } from "../src";
+  import { RedoUndo, ZoomControl, PageControl } from "../src";
   import { room, trigger } from "./mock/room";
 
   let dark = false;
   let redo_undo = true;
   let zoom_control = true;
+  let page_control = true;
 
   $: document.documentElement.style.colorScheme = dark ? "dark" : "light";
 </script>
@@ -20,11 +21,19 @@
     <div class="resize" />
   </div>
 
+  <div class="bottom-right">
+    {#if page_control}<PageControl
+        theme={dark ? "dark" : "light"}
+        {room}
+      />{/if}
+  </div>
+
   <div class="bottom-hang">
     <label>
       <input type="checkbox" bind:checked={dark} />
       Dark
     </label><br />
+
     <label>
       <input type="checkbox" bind:checked={redo_undo} />
       RedoUndo
@@ -41,10 +50,16 @@
     <button on:click={() => trigger("onCanRedoStepsUpdate", 0)}>
       SET REDO 0
     </button><br />
+
     <label>
       <input type="checkbox" bind:checked={zoom_control} />
       Zoom
-    </label>
+    </label><br />
+
+    <label>
+      <input type="checkbox" bind:checked={page_control} />
+      Pages
+    </label><br />
   </div>
 </div>
 
@@ -65,6 +80,11 @@
     bottom: $unit;
     left: $unit;
     padding: $unit;
+  }
+  .bottom-right {
+    @extend .bottom-left;
+    left: auto;
+    right: $unit;
   }
   .bottom-hang {
     position: absolute;

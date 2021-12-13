@@ -27,3 +27,9 @@ export type ZoomControlProps = CommonProps & {
   lessIcon?: Icon;
   plusIcon?: Icon;
 };
+
+export type PageControlProps = CommonProps & {
+  addIcon?: Icon;
+  prevIcon?: Icon;
+  nextIcon?: Icon;
+};

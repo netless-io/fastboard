@@ -19,10 +19,10 @@
   let undoSteps = 0;
   let redoSteps = 0;
 
-  const updateUndoSteps = (e: number) => (undoSteps = e);
-  const updateRedoSteps = (e: number) => (redoSteps = e);
-
   onMount(() => {
+    const updateUndoSteps = (e: number) => (undoSteps = e);
+    const updateRedoSteps = (e: number) => (redoSteps = e);
+
     const registerListeners = (room: Room) => {
       room.isWritable && (room.disableSerialization = false);
       room.callbacks.on("onCanUndoStepsUpdate", updateUndoSteps);
