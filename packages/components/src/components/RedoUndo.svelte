@@ -1,5 +1,5 @@
 <script context="module">
-  export const name = "agora-whiteboard-redo-undo";
+  export const name = "fastboard-redo-undo";
 </script>
 
 <script lang="ts">
@@ -73,7 +73,7 @@
 </div>
 
 <style lang="scss">
-  $name: "agora-whiteboard-redo-undo";
+  $name: "fastboard-redo-undo";
   div {
     display: inline-flex;
     align-items: center;

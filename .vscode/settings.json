@@ -11,5 +11,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
-  }
+  },
+  "cSpell.words": ["esbuild", "fastboard", "preinstall"]
 }

@@ -1,5 +1,5 @@
 <script context="module">
-  export const name = "agora-whiteboard-zoom-control";
+  export const name = "fastboard-zoom-control";
 </script>
 
 <script lang="ts">
@@ -67,7 +67,7 @@
 </div>
 
 <style lang="scss">
-  $name: "agora-whiteboard-zoom-control";
+  $name: "fastboard-zoom-control";
   div {
     display: inline-flex;
     align-items: center;

@@ -1,17 +1,17 @@
-# agora-whiteboard-sdk
+# @netless/fastboard
 
 A whiteboard starter, based on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk).
 
 ## Install
 
 ```bash
-npm add agora-whiteboard-sdk
+npm add @netless/fastboard
 ```
 
 ## Usage
 
 ```js
-import { createWhiteboardApp } from "agora-whiteboard-sdk";
+import { createWhiteboardApp } from "@netless/fastboard";
 
 let app = createWhiteboardApp({
   target: document.getElementById("whiteboard"),

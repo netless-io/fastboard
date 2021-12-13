@@ -1,5 +1,5 @@
 {
-  "name": "agora-whiteboard-sdk-monorepo",
+  "name": "fastboard-monorepo",
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",

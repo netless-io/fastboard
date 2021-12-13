@@ -14,6 +14,6 @@
   <RedoUndo {room} {manager} />;
   ```
 
-- agora-whiteboard-sdk
+- fastboard
 
   使用了上面 components 的一个开箱即用的白板库，整合了上面所有组件的配置参数。
