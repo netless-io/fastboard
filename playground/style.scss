@@ -32,4 +32,8 @@ $unit: 8px;
   label {
     cursor: pointer;
   }
+  .row {
+    display: flex;
+    gap: 5px;
+  }
 }

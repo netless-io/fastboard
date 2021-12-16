@@ -1,10 +1,15 @@
+import type { Room } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
 import clsx from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { RedoUndo } from "../src";
+import { room } from "./mock";
 import "./style.scss";
+
+import { RedoUndo } from "../src";
+import { DarkControls } from "./controls/DarkControls";
+import { RedoUndoControls } from "./controls/RedoUndoControls";
 
 function App() {
   const [dark, set_dark] = useState(false);
@@ -20,28 +25,15 @@ function App() {
     <>
       <div className={clsx("wrapper", { dark })}>
         <div className="bottom-left">
-          {redo_undo && <RedoUndo theme={theme} />}
+          {redo_undo && (
+            <RedoUndo theme={theme} room={room as unknown as Room} />
+          )}
         </div>
       </div>
       {/* - - - */}
       <div className="bottom-hang">
-        <label>
-          <input
-            type="checkbox"
-            checked={dark}
-            onChange={ev => set_dark(ev.target.checked)}
-          />
-          Dark
-        </label>
-        <br />
-        <label>
-          <input
-            type="checkbox"
-            checked={redo_undo}
-            onChange={useCallback(ev => set_redo_undo(ev.target.checked), [])}
-          />
-          RedoUndo
-        </label>
+        <DarkControls dark={dark} setDark={set_dark} />
+        <RedoUndoControls visible={redo_undo} setVisible={set_redo_undo} />
       </div>
     </>
   );
