@@ -1,4 +1,4 @@
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+import react from "@vitejs/plugin-react";
 import path from "path";
 import { defineConfig } from "vite";
 import { peerDependencies } from "./package.json";
@@ -7,23 +7,10 @@ export default defineConfig(({ mode }) => {
   const isProd = mode === "production";
 
   return {
-    plugins: [
-      svelte({
-        emitCss: false,
-        compilerOptions: {
-          enableSourcemap: {
-            js: true,
-            css: false,
-          },
-        },
-        experimental: {
-          useVitePreprocess: true,
-        },
-      }),
-    ],
+    plugins: [react()],
     build: {
       lib: {
-        entry: path.resolve(process.cwd(), "src/index.ts"),
+        entry: path.resolve(process.cwd(), "./src/index.ts"),
         formats: ["es", "cjs"],
         fileName: "index",
       },
