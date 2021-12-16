@@ -1,7 +1,7 @@
-import { useStyleLoader } from "../helpers";
+import { applyStyles } from "../helpers";
 import style from "../style.scss?inline";
 
-const newEl = useStyleLoader(style);
+const newEl = applyStyles(style);
 
 if (import.meta.hot) {
   import.meta.hot.dispose(data => {

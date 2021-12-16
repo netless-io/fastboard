@@ -1,0 +1,76 @@
+$name: "fastboard-page-control";
+
+.#{$name} {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px;
+  border-radius: 4px;
+
+  &.light {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  &.dark {
+    background-color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+  }
+}
+
+.#{$name}-btn {
+  appearance: none;
+  cursor: pointer;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 1em;
+  height: 1em;
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 24px;
+  line-height: 1;
+
+  svg,
+  img {
+    width: 1em;
+    height: 1em;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.light:not(:disabled):hover {
+    background-color: rgba(51, 129, 255, 0.1);
+  }
+
+  &.dark:not(:disabled):hover {
+    background-color: rgba(51, 129, 255, 0.25);
+  }
+}
+
+.#{$name}-cut-line {
+  height: 24px;
+  width: 0.5px;
+
+  &.light {
+    background-color: #e7e7e7;
+  }
+
+  &.dark {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.#{$name}-slash {
+  opacity: 0.6;
+}
+
+.#{$name}-page,
+.#{$name}-slash,
+.#{$name}-page-count {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}

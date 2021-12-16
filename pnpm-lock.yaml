@@ -17,6 +17,7 @@ importers:
       esbuild: ^0.14.5
       eslint: ^8.4.1
       eslint-define-config: ^1.2.0
+      eslint-plugin-react-hooks: ^4.3.0
       prettier: 2.5.1
       react: ^17.0.2
       react-dom: ^17.0.2
@@ -40,6 +41,7 @@ importers:
       esbuild: 0.14.5
       eslint: 8.4.1
       eslint-define-config: 1.2.0
+      eslint-plugin-react-hooks: 4.3.0_eslint@8.4.1
       prettier: 2.5.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -1378,6 +1380,15 @@ packages:
   /eslint-define-config/1.2.0:
     resolution: {integrity: sha512-EQ8d9F9LmJVRfkZW9WgSa5VBAVZialrLZKy0k1062zlhM8KFUyFoAC8xRI+mdp5m81FNMPnpKZfyq0AfJDyNTg==}
     engines: {node: '>= 16.9.0', npm: '>= 7.0.0', pnpm: '>= 6.17.0'}
+    dev: true
+
+  /eslint-plugin-react-hooks/4.3.0_eslint@8.4.1:
+    resolution: {integrity: sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+    dependencies:
+      eslint: 8.4.1
     dev: true
 
   /eslint-scope/5.1.1:

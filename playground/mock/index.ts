@@ -1,5 +1,5 @@
 import type { PartialDeep } from "type-fest";
-import type { Room } from "white-web-sdk";
+import type { Room, SceneDefinition } from "white-web-sdk";
 import { MockCallbacks } from "./callbacks";
 import { log } from "./helpers";
 
@@ -38,6 +38,38 @@ class MockRoom implements PartialDeep<Room> {
       this.callbacks.emit("onCanUndoStepsUpdate", this.undoStack.undoSteps);
     }
     return this.undoStack.undoSteps;
+  }
+  //#endregion
+
+  //#region PageControl
+  state = {
+    sceneState: {
+      index: 0,
+      scenes: [{}],
+    },
+  };
+  putScenes(_path: string, scenes: SceneDefinition[], index?: number) {
+    index ??= this.state.sceneState.scenes.length;
+    this.state.sceneState.scenes.splice(index, 0, ...scenes);
+    this.callbacks.emit("onRoomStateChanged", {
+      sceneState: this.state.sceneState,
+    });
+  }
+  pptPreviousStep() {
+    if (this.state.sceneState.index > 0) {
+      this.state.sceneState.index--;
+      this.callbacks.emit("onRoomStateChanged", {
+        sceneState: this.state.sceneState,
+      });
+    }
+  }
+  pptNextStep() {
+    if (this.state.sceneState.index + 1 < this.state.sceneState.scenes.length) {
+      this.state.sceneState.index++;
+      this.callbacks.emit("onRoomStateChanged", {
+        sceneState: this.state.sceneState,
+      });
+    }
   }
   //#endregion
 }

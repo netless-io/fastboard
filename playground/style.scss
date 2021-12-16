@@ -24,6 +24,12 @@ $unit: 8px;
   padding: $unit;
 }
 
+.bottom-right {
+  @extend .bottom-left;
+  left: auto;
+  right: $unit;
+}
+
 .bottom-hang {
   position: absolute;
   top: 100%;
