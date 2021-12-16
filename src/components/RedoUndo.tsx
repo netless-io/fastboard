@@ -41,8 +41,7 @@ export function RedoUndo({
         onClick={useCallback(() => room && room.undo(), [room])}
       >
         <Icon
-          theme={theme}
-          Fallback={Undo}
+          fallback={<Undo theme={theme} />}
           src={undoSteps === 0 ? undoIconDisable : undoIcon}
           alt="[undo]"
         />
@@ -53,8 +52,7 @@ export function RedoUndo({
         onClick={useCallback(() => room && room.redo(), [room])}
       >
         <Icon
-          theme={theme}
-          Fallback={Redo}
+          fallback={<Redo theme={theme} />}
           src={redoSteps === 0 ? redoIconDisable : redoIcon}
           alt="[redo]"
         />

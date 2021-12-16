@@ -103,8 +103,7 @@ export function PageControl({
         onClick={addPage}
       >
         <Icon
-          theme={theme}
-          Fallback={FilePlus}
+          fallback={<FilePlus theme={theme} />}
           src={disabled ? addIconDisable : addIcon}
           alt="[add]"
         />
@@ -116,8 +115,7 @@ export function PageControl({
         onClick={prevPage}
       >
         <Icon
-          theme={theme}
-          Fallback={ChevronLeft}
+          fallback={<ChevronLeft theme={theme} />}
           src={disabled ? prevIconDisable : prevIcon}
           alt="[prev]"
         />
@@ -131,8 +129,7 @@ export function PageControl({
         onClick={nextPage}
       >
         <Icon
-          theme={theme}
-          Fallback={ChevronRight}
+          fallback={<ChevronRight theme={theme} />}
           src={disabled ? nextIconDisable : nextIcon}
           alt="[next]"
         />

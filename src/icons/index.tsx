@@ -1,22 +1,11 @@
 import React from "react";
-import type { IconProps } from "../types";
 
-export type MergedIconProps = IconProps & {
-  Fallback: React.ComponentType<IconProps>;
+export interface IconPropsWithFallback {
+  fallback: React.ReactElement;
   src?: string;
   alt?: string;
-};
+}
 
-export function Icon({
-  theme,
-  active,
-  Fallback,
-  src,
-  alt = "[icon]",
-}: MergedIconProps) {
-  return src ? (
-    <img src={src} alt={alt} title={alt} />
-  ) : (
-    <Fallback theme={theme} active={active} />
-  );
+export function Icon({ fallback, src, alt = "[icon]" }: IconPropsWithFallback) {
+  return src ? <img src={src} alt={alt} title={alt} /> : fallback;
 }
