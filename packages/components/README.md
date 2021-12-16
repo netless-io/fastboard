@@ -1,3 +1,0 @@
-## @netless/components
-
-Standalone components

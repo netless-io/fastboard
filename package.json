@@ -1,34 +1,68 @@
 {
-  "name": "fastboard-monorepo",
-  "private": true,
+  "name": "@netless/fastboard",
+  "version": "0.0.0",
+  "description": "An open sourced sdk based on white-web-sdk.",
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "node": {
+        "import": "./dist/index.es.js",
+        "require": "./dist/index.cjs.js"
+      },
+      "default": "./dist/index.es.js",
+      "types": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "format": "prettier --write .",
-    "lint": "eslint --ext .ts,.tsx,.svelte .",
-    "build-all": "pnpm build --recursive",
-    "dev": "pnpm dev --filter components"
+    "lint": "eslint --ext .ts,.tsx .",
+    "dev": "vite dev",
+    "build": "vite build",
+    "build:dev": "vite build --mode development"
+  },
+  "contributors": [
+    {
+      "name": "hyrious",
+      "email": "hyrious@outlook.com"
+    },
+    {
+      "name": "l1shen",
+      "email": "lishen1635@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@netless/window-manager": "*",
+    "white-web-sdk": "*",
+    "react": "*"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.6.2",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/window-manager": "^0.3.9",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.31",
-    "@types/node": "^16.11.12",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "esbuild": "^0.14.3",
+    "@netless/window-manager": "^0.3.12",
+    "@types/node": "^17.0.0",
+    "@types/react": "^17.0.37",
+    "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "@vitejs/plugin-react": "^1.1.3",
+    "esbuild": "^0.14.5",
     "eslint": "^8.4.1",
     "eslint-define-config": "^1.2.0",
-    "eslint-plugin-svelte3": "^3.2.1",
-    "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
-    "prettier-plugin-svelte": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "sass": "^1.45.0",
-    "svelte": "^3.44.2",
-    "svelte-preprocess": "^4.9.8",
-    "typescript": "^4.5.3",
-    "vite": "^2.7.1",
-    "white-web-sdk": "^2.15.12"
-  },
-  "packageManager": "pnpm@6.23.6"
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2",
+    "white-web-sdk": "^2.15.13"
+  }
 }

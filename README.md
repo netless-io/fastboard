@@ -31,11 +31,7 @@ let app = createWhiteboardApp({
 ```bash
 pnpm i
 # upgrade dependencies
-pnpm up -Lir
-# install dependency to some package
-pnpm add [-D] svelte --filter playground
-# run scripts
-pnpm build --filter components
+pnpm up -Li
 ```
 
 ## License
