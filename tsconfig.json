@@ -15,6 +15,7 @@
     "useUnknownInCatchVariables": false,
     "preserveValueImports": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "isolatedModules": true
   }
 }

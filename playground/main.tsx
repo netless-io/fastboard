@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { RedoUndo } from "../src";
 
 function App() {
-  return <div>Hello world!</div>;
+  return <RedoUndo />;
 }
 
 ReactDOM.render(<App />, document.querySelector("#app"));

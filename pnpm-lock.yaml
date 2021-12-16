@@ -13,6 +13,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.7.0
       '@typescript-eslint/parser': ^5.7.0
       '@vitejs/plugin-react': ^1.1.3
+      clsx: ^1.1.1
       esbuild: ^0.14.5
       eslint: ^8.4.1
       eslint-define-config: ^1.2.0
@@ -23,6 +24,8 @@ importers:
       typescript: ^4.5.4
       vite: ^2.7.2
       white-web-sdk: ^2.15.13
+    dependencies:
+      clsx: 1.1.1
     devDependencies:
       '@hyrious/esbuild-dev': 0.6.2_esbuild@0.14.5
       '@hyrious/rimraf': 0.1.0
@@ -867,6 +870,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /clsx/1.1.1:
+    resolution: {integrity: sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
