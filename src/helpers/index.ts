@@ -4,3 +4,7 @@ export function applyStyles(css: string) {
   document.head.appendChild(el);
   return el;
 }
+
+export function clamp(value: number, min: number, max: number) {
+  return Math.min(Math.max(value, min), max);
+}

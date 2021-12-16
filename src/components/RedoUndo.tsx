@@ -18,26 +18,32 @@ export function RedoUndo({
   redoIcon,
   redoIconDisable,
 }: RedoUndoProps) {
+  const [writable, setWritable] = useState(true);
   const [undoSteps, setUndoSteps] = useState(0);
   const [redoSteps, setRedoSteps] = useState(0);
 
   useEffect(() => {
     if (room) {
+      setWritable(room.isWritable);
       room.isWritable && (room.disableSerialization = false);
+      room.callbacks.on("onEnableWriteNowChanged", setWritable);
       room.callbacks.on("onCanUndoStepsUpdate", setUndoSteps);
       room.callbacks.on("onCanRedoStepsUpdate", setRedoSteps);
       return () => {
+        room.callbacks.off("onEnableWriteNowChanged", setWritable);
         room.callbacks.off("onCanUndoStepsUpdate", setUndoSteps);
         room.callbacks.off("onCanRedoStepsUpdate", setRedoSteps);
       };
     }
   }, [room]);
 
+  const disabled = !writable;
+
   return (
     <div className={clsx(name, theme)}>
       <button
         className={clsx(`${name}-btn`, "undo", theme)}
-        disabled={undoSteps === 0}
+        disabled={disabled || undoSteps === 0}
         onClick={useCallback(() => room && room.undo(), [room])}
       >
         <Icon
@@ -48,7 +54,7 @@ export function RedoUndo({
       </button>
       <button
         className={clsx(`${name}-btn`, "redo", theme)}
-        disabled={redoSteps === 0}
+        disabled={disabled || redoSteps === 0}
         onClick={useCallback(() => room && room.redo(), [room])}
       >
         <Icon

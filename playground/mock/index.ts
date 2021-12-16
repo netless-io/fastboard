@@ -5,9 +5,15 @@ import { log } from "./helpers";
 
 class MockRoom implements PartialDeep<Room> {
   callbacks = new MockCallbacks();
+  isWritable = true;
+
+  setWritable(writable: boolean) {
+    this.isWritable = writable;
+    this.callbacks.emit("onEnableWriteNowChanged", this.isWritable);
+    return Promise.resolve();
+  }
 
   //#region RedoUndo
-  isWritable = true;
   disableSerialization = false;
 
   undoStack = { undoSteps: 0, redoSteps: 0 };
@@ -46,9 +52,14 @@ class MockRoom implements PartialDeep<Room> {
     sceneState: {
       index: 0,
       scenes: [{}],
+      scenePath: "/init",
+    },
+    cameraState: {
+      scale: 1,
     },
   };
-  putScenes(_path: string, scenes: SceneDefinition[], index?: number) {
+  putScenes(path: string, scenes: SceneDefinition[], index?: number) {
+    log("[room.putScenes]", path, scenes, index);
     index ??= this.state.sceneState.scenes.length;
     this.state.sceneState.scenes.splice(index, 0, ...scenes);
     this.callbacks.emit("onRoomStateChanged", {
@@ -56,6 +67,7 @@ class MockRoom implements PartialDeep<Room> {
     });
   }
   pptPreviousStep() {
+    log("[room.pptPreviousStep]", this.state.sceneState.index);
     if (this.state.sceneState.index > 0) {
       this.state.sceneState.index--;
       this.callbacks.emit("onRoomStateChanged", {
@@ -64,6 +76,7 @@ class MockRoom implements PartialDeep<Room> {
     }
   }
   pptNextStep() {
+    log("[room.pptNextStep]", this.state.sceneState.index);
     if (this.state.sceneState.index + 1 < this.state.sceneState.scenes.length) {
       this.state.sceneState.index++;
       this.callbacks.emit("onRoomStateChanged", {
@@ -72,6 +85,15 @@ class MockRoom implements PartialDeep<Room> {
     }
   }
   //#endregion
+
+  //#region ZoomControl
+  moveCamera({ scale }: { scale: number }) {
+    log("[room.moveCamera]", scale);
+    this.state.cameraState.scale = scale;
+    this.callbacks.emit("onRoomStateChanged", {
+      cameraState: this.state.cameraState,
+    });
+  }
 }
 
 export const room = new MockRoom();

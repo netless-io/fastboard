@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Callbacks, RoomCallbacks } from "white-web-sdk";
+import { log } from "./helpers";
 
 type Vof<KV, K> = K extends keyof KV ? KV[K] : never;
 export class MockCallbacks implements Callbacks<RoomCallbacks> {
@@ -13,6 +14,7 @@ export class MockCallbacks implements Callbacks<RoomCallbacks> {
   }
 
   on<K extends string>(e: K, f: Vof<RoomCallbacks, K>): void {
+    log("[on]", e);
     this.of(e).add(f);
   }
 
@@ -25,6 +27,7 @@ export class MockCallbacks implements Callbacks<RoomCallbacks> {
   }
 
   off<K extends string>(e?: K, f?: Vof<RoomCallbacks, K>): void {
+    log("[off]", e);
     if (e) {
       if (f) {
         const set = this.of(e);

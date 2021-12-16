@@ -10,6 +10,24 @@ export type StatePair<KV extends Record<string, unknown>> = KV extends Record<
     : never
   : never;
 
+export function WritableControls({
+  writable,
+  setWritable,
+}: StatePair<{ writable: boolean }>) {
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="checkbox"
+          checked={writable}
+          onChange={ev => setWritable(ev.target.checked)}
+        />
+        Writable
+      </label>
+    </div>
+  );
+}
+
 export function DarkControls({ dark, setDark }: StatePair<{ dark: boolean }>) {
   return (
     <div className="row">
@@ -59,6 +77,24 @@ export function PageControlControls({
           onChange={ev => setVisible(ev.target.checked)}
         />
         PageControl
+      </label>
+    </div>
+  );
+}
+
+export function ZoomControlControls({
+  visible,
+  setVisible,
+}: StatePair<{ visible: boolean }>) {
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="checkbox"
+          checked={visible}
+          onChange={ev => setVisible(ev.target.checked)}
+        />
+        ZoomControl
       </label>
     </div>
   );

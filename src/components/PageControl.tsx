@@ -60,6 +60,7 @@ export function PageControl({
 
   useEffect(() => {
     if (room) {
+      setWritable(room.isWritable);
       setPageIndex(room.state.sceneState.index);
       setPageCount(room.state.sceneState.scenes.length);
     }
