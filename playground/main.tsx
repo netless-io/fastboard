@@ -2,12 +2,12 @@ import type { Room } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { room } from "./mock";
+import { RedoUndo, Toolbar } from "../src";
 import "./style.scss";
 
-import { RedoUndo } from "../src";
 import { PageControl } from "../src/components/PageControl";
 import { ZoomControl } from "../src/components/ZoomControl";
 import {
@@ -24,6 +24,7 @@ function App() {
   const [redo_undo, set_redo_undo] = useState(true);
   const [page_control, set_page_control] = useState(true);
   const [zoom_control, set_zoom_control] = useState(true);
+  const [toolbar, setToolbar] = useState(true);
 
   useEffect(() => {
     document.documentElement.style.colorScheme = dark ? "dark" : "light";
@@ -38,6 +39,7 @@ function App() {
   return (
     <>
       <div className={clsx("wrapper", { dark })}>
+        {toolbar && <Toolbar theme={theme}></Toolbar>}
         <div className="bottom-left">
           {redo_undo && (
             <RedoUndo theme={theme} room={room as unknown as Room} />
@@ -64,6 +66,31 @@ function App() {
           visible={zoom_control}
           setVisible={set_zoom_control}
         />
+        <label>
+          <input
+            type="checkbox"
+            checked={dark}
+            onChange={ev => set_dark(ev.target.checked)}
+          />
+          Dark
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            checked={redo_undo}
+            onChange={useCallback(ev => set_redo_undo(ev.target.checked), [])}
+          />
+          RedoUndo
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={toolbar}
+            onChange={useCallback(ev => setToolbar(ev.target.checked), [])}
+          />
+          Toolbar
+        </label>
       </div>
     </>
   );

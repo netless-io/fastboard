@@ -45,7 +45,10 @@
     "white-web-sdk": "*"
   },
   "dependencies": {
-    "clsx": "^1.1.1"
+    "@tippyjs/react": "^4.2.6",
+    "clsx": "^1.1.1",
+    "rc-slider": "^9.7.5",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.6.2",

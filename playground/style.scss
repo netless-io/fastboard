@@ -1,7 +1,7 @@
 #app {
   position: relative;
   width: 600px;
-  height: 400px;
+  height: 60vh;
   border: 1px solid rgba($color: gray, $alpha: 0.5);
 }
 
@@ -42,4 +42,10 @@ $unit: 8px;
     display: flex;
     gap: 5px;
   }
+}
+
+.left {
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }

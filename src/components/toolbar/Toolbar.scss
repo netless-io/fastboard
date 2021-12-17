@@ -1,0 +1,124 @@
+$name: "fastboard-toolbar";
+
+.#{$name} {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  flex-direction: column;
+  gap: 8px;
+  position: fixed;
+
+  &.light {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  &.dark {
+    background-color: #333;
+    border: 1px solid rgba(0, 0, 0, 0.45);
+  }
+
+  .section {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .button {
+    appearance: none;
+    cursor: pointer;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: 1em;
+    height: 1em;
+    background-color: transparent;
+    border-radius: 4px;
+    font-size: 24px;
+    line-height: 1;
+    position: relative;
+  }
+
+  .button:hover {
+    background-color: rgba(51, 129, 255, 0.1);
+  }
+
+  .expand {
+    height: 70%;
+  }
+
+  .line {
+    display: inline-block;
+    height: 0.5px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .pencil-wrapper {
+    width: 136px;
+    height: 106px;
+    padding: 8px;
+  }
+
+  .text-wrapper {
+    width: 136px;
+  }
+
+  .shapes-wrapper {
+    width: 120px;
+    height: 166px;
+    padding: 8px;
+  }
+
+  .shapes-container {
+    display: flex;
+    height: 30%;
+    flex-flow: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .pencil-slider.slider {
+    margin: 5px 0;
+  }
+
+  .color-box {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .color-item {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+  }
+
+  .color-button {
+    margin: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+  }
+
+  .triangle {
+    width: 0px;
+    height: 0px;
+    border-bottom: 4px solid;
+    border-left: 4px solid transparent;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

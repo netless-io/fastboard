@@ -12,5 +12,5 @@
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
-  "cSpell.words": ["esbuild", "fastboard", "preinstall"]
+  "cSpell.words": ["clsx", "esbuild", "fastboard", "preinstall", "tippyjs"]
 }
