@@ -276,8 +276,11 @@ export const ColorBox = () => {
     return (
       <div key={color} className="color-item">
         <div
-          className="color-border"
-          style={activeColor === color ? activeStyle : undefined}
+          className={clsx(
+            "color-border",
+            { active: activeColor === color },
+            theme
+          )}
         >
           <div
             className="color-button"

@@ -99,13 +99,22 @@ $name: "fastboard-toolbar";
     width: 24px;
     height: 24px;
     border-radius: 4px;
+  }
+
+  .color-border {
+    width: 24px;
+    height: 24px;
     align-items: center;
     justify-content: center;
     display: inline-flex;
+
+    &.active.light {
+      border: 1px solid rgba(51, 129, 255, 0.8);
+      border-radius: 4px;
+    }
   }
 
   .color-button {
-    margin: 2px;
     width: 16px;
     height: 16px;
     border-radius: 4px;
