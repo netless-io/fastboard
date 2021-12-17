@@ -5,7 +5,7 @@ import type { Room, WhiteWebSdk } from "white-web-sdk";
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
 
-import Root from "./components/Root";
+import Root from "./Root";
 import { noop } from "./internal";
 
 export interface WhiteboardAppConfig {
