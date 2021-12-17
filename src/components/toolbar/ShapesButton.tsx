@@ -1,32 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Tippy from "@tippyjs/react";
+import { ApplianceNames, ShapeType } from "white-web-sdk";
 import { ColorBox } from "./ToolbarContent";
 import { Icons } from "./icons";
-import { ShapesMap, ToolbarContext, type ToolName } from "./Toolbar";
 import { ToolbarSlider } from "./Slider";
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { ShapesMap, ToolbarContext, type ToolName } from "./Toolbar";
 import type { MemoExoticComponent } from "react";
 import type { ContentProps } from "./ToolbarContent";
 import type { IconProps, Theme } from "../../types";
-import { ApplianceNames, ShapeType } from "white-web-sdk";
 
-export const ShapesButton = (props: ContentProps) => {
-  const { theme, methods } = useContext(ToolbarContext);
+type ActiveShapeType = {
+  currentApplianceName: ToolName | undefined;
+  setApplianceShape?: (shape: ToolName | undefined) => void;
+};
+
+export const ShapesButton = React.memo((props: ContentProps) => {
+  const { theme, methods, currentApplianceName } = useContext(ToolbarContext);
   const { activeTool, setActiveTool } = props;
-  const [activeShape, setActiveShape] = useState<ToolName>(
-    ApplianceNames.rectangle
-  );
-
-  useEffect(() => {
-    methods?.setAppliance(activeShape);
-    console.log("activeShape", activeShape);
-  }, [activeShape, methods]);
 
   return (
     <Tippy
       content={ShapesContent({
-        activeShape,
-        setActiveShape,
+        currentApplianceName,
+        setApplianceShape: methods?.setAppliance,
       })}
       theme={theme}
       placement="right"
@@ -40,7 +37,7 @@ export const ShapesButton = (props: ContentProps) => {
         className="button"
         onClick={() => setActiveTool(ApplianceNames.rectangle)}
       >
-        {renderIcon(activeShape, {
+        {renderIcon(currentApplianceName, {
           theme,
           active: activeTool === ApplianceNames.rectangle,
         })}
@@ -48,22 +45,21 @@ export const ShapesButton = (props: ContentProps) => {
       </button>
     </Tippy>
   );
+});
+
+const renderIcon = (name: ToolName | undefined, props: IconProps) => {
+  if (name) {
+    const CurrentIcon = ShapesMap[name];
+    return CurrentIcon && <CurrentIcon {...props} />;
+  } else {
+    return ShapesMap.rectangle && <ShapesMap.rectangle {...props} />;
+  }
 };
 
-const renderIcon = (name: ToolName, props: IconProps) => {
-  const CurrentIcon = ShapesMap[name];
-  return CurrentIcon && <CurrentIcon {...props} />;
-};
-
-type RenderShapesContentProps = {
-  activeShape: string;
-  setActiveShape: React.Dispatch<React.SetStateAction<ToolName>>;
-};
-
-const ShapesContent = (props: RenderShapesContentProps) => {
+const ShapesContent = (props: ActiveShapeType) => {
   const { theme } = useContext(ToolbarContext);
-  const { activeShape, setActiveShape } = props;
-  const defaultProps = { theme, activeShape, setActiveShape };
+  const { currentApplianceName, setApplianceShape } = props;
+  const defaultProps = { theme, currentApplianceName, setApplianceShape };
   return (
     <div className="shapes-wrapper">
       <div className="shapes-container">
@@ -129,20 +125,25 @@ type CreateShapeButtonProps = {
   name: ToolName;
   theme: Theme;
   Icon: MemoExoticComponent<(props: IconProps) => JSX.Element>;
-  activeShape: string;
-  setActiveShape: React.Dispatch<React.SetStateAction<ToolName>>;
-};
+} & ActiveShapeType;
 
 const createShapeButton = (props: CreateShapeButtonProps) => {
-  const { content, name, Icon, activeShape, setActiveShape, theme } = props;
+  const {
+    content,
+    name,
+    Icon,
+    currentApplianceName,
+    theme,
+    setApplianceShape,
+  } = props;
   return (
     <Tippy content={content} placement="auto">
       <button
         className="button"
         key={content}
-        onClick={() => setActiveShape(name)}
+        onClick={() => setApplianceShape && setApplianceShape(name)}
       >
-        <Icon theme={theme} active={activeShape === name} />
+        <Icon theme={theme} active={currentApplianceName === name} />
       </button>
     </Tippy>
   );

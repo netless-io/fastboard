@@ -49,6 +49,7 @@ type ContextType = {
   theme: Theme;
   icons?: ToolbarProps["icons"];
   methods?: ReturnType<typeof createMethods>;
+  currentApplianceName?: ApplianceNames;
 };
 
 const defaultContext: ContextType = {
@@ -60,7 +61,9 @@ const ShapeTypes: string[] = Object.values(ShapeType);
 const createMethods = (room?: Room | null, manager?: WindowManager | null) => {
   return {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
-    setAppliance: (appliance: ToolName) => {
+    setAppliance: (appliance: ToolName | undefined) => {
+      if (!appliance) return;
+      console.log("setAppliance", appliance);
       if (ShapeTypes.includes(appliance)) {
         room?.setMemberState({
           currentApplianceName: ApplianceNames.shape,
@@ -101,7 +104,15 @@ export const Toolbar = (props: ToolbarProps) => {
   }, [activeTool, methods]);
 
   return (
-    <ToolbarContext.Provider value={{ theme, icons, methods }}>
+    <ToolbarContext.Provider
+      value={{
+        theme,
+        icons,
+        methods,
+        currentApplianceName:
+          props.room?.state.memberState.currentApplianceName,
+      }}
+    >
       <div className={clsx(name, props.theme)} style={{ left, top }}>
         <div className="button" onClick={toggleExpand}>
           {expanded
