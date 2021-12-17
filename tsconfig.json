@@ -1,5 +1,5 @@
 {
-  "include": ["src", "playground", "./package.json"],
+  "include": ["src", "playground", "./package.json", "e2e"],
   "compilerOptions": {
     "noEmit": true,
     "jsx": "react",

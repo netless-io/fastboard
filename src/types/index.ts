@@ -9,8 +9,8 @@ export interface IconProps {
 }
 
 export interface CommonProps {
-  room?: Room;
-  manager?: WindowManager;
+  room?: Room | null;
+  manager?: WindowManager | null;
   theme?: Theme;
 }
 

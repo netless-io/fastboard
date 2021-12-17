@@ -5,6 +5,7 @@ import style from "./style.scss?inline";
 import { useStyle } from "./hooks";
 import { mountWhiteboard } from "./internal";
 import { useWhiteboardApp } from "./WhiteboardApp";
+import { RedoUndo } from ".";
 
 export default function Root() {
   useStyle(style);
@@ -28,6 +29,9 @@ export default function Root() {
   return (
     <div className="agora-whiteboard-root">
       <div className="agora-whiteboard-view" ref={useWhiteboard} />
+      <div className="fastboard-bottom-left">
+        {app.room && <RedoUndo room={app.room} manager={app.manager} />}
+      </div>
     </div>
   );
 }
