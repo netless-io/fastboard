@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import React from "react";
-import { ApplianceNames } from "white-web-sdk";
+import React, { type MemoExoticComponent } from "react";
+import { ApplianceNames, ShapeType } from "white-web-sdk";
 import { Button } from "./Button";
 import { createContext, useEffect, useState } from "react";
 import { Icon } from "../../icons";
@@ -28,25 +28,49 @@ export type ToolbarProps = CommonProps & {
   >;
 };
 
+export type ToolName = `${ApplianceNames}` | `${ShapeType}`;
+
+export const ShapesMap: Partial<{
+  [key in ToolName]: MemoExoticComponent<(props: IconProps) => JSX.Element>;
+}> = {
+  rectangle: Icons.Rectangle,
+  ellipse: Icons.Circle,
+  straight: Icons.Line,
+  arrow: Icons.Arrow,
+  pentagram: Icons.Star,
+  rhombus: Icons.Diamond,
+  triangle: Icons.Triangle,
+  speechBalloon: Icons.SpeechBalloon,
+};
+
 const defaultTheme: Theme = "light";
 
 type ContextType = {
   theme: Theme;
   icons?: ToolbarProps["icons"];
-  methods?: {
-    cleanCurrentScene: () => void;
-  };
+  methods?: ReturnType<typeof createMethods>;
 };
 
 const defaultContext: ContextType = {
   theme: defaultTheme,
 };
 
+const ShapeTypes: string[] = Object.values(ShapeType);
+
 const createMethods = (room?: Room | null, manager?: WindowManager | null) => {
   return {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
-    setAppliance: (appliance: ApplianceNames) => {
-      room?.setMemberState({ currentApplianceName: appliance });
+    setAppliance: (appliance: ToolName) => {
+      if (ShapeTypes.includes(appliance)) {
+        room?.setMemberState({
+          currentApplianceName: ApplianceNames.shape,
+          shapeType: appliance as ShapeType,
+        });
+      } else {
+        room?.setMemberState({
+          currentApplianceName: appliance as ApplianceNames,
+        });
+      }
     },
     setStrokeWidth: (width: number) => {
       room?.setMemberState({ strokeWidth: width });

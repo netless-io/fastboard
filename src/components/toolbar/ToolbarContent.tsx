@@ -5,7 +5,6 @@ import { Button } from "./Button";
 import { Icon } from "../../icons";
 import { Icons } from "./icons";
 import { ShapesButton } from "./ShapesButton";
-import { themes } from "../../theme";
 import { ToolbarContext } from "./Toolbar";
 import { ToolbarSlider } from "./Slider";
 import React, {
@@ -80,6 +79,7 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
     getAndSetParentHeight();
     window.addEventListener("resize", resizeListener);
     return () => window.removeEventListener("resize", resizeListener);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -258,7 +258,6 @@ const TextButton = (props: ContentProps) => {
 
 export const ColorBox = () => {
   const { theme } = useContext(ToolbarContext);
-  const config = themes[theme];
   const [activeColor, setColor] = useState("red");
   const colors = [
     "white",
@@ -270,7 +269,6 @@ export const ColorBox = () => {
     "orange",
     "purple",
   ];
-  const activeStyle = computedActiveStyle(config.activeColor);
 
   return colors.map((color: string) => {
     return (
@@ -291,8 +289,4 @@ export const ColorBox = () => {
       </div>
     );
   });
-};
-
-const computedActiveStyle = (color: string): React.CSSProperties => {
-  return { border: `1px solid ${color}`, borderRadius: "4px" };
 };
