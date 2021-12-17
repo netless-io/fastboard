@@ -69,23 +69,6 @@ function App() {
         <label>
           <input
             type="checkbox"
-            checked={dark}
-            onChange={ev => set_dark(ev.target.checked)}
-          />
-          Dark
-        </label>
-        <br />
-        <label>
-          <input
-            type="checkbox"
-            checked={redo_undo}
-            onChange={useCallback(ev => set_redo_undo(ev.target.checked), [])}
-          />
-          RedoUndo
-        </label>
-        <label>
-          <input
-            type="checkbox"
             checked={toolbar}
             onChange={useCallback(ev => setToolbar(ev.target.checked), [])}
           />

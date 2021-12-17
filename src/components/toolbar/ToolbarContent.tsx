@@ -119,9 +119,6 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
             alt="[selector]"
           />
         </Button>
-        {/* <Button content="Pencil" interactive={false}>
-
-        </Button> */}
         {PencilButton(props)}
         {TextButton(props)}
         <ShapesButton {...props} />
