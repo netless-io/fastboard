@@ -5,7 +5,8 @@ import style from "./style.scss?inline";
 import { useStyle } from "./hooks";
 import { mountWhiteboard } from "./internal";
 import { useWhiteboardApp } from "./WhiteboardApp";
-import { RedoUndo } from ".";
+import { RedoUndo, Toolbar } from ".";
+import { ZoomControl } from "./components/ZoomControl";
 
 export default function Root() {
   useStyle(style);
@@ -30,8 +31,16 @@ export default function Root() {
     <div className="agora-whiteboard-root">
       <div className="agora-whiteboard-view" ref={useWhiteboard} />
       <div className="fastboard-bottom-left">
-        {app.room && <RedoUndo room={app.room} manager={app.manager} />}
+        <RedoUndo room={app.room} manager={app.manager} />
+        <ZoomControl room={app.room} manager={app.manager} />
       </div>
+      <Toolbar
+        room={app.room}
+        manager={app.manager}
+        left={20}
+        top={200}
+        theme={"light"}
+      />
     </div>
   );
 }

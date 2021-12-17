@@ -60,9 +60,10 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
 
   const getAndSetParentHeight = () => {
     if (ref.current) {
-      const rect = ref.current?.getBoundingClientRect();
+      const rect =
+        ref.current.parentElement?.parentElement?.getBoundingClientRect();
       if (rect) {
-        setParentHeight(window.innerHeight - rect.y);
+        setParentHeight(rect.height);
       }
     }
   };

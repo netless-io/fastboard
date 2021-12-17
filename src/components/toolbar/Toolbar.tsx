@@ -42,7 +42,7 @@ const defaultContext: ContextType = {
   theme: defaultTheme,
 };
 
-const createMethods = (room?: Room, manager?: WindowManager) => {
+const createMethods = (room?: Room | null, manager?: WindowManager | null) => {
   return {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
     setAppliance: (appliance: ApplianceNames) => {
@@ -63,8 +63,8 @@ export const name = "fastboard-toolbar";
 
 export const Toolbar = (props: ToolbarProps) => {
   const theme = props.theme || defaultTheme;
-  const left = props.left || 350;
-  const top = props.top || 50;
+  const left = props.left || 15;
+  const top = props.top || 20;
   const icons = props.icons;
   const [expanded, setExpanded] = useState(true);
   const toggleExpand = () => setExpanded(!expanded);
