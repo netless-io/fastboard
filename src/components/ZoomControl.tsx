@@ -114,10 +114,12 @@ export function ZoomControl({
       }
     };
 
+    const onCameraUpdated = ({ scale }: { scale: number }) => setScale(scale);
+
     if (room) {
       room.callbacks.on("onEnableWriteNowChanged", setWritable);
       if (manager) {
-        manager.mainView.callbacks.on("onCameraUpdated", setScale);
+        manager.mainView.callbacks.on("onCameraUpdated", onCameraUpdated);
       } else {
         room.callbacks.on("onRoomStateChanged", onRoomStateChanged);
       }
@@ -127,7 +129,7 @@ export function ZoomControl({
       if (room) {
         room.callbacks.off("onEnableWriteNowChanged", setWritable);
         room.callbacks.off("onRoomStateChanged", onRoomStateChanged);
-        manager?.mainView.callbacks.off("onCameraUpdated", setScale);
+        manager?.mainView.callbacks.off("onCameraUpdated", onCameraUpdated);
       }
     };
   }, [room, manager]);

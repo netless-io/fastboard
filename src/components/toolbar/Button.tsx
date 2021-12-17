@@ -1,6 +1,7 @@
+import type { PropsWithChildren, ReactEventHandler } from "react";
+
 import React from "react";
 import Tippy from "@tippyjs/react";
-import type { PropsWithChildren, ReactEventHandler } from "react";
 
 type ButtonProps = PropsWithChildren<{
   content: string;

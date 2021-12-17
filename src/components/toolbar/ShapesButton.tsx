@@ -1,14 +1,15 @@
-import React from "react";
+import type { MemoExoticComponent } from "react";
+import type { IconProps, Theme } from "../../types";
+import type { ContentProps } from "./ToolbarContent";
+import type { ToolName } from "./Toolbar";
+
 import Tippy from "@tippyjs/react";
+import React, { useContext } from "react";
 import { ApplianceNames, ShapeType } from "white-web-sdk";
-import { ColorBox } from "./ToolbarContent";
 import { Icons } from "./icons";
 import { ToolbarSlider } from "./Slider";
-import { useContext } from "react";
-import { ShapesMap, ToolbarContext, type ToolName } from "./Toolbar";
-import type { MemoExoticComponent } from "react";
-import type { ContentProps } from "./ToolbarContent";
-import type { IconProps, Theme } from "../../types";
+import { ShapesMap, ToolbarContext } from "./Toolbar";
+import { ColorBox } from "./ToolbarContent";
 
 type ActiveShapeType = {
   currentApplianceName: ToolName | undefined;

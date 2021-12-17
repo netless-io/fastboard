@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { createWhiteboardApp } from "../src";
 import "./index.css";
@@ -11,11 +10,11 @@ function App() {
       createWhiteboardApp({
         target: ref.current,
         sdkConfig: {
-          appIdentifier: import.meta.env.VITE_APPID as string,
+          appIdentifier: import.meta.env.VITE_APPID,
         },
         joinRoom: {
-          uuid: import.meta.env.VITE_ROOM_UUID as string,
-          roomToken: import.meta.env.VITE_ROOM_TOKEN as string,
+          uuid: import.meta.env.VITE_ROOM_UUID,
+          roomToken: import.meta.env.VITE_ROOM_TOKEN,
           uid: "test",
         },
       });

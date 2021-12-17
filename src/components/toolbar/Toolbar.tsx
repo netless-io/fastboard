@@ -1,15 +1,16 @@
+import type { MemoExoticComponent } from "react";
+import type { Color, Room } from "white-web-sdk";
+import type { WindowManager } from "@netless/window-manager";
+import type { CommonProps, GenericIcon, IconProps, Theme } from "../../types";
+
 import clsx from "clsx";
-import React, { type MemoExoticComponent } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { ApplianceNames, ShapeType } from "white-web-sdk";
-import { Button } from "./Button";
-import { createContext, useEffect, useState } from "react";
 import { Icon } from "../../icons";
+import { Button } from "./Button";
 import { Icons } from "./icons";
 import { Line } from "./Line";
 import { ToolbarContent } from "./ToolbarContent";
-import type { CommonProps, GenericIcon, IconProps, Theme } from "../../types";
-import type { Color, Room } from "white-web-sdk";
-import type { WindowManager } from "@netless/window-manager";
 
 export type ToolbarProps = CommonProps & {
   left?: number;
@@ -58,7 +59,7 @@ const defaultContext: ContextType = {
 
 const ShapeTypes: string[] = Object.values(ShapeType);
 
-const createMethods = (room?: Room | null, manager?: WindowManager | null) => {
+const createMethods = (room?: Room | null, _manager?: WindowManager | null) => {
   return {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
     setAppliance: (appliance: ToolName | undefined) => {
@@ -113,7 +114,7 @@ export const Toolbar = (props: ToolbarProps) => {
           props.room?.state.memberState.currentApplianceName,
       }}
     >
-      <div className={clsx(name, props.theme)} style={{ left, top }}>
+      <div className={clsx(name, theme)} style={{ left, top }}>
         <div className="button" onClick={toggleExpand}>
           {expanded
             ? createCollapseOrExpandButton({

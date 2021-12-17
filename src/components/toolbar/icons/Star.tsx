@@ -1,5 +1,6 @@
-import React from "react";
 import type { IconProps } from "../../../types";
+
+import React from "react";
 import { getStroke } from "./index";
 
 export const Star = (props: IconProps) => {

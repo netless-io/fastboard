@@ -1,4 +1,5 @@
 #app {
   width: 80vw;
   height: 80vh;
+  border: 1px solid WindowFrame;
 }

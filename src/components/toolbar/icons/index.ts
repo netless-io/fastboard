@@ -21,6 +21,16 @@ import { Up } from "./Up";
 import { Down } from "./Down";
 import type { IconProps } from "../../../types";
 
+export const getStroke = (props: IconProps) => {
+  let config;
+  if (props.theme) {
+    config = themes[props.theme];
+  } else {
+    config = themes.light;
+  }
+  return props.active ? config.activeColor : config.color;
+};
+
 export const Icons = {
   Clicker: React.memo(Clicker),
   Collapse: React.memo(Collapse),
@@ -41,14 +51,4 @@ export const Icons = {
   Triangle: React.memo(Triangle),
   Up: React.memo(Up),
   Down: React.memo(Down),
-};
-
-export const getStroke = (props: IconProps) => {
-  let config;
-  if (props.theme) {
-    config = themes[props.theme];
-  } else {
-    config = themes.light;
-  }
-  return props.active ? config.activeColor : config.color;
 };

@@ -1,6 +1,7 @@
+import type { IconProps } from "../../../types";
+
 import React from "react";
 import { getStroke } from "./index";
-import type { IconProps } from "../../../types";
 
 export const Apps = (props: IconProps) => {
   const stroke = getStroke(props);
