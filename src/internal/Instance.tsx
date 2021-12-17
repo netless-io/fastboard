@@ -38,8 +38,8 @@ export class Instance {
   room: Room | null = null;
   manager: WindowManager | null = null;
 
-  private container: HTMLElement | null = null;
-  private destroyed = true;
+  _container: HTMLElement | null = null;
+  _destroyed = true;
 
   constructor(config: WhiteboardAppConfig) {
     this.target = config.target;
@@ -48,8 +48,8 @@ export class Instance {
   }
 
   initialize() {
-    if (this.destroyed) {
-      this.destroyed = false;
+    if (this._destroyed) {
+      this._destroyed = false;
       this.forceUpdate();
     }
   }
@@ -67,17 +67,22 @@ export class Instance {
 
   async dispose() {
     await this._unmount();
-    if (!this.destroyed && this.target) {
-      this.destroyed = true;
+    if (!this._destroyed && this.target) {
+      this._destroyed = true;
       ReactDOM.unmountComponentAtNode(this.target);
-      this.sdk = this.room = this.manager = this.target = this.container = null;
+      this.sdk =
+        this.room =
+        this.manager =
+        this.target =
+        this._container =
+          null;
     }
   }
 
   private _mountLock = new Lock();
 
   mount(container: HTMLElement) {
-    this.container = container;
+    this._container = container;
     this._mountLock.schedule(this._mount);
   }
 
@@ -86,12 +91,12 @@ export class Instance {
       console.warn("[WhiteboardApp] Already mounted");
       return;
     }
-    if (this.container) {
+    if (this._container) {
       try {
         const essentials = await mountWhiteboard(
           this.config.sdkConfig,
           this.config.joinRoom,
-          { ...this.config.managerConfig, container: this.container }
+          { ...this.config.managerConfig, container: this._container }
         );
         this.accept(essentials);
       } catch (error) {
