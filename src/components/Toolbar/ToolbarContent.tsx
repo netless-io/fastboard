@@ -127,16 +127,30 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
           content="Eraser"
           onClick={() => setActiveTool(ApplianceNames.eraser)}
         >
-          <Icons.Eraser
-            theme={theme}
-            active={activeTool === ApplianceNames.eraser}
+          <Icon
+            fallback={
+              <Icons.Eraser
+                theme={theme}
+                active={activeTool === ApplianceNames.eraser}
+              />
+            }
+            src={icons?.eraserIcon}
+            alt="[eraser]"
           />
         </Button>
         <Button content="CleanScene" onClick={() => console.log("test")}>
-          <Icons.Clean theme={theme} />
+          <Icon
+            fallback={<Icons.Clean theme={theme} />}
+            src={icons?.cleanIcon}
+            alt="[clean]"
+          />
         </Button>
         <Button content="Apps" onClick={() => console.log("test")}>
-          <Icons.Apps theme={theme} />
+          <Icon
+            fallback={<Icons.Apps theme={theme} />}
+            src={icons?.cleanIcon}
+            alt="[apps]"
+          />
         </Button>
       </div>
       <DownButton needScroll={needScroll} scrollTo={scrollTo} />
@@ -144,11 +158,11 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
   );
 });
 
-const renderPencilContent = () => {
+const renderPencilContent = (theme: Theme) => {
   return (
     <div className="pencil-wrapper">
       <ToolbarSlider setStrokeWidth={v => console.log(v)} strokeWidth={15} />
-      <div className="line"></div>
+      <div className={clsx("line", theme)}></div>
       <div className="color-box">{ColorBox()}</div>
     </div>
   );
@@ -163,10 +177,10 @@ const renderTextContent = () => {
 };
 
 const PencilButton = (props: ContentProps) => {
-  const { icons } = useContext(ToolbarContext);
+  const { icons, theme } = useContext(ToolbarContext);
   return (
     <Tippy
-      content={renderPencilContent()}
+      content={renderPencilContent(theme)}
       theme={props.theme}
       placement="right"
       trigger="click"
@@ -200,22 +214,22 @@ type RenderUpButton = PropsWithChildren<{
 }>;
 
 const UpButton = React.memo((props: RenderUpButton) => {
-  const { icons } = useContext(ToolbarContext);
+  const { icons, theme } = useContext(ToolbarContext);
   return props.needScroll ? (
     <>
       <Button content="Up" onClick={() => props.scrollTo(-ItemHeight)}>
         <Icon fallback={<Icons.Up />} src={icons?.upIcon} alt="[up]" />
       </Button>
-      <div className="line"></div>
+      <div className={clsx("line", theme)}></div>
     </>
   ) : null;
 });
 
 const DownButton = React.memo((props: RenderUpButton) => {
-  const { icons } = useContext(ToolbarContext);
+  const { icons, theme } = useContext(ToolbarContext);
   return props.needScroll ? (
     <>
-      <div className="line"></div>
+      <div className={clsx("line", theme)}></div>
       <Button content="Down" onClick={() => props.scrollTo(ItemHeight)}>
         <Icon fallback={<Icons.Down />} src={icons?.downIcon} alt="[down]" />
       </Button>

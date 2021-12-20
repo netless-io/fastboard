@@ -9,7 +9,6 @@ import { ApplianceNames, ShapeType } from "white-web-sdk";
 import { Icon } from "../../icons";
 import { Button } from "./Button";
 import { Icons } from "./icons";
-import { Line } from "./Line";
 import { ToolbarContent } from "./ToolbarContent";
 
 export type ToolbarProps = CommonProps & {
@@ -64,7 +63,6 @@ const createMethods = (room?: Room | null, _manager?: WindowManager | null) => {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
     setAppliance: (appliance: ToolName | undefined) => {
       if (!appliance) return;
-      console.log("setAppliance", appliance);
       if (ShapeTypes.includes(appliance)) {
         room?.setMemberState({
           currentApplianceName: ApplianceNames.shape,
@@ -132,7 +130,7 @@ export const Toolbar = (props: ToolbarProps) => {
         </div>
         {expanded ? (
           <>
-            <Line theme={"dark"} />
+            <div className={clsx("line", theme)}></div>
             <ToolbarContent
               theme={theme}
               setActiveTool={setActiveTool}

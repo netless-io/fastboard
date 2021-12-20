@@ -10,6 +10,7 @@ import { Icons } from "./icons";
 import { ToolbarSlider } from "./Slider";
 import { ShapesMap, ToolbarContext } from "./Toolbar";
 import { ColorBox } from "./ToolbarContent";
+import clsx from "clsx";
 
 type ActiveShapeType = {
   currentApplianceName: ToolName | undefined;
@@ -113,9 +114,9 @@ const ShapesContent = (props: ActiveShapeType) => {
           Icon: Icons.Triangle,
         })}
       </div>
-      <div className="line"></div>
+      <div className={clsx("line", theme)}></div>
       <ToolbarSlider strokeWidth={15} setStrokeWidth={v => console.log(v)} />
-      <div className="line"></div>
+      <div className={clsx("line", theme)}></div>
       <div className="color-box">{ColorBox()}</div>
     </div>
   );
