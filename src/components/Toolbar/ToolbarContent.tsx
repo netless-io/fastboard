@@ -120,8 +120,8 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
             alt="[selector]"
           />
         </Button>
-        {PencilButton(props)}
-        {TextButton(props)}
+        <PencilButton {...props} />
+        <TextButton {...props} />
         <ShapesButton {...props} />
         <Button
           content="Eraser"

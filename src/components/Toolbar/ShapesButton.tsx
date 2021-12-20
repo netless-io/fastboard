@@ -17,7 +17,7 @@ type ActiveShapeType = {
   setApplianceShape?: (shape: ToolName | undefined) => void;
 };
 
-export const ShapesButton = React.memo((props: ContentProps) => {
+export function ShapesButton(props: ContentProps) {
   const { theme, methods, currentApplianceName } = useContext(ToolbarContext);
   const { activeTool, setActiveTool } = props;
 
@@ -32,8 +32,8 @@ export const ShapesButton = React.memo((props: ContentProps) => {
       trigger="click"
       offset={[85, 15]}
       arrow={false}
-      interactive={true}
-      animation={true}
+      interactive
+      animation
     >
       <button
         className="button"
@@ -43,11 +43,11 @@ export const ShapesButton = React.memo((props: ContentProps) => {
           theme,
           active: activeTool === ApplianceNames.rectangle,
         })}
-        <span className="triangle"></span>
+        <span className="triangle" />
       </button>
     </Tippy>
   );
-});
+}
 
 const renderIcon = (name: ToolName | undefined, props: IconProps) => {
   if (name) {

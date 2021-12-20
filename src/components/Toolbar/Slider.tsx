@@ -16,7 +16,6 @@ export const ToolbarSlider = (props: ToolbarSlideProps) => {
   const config = themes[theme];
   return (
     <Slider
-      style={{ marginBottom: 0 }}
       className="pencil-slider slider"
       trackStyle={{
         background: config.activeColor,
