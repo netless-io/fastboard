@@ -1,15 +1,16 @@
 import type { MemoExoticComponent } from "react";
-import type { Color, Room } from "white-web-sdk";
+import type { Color, Room, RoomState, ShapeType } from "white-web-sdk";
 import type { WindowManager } from "@netless/window-manager";
 import type { CommonProps, GenericIcon, IconProps, Theme } from "../../types";
 
 import clsx from "clsx";
 import React, { createContext, useEffect, useState } from "react";
-import { ApplianceNames, ShapeType } from "white-web-sdk";
+import { ApplianceNames } from "white-web-sdk";
 import { Icon } from "../../icons";
 import { Button } from "./Button";
 import { Icons } from "./icons";
 import { ToolbarContent } from "./ToolbarContent";
+import { ShapeTypes } from "./ShapesButton";
 
 export type ToolbarProps = CommonProps & {
   left?: number;
@@ -56,8 +57,6 @@ const defaultContext: ContextType = {
   theme: defaultTheme,
 };
 
-const ShapeTypes: string[] = Object.values(ShapeType);
-
 const createMethods = (room?: Room | null, _manager?: WindowManager | null) => {
   return {
     cleanCurrentScene: () => room?.cleanCurrentScene(),
@@ -92,15 +91,34 @@ export const Toolbar = (props: ToolbarProps) => {
   const left = props.left || 15;
   const top = props.top || 20;
   const icons = props.icons;
+  const [, forceUpdate] = useState({});
   const [expanded, setExpanded] = useState(true);
   const toggleExpand = () => setExpanded(!expanded);
-  const [activeTool, setActiveTool] = useState(ApplianceNames.pencil);
-
-  const methods = createMethods(props.room, props.manager);
+  const [activeTool, setActiveTool] = useState<ToolName>(ApplianceNames.pencil);
+  const methods = React.useMemo(
+    () => createMethods(props.room, props.manager),
+    [props.room, props.manager]
+  );
 
   useEffect(() => {
     methods.setAppliance(activeTool);
   }, [activeTool, methods]);
+
+  useEffect(() => {
+    const onRoomStateChanged = (modifyState: Partial<RoomState>) => {
+      if (modifyState.memberState) {
+        forceUpdate({});
+      }
+    };
+    if (props.room) {
+      props.room.callbacks.on("onRoomStateChanged", onRoomStateChanged);
+    }
+    return () => {
+      if (props.room) {
+        props.room.callbacks.off("onRoomStateChanged", onRoomStateChanged);
+      }
+    };
+  }, [props.room]);
 
   return (
     <ToolbarContext.Provider
@@ -130,7 +148,7 @@ export const Toolbar = (props: ToolbarProps) => {
         </div>
         {expanded ? (
           <>
-            <div className={clsx("line", theme)}></div>
+            <div className={clsx("line", theme)} />
             <ToolbarContent
               theme={theme}
               setActiveTool={setActiveTool}

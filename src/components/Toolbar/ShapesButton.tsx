@@ -12,21 +12,34 @@ import { ShapesMap, ToolbarContext } from "./Toolbar";
 import { ColorBox } from "./ToolbarContent";
 import clsx from "clsx";
 
+export const ShapeTypes: string[] = Object.values(ShapeType);
+export const ShapeAppliances: ToolName[] = [
+  "rectangle",
+  "ellipse",
+  "straight",
+  "arrow",
+];
+export const Shapes = new Set([...ShapeTypes, ...ShapeAppliances]);
+
 type ActiveShapeType = {
-  currentApplianceName: ToolName | undefined;
-  setApplianceShape?: (shape: ToolName | undefined) => void;
+  activeTool?: ToolName | undefined;
+  setActiveTool?: (shape: ToolName) => void;
 };
 
 export function ShapesButton(props: ContentProps) {
-  const { theme, methods, currentApplianceName } = useContext(ToolbarContext);
+  const { theme, currentApplianceName } = useContext(ToolbarContext);
   const { activeTool, setActiveTool } = props;
+
+  const icon = Shapes.has(activeTool) ? activeTool : ApplianceNames.rectangle;
+  const active =
+    ShapeAppliances.includes(currentApplianceName as ToolName) ||
+    currentApplianceName === ApplianceNames.shape;
 
   return (
     <Tippy
-      content={ShapesContent({
-        currentApplianceName,
-        setApplianceShape: methods?.setAppliance,
-      })}
+      content={
+        <ShapesContent activeTool={activeTool} setActiveTool={setActiveTool} />
+      }
       theme={theme}
       placement="right"
       trigger="click"
@@ -35,14 +48,8 @@ export function ShapesButton(props: ContentProps) {
       interactive
       animation
     >
-      <button
-        className="button"
-        onClick={() => setActiveTool(ApplianceNames.rectangle)}
-      >
-        {renderIcon(currentApplianceName, {
-          theme,
-          active: activeTool === ApplianceNames.rectangle,
-        })}
+      <button className="button">
+        {renderIcon(icon, { theme, active })}
         <span className="triangle" />
       </button>
     </Tippy>
@@ -60,14 +67,14 @@ const renderIcon = (name: ToolName | undefined, props: IconProps) => {
 
 const ShapesContent = (props: ActiveShapeType) => {
   const { theme } = useContext(ToolbarContext);
-  const { currentApplianceName, setApplianceShape } = props;
-  const defaultProps = { theme, currentApplianceName, setApplianceShape };
+  const { activeTool, setActiveTool } = props;
+  const defaultProps = { theme, activeTool, setActiveTool };
   return (
     <div className="shapes-wrapper">
       <div className="shapes-container">
         {createShapeButton({
           ...defaultProps,
-          name: "rectangle",
+          name: ApplianceNames.rectangle,
           content: "Rectangle",
           Icon: Icons.Rectangle,
         })}
@@ -114,9 +121,9 @@ const ShapesContent = (props: ActiveShapeType) => {
           Icon: Icons.Triangle,
         })}
       </div>
-      <div className={clsx("line", theme)}></div>
+      <div className={clsx("line", theme)} />
       <ToolbarSlider strokeWidth={15} setStrokeWidth={v => console.log(v)} />
-      <div className={clsx("line", theme)}></div>
+      <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>
   );
@@ -130,22 +137,15 @@ type CreateShapeButtonProps = {
 } & ActiveShapeType;
 
 const createShapeButton = (props: CreateShapeButtonProps) => {
-  const {
-    content,
-    name,
-    Icon,
-    currentApplianceName,
-    theme,
-    setApplianceShape,
-  } = props;
+  const { content, name, Icon, theme, activeTool, setActiveTool } = props;
   return (
     <Tippy content={content} placement="auto">
       <button
         className="button"
         key={content}
-        onClick={() => setApplianceShape && setApplianceShape(name)}
+        onClick={() => setActiveTool && setActiveTool(name)}
       >
-        <Icon theme={theme} active={currentApplianceName === name} />
+        <Icon theme={theme} active={activeTool === name} />
       </button>
     </Tippy>
   );

@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { Icon } from "../../icons";
 import { Icons } from "./icons";
 import { ShapesButton } from "./ShapesButton";
-import { ToolbarContext } from "./Toolbar";
+import { ToolbarContext, type ToolName } from "./Toolbar";
 import { ToolbarSlider } from "./Slider";
 import React, {
   useContext,
@@ -20,13 +20,13 @@ const ItemHeight = 28;
 const ItemsCount = 9;
 
 export type ContentProps = {
-  setActiveTool: React.Dispatch<React.SetStateAction<ApplianceNames>>;
-  activeTool: string;
+  setActiveTool: React.Dispatch<React.SetStateAction<ToolName>>;
+  activeTool: ToolName;
   theme: Theme;
 };
 
 export const ToolbarContent = React.memo((props: ContentProps) => {
-  const { icons } = useContext(ToolbarContext);
+  const { icons, methods } = useContext(ToolbarContext);
   const { theme, activeTool, setActiveTool } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
@@ -103,7 +103,7 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
             }
             src={icons?.clickerIcon}
             alt="[clicker]"
-          ></Icon>
+          />
         </Button>
         <Button
           content="Selector"
@@ -138,7 +138,7 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
             alt="[eraser]"
           />
         </Button>
-        <Button content="CleanScene" onClick={() => console.log("test")}>
+        <Button content="CleanScene" onClick={methods?.cleanCurrentScene}>
           <Icon
             fallback={<Icons.Clean theme={theme} />}
             src={icons?.cleanIcon}
@@ -162,7 +162,7 @@ const renderPencilContent = (theme: Theme) => {
   return (
     <div className="pencil-wrapper">
       <ToolbarSlider setStrokeWidth={v => console.log(v)} strokeWidth={15} />
-      <div className={clsx("line", theme)}></div>
+      <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>
   );
@@ -202,7 +202,7 @@ const PencilButton = (props: ContentProps) => {
           src={icons?.pencilIcon}
           alt="[pencil]"
         />
-        <span className="triangle"></span>
+        <span className="triangle" />
       </button>
     </Tippy>
   );
@@ -220,7 +220,7 @@ const UpButton = React.memo((props: RenderUpButton) => {
       <Button content="Up" onClick={() => props.scrollTo(-ItemHeight)}>
         <Icon fallback={<Icons.Up />} src={icons?.upIcon} alt="[up]" />
       </Button>
-      <div className={clsx("line", theme)}></div>
+      <div className={clsx("line", theme)} />
     </>
   ) : null;
 });
@@ -229,7 +229,7 @@ const DownButton = React.memo((props: RenderUpButton) => {
   const { icons, theme } = useContext(ToolbarContext);
   return props.needScroll ? (
     <>
-      <div className={clsx("line", theme)}></div>
+      <div className={clsx("line", theme)} />
       <Button content="Down" onClick={() => props.scrollTo(ItemHeight)}>
         <Icon fallback={<Icons.Down />} src={icons?.downIcon} alt="[down]" />
       </Button>
@@ -263,8 +263,8 @@ const TextButton = (props: ContentProps) => {
           }
           src={icons?.textIcon}
           alt="[text]"
-        ></Icon>
-        <span className="triangle"></span>
+        />
+        <span className="triangle" />
       </button>
     </Tippy>
   );
@@ -298,7 +298,7 @@ export const ColorBox = () => {
             className="color-button"
             style={{ background: color }}
             onClick={() => setColor(color)}
-          ></div>
+          />
         </div>
       </div>
     );
