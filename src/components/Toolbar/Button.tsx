@@ -23,9 +23,9 @@ export const Button = ({
       offset={[0, 18]}
       duration={500}
     >
-      <div className={"button"} onClick={onClick}>
+      <button className="button" onClick={onClick}>
         {children}
-      </div>
+      </button>
     </Tippy>
   );
 };

@@ -1,8 +1,25 @@
 #app {
   position: relative;
-  width: 600px;
-  height: 60vh;
   border: 1px solid rgba($color: gray, $alpha: 0.5);
+}
+
+.draggable {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba($color: gray, $alpha: 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.1s;
+  cursor: grab;
+  user-select: none;
+  &:hover {
+    opacity: 1;
+  }
+  &.active {
+    cursor: grabbing;
+  }
 }
 
 .wrapper {

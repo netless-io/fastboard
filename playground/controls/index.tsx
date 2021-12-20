@@ -99,3 +99,21 @@ export function ZoomControlControls({
     </div>
   );
 }
+
+export function ToolbarControls({
+  visible,
+  setVisible,
+}: StatePair<{ visible: boolean }>) {
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="checkbox"
+          checked={visible}
+          onChange={ev => setVisible(ev.target.checked)}
+        />
+        Toolbar
+      </label>
+    </div>
+  );
+}

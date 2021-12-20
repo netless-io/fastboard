@@ -93,7 +93,6 @@ export const Toolbar = (props: ToolbarProps) => {
   const icons = props.icons;
   const [, forceUpdate] = useState({});
   const [expanded, setExpanded] = useState(true);
-  const toggleExpand = () => setExpanded(!expanded);
   const [activeTool, setActiveTool] = useState<ToolName>(ApplianceNames.pencil);
   const methods = React.useMemo(
     () => createMethods(props.room, props.manager),
@@ -131,7 +130,7 @@ export const Toolbar = (props: ToolbarProps) => {
       }}
     >
       <div className={clsx(name, theme)} style={{ left, top }}>
-        <div className="button" onClick={toggleExpand}>
+        <div className="button" onClick={() => setExpanded(!expanded)}>
           {expanded
             ? createCollapseOrExpandButton({
                 theme,

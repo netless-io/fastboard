@@ -57,37 +57,28 @@ export const ToolbarContent = React.memo((props: ContentProps) => {
     }
   }, [parentHeight]);
 
-  const getAndSetParentHeight = () => {
-    if (ref.current) {
-      const rect =
-        ref.current.parentElement?.parentElement?.getBoundingClientRect();
-      if (rect) {
-        setParentHeight(rect.height);
-      }
-    }
-  };
-
-  const resizeListener = () => {
-    window.requestAnimationFrame(() => getAndSetParentHeight());
-  };
-
   useEffect(() => {
     setSectionHeight(computedSectionHeight(parentHeight - ItemHeight * 3));
   }, [parentHeight]);
 
   useEffect(() => {
-    getAndSetParentHeight();
-    window.addEventListener("resize", resizeListener);
-    return () => window.removeEventListener("resize", resizeListener);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const container = ref.current?.parentElement?.parentElement;
+    if (container) {
+      const getAndSetParentHeight = () => {
+        setParentHeight(container.getBoundingClientRect().height);
+      };
+      const resizeObserver = new ResizeObserver(getAndSetParentHeight);
+      resizeObserver.observe(container);
+      return () => resizeObserver.disconnect();
+    }
   }, []);
 
   return (
     <>
       <UpButton needScroll={needScroll} scrollTo={scrollTo} />
       <div
-        className={clsx("section")}
         ref={ref}
+        className="section"
         style={{ height: `${sectionHeight}px` }}
       >
         <Button
@@ -218,7 +209,11 @@ const UpButton = React.memo((props: RenderUpButton) => {
   return props.needScroll ? (
     <>
       <Button content="Up" onClick={() => props.scrollTo(-ItemHeight)}>
-        <Icon fallback={<Icons.Up />} src={icons?.upIcon} alt="[up]" />
+        <Icon
+          fallback={<Icons.Up theme={theme} />}
+          src={icons?.upIcon}
+          alt="[up]"
+        />
       </Button>
       <div className={clsx("line", theme)} />
     </>
@@ -231,7 +226,11 @@ const DownButton = React.memo((props: RenderUpButton) => {
     <>
       <div className={clsx("line", theme)} />
       <Button content="Down" onClick={() => props.scrollTo(ItemHeight)}>
-        <Icon fallback={<Icons.Down />} src={icons?.downIcon} alt="[down]" />
+        <Icon
+          fallback={<Icons.Down theme={theme} />}
+          src={icons?.downIcon}
+          alt="[down]"
+        />
       </Button>
     </>
   ) : null;

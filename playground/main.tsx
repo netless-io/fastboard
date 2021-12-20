@@ -2,7 +2,7 @@ import type { Room } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
 import clsx from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { room } from "./mock";
 import { RedoUndo, Toolbar } from "../src";
@@ -14,9 +14,11 @@ import {
   DarkControls,
   PageControlControls,
   RedoUndoControls,
+  ToolbarControls,
   WritableControls,
   ZoomControlControls,
 } from "./controls";
+import { Handler } from "./controls/resize";
 
 function App() {
   const [writable, set_writable] = useState(true);
@@ -66,15 +68,12 @@ function App() {
           visible={zoom_control}
           setVisible={set_zoom_control}
         />
-        <label>
-          <input
-            type="checkbox"
-            checked={toolbar}
-            onChange={useCallback(ev => setToolbar(ev.target.checked), [])}
-          />
-          Toolbar
-        </label>
+        <ToolbarControls visible={toolbar} setVisible={setToolbar} />
       </div>
+      <Handler
+        target={document.querySelector("#app") as HTMLDivElement}
+        defaultSize={{ width: 600, height: 400 }}
+      />
     </>
   );
 }
