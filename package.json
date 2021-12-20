@@ -46,6 +46,7 @@
     "white-web-sdk": "*"
   },
   "dependencies": {
+    "@netless/app-slide": "^0.0.51",
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
     "rc-slider": "^9.7.5",

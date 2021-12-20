@@ -1,4 +1,5 @@
 import "./behaviors/style";
+import "./internal/register-apps";
 
 export type { RedoUndoProps } from "./components/RedoUndo";
 export type { PageControlProps } from "./components/PageControl";

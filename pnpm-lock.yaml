@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@hyrious/esbuild-dev': ^0.7.0
       '@hyrious/rimraf': ^0.1.0
+      '@netless/app-slide': ^0.0.51
       '@netless/window-manager': ^0.3.14
       '@tippyjs/react': ^4.2.6
       '@types/node': ^17.0.1
@@ -31,6 +32,7 @@ importers:
       vite: ^2.7.3
       white-web-sdk: ^2.15.13
     dependencies:
+      '@netless/app-slide': 0.0.51
       '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
       clsx: 1.1.1
       rc-slider: 9.7.5_react-dom@17.0.2+react@17.0.2
@@ -407,6 +409,10 @@ packages:
   /@netless/app-media-player/0.1.0-beta.5:
     resolution: {integrity: sha512-q24tZnDGwTM8fvSs97qavuF8w8cXa4Tx3Nl7Xvig5Um4XKrfNijjLK9pI1cdctfuefl9s8wrG8JNCN2C6yqeDw==}
     dev: true
+
+  /@netless/app-slide/0.0.51:
+    resolution: {integrity: sha512-EkY55P0sJYvzH3HxiJzvtGYtSke7v2v56SqIeDRE7xR2DzLRdQ2SI4i/detQNgr4GY+YIZsN9dx50lSkMdNhag==}
+    dev: false
 
   /@netless/canvas-polyfill/0.0.4:
     resolution: {integrity: sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==}
