@@ -1,5 +1,3 @@
-import type { PropsWithChildren } from "react";
-import type { ToolName } from "./Toolbar";
 import type { Theme } from "../../types";
 
 import Tippy from "@tippyjs/react";
@@ -11,15 +9,16 @@ import React, {
   useEffect,
   useRef,
   useState,
+  type PropsWithChildren,
 } from "react";
 import { ApplianceNames } from "white-web-sdk";
 import { clamp } from "../../helpers";
 import { Icon } from "../../icons";
 import { Button } from "./Button";
 import { Icons } from "./icons";
-import { ShapesButton } from "./ShapesButton";
+import { renderShapesButton } from "./ShapesButton";
 import { ToolbarSlider } from "./Slider";
-import { ToolbarContext } from "./Toolbar";
+import { ToolbarContext, type ToolName } from "./Toolbar";
 
 const ItemHeight = 32;
 const ItemsCount = 8;
@@ -31,11 +30,12 @@ export type ContentProps = {
   setActiveTool: React.Dispatch<React.SetStateAction<ToolName>>;
   activeTool: ToolName;
   theme: Theme;
+  onClickApps?: () => void;
 };
 
 export const ToolbarContent = memo((props: ContentProps) => {
   const { icons, methods } = useContext(ToolbarContext);
-  const { top, theme, activeTool, setActiveTool } = props;
+  const { top, theme, activeTool, setActiveTool, onClickApps } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
   const [needScroll, setNeedScroll] = useState(false);
@@ -109,7 +109,7 @@ export const ToolbarContent = memo((props: ContentProps) => {
         </Button>
         <PencilButton {...props} />
         <TextButton {...props} />
-        <ShapesButton {...props} />
+        {renderShapesButton(props)}
         <Button
           content="Eraser"
           onClick={() => setActiveTool(ApplianceNames.eraser)}
@@ -132,7 +132,7 @@ export const ToolbarContent = memo((props: ContentProps) => {
             alt="[clean]"
           />
         </Button>
-        <Button content="Apps" onClick={() => console.log("test")}>
+        <Button content="Apps" onClick={onClickApps}>
           <Icon
             fallback={<Icons.Apps theme={theme} />}
             src={icons?.cleanIcon}
@@ -146,9 +146,14 @@ export const ToolbarContent = memo((props: ContentProps) => {
 });
 
 const renderPencilContent = (theme: Theme) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { methods } = useContext(ToolbarContext);
   return (
     <div className="pencil-wrapper">
-      <ToolbarSlider setStrokeWidth={v => console.log(v)} strokeWidth={15} />
+      <ToolbarSlider
+        setStrokeWidth={methods?.setStrokeWidth}
+        strokeWidth={15}
+      />
       <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>

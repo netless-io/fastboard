@@ -3,11 +3,11 @@ import type { CommonProps, GenericIcon } from "../types";
 
 import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
+import { clamp } from "../helpers";
 import { Icon } from "../icons";
-import { Reset } from "../icons/Reset";
 import { Minus } from "../icons/Minus";
 import { Plus } from "../icons/Plus";
-import { clamp } from "../helpers";
+import { Reset } from "../icons/Reset";
 
 export const name = "fastboard-zoom-control";
 

@@ -26,7 +26,8 @@ type ActiveShapeType = {
   setActiveTool?: (shape: ToolName) => void;
 };
 
-export function ShapesButton(props: ContentProps) {
+export function renderShapesButton(props: ContentProps) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { theme, currentApplianceName } = useContext(ToolbarContext);
   const { activeTool, setActiveTool } = props;
 
@@ -37,9 +38,7 @@ export function ShapesButton(props: ContentProps) {
 
   return (
     <Tippy
-      content={
-        <ShapesContent activeTool={activeTool} setActiveTool={setActiveTool} />
-      }
+      content={renderShapesContent({ activeTool, setActiveTool })}
       theme={theme}
       placement="right"
       trigger="click"
@@ -65,8 +64,9 @@ const renderIcon = (name: ToolName | undefined, props: IconProps) => {
   }
 };
 
-const ShapesContent = (props: ActiveShapeType) => {
-  const { theme } = useContext(ToolbarContext);
+const renderShapesContent = (props: ActiveShapeType) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { theme, methods } = useContext(ToolbarContext);
   const { activeTool, setActiveTool } = props;
   const defaultProps = { theme, activeTool, setActiveTool };
   return (
@@ -122,7 +122,10 @@ const ShapesContent = (props: ActiveShapeType) => {
         })}
       </div>
       <div className={clsx("line", theme)} />
-      <ToolbarSlider strokeWidth={15} setStrokeWidth={v => console.log(v)} />
+      <ToolbarSlider
+        strokeWidth={15}
+        setStrokeWidth={methods?.setStrokeWidth}
+      />
       <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>

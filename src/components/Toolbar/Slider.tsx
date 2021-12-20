@@ -1,16 +1,14 @@
-import React from "react";
-import Slider from "rc-slider/lib/Slider";
+import Slider from "rc-slider";
+import React, { useContext, useState } from "react";
 import { themes } from "../../theme";
 import { ToolbarContext } from "./Toolbar";
-import { useContext } from "react";
-import { useState } from "react";
 
-export type ToolbarSlideProps = {
-  setStrokeWidth: (value: number) => void;
+export interface ToolbarSliderProps {
   strokeWidth: number;
-};
+  setStrokeWidth?: (value: number) => void;
+}
 
-export const ToolbarSlider = (props: ToolbarSlideProps) => {
+export function ToolbarSlider(props: ToolbarSliderProps) {
   const { theme } = useContext(ToolbarContext);
   const [value] = useState(props.strokeWidth);
   const config = themes[theme];
@@ -24,7 +22,7 @@ export const ToolbarSlider = (props: ToolbarSlideProps) => {
         border: `1px solid ${config.activeColor}`,
       }}
       value={value}
-      onChange={v => props.setStrokeWidth(v)}
+      onChange={props.setStrokeWidth}
     />
   );
-};
+}
