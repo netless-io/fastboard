@@ -24,3 +24,9 @@ $unit: 8px;
   padding: $unit;
   z-index: 200;
 }
+
+.fastboard-bottom-right {
+  @extend .fastboard-bottom-left;
+  left: initial;
+  right: $unit;
+}

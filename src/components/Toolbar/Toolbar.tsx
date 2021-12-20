@@ -4,7 +4,7 @@ import type { WindowManager } from "@netless/window-manager";
 import type { CommonProps, GenericIcon, IconProps, Theme } from "../../types";
 
 import clsx from "clsx";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useMemo } from "react";
 import { ApplianceNames } from "white-web-sdk";
 import { Icon } from "../../icons";
 import { Button } from "./Button";
@@ -94,7 +94,7 @@ export const Toolbar = (props: ToolbarProps) => {
   const [, forceUpdate] = useState({});
   const [expanded, setExpanded] = useState(true);
   const [activeTool, setActiveTool] = useState<ToolName>(ApplianceNames.pencil);
-  const methods = React.useMemo(
+  const methods = useMemo(
     () => createMethods(props.room, props.manager),
     [props.room, props.manager]
   );
@@ -149,6 +149,7 @@ export const Toolbar = (props: ToolbarProps) => {
           <>
             <div className={clsx("line", theme)} />
             <ToolbarContent
+              top={top}
               theme={theme}
               setActiveTool={setActiveTool}
               activeTool={activeTool}

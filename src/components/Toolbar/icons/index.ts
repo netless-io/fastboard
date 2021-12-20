@@ -1,4 +1,6 @@
-import React from "react";
+import { memo } from "react";
+import { themes } from "../../../theme";
+import type { IconProps } from "../../../types";
 import { Apps } from "./Apps";
 import { Arrow } from "./Arrow";
 import { Circle } from "./Circle";
@@ -6,6 +8,7 @@ import { Clean } from "./Clean";
 import { Clicker } from "./Clicker";
 import { Collapse } from "./Collapse";
 import { Diamond } from "./Diamond";
+import { Down } from "./Down";
 import { Eraser } from "./Eraser";
 import { Expand } from "./Expand";
 import { Line } from "./Line";
@@ -15,11 +18,8 @@ import { Selector } from "./Selector";
 import { SpeechBalloon } from "./SpeechBalloon";
 import { Star } from "./Star";
 import { Text } from "./Text";
-import { themes } from "../../../theme";
 import { Triangle } from "./Triangle";
 import { Up } from "./Up";
-import { Down } from "./Down";
-import type { IconProps } from "../../../types";
 
 export const getStroke = (props: IconProps) => {
   let config;
@@ -32,23 +32,23 @@ export const getStroke = (props: IconProps) => {
 };
 
 export const Icons = {
-  Clicker: React.memo(Clicker),
-  Collapse: React.memo(Collapse),
-  Eraser: React.memo(Eraser),
-  Expand: React.memo(Expand),
-  Pencil: React.memo(Pencil),
-  Selector: React.memo(Selector),
-  Rectangle: React.memo(Rectangle),
-  Text: React.memo(Text),
-  Apps: React.memo(Apps),
-  Clean: React.memo(Clean),
-  Circle: React.memo(Circle),
-  Line: React.memo(Line),
-  Arrow: React.memo(Arrow),
-  Star: React.memo(Star),
-  Diamond: React.memo(Diamond),
-  SpeechBalloon: React.memo(SpeechBalloon),
-  Triangle: React.memo(Triangle),
-  Up: React.memo(Up),
-  Down: React.memo(Down),
+  Clicker: memo(Clicker),
+  Collapse: memo(Collapse),
+  Eraser: memo(Eraser),
+  Expand: memo(Expand),
+  Pencil: memo(Pencil),
+  Selector: memo(Selector),
+  Rectangle: memo(Rectangle),
+  Text: memo(Text),
+  Apps: memo(Apps),
+  Clean: memo(Clean),
+  Circle: memo(Circle),
+  Line: memo(Line),
+  Arrow: memo(Arrow),
+  Star: memo(Star),
+  Diamond: memo(Diamond),
+  SpeechBalloon: memo(SpeechBalloon),
+  Triangle: memo(Triangle),
+  Up: memo(Up),
+  Down: memo(Down),
 };

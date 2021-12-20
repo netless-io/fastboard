@@ -1,77 +1,73 @@
-import clsx from "clsx";
+import type { PropsWithChildren } from "react";
+import type { ToolName } from "./Toolbar";
+import type { Theme } from "../../types";
+
 import Tippy from "@tippyjs/react";
-import { ApplianceNames } from "white-web-sdk";
-import { Button } from "./Button";
-import { Icon } from "../../icons";
-import { Icons } from "./icons";
-import { ShapesButton } from "./ShapesButton";
-import { ToolbarContext, type ToolName } from "./Toolbar";
-import { ToolbarSlider } from "./Slider";
+import clsx from "clsx";
 import React, {
+  memo,
+  useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
-  type PropsWithChildren,
 } from "react";
-import type { Theme } from "../../types";
+import { ApplianceNames } from "white-web-sdk";
+import { clamp } from "../../helpers";
+import { Icon } from "../../icons";
+import { Button } from "./Button";
+import { Icons } from "./icons";
+import { ShapesButton } from "./ShapesButton";
+import { ToolbarSlider } from "./Slider";
+import { ToolbarContext } from "./Toolbar";
 
-const ItemHeight = 28;
-const ItemsCount = 9;
+const ItemHeight = 32;
+const ItemsCount = 8;
+const maxHeight = ItemHeight * ItemsCount - 8;
+const minHeight = ItemHeight * 2 - 8;
 
 export type ContentProps = {
+  top: number;
   setActiveTool: React.Dispatch<React.SetStateAction<ToolName>>;
   activeTool: ToolName;
   theme: Theme;
 };
 
-export const ToolbarContent = React.memo((props: ContentProps) => {
+export const ToolbarContent = memo((props: ContentProps) => {
   const { icons, methods } = useContext(ToolbarContext);
-  const { theme, activeTool, setActiveTool } = props;
+  const { top, theme, activeTool, setActiveTool } = props;
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
   const [needScroll, setNeedScroll] = useState(false);
   const [sectionHeight, setSectionHeight] = useState(200);
 
-  const scrollTo = (height: number) => {
+  const scrollTo = useCallback((height: number) => {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollTop + height;
     }
-  };
-
-  const computedSectionHeight = (height: number) => {
-    const maxHeight = ItemsCount * ItemHeight;
-    const minHeight = ItemHeight * 2;
-    if (height > maxHeight) {
-      return maxHeight;
-    } else {
-      return height < minHeight ? minHeight : height;
-    }
-  };
+  }, []);
 
   useEffect(() => {
-    if (parentHeight < ItemHeight * (ItemsCount + 2.3)) {
-      setNeedScroll(true);
-    } else {
-      setNeedScroll(false);
-    }
-  }, [parentHeight]);
-
-  useEffect(() => {
-    setSectionHeight(computedSectionHeight(parentHeight - ItemHeight * 3));
-  }, [parentHeight]);
-
-  useEffect(() => {
-    const container = ref.current?.parentElement?.parentElement;
-    if (container) {
-      const getAndSetParentHeight = () => {
-        setParentHeight(container.getBoundingClientRect().height);
-      };
-      const resizeObserver = new ResizeObserver(getAndSetParentHeight);
+    const toolbar = ref.current?.parentElement;
+    const container = toolbar?.parentElement;
+    if (toolbar && container) {
+      const resizeObserver = new ResizeObserver(() => {
+        setParentHeight(container.getBoundingClientRect().height - top - 64);
+      });
       resizeObserver.observe(container);
       return () => resizeObserver.disconnect();
     }
-  }, []);
+  }, [top]);
+
+  useEffect(() => {
+    setNeedScroll(parentHeight < ItemHeight * ItemsCount + 48);
+  }, [parentHeight]);
+
+  useEffect(() => {
+    let height = parentHeight - 48;
+    if (needScroll) height -= 48 * 2;
+    setSectionHeight(clamp(height, minHeight, maxHeight));
+  }, [needScroll, parentHeight]);
 
   return (
     <>
@@ -204,7 +200,7 @@ type RenderUpButton = PropsWithChildren<{
   scrollTo: (height: number) => void;
 }>;
 
-const UpButton = React.memo((props: RenderUpButton) => {
+const UpButton = memo((props: RenderUpButton) => {
   const { icons, theme } = useContext(ToolbarContext);
   return props.needScroll ? (
     <>
@@ -220,7 +216,7 @@ const UpButton = React.memo((props: RenderUpButton) => {
   ) : null;
 });
 
-const DownButton = React.memo((props: RenderUpButton) => {
+const DownButton = memo((props: RenderUpButton) => {
   const { icons, theme } = useContext(ToolbarContext);
   return props.needScroll ? (
     <>

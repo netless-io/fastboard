@@ -1,7 +1,8 @@
 import type { Size } from "white-web-sdk";
+
+import clsx from "clsx";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import clsx from "clsx";
 
 export interface HandlerProps {
   target: HTMLDivElement;
@@ -22,11 +23,18 @@ export function Handler({ target, defaultSize }: HandlerProps) {
   const [height, setHeight] = useState(defaultSize.height);
 
   useEffect(() => {
-    setOffset(target.getBoundingClientRect());
+    if (target) {
+      setOffset(target.getBoundingClientRect());
+    }
   }, [target]);
 
   useEffect(() => {
-    Object.assign(target.style, { width: `${width}px`, height: `${height}px` });
+    if (target) {
+      Object.assign(target.style, {
+        width: `${width}px`,
+        height: `${height}px`,
+      });
+    }
   }, [height, target, width]);
 
   const onPointerDown = useCallback(
