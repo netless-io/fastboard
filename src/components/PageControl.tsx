@@ -29,14 +29,17 @@ export function PageControl({
   const [pageCount, setPageCount] = useState(0);
 
   const addPage = useCallback(async () => {
-    if (room?.isWritable) {
-      const path = room.state.sceneState.scenePath;
-      room.putScenes(path, [{}], pageIndex);
-      if (manager) {
-        await manager.setMainViewSceneIndex(pageIndex);
-      }
+    if (manager && room) {
+      await manager.switchMainViewToWriter();
+      const path = room.state.sceneState.contextPath;
+      room.putScenes(path, [{}], pageCount);
+      await manager.setMainViewSceneIndex(pageIndex);
+    } else if (!manager && room) {
+      const path = room.state.sceneState.contextPath;
+      room.putScenes(path, [{}], pageCount);
+      room.setSceneIndex(pageIndex);
     }
-  }, [room, manager, pageIndex]);
+  }, [room, manager, pageCount, pageIndex]);
 
   const prevPage = useCallback(() => {
     if (room?.isWritable) {

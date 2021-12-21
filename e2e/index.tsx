@@ -6,7 +6,7 @@ import { Handler } from "../playground/controls/resize";
 import { createWhiteboardApp } from "../src";
 import "./index.scss";
 
-const CanvasSize = { width: 600, height: 400 };
+const CanvasSize = { width: 1400, height: 800 };
 
 function App() {
   const app = useRef<WhiteboardApp>();

@@ -1,7 +1,12 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #app {
   position: relative;
   border: 1px solid WindowFrame;
-
   * {
     box-sizing: border-box;
   }
