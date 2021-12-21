@@ -61,6 +61,15 @@ $unit: 8px;
   }
 }
 
+.right-hang {
+  width: 150px;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  padding-left: 8px;
+  user-select: none;
+}
+
 .left {
   position: absolute;
   left: 20px;

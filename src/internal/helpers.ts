@@ -1,3 +1,7 @@
+export function noop() {
+  return;
+}
+
 export type TaskFn = () => Promise<void> | void;
 
 export class Lock {

@@ -1,22 +1,14 @@
+import "./behaviors/register-apps";
 import "./behaviors/style";
-import "./internal/register-apps";
 
-export type { RedoUndoProps } from "./components/RedoUndo";
-export type { PageControlProps } from "./components/PageControl";
-export type { ZoomControlProps } from "./components/ZoomControl";
-export type { ToolbarProps } from "./components/Toolbar";
+import { WhiteboardApp, type WhiteboardAppConfig } from "./WhiteboardApp";
 
 export { version } from "../package.json";
-export { RedoUndo } from "./components/RedoUndo";
-export { PageControl } from "./components/PageControl";
-export { ZoomControl } from "./components/ZoomControl";
-export { Toolbar } from "./components/Toolbar";
-
-import type { WhiteboardAppConfig } from "./internal";
-import { WhiteboardApp } from "./WhiteboardApp";
-
-export type { WhiteboardAppConfig };
-export { WhiteboardApp };
+export { PageControl, type PageControlProps } from "./components/PageControl";
+export { RedoUndo, type RedoUndoProps } from "./components/RedoUndo";
+export { Toolbar, type ToolbarProps } from "./components/Toolbar";
+export { ZoomControl, type ZoomControlProps } from "./components/ZoomControl";
+export * from "./WhiteboardApp";
 
 export function createWhiteboardApp(
   config: WhiteboardAppConfig

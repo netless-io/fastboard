@@ -70,6 +70,9 @@ function App() {
         />
         <ToolbarControls visible={toolbar} setVisible={setToolbar} />
       </div>
+      <div className="right-hang">
+        <a href="/e2e.html">E2E Test</a>
+      </div>
       <Handler
         target={document.querySelector("#app") as HTMLDivElement}
         defaultSize={{ width: 600, height: 400 }}

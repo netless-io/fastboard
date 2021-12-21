@@ -1,9 +1,9 @@
 import React, { useCallback, useContext } from "react";
-import { PageControl } from "..";
 import { Instance } from "../internal";
-import { RedoUndo } from "./RedoUndo";
 import { Toolbar } from "./Toolbar";
+import { RedoUndo } from "./RedoUndo";
 import { ZoomControl } from "./ZoomControl";
+import { PageControl } from "./PageControl";
 
 export interface RootProps {
   instance: Instance;

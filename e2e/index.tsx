@@ -25,6 +25,7 @@ function App() {
           uid: "test",
         },
       });
+      (window as any).app = app.current;
     }
   }, [ref]);
 

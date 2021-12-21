@@ -1,19 +1,36 @@
 import type { WindowManager } from "@netless/window-manager";
-import type { Room, WhiteWebSdk } from "white-web-sdk";
+import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
 
 import React, { createContext } from "react";
 import ReactDOM from "react-dom";
+
 import Root from "../components/Root";
 import { mountWhiteboard } from "./mount-whiteboard";
-import { Lock } from "./helpers";
-import type { InsertDocsParams } from "../WhiteboardApp";
+import { noop, Lock } from "./helpers";
 
 export interface AcceptParams {
   readonly sdk: WhiteWebSdk;
   readonly room: Room;
   readonly manager: WindowManager;
 }
+
+export interface InsertDocsStatic {
+  readonly fileType: "pdf" | "ppt";
+  readonly scenePath: string;
+  readonly scenes: SceneDefinition[];
+  readonly title?: string;
+}
+
+export interface InsertDocsDynamic {
+  readonly fileType: "pptx";
+  readonly scenePath: string;
+  readonly taskId: string;
+  readonly title?: string;
+  readonly url?: string;
+}
+
+export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
 export interface WhiteboardAppConfig {
   readonly target: HTMLElement;
@@ -39,15 +56,24 @@ export class Instance {
   room: Room | null = null;
   manager: WindowManager | null = null;
 
-  _container: HTMLElement | null = null;
+  _whiteboardContainer: HTMLElement | null = null;
+
   _destroyed = true;
-  _mounted: Promise<void> | null = null;
-  _resolve: (() => void) | null = null;
 
   constructor(config: WhiteboardAppConfig) {
     this.target = config.target;
     this.config = config;
+    this.resetManagerPromise();
     this.initialize();
+  }
+
+  _managerPromise!: Promise<WindowManager>;
+  _resolveManager!: (manager: WindowManager) => void;
+
+  resetManagerPromise() {
+    this._managerPromise = new Promise<WindowManager>(resolve => {
+      this._resolveManager = resolve;
+    });
   }
 
   initialize() {
@@ -58,16 +84,15 @@ export class Instance {
   }
 
   forceUpdate() {
-    this._mounted = new Promise(resolve => {
-      ReactDOM.render(<Root instance={this} />, this.target);
-      this._resolve = resolve;
-    });
+    ReactDOM.render(<Root instance={this} />, this.target);
   }
 
   accept({ sdk, room, manager }: AcceptParams) {
     this.sdk = sdk;
     this.room = room;
     this.manager = manager;
+    this._resolveManager(manager);
+    this._resolveManager = noop;
     this.forceUpdate();
   }
 
@@ -76,19 +101,15 @@ export class Instance {
     if (!this._destroyed && this.target) {
       this._destroyed = true;
       ReactDOM.unmountComponentAtNode(this.target);
-      this.sdk =
-        this.room =
-        this.manager =
-        this.target =
-        this._container =
-          null;
+      this.sdk = this.room = this.manager = this.target = null;
+      this._whiteboardContainer = null;
     }
   }
 
   private _mountLock = new Lock();
 
   mount(container: HTMLElement) {
-    this._container = container;
+    this._whiteboardContainer = container;
     this._mountLock.schedule(this._mount);
   }
 
@@ -97,14 +118,13 @@ export class Instance {
       console.warn("[WhiteboardApp] Already mounted");
       return;
     }
-    if (this._container) {
+    if (this._whiteboardContainer) {
       try {
         const essentials = await mountWhiteboard(
           this.config.sdkConfig,
           this.config.joinRoom,
-          { ...this.config.managerConfig, container: this._container }
+          { ...this.config.managerConfig, container: this._whiteboardContainer }
         );
-        this._resolve && this._resolve();
         this.accept(essentials);
       } catch (error) {
         console.warn("[WhiteboardApp] mount error", error);
@@ -120,6 +140,7 @@ export class Instance {
     if (this.manager) {
       this.manager.destroy();
       this.manager = null;
+      this.resetManagerPromise();
     }
     if (this.room) {
       try {
@@ -131,32 +152,31 @@ export class Instance {
     }
   };
 
-  public insertDocs = async (params: InsertDocsParams) => {
-    if (this._mounted) {
-      await this._mounted;
+  async insertDocs(params: InsertDocsParams) {
+    const manager = await this._managerPromise;
+    switch (params.fileType) {
+      case "pdf":
+      case "ppt":
+        return manager.addApp({
+          kind: "DocsViewer",
+          options: {
+            scenePath: params.scenePath,
+            title: params.title,
+            scenes: params.scenes,
+          },
+        });
+      case "pptx":
+        return manager.addApp({
+          kind: "Slide",
+          options: {
+            scenePath: params.scenePath,
+            title: params.title,
+          },
+          attributes: {
+            taskId: params.taskId,
+            url: params.url,
+          },
+        });
     }
-    const fileType = params.fileType;
-    if (fileType === "pdf" || fileType === "ppt") {
-      return this.manager?.addApp({
-        kind: "DocsViewer",
-        options: {
-          scenePath: params.params.scenePath,
-          title: params.params.title,
-          scenes: params.params.scenes,
-        },
-      });
-    } else if (fileType === "pptx") {
-      return this.manager?.addApp({
-        kind: "Slide",
-        options: {
-          scenePath: params.params.scenePath,
-          title: params.params.title,
-        },
-        attributes: {
-          taskId: params.params.taskId,
-          url: params.params.url,
-        },
-      });
-    }
-  };
+  }
 }
