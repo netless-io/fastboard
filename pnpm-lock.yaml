@@ -7,7 +7,7 @@ importers:
       '@hyrious/esbuild-dev': ^0.7.0
       '@hyrious/rimraf': ^0.1.0
       '@netless/app-slide': ^0.0.51
-      '@netless/window-manager': ^0.3.14
+      '@netless/window-manager': ^0.3.15
       '@tippyjs/react': ^4.2.6
       '@types/node': ^17.0.2
       '@types/react': ^17.0.37
@@ -24,6 +24,7 @@ importers:
       rc-slider: ^9.7.5
       react: ^17.0.2
       react-dom: ^17.0.2
+      rollup: ^2.61.1
       rollup-plugin-visualizer: ^5.5.2
       sass: ^1.45.1
       tippy.js: ^6.3.7
@@ -32,7 +33,6 @@ importers:
       vite: ^2.7.4
       white-web-sdk: ^2.15.13
     dependencies:
-      '@netless/app-slide': 0.0.51
       '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
       clsx: 1.1.1
       rc-slider: 9.7.5_react-dom@17.0.2+react@17.0.2
@@ -40,7 +40,8 @@ importers:
     devDependencies:
       '@hyrious/esbuild-dev': 0.7.0_esbuild@0.14.6
       '@hyrious/rimraf': 0.1.0
-      '@netless/window-manager': 0.3.14_white-web-sdk@2.15.13
+      '@netless/app-slide': 0.0.51
+      '@netless/window-manager': 0.3.15_white-web-sdk@2.15.13
       '@types/node': 17.0.2
       '@types/react': 17.0.37
       '@types/react-dom': 17.0.11
@@ -54,7 +55,8 @@ importers:
       prettier: 2.5.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      rollup-plugin-visualizer: 5.5.2
+      rollup: 2.61.1
+      rollup-plugin-visualizer: 5.5.2_rollup@2.61.1
       sass: 1.45.1
       type-fest: 2.8.0
       typescript: 4.5.4
@@ -399,8 +401,8 @@ packages:
     resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
     dev: true
 
-  /@netless/app-docs-viewer/0.1.23:
-    resolution: {integrity: sha512-edTXoqT0jwwLVxWgmzvAbgLwZLrWZMU+WpSmEQeLPk6HKWiRsqsU+dzht989ddggHFSIGBF4haVl2oCErVVz7g==}
+  /@netless/app-docs-viewer/0.1.24:
+    resolution: {integrity: sha512-0NfcTqRvWlqGXhLc451AclDobp6Uicr+J51pfJbFfapWBwCOwynF3dn1wpazlffr1YYHRP+V+CVi7MmVt4qEwA==}
     dependencies:
       debounce-fn: 5.0.0
       vanilla-lazyload: 17.5.0
@@ -412,7 +414,7 @@ packages:
 
   /@netless/app-slide/0.0.51:
     resolution: {integrity: sha512-EkY55P0sJYvzH3HxiJzvtGYtSke7v2v56SqIeDRE7xR2DzLRdQ2SI4i/detQNgr4GY+YIZsN9dx50lSkMdNhag==}
-    dev: false
+    dev: true
 
   /@netless/canvas-polyfill/0.0.4:
     resolution: {integrity: sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==}
@@ -429,13 +431,13 @@ packages:
       value-enhancer: 0.0.8
     dev: true
 
-  /@netless/window-manager/0.3.14_white-web-sdk@2.15.13:
-    resolution: {integrity: sha512-OPb8lawQA6gY4ONTYzOlSYboC2PxReTlYdhvmZJbtaygGB3dTkp9EBt1GPkJiETxEtfIxLZ5bF4RGPYGpDlINw==}
+  /@netless/window-manager/0.3.15_white-web-sdk@2.15.13:
+    resolution: {integrity: sha512-AtR3NRIVXHqXywGnqekRZQI/GBNg5uvIXyP8sYHpHUf31gj4lbio3QRMOH3gSmpX5aa+hn6mhreY62HZv7Dj7A==}
     peerDependencies:
       white-web-sdk: ^2.13.16
     dependencies:
       '@juggle/resize-observer': 3.3.1
-      '@netless/app-docs-viewer': 0.1.23
+      '@netless/app-docs-viewer': 0.1.24
       '@netless/app-media-player': 0.1.0-beta.5
       '@netless/telebox-insider': 0.2.10
       emittery: 0.9.2
@@ -2415,7 +2417,7 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /rollup-plugin-visualizer/5.5.2:
+  /rollup-plugin-visualizer/5.5.2_rollup@2.61.1:
     resolution: {integrity: sha512-sh+P9KhuWTzeStyRA5yNZpoEFGuj5Ph34JLMa9+muhU8CneFf9L0XE4fmAwAojJLWp//uLUEyytBPSCdZEg5AA==}
     engines: {node: '>=10.16'}
     hasBin: true
@@ -2424,6 +2426,7 @@ packages:
     dependencies:
       nanoid: 3.1.30
       open: 7.4.2
+      rollup: 2.61.1
       source-map: 0.7.3
       yargs: 16.2.0
     dev: true

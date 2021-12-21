@@ -40,13 +40,18 @@
   ],
   "license": "MIT",
   "peerDependencies": {
+    "@netless/app-slide": "*",
     "@netless/window-manager": "*",
     "react": "*",
     "react-dom": "*",
     "white-web-sdk": "*"
   },
+  "peerDependenciesMeta": {
+    "@netless/app-slide": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "@netless/app-slide": "^0.0.51",
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
     "rc-slider": "^9.7.5",
@@ -55,7 +60,8 @@
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.7.0",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/window-manager": "^0.3.14",
+    "@netless/app-slide": "^0.0.51",
+    "@netless/window-manager": "^0.3.15",
     "@types/node": "^17.0.2",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
@@ -69,6 +75,7 @@
     "prettier": "2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "rollup": "^2.61.1",
     "rollup-plugin-visualizer": "^5.5.2",
     "sass": "^1.45.1",
     "type-fest": "^2.8.0",

@@ -100,6 +100,9 @@ const appId = await whiteboard.manager.addApp({
 pnpm i
 # upgrade dependencies
 pnpm up -Li
+# build and see bundle size
+pnpm build
+open node_modules/.visualizer/stats.html
 ```
 
 ## License
