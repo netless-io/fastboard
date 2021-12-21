@@ -1,5 +1,6 @@
 import type { PartialDeep } from "type-fest";
-import type { Room, SceneDefinition } from "white-web-sdk";
+import type { MemberState, Room, SceneDefinition } from "white-web-sdk";
+import { ApplianceNames } from "white-web-sdk";
 import { MockCallbacks } from "./callbacks";
 import { log } from "./helpers";
 
@@ -57,6 +58,16 @@ class MockRoom implements PartialDeep<Room> {
     cameraState: {
       scale: 1,
     },
+    memberState: {
+      currentApplianceName: ApplianceNames.pencil,
+      strokeColor: [255, 0, 0],
+      strokeWidth: 15,
+      textSize: 18,
+      bold: false,
+      italic: false,
+      underline: false,
+      lineThrough: false,
+    },
   };
   putScenes(path: string, scenes: SceneDefinition[], index?: number) {
     log("[room.putScenes]", path, scenes, index);
@@ -94,6 +105,18 @@ class MockRoom implements PartialDeep<Room> {
       cameraState: this.state.cameraState,
     });
   }
+  //#endregion
+
+  //#region Toolbar
+  setMemberState(diff: Partial<MemberState>) {
+    log("[room.setMemberState]", JSON.stringify(diff));
+    this.state.memberState = { ...this.state.memberState, ...diff };
+    this.callbacks.emit("onRoomStateChanged", {
+      memberState: this.state.memberState,
+    });
+    return this.state.memberState;
+  }
+  //#endregion
 }
 
 export const room = new MockRoom();

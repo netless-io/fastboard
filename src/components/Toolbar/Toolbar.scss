@@ -55,6 +55,7 @@ $name: "fastboard-toolbar";
   }
 
   &-cut-line {
+    display: inline-block;
     height: 0.5px;
     width: 100%;
 
@@ -67,16 +68,61 @@ $name: "fastboard-toolbar";
     }
   }
 
-  .section {
+  &-section {
     display: inline-flex;
-    flex-direction: column;
+    flex-flow: column nowrap;
     gap: 8px;
     overflow: hidden;
     scroll-behavior: smooth;
   }
 
-  .expand {
-    height: 70%;
+  &-panel {
+    width: 136px;
+    padding: 8px;
+  }
+
+  &-color-box {
+    padding-top: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    justify-content: center;
+  }
+
+  &-color-item {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+
+  &-color-border {
+    width: 24px;
+    height: 24px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &.active.light {
+      border: 1px solid rgba(51, 129, 255, 0.8);
+    }
+
+    &.active.dark {
+      border: 1px solid rgba(51, 129, 255, 0.8);
+    }
+  }
+
+  &-color-btn {
+    margin: 0;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   .pencil-wrapper {

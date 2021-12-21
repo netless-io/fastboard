@@ -1,15 +1,15 @@
 import type { MemoExoticComponent } from "react";
-import type { IconProps, Theme } from "../../types";
-import type { ContentProps } from "./Content";
-import type { ToolName } from "./Toolbar";
+import type { IconProps, Theme } from "../../../types";
+import type { ContentProps } from "../Content";
+import type { ToolName } from "../Toolbar";
 
 import Tippy from "@tippyjs/react";
 import React, { useContext } from "react";
 import { ApplianceNames, ShapeType } from "white-web-sdk";
-import { Icons } from "./icons";
-import { Slider } from "./components/Slider";
-import { ShapesMap, ToolbarContext } from "./Toolbar";
-import { ColorBox } from "./Content";
+import { Icons } from "../icons";
+import { Slider } from "./Slider";
+import { ShapesMap, ToolbarContext } from "../Toolbar";
+import { ColorBox } from "../Content";
 import clsx from "clsx";
 
 export const ShapeTypes: string[] = Object.values(ShapeType);

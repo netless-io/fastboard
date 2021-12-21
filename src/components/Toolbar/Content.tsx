@@ -4,8 +4,14 @@ import { clamp } from "../../helpers";
 import { name } from "./Toolbar";
 import { ItemHeight, ItemsCount, MaxHeight, MinHeight } from "./const";
 import { DownButton, UpButton } from "./components/UpDownButtons";
+import { ClickerButton, SelectorButton } from "./components/ApplianceButtons";
+import { PencilButton } from "./components/PencilButton";
 
-export function Content() {
+export interface ContentProps {
+  padding?: number;
+}
+
+export function Content({ padding = 16 }: ContentProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
 
@@ -26,12 +32,12 @@ export function Content() {
     const container = ref.current?.parentElement?.parentElement;
     if (container) {
       const resizeObserver = new ResizeObserver(() => {
-        setParentHeight(container.getBoundingClientRect().height);
+        setParentHeight(container.getBoundingClientRect().height - padding * 2);
       });
       resizeObserver.observe(container);
       return () => resizeObserver.disconnect();
     }
-  }, []);
+  }, [padding]);
 
   return (
     <>
@@ -41,7 +47,9 @@ export function Content() {
         className={`${name}-section`}
         style={{ height: `${sectionHeight}px` }}
       >
-        hello world
+        <ClickerButton />
+        <SelectorButton />
+        <PencilButton />
       </div>
       {needScroll && <DownButton scrollTo={scrollTo} />}
     </>

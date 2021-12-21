@@ -48,14 +48,14 @@ export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
     <ToolbarContext.Provider value={{ theme, icons, ...hook }}>
       <div className={clsx(name, theme)}>
         {expanded ? (
-          <Button content="Collapse" onClick={toggle} disabled={disabled}>
+          <Button content="Collapse" onClick={toggle}>
             <Icon
               fallback={<Icons.Collapse theme={theme} />}
               src={disabled ? icons?.collapseIconDisable : icons?.collapseIcon}
             />
           </Button>
         ) : (
-          <Button content="Expand" onClick={toggle} disabled={disabled}>
+          <Button content="Expand" onClick={toggle}>
             <Icon
               fallback={<Icons.Expand theme={theme} />}
               src={disabled ? icons?.expandIconDisable : icons?.expandIcon}

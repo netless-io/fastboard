@@ -17,7 +17,6 @@ export const light: ThemeConfig = {
 export const dark: ThemeConfig = {
   ...light,
   color: "#eee",
-  activeColor: "#fff",
   backgroundColor: "#111",
 };
 

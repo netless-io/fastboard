@@ -19,7 +19,7 @@ export function UpButton({ scrollTo }: UpButtonProps) {
 
   return (
     <>
-      <Button content="Up" onClick={scrollUp} disabled={disabled}>
+      <Button content="Up" onClick={scrollUp}>
         <Icon
           fallback={<Icons.Up theme={theme} />}
           src={disabled ? icons?.upIconDisable : icons?.upIcon}
@@ -40,7 +40,7 @@ export function DownButton({ scrollTo }: UpButtonProps) {
   return (
     <>
       <CutLine />
-      <Button content="Down" onClick={scrollDown} disabled={disabled}>
+      <Button content="Down" onClick={scrollDown}>
         <Icon
           fallback={<Icons.Down theme={theme} />}
           src={disabled ? icons?.downIconDisable : icons?.downIcon}
