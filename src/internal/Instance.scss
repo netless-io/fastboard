@@ -15,6 +15,15 @@
 
 $unit: 8px;
 
+.fastboard-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - 48px);
+  padding: $unit * 2;
+  z-index: 201;
+}
+
 .fastboard-bottom-left {
   display: flex;
   gap: 10px;

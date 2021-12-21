@@ -20,6 +20,9 @@ export default function Root({ instance: app }: RootProps) {
     <Instance.Context.Provider value={app}>
       <div className="fastboard-root">
         <div className="fastboard-view" ref={useWhiteboard} />
+        <div className="fastboard-left">
+          <Toolbar room={app.room} manager={app.manager} />
+        </div>
         <div className="fastboard-bottom-left">
           <RedoUndo room={app.room} manager={app.manager} />
           <ZoomControl room={app.room} manager={app.manager} />
@@ -27,7 +30,6 @@ export default function Root({ instance: app }: RootProps) {
         <div className="fastboard-bottom-right">
           <PageControl room={app.room} manager={app.manager} />
         </div>
-        <Toolbar room={app.room} manager={app.manager} />
       </div>
     </Instance.Context.Provider>
   );

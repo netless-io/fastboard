@@ -11,10 +11,11 @@ import { useCallback, useEffect, useState } from "react";
 import { noop } from "../../internal/helpers";
 
 export function useWritable(room?: Room | null) {
-  const [value, setValue] = useState(room?.isWritable || false);
+  const [value, setValue] = useState(false);
 
   useEffect(() => {
     if (room) {
+      setValue(room.isWritable);
       room.callbacks.on("onEnableWriteNowChanged", setValue);
       return () => room.callbacks.off("onEnableWriteNowChanged", setValue);
     }
@@ -25,11 +26,12 @@ export function useWritable(room?: Room | null) {
 
 export function useRoomState(room?: Room | null) {
   const [memberState, setMemberState] = useState<MemberState | undefined>(
-    room?.state.memberState
+    undefined
   );
 
   useEffect(() => {
     if (room) {
+      setMemberState(room.state.memberState);
       const onRoomStateChanged = (diff: Partial<RoomState>) => {
         if (diff.memberState) setMemberState(diff.memberState);
       };
