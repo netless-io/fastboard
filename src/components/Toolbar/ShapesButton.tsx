@@ -7,7 +7,7 @@ import Tippy from "@tippyjs/react";
 import React, { useContext } from "react";
 import { ApplianceNames, ShapeType } from "white-web-sdk";
 import { Icons } from "./icons";
-import { ToolbarSlider } from "./Slider";
+import { Slider } from "./components/Slider";
 import { ShapesMap, ToolbarContext } from "./Toolbar";
 import { ColorBox } from "./ToolbarContent";
 import clsx from "clsx";
@@ -122,10 +122,9 @@ const renderShapesContent = (props: ActiveShapeType) => {
         })}
       </div>
       <div className={clsx("line", theme)} />
-      <ToolbarSlider
-        strokeWidth={15}
-        setStrokeWidth={methods?.setStrokeWidth}
-      />
+      {methods && (
+        <Slider strokeWidth={15} setStrokeWidth={methods.setStrokeWidth} />
+      )}
       <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>

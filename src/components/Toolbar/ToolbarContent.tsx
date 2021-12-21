@@ -14,10 +14,10 @@ import React, {
 import { ApplianceNames } from "white-web-sdk";
 import { clamp } from "../../helpers";
 import { Icon } from "../../icons";
-import { Button } from "./Button";
+import { Button } from "./components/Button";
 import { Icons } from "./icons";
 import { renderShapesButton } from "./ShapesButton";
-import { ToolbarSlider } from "./Slider";
+import { Slider } from "./components/Slider";
 import { ToolbarContext, type ToolName } from "./Toolbar";
 
 const ItemHeight = 32;
@@ -150,10 +150,9 @@ const renderPencilContent = (theme: Theme) => {
   const { methods } = useContext(ToolbarContext);
   return (
     <div className="pencil-wrapper">
-      <ToolbarSlider
-        setStrokeWidth={methods?.setStrokeWidth}
-        strokeWidth={15}
-      />
+      {methods && (
+        <Slider setStrokeWidth={methods.setStrokeWidth} strokeWidth={15} />
+      )}
       <div className={clsx("line", theme)} />
       <div className="color-box">{ColorBox()}</div>
     </div>

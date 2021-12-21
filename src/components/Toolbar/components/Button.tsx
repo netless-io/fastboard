@@ -1,26 +1,28 @@
-import type { PropsWithChildren, ReactEventHandler } from "react";
+import type { PropsWithChildren } from "react";
 
 import React from "react";
 import Tippy from "@tippyjs/react";
 
-type ButtonProps = PropsWithChildren<{
+interface ButtonProps {
   content: string;
-  onClick?: ReactEventHandler;
+  onClick?: () => void;
   interactive?: boolean;
-}>;
+}
 
-export const Button = ({
-  children,
+const RightOffset = [0, 18] as [number, number];
+
+export function Button({
   content,
   onClick,
-  interactive,
-}: ButtonProps) => {
+  interactive = true,
+  children,
+}: PropsWithChildren<ButtonProps>) {
   return (
     <Tippy
       content={content}
       placement="right"
-      interactive={interactive === undefined ? true : interactive}
-      offset={[0, 18]}
+      interactive={interactive}
+      offset={RightOffset}
       duration={500}
     >
       <button className="button" onClick={onClick}>
@@ -28,4 +30,4 @@ export const Button = ({
       </button>
     </Tippy>
   );
-};
+}

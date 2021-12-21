@@ -1,16 +1,17 @@
+import type { WindowManager } from "@netless/window-manager";
 import type { MemoExoticComponent } from "react";
 import type { Color, Room, RoomState, ShapeType } from "white-web-sdk";
-import type { WindowManager } from "@netless/window-manager";
 import type { CommonProps, GenericIcon, IconProps, Theme } from "../../types";
 
 import clsx from "clsx";
-import React, { createContext, useEffect, useState, useMemo } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import { ApplianceNames } from "white-web-sdk";
+
 import { Icon } from "../../icons";
-import { Button } from "./Button";
+import { Button } from "./components/Button";
 import { Icons } from "./icons";
-import { ToolbarContent } from "./ToolbarContent";
 import { ShapeTypes } from "./ShapesButton";
+import { ToolbarContent } from "./ToolbarContent";
 
 export type ToolbarProps = CommonProps & {
   left?: number;
