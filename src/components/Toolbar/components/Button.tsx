@@ -1,5 +1,7 @@
+import type { Placement } from "tippy.js";
+
 import clsx from "clsx";
-import React, { useContext, type PropsWithChildren } from "react";
+import React, { forwardRef, useContext, type PropsWithChildren } from "react";
 import Tippy from "@tippyjs/react";
 
 import { ToolbarContext } from "../Toolbar";
@@ -10,18 +12,24 @@ interface ButtonProps {
   active?: boolean;
   onClick?: () => void;
   interactive?: boolean;
+  placement?: Placement;
 }
 
 const RightOffset = [0, 18] as [number, number];
 
-export function Button({
-  content,
-  disabled,
-  active,
-  onClick,
-  interactive = true,
-  children,
-}: PropsWithChildren<ButtonProps>) {
+export const Button = forwardRef<
+  HTMLButtonElement,
+  PropsWithChildren<ButtonProps>
+>(function Button(props, ref) {
+  const {
+    content,
+    disabled,
+    active,
+    onClick,
+    interactive = true,
+    placement = "right",
+    children,
+  } = props;
   const { writable, theme } = useContext(ToolbarContext);
 
   return (
@@ -30,11 +38,12 @@ export function Button({
       interactive={interactive}
       theme={theme}
       disabled={!writable || disabled}
-      placement="right"
-      offset={RightOffset}
+      placement={placement}
+      offset={placement === "right" ? RightOffset : undefined}
       duration={500}
     >
       <button
+        ref={ref}
         className={clsx("fastboard-toolbar-btn", theme, { active })}
         onClick={onClick}
         disabled={!writable || disabled}
@@ -43,4 +52,4 @@ export function Button({
       </button>
     </Tippy>
   );
-}
+});

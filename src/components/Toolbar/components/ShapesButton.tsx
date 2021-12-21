@@ -1,154 +1,139 @@
-import type { MemoExoticComponent } from "react";
-import type { IconProps, Theme } from "../../../types";
-import type { ContentProps } from "../Content";
-import type { ToolName } from "../Toolbar";
+import type { IconProps } from "../../../types";
 
 import Tippy from "@tippyjs/react";
 import React, { useContext } from "react";
-import { ApplianceNames, ShapeType } from "white-web-sdk";
+import type { ShapeType } from "white-web-sdk";
+import { ApplianceNames } from "white-web-sdk";
+
+import { capitalize } from "../../../helpers";
+import { ApplianceShapes, PanelRightOffset, Shapes, ShapesMap } from "../const";
 import { Icons } from "../icons";
+import { ToolbarContext } from "../Toolbar";
+import { Button } from "./Button";
+import { CutLine } from "./CutLine";
 import { Slider } from "./Slider";
-import { ShapesMap, ToolbarContext } from "../Toolbar";
-import { ColorBox } from "../Content";
-import clsx from "clsx";
+import { ColorBox } from "./ColorBox";
 
-export const ShapeTypes: string[] = Object.values(ShapeType);
-export const ShapeAppliances: ToolName[] = [
-  "rectangle",
-  "ellipse",
-  "straight",
-  "arrow",
-];
-export const Shapes = new Set([...ShapeTypes, ...ShapeAppliances]);
+const ShapeTypes = new Set([...ApplianceShapes, ...Shapes]);
 
-type ActiveShapeType = {
-  activeTool?: ToolName | undefined;
-  setActiveTool?: (shape: ToolName) => void;
-};
+export function ShapesButton() {
+  const { theme, memberState } = useContext(ToolbarContext);
 
-export function renderShapesButton(props: ContentProps) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { theme, currentApplianceName } = useContext(ToolbarContext);
-  const { activeTool, setActiveTool } = props;
+  const appliance = memberState?.currentApplianceName;
+  const shape = memberState?.shapeType;
 
-  const icon = Shapes.has(activeTool) ? activeTool : ApplianceNames.rectangle;
-  const active =
-    ShapeAppliances.includes(currentApplianceName as ToolName) ||
-    currentApplianceName === ApplianceNames.shape;
+  const key = (
+    appliance === ApplianceNames.shape ? shape : appliance
+  ) as keyof typeof ShapesMap;
+
+  const active = ShapeTypes.has(key);
+
+  const CurrentIcon = ShapesMap[key] || Icons.Rectangle;
 
   return (
     <Tippy
-      content={renderShapesContent({ activeTool, setActiveTool })}
+      content={renderShapesButtonContent()}
       theme={theme}
-      placement="right"
+      placement="right-start"
       trigger="click"
-      offset={[85, 15]}
+      offset={PanelRightOffset}
       arrow={false}
       interactive
-      animation
     >
-      <button className="button">
-        {renderIcon(icon, { theme, active })}
-        <span className="triangle" />
-      </button>
+      <Button content="Shape" active={active}>
+        <CurrentIcon theme={theme} active={active} />
+        <span className="fastboard-toolbar-triangle" />
+      </Button>
     </Tippy>
   );
 }
 
-const renderIcon = (name: ToolName | undefined, props: IconProps) => {
-  if (name) {
-    const CurrentIcon = ShapesMap[name];
-    return CurrentIcon && <CurrentIcon {...props} />;
-  } else {
-    return ShapesMap.rectangle && <ShapesMap.rectangle {...props} />;
-  }
-};
-
-const renderShapesContent = (props: ActiveShapeType) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { theme, methods } = useContext(ToolbarContext);
-  const { activeTool, setActiveTool } = props;
-  const defaultProps = { theme, activeTool, setActiveTool };
+function renderShapesButtonContent() {
   return (
-    <div className="shapes-wrapper">
-      <div className="shapes-container">
-        {createShapeButton({
-          ...defaultProps,
-          name: ApplianceNames.rectangle,
-          content: "Rectangle",
-          Icon: Icons.Rectangle,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ApplianceNames.ellipse,
-          content: "Circle",
-          Icon: Icons.Circle,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ApplianceNames.straight,
-          content: "Line",
-          Icon: Icons.Line,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ApplianceNames.arrow,
-          content: "Arrow",
-          Icon: Icons.Arrow,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ShapeType.Pentagram,
-          content: "Star",
-          Icon: Icons.Star,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ShapeType.Rhombus,
-          content: "Diamond",
-          Icon: Icons.Diamond,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ShapeType.SpeechBalloon,
-          content: "SpeechBalloon",
-          Icon: Icons.SpeechBalloon,
-        })}
-        {createShapeButton({
-          ...defaultProps,
-          name: ShapeType.Triangle,
-          content: "Triangle",
-          Icon: Icons.Triangle,
-        })}
-      </div>
-      <div className={clsx("line", theme)} />
-      {methods && (
-        <Slider strokeWidth={15} setStrokeWidth={methods.setStrokeWidth} />
-      )}
-      <div className={clsx("line", theme)} />
-      <div className="color-box">{ColorBox()}</div>
+    <div className="fastboard-toolbar-panel">
+      <ShapesBox />
+      <CutLine />
+      <Slider />
+      <CutLine />
+      <ColorBox />
     </div>
   );
-};
+}
 
-type CreateShapeButtonProps = {
-  content: string;
-  name: ToolName;
-  theme: Theme;
-  Icon: MemoExoticComponent<(props: IconProps) => JSX.Element>;
-} & ActiveShapeType;
-
-const createShapeButton = (props: CreateShapeButtonProps) => {
-  const { content, name, Icon, theme, activeTool, setActiveTool } = props;
+export function ShapesBox() {
   return (
-    <Tippy content={content} placement="auto">
-      <button
-        className="button"
-        key={content}
-        onClick={() => setActiveTool && setActiveTool(name)}
-      >
-        <Icon theme={theme} active={activeTool === name} />
-      </button>
-    </Tippy>
+    <div className="fastboard-toolbar-shapes">
+      {ApplianceShapes.map(Appliance => (
+        <ApplianceShapeButton
+          key={Appliance}
+          content={capitalize(Appliance)}
+          Appliance={Appliance}
+          Icon={ShapesMap[Appliance]}
+        />
+      ))}
+      {Shapes.map(shape => (
+        <ShapeShapeButton
+          key={shape}
+          content={capitalize(shape)}
+          shape={shape}
+          Icon={ShapesMap[shape]}
+        />
+      ))}
+    </div>
   );
-};
+}
+
+interface ApplianceShapeButtonProps {
+  content: string;
+  Appliance: ApplianceNames;
+  Icon: React.ComponentType<IconProps>;
+}
+
+function ApplianceShapeButton({
+  content,
+  Appliance,
+  Icon,
+}: ApplianceShapeButtonProps) {
+  const { theme, writable, setAppliance, memberState } =
+    useContext(ToolbarContext);
+
+  const current = memberState?.currentApplianceName;
+  const disabled = !writable;
+
+  return (
+    <Button
+      content={content}
+      disabled={disabled}
+      placement="top"
+      onClick={() => setAppliance(Appliance)}
+    >
+      <Icon theme={theme} active={current === Appliance} />
+    </Button>
+  );
+}
+
+interface ShapeShapeButtonProps {
+  content: string;
+  shape: ShapeType;
+  Icon: React.ComponentType<IconProps>;
+}
+
+function ShapeShapeButton({ content, shape, Icon }: ShapeShapeButtonProps) {
+  const { theme, writable, setAppliance, memberState } =
+    useContext(ToolbarContext);
+
+  const appliance = memberState?.currentApplianceName;
+  const current = appliance === ApplianceNames.shape && memberState?.shapeType;
+  const disabled = !writable;
+
+  return (
+    <Button
+      content={content}
+      disabled={disabled}
+      placement="top"
+      onClick={() => setAppliance(ApplianceNames.shape, shape)}
+    >
+      <Icon theme={theme} active={current === shape} />
+    </Button>
+  );
+}

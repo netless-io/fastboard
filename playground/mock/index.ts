@@ -116,6 +116,9 @@ class MockRoom implements PartialDeep<Room> {
     });
     return this.state.memberState;
   }
+  cleanCurrentScene() {
+    log("[room.cleanCurrentScene]");
+  }
   //#endregion
 }
 

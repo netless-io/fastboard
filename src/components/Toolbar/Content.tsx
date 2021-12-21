@@ -4,14 +4,23 @@ import { clamp } from "../../helpers";
 import { name } from "./Toolbar";
 import { ItemHeight, ItemsCount, MaxHeight, MinHeight } from "./const";
 import { DownButton, UpButton } from "./components/UpDownButtons";
-import { ClickerButton, SelectorButton } from "./components/ApplianceButtons";
+import {
+  AppsButton,
+  CleanButton,
+  ClickerButton,
+  EraserButton,
+  SelectorButton,
+} from "./components/ApplianceButtons";
 import { PencilButton } from "./components/PencilButton";
+import { TextButton } from "./components/TextButton";
+import { ShapesButton } from "./components/ShapesButton";
 
 export interface ContentProps {
   padding?: number;
+  onClickApps?: () => void;
 }
 
-export function Content({ padding = 16 }: ContentProps) {
+export function Content({ padding = 16, onClickApps }: ContentProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
 
@@ -50,6 +59,11 @@ export function Content({ padding = 16 }: ContentProps) {
         <ClickerButton />
         <SelectorButton />
         <PencilButton />
+        <TextButton />
+        <ShapesButton />
+        <EraserButton />
+        <CleanButton />
+        <AppsButton onClick={onClickApps} />
       </div>
       {needScroll && <DownButton scrollTo={scrollTo} />}
     </>

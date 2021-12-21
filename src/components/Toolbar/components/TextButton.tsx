@@ -9,24 +9,22 @@ import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 import { ColorBox } from "./ColorBox";
-import { CutLine } from "./CutLine";
-import { Slider } from "./Slider";
 
-export function PencilButton() {
+export function TextButton() {
   const { theme, icons, writable, setAppliance, memberState } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(() => {
-    setAppliance(ApplianceNames.pencil);
+    setAppliance(ApplianceNames.text);
   }, [setAppliance]);
 
   const appliance = memberState?.currentApplianceName;
-  const active = appliance === ApplianceNames.pencil;
+  const active = appliance === ApplianceNames.text;
   const disabled = !writable;
 
   return (
     <Tippy
-      content={renderPencilButtonContent()}
+      content={renderTextButtonContent()}
       theme={theme}
       placement="right-start"
       trigger="click"
@@ -34,11 +32,11 @@ export function PencilButton() {
       arrow={false}
       interactive
     >
-      <Button content="Pencil" active={active} onClick={changeAppliance}>
+      <Button content="Text" active={active} onClick={changeAppliance}>
         <Icon
-          fallback={<Icons.Pencil theme={theme} active={active} />}
-          src={disabled ? icons?.pencilIconDisable : icons?.pencilIcon}
-          alt="[pencil]"
+          fallback={<Icons.Text theme={theme} active={active} />}
+          src={disabled ? icons?.textIconDisable : icons?.textIcon}
+          alt="[text]"
         />
         <span className="fastboard-toolbar-triangle" />
       </Button>
@@ -46,11 +44,9 @@ export function PencilButton() {
   );
 }
 
-function renderPencilButtonContent() {
+function renderTextButtonContent() {
   return (
     <div className="fastboard-toolbar-panel">
-      <Slider />
-      <CutLine />
       <ColorBox />
     </div>
   );

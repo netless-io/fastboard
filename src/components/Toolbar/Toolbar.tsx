@@ -22,6 +22,7 @@ export type ToolbarProps = CommonProps & {
     | "up"
     | "down"
     | "text"
+    | "apps"
   >;
 };
 
