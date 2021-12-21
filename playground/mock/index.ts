@@ -77,6 +77,13 @@ class MockRoom implements PartialDeep<Room> {
       sceneState: this.state.sceneState,
     });
   }
+  setSceneIndex(index: number) {
+    log("[room.setSceneIndex]", index);
+    this.state.sceneState.index = index;
+    this.callbacks.emit("onRoomStateChanged", {
+      sceneState: this.state.sceneState,
+    });
+  }
   pptPreviousStep() {
     log("[room.pptPreviousStep]", this.state.sceneState.index);
     if (this.state.sceneState.index > 0) {
