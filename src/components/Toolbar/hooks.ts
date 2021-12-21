@@ -8,8 +8,9 @@ import type {
 } from "white-web-sdk";
 
 import { useCallback, useEffect, useState } from "react";
+import { noop } from "../../internal/helpers";
 
-export function useWritable(room?: Room) {
+export function useWritable(room?: Room | null) {
   const [value, setValue] = useState(room?.isWritable || false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export function useWritable(room?: Room) {
   return value;
 }
 
-export function useRoomState(room?: Room) {
+export function useRoomState(room?: Room | null) {
   const [memberState, setMemberState] = useState<MemberState | undefined>(
     room?.state.memberState
   );
@@ -49,7 +50,7 @@ export interface ToolbarHook {
   setStrokeColor(color: Color): void;
 }
 
-export function useToolbar(room?: Room): ToolbarHook {
+export function useToolbar(room?: Room | null): ToolbarHook {
   const writable = useWritable(room);
   const { memberState } = useRoomState(room);
 
@@ -98,3 +99,12 @@ export function useToolbar(room?: Room): ToolbarHook {
     setStrokeColor,
   };
 }
+
+export const EmptyToolbarHook: ToolbarHook = {
+  writable: false,
+  memberState: undefined,
+  cleanCurrentScene: noop,
+  setAppliance: noop,
+  setStrokeWidth: noop,
+  setStrokeColor: noop,
+};

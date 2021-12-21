@@ -5,6 +5,7 @@ import Tippy from "@tippyjs/react";
 
 interface ButtonProps {
   content: string;
+  disabled?: boolean;
   onClick?: () => void;
   interactive?: boolean;
 }
@@ -13,6 +14,7 @@ const RightOffset = [0, 18] as [number, number];
 
 export function Button({
   content,
+  disabled,
   onClick,
   interactive = true,
   children,
@@ -20,12 +22,17 @@ export function Button({
   return (
     <Tippy
       content={content}
-      placement="right"
       interactive={interactive}
+      disabled={disabled}
+      placement="right"
       offset={RightOffset}
       duration={500}
     >
-      <button className="button" onClick={onClick}>
+      <button
+        className="fastboard-toolbar-btn"
+        onClick={onClick}
+        disabled={disabled}
+      >
         {children}
       </button>
     </Tippy>
