@@ -5,12 +5,12 @@ and [netless-app](https://github.com/netless-io/netless-app).
 
 ## 目录
 
-- [安装](#安装)
-- [使用](#使用)
+- [安装](#install)
+- [使用](#usage)
 - [进阶](./docs/advanced.md)
 - [开发](#开发)
 
-## 安装
+<h2 id="install">安装</h2>
 
 ```bash
 npm add @netless/fastboard
@@ -24,9 +24,9 @@ yarn add @netless/fastboard
 pnpm add @netless/fastboard
 ```
 
-## 使用
+<h2 id="usage">使用</h2>
 
-### 挂载白板
+<h3 id="mount-whiteboard">挂载白板</h3>
 
 ```js
 import { createWhiteboardApp } from "@netless/fastboard";
@@ -50,11 +50,11 @@ let whiteboard = createWhiteboardApp({
 });
 ```
 
-[1] 关于 SDK 更多配置请看 [构造 WhiteWebSDK](#https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)
+[1] 关于 SDK 更多配置请看 [构造 WhiteWebSDK](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)
 
-[2] 加入房间更多配置请看 [构造 Room 与 Player 对象](#https://developer.netless.link/javascript-zh/home/construct-room-and-player)
+[2] 加入房间更多配置请看 [构造 Room 与 Player 对象](https://developer.netless.link/javascript-zh/home/construct-room-and-player)
 
-[3] 配置 `WindowManager` 请看 [WindowManager](#https://github.com/netless-io/window-manager#mount)
+[3] 配置 `WindowManager` 请看 [WindowManager](https://github.com/netless-io/window-manager#mount)
 
 ### 使用 APPS
 
