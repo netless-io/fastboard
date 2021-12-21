@@ -20,15 +20,7 @@ $name: "fastboard-toolbar";
     border: 1px solid rgba(0, 0, 0, 0.45);
   }
 
-  .section {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow: hidden;
-    scroll-behavior: smooth;
-  }
-
-  .button {
+  &-btn {
     appearance: none;
     cursor: pointer;
     margin: 0;
@@ -41,20 +33,31 @@ $name: "fastboard-toolbar";
     font-size: 24px;
     line-height: 1;
     position: relative;
+
+    svg,
+    img {
+      width: 1em;
+      height: 1em;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.light:not(:disabled):hover {
+      background-color: rgba(51, 129, 255, 0.1);
+    }
+
+    &.dark:not(:disabled):hover {
+      background-color: rgba(51, 129, 255, 0.25);
+    }
   }
 
-  .button:hover {
-    background-color: rgba(51, 129, 255, 0.1);
-  }
-
-  .expand {
-    height: 70%;
-  }
-
-  .line {
-    display: inline-block;
+  &-cut-line {
     height: 0.5px;
     width: 100%;
+
     &.light {
       background-color: #e7e7e7;
     }
@@ -62,6 +65,18 @@ $name: "fastboard-toolbar";
     &.dark {
       background-color: rgba(255, 255, 255, 0.15);
     }
+  }
+
+  .section {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .expand {
+    height: 70%;
   }
 
   .pencil-wrapper {

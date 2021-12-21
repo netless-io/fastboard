@@ -1,6 +1,10 @@
 #app {
   position: relative;
   border: 1px solid rgba($color: gray, $alpha: 0.5);
+
+  * {
+    box-sizing: border-box;
+  }
 }
 
 .draggable {
@@ -72,6 +76,8 @@ $unit: 8px;
 
 .left {
   position: absolute;
-  left: 20px;
-  top: 20px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 16px;
 }

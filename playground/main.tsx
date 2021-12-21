@@ -41,7 +41,9 @@ function App() {
   return (
     <>
       <div className={clsx("wrapper", { dark })}>
-        {toolbar && <Toolbar theme={theme}></Toolbar>}
+        <div className="left">
+          {toolbar && <Toolbar theme={theme} room={room as unknown as Room} />}
+        </div>
         <div className="bottom-left">
           {redo_undo && (
             <RedoUndo theme={theme} room={room as unknown as Room} />

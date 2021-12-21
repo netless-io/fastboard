@@ -4,9 +4,11 @@ import clsx from "clsx";
 import React, { createContext, useCallback, useState } from "react";
 
 import { Icon } from "../../icons";
-import { Button } from "./components/Button";
-import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
 import { Icons } from "./icons";
+import { Button } from "./components/Button";
+import { CutLine } from "./components/CutLine";
+import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
+import { Content } from "./Content";
 
 export type ToolbarProps = CommonProps & {
   icons?: GenericIcon<
@@ -62,7 +64,8 @@ export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
         )}
         {expanded && (
           <>
-            <span className={clsx(`${name}-cut-line`, theme)} />
+            <CutLine />
+            <Content />
           </>
         )}
       </div>
