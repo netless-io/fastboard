@@ -1,6 +1,4 @@
 import { memo } from "react";
-import { themes } from "../../../theme";
-import type { IconProps } from "../../../types";
 import { Apps } from "./Apps";
 import { Arrow } from "./Arrow";
 import { Circle } from "./Circle";
@@ -20,16 +18,6 @@ import { Star } from "./Star";
 import { Text } from "./Text";
 import { Triangle } from "./Triangle";
 import { Up } from "./Up";
-
-export const getStroke = (props: IconProps) => {
-  let config;
-  if (props.theme) {
-    config = themes[props.theme];
-  } else {
-    config = themes.light;
-  }
-  return props.active ? config.activeColor : config.color;
-};
 
 export const Icons = {
   Clicker: memo(Clicker),

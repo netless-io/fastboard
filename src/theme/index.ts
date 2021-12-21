@@ -1,3 +1,5 @@
+import type { IconProps } from "../types";
+
 export interface ThemeConfig {
   color: string;
   activeColor: string;
@@ -20,3 +22,13 @@ export const dark: ThemeConfig = {
 };
 
 export const themes = { light, dark };
+
+export const getStroke = (props: IconProps) => {
+  let config;
+  if (props.theme) {
+    config = themes[props.theme];
+  } else {
+    config = themes.light;
+  }
+  return props.active ? config.activeColor : config.color;
+};

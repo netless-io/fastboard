@@ -1,7 +1,7 @@
 import type { IconProps } from "../../../types";
 
 import React from "react";
-import { getStroke } from "./index";
+import { getStroke } from "../../../theme";
 
 export const Circle = (props: IconProps) => {
   const stroke = getStroke(props);

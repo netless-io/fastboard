@@ -1,6 +1,7 @@
-import React from "react";
 import type { IconProps } from "../../../types";
-import { getStroke } from "./index";
+
+import React from "react";
+import { getStroke } from "../../../theme";
 
 export const Down = (props: IconProps) => {
   const stroke = getStroke(props);
