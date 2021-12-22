@@ -12,6 +12,8 @@ export { Toolbar, type ToolbarProps } from "./components/Toolbar";
 export { ZoomControl, type ZoomControlProps } from "./components/ZoomControl";
 export * from "./WhiteboardApp";
 
+export type FastBoardConfig = Omit<WhiteboardAppConfig, "target">;
+
 export async function createWhiteboardApp(
   config: WhiteboardAppConfig
 ): Promise<WhiteboardApp> {
@@ -31,9 +33,7 @@ const SECRET_DEV_KEY = Symbol("fastboard working state");
  * }
  * return <div style={{ width: '100%', height: '100%' }} ref={ref} />
  */
-export function useFastboard(
-  config: Omit<WhiteboardAppConfig, "target">
-): readonly [
+export function useFastboard(config: FastBoardConfig): readonly [
   app: WhiteboardApp | null,
   ref: (div: HTMLDivElement | null) => void
 ] & {

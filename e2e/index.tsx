@@ -1,3 +1,4 @@
+import type { FastBoardConfig } from "../src";
 import { useFastboard } from "../src";
 
 import React from "react";
@@ -7,7 +8,7 @@ import "./index.scss";
 
 const CanvasSize = { width: 720, height: 540 };
 
-const WhiteboardAppConfig = {
+const WhiteboardAppConfig: FastBoardConfig = {
   sdkConfig: {
     appIdentifier: import.meta.env.VITE_APPID,
   },

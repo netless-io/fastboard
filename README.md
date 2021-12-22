@@ -28,6 +28,8 @@ pnpm add @netless/fastboard
 
 <h3 id="mount-whiteboard">挂载白板</h3>
 
+> 原生 `javascript`
+
 ```js
 import { createWhiteboardApp } from "@netless/fastboard";
 
@@ -48,6 +50,30 @@ let whiteboard = createWhiteboardApp({
     cursor: true,
   },
 });
+```
+
+> 使用 `React`
+
+```typescript
+import { useFastboard, FastBoardConfig } from "@netless/fastboard";
+import ReactDOM from "react-dom";
+
+const config: FastBoardConfig = {
+  sdkConfig: {
+    appIdentifier: "whiteboard-appid",
+  },
+  joinRoom: {
+    uid: "unique_id_for_each_client",
+    uuid: "room-uuid",
+    roomToken: "NETLESSROOM_...",
+  },
+};
+
+function App() {
+  const [app, ref] = useFastboard(config);
+  return <div ref={ref} />;
+}
+ReactDOM.render(<App />, document.getElementById("root"));
 ```
 
 [1] 关于 SDK 更多配置请看 [构造 WhiteWebSDK](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)
