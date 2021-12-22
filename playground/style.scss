@@ -79,5 +79,7 @@ $unit: 8px;
   top: 0;
   left: 0;
   height: 100%;
-  padding: 16px;
+  padding: 16px 16px 64px;
+  display: flex;
+  align-items: center;
 }
