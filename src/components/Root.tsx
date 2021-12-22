@@ -1,4 +1,6 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
+
+import { Lock } from "../internal/helpers";
 import { Instance } from "../internal";
 import { Toolbar } from "./Toolbar";
 import { RedoUndo } from "./RedoUndo";
@@ -10,10 +12,14 @@ export interface RootProps {
 }
 
 export default function Root({ instance: app }: RootProps) {
+  const [mux] = useState(() => new Lock());
+
   const useWhiteboard = useCallback(
     (container: HTMLDivElement | null) =>
-      container ? app.mount(container) : app.unmount(),
-    [app]
+      mux.schedule(
+        container ? () => app.mount(container) : () => app.unmount()
+      ),
+    [app, mux]
   );
 
   return (

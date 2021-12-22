@@ -3,6 +3,9 @@ import type { CommonProps, GenericIcon } from "../types";
 
 import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
+import Tippy from "@tippyjs/react";
+
+import { TopOffset } from "../theme";
 import { Icon } from "../icons";
 import { FilePlus } from "../icons/FilePlus";
 import { ChevronLeft } from "../icons/ChevronLeft";
@@ -24,7 +27,7 @@ export function PageControl({
   nextIcon,
   nextIconDisable,
 }: PageControlProps) {
-  const [writable, setWritable] = useState(true);
+  const [writable, setWritable] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
@@ -101,43 +104,73 @@ export function PageControl({
 
   return (
     <div className={clsx(name, theme)}>
-      <button
-        className={clsx(`${name}-btn`, "add", theme)}
+      {" "}
+      <Tippy
+        content="Add Page"
+        theme={theme}
         disabled={disabled}
-        onClick={addPage}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<FilePlus theme={theme} />}
-          src={disabled ? addIconDisable : addIcon}
-          alt="[add]"
-        />
-      </button>
-      <span className={clsx(`${name}-cut-line`, theme)} />
-      <button
-        className={clsx(`${name}-btn`, "prev", theme)}
-        disabled={disabled || pageIndex === 0}
-        onClick={prevPage}
+        <button
+          className={clsx(`${name}-btn`, "add", theme)}
+          disabled={disabled}
+          onClick={addPage}
+        >
+          <Icon
+            fallback={<FilePlus theme={theme} />}
+            src={disabled ? addIconDisable : addIcon}
+            alt="[add]"
+          />
+        </button>
+      </Tippy>
+      <span className={clsx(`${name}-cut-line`, theme)} />{" "}
+      <Tippy
+        content="Prev Page"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<ChevronLeft theme={theme} />}
-          src={disabled ? prevIconDisable : prevIcon}
-          alt="[prev]"
-        />
-      </button>
-      <span className={clsx(`${name}-page`, theme)}>{pageIndex + 1}</span>
+        <button
+          className={clsx(`${name}-btn`, "prev", theme)}
+          disabled={disabled || pageIndex === 0}
+          onClick={prevPage}
+        >
+          <Icon
+            fallback={<ChevronLeft theme={theme} />}
+            src={disabled ? prevIconDisable : prevIcon}
+            alt="[prev]"
+          />
+        </button>
+      </Tippy>
+      <span className={clsx(`${name}-page`, theme)}>
+        {pageCount === 0 ? "\u2026" : pageIndex + 1}
+      </span>
       <span className={clsx(`${name}-slash`, theme)}>/</span>
       <span className={clsx(`${name}-page-count`, theme)}>{pageCount}</span>
-      <button
-        className={clsx(`${name}-btn`, "next", theme)}
-        disabled={disabled || pageIndex === pageCount - 1}
-        onClick={nextPage}
+      <Tippy
+        content="Next Page"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<ChevronRight theme={theme} />}
-          src={disabled ? nextIconDisable : nextIcon}
-          alt="[next]"
-        />
-      </button>
+        <button
+          className={clsx(`${name}-btn`, "next", theme)}
+          disabled={disabled || pageIndex === pageCount - 1}
+          onClick={nextPage}
+        >
+          <Icon
+            fallback={<ChevronRight theme={theme} />}
+            src={disabled ? nextIconDisable : nextIcon}
+            alt="[next]"
+          />
+        </button>
+      </Tippy>
     </div>
   );
 }

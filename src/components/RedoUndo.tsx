@@ -2,9 +2,12 @@ import type { CommonProps, GenericIcon } from "../types";
 
 import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
+import Tippy from "@tippyjs/react";
+
 import { Icon } from "../icons";
 import { Undo } from "../icons/Undo";
 import { Redo } from "../icons/Redo";
+import { TopOffset } from "../theme";
 
 export const name = "fastboard-redo-undo";
 
@@ -18,7 +21,7 @@ export function RedoUndo({
   redoIcon,
   redoIconDisable,
 }: RedoUndoProps) {
-  const [writable, setWritable] = useState(true);
+  const [writable, setWritable] = useState(false);
   const [undoSteps, setUndoSteps] = useState(0);
   const [redoSteps, setRedoSteps] = useState(0);
 
@@ -41,28 +44,46 @@ export function RedoUndo({
 
   return (
     <div className={clsx(name, theme)}>
-      <button
-        className={clsx(`${name}-btn`, "undo", theme)}
-        disabled={disabled || undoSteps === 0}
-        onClick={useCallback(() => room && room.undo(), [room])}
+      <Tippy
+        content="Undo"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<Undo theme={theme} />}
-          src={undoSteps === 0 ? undoIconDisable : undoIcon}
-          alt="[undo]"
-        />
-      </button>
-      <button
-        className={clsx(`${name}-btn`, "redo", theme)}
-        disabled={disabled || redoSteps === 0}
-        onClick={useCallback(() => room && room.redo(), [room])}
+        <button
+          className={clsx(`${name}-btn`, "undo", theme)}
+          disabled={disabled || undoSteps === 0}
+          onClick={useCallback(() => room && room.undo(), [room])}
+        >
+          <Icon
+            fallback={<Undo theme={theme} />}
+            src={undoSteps === 0 ? undoIconDisable : undoIcon}
+            alt="[undo]"
+          />
+        </button>
+      </Tippy>
+      <Tippy
+        content="Redo"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<Redo theme={theme} />}
-          src={redoSteps === 0 ? redoIconDisable : redoIcon}
-          alt="[redo]"
-        />
-      </button>
+        <button
+          className={clsx(`${name}-btn`, "redo", theme)}
+          disabled={disabled || redoSteps === 0}
+          onClick={useCallback(() => room && room.redo(), [room])}
+        >
+          <Icon
+            fallback={<Redo theme={theme} />}
+            src={redoSteps === 0 ? redoIconDisable : redoIcon}
+            alt="[redo]"
+          />
+        </button>
+      </Tippy>
     </div>
   );
 }

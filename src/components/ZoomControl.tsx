@@ -3,7 +3,10 @@ import type { CommonProps, GenericIcon } from "../types";
 
 import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
+import Tippy from "@tippyjs/react";
+
 import { clamp } from "../helpers";
+import { TopOffset } from "../theme";
 import { Icon } from "../icons";
 import { Minus } from "../icons/Minus";
 import { Plus } from "../icons/Plus";
@@ -48,7 +51,7 @@ export function ZoomControl({
   plusIcon,
   plusIconDisable,
 }: ZoomControlProps) {
-  const [writable, setWritable] = useState(true);
+  const [writable, setWritable] = useState(false);
   const [scale, setScale] = useState(1);
 
   const resetCamera = useCallback(() => {
@@ -142,44 +145,71 @@ export function ZoomControl({
 
   return (
     <div className={clsx(name, theme)}>
-      <button
-        className={clsx(`${name}-btn`, "reset", theme)}
+      <Tippy
+        content="Reset"
+        theme={theme}
         disabled={disabled}
-        onClick={resetCamera}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<Reset theme={theme} />}
-          src={disabled ? resetIconDisable : resetIcon}
-          alt="[reset]"
-        />
-      </button>
+        <button
+          className={clsx(`${name}-btn`, "reset", theme)}
+          disabled={disabled}
+          onClick={resetCamera}
+        >
+          <Icon
+            fallback={<Reset theme={theme} />}
+            src={disabled ? resetIconDisable : resetIcon}
+            alt="[reset]"
+          />
+        </button>
+      </Tippy>
       <span className={clsx(`${name}-cut-line`, theme)} />
-      <button
-        className={clsx(`${name}-btn`, "minus", theme)}
+      <Tippy
+        content="Zoom Out"
+        theme={theme}
         disabled={disabled}
-        onClick={zoomOut}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<Minus theme={theme} />}
-          src={disabled ? minusIconDisable : minusIcon}
-          alt="[minus]"
-        />
-      </button>
+        <button
+          className={clsx(`${name}-btn`, "minus", theme)}
+          disabled={disabled}
+          onClick={zoomOut}
+        >
+          <Icon
+            fallback={<Minus theme={theme} />}
+            src={disabled ? minusIconDisable : minusIcon}
+            alt="[minus]"
+          />
+        </button>
+      </Tippy>
       <span className={clsx(`${name}-scale`, theme)}>
         {Math.ceil(scale * 100)}
       </span>
       <span className={clsx(`${name}-percent`, theme)}>%</span>
-      <button
-        className={clsx(`${name}-btn`, "plus", theme)}
+      <Tippy
+        content="Zoom In"
+        theme={theme}
         disabled={disabled}
-        onClick={zoomIn}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
       >
-        <Icon
-          fallback={<Plus theme={theme} />}
-          src={disabled ? plusIconDisable : plusIcon}
-          alt="[plus]"
-        />
-      </button>
+        <button
+          className={clsx(`${name}-btn`, "plus", theme)}
+          disabled={disabled}
+          onClick={zoomIn}
+        >
+          <Icon
+            fallback={<Plus theme={theme} />}
+            src={disabled ? plusIconDisable : plusIcon}
+            alt="[plus]"
+          />
+        </button>
+      </Tippy>
     </div>
   );
 }

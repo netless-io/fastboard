@@ -54,7 +54,10 @@ export function Content({ padding = 16, onClickApps }: ContentProps) {
       <div
         ref={ref}
         className={`${name}-section`}
-        style={{ height: `${sectionHeight}px` }}
+        style={{
+          height: `${sectionHeight}px`,
+          overflow: needScroll ? "hidden" : "visible",
+        }}
       >
         <ClickerButton />
         <SelectorButton />

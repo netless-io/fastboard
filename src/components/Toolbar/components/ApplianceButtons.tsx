@@ -20,12 +20,7 @@ export function ClickerButton() {
   const disabled = !writable;
 
   return (
-    <Button
-      content="Clicker"
-      interactive={false}
-      onClick={changeAppliance}
-      active={active}
-    >
+    <Button content="Clicker" onClick={changeAppliance} active={active}>
       <Icon
         fallback={<Icons.Clicker theme={theme} active={active} />}
         src={disabled ? icons?.clickerIconDisable : icons?.clickerIcon}
@@ -49,12 +44,7 @@ export function SelectorButton() {
   const disabled = !writable;
 
   return (
-    <Button
-      content="Selector"
-      interactive={false}
-      onClick={changeAppliance}
-      active={active}
-    >
+    <Button content="Selector" onClick={changeAppliance} active={active}>
       <Icon
         fallback={<Icons.Selector theme={theme} active={active} />}
         src={disabled ? icons?.selectorIconDisable : icons?.selectorIcon}
@@ -78,12 +68,7 @@ export function EraserButton() {
   const disabled = !writable;
 
   return (
-    <Button
-      content="Eraser"
-      interactive={false}
-      onClick={changeAppliance}
-      active={active}
-    >
+    <Button content="Eraser" onClick={changeAppliance} active={active}>
       <Icon
         fallback={<Icons.Eraser theme={theme} active={active} />}
         src={disabled ? icons?.eraserIconDisable : icons?.eraserIcon}
@@ -100,7 +85,7 @@ export function CleanButton() {
   const disabled = !writable;
 
   return (
-    <Button content="Clean" interactive={false} onClick={cleanCurrentScene}>
+    <Button content="Clean" onClick={cleanCurrentScene}>
       <Icon
         fallback={<Icons.Clean theme={theme} />}
         src={disabled ? icons?.cleanIconDisable : icons?.cleanIcon}
@@ -120,7 +105,7 @@ export function AppsButton({ onClick }: AppsButtonProps) {
   const disabled = !writable;
 
   return (
-    <Button content="Apps" interactive={false} onClick={onClick}>
+    <Button content="Apps" onClick={onClick}>
       <Icon
         fallback={<Icons.Apps theme={theme} />}
         src={disabled ? icons?.appsIconDisable : icons?.appsIcon}

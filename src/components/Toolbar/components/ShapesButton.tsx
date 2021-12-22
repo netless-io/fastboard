@@ -6,7 +6,8 @@ import type { ShapeType } from "white-web-sdk";
 import { ApplianceNames } from "white-web-sdk";
 
 import { capitalize } from "../../../helpers";
-import { ApplianceShapes, PanelRightOffset, Shapes, ShapesMap } from "../const";
+import { RightOffset } from "../../../theme";
+import { ApplianceShapes, Shapes, ShapesMap } from "../const";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
@@ -31,20 +32,22 @@ export function ShapesButton() {
   const CurrentIcon = ShapesMap[key] || Icons.Rectangle;
 
   return (
-    <Tippy
-      content={renderShapesButtonContent()}
-      theme={theme}
-      placement="right-start"
-      trigger="click"
-      offset={PanelRightOffset}
-      arrow={false}
-      interactive
-    >
-      <Button content="Shape" active={active}>
-        <CurrentIcon theme={theme} active={active} />
-        <span className="fastboard-toolbar-triangle" />
-      </Button>
-    </Tippy>
+    <span className="fastboard-toolbar-btn-interactive">
+      <Tippy
+        content={renderShapesButtonContent()}
+        theme={theme}
+        placement="right-start"
+        trigger="click"
+        offset={RightOffset}
+        arrow={false}
+        interactive
+      >
+        <Button content="Shape" active={active}>
+          <CurrentIcon theme={theme} active={active} />
+          <span className="fastboard-toolbar-triangle" />
+        </Button>
+      </Tippy>
+    </span>
   );
 }
 

@@ -31,3 +31,6 @@ export const getStroke = (props: IconProps) => {
   }
   return props.active ? config.activeColor : config.color;
 };
+
+export const TopOffset = [0, 15] as [number, number];
+export const RightOffset = [0, 18] as [number, number];

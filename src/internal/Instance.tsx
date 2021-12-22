@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 
 import Root from "../components/Root";
 import { mountWhiteboard } from "./mount-whiteboard";
-import { noop, Lock } from "./helpers";
+import { noop } from "./helpers";
 
 export interface AcceptParams {
   readonly sdk: WhiteWebSdk;
@@ -43,7 +43,6 @@ export interface Essentials {
   readonly sdk: WhiteWebSdk;
   readonly room: Room;
   readonly manager: WindowManager;
-  // TODO: add fields like "hotkeys" for future usage (in toolbar)
 }
 
 export class Instance {
@@ -56,31 +55,25 @@ export class Instance {
   room: Room | null = null;
   manager: WindowManager | null = null;
 
-  _whiteboardContainer: HTMLElement | null = null;
+  ready = false;
+  resolveReady!: () => void;
+  readyPromise!: Promise<void>;
 
-  _destroyed = true;
+  refreshReadyPromise() {
+    this.readyPromise = new Promise<void>(resolve => {
+      this.resolveReady = () => {
+        this.resolveReady = noop;
+        this.ready = true;
+        resolve();
+      };
+    });
+  }
 
   constructor(config: WhiteboardAppConfig) {
     this.target = config.target;
     this.config = config;
-    this.resetManagerPromise();
-    this.initialize();
-  }
-
-  _managerPromise!: Promise<WindowManager>;
-  _resolveManager!: (manager: WindowManager) => void;
-
-  resetManagerPromise() {
-    this._managerPromise = new Promise<WindowManager>(resolve => {
-      this._resolveManager = resolve;
-    });
-  }
-
-  initialize() {
-    if (this._destroyed) {
-      this._destroyed = false;
-      this.forceUpdate();
-    }
+    this.refreshReadyPromise();
+    this.forceUpdate();
   }
 
   forceUpdate() {
@@ -91,56 +84,37 @@ export class Instance {
     this.sdk = sdk;
     this.room = room;
     this.manager = manager;
-    this._resolveManager(manager);
-    this._resolveManager = noop;
     this.forceUpdate();
   }
 
   async dispose() {
-    await this._unmount();
-    if (!this._destroyed && this.target) {
-      this._destroyed = true;
+    if (this.room) {
+      await this.unmount();
+    }
+    if (this.target) {
       ReactDOM.unmountComponentAtNode(this.target);
       this.sdk = this.room = this.manager = this.target = null;
-      this._whiteboardContainer = null;
     }
   }
 
-  private _mountLock = new Lock();
-
-  mount(container: HTMLElement) {
-    this._whiteboardContainer = container;
-    this._mountLock.schedule(this._mount);
-  }
-
-  private _mount = async () => {
+  async mount(container: HTMLElement) {
     if (this.room) {
-      console.warn("[WhiteboardApp] Already mounted");
+      console.warn("[WhiteboardApp] already mounted");
       return;
     }
-    if (this._whiteboardContainer) {
-      try {
-        const essentials = await mountWhiteboard(
-          this.config.sdkConfig,
-          this.config.joinRoom,
-          { ...this.config.managerConfig, container: this._whiteboardContainer }
-        );
-        this.accept(essentials);
-      } catch (error) {
-        console.warn("[WhiteboardApp] mount error", error);
-      }
-    }
-  };
-
-  unmount() {
-    this._mountLock.schedule(this._unmount);
+    const essentials = await mountWhiteboard(
+      this.config.sdkConfig,
+      this.config.joinRoom,
+      { ...this.config.managerConfig, container }
+    );
+    this.accept(essentials);
+    this.resolveReady();
   }
 
-  private _unmount = async () => {
+  async unmount() {
     if (this.manager) {
       this.manager.destroy();
       this.manager = null;
-      this.resetManagerPromise();
     }
     if (this.room) {
       try {
@@ -150,14 +124,17 @@ export class Instance {
       }
       this.room = null;
     }
-  };
+    this.refreshReadyPromise();
+  }
 
   async insertDocs(params: InsertDocsParams) {
-    const manager = await this._managerPromise;
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] cannot insert doc before mounted`);
+    }
     switch (params.fileType) {
       case "pdf":
       case "ppt":
-        return manager.addApp({
+        return this.manager.addApp({
           kind: "DocsViewer",
           options: {
             scenePath: params.scenePath,
@@ -166,7 +143,7 @@ export class Instance {
           },
         });
       case "pptx":
-        return manager.addApp({
+        return this.manager.addApp({
           kind: "Slide",
           options: {
             scenePath: params.scenePath,

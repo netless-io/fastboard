@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ApplianceNames } from "white-web-sdk";
 
 import { Icon } from "../../../icons";
-import { PanelRightOffset } from "../const";
+import { RightOffset } from "../../../theme";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
@@ -25,24 +25,26 @@ export function PencilButton() {
   const disabled = !writable;
 
   return (
-    <Tippy
-      content={renderPencilButtonContent()}
-      theme={theme}
-      placement="right-start"
-      trigger="click"
-      offset={PanelRightOffset}
-      arrow={false}
-      interactive
-    >
-      <Button content="Pencil" active={active} onClick={changeAppliance}>
-        <Icon
-          fallback={<Icons.Pencil theme={theme} active={active} />}
-          src={disabled ? icons?.pencilIconDisable : icons?.pencilIcon}
-          alt="[pencil]"
-        />
-        <span className="fastboard-toolbar-triangle" />
-      </Button>
-    </Tippy>
+    <span className="fastboard-toolbar-btn-interactive">
+      <Tippy
+        content={renderPencilButtonContent()}
+        theme={theme}
+        placement="right-start"
+        trigger="click"
+        offset={RightOffset}
+        arrow={false}
+        interactive
+      >
+        <Button content="Pencil" active={active} onClick={changeAppliance}>
+          <Icon
+            fallback={<Icons.Pencil theme={theme} active={active} />}
+            src={disabled ? icons?.pencilIconDisable : icons?.pencilIcon}
+            alt="[pencil]"
+          />
+          <span className="fastboard-toolbar-triangle" />
+        </Button>
+      </Tippy>
+    </span>
   );
 }
 

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ApplianceNames } from "white-web-sdk";
 
 import { Icon } from "../../../icons";
-import { PanelRightOffset } from "../const";
+import { RightOffset } from "../../../theme";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
@@ -23,24 +23,26 @@ export function TextButton() {
   const disabled = !writable;
 
   return (
-    <Tippy
-      content={renderTextButtonContent()}
-      theme={theme}
-      placement="right-start"
-      trigger="click"
-      offset={PanelRightOffset}
-      arrow={false}
-      interactive
-    >
-      <Button content="Text" active={active} onClick={changeAppliance}>
-        <Icon
-          fallback={<Icons.Text theme={theme} active={active} />}
-          src={disabled ? icons?.textIconDisable : icons?.textIcon}
-          alt="[text]"
-        />
-        <span className="fastboard-toolbar-triangle" />
-      </Button>
-    </Tippy>
+    <span className="fastboard-toolbar-btn-interactive">
+      <Tippy
+        content={renderTextButtonContent()}
+        theme={theme}
+        placement="right-start"
+        trigger="click"
+        offset={RightOffset}
+        arrow={false}
+        interactive
+      >
+        <Button content="Text" active={active} onClick={changeAppliance}>
+          <Icon
+            fallback={<Icons.Text theme={theme} active={active} />}
+            src={disabled ? icons?.textIconDisable : icons?.textIcon}
+            alt="[text]"
+          />
+          <span className="fastboard-toolbar-triangle" />
+        </Button>
+      </Tippy>
+    </span>
   );
 }
 

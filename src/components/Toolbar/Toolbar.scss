@@ -34,6 +34,12 @@ $name: "fastboard-toolbar";
     line-height: 1;
     position: relative;
 
+    &-interactive {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+    }
+
     svg,
     img {
       width: 1em;
@@ -82,13 +88,16 @@ $name: "fastboard-toolbar";
     display: inline-flex;
     flex-flow: column nowrap;
     gap: 8px;
-    overflow: hidden;
     scroll-behavior: smooth;
   }
 
   &-panel {
     width: 136px;
     padding: 8px;
+  }
+
+  &-slider {
+    padding-top: 11px;
   }
 
   &-color-box,
@@ -128,76 +137,14 @@ $name: "fastboard-toolbar";
     margin: 0;
     border: 1px solid rgba(0, 0, 0, 0.24);
     padding: 0;
-    outline: 0;
     appearance: none;
     width: 16px;
     height: 16px;
     border-radius: 4px;
     cursor: pointer;
-  }
 
-  .pencil-wrapper {
-    box-sizing: border-box;
-    width: 136px;
-    padding: 8px;
-  }
-
-  .text-wrapper {
-    width: 136px;
-  }
-
-  .shapes-wrapper {
-    width: 120px;
-    height: 166px;
-    padding: 8px;
-  }
-
-  .shapes-container {
-    display: flex;
-    height: 30%;
-    flex-flow: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .pencil-slider.slider {
-    padding: 10px 0 5px;
-  }
-
-  .color-box {
-    padding: 5px 0;
-    width: 100%;
-    display: flex;
-    flex-flow: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .color-item {
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-  }
-
-  .color-border {
-    width: 24px;
-    height: 24px;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    border: 1px solid transparent;
-
-    &.active.light {
-      border: 1px solid rgba(51, 129, 255, 0.8);
-      border-radius: 4px;
+    &:focus-visible {
+      outline-offset: 2px;
     }
-  }
-
-  .color-button {
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.24);
-    cursor: pointer;
   }
 }

@@ -4,6 +4,7 @@ import clsx from "clsx";
 import React, { forwardRef, useContext, type PropsWithChildren } from "react";
 import Tippy from "@tippyjs/react";
 
+import { RightOffset } from "../../../theme";
 import { ToolbarContext } from "../Toolbar";
 
 interface ButtonProps {
@@ -15,8 +16,6 @@ interface ButtonProps {
   placement?: Placement;
 }
 
-const RightOffset = [0, 18] as [number, number];
-
 export const Button = forwardRef<
   HTMLButtonElement,
   PropsWithChildren<ButtonProps>
@@ -26,7 +25,7 @@ export const Button = forwardRef<
     disabled,
     active,
     onClick,
-    interactive = true,
+    interactive,
     placement = "right",
     children,
   } = props;
@@ -39,7 +38,7 @@ export const Button = forwardRef<
       theme={theme}
       disabled={!writable || disabled}
       placement={placement}
-      offset={placement === "right" ? RightOffset : undefined}
+      offset={placement.includes("right") ? RightOffset : undefined}
       duration={500}
     >
       <button
