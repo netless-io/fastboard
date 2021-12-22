@@ -108,6 +108,10 @@ export function ZoomControl({
       setScale(room.state.cameraState.scale);
     }
 
+    if (manager) {
+      setScale(manager.mainView.camera.scale);
+    }
+
     const onRoomStateChanged = (modifyState: Partial<RoomState>) => {
       if (modifyState.cameraState) {
         setScale(modifyState.cameraState.scale);
