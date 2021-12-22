@@ -2,8 +2,8 @@
 @import "tippy.js/dist/tippy.css";
 @import "tippy.js/themes/light.css";
 @import "rc-slider/assets/index.css";
+@import "./components/Root.scss";
 @import "./components/RedoUndo.scss";
 @import "./components/PageControl.scss";
 @import "./components/ZoomControl.scss";
 @import "./components/Toolbar/Toolbar.scss";
-@import "./internal/Instance.scss";

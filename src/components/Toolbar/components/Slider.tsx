@@ -20,6 +20,8 @@ export function Slider() {
       handleStyle={{ border: `1px solid ${activeColor}` }}
       value={strokeWidth}
       onChange={setStrokeWidth}
+      min={1}
+      max={32}
     />
   );
 }

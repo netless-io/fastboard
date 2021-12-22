@@ -1,21 +1,22 @@
 import type { WhiteboardApp } from "../src";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Handler } from "../playground/controls/resize";
 import { createWhiteboardApp } from "../src";
 import "./index.scss";
 
-const CanvasSize = { width: 1400, height: 800 };
+const CanvasSize = { width: 720, height: 540 };
 
 function App() {
-  const app = useRef<WhiteboardApp>();
+  const app = useRef<WhiteboardApp | null>(null);
   const [ref, setRef] = useState<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (ref) {
+  const useApp = useCallback((div: HTMLDivElement | null) => {
+    if (div) {
+      setRef(div);
       app.current = createWhiteboardApp({
-        target: ref,
+        target: div,
         sdkConfig: {
           appIdentifier: import.meta.env.VITE_APPID,
         },
@@ -27,12 +28,18 @@ function App() {
       });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).app = app.current;
+    } else {
+      setRef(null);
+      if (app.current) {
+        app.current.dispose();
+        app.current = null;
+      }
     }
-  }, [ref]);
+  }, []);
 
   return (
     <>
-      <div ref={setRef} style={{ width: "100%", height: "100%" }} />
+      <div ref={useApp} style={{ width: "100%", height: "100%" }} />
       {ref && (
         <Handler
           target={ref.parentElement as HTMLDivElement}

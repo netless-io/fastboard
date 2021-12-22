@@ -19,6 +19,7 @@ export default function Root({ instance: app }: RootProps) {
   return (
     <Instance.Context.Provider value={app}>
       <div className="fastboard-root">
+        {!app.room && <div className="fastboard-loading">Loading&hellip;</div>}
         <div className="fastboard-view" ref={useWhiteboard} />
         <div className="fastboard-left">
           <Toolbar room={app.room} manager={app.manager} />
