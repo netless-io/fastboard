@@ -3,20 +3,45 @@ $name: "fastboard-toolbar";
 .#{$name} {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 4px;
   border-radius: 4px;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   position: absolute;
   z-index: 100;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  .rc-slider {
+    padding: 6px 0;
+  }
+  .rc-slider-rail,
+  .rc-slider-track {
+    height: 2px;
+  }
+
+  .tippy-content {
+    padding: 8px;
+  }
+  .tippy-box {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba($color: #333, $alpha: 0.95);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  .tippy-box[data-theme~="light"] {
+    background-color: rgba($color: #fff, $alpha: 0.95);
+  }
 
   &.light {
-    background-color: #fff;
+    color: #333;
+    background-color: rgba($color: #fff, $alpha: 0.85);
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   &.dark {
-    background-color: #333;
+    color: #ddd;
+    background-color: rgba($color: #333, $alpha: 0.85);
     border: 1px solid rgba(0, 0, 0, 0.45);
   }
 
@@ -25,9 +50,9 @@ $name: "fastboard-toolbar";
     cursor: pointer;
     margin: 0;
     border: 0;
-    padding: 0;
-    width: 1em;
-    height: 1em;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
     background-color: transparent;
     border-radius: 4px;
     font-size: 24px;
@@ -36,8 +61,8 @@ $name: "fastboard-toolbar";
 
     &-interactive {
       display: inline-block;
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
     }
 
     svg,
@@ -87,26 +112,32 @@ $name: "fastboard-toolbar";
   &-section {
     display: inline-flex;
     flex-flow: column nowrap;
-    gap: 8px;
+    gap: 4px;
     scroll-behavior: smooth;
   }
 
   &-panel {
-    width: 136px;
-    padding: 8px;
-  }
-
-  &-slider {
-    padding-top: 11px;
+    width: 136px - 8px * 2;
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 8px;
   }
 
   &-color-box,
   &-shapes {
-    padding-top: 5px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
-    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+    .#{$name}-btn {
+      padding: 0;
+      width: 24px;
+      height: 24px;
+    }
   }
 
   &-color-item {

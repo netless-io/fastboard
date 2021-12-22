@@ -26,7 +26,7 @@ export const Shapes = [
   ShapeType.SpeechBalloon,
 ] as const;
 
-export const ItemHeight = 32;
+export const ItemHeight = 32 + 4;
 export const ItemsCount = 8;
-export const MaxHeight = ItemHeight * ItemsCount - 8;
-export const MinHeight = ItemHeight * 2 - 8;
+export const MaxHeight = ItemHeight * ItemsCount - 4;
+export const MinHeight = ItemHeight * 2 - 4;

@@ -11,13 +11,13 @@ export function Undo({ theme = "light", active }: IconProps) {
     <svg viewBox="0 0 24 24">
       <g
         fill="none"
-        fillRule="evenodd"
+        fill-rule="evenodd"
         stroke={stroke}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <path d="m11 14-2-2-2-2 2-2 2-2" />
-        <path d="M7 10h8a2 2 0 0 1 2 2v6h0" />
+        <path d="M10 14H6v-4" />
+        <path d="m6 14 .788-.9A7.005 7.005 0 0 1 18 14h0" />
       </g>
     </svg>
   );

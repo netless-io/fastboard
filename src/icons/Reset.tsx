@@ -9,25 +9,14 @@ export function Reset({ theme = "light", active }: IconProps) {
 
   return (
     <svg viewBox="0 0 24 24">
-      <g
-        fill="none"
-        fillRule="evenodd"
-        stroke={stroke}
-        transform="translate(-88 -152)"
-      >
-        <circle cx="100" cy="164" r="1" fill={stroke} />
-        <circle
-          cx="100"
-          cy="164"
-          r="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+      <g fill="none" fill-rule="evenodd" transform="translate(-176 -684)">
         <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M100 158v2m0 8v2m6-6h-2m-8 0h-2"
+          stroke={stroke}
+          stroke-linejoin="round"
+          d="M188 688v4m0 8v4m8-8h-4m-8 0h-4"
         />
+        <circle cx="188" cy="696" r="6" stroke={stroke} />
+        <circle cx="188" cy="696" r="1" fill={stroke} />
       </g>
     </svg>
   );

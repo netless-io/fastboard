@@ -145,27 +145,7 @@ export function ZoomControl({
 
   return (
     <div className={clsx(name, theme)}>
-      <Tippy
-        content="Reset"
-        theme={theme}
-        disabled={disabled}
-        placement="top"
-        duration={500}
-        offset={TopOffset}
-      >
-        <button
-          className={clsx(`${name}-btn`, "reset", theme)}
-          disabled={disabled}
-          onClick={resetCamera}
-        >
-          <Icon
-            fallback={<Reset theme={theme} />}
-            src={disabled ? resetIconDisable : resetIcon}
-            alt="[reset]"
-          />
-        </button>
-      </Tippy>
-      <span className={clsx(`${name}-cut-line`, theme)} />
+      {/* <span className={clsx(`${name}-cut-line`, theme)} /> */}
       <Tippy
         content="Zoom Out"
         theme={theme}
@@ -207,6 +187,26 @@ export function ZoomControl({
             fallback={<Plus theme={theme} />}
             src={disabled ? plusIconDisable : plusIcon}
             alt="[plus]"
+          />
+        </button>
+      </Tippy>
+      <Tippy
+        content="Reset"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
+      >
+        <button
+          className={clsx(`${name}-btn`, "reset", theme)}
+          disabled={disabled}
+          onClick={resetCamera}
+        >
+          <Icon
+            fallback={<Reset theme={theme} />}
+            src={disabled ? resetIconDisable : resetIcon}
+            alt="[reset]"
           />
         </button>
       </Tippy>

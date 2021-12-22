@@ -104,28 +104,7 @@ export function PageControl({
 
   return (
     <div className={clsx(name, theme)}>
-      {" "}
-      <Tippy
-        content="Add Page"
-        theme={theme}
-        disabled={disabled}
-        placement="top"
-        duration={500}
-        offset={TopOffset}
-      >
-        <button
-          className={clsx(`${name}-btn`, "add", theme)}
-          disabled={disabled}
-          onClick={addPage}
-        >
-          <Icon
-            fallback={<FilePlus theme={theme} />}
-            src={disabled ? addIconDisable : addIcon}
-            alt="[add]"
-          />
-        </button>
-      </Tippy>
-      <span className={clsx(`${name}-cut-line`, theme)} />{" "}
+      {/* <span className={clsx(`${name}-cut-line`, theme)} />{" "} */}
       <Tippy
         content="Prev Page"
         theme={theme}
@@ -168,6 +147,26 @@ export function PageControl({
             fallback={<ChevronRight theme={theme} />}
             src={disabled ? nextIconDisable : nextIcon}
             alt="[next]"
+          />
+        </button>
+      </Tippy>
+      <Tippy
+        content="Add Page"
+        theme={theme}
+        disabled={disabled}
+        placement="top"
+        duration={500}
+        offset={TopOffset}
+      >
+        <button
+          className={clsx(`${name}-btn`, "add", theme)}
+          disabled={disabled}
+          onClick={addPage}
+        >
+          <Icon
+            fallback={<FilePlus theme={theme} />}
+            src={disabled ? addIconDisable : addIcon}
+            alt="[add]"
           />
         </button>
       </Tippy>

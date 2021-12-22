@@ -3,7 +3,7 @@ import React, { useCallback, useContext } from "react";
 import { Icon } from "../../../icons";
 import { Icons } from "../icons";
 import { Button } from "./Button";
-import { CutLine } from "./CutLine";
+// import { CutLine } from "./CutLine";
 import { ToolbarContext } from "../Toolbar";
 import { ItemHeight } from "../const";
 
@@ -26,7 +26,7 @@ export function UpButton({ scrollTo }: UpButtonProps) {
           alt="[up]"
         />
       </Button>
-      <CutLine />
+      {/* <CutLine /> */}
     </>
   );
 }
@@ -39,7 +39,7 @@ export function DownButton({ scrollTo }: UpButtonProps) {
 
   return (
     <>
-      <CutLine />
+      {/* <CutLine /> */}
       <Button content="Down" onClick={scrollDown}>
         <Icon
           fallback={<Icons.Down theme={theme} />}

@@ -11,13 +11,13 @@ export function Redo({ theme = "light", active }: IconProps) {
     <svg viewBox="0 0 24 24">
       <g
         fill="none"
-        fillRule="evenodd"
+        fill-rule="evenodd"
         stroke={stroke}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <path d="m13 14 2-2 2-2-2-2-2-2" />
-        <path d="M17 10H9a2 2 0 0 0-2 2v6h0" />
+        <path d="M14 14h4v-4" />
+        <path d="m18 14-.788-.9A7.005 7.005 0 0 0 6 14h0" />
       </g>
     </svg>
   );
