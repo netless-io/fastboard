@@ -45,11 +45,12 @@ export function RedoUndo({
   return (
     <div className={clsx(name, theme)}>
       <Tippy
+        className="fastboard-tip"
         content="Undo"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button
@@ -65,11 +66,12 @@ export function RedoUndo({
         </button>
       </Tippy>
       <Tippy
+        className="fastboard-tip"
         content="Redo"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button

@@ -2,7 +2,7 @@ import type { WindowManager } from "@netless/window-manager";
 import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
 
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
 
 import Root from "../components/Root";
@@ -156,4 +156,8 @@ export class Instance {
         });
     }
   }
+}
+
+export function useInstance() {
+  return useContext(Instance.Context);
 }

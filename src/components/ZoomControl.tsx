@@ -147,11 +147,12 @@ export function ZoomControl({
     <div className={clsx(name, theme)}>
       {/* <span className={clsx(`${name}-cut-line`, theme)} /> */}
       <Tippy
+        className="fastboard-tip"
         content="Zoom Out"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button
@@ -171,11 +172,12 @@ export function ZoomControl({
       </span>
       <span className={clsx(`${name}-percent`, theme)}>%</span>
       <Tippy
+        className="fastboard-tip"
         content="Zoom In"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button
@@ -191,11 +193,12 @@ export function ZoomControl({
         </button>
       </Tippy>
       <Tippy
+        className="fastboard-tip"
         content="Reset"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button

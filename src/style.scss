@@ -7,3 +7,22 @@
 @import "./components/PageControl.scss";
 @import "./components/ZoomControl.scss";
 @import "./components/Toolbar/Toolbar.scss";
+
+.tippy-box.fastboard-tip {
+  color: #eee;
+  background-color: rgba($color: #000000, $alpha: 0.95);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.tippy-box.fastboard-tip[data-placement^="right"] > .tippy-arrow::before {
+  top: 4px;
+  border-width: 4px;
+  border-right-color: #000;
+}
+
+.tippy-box.fastboard-tip[data-placement^="top"] > .tippy-arrow::before {
+  left: 4px;
+  border-width: 4px;
+  border-top-color: #000;
+}

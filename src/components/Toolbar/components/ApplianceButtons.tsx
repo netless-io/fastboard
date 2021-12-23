@@ -1,12 +1,27 @@
+import type { HotKey } from "white-web-sdk";
+
 import React, { useCallback, useContext } from "react";
 import { ApplianceNames } from "white-web-sdk";
 
+import { defaultHotKeys, useInstance } from "../../../internal";
 import { Icon } from "../../../icons";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 
+export function renderToolTip(text: string, hotkey?: HotKey) {
+  if (!(typeof hotkey === "string")) return text;
+  return (
+    <span className="fastboard-toolbar-tooltip">
+      <span>{text}</span>
+      <span className="fastboard-toolbar-hotkey">{hotkey.toUpperCase()}</span>
+    </span>
+  );
+}
+
 export function ClickerButton() {
+  const app = useInstance();
+
   const { theme, icons, writable, setAppliance, memberState } =
     useContext(ToolbarContext);
 
@@ -15,12 +30,17 @@ export function ClickerButton() {
     [setAppliance]
   );
 
+  const shortcut = app?.config.joinRoom.hotKeys?.changeToClick;
   const appliance = memberState?.currentApplianceName;
   const active = appliance === ApplianceNames.clicker;
   const disabled = !writable;
 
   return (
-    <Button content="Clicker" onClick={changeAppliance} active={active}>
+    <Button
+      content={renderToolTip("Clicker", shortcut)}
+      onClick={changeAppliance}
+      active={active}
+    >
       <Icon
         fallback={<Icons.Clicker theme={theme} active={active} />}
         src={disabled ? icons?.clickerIconDisable : icons?.clickerIcon}
@@ -31,6 +51,8 @@ export function ClickerButton() {
 }
 
 export function SelectorButton() {
+  const app = useInstance();
+
   const { theme, icons, writable, setAppliance, memberState } =
     useContext(ToolbarContext);
 
@@ -42,9 +64,15 @@ export function SelectorButton() {
   const appliance = memberState?.currentApplianceName;
   const active = appliance === ApplianceNames.selector;
   const disabled = !writable;
+  const shortcut = (app?.config.joinRoom.hotKeys || defaultHotKeys)
+    .changeToSelector;
 
   return (
-    <Button content="Selector" onClick={changeAppliance} active={active}>
+    <Button
+      content={renderToolTip("Selector", shortcut)}
+      onClick={changeAppliance}
+      active={active}
+    >
       <Icon
         fallback={<Icons.Selector theme={theme} active={active} />}
         src={disabled ? icons?.selectorIconDisable : icons?.selectorIcon}
@@ -55,6 +83,8 @@ export function SelectorButton() {
 }
 
 export function EraserButton() {
+  const app = useInstance();
+
   const { theme, icons, writable, setAppliance, memberState } =
     useContext(ToolbarContext);
 
@@ -66,9 +96,15 @@ export function EraserButton() {
   const appliance = memberState?.currentApplianceName;
   const active = appliance === ApplianceNames.eraser;
   const disabled = !writable;
+  const shortcut = (app?.config.joinRoom.hotKeys || defaultHotKeys)
+    .changeToEraser;
 
   return (
-    <Button content="Eraser" onClick={changeAppliance} active={active}>
+    <Button
+      content={renderToolTip("Eraser", shortcut)}
+      onClick={changeAppliance}
+      active={active}
+    >
       <Icon
         fallback={<Icons.Eraser theme={theme} active={active} />}
         src={disabled ? icons?.eraserIconDisable : icons?.eraserIcon}

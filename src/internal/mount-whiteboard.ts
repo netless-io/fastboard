@@ -27,6 +27,19 @@ function ensureWindowManager(joinRoom: JoinRoom) {
   }
 }
 
+export const defaultHotKeys = {
+  changeToSelector: "s",
+  changeToLaserPointer: "z",
+  changeToPencil: "p",
+  changeToRectangle: "r",
+  changeToEllipse: "c",
+  changeToEraser: "e",
+  changeToText: "t",
+  changeToStraight: "l",
+  changeToArrow: "a",
+  changeToHand: "h",
+};
+
 export async function mountWhiteboard(
   sdkConfig: SdkConfig,
   joinRoom: JoinRoom,
@@ -42,16 +55,7 @@ export async function mountWhiteboard(
     floatBar: true,
     hotKeys: {
       ...DefaultHotKeys,
-      changeToSelector: "s",
-      changeToLaserPointer: "z",
-      changeToPencil: "p",
-      changeToRectangle: "r",
-      changeToEllipse: "c",
-      changeToEraser: "e",
-      changeToText: "t",
-      changeToStraight: "l",
-      changeToArrow: "a",
-      changeToHand: "h",
+      ...defaultHotKeys,
     },
     ...joinRoom,
     useMultiViews: true,

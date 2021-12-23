@@ -33,4 +33,4 @@ export const getStroke = (props: IconProps) => {
 };
 
 export const TopOffset = [0, 11] as [number, number];
-export const RightOffset = [0, 14] as [number, number];
+export const RightOffset = [0, 11] as [number, number];

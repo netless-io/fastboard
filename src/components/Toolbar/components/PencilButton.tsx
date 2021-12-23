@@ -3,6 +3,7 @@ import React, { useCallback } from "react";
 import { useContext } from "react";
 import { ApplianceNames } from "white-web-sdk";
 
+import { defaultHotKeys, useInstance } from "../../../internal";
 import { Icon } from "../../../icons";
 import { RightOffset } from "../../../theme";
 import { Icons } from "../icons";
@@ -11,8 +12,11 @@ import { Button } from "./Button";
 import { ColorBox } from "./ColorBox";
 import { CutLine } from "./CutLine";
 import { Slider } from "./Slider";
+import { renderToolTip } from "./ApplianceButtons";
 
 export function PencilButton() {
+  const app = useInstance();
+
   const { theme, icons, writable, setAppliance, memberState } =
     useContext(ToolbarContext);
 
@@ -23,10 +27,12 @@ export function PencilButton() {
   const appliance = memberState?.currentApplianceName;
   const active = appliance === ApplianceNames.pencil;
   const disabled = !writable;
+  const shortcut = (app?.config.joinRoom.hotKeys || defaultHotKeys).changeToPencil
 
   return (
     <span className="fastboard-toolbar-btn-interactive">
       <Tippy
+        className="fastboard-tip"
         content={renderPencilButtonContent()}
         theme={theme}
         placement="right-start"
@@ -35,7 +41,7 @@ export function PencilButton() {
         arrow={false}
         interactive
       >
-        <Button content="Pencil" active={active} onClick={changeAppliance}>
+        <Button content={renderToolTip("Pencil", shortcut)} active={active} onClick={changeAppliance}>
           <Icon
             fallback={<Icons.Pencil theme={theme} active={active} />}
             src={disabled ? icons?.pencilIconDisable : icons?.pencilIcon}

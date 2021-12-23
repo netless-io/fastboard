@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { Lock } from "../internal/helpers";
 import { Instance } from "../internal";
@@ -40,12 +40,4 @@ export default function Root({ instance: app }: RootProps) {
       </div>
     </Instance.Context.Provider>
   );
-}
-
-export function useInstance() {
-  const app = useContext(Instance.Context);
-  if (!app) {
-    throw new Error("useInstance must be used within a WhiteboardApp");
-  }
-  return app;
 }

@@ -11,10 +11,10 @@ export function Undo({ theme = "light", active }: IconProps) {
     <svg viewBox="0 0 24 24">
       <g
         fill="none"
-        fill-rule="evenodd"
+        fillRule="evenodd"
         stroke={stroke}
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path d="M10 14H6v-4" />
         <path d="m6 14 .788-.9A7.005 7.005 0 0 1 18 14h0" />

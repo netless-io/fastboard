@@ -34,6 +34,7 @@ export function ShapesButton() {
   return (
     <span className="fastboard-toolbar-btn-interactive">
       <Tippy
+        className="fastboard-tip"
         content={renderShapesButtonContent()}
         theme={theme}
         placement="right-start"

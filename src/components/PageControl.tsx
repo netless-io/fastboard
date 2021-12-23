@@ -106,11 +106,12 @@ export function PageControl({
     <div className={clsx(name, theme)}>
       {/* <span className={clsx(`${name}-cut-line`, theme)} />{" "} */}
       <Tippy
+        className="fastboard-tip"
         content="Prev Page"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button
@@ -131,11 +132,12 @@ export function PageControl({
       <span className={clsx(`${name}-slash`, theme)}>/</span>
       <span className={clsx(`${name}-page-count`, theme)}>{pageCount}</span>
       <Tippy
+        className="fastboard-tip"
         content="Next Page"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button
@@ -151,11 +153,12 @@ export function PageControl({
         </button>
       </Tippy>
       <Tippy
+        className="fastboard-tip"
         content="Add Page"
         theme={theme}
         disabled={disabled}
         placement="top"
-        duration={500}
+        duration={300}
         offset={TopOffset}
       >
         <button

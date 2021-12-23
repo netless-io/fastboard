@@ -7,48 +7,48 @@ import Tippy from "@tippyjs/react";
 import { RightOffset } from "../../../theme";
 import { ToolbarContext } from "../Toolbar";
 
-interface ButtonProps {
-  content: string;
+type ButtonProps = PropsWithChildren<{
+  content: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
   onClick?: () => void;
   interactive?: boolean;
   placement?: Placement;
-}
+}>;
 
-export const Button = forwardRef<
-  HTMLButtonElement,
-  PropsWithChildren<ButtonProps>
->(function Button(props, ref) {
-  const {
-    content,
-    disabled,
-    active,
-    onClick,
-    interactive,
-    placement = "right",
-    children,
-  } = props;
-  const { writable, theme } = useContext(ToolbarContext);
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (props, ref) => {
+    const {
+      content,
+      disabled,
+      active,
+      onClick,
+      interactive,
+      placement = "right",
+      children,
+    } = props;
+    const { writable, theme } = useContext(ToolbarContext);
 
-  return (
-    <Tippy
-      content={content}
-      interactive={interactive}
-      theme={theme}
-      disabled={!writable || disabled}
-      placement={placement}
-      offset={placement.includes("right") ? RightOffset : undefined}
-      duration={500}
-    >
-      <button
-        ref={ref}
-        className={clsx("fastboard-toolbar-btn", theme, { active })}
-        onClick={onClick}
-        disabled={!writable || disabled}
+    return (
+      <Tippy
+        className="fastboard-tip"
+        content={content}
+        interactive={interactive}
+        theme={theme}
+        disabled={disabled || !writable}
+        placement={placement}
+        offset={placement.includes("right") ? RightOffset : undefined}
+        duration={300}
       >
-        {children}
-      </button>
-    </Tippy>
-  );
-});
+        <button
+          ref={ref}
+          className={clsx("fastboard-toolbar-btn", theme, { active })}
+          onClick={onClick}
+          disabled={disabled || !writable}
+        >
+          {children}
+        </button>
+      </Tippy>
+    );
+  }
+);
