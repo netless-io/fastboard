@@ -6,7 +6,7 @@ import React, { createContext, useCallback, useState } from "react";
 import { Icon } from "../../icons";
 import { Icons } from "./icons";
 import { Button } from "./components/Button";
-// import { CutLine } from "./components/CutLine";
+import { CutLine } from "./components/CutLine";
 import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
 import { Content } from "./Content";
 
@@ -65,7 +65,7 @@ export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
         )}
         {expanded && (
           <>
-            {/* <CutLine /> */}
+            <CutLine />
             <Content />
           </>
         )}
