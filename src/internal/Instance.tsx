@@ -1,7 +1,6 @@
 import type { WindowManager } from "@netless/window-manager";
 import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
-import type { ToolbarProps } from "../components/Toolbar";
 
 import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
@@ -38,7 +37,13 @@ export interface WhiteboardAppConfig {
   readonly sdkConfig: SdkConfig;
   readonly joinRoom: JoinRoom;
   readonly managerConfig?: Omit<ManagerConfig, "container">;
-  readonly onClickApps?: ToolbarProps["onClickApps"];
+  readonly toolbar?: {
+    apps?: {
+      enable?: boolean;
+      content?: React.ReactNode;
+      onClick?: () => void;
+    };
+  };
 }
 
 export interface Essentials {

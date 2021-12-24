@@ -22,7 +22,19 @@ export function AppsButton({ content, onClick }: AppsButtonProps) {
 
   const disabled = !writable;
 
-  return (
+  const button = (
+    <Button content="Apps" onClick={onClick}>
+      <Icon
+        fallback={<Icons.Apps theme={theme} />}
+        src={disabled ? icons?.appsIconDisable : icons?.appsIcon}
+        alt="[apps]"
+      />
+    </Button>
+  );
+
+  return content === false ? (
+    button
+  ) : (
     <span className="fastboard-toolbar-btn-interactive">
       <Tippy
         className="fastboard-tip"
@@ -34,13 +46,7 @@ export function AppsButton({ content, onClick }: AppsButtonProps) {
         arrow={false}
         interactive
       >
-        <Button content="Apps" onClick={onClick}>
-          <Icon
-            fallback={<Icons.Apps theme={theme} />}
-            src={disabled ? icons?.appsIconDisable : icons?.appsIcon}
-            alt="[apps]"
-          />
-        </Button>
+        {button}
       </Tippy>
     </span>
   );

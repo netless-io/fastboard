@@ -8,7 +8,7 @@ import { Icons } from "./icons";
 import { Button } from "./components/Button";
 import { CutLine } from "./components/CutLine";
 import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
-import { Content, type ContentProps } from "./Content";
+import { Content } from "./Content";
 
 export type ToolbarProps = CommonProps & {
   icons?: GenericIcon<
@@ -24,8 +24,6 @@ export type ToolbarProps = CommonProps & {
     | "text"
     | "apps"
   >;
-  appsContent?: React.ReactNode;
-  onClickApps?: ContentProps["onClickApps"];
 };
 
 type ToolbarContextType = ToolbarHook & {
@@ -40,13 +38,7 @@ export const ToolbarContext = createContext<ToolbarContextType>({
 
 export const name = "fastboard-toolbar";
 
-export const Toolbar = ({
-  theme = "light",
-  icons,
-  room,
-  appsContent,
-  onClickApps,
-}: ToolbarProps) => {
+export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
   const [expanded, setExpanded] = useState(true);
   const hook = useToolbar(room);
   const toggle = useCallback(() => setExpanded(e => !e), []);
@@ -74,7 +66,7 @@ export const Toolbar = ({
         {expanded && (
           <>
             <CutLine />
-            <Content onClickApps={onClickApps} appsContent={appsContent} />
+            <Content />
           </>
         )}
       </div>

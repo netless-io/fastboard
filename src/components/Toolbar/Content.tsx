@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+import { useInstance } from "../../internal";
 import { clamp } from "../../helpers";
 import { name } from "./Toolbar";
 import { ItemHeight, ItemsCount, MaxHeight, MinHeight } from "./const";
@@ -17,15 +18,10 @@ import { ShapesButton } from "./components/ShapesButton";
 
 export interface ContentProps {
   padding?: number;
-  appsContent?: React.ReactNode;
-  onClickApps?: () => void;
 }
 
-export function Content({
-  padding = 16,
-  appsContent,
-  onClickApps,
-}: ContentProps) {
+export function Content({ padding = 16 }: ContentProps) {
+  const app = useInstance();
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
 
@@ -71,7 +67,12 @@ export function Content({
         <ShapesButton />
         <EraserButton />
         <CleanButton />
-        <AppsButton content={appsContent} onClick={onClickApps} />
+        {(app?.config.toolbar?.apps?.enable ?? true) && (
+          <AppsButton
+            content={app?.config.toolbar?.apps?.content}
+            onClick={app?.config.toolbar?.apps?.onClick}
+          />
+        )}
       </div>
       {needScroll && <DownButton scrollTo={scrollTo} />}
     </>

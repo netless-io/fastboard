@@ -28,11 +28,7 @@ export default function Root({ instance: app }: RootProps) {
         {!app.room && <div className="fastboard-loading">Loading&hellip;</div>}
         <div className="fastboard-view" ref={useWhiteboard} />
         <div className="fastboard-left">
-          <Toolbar
-            room={app.room}
-            manager={app.manager}
-            onClickApps={app.config.onClickApps}
-          />
+          <Toolbar room={app.room} manager={app.manager} />
         </div>
         <div className="fastboard-bottom-left">
           <RedoUndo room={app.room} manager={app.manager} />
