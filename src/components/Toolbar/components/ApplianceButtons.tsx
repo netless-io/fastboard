@@ -130,23 +130,3 @@ export function CleanButton() {
     </Button>
   );
 }
-
-export interface AppsButtonProps {
-  onClick?: () => void;
-}
-
-export function AppsButton({ onClick }: AppsButtonProps) {
-  const { theme, icons, writable } = useContext(ToolbarContext);
-
-  const disabled = !writable;
-
-  return (
-    <Button content="Apps" onClick={onClick}>
-      <Icon
-        fallback={<Icons.Apps theme={theme} />}
-        src={disabled ? icons?.appsIconDisable : icons?.appsIcon}
-        alt="[apps]"
-      />
-    </Button>
-  );
-}

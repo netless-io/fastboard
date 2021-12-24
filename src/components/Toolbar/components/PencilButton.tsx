@@ -27,7 +27,8 @@ export function PencilButton() {
   const appliance = memberState?.currentApplianceName;
   const active = appliance === ApplianceNames.pencil;
   const disabled = !writable;
-  const shortcut = (app?.config.joinRoom.hotKeys || defaultHotKeys).changeToPencil
+  const shortcut = (app?.config.joinRoom.hotKeys || defaultHotKeys)
+    .changeToPencil;
 
   return (
     <span className="fastboard-toolbar-btn-interactive">
@@ -41,7 +42,11 @@ export function PencilButton() {
         arrow={false}
         interactive
       >
-        <Button content={renderToolTip("Pencil", shortcut)} active={active} onClick={changeAppliance}>
+        <Button
+          content={renderToolTip("Pencil", shortcut)}
+          active={active}
+          onClick={changeAppliance}
+        >
           <Icon
             fallback={<Icons.Pencil theme={theme} active={active} />}
             src={disabled ? icons?.pencilIconDisable : icons?.pencilIcon}
@@ -56,7 +61,7 @@ export function PencilButton() {
 
 function renderPencilButtonContent() {
   return (
-    <div className="fastboard-toolbar-panel">
+    <div className="fastboard-toolbar-panel pencil">
       <Slider />
       <CutLine />
       <ColorBox />

@@ -7,14 +7,14 @@ import { isEqualArray } from "../../../helpers";
 import { ToolbarContext } from "../Toolbar";
 
 const colors: Record<string, Color> = {
-  white: [255, 255, 255],
-  black: [0, 0, 0],
-  red: [255, 0, 0],
-  blue: [0, 0, 255],
-  green: [0, 255, 0],
-  yellow: [255, 255, 0],
-  orange: [255, 255, 127],
-  purple: [255, 0, 255],
+  "#E02020": [224, 32, 32],
+  "#F7B500": [247, 181, 0],
+  "#6DD400": [109, 212, 0],
+  "#32C5FF": [50, 197, 255],
+  "#0091FF": [0, 145, 255],
+  "#6236FF": [98, 54, 255],
+  "#B620E0": [182, 32, 224],
+  "#6D7278": [109, 114, 120],
 };
 
 const colorKeys = Object.keys(colors);

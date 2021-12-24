@@ -54,7 +54,7 @@ export function ShapesButton() {
 
 function renderShapesButtonContent() {
   return (
-    <div className="fastboard-toolbar-panel">
+    <div className="fastboard-toolbar-panel shapes">
       <ShapesBox />
       <CutLine />
       <Slider />

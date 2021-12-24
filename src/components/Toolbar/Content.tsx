@@ -5,22 +5,27 @@ import { name } from "./Toolbar";
 import { ItemHeight, ItemsCount, MaxHeight, MinHeight } from "./const";
 import { DownButton, UpButton } from "./components/UpDownButtons";
 import {
-  AppsButton,
   CleanButton,
   ClickerButton,
   EraserButton,
   SelectorButton,
 } from "./components/ApplianceButtons";
+import { AppsButton } from "./components/AppsButton";
 import { PencilButton } from "./components/PencilButton";
 import { TextButton } from "./components/TextButton";
 import { ShapesButton } from "./components/ShapesButton";
 
 export interface ContentProps {
   padding?: number;
+  appsContent?: React.ReactNode;
   onClickApps?: () => void;
 }
 
-export function Content({ padding = 16, onClickApps }: ContentProps) {
+export function Content({
+  padding = 16,
+  appsContent,
+  onClickApps,
+}: ContentProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [parentHeight, setParentHeight] = useState(0);
 
@@ -66,7 +71,7 @@ export function Content({ padding = 16, onClickApps }: ContentProps) {
         <ShapesButton />
         <EraserButton />
         <CleanButton />
-        <AppsButton onClick={onClickApps} />
+        <AppsButton content={appsContent} onClick={onClickApps} />
       </div>
       {needScroll && <DownButton scrollTo={scrollTo} />}
     </>

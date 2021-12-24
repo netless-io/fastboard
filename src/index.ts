@@ -1,3 +1,4 @@
+import { WindowManager } from "@netless/window-manager";
 import { useEffect, useRef, useState } from "react";
 
 import "./behaviors/register-apps";
@@ -11,6 +12,8 @@ export { RedoUndo, type RedoUndoProps } from "./components/RedoUndo";
 export { Toolbar, type ToolbarProps } from "./components/Toolbar";
 export { ZoomControl, type ZoomControlProps } from "./components/ZoomControl";
 export * from "./WhiteboardApp";
+
+export const register = WindowManager.register.bind(WindowManager);
 
 export type FastBoardConfig = Omit<WhiteboardAppConfig, "target">;
 

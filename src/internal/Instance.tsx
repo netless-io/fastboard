@@ -1,6 +1,7 @@
 import type { WindowManager } from "@netless/window-manager";
 import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
+import type { ToolbarProps } from "../components/Toolbar";
 
 import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
@@ -37,6 +38,7 @@ export interface WhiteboardAppConfig {
   readonly sdkConfig: SdkConfig;
   readonly joinRoom: JoinRoom;
   readonly managerConfig?: Omit<ManagerConfig, "container">;
+  readonly onClickApps?: ToolbarProps["onClickApps"];
 }
 
 export interface Essentials {
@@ -127,7 +129,7 @@ export class Instance {
     this.refreshReadyPromise();
   }
 
-  async insertDocs(params: InsertDocsParams) {
+  insertDocs(params: InsertDocsParams) {
     if (!this.manager) {
       throw new Error(`[WhiteboardApp] cannot insert doc before mounted`);
     }
@@ -155,6 +157,36 @@ export class Instance {
           },
         });
     }
+  }
+
+  insertCodeEditor() {
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] cannot insert app before mounted`);
+    }
+    return this.manager.addApp({
+      kind: "Monaco",
+      options: { title: "Code Editor" },
+    });
+  }
+
+  insertGeoGebra() {
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] cannot insert app before mounted`);
+    }
+    return this.manager.addApp({
+      kind: "GeoGebra",
+      options: { title: "GeoGebra" },
+    });
+  }
+
+  insertCountdown() {
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] cannot insert app before mounted`);
+    }
+    return this.manager.addApp({
+      kind: "Countdown",
+      options: { title: "Countdown" },
+    });
   }
 }
 

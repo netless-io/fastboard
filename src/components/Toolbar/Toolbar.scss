@@ -141,6 +141,10 @@ $name: "fastboard-toolbar";
     flex-flow: column nowrap;
     align-items: center;
     gap: 8px;
+
+    &.apps {
+      width: 240px - 8px * 2;
+    }
   }
 
   &-color-box,
@@ -155,6 +159,41 @@ $name: "fastboard-toolbar";
       padding: 0;
       width: 24px;
       height: 24px;
+    }
+  }
+
+  &-apps {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    align-items: center;
+    justify-items: center;
+
+    .#{$name}-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 40px;
+    }
+  }
+
+  &-app-icon {
+    padding-top: 4px;
+    display: inline-flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 4px;
+
+    .fastboard-toolbar-btn {
+      padding: 0;
+    }
+
+    &-text {
+      font-size: 12px;
+      color: #5d5d5d;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 

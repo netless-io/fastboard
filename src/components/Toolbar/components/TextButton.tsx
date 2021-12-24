@@ -59,7 +59,7 @@ export function TextButton() {
 
 function renderTextButtonContent() {
   return (
-    <div className="fastboard-toolbar-panel">
+    <div className="fastboard-toolbar-panel text">
       <ColorBox />
     </div>
   );

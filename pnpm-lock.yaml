@@ -3,6 +3,9 @@ lockfileVersion: 5.3
 specifiers:
   '@hyrious/esbuild-dev': ^0.7.0
   '@hyrious/rimraf': ^0.1.0
+  '@netless/app-countdown': ^0.0.1
+  '@netless/app-geogebra': ^0.0.2
+  '@netless/app-monaco': ^0.1.12
   '@netless/app-slide': ^0.0.51
   '@netless/window-manager': ^0.3.15
   '@tippyjs/react': ^4.2.6
@@ -39,6 +42,9 @@ dependencies:
 devDependencies:
   '@hyrious/esbuild-dev': 0.7.0_esbuild@0.14.7
   '@hyrious/rimraf': 0.1.0
+  '@netless/app-countdown': 0.0.1
+  '@netless/app-geogebra': 0.0.2
+  '@netless/app-monaco': 0.1.12
   '@netless/app-slide': 0.0.51
   '@netless/window-manager': 0.3.15_white-web-sdk@2.15.13
   '@types/node': 17.0.2
@@ -383,6 +389,10 @@ packages:
     resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
     dev: true
 
+  /@netless/app-countdown/0.0.1:
+    resolution: {integrity: sha512-pOJLEQEHoSujAN+Q0kB257XKo3D6+J5Lz7s57OMc0/clhgaciOidBvNoTpsN70mOGRGpGiWpMovaoSYTihuU4Q==}
+    dev: true
+
   /@netless/app-docs-viewer/0.1.24:
     resolution: {integrity: sha512-0NfcTqRvWlqGXhLc451AclDobp6Uicr+J51pfJbFfapWBwCOwynF3dn1wpazlffr1YYHRP+V+CVi7MmVt4qEwA==}
     dependencies:
@@ -390,8 +400,16 @@ packages:
       vanilla-lazyload: 17.5.0
     dev: true
 
+  /@netless/app-geogebra/0.0.2:
+    resolution: {integrity: sha512-IKVOHsakK3ITbz1A92sgAqDNZblfTxzKDuMquCVBbsdwC5IikNeRSXgzEw0fZh+52KZ6DEXx+aews7C3pQvWdQ==}
+    dev: true
+
   /@netless/app-media-player/0.1.0-beta.5:
     resolution: {integrity: sha512-q24tZnDGwTM8fvSs97qavuF8w8cXa4Tx3Nl7Xvig5Um4XKrfNijjLK9pI1cdctfuefl9s8wrG8JNCN2C6yqeDw==}
+    dev: true
+
+  /@netless/app-monaco/0.1.12:
+    resolution: {integrity: sha512-f8LLS5jVcBXn5Ua1HfWNHUq7wa/yax81+XTfjXJ8B2ztOGTHB1uHDveD/hjcWCTCEeZP/sv8c8HTXwqb0fLUcg==}
     dev: true
 
   /@netless/app-slide/0.0.51:
