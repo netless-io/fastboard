@@ -15,9 +15,10 @@ export function useWritable(room?: Room | null) {
 
   useEffect(() => {
     if (room) {
-      setValue(room.isWritable);
-      room.callbacks.on("onEnableWriteNowChanged", setValue);
-      return () => room.callbacks.off("onEnableWriteNowChanged", setValue);
+      const setWritable = () => setValue(room.isWritable);
+      setWritable();
+      room.callbacks.on("onEnableWriteNowChanged", setWritable);
+      return () => room.callbacks.off("onEnableWriteNowChanged", setWritable);
     }
   }, [room]);
 
