@@ -1,9 +1,10 @@
 import type { MountParams } from "@netless/window-manager";
 import type { JoinRoomParams, WhiteWebSdkConfiguration } from "white-web-sdk";
-import type { Essentials } from "./instance";
+import type { Essentials, Language } from "./instance";
 
 import { WindowManager } from "@netless/window-manager";
 import { DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
+import { createI18n } from "../i18n";
 
 export type SdkConfig = Omit<
   WhiteWebSdkConfiguration,
@@ -43,7 +44,8 @@ export const defaultHotKeys = {
 export async function mountWhiteboard(
   sdkConfig: SdkConfig,
   joinRoom: JoinRoom,
-  managerConfig: ManagerConfig
+  managerConfig: ManagerConfig,
+  language?: Language
 ): Promise<Essentials> {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
@@ -70,9 +72,11 @@ export async function mountWhiteboard(
     room,
   });
 
+  const i18n = await createI18n({ language });
+
   if (import.meta.env.DEV) {
     Object.assign(window, { sdk, room, manager });
   }
 
-  return { sdk, room, manager };
+  return { sdk, room, manager, i18n };
 }

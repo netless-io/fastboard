@@ -9,7 +9,7 @@ import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 
-export function renderToolTip(text: string, hotkey?: HotKey) {
+export function renderToolTip(text: string | undefined, hotkey?: HotKey) {
   if (!(typeof hotkey === "string")) return text;
   return (
     <span className="fastboard-toolbar-tooltip">
@@ -22,7 +22,7 @@ export function renderToolTip(text: string, hotkey?: HotKey) {
 export function ClickerButton() {
   const app = useInstance();
 
-  const { theme, icons, writable, setAppliance, memberState } =
+  const { theme, icons, writable, setAppliance, memberState, i18n } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(
@@ -37,7 +37,7 @@ export function ClickerButton() {
 
   return (
     <Button
-      content={renderToolTip("Clicker", shortcut)}
+      content={renderToolTip(i18n?.t("clicker"), shortcut)}
       onClick={changeAppliance}
       active={active}
     >
@@ -53,7 +53,7 @@ export function ClickerButton() {
 export function SelectorButton() {
   const app = useInstance();
 
-  const { theme, icons, writable, setAppliance, memberState } =
+  const { theme, icons, writable, setAppliance, memberState, i18n } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(
@@ -69,7 +69,7 @@ export function SelectorButton() {
 
   return (
     <Button
-      content={renderToolTip("Selector", shortcut)}
+      content={renderToolTip(i18n?.t("selector"), shortcut)}
       onClick={changeAppliance}
       active={active}
     >
@@ -85,7 +85,7 @@ export function SelectorButton() {
 export function EraserButton() {
   const app = useInstance();
 
-  const { theme, icons, writable, setAppliance, memberState } =
+  const { theme, icons, writable, setAppliance, memberState, i18n } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(
@@ -101,7 +101,7 @@ export function EraserButton() {
 
   return (
     <Button
-      content={renderToolTip("Eraser", shortcut)}
+      content={renderToolTip(i18n?.t("eraser"), shortcut)}
       onClick={changeAppliance}
       active={active}
     >
@@ -115,13 +115,13 @@ export function EraserButton() {
 }
 
 export function CleanButton() {
-  const { theme, icons, writable, cleanCurrentScene } =
+  const { theme, icons, writable, cleanCurrentScene, i18n } =
     useContext(ToolbarContext);
 
   const disabled = !writable;
 
   return (
-    <Button content="Clean" onClick={cleanCurrentScene}>
+    <Button content={i18n?.t("clean")} onClick={cleanCurrentScene}>
       <Icon
         fallback={<Icons.Clean theme={theme} />}
         src={disabled ? icons?.cleanIconDisable : icons?.cleanIcon}

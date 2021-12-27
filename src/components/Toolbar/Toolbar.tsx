@@ -1,4 +1,5 @@
 import type { CommonProps, GenericIcon, Theme } from "../../types";
+import type { i18n } from "i18next";
 
 import clsx from "clsx";
 import React, { createContext, useCallback, useState } from "react";
@@ -29,6 +30,7 @@ export type ToolbarProps = CommonProps & {
 type ToolbarContextType = ToolbarHook & {
   theme: Theme;
   icons?: ToolbarProps["icons"];
+  i18n?: i18n | null;
 };
 
 export const ToolbarContext = createContext<ToolbarContextType>({
@@ -38,7 +40,12 @@ export const ToolbarContext = createContext<ToolbarContextType>({
 
 export const name = "fastboard-toolbar";
 
-export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
+export const Toolbar = ({
+  theme = "light",
+  icons,
+  room,
+  i18n,
+}: ToolbarProps) => {
   const [expanded, setExpanded] = useState(true);
   const hook = useToolbar(room);
   const toggle = useCallback(() => setExpanded(e => !e), []);
@@ -46,17 +53,17 @@ export const Toolbar = ({ theme = "light", icons, room }: ToolbarProps) => {
   const disabled = !hook.writable;
 
   return (
-    <ToolbarContext.Provider value={{ theme, icons, ...hook }}>
+    <ToolbarContext.Provider value={{ theme, icons, ...hook, i18n }}>
       <div className={clsx(name, theme)}>
         {expanded ? (
-          <Button content="Collapse" onClick={toggle}>
+          <Button content={i18n?.t("collapse")} onClick={toggle}>
             <Icon
               fallback={<Icons.Collapse theme={theme} />}
               src={disabled ? icons?.collapseIconDisable : icons?.collapseIcon}
             />
           </Button>
         ) : (
-          <Button content="Expand" onClick={toggle}>
+          <Button content={i18n?.t("expand")} onClick={toggle}>
             <Icon
               fallback={<Icons.Expand theme={theme} />}
               src={disabled ? icons?.expandIconDisable : icons?.expandIcon}

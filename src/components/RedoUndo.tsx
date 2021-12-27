@@ -20,6 +20,7 @@ export function RedoUndo({
   undoIconDisable,
   redoIcon,
   redoIconDisable,
+  i18n,
 }: RedoUndoProps) {
   const [writable, setWritable] = useState(false);
   const [undoSteps, setUndoSteps] = useState(0);
@@ -49,7 +50,7 @@ export function RedoUndo({
     <div className={clsx(name, theme)}>
       <Tippy
         className="fastboard-tip"
-        content="Undo"
+        content={i18n?.t("undo")}
         theme={theme}
         disabled={disabled}
         placement="top"
@@ -70,7 +71,7 @@ export function RedoUndo({
       </Tippy>
       <Tippy
         className="fastboard-tip"
-        content="Redo"
+        content={i18n?.t("redo")}
         theme={theme}
         disabled={disabled}
         placement="top"

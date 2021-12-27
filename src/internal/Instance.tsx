@@ -1,6 +1,7 @@
 import type { WindowManager } from "@netless/window-manager";
 import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
+import type { i18n } from "i18next";
 
 import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
@@ -13,6 +14,7 @@ export interface AcceptParams {
   readonly sdk: WhiteWebSdk;
   readonly room: Room;
   readonly manager: WindowManager;
+  readonly i18n: i18n;
 }
 
 export interface InsertDocsStatic {
@@ -32,6 +34,8 @@ export interface InsertDocsDynamic {
 
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
+export type Language = "zh-CN" | "en-US";
+
 export interface WhiteboardAppConfig {
   readonly target: HTMLElement;
   readonly sdkConfig: SdkConfig;
@@ -44,12 +48,14 @@ export interface WhiteboardAppConfig {
       onClick?: () => void;
     };
   };
+  readonly language?: Language;
 }
 
 export interface Essentials {
   readonly sdk: WhiteWebSdk;
   readonly room: Room;
   readonly manager: WindowManager;
+  readonly i18n: i18n;
 }
 
 export class Instance {
@@ -61,6 +67,7 @@ export class Instance {
   sdk: WhiteWebSdk | null = null;
   room: Room | null = null;
   manager: WindowManager | null = null;
+  i18n: i18n | null = null;
 
   ready = false;
   resolveReady!: () => void;
@@ -87,10 +94,11 @@ export class Instance {
     ReactDOM.render(<Root instance={this} />, this.target);
   }
 
-  accept({ sdk, room, manager }: AcceptParams) {
+  accept({ sdk, room, manager, i18n }: AcceptParams) {
     this.sdk = sdk;
     this.room = room;
     this.manager = manager;
+    this.i18n = i18n;
     this.forceUpdate();
   }
 
@@ -112,7 +120,8 @@ export class Instance {
     const essentials = await mountWhiteboard(
       this.config.sdkConfig,
       this.config.joinRoom,
-      { ...this.config.managerConfig, container }
+      { ...this.config.managerConfig, container },
+      this.config.language
     );
     this.accept(essentials);
     this.resolveReady();

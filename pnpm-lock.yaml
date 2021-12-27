@@ -20,6 +20,7 @@ specifiers:
   eslint: ^8.5.0
   eslint-define-config: ^1.2.0
   eslint-plugin-react-hooks: ^4.3.0
+  i18next: ^21.6.3
   prettier: 2.5.1
   rc-slider: ^9.7.5
   react: ^17.0.2
@@ -36,6 +37,7 @@ specifiers:
 dependencies:
   '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
   clsx: 1.1.1
+  i18next: 21.6.3
   rc-slider: 9.7.5_react-dom@17.0.2+react@17.0.2
   tippy.js: 6.3.7
 
@@ -1758,6 +1760,12 @@ packages:
   /hey-listen/1.0.8:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: true
+
+  /i18next/21.6.3:
+    resolution: {integrity: sha512-2uuRGslNQ8m7TRllsVs4cZuei5X9OgoPRB/Sj5oadUpxZaW+NYv3srn7zR+h8bCMhkux9z8HtnJdQM5Mz+Govw==}
+    dependencies:
+      '@babel/runtime': 7.16.5
+    dev: false
 
   /ignore/4.0.6:
     resolution: {integrity: sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==}

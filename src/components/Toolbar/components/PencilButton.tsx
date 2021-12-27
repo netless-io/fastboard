@@ -17,7 +17,7 @@ import { renderToolTip } from "./ApplianceButtons";
 export function PencilButton() {
   const app = useInstance();
 
-  const { theme, icons, writable, setAppliance, memberState } =
+  const { theme, icons, writable, setAppliance, memberState, i18n } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(() => {
@@ -43,7 +43,7 @@ export function PencilButton() {
         interactive
       >
         <Button
-          content={renderToolTip("Pencil", shortcut)}
+          content={renderToolTip(i18n?.t("pencil"), shortcut)}
           active={active}
           onClick={changeAppliance}
         >

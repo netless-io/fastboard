@@ -26,6 +26,7 @@ export function PageControl({
   prevIconDisable,
   nextIcon,
   nextIconDisable,
+  i18n,
 }: PageControlProps) {
   const [writable, setWritable] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
@@ -109,7 +110,7 @@ export function PageControl({
       {/* <span className={clsx(`${name}-cut-line`, theme)} />{" "} */}
       <Tippy
         className="fastboard-tip"
-        content="Prev Page"
+        content={i18n?.t("prevPage")}
         theme={theme}
         disabled={disabled}
         placement="top"
@@ -135,7 +136,7 @@ export function PageControl({
       <span className={clsx(`${name}-page-count`, theme)}>{pageCount}</span>
       <Tippy
         className="fastboard-tip"
-        content="Next Page"
+        content={i18n?.t("nextPage")}
         theme={theme}
         disabled={disabled}
         placement="top"
@@ -156,7 +157,7 @@ export function PageControl({
       </Tippy>
       <Tippy
         className="fastboard-tip"
-        content="Add Page"
+        content={i18n?.t("addPage")}
         theme={theme}
         disabled={disabled}
         placement="top"

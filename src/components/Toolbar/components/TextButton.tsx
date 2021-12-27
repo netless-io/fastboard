@@ -15,7 +15,7 @@ import { renderToolTip } from "./ApplianceButtons";
 export function TextButton() {
   const app = useInstance();
 
-  const { theme, icons, writable, setAppliance, memberState } =
+  const { theme, icons, writable, setAppliance, memberState, i18n } =
     useContext(ToolbarContext);
 
   const changeAppliance = useCallback(() => {
@@ -41,7 +41,7 @@ export function TextButton() {
         interactive
       >
         <Button
-          content={renderToolTip("Text", shortcut)}
+          content={renderToolTip(i18n?.t("text"), shortcut)}
           active={active}
           onClick={changeAppliance}
         >

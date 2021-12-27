@@ -50,6 +50,7 @@ export function ZoomControl({
   minusIconDisable,
   plusIcon,
   plusIconDisable,
+  i18n,
 }: ZoomControlProps) {
   const [writable, setWritable] = useState(false);
   const [scale, setScale] = useState(1);
@@ -150,7 +151,7 @@ export function ZoomControl({
       {/* <span className={clsx(`${name}-cut-line`, theme)} /> */}
       <Tippy
         className="fastboard-tip"
-        content="Zoom Out"
+        content={i18n?.t("zoomOut")}
         theme={theme}
         disabled={disabled}
         placement="top"
@@ -175,7 +176,7 @@ export function ZoomControl({
       <span className={clsx(`${name}-percent`, theme)}>%</span>
       <Tippy
         className="fastboard-tip"
-        content="Zoom In"
+        content={i18n?.t("zoomIn")}
         theme={theme}
         disabled={disabled}
         placement="top"
@@ -196,7 +197,7 @@ export function ZoomControl({
       </Tippy>
       <Tippy
         className="fastboard-tip"
-        content="Reset"
+        content={i18n?.t("reset")}
         theme={theme}
         disabled={disabled}
         placement="top"

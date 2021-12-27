@@ -28,14 +28,14 @@ export default function Root({ instance: app }: RootProps) {
         {!app.room && <div className="fastboard-loading">Loading&hellip;</div>}
         <div className="fastboard-view" ref={useWhiteboard} />
         <div className="fastboard-left">
-          <Toolbar room={app.room} manager={app.manager} />
+          <Toolbar room={app.room} manager={app.manager} i18n={app.i18n} />
         </div>
         <div className="fastboard-bottom-left">
-          <RedoUndo room={app.room} manager={app.manager} />
-          <ZoomControl room={app.room} manager={app.manager} />
+          <RedoUndo room={app.room} manager={app.manager} i18n={app.i18n} />
+          <ZoomControl room={app.room} manager={app.manager} i18n={app.i18n} />
         </div>
         <div className="fastboard-bottom-right">
-          <PageControl room={app.room} manager={app.manager} />
+          <PageControl room={app.room} manager={app.manager} i18n={app.i18n} />
         </div>
       </div>
     </Instance.Context.Provider>

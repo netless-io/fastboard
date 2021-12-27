@@ -5,7 +5,6 @@ import React, { useContext } from "react";
 import type { ShapeType } from "white-web-sdk";
 import { ApplianceNames } from "white-web-sdk";
 
-import { capitalize } from "../../../helpers";
 import { RightOffset } from "../../../theme";
 import { ApplianceShapes, Shapes, ShapesMap } from "../const";
 import { Icons } from "../icons";
@@ -18,7 +17,7 @@ import { ColorBox } from "./ColorBox";
 const ShapeTypes = new Set([...ApplianceShapes, ...Shapes]);
 
 export function ShapesButton() {
-  const { theme, memberState } = useContext(ToolbarContext);
+  const { theme, memberState, i18n } = useContext(ToolbarContext);
 
   const appliance = memberState?.currentApplianceName;
   const shape = memberState?.shapeType;
@@ -43,7 +42,7 @@ export function ShapesButton() {
         arrow={false}
         interactive
       >
-        <Button content="Shape" active={active}>
+        <Button content={i18n?.t("shape")} active={active}>
           <CurrentIcon theme={theme} active={active} />
           <span className="fastboard-toolbar-triangle" />
         </Button>
@@ -65,12 +64,13 @@ function renderShapesButtonContent() {
 }
 
 export function ShapesBox() {
+  const { i18n } = useContext(ToolbarContext);
   return (
     <div className="fastboard-toolbar-shapes">
       {ApplianceShapes.map(Appliance => (
         <ApplianceShapeButton
           key={Appliance}
-          content={capitalize(Appliance)}
+          content={i18n?.t(Appliance)}
           Appliance={Appliance}
           Icon={ShapesMap[Appliance]}
         />
@@ -78,7 +78,7 @@ export function ShapesBox() {
       {Shapes.map(shape => (
         <ShapeShapeButton
           key={shape}
-          content={capitalize(shape)}
+          content={i18n?.t(shape)}
           shape={shape}
           Icon={ShapesMap[shape]}
         />
@@ -88,7 +88,7 @@ export function ShapesBox() {
 }
 
 interface ApplianceShapeButtonProps {
-  content: string;
+  content?: string;
   Appliance: ApplianceNames;
   Icon: React.ComponentType<IconProps>;
 }
@@ -117,7 +117,7 @@ function ApplianceShapeButton({
 }
 
 interface ShapeShapeButtonProps {
-  content: string;
+  content?: string;
   shape: ShapeType;
   Icon: React.ComponentType<IconProps>;
 }

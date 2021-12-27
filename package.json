@@ -66,6 +66,7 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
+    "i18next": "^21.6.3",
     "rc-slider": "^9.7.5",
     "tippy.js": "^6.3.7"
   },
