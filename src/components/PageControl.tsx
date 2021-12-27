@@ -85,15 +85,17 @@ export function PageControl({
       }
     };
 
+    const updateWritable = () => setWritable(room?.isWritable || false);
+
     if (room) {
-      room.callbacks.on("onEnableWriteNowChanged", setWritable);
+      room.callbacks.on("onEnableWriteNowChanged", updateWritable);
       room.callbacks.on("onRoomStateChanged", onRoomStateChanged);
       manager?.callbacks.on("mainViewModeChange", onMainViewModeChanged);
     }
 
     return () => {
       if (room) {
-        room.callbacks.off("onEnableWriteNowChanged", setWritable);
+        room.callbacks.off("onEnableWriteNowChanged", updateWritable);
         room.callbacks.off("onRoomStateChanged", onRoomStateChanged);
         manager?.callbacks.off("mainViewModeChange", onMainViewModeChanged);
       }

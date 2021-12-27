@@ -29,11 +29,14 @@ export function RedoUndo({
     if (room) {
       setWritable(room.isWritable);
       room.isWritable && (room.disableSerialization = false);
-      room.callbacks.on("onEnableWriteNowChanged", setWritable);
+
+      const updateWritable = () => setWritable(room?.isWritable || false);
+
+      room.callbacks.on("onEnableWriteNowChanged", updateWritable);
       room.callbacks.on("onCanUndoStepsUpdate", setUndoSteps);
       room.callbacks.on("onCanRedoStepsUpdate", setRedoSteps);
       return () => {
-        room.callbacks.off("onEnableWriteNowChanged", setWritable);
+        room.callbacks.off("onEnableWriteNowChanged", updateWritable);
         room.callbacks.off("onCanUndoStepsUpdate", setUndoSteps);
         room.callbacks.off("onCanRedoStepsUpdate", setRedoSteps);
       };
