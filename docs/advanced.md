@@ -4,6 +4,7 @@
 
 - [配置 UI](#配置UI)
 - [可选 APP](#optional-app)
+- [多语言](#i18n)
 
 ### 配置
 
@@ -20,3 +21,16 @@
 3. `countdown` 倒计时 `@netless/app-countdown`
 
 如果有需要这些应用的，可以通过 `yarn` `npm` 或者 `pnpm` 安装到项目中
+
+<h2 id="i18n">多语言</h2>
+
+目前有中文和英文的多语言支持，使用浏览器的 `navigator.language` 作为默认语言
+
+可以切换的语言为
+
+- `zh-CN`
+- `en`
+
+```javascript
+app.changeLanguage("en");
+```
