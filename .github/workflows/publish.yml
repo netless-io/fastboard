@@ -1,0 +1,19 @@
+name: Node.js Package
+
+on:
+  push:
+    tags: "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: latest
+          run_install: true
+      - run: pnpm build
+      - run: pnpm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
