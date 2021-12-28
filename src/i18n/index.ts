@@ -17,5 +17,6 @@ export const createI18n = async (params: CreateI18nParams) => {
       "zh-CN": zhCN,
     },
   });
+
   return i18next;
 };

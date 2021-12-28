@@ -201,6 +201,15 @@ $name: "fastboard-toolbar";
     width: 24px;
     height: 24px;
     border-radius: 4px;
+    cursor: pointer;
+
+    *.light:hover {
+      background-color: #f5f5f5;
+    }
+
+    *.dark:hover {
+      background-color: #333;
+    }
   }
 
   &-color-border {

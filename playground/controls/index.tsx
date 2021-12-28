@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import React from "react";
 import { room } from "../mock";
 
@@ -9,6 +10,40 @@ export type StatePair<KV extends Record<string, unknown>> = KV extends Record<
     ? Record<K, T> & Record<`set${Capitalize<K>}`, (v: T) => void>
     : never
   : never;
+
+export function LanguageControls({
+  language,
+  setLanguage,
+}: StatePair<{ language: "zh-CN" | "en" }>) {
+  const update = (ev: ChangeEvent<HTMLInputElement>) => {
+    setLanguage(ev.target.value as "zh-CN" | "en");
+  };
+
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="radio"
+          name="language"
+          value="en"
+          checked={language === "en"}
+          onChange={update}
+        />
+        <span>English</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="language"
+          value="zh-CN"
+          checked={language === "zh-CN"}
+          onChange={update}
+        />
+        <span>中文</span>
+      </label>
+    </div>
+  );
+}
 
 export function WritableControls({
   writable,

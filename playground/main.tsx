@@ -1,3 +1,4 @@
+import type { i18n } from "i18next";
 import type { Room } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
@@ -8,10 +9,12 @@ import { room } from "./mock";
 import { RedoUndo, Toolbar } from "../src";
 import "./style.scss";
 
+import { createI18n } from "../src/i18n";
 import { PageControl } from "../src/components/PageControl";
 import { ZoomControl } from "../src/components/ZoomControl";
 import {
   DarkControls,
+  LanguageControls,
   PageControlControls,
   RedoUndoControls,
   ToolbarControls,
@@ -21,6 +24,9 @@ import {
 import { Handler } from "./controls/resize";
 
 function App() {
+  const [, forceUpdate] = useState({});
+  const [language, setLanguage] = useState<"en" | "zh-CN">("zh-CN");
+  const [i18n, setI18n] = useState<i18n | null>(null);
   const [writable, set_writable] = useState(true);
   const [dark, set_dark] = useState(false);
   const [redo_undo, set_redo_undo] = useState(true);
@@ -33,32 +39,37 @@ function App() {
   }, [dark]);
 
   useEffect(() => {
+    createI18n({ language }).then(setI18n);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (i18n) i18n.changeLanguage(language);
+    forceUpdate({});
+  }, [i18n, language]);
+
+  useEffect(() => {
     room.setWritable(writable);
   }, [writable]);
 
   const theme: Theme = dark ? "dark" : "light";
 
+  const props = { theme, room: room as unknown as Room, i18n };
+
   return (
     <>
       <div className={clsx("wrapper", { dark })}>
-        <div className="left">
-          {toolbar && <Toolbar theme={theme} room={room as unknown as Room} />}
-        </div>
+        <div className="left">{toolbar && <Toolbar {...props} />}</div>
         <div className="bottom-left">
-          {redo_undo && (
-            <RedoUndo theme={theme} room={room as unknown as Room} />
-          )}
-          {zoom_control && (
-            <ZoomControl theme={theme} room={room as unknown as Room} />
-          )}
+          {redo_undo && <RedoUndo {...props} />}
+          {zoom_control && <ZoomControl {...props} />}
         </div>
         <div className="bottom-right">
-          {page_control && (
-            <PageControl theme={theme} room={room as unknown as Room} />
-          )}
+          {page_control && <PageControl {...props} />}
         </div>
       </div>
       <div className="bottom-hang">
+        <LanguageControls language={language} setLanguage={setLanguage} />
         <WritableControls writable={writable} setWritable={set_writable} />
         <DarkControls dark={dark} setDark={set_dark} />
         <RedoUndoControls visible={redo_undo} setVisible={set_redo_undo} />

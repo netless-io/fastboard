@@ -27,9 +27,13 @@ export function ColorBox() {
   const disabled = !writable;
 
   return (
-    <div className="fastboard-toolbar-color-box">
+    <div className={clsx("fastboard-toolbar-color-box", theme)}>
       {colorKeys.map((key: string) => (
-        <div key={key} className="fastboard-toolbar-color-item">
+        <div
+          key={key}
+          className={clsx("fastboard-toolbar-color-item", theme)}
+          onClick={() => setStrokeColor(colors[key])}
+        >
           <div
             className={clsx("fastboard-toolbar-color-border", theme, {
               active: strokeColor && isEqualArray(strokeColor, colors[key]),
@@ -39,7 +43,10 @@ export function ColorBox() {
               className={clsx("fastboard-toolbar-color-btn")}
               style={{ background: key }}
               disabled={disabled}
-              onClick={() => setStrokeColor(colors[key])}
+              onClick={ev => {
+                ev.stopPropagation();
+                setStrokeColor(colors[key]);
+              }}
             />
           </div>
         </div>
