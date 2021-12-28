@@ -1,4 +1,8 @@
-import type { InsertDocsParams, WhiteboardAppConfig } from "./internal";
+import type {
+  InsertDocsParams,
+  Language,
+  WhiteboardAppConfig,
+} from "./internal";
 import { Instance } from "./internal";
 
 export type { WhiteboardAppConfig, InsertDocsParams };
@@ -12,6 +16,12 @@ export class WhiteboardApp {
 
   public insertDocs(params: InsertDocsParams) {
     return this._instance.insertDocs(params);
+  }
+
+  public changeLanguage(language: Language) {
+    return this._instance.changeLanguage(language)?.finally(() => {
+      this._instance.forceUpdate();
+    });
   }
 
   public dispose() {

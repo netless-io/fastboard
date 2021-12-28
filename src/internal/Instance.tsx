@@ -202,6 +202,10 @@ export class Instance {
       options: { title: "Countdown" },
     });
   }
+
+  changeLanguage(language: Language) {
+    return this.i18n?.changeLanguage(language);
+  }
 }
 
 export function useInstance() {
