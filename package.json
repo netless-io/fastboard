@@ -21,6 +21,7 @@
     "dist"
   ],
   "scripts": {
+    "prepublishOnly": "esbuild-dev scripts/prepublish.ts",
     "preinstall": "npx only-allow pnpm",
     "format": "prettier --write .",
     "lint": "eslint --ext .ts,.tsx .",
