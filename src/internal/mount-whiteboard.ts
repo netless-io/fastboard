@@ -1,5 +1,9 @@
 import type { MountParams } from "@netless/window-manager";
-import type { JoinRoomParams, WhiteWebSdkConfiguration } from "white-web-sdk";
+import type {
+  JoinRoomParams,
+  RoomCallbacks,
+  WhiteWebSdkConfiguration,
+} from "white-web-sdk";
 import type { Essentials, Language } from "./instance";
 
 import { WindowManager } from "@netless/window-manager";
@@ -13,7 +17,7 @@ export type SdkConfig = Omit<
 export type JoinRoom = Omit<
   JoinRoomParams,
   "useMultiViews" | "disableMagixEventDispatchLimit"
->;
+> & { callbacks?: Partial<RoomCallbacks> };
 export type ManagerConfig = Omit<MountParams, "room">;
 
 function ensureWindowManager(joinRoom: JoinRoom) {
@@ -53,7 +57,10 @@ export async function mountWhiteboard(
   });
 
   ensureWindowManager(joinRoom);
-  const room = await sdk.joinRoom({
+  joinRoom = { ...joinRoom };
+  const callbacks = joinRoom.callbacks;
+  delete joinRoom.callbacks;
+  const joinRoomParams: JoinRoomParams = {
     floatBar: true,
     hotKeys: {
       ...DefaultHotKeys,
@@ -63,7 +70,8 @@ export async function mountWhiteboard(
     useMultiViews: true,
     disableNewPencil: false,
     disableMagixEventDispatchLimit: true,
-  });
+  };
+  const room = await sdk.joinRoom(joinRoomParams, callbacks);
 
   const manager = await WindowManager.mount({
     cursor: true,
