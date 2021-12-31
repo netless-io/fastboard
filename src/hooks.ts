@@ -4,7 +4,8 @@ import type { FastBoardConfig } from "./index";
 import { useEffect, useRef, useState } from "react";
 import { createWhiteboardApp } from "./index";
 
-const SECRET_DEV_KEY = Symbol("fastboard working state");
+// make sure to get the same symbol
+const SECRET_DEV_KEY = Symbol.for("fastboard working state");
 
 /**
  * @example
@@ -28,12 +29,14 @@ export function useFastboard(config: FastBoardConfig): readonly [
     app: WhiteboardApp | undefined;
     type: "creating" | "disposing" | undefined;
     next: HTMLDivElement | null | undefined;
+    renderCount: number;
   }
 
   const working = useRef<WorkingState>({
     app: undefined,
     type: undefined,
     next: undefined,
+    renderCount: 0,
   });
 
   useEffect(() => {
@@ -52,6 +55,15 @@ export function useFastboard(config: FastBoardConfig): readonly [
     if (working.current.type) {
       working.current.next = currentTarget;
       return;
+    }
+
+    if (currentTarget) {
+      if (working.current.renderCount > 0) {
+        console.warn(
+          "[WhiteboardApp] You have called `useFastboard()` twice with different config or target, this is normally wrong."
+        );
+      }
+      working.current.renderCount++;
     }
 
     (async () => {
