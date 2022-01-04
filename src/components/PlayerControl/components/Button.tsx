@@ -1,10 +1,10 @@
 import type { Placement } from "tippy.js";
+import type { Theme } from "../../../types";
 
 import clsx from "clsx";
 import React, { forwardRef, type PropsWithChildren } from "react";
 import Tippy from "@tippyjs/react";
 
-import { Theme } from "../../../types";
 import { TopOffset } from "../../../theme";
 
 type ButtonProps = PropsWithChildren<{

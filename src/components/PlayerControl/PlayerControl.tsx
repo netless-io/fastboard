@@ -122,7 +122,7 @@ export function PlayerControl({
 
 function renderTime(ms: number) {
   let seconds = ms / 1000;
-  let minutes = Math.floor(seconds / 60);
+  const minutes = Math.floor(seconds / 60);
   seconds = Math.floor(seconds) % 60;
 
   return (

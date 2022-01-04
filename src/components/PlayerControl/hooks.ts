@@ -51,12 +51,15 @@ export function usePlayer(player?: Player | null) {
 
   const forceUpdate = useForceUpdate();
 
-  const setSpeed = useCallback((speed: number) => {
-    if (player) {
-      player.playbackSpeed = speed;
-      forceUpdate();
-    }
-  }, []);
+  const setSpeed = useCallback(
+    (speed: number) => {
+      if (player) {
+        player.playbackSpeed = speed;
+        forceUpdate();
+      }
+    },
+    [forceUpdate, player]
+  );
 
   useEffect(() => {
     if (!lastPlayer && player) {

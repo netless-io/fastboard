@@ -1,5 +1,6 @@
-import { ChangeEvent, useEffect } from "react";
-import React from "react";
+import type { ChangeEvent } from "react";
+
+import React, { useEffect } from "react";
 import { PlayerPhase } from "white-web-sdk";
 import { player, room } from "../mock";
 
@@ -194,7 +195,7 @@ export function PlayerControlControls({
 }: StatePair<{ visible: boolean }>) {
   useEffect(() => {
     player.setPhase(PlayerPhase.Buffering);
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       player.pause();
     }, 1000);
     return () => clearTimeout(timer);

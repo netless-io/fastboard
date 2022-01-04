@@ -25,14 +25,16 @@ export function useFastboard(config: FastBoardConfig): readonly [
 
   useEffect(() => {
     let isMounted = true;
-    let promise = createWhiteboardApp(config).then(app => {
+    const promise = createWhiteboardApp(config).then(app => {
       if (isMounted) setApp(app);
     });
     return () => {
       isMounted = false;
       promise.then(() => app?.dispose());
     };
-  }, []);
+    // ignore config change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [app]);
 
   useEffect(() => {
     if (app) {
