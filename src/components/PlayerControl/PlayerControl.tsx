@@ -2,7 +2,7 @@ import type { Player } from "white-web-sdk";
 import type { CommonProps, GenericIcon } from "../../types";
 
 import clsx from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RcSlider from "rc-slider";
 import { PlayerPhase } from "white-web-sdk";
 import { usePlayer } from "./hooks";
@@ -148,7 +148,7 @@ function renderSpeeds({
             active: speed === current,
           })}
           key={speed}
-          onClick={useCallback(() => setSpeed(speed), [setSpeed, speed])}
+          onClick={() => setSpeed(speed)}
         >
           {speed}x
         </button>

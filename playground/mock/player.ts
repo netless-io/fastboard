@@ -30,6 +30,8 @@ export class MockPlayer implements PartialDeep<Player> {
 
   async seekToProgressTime(time: number) {
     log("[player.seekToProgressTime]", time);
+    this.phase = PlayerPhase.Buffering;
+    this.callbacks.emit("onPhaseChanged", this.phase);
     this.targetTime = time;
     if (!this.bufferingPromise) {
       this.bufferingPromise = new Promise<PlayerSeekingResult>(resolve => {
@@ -38,6 +40,8 @@ export class MockPlayer implements PartialDeep<Player> {
           this.progressTime = this.targetTime;
           log("(player.onProgressTimeChanged)", this.progressTime);
           this.callbacks.emit("onProgressTimeChanged", this.progressTime);
+          this.phase = PlayerPhase.Playing;
+          this.callbacks.emit("onPhaseChanged", this.phase);
           resolve(result);
         };
       });
@@ -62,9 +66,11 @@ export class MockPlayer implements PartialDeep<Player> {
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       if (this.progressTime < this.timeDuration) {
-        this.progressTime += 100;
-        log("(player.onProgressTimeChanged)", this.progressTime);
-        this.callbacks.emit("onProgressTimeChanged", this.progressTime);
+        if (this.phase === PlayerPhase.Playing) {
+          this.progressTime += 100;
+          log("(player.onProgressTimeChanged)", this.progressTime);
+          this.callbacks.emit("onProgressTimeChanged", this.progressTime);
+        }
       } else {
         clearInterval(this.timer);
         this.phase = PlayerPhase.Ended;
