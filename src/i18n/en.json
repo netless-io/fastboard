@@ -25,6 +25,7 @@
     "speechBalloon": "Speech Balloon",
     "rectangle": "Rectangle",
     "ellipse": "Ellipse",
-    "straight": "Straight"
+    "straight": "Straight",
+    "speed": "Speed"
   }
 }

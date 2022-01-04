@@ -6,11 +6,7 @@ export function applyStyles(css: string) {
 }
 
 export function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(value, min), max);
-}
-
-export function capitalize(str: string) {
-  return str[0].toUpperCase() + str.slice(1);
+  return value < min ? min : value > max ? max : value;
 }
 
 export function isEqualArray<T>(a: T[], b: T[]) {

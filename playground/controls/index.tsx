@@ -1,6 +1,7 @@
-import type { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import React from "react";
-import { room } from "../mock";
+import { PlayerPhase } from "white-web-sdk";
+import { player, room } from "../mock";
 
 export type StatePair<KV extends Record<string, unknown>> = KV extends Record<
   infer K,
@@ -10,6 +11,40 @@ export type StatePair<KV extends Record<string, unknown>> = KV extends Record<
     ? Record<K, T> & Record<`set${Capitalize<K>}`, (v: T) => void>
     : never
   : never;
+
+export function ModeControls({
+  mode,
+  setMode,
+}: StatePair<{ mode: "online" | "replay" }>) {
+  const update = (ev: ChangeEvent<HTMLInputElement>) => {
+    setMode(ev.target.value as "online" | "replay");
+  };
+
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="radio"
+          name="mode"
+          value="online"
+          checked={mode === "online"}
+          onChange={update}
+        />
+        <span>Online</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="mode"
+          value="replay"
+          checked={mode === "replay"}
+          onChange={update}
+        />
+        <span>Replay</span>
+      </label>
+    </div>
+  );
+}
 
 export function LanguageControls({
   language,
@@ -149,6 +184,36 @@ export function ToolbarControls({
         />
         Toolbar
       </label>
+    </div>
+  );
+}
+
+export function PlayerControlControls({
+  visible,
+  setVisible,
+}: StatePair<{ visible: boolean }>) {
+  useEffect(() => {
+    player.setPhase(PlayerPhase.Buffering);
+    let timer = setTimeout(() => {
+      player.pause();
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="row">
+      <label>
+        <input
+          type="checkbox"
+          checked={visible}
+          onChange={ev => setVisible(ev.target.checked)}
+        />
+        PlayerControl
+      </label>
+      <button onClick={player.setPhase.bind(player, PlayerPhase.Buffering)}>
+        buffering
+      </button>
+      <button onClick={player.pause.bind(player)}>pause</button>
     </div>
   );
 }

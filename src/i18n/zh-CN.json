@@ -26,6 +26,7 @@
     "speechBalloon": "气球",
     "rectangle": "矩形",
     "ellipse": "椭圆",
-    "straight": "直线"
+    "straight": "直线",
+    "speed": "速度"
   }
 }
