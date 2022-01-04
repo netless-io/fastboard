@@ -13,15 +13,7 @@ and [netless-app](https://github.com/netless-io/netless-app).
 <h2 id="install">安装</h2>
 
 ```bash
-npm add @netless/fastboard
-```
-
-```bash
-yarn add @netless/fastboard
-```
-
-```bash
-pnpm add @netless/fastboard
+npm add @netless/fastboard @netless/window-manager white-web-sdk react react-dom
 ```
 
 <h2 id="usage">使用</h2>
@@ -33,7 +25,7 @@ pnpm add @netless/fastboard
 ```js
 import { createWhiteboardApp } from "@netless/fastboard";
 
-let whiteboard = createWhiteboardApp({
+let whiteboard = await createWhiteboardApp({
   target: document.getElementById("whiteboard"),
   // [1]
   sdkConfig: {
@@ -83,6 +75,12 @@ ReactDOM.render(<App />, document.getElementById("root"));
 [3] 配置 `WindowManager` 请看 [WindowManager](https://github.com/netless-io/window-manager#mount)
 
 ### 使用 APPS
+
+**注意:** 需要先安装对应的 APP
+
+```bash
+npm add @netless/app-slide
+```
 
 ```typescript
 // 插入动态 PPTX 至白板
