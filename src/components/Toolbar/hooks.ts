@@ -8,7 +8,7 @@ import type {
 } from "white-web-sdk";
 
 import { useCallback, useEffect, useState } from "react";
-import { noop } from "../../internal/helpers";
+import { noop } from "../../internal";
 
 export function useWritable(room?: Room | null) {
   const [value, setValue] = useState(false);

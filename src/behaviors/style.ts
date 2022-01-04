@@ -1,4 +1,4 @@
-import { applyStyles } from "../helpers";
+import { applyStyles } from "../internal";
 import style from "../style.scss?inline";
 
 const newEl = applyStyles(style);

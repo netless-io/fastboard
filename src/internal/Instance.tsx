@@ -37,7 +37,6 @@ export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 export type Language = "zh-CN" | "en-US";
 
 export interface WhiteboardAppConfig {
-  readonly target: HTMLElement;
   readonly sdkConfig: SdkConfig;
   readonly joinRoom: JoinRoom;
   readonly managerConfig?: Omit<ManagerConfig, "container">;
@@ -63,7 +62,6 @@ export class Instance {
 
   readonly config: WhiteboardAppConfig;
 
-  target: HTMLElement | null = null;
   sdk: WhiteWebSdk | null = null;
   room: Room | null = null;
   manager: WindowManager | null = null;
@@ -84,14 +82,41 @@ export class Instance {
   }
 
   constructor(config: WhiteboardAppConfig) {
-    this.target = config.target;
     this.config = config;
     this.refreshReadyPromise();
+    this.initialize();
+  }
+
+  private _target: HTMLElement | null = null;
+
+  async initialize() {
+    const essentials = await mountWhiteboard(
+      this.config.sdkConfig,
+      this.config.joinRoom,
+      this.config.managerConfig || {},
+      this.config.language || "en-US"
+    );
+    this.accept(essentials);
+    this.resolveReady();
+  }
+
+  get target(): HTMLElement | null {
+    return this._target;
+  }
+
+  set target(value: HTMLElement | null) {
+    if (this._target && value) {
+      ReactDOM.unmountComponentAtNode(this._target);
+    }
+    this._target = value;
     this.forceUpdate();
   }
 
-  forceUpdate() {
-    ReactDOM.render(<Root instance={this} />, this.target);
+  async forceUpdate() {
+    await this.readyPromise;
+    if (this.target) {
+      ReactDOM.render(<Root instance={this} />, this.target);
+    }
   }
 
   accept({ sdk, room, manager, i18n }: AcceptParams) {
@@ -112,19 +137,11 @@ export class Instance {
     }
   }
 
-  async mount(container: HTMLElement) {
-    if (this.room) {
-      console.warn("[WhiteboardApp] already mounted");
-      return;
+  async mount(node: HTMLElement) {
+    await this.readyPromise;
+    if (this.manager) {
+      this.manager.bindContainer(node);
     }
-    const essentials = await mountWhiteboard(
-      this.config.sdkConfig,
-      this.config.joinRoom,
-      { ...this.config.managerConfig, container },
-      this.config.language
-    );
-    this.accept(essentials);
-    this.resolveReady();
   }
 
   async unmount() {
@@ -203,8 +220,12 @@ export class Instance {
     });
   }
 
-  changeLanguage(language: Language) {
-    return this.i18n?.changeLanguage(language);
+  async changeLanguage(language: Language) {
+    try {
+      await this.i18n?.changeLanguage(language);
+    } finally {
+      await this.forceUpdate();
+    }
   }
 }
 

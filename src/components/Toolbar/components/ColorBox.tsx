@@ -1,9 +1,9 @@
 import type { Color } from "white-web-sdk";
 
 import clsx from "clsx";
-import React from "react";
-import { useContext } from "react";
-import { isEqualArray } from "../../../helpers";
+import React, { useContext } from "react";
+
+import { isEqualArray } from "../../../internal";
 import { ToolbarContext } from "../Toolbar";
 
 const colors: Record<string, Color> = {

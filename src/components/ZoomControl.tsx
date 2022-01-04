@@ -5,7 +5,7 @@ import clsx from "clsx";
 import React, { useCallback, useEffect, useState } from "react";
 import Tippy from "@tippyjs/react";
 
-import { clamp } from "../helpers";
+import { clamp } from "../internal";
 import { TopOffset } from "../theme";
 import { Icon } from "../icons";
 import { Minus } from "../icons/Minus";

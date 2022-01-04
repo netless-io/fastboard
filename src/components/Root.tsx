@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { Lock } from "../internal/helpers";
-import { Instance } from "../internal";
+import { Lock, Instance } from "../internal";
 import { Toolbar } from "./Toolbar";
 import { RedoUndo } from "./RedoUndo";
 import { ZoomControl } from "./ZoomControl";

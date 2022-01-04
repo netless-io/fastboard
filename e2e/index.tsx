@@ -17,6 +17,9 @@ const WhiteboardAppConfig: FastBoardConfig = {
     roomToken: import.meta.env.VITE_ROOM_TOKEN,
     uid: "test",
   },
+  managerConfig: {
+    chessboard: true,
+  },
 };
 
 function App() {

@@ -15,8 +15,11 @@ export * from "./hooks";
 
 export const register = WindowManager.register.bind(WindowManager);
 
-export type FastBoardConfig = Omit<WhiteboardAppConfig, "target">;
-
+/**
+ * @example
+ * let app = await createWhiteboardApp(config)
+ * app.bindElement(el)
+ */
 export async function createWhiteboardApp(
   config: WhiteboardAppConfig
 ): Promise<WhiteboardApp> {

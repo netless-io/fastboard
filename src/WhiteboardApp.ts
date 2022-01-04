@@ -14,14 +14,16 @@ export class WhiteboardApp {
     this._instance = new Instance(config);
   }
 
+  public bindElement(target?: HTMLElement | null) {
+    this._instance.target = target || null;
+  }
+
   public insertDocs(params: InsertDocsParams) {
     return this._instance.insertDocs(params);
   }
 
   public changeLanguage(language: Language) {
-    return this._instance.changeLanguage(language)?.finally(() => {
-      this._instance.forceUpdate();
-    });
+    return this._instance.changeLanguage(language);
   }
 
   public dispose() {

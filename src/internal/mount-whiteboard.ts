@@ -49,7 +49,7 @@ export async function mountWhiteboard(
   sdkConfig: SdkConfig,
   joinRoom: JoinRoom,
   managerConfig: ManagerConfig,
-  language?: Language
+  language: Language
 ): Promise<Essentials> {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,

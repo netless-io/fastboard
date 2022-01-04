@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { useInstance } from "../../internal";
-import { clamp } from "../../helpers";
+import { useInstance, clamp } from "../../internal";
 import { name } from "./Toolbar";
 import { ItemHeight, ItemsCount, MaxHeight, MinHeight } from "./const";
 import { DownButton, UpButton } from "./components/UpDownButtons";
