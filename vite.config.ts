@@ -26,10 +26,12 @@ export default defineConfig(({ mode }) => {
         input: {
           index: path.resolve(__dirname, "src/index.ts"),
           vue: path.resolve(__dirname, "src/vue.ts"),
+          svelte: path.resolve(__dirname, "src/svelte.ts"),
         },
         external: Object.keys({
           ...dependencies,
           ...peerDependencies,
+          "svelte/store": "*",
         }),
         output: formats.map(format => ({
           format,

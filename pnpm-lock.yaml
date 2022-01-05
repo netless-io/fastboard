@@ -28,6 +28,7 @@ specifiers:
   rollup: ^2.63.0
   rollup-plugin-visualizer: ^5.5.2
   sass: ^1.45.2
+  svelte: ^3.44.3
   tippy.js: ^6.3.7
   type-fest: ^2.8.0
   typescript: ^4.5.4
@@ -68,6 +69,7 @@ devDependencies:
   rollup: 2.63.0
   rollup-plugin-visualizer: 5.5.2_rollup@2.63.0
   sass: 1.45.2
+  svelte: 3.44.3
   type-fest: 2.8.0
   typescript: 4.5.4
   vite: 2.7.10_sass@1.45.2
@@ -2763,6 +2765,11 @@ packages:
   /supports-preserve-symlinks-flag/1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+    dev: true
+
+  /svelte/3.44.3:
+    resolution: {integrity: sha512-aGgrNCip5PQFNfq9e9tmm7EYxWLVHoFsEsmKrtOeRD8dmoGDdyTQ+21xd7qgFd8MNdKGSYvg7F9dr+Tc0yDymg==}
+    engines: {node: '>= 8'}
     dev: true
 
   /text-table/0.2.0:
