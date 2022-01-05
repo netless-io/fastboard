@@ -32,9 +32,9 @@ export function useFastboard(config: FastBoardConfig): readonly [
       isMounted = false;
       promise.then(() => app?.dispose());
     };
-    // ignore config change
+    // ignore config and app change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [app]);
+  }, []);
 
   useEffect(() => {
     if (app) {
