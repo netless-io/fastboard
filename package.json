@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An open sourced sdk based on white-web-sdk.",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
