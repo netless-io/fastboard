@@ -10,6 +10,10 @@ export { PageControl, type PageControlProps } from "./components/PageControl";
 export { RedoUndo, type RedoUndoProps } from "./components/RedoUndo";
 export { Toolbar, type ToolbarProps } from "./components/Toolbar";
 export { ZoomControl, type ZoomControlProps } from "./components/ZoomControl";
+export {
+  PlayerControl,
+  type PlayerControlProps,
+} from "./components/PlayerControl";
 export * from "./WhiteboardApp";
 export * from "./hooks";
 

@@ -14,6 +14,7 @@
   },
   "cSpell.words": [
     "clsx",
+    "demi",
     "esbuild",
     "fastboard",
     "geogebra",
@@ -21,7 +22,5 @@
     "preinstall",
     "tippyjs"
   ],
-  "i18n-ally.localesPaths": [
-    "src/i18n"
-  ]
+  "i18n-ally.localesPaths": ["src/i18n"]
 }

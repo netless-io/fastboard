@@ -14,6 +14,14 @@
       "default": "./dist/index.es.js",
       "types": "./src/index.ts"
     },
+    "./vue": {
+      "node": {
+        "import": "./dist/vue.es.js",
+        "require": "./dist/vue.cjs.js"
+      },
+      "default": "./dist/vue.es.js",
+      "types": "./src/vue.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -46,8 +54,10 @@
     "@netless/app-monaco": "*",
     "@netless/app-slide": "*",
     "@netless/window-manager": "*",
+    "@vue/composition-api": "*",
     "react": "*",
     "react-dom": "*",
+    "vue": "*",
     "white-web-sdk": "*"
   },
   "peerDependenciesMeta": {
@@ -62,6 +72,12 @@
     },
     "@netless/app-geogebra": {
       "optional": true
+    },
+    "@vue/composition-api": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
     }
   },
   "dependencies": {
@@ -69,7 +85,8 @@
     "clsx": "^1.1.1",
     "i18next": "^21.6.5",
     "rc-slider": "^9.7.5",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "vue-demi": "^0.12.1"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.7.1",
@@ -98,6 +115,7 @@
     "type-fest": "^2.8.0",
     "typescript": "^4.5.4",
     "vite": "^2.7.10",
+    "vue": "^3.2.26",
     "white-web-sdk": "^2.15.14"
   }
 }
