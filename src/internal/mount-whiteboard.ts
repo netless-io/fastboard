@@ -4,7 +4,7 @@ import type {
   RoomCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
-import type { Essentials, Language } from "./instance";
+import type { Essentials, Language } from "./Instance";
 
 import { WindowManager } from "@netless/window-manager";
 import { DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
