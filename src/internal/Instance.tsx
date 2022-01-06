@@ -119,7 +119,7 @@ export class Instance {
     this.forceUpdate();
   }
 
-  updateLayout(layout: Layout) {
+  updateLayout(layout: Layout | undefined) {
     this.config.layout = layout;
     this.forceUpdate();
   }

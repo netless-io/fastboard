@@ -1,11 +1,12 @@
 import type {
   InsertDocsParams,
   Language,
+  Layout,
   WhiteboardAppConfig,
 } from "./internal";
 import { Instance } from "./internal";
 
-export type { WhiteboardAppConfig, InsertDocsParams };
+export type { Language, Layout, WhiteboardAppConfig, InsertDocsParams };
 
 export class WhiteboardApp {
   private readonly _instance: Instance;
@@ -30,23 +31,27 @@ export class WhiteboardApp {
     return this._instance.i18n;
   }
 
-  private _target: HTMLElement | null = null;
   public get target(): HTMLElement | null {
-    return this._target;
+    return this._instance.target;
   }
 
-  private _collector: HTMLElement | null = null;
   public get collector(): HTMLElement | null {
-    return this._collector;
+    return this._instance.collector;
   }
 
   public bindElement(
     target?: HTMLElement | null,
     collector?: HTMLElement | null
   ) {
-    this._target = target || null;
-    this._collector = collector || null;
-    this._instance.bindElement(this._target, this._collector);
+    this._instance.bindElement(target || null, collector || null);
+  }
+
+  public get layout() {
+    return this._instance.config.layout;
+  }
+
+  public updateLayout(layout?: Layout | undefined) {
+    this._instance.updateLayout(layout);
   }
 
   public insertDocs(params: InsertDocsParams) {
