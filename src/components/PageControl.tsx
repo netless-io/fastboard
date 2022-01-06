@@ -36,14 +36,14 @@ export function PageControl({
     if (manager && room) {
       await manager.switchMainViewToWriter();
       const path = room.state.sceneState.contextPath;
-      room.putScenes(path, [{}], pageCount);
-      await manager.setMainViewSceneIndex(pageIndex);
+      room.putScenes(path, [{}], pageIndex + 1);
+      await manager.setMainViewSceneIndex(pageIndex + 1);
     } else if (!manager && room) {
       const path = room.state.sceneState.contextPath;
-      room.putScenes(path, [{}], pageCount);
-      room.setSceneIndex(pageIndex);
+      room.putScenes(path, [{}], pageIndex + 1);
+      room.setSceneIndex(pageIndex + 1);
     }
-  }, [room, manager, pageCount, pageIndex]);
+  }, [room, manager, pageIndex]);
 
   const prevPage = useCallback(() => {
     if (room?.isWritable) {
