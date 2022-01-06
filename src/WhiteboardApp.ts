@@ -10,11 +10,6 @@ export type { WhiteboardAppConfig, InsertDocsParams };
 export class WhiteboardApp {
   private readonly _instance: Instance;
 
-  private _target: HTMLElement | null = null;
-  public get target(): HTMLElement | null {
-    return this._target;
-  }
-
   constructor(readonly config: WhiteboardAppConfig) {
     this._instance = new Instance(config);
   }
@@ -35,9 +30,23 @@ export class WhiteboardApp {
     return this._instance.i18n;
   }
 
-  public bindElement(target?: HTMLElement | null) {
+  private _target: HTMLElement | null = null;
+  public get target(): HTMLElement | null {
+    return this._target;
+  }
+
+  private _collector: HTMLElement | null = null;
+  public get collector(): HTMLElement | null {
+    return this._collector;
+  }
+
+  public bindElement(
+    target?: HTMLElement | null,
+    collector?: HTMLElement | null
+  ) {
     this._target = target || null;
-    this._instance.target = target || null;
+    this._collector = collector || null;
+    this._instance.bindElement(this._target, this._collector);
   }
 
   public insertDocs(params: InsertDocsParams) {

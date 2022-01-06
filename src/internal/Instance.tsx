@@ -112,6 +112,14 @@ export class Instance {
     this.forceUpdate();
   }
 
+  collector: HTMLElement | null = null;
+
+  bindElement(target: HTMLElement | null, collector: HTMLElement | null) {
+    this.target = target;
+    this.collector = collector;
+    this.forceUpdate();
+  }
+
   async forceUpdate() {
     await this.readyPromise;
     if (this.target) {
@@ -139,7 +147,12 @@ export class Instance {
 
   async mount(node: HTMLElement) {
     await this.readyPromise;
-    if (this.manager) {
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] mounted, but not found window manager`);
+    }
+    if (this.collector) {
+      this.manager.bindContainer(node, this.collector);
+    } else {
       this.manager.bindContainer(node);
     }
   }
