@@ -32,7 +32,7 @@
     "prepublishOnly": "esbuild-dev scripts/prepublish.ts",
     "preinstall": "npx only-allow pnpm",
     "format": "prettier --write .",
-    "lint": "eslint --ext .ts,.tsx .",
+    "lint": "eslint --ext .ts,.tsx . && tsc",
     "dev": "vite dev --host",
     "build": "vite build",
     "build:dev": "vite build --mode development"
@@ -115,7 +115,7 @@
     "react-dom": "^17.0.2",
     "rollup": "^2.63.0",
     "rollup-plugin-visualizer": "^5.5.2",
-    "sass": "^1.45.2",
+    "sass": "^1.46.0",
     "svelte": "^3.44.3",
     "type-fest": "^2.8.0",
     "typescript": "^4.5.4",

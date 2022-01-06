@@ -27,7 +27,7 @@ specifiers:
   react-dom: ^17.0.2
   rollup: ^2.63.0
   rollup-plugin-visualizer: ^5.5.2
-  sass: ^1.45.2
+  sass: ^1.46.0
   svelte: ^3.44.3
   tippy.js: ^6.3.7
   type-fest: ^2.8.0
@@ -68,11 +68,11 @@ devDependencies:
   react-dom: 17.0.2_react@17.0.2
   rollup: 2.63.0
   rollup-plugin-visualizer: 5.5.2_rollup@2.63.0
-  sass: 1.45.2
+  sass: 1.46.0
   svelte: 3.44.3
   type-fest: 2.8.0
   typescript: 4.5.4
-  vite: 2.7.10_sass@1.45.2
+  vite: 2.7.10_sass@1.46.0
   vue: 3.2.26
   white-web-sdk: 2.15.14
 
@@ -2606,8 +2606,8 @@ packages:
       rust-result: 1.0.0
     dev: true
 
-  /sass/1.45.2:
-    resolution: {integrity: sha512-cKfs+F9AMPAFlbbTXNsbGvg3y58nV0mXA3E94jqaySKcC8Kq3/8983zVKQ0TLMUrHw7hF9Tnd3Bz9z5Xgtrl9g==}
+  /sass/1.46.0:
+    resolution: {integrity: sha512-Z4BYTgioAOlMmo4LU3Ky2txR8KR0GRPLXxO38kklaYxgo7qMTgy+mpNN4eKsrXDTFlwS5vdruvazG4cihxHRVQ==}
     engines: {node: '>=8.9.0'}
     hasBin: true
     dependencies:
@@ -2908,7 +2908,7 @@ packages:
       global: 4.4.0
     dev: true
 
-  /vite/2.7.10_sass@1.45.2:
+  /vite/2.7.10_sass@1.46.0:
     resolution: {integrity: sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -2928,7 +2928,7 @@ packages:
       postcss: 8.4.5
       resolve: 1.21.0
       rollup: 2.63.0
-      sass: 1.45.2
+      sass: 1.46.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
