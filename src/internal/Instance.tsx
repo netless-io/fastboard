@@ -1,3 +1,4 @@
+import type { Mutable } from "type-fest";
 import type { WindowManager } from "@netless/window-manager";
 import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
@@ -6,7 +7,7 @@ import type { i18n } from "i18next";
 import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
 
-import Root from "../components/Root";
+import { Root } from "../components/Root";
 import { mountWhiteboard } from "./mount-whiteboard";
 import { noop } from "./helpers";
 
@@ -36,10 +37,18 @@ export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
 export type Language = "zh-CN" | "en-US";
 
+export interface Layout {
+  Toolbar?: boolean;
+  PageControl?: boolean;
+  RedoUndo?: boolean;
+  ZoomControl?: boolean;
+}
+
 export interface WhiteboardAppConfig {
   readonly sdkConfig: SdkConfig;
   readonly joinRoom: JoinRoom;
   readonly managerConfig?: Omit<ManagerConfig, "container">;
+  readonly layout?: Layout;
   readonly toolbar?: {
     apps?: {
       enable?: boolean;
@@ -60,7 +69,7 @@ export interface Essentials {
 export class Instance {
   static readonly Context = createContext<Instance | null>(null);
 
-  readonly config: WhiteboardAppConfig;
+  config: Mutable<WhiteboardAppConfig>;
 
   sdk: WhiteWebSdk | null = null;
   room: Room | null = null;
@@ -82,12 +91,10 @@ export class Instance {
   }
 
   constructor(config: WhiteboardAppConfig) {
-    this.config = config;
+    this.config = { ...config };
     this.refreshReadyPromise();
     this.initialize();
   }
-
-  private _target: HTMLElement | null = null;
 
   async initialize() {
     const essentials = await mountWhiteboard(
@@ -100,23 +107,20 @@ export class Instance {
     this.resolveReady();
   }
 
-  get target(): HTMLElement | null {
-    return this._target;
-  }
-
-  set target(value: HTMLElement | null) {
-    if (this._target && value) {
-      ReactDOM.unmountComponentAtNode(this._target);
-    }
-    this._target = value;
-    this.forceUpdate();
-  }
-
+  target: HTMLElement | null = null;
   collector: HTMLElement | null = null;
 
   bindElement(target: HTMLElement | null, collector: HTMLElement | null) {
+    if (this.target && target) {
+      ReactDOM.unmountComponentAtNode(this.target);
+    }
     this.target = target;
     this.collector = collector;
+    this.forceUpdate();
+  }
+
+  updateLayout(layout: Layout) {
+    this.config.layout = layout;
     this.forceUpdate();
   }
 
