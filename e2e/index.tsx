@@ -3,7 +3,7 @@ import type { WhiteboardApp, WhiteboardAppConfig } from "../src";
 import { Fastboard } from "../src/react";
 import { createWhiteboardApp } from "../src";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Handler } from "../playground/controls/resize";
 import "./index.scss";
@@ -25,6 +25,7 @@ const config: WhiteboardAppConfig = {
 };
 
 function App() {
+  const ref = useRef<HTMLDivElement>(null);
   const [app, setApp] = useState<WhiteboardApp | null>(null);
 
   useEffect(() => {
@@ -39,9 +40,13 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    console.log(ref.current);
+  }, [ref]);
+
   return (
     <>
-      <Fastboard app={app} />
+      <Fastboard app={app} ref={ref} />
       <Handler
         target={document.getElementById("app") as HTMLDivElement}
         defaultSize={CanvasSize}
