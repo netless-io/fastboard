@@ -28,9 +28,16 @@ function App() {
   const [app, setApp] = useState<WhiteboardApp | null>(null);
 
   useEffect(() => {
-    if (!app) createWhiteboardApp(config).then(setApp);
+    // capture the app instance by ourself
+    let app: WhiteboardApp | null = null;
+    createWhiteboardApp(config).then(a => {
+      setApp((app = a));
+      Object.assign(window, { app });
+    });
     return () => void app?.dispose();
-  }, [app]);
+    // make sure to only create app once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

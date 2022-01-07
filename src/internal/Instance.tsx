@@ -6,6 +6,7 @@ import type { i18n } from "i18next";
 
 import React, { createContext, useContext } from "react";
 import ReactDOM from "react-dom";
+import { BuiltinApps } from "@netless/window-manager";
 
 import { Root } from "../components/Root";
 import { mountWhiteboard } from "./mount-whiteboard";
@@ -16,6 +17,11 @@ export interface AcceptParams {
   readonly room: Room;
   readonly manager: WindowManager;
   readonly i18n: i18n;
+}
+
+export interface InsertMediaParams {
+  title: string;
+  src: string;
 }
 
 export interface InsertDocsStatic {
@@ -31,6 +37,7 @@ export interface InsertDocsDynamic {
   readonly taskId: string;
   readonly title?: string;
   readonly url?: string;
+  readonly scenes?: SceneDefinition[];
 }
 
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
@@ -110,13 +117,19 @@ export class Instance {
   target: HTMLElement | null = null;
   collector: HTMLElement | null = null;
 
-  bindElement(target: HTMLElement | null, collector: HTMLElement | null) {
+  bindElement(target: HTMLElement | null) {
     if (this.target && this.target !== target) {
       ReactDOM.unmountComponentAtNode(this.target);
     }
     this.target = target;
-    this.collector = collector;
     this.forceUpdate();
+  }
+
+  bindCollector(collector: HTMLElement | null) {
+    this.collector = collector;
+    if (this.manager && collector) {
+      this.manager.bindCollectorContainer(collector);
+    }
   }
 
   updateLayout(layout: Layout | undefined) {
@@ -154,10 +167,9 @@ export class Instance {
     if (!this.manager) {
       throw new Error(`[WhiteboardApp] mounted, but not found window manager`);
     }
+    this.manager.bindContainer(node);
     if (this.collector) {
-      this.manager.bindContainer(node, this.collector);
-    } else {
-      this.manager.bindContainer(node);
+      this.manager.bindCollectorContainer(this.collector);
     }
   }
 
@@ -198,6 +210,7 @@ export class Instance {
           options: {
             scenePath: params.scenePath,
             title: params.title,
+            scenes: params.scenes,
           },
           attributes: {
             taskId: params.taskId,
@@ -234,6 +247,17 @@ export class Instance {
     return this.manager.addApp({
       kind: "Countdown",
       options: { title: "Countdown" },
+    });
+  }
+
+  insertMedia({ title, src }: InsertMediaParams) {
+    if (!this.manager) {
+      throw new Error(`[WhiteboardApp] cannot insert app before mounted`);
+    }
+    return this.manager.addApp({
+      kind: BuiltinApps.MediaPlayer,
+      options: { title },
+      attributes: { src },
     });
   }
 
