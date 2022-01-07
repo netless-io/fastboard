@@ -11,23 +11,23 @@ export type { Language, Layout, WhiteboardAppConfig, InsertDocsParams };
 export class WhiteboardApp {
   private readonly _instance: Instance;
 
-  constructor(readonly config: WhiteboardAppConfig) {
+  public constructor(readonly config: WhiteboardAppConfig) {
     this._instance = new Instance(config);
   }
 
-  get room() {
+  public get room() {
     return this._instance.room;
   }
 
-  get manager() {
+  public get manager() {
     return this._instance.manager;
   }
 
-  get sdk() {
+  public get sdk() {
     return this._instance.sdk;
   }
 
-  get i18n() {
+  public get i18n() {
     return this._instance.i18n;
   }
 

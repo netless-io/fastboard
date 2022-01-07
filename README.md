@@ -25,7 +25,7 @@ npm add @netless/fastboard @netless/window-manager white-web-sdk react react-dom
 ```js
 import { createWhiteboardApp } from "@netless/fastboard";
 
-let whiteboard = await createWhiteboardApp({
+let app = await createWhiteboardApp({
   target: document.getElementById("whiteboard"),
   // [1]
   sdkConfig: {
@@ -46,24 +46,16 @@ let whiteboard = await createWhiteboardApp({
 
 > 使用 `React`
 
-```typescript
-import { useFastboard, FastBoardConfig } from "@netless/fastboard";
+```jsx
+import { createWhiteboardApp, Fastboard } from "@netless/fastboard";
 import ReactDOM from "react-dom";
 
-const config: FastBoardConfig = {
-  sdkConfig: {
-    appIdentifier: "whiteboard-appid",
-  },
-  joinRoom: {
-    uid: "unique_id_for_each_client",
-    uuid: "room-uuid",
-    roomToken: "NETLESSROOM_...",
-  },
-};
+let app = await createWhiteboardApp({
+  /* ... */
+});
 
 function App() {
-  const [app, ref] = useFastboard(config);
-  return <div ref={ref} />;
+  return <Fastboard app={app} />;
 }
 ReactDOM.render(<App />, document.getElementById("root"));
 ```
@@ -84,7 +76,7 @@ npm add @netless/app-slide
 
 ```typescript
 // 插入动态 PPTX 至白板
-const appId = await whiteboard.insertDocs({
+const appId = await app.insertDocs({
   fileType: "pptx",
   params: {
     scenePath: `/ppt/${uuid}`, // [1]
@@ -95,7 +87,7 @@ const appId = await whiteboard.insertDocs({
 });
 
 // 插入 PDF/静态 PPT 至白板
-const appId = await whiteboard.insertDocs({
+const appId = await app.insertDocs({
   fileType: "pdf", // or ppt
   options: {
     scenePath: `/pdf${uuid}`,
@@ -105,7 +97,7 @@ const appId = await whiteboard.insertDocs({
 });
 
 // 插入音频/视频至白板
-const appId = await whiteboard.manager.addApp({
+const appId = await app.manager.addApp({
   kind: "MediaPlayer",
   options: {
     title: "test.mp3", // 可选

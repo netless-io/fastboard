@@ -22,6 +22,14 @@
       "default": "./dist/vue.es.js",
       "types": "./src/vue.ts"
     },
+    "./svelte": {
+      "node": {
+        "import": "./dist/svelte.es.js",
+        "require": "./dist/svelte.cjs.js"
+      },
+      "default": "./dist/svelte.es.js",
+      "types": "./src/svelte.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [

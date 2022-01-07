@@ -1,8 +1,9 @@
 import type { DependencyList } from "react";
 import type { Player } from "white-web-sdk";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PlayerPhase } from "white-web-sdk";
+import { useLastValue } from "../../internal/hooks";
 
 const EMPTY_ARRAY: DependencyList = [];
 
@@ -10,14 +11,6 @@ function useForceUpdate() {
   const [, forceUpdate_] = useState({});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(() => forceUpdate_({}), EMPTY_ARRAY);
-}
-
-function useLastValue<T>(value: T) {
-  const ref = useRef<T>(value);
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
 }
 
 export function usePlayer(player?: Player | null) {

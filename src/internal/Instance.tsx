@@ -111,7 +111,7 @@ export class Instance {
   collector: HTMLElement | null = null;
 
   bindElement(target: HTMLElement | null, collector: HTMLElement | null) {
-    if (this.target && target) {
+    if (this.target && this.target !== target) {
       ReactDOM.unmountComponentAtNode(this.target);
     }
     this.target = target;

@@ -1,14 +1,16 @@
-import type { FastBoardConfig } from "../src";
-import { useFastboard } from "../src";
+import type { WhiteboardApp, WhiteboardAppConfig } from "../src";
 
-import React from "react";
+import { Fastboard } from "../src/react";
+import { createWhiteboardApp } from "../src";
+
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Handler } from "../playground/controls/resize";
 import "./index.scss";
 
 const CanvasSize = { width: 720, height: 540 };
 
-const WhiteboardAppConfig: FastBoardConfig = {
+const config: WhiteboardAppConfig = {
   sdkConfig: {
     appIdentifier: import.meta.env.VITE_APPID,
   },
@@ -23,14 +25,16 @@ const WhiteboardAppConfig: FastBoardConfig = {
 };
 
 function App() {
-  const [app, ref] = useFastboard(WhiteboardAppConfig);
+  const [app, setApp] = useState<WhiteboardApp | null>(null);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).app = app;
+  useEffect(() => {
+    if (!app) createWhiteboardApp(config).then(setApp);
+    return () => void app?.dispose();
+  }, [app]);
 
   return (
     <>
-      <div ref={ref} style={{ width: "100%", height: "100%" }} />
+      <Fastboard app={app} />
       <Handler
         target={document.getElementById("app") as HTMLDivElement}
         defaultSize={CanvasSize}

@@ -15,7 +15,7 @@ export {
   type PlayerControlProps,
 } from "./components/PlayerControl";
 export * from "./WhiteboardApp";
-export * from "./hooks";
+export * from "./react";
 
 export const register = WindowManager.register.bind(WindowManager);
 
