@@ -70,6 +70,7 @@ export const Toolbar = ({
   }, []);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [onHover, setOnHover] = useState<boolean>(false);
+  const [pointEvents, setPointEvents] = useState(true);
   const disabled = !hook.writable;
 
   return (
@@ -97,6 +98,9 @@ export const Toolbar = ({
               x: -100,
               transition: { duration: 1 },
             }}
+            onAnimationStart={() => setPointEvents(false)}
+            onAnimationComplete={() => setPointEvents(true)}
+            style={{ pointerEvents: pointEvents ? "auto" : "none" }}
           >
             <Content />
             {expanded && onHover && (
