@@ -26,7 +26,6 @@ npm add @netless/fastboard @netless/window-manager white-web-sdk react react-dom
 import { createWhiteboardApp } from "@netless/fastboard";
 
 let app = await createWhiteboardApp({
-  target: document.getElementById("whiteboard"),
   // [1]
   sdkConfig: {
     appIdentifier: "whiteboard-appid",
@@ -42,6 +41,8 @@ let app = await createWhiteboardApp({
     cursor: true,
   },
 });
+
+app.bindElement(document.getElementById("whiteboard"));
 ```
 
 > 使用 `React`
