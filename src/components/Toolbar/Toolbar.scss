@@ -40,10 +40,23 @@ $name: "fastboard-toolbar";
     border: 1px solid rgba(0, 0, 0, 0.15);
   }
 
+  &.expanded {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
   &.dark {
     color: #ddd;
     background-color: rgba($color: #333, $alpha: 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.45);
+  }
+
+  &.expanded:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.collapsed {
+    padding: 0;
+    background-color: transparent;
   }
 
   &-tooltip {
@@ -132,6 +145,11 @@ $name: "fastboard-toolbar";
     flex-flow: column nowrap;
     gap: 4px;
     scroll-behavior: smooth;
+
+    &.collapsed {
+      transform: translateX(-100%);
+      transition: 1s transform;
+    }
   }
 
   &-panel {
@@ -243,5 +261,20 @@ $name: "fastboard-toolbar";
     &:focus-visible {
       outline-offset: 2px;
     }
+  }
+
+  &-mask-btn {
+    width: 17px;
+    height: 62px;
+    &.dark {
+      filter: invert(0.8);
+    }
+  }
+
+  &-expand-btn {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
   }
 }

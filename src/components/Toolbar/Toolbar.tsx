@@ -1,15 +1,24 @@
 import type { CommonProps, GenericIcon, Theme } from "../../types";
-import type { i18n } from "i18next";
+import { i18n } from "i18next";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
-import clsx from "clsx";
-import React, { createContext, useCallback, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { Icon } from "../../icons";
-import { Icons } from "./icons";
-import { Button } from "./components/Button";
-import { CutLine } from "./components/CutLine";
 import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
 import { Content } from "./Content";
+
+import collapsePNG from "./components/assets/collapsed.png";
+import expandPNG from "./components/assets/expanded.png";
+
+import clsx from "clsx";
+import { Mask } from "./components/Mask";
 
 export type ToolbarProps = CommonProps & {
   icons?: GenericIcon<
@@ -47,36 +56,85 @@ export const Toolbar = ({
   i18n,
 }: ToolbarProps) => {
   const [expanded, setExpanded] = useState(true);
+  const [display, setDisplay] = useState(true);
   const hook = useToolbar(room);
-  const toggle = useCallback(() => setExpanded(e => !e), []);
-
+  const toggle = useCallback(() => {
+    setExpanded(e => {
+      if (!e) {
+        setDisplay(true);
+      } else {
+        setDisplay(false);
+      }
+      return !e;
+    });
+  }, []);
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const [onHover, setOnHover] = useState<boolean>(false);
   const disabled = !hook.writable;
 
   return (
     <ToolbarContext.Provider value={{ theme, icons, ...hook, i18n }}>
-      <div className={clsx(name, theme)}>
-        {expanded ? (
-          <Button content={i18n?.t("collapse")} onClick={toggle}>
-            <Icon
-              fallback={<Icons.Collapse theme={theme} />}
-              src={disabled ? icons?.collapseIconDisable : icons?.collapseIcon}
-            />
-          </Button>
-        ) : (
-          <Button content={i18n?.t("expand")} onClick={toggle}>
-            <Icon
-              fallback={<Icons.Expand theme={theme} />}
-              src={disabled ? icons?.expandIconDisable : icons?.expandIcon}
-            />
-          </Button>
-        )}
-        {expanded && (
-          <>
-            <CutLine />
+      <AnimatePresence>
+        {display ? (
+          <motion.div
+            initial={{ x: -100 }}
+            animate={{
+              x: 0,
+              transition: {
+                duration: 1,
+              },
+            }}
+            key="toolbar"
+            ref={toolbarRef}
+            className={clsx(name, theme)}
+            onPointerEnter={() => {
+              if (expanded) {
+                setOnHover(true);
+              }
+            }}
+            onMouseLeave={() => setOnHover(false)}
+            exit={{
+              x: -100,
+              transition: { duration: 1 },
+            }}
+          >
             <Content />
-          </>
+            {expanded && onHover && (
+              <Mask toolbarRef={toolbarRef}>
+                <div onClick={() => toggle()}>
+                  <img
+                    className={clsx(`${name}-mask-btn`, theme)}
+                    src={collapsePNG}
+                  />
+                </div>
+              </Mask>
+            )}
+          </motion.div>
+        ) : (
+          <motion.div
+            className={clsx(`${name}-expand-btn`, theme)}
+            key="expand"
+            onClick={() => toggle()}
+            initial={{ x: -100 }}
+            animate={{
+              x: 0,
+              transition: { duration: 1 },
+            }}
+          >
+            {!expanded && (
+              <Icon
+                fallback={
+                  <img
+                    src={expandPNG}
+                    className={clsx(`${name}-mask-btn`, theme)}
+                  />
+                }
+                src={disabled ? icons?.expandIconDisable : icons?.expandIcon}
+              />
+            )}
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </ToolbarContext.Provider>
   );
 };

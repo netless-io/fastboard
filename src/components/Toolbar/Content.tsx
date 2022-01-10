@@ -14,8 +14,9 @@ import { AppsButton } from "./components/AppsButton";
 import { PencilButton } from "./components/PencilButton";
 import { TextButton } from "./components/TextButton";
 import { ShapesButton } from "./components/ShapesButton";
+import clsx from "clsx";
 
-export function Content() {
+export const Content = React.memo(() => {
   const app = useInstance();
   const ref = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
@@ -65,7 +66,7 @@ export function Content() {
       )}
       <div
         ref={ref}
-        className={`${name}-section`}
+        className={clsx(`${name}-section`)}
         style={{
           height: `${sectionHeight}px`,
           overflow: needScroll ? "hidden" : "visible",
@@ -90,4 +91,4 @@ export function Content() {
       )}
     </>
   );
-}
+});

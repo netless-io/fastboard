@@ -95,6 +95,7 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
+    "framer-motion": "^5.5.5",
     "i18next": "^21.6.5",
     "rc-slider": "^9.7.5",
     "tippy.js": "^6.3.7",
