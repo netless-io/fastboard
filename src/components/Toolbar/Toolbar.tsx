@@ -107,6 +107,7 @@ export const Toolbar = ({
               <Mask toolbarRef={toolbarRef}>
                 <div onClick={() => toggle()}>
                   <img
+                    draggable={false}
                     className={clsx(`${name}-mask-btn`, theme)}
                     src={collapsePNG}
                   />
@@ -129,6 +130,7 @@ export const Toolbar = ({
               <Icon
                 fallback={
                   <img
+                    draggable={false}
                     src={expandPNG}
                     className={clsx(`${name}-mask-btn`, theme)}
                   />
