@@ -1,13 +1,15 @@
-import type { CommonProps, GenericIcon } from "../types";
+import type { CommonProps, GenericIcon } from "../../types";
 
 import clsx from "clsx";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import Tippy from "@tippyjs/react";
 
-import { Icon } from "../icons";
-import { Undo } from "../icons/Undo";
-import { Redo } from "../icons/Redo";
-import { TopOffset } from "../theme";
+import { Icon } from "../../icons";
+import { Undo } from "../../icons/Undo";
+import { Redo } from "../../icons/Redo";
+import { TopOffset } from "../../theme";
+import { useWritable } from "../hooks";
+import { useRedoUndo } from "./hooks";
 
 export const name = "fastboard-redo-undo";
 
@@ -15,6 +17,7 @@ export type RedoUndoProps = CommonProps & GenericIcon<"undo" | "redo">;
 
 export function RedoUndo({
   room,
+  manager,
   theme = "light",
   undoIcon,
   undoIconDisable,
@@ -22,27 +25,8 @@ export function RedoUndo({
   redoIconDisable,
   i18n,
 }: RedoUndoProps) {
-  const [writable, setWritable] = useState(false);
-  const [undoSteps, setUndoSteps] = useState(0);
-  const [redoSteps, setRedoSteps] = useState(0);
-
-  useEffect(() => {
-    if (room) {
-      setWritable(room.isWritable);
-      room.isWritable && (room.disableSerialization = false);
-
-      const updateWritable = () => setWritable(room?.isWritable || false);
-
-      room.callbacks.on("onEnableWriteNowChanged", updateWritable);
-      room.callbacks.on("onCanUndoStepsUpdate", setUndoSteps);
-      room.callbacks.on("onCanRedoStepsUpdate", setRedoSteps);
-      return () => {
-        room.callbacks.off("onEnableWriteNowChanged", updateWritable);
-        room.callbacks.off("onCanUndoStepsUpdate", setUndoSteps);
-        room.callbacks.off("onCanRedoStepsUpdate", setRedoSteps);
-      };
-    }
-  }, [room]);
+  const writable = useWritable(room);
+  const { redoSteps, undoSteps, redo, undo } = useRedoUndo(room, manager);
 
   const disabled = !writable;
 
@@ -60,7 +44,7 @@ export function RedoUndo({
         <button
           className={clsx(`${name}-btn`, "undo", theme)}
           disabled={disabled || undoSteps === 0}
-          onClick={useCallback(() => room && room.undo(), [room])}
+          onClick={undo}
         >
           <Icon
             fallback={<Undo theme={theme} />}
@@ -81,7 +65,7 @@ export function RedoUndo({
         <button
           className={clsx(`${name}-btn`, "redo", theme)}
           disabled={disabled || redoSteps === 0}
-          onClick={useCallback(() => room && room.redo(), [room])}
+          onClick={redo}
         >
           <Icon
             fallback={<Redo theme={theme} />}

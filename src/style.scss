@@ -3,9 +3,9 @@
 @import "tippy.js/themes/light.css";
 @import "rc-slider/assets/index.css";
 @import "./components/Root.scss";
-@import "./components/RedoUndo.scss";
-@import "./components/PageControl.scss";
-@import "./components/ZoomControl.scss";
+@import "./components/RedoUndo/RedoUndo.scss";
+@import "./components/PageControl/PageControl.scss";
+@import "./components/ZoomControl/ZoomControl.scss";
 @import "./components/Toolbar/Toolbar.scss";
 @import "./components/PlayerControl/PlayerControl.scss";
 

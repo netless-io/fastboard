@@ -13,7 +13,7 @@ function useForceUpdate() {
   return useCallback(() => forceUpdate_({}), EMPTY_ARRAY);
 }
 
-export function usePlayer(player?: Player | null) {
+export function usePlayerControl(player?: Player | null) {
   const togglePlay = useCallback(() => {
     if (player) {
       switch (player.phase) {

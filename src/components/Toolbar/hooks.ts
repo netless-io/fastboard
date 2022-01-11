@@ -6,24 +6,11 @@ import type {
   RoomState,
   ShapeType,
 } from "white-web-sdk";
-
+import type { WindowManager } from "@netless/window-manager";
 import { useCallback, useEffect, useState } from "react";
+
 import { noop } from "../../internal";
-
-export function useWritable(room?: Room | null) {
-  const [value, setValue] = useState(false);
-
-  useEffect(() => {
-    if (room) {
-      const setWritable = () => setValue(room.isWritable);
-      setWritable();
-      room.callbacks.on("onEnableWriteNowChanged", setWritable);
-      return () => room.callbacks.off("onEnableWriteNowChanged", setWritable);
-    }
-  }, [room]);
-
-  return value;
-}
+import { useWritable } from "../hooks";
 
 export function useRoomState(room?: Room | null) {
   const [memberState, setMemberState] = useState<MemberState | undefined>(
@@ -53,44 +40,56 @@ export interface ToolbarHook {
   setStrokeColor(color: Color): void;
 }
 
-export function useToolbar(room?: Room | null): ToolbarHook {
+export function useToolbar(
+  room?: Room | null,
+  manager?: WindowManager | null
+): ToolbarHook {
   const writable = useWritable(room);
   const { memberState } = useRoomState(room);
 
   const cleanCurrentScene = useCallback(() => {
-    if (room?.isWritable) {
+    if (manager) {
+      manager.mainView.cleanCurrentScene();
+    } else if (room) {
       room.cleanCurrentScene();
     }
-  }, [room]);
+  }, [manager, room]);
 
   const setAppliance = useCallback(
     (appliance: ApplianceNames, shape?: ShapeType) => {
-      if (room?.isWritable) {
-        room.setMemberState({
-          currentApplianceName: appliance,
-          shapeType: shape,
-        });
+      const memberState = {
+        currentApplianceName: appliance,
+        shapeType: shape,
+      };
+      if (manager) {
+        manager.mainView.setMemberState(memberState);
+      } else if (room) {
+        room.setMemberState(memberState);
       }
     },
-    [room]
+    [manager, room]
   );
 
   const setStrokeWidth = useCallback(
     (strokeWidth: number) => {
-      if (room?.isWritable) {
+      if (manager) {
+        manager.mainView.setMemberState({ strokeWidth });
+      } else if (room) {
         room.setMemberState({ strokeWidth });
       }
     },
-    [room]
+    [manager, room]
   );
 
   const setStrokeColor = useCallback(
     (strokeColor: Color) => {
-      if (room?.isWritable) {
+      if (manager) {
+        manager.mainView.setMemberState({ strokeColor });
+      } else if (room) {
         room.setMemberState({ strokeColor });
       }
     },
-    [room]
+    [manager, room]
   );
 
   return {

@@ -1,16 +1,15 @@
-import type { Player } from "white-web-sdk";
 import type { CommonProps, GenericIcon } from "../../types";
-
+import Tippy from "@tippyjs/react";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
 import RcSlider from "rc-slider";
-import { PlayerPhase } from "white-web-sdk";
-import { usePlayer } from "./hooks";
+import React, { useEffect, useState } from "react";
+import { PlayerPhase, type Player } from "white-web-sdk";
+
 import { Icon } from "../../icons";
 import { themes, TopOffset } from "../../theme";
-import { Icons } from "./icons";
-import Tippy from "@tippyjs/react";
 import { Button } from "./components/Button";
+import { Icons } from "./icons";
+import { usePlayerControl } from "./hooks";
 
 export type PlayerControlProps = {
   autoHide?: boolean;
@@ -28,7 +27,7 @@ export function PlayerControl({
   ...icons
 }: PlayerControlProps) {
   const [currentTime, setCurrentTime] = useState(0);
-  const player = usePlayer(player_);
+  const player = usePlayerControl(player_);
 
   useEffect(() => {
     setCurrentTime(player.currentTime);

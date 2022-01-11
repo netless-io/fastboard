@@ -5,9 +5,7 @@ import type { Theme } from "../src/types";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { room } from "./mock";
-import { RedoUndo, Toolbar } from "../src";
-import { PageControl } from "../src/components/PageControl";
-import { ZoomControl } from "../src/components/ZoomControl";
+import { RedoUndo, Toolbar, PageControl, ZoomControl } from "../src";
 import {
   PageControlControls,
   RedoUndoControls,

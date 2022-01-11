@@ -1,14 +1,8 @@
+import type { i18n } from "i18next";
 import type { CommonProps, GenericIcon, Theme } from "../../types";
-import { i18n } from "i18next";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
-import React, {
-  createContext,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useCallback, useRef, useState } from "react";
 
 import { Icon } from "../../icons";
 import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
@@ -53,20 +47,14 @@ export const Toolbar = ({
   theme = "light",
   icons,
   room,
+  manager,
   i18n,
 }: ToolbarProps) => {
   const [expanded, setExpanded] = useState(true);
   const [display, setDisplay] = useState(true);
-  const hook = useToolbar(room);
+  const hook = useToolbar(room, manager);
   const toggle = useCallback(() => {
-    setExpanded(e => {
-      if (!e) {
-        setDisplay(true);
-      } else {
-        setDisplay(false);
-      }
-      return !e;
-    });
+    setExpanded(e => (setDisplay(!e), !e));
   }, []);
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [onHover, setOnHover] = useState<boolean>(false);
