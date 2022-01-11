@@ -67,6 +67,15 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 [3] 配置 `WindowManager` 请看 [WindowManager](https://github.com/netless-io/window-manager#mount)
 
+关于窗口最小化后显示的小图标，可以通过 CSS 覆盖样式的方式修改它的位置：
+
+```css
+.telebox-collector {
+  right: 20px;
+  bottom: 40px;
+}
+```
+
 ### 使用 APPS
 
 **注意:** 需要先安装对应的 APP
