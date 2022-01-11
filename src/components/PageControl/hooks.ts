@@ -44,8 +44,11 @@ export function usePageControl(
       setPageCount(room.state.sceneState.scenes.length);
 
       if (manager) {
-        // TODO: on mainViewSceneIndexChanged
-        manager.callbacks.on;
+        manager.emitter.on("mainViewSceneIndexChange", setPageIndex);
+
+        return () => {
+          manager.emitter.off("mainViewSceneIndexChange", setPageIndex);
+        };
       } else {
         const onRoomStateChanged = (modifyState: Partial<RoomState>) => {
           if (modifyState.sceneState) {
