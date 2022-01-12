@@ -5,6 +5,7 @@ import { Toolbar } from "./Toolbar";
 import { RedoUndo } from "./RedoUndo";
 import { ZoomControl } from "./ZoomControl";
 import { PageControl } from "./PageControl";
+import { useHideControls } from "./hooks";
 
 export interface RootProps {
   instance: Instance;
@@ -21,18 +22,21 @@ export function Root({ instance: app }: RootProps) {
     [app, mux]
   );
 
-  const {
-    Toolbar: toolbar = true,
-    RedoUndo: redo_undo = true,
-    ZoomControl: zoom_control = true,
-    PageControl: page_control = true,
-  } = app.config.layout || {};
+  const hideControls = useHideControls(app.manager);
+  const showControls = !hideControls;
 
   const props = {
     room: app.room,
     manager: app.manager,
     i18n: app.i18n,
   };
+
+  const {
+    Toolbar: toolbar = showControls || hideControls === "toolbar-only",
+    RedoUndo: redo_undo = showControls,
+    ZoomControl: zoom_control = showControls,
+    PageControl: page_control = showControls,
+  } = app.config.layout || {};
 
   return (
     <Instance.Context.Provider value={app}>

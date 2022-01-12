@@ -266,6 +266,7 @@ $name: "fastboard-toolbar";
   &-mask-btn {
     width: 17px;
     height: 62px;
+    cursor: pointer;
     &.dark {
       filter: invert(0.8);
     }

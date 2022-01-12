@@ -2,7 +2,7 @@ import type { i18n } from "i18next";
 import type { CommonProps, GenericIcon, Theme } from "../../types";
 import { AnimatePresence, motion } from "framer-motion";
 
-import React, { createContext, useCallback, useRef, useState } from "react";
+import React, { createContext, useCallback, useState } from "react";
 
 import { Icon } from "../../icons";
 import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
@@ -51,27 +51,25 @@ export const Toolbar = ({
   i18n,
 }: ToolbarProps) => {
   const [expanded, setExpanded] = useState(true);
-  const [display, setDisplay] = useState(true);
   const hook = useToolbar(room, manager);
-  const toggle = useCallback(() => {
-    setExpanded(e => (setDisplay(!e), !e));
-  }, []);
-  const toolbarRef = useRef<HTMLDivElement>(null);
+  const [toolbar, toolbarRef] = useState<HTMLDivElement | null>(null);
   const [onHover, setOnHover] = useState<boolean>(false);
   const [pointEvents, setPointEvents] = useState(true);
   const disabled = !hook.writable;
 
+  const toggle = useCallback(() => {
+    setExpanded(e => !e);
+  }, []);
+
   return (
     <ToolbarContext.Provider value={{ theme, icons, ...hook, i18n }}>
       <AnimatePresence>
-        {display ? (
+        {expanded ? (
           <motion.div
             initial={{ x: -100 }}
             animate={{
               x: 0,
-              transition: {
-                duration: 1,
-              },
+              transition: { duration: 0.5 },
             }}
             key="toolbar"
             ref={toolbarRef}
@@ -84,7 +82,7 @@ export const Toolbar = ({
             onMouseLeave={() => setOnHover(false)}
             exit={{
               x: -100,
-              transition: { duration: 1 },
+              transition: { duration: 0.5 },
             }}
             onAnimationStart={() => setPointEvents(false)}
             onAnimationComplete={() => setPointEvents(true)}
@@ -92,8 +90,8 @@ export const Toolbar = ({
           >
             <Content />
             {expanded && onHover && (
-              <Mask toolbarRef={toolbarRef}>
-                <div onClick={() => toggle()}>
+              <Mask toolbar={toolbar}>
+                <div onClick={toggle}>
                   <img
                     draggable={false}
                     className={clsx(`${name}-mask-btn`, theme)}
@@ -107,11 +105,11 @@ export const Toolbar = ({
           <motion.div
             className={clsx(`${name}-expand-btn`, theme)}
             key="expand"
-            onClick={() => toggle()}
+            onClick={toggle}
             initial={{ x: -100 }}
             animate={{
               x: 0,
-              transition: { duration: 1 },
+              transition: { duration: 0.5 },
             }}
           >
             {!expanded && (
