@@ -1,5 +1,4 @@
 import path from "path";
-// import react from "@vitejs/plugin-react";
 import preact from "@preact/preset-vite";
 import { defineConfig, type LibraryFormats } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
@@ -12,21 +11,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       preact(),
-      // react({ jsxRuntime: "classic" }), // TODO: change react to svelte
       visualizer({ filename: "./node_modules/.visualizer/stats.html" }),
     ],
-    // esbuild: {
-    //   jsxFactory: "h",
-    //   jsxFragment: "Fragment",
-    //   jsxInject: "import { h, Fragment } from 'preact'",
-    // },
-    // resolve: {
-    //   alias: {
-    //     "react-dom/test-utils": "preact/test-utils",
-    //     "react-dom": "preact/compat",
-    //     react: "preact/compat",
-    //   },
-    // },
     build: {
       lib: {
         name: "Fastboard",
@@ -39,6 +25,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           index: path.resolve(__dirname, "src/index.ts"),
+          preact: path.resolve(__dirname, "src/preact.tsx"),
         },
         external: Object.keys({
           ...dependencies,
@@ -47,7 +34,7 @@ export default defineConfig(({ mode }) => {
         output: formats.map(format => ({
           format,
           entryFileNames: ({ name }) => `${name}.${format}.js`,
-          manualChunks: undefined,
+          manualChunks: {},
           exports: "named",
         })),
       },

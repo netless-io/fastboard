@@ -34,7 +34,6 @@ specifiers:
   white-web-sdk: ^2.16.0
 
 dependencies:
-  '@tippyjs/react': 4.2.6
   clsx: 1.1.1
   framer-motion: 5.6.0
   i18next: 21.6.6
@@ -47,6 +46,7 @@ devDependencies:
   '@netless/app-slide': 0.0.55
   '@netless/window-manager': 0.4.0-canary.16_white-web-sdk@2.16.0
   '@preact/preset-vite': 2.1.7_preact@10.6.4+vite@2.7.12
+  '@tippyjs/react': 4.2.6
   '@types/node': 17.0.8
   '@types/react': 17.0.38
   '@typescript-eslint/eslint-plugin': 5.9.1_b7b2e42b32ee097737cd3e626b10847b
@@ -545,7 +545,6 @@ packages:
 
   /@popperjs/core/2.11.0:
     resolution: {integrity: sha512-zrsUxjLOKAzdewIDRWy9nsV1GQsKBCWaGwsZQlCgr6/q+vjyZhFgqedLfFBuI9anTPEUT4APq9Mu0SZBTzIcGQ==}
-    dev: false
 
   /@preact/preset-vite/2.1.7_preact@10.6.4+vite@2.7.12:
     resolution: {integrity: sha512-/Ii+aN1Jm8TK5YzDVrj5UOVRZ91F2Nik1P3FbmZyQ5VJAg1ZCkOBBkmLrz9YhiMbbGl+U35yaZNUDMcO8Xlp2g==}
@@ -665,7 +664,7 @@ packages:
         optional: true
     dependencies:
       tippy.js: 6.3.7
-    dev: false
+    dev: true
 
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
@@ -2967,7 +2966,6 @@ packages:
     resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
     dependencies:
       '@popperjs/core': 2.11.0
-    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}

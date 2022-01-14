@@ -1,6 +1,5 @@
 {
   "include": ["src", "playground", "e2e", "./package.json", "shim.d.ts"],
-  "exclude": ["src/vue.ts"],
   "compilerOptions": {
     "baseUrl": "./",
     "noEmit": true,

@@ -4,7 +4,14 @@ import type { JSX } from "preact/jsx-runtime";
 import type { Ref } from "preact";
 import { forwardRef, useRef } from "preact/compat";
 import { useEffect } from "preact/hooks";
-import { useLastValue } from "./internal/hooks";
+
+function useLastValue<T>(value: T) {
+  const ref = useRef<T>(value);
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
 
 // https://itnext.io/reusing-the-ref-from-forwardref-with-react-hooks-4ce9df693dd
 function useCombinedRefs<T>(...refs: Ref<T>[]) {

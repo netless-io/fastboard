@@ -1,9 +1,8 @@
 import type { Player } from "white-web-sdk";
 import type { Inputs } from "preact/hooks";
 
-import { useCallback, useEffect, useState } from "preact/hooks";
+import { useCallback, useEffect, useState, useRef } from "preact/hooks";
 import { PlayerPhase } from "white-web-sdk";
-import { useLastValue } from "../../internal/hooks";
 
 const EMPTY_ARRAY: Inputs = [];
 
@@ -11,6 +10,14 @@ function useForceUpdate() {
   const [, forceUpdate_] = useState({});
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(() => forceUpdate_({}), EMPTY_ARRAY);
+}
+
+export function useLastValue<T>(value: T) {
+  const ref = useRef<T>(value);
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
 }
 
 export function usePlayerControl(player?: Player | null) {
