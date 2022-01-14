@@ -1,5 +1,5 @@
 {
-  "include": ["src", "playground", "e2e", "./package.json", "shim.d.ts"],
+  "include": ["src"],
   "compilerOptions": {
     "baseUrl": "./",
     "noEmit": true,

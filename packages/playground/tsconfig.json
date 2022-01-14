@@ -1,0 +1,18 @@
+{
+  "include": ["src", "e2e", "shim.d.ts"],
+  "compilerOptions": {
+    "noEmit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "node",
+    "types": ["vite/client"],
+    "paths": {
+      "@netless/fastboard": ["../fastboard/src"]
+    }
+  }
+}

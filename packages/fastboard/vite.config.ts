@@ -2,7 +2,7 @@ import path from "path";
 import preact from "@preact/preset-vite";
 import { defineConfig, type LibraryFormats } from "vite";
 import { visualizer } from "rollup-plugin-visualizer";
-import { dependencies, peerDependencies } from "./package.json";
+import pkg from "./package.json";
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === "production";
@@ -16,20 +16,16 @@ export default defineConfig(({ mode }) => {
     build: {
       lib: {
         name: "Fastboard",
-        entry: path.resolve(process.cwd(), "./src/index.ts"),
+        entry: path.resolve(__dirname, "src/index.ts"),
         fileName: "index",
       },
       minify: isProd,
       sourcemap: isProd,
       outDir: "dist",
       rollupOptions: {
-        input: {
-          index: path.resolve(__dirname, "src/index.ts"),
-          preact: path.resolve(__dirname, "src/preact.tsx"),
-        },
         external: Object.keys({
-          ...dependencies,
-          ...peerDependencies,
+          ...pkg.dependencies,
+          ...pkg.peerDependencies,
         }),
         output: formats.map(format => ({
           format,

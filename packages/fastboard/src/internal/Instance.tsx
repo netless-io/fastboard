@@ -4,7 +4,7 @@ import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
 import type { i18n } from "i18next";
 
-import { createContext, render } from "preact";
+import { render, createContext, unmountComponentAtNode } from "preact/compat";
 import { useContext } from "preact/hooks";
 import { BuiltinApps } from "@netless/window-manager";
 
@@ -119,7 +119,7 @@ export class Instance {
 
   bindElement(target: HTMLElement | null) {
     if (this.target && this.target !== target) {
-      render(null, this.target);
+      unmountComponentAtNode(this.target);
     }
     this.target = target;
     this.forceUpdate();
@@ -157,7 +157,7 @@ export class Instance {
       await this.unmount();
     }
     if (this.target) {
-      render(null, this.target);
+      unmountComponentAtNode(this.target);
       this.sdk = this.room = this.manager = this.target = null;
     }
   }

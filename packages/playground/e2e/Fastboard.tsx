@@ -1,9 +1,8 @@
-import type { WhiteboardApp } from "./index";
-
+import type { WhiteboardApp } from "@netless/fastboard";
 import type { JSX } from "preact/jsx-runtime";
 import type { Ref } from "preact";
-import { forwardRef, useRef } from "preact/compat";
-import { useEffect } from "preact/hooks";
+
+import { forwardRef, useEffect, useRef } from "preact/compat";
 
 function useLastValue<T>(value: T) {
   const ref = useRef<T>(value);

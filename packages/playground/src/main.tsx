@@ -1,14 +1,15 @@
 import type { i18n } from "i18next";
 
+import { render } from "preact";
 import { useEffect, useState } from "preact/hooks";
+import { createI18n } from "@netless/fastboard";
+
 import "./style.scss";
 
 import { Online } from "./Online";
 import { Replay } from "./Replay";
 import { DarkControls, LanguageControls, ModeControls } from "./controls";
 import { Handler } from "./controls/resize";
-import { createI18n } from "../src/i18n";
-import { render } from "preact";
 
 function App() {
   const [dark, set_dark] = useState(false);

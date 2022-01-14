@@ -1,10 +1,10 @@
 import type { i18n } from "i18next";
 import type { Player } from "white-web-sdk";
-import type { Theme } from "../src/types";
+import type { Theme } from "@netless/fastboard";
 
 import clsx from "clsx";
 import { useState } from "preact/hooks";
-import { PlayerControl } from "../src/components/PlayerControl";
+import { PlayerControl } from "@netless/fastboard";
 import { player } from "./mock";
 import { PlayerControlControls } from "./controls";
 

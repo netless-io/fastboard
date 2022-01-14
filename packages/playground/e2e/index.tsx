@@ -1,11 +1,10 @@
-import type { WhiteboardApp, WhiteboardAppConfig } from "../src";
-
-import { Fastboard } from "../src/preact";
-import { createWhiteboardApp } from "../src";
+import type { WhiteboardApp, WhiteboardAppConfig } from "@netless/fastboard";
+import { createWhiteboardApp } from "@netless/fastboard";
 
 import { render } from "preact";
 import { useRef, useEffect, useState } from "preact/hooks";
-import { Handler } from "../playground/controls/resize";
+import { Handler } from "../src/controls/resize";
+import { Fastboard } from "./Fastboard";
 import "./index.scss";
 
 const CanvasSize = { width: 720, height: 540 };

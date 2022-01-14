@@ -29,7 +29,9 @@ export {
   type PlayerControlProps,
 } from "./components/PlayerControl";
 
+export type { CommonProps, GenericIcon, IconProps, Theme } from "./types";
 export * from "./WhiteboardApp";
+export * from "./i18n";
 
 export interface RegisterOptions extends RegisterParams {
   appIcon?: string;

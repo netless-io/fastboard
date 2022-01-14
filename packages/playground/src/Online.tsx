@@ -1,11 +1,16 @@
 import type { i18n } from "i18next";
 import type { Room } from "white-web-sdk";
-import type { Theme } from "../src/types";
+import type { Theme } from "@netless/fastboard";
 
 import clsx from "clsx";
 import { useEffect, useState } from "preact/hooks";
 import { room } from "./mock";
-import { RedoUndo, Toolbar, PageControl, ZoomControl } from "../src";
+import {
+  RedoUndo,
+  Toolbar,
+  PageControl,
+  ZoomControl,
+} from "@netless/fastboard";
 import {
   PageControlControls,
   RedoUndoControls,
