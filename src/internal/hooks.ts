@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "preact/hooks";
 
 export function useLastValue<T>(value: T) {
   const ref = useRef<T>(value);

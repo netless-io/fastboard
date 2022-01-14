@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from "preact/compat";
 import { Apps } from "./Apps";
 import { Arrow } from "./Arrow";
 import { Circle } from "./Circle";

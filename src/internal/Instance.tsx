@@ -4,8 +4,8 @@ import type { Room, SceneDefinition, WhiteWebSdk } from "white-web-sdk";
 import type { JoinRoom, ManagerConfig, SdkConfig } from "./mount-whiteboard";
 import type { i18n } from "i18next";
 
-import React, { createContext, useContext } from "react";
-import ReactDOM from "react-dom";
+import { createContext, render } from "preact";
+import { useContext } from "preact/hooks";
 import { BuiltinApps } from "@netless/window-manager";
 
 import { Root } from "../components/Root";
@@ -59,7 +59,7 @@ export interface WhiteboardAppConfig {
   readonly toolbar?: {
     apps?: {
       enable?: boolean;
-      content?: React.ReactNode;
+      content?: string;
       onClick?: () => void;
     };
   };
@@ -119,7 +119,7 @@ export class Instance {
 
   bindElement(target: HTMLElement | null) {
     if (this.target && this.target !== target) {
-      ReactDOM.unmountComponentAtNode(this.target);
+      render(null, this.target);
     }
     this.target = target;
     this.forceUpdate();
@@ -140,7 +140,7 @@ export class Instance {
   async forceUpdate() {
     await this.readyPromise;
     if (this.target) {
-      ReactDOM.render(<Root instance={this} />, this.target);
+      render(<Root instance={this} />, this.target);
     }
   }
 
@@ -157,7 +157,7 @@ export class Instance {
       await this.unmount();
     }
     if (this.target) {
-      ReactDOM.unmountComponentAtNode(this.target);
+      render(null, this.target);
       this.sdk = this.room = this.manager = this.target = null;
     }
   }

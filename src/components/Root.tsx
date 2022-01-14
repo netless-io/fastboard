@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "preact/hooks";
 
 import { Lock, Instance } from "../internal";
 import { Toolbar } from "./Toolbar";

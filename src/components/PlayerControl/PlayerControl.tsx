@@ -1,15 +1,15 @@
 import type { CommonProps, GenericIcon } from "../../types";
-import Tippy from "@tippyjs/react";
-import clsx from "clsx";
-import RcSlider from "rc-slider";
-import React, { useEffect, useState } from "react";
-import { PlayerPhase, type Player } from "white-web-sdk";
 
+import clsx from "clsx";
+import { useEffect, useState } from "preact/hooks";
+import RcSlider from "rc-slider";
+import { PlayerPhase, type Player } from "white-web-sdk";
 import { Icon } from "../../icons";
 import { themes, TopOffset } from "../../theme";
+import { Tippy } from "../Tippy";
 import { Button } from "./components/Button";
-import { Icons } from "./icons";
 import { usePlayerControl } from "./hooks";
+import { Icons } from "./icons";
 
 export type PlayerControlProps = {
   autoHide?: boolean;

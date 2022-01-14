@@ -1,16 +1,15 @@
-import Tippy from "@tippyjs/react";
-import React, { useCallback } from "react";
-import { useContext } from "react";
+import { useCallback, useContext } from "preact/hooks";
 import { ApplianceNames } from "white-web-sdk";
 
-import { defaultHotKeys, useInstance } from "../../../internal";
 import { Icon } from "../../../icons";
+import { defaultHotKeys, useInstance } from "../../../internal";
 import { RightOffset } from "../../../theme";
+import { Tippy } from "../../Tippy";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
+import { renderToolTip } from "./ApplianceButtons";
 import { Button } from "./Button";
 import { ColorBox } from "./ColorBox";
-import { renderToolTip } from "./ApplianceButtons";
 
 export function TextButton() {
   const app = useInstance();

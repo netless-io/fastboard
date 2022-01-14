@@ -1,20 +1,23 @@
+import type { ComponentChildren, VNode } from "preact";
 import type { Placement } from "tippy.js";
 
 import clsx from "clsx";
-import React, { forwardRef, useContext, type PropsWithChildren } from "react";
-import Tippy from "@tippyjs/react";
 
+import { forwardRef } from "preact/compat";
+import { useContext } from "preact/hooks";
 import { RightOffset } from "../../../theme";
+import { Tippy } from "../../Tippy";
 import { ToolbarContext } from "../Toolbar";
 
-type ButtonProps = PropsWithChildren<{
-  content: React.ReactNode;
+interface ButtonProps {
+  content?: string | VNode;
   disabled?: boolean;
   active?: boolean;
   onClick?: () => void;
   interactive?: boolean;
   placement?: Placement;
-}>;
+  children: ComponentChildren;
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
@@ -32,12 +35,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Tippy
         className="fastboard-tip"
-        content={content}
+        content={<span>{content}</span>}
         interactive={interactive}
         theme={theme}
         disabled={disabled || !writable}
         placement={placement}
         offset={placement.includes("right") ? RightOffset : undefined}
+        delay={[1000, 400]}
         duration={300}
       >
         <button

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import type { VNode } from "preact";
+import { createPortal, memo } from "preact/compat";
+import { useEffect, useState } from "preact/hooks";
 
 type MaskProps = {
   toolbar: HTMLDivElement | null;
-  children: React.ReactNode;
+  children: VNode;
 };
 
-export const Mask = React.memo(({ toolbar, children }: MaskProps) => {
+export const Mask = memo(({ toolbar, children }: MaskProps) => {
   const [rootElement] = useState<HTMLDivElement | null>(() => {
     const element = document.createElement("div");
     element.style.position = "absolute";
@@ -37,7 +38,7 @@ export const Mask = React.memo(({ toolbar, children }: MaskProps) => {
   }, [rootElement, toolbar]);
 
   if (rootElement) {
-    return ReactDOM.createPortal(children, rootElement);
+    return createPortal(children, rootElement);
   } else {
     return null;
   }

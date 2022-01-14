@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo } from "preact/compat";
 import { Loading } from "./Loading";
 import { Pause } from "./Pause";
 import { Play } from "./Play";

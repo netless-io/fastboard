@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import RcSlider from "rc-slider";
-import React, { useContext } from "react";
+import { useContext } from "preact/hooks";
 
 import { themes } from "../../../theme";
 import { ToolbarContext } from "../Toolbar";

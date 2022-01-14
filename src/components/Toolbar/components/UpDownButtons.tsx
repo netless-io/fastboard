@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import { useCallback, useContext } from "preact/hooks";
 
 import { Icon } from "../../../icons";
 import { Icons } from "../icons";

@@ -1,6 +1,5 @@
 import type { IconProps } from "../types";
 
-import React from "react";
 import { themes } from "../theme";
 
 export function ChevronRight({ theme = "light", active }: IconProps) {

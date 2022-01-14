@@ -1,5 +1,5 @@
 import type { WindowManager, Room } from "@netless/window-manager";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "preact/hooks";
 
 export function useRedoUndo(
   room?: Room | null,

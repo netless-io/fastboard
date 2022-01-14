@@ -100,7 +100,7 @@ const appId = await app.insertDocs({
 const appId = await app.insertDocs({
   fileType: "pdf", // or ppt
   options: {
-    scenePath: `/pdf${uuid}`,
+    scenePath: `/pdf/${uuid}`,
     title: "a.pdf", // 可选
     scenes: [], // SceneDefinition[] 静态/动态 Scene 数据
   },

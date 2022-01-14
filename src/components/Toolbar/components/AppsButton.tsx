@@ -1,19 +1,20 @@
-import Tippy from "@tippyjs/react";
-import React, { useContext } from "react";
+import type { ComponentChildren, VNode } from "preact";
+import { useContext } from "preact/hooks";
 
-import vscodePNG from "./assets/vscode.png";
-import geogebraPNG from "./assets/geogebra.png";
 import countdownPNG from "./assets/countdown.png";
+import geogebraPNG from "./assets/geogebra.png";
+import vscodePNG from "./assets/vscode.png";
 
-import { useInstance } from "../../../internal";
 import { Icon } from "../../../icons";
+import { useInstance } from "../../../internal";
 import { RightOffset } from "../../../theme";
+import { Tippy } from "../../Tippy";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 
 export interface AppsButtonProps {
-  content?: React.ReactNode;
+  content?: string | VNode | false;
   onClick?: () => void;
 }
 
@@ -52,7 +53,7 @@ export function AppsButton({ content, onClick }: AppsButtonProps) {
   );
 }
 
-function renderAppsButtonContent(content?: React.ReactNode) {
+function renderAppsButtonContent(content?: ComponentChildren) {
   return (
     <div className="fastboard-toolbar-panel apps">
       <div className="fastboard-toolbar-apps">{content || <DefaultApps />}</div>

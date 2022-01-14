@@ -1,6 +1,6 @@
 import type { HotKey } from "white-web-sdk";
 
-import React, { useCallback, useContext } from "react";
+import { useCallback, useContext } from "preact/hooks";
 import { ApplianceNames } from "white-web-sdk";
 
 import { defaultHotKeys, useInstance } from "../../../internal";

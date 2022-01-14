@@ -1,15 +1,14 @@
 import type { CommonProps, GenericIcon } from "../../types";
 
 import clsx from "clsx";
-import React from "react";
-import Tippy from "@tippyjs/react";
 
-import { TopOffset } from "../../theme";
 import { Icon } from "../../icons";
 import { Minus } from "../../icons/Minus";
 import { Plus } from "../../icons/Plus";
 import { Reset } from "../../icons/Reset";
+import { TopOffset } from "../../theme";
 import { useWritable } from "../hooks";
+import { Tippy } from "../Tippy";
 import { useZoomControl } from "./hooks";
 
 export const name = "fastboard-zoom-control";
@@ -43,6 +42,7 @@ export function ZoomControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -68,6 +68,7 @@ export function ZoomControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -89,6 +90,7 @@ export function ZoomControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >

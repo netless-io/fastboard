@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useContext } from "react";
+import { useContext } from "preact/hooks";
 import { ToolbarContext, name } from "../Toolbar";
 
 export function CutLine() {

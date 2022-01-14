@@ -1,7 +1,7 @@
-import React from "react";
+import type { JSX } from "preact";
 
 export interface IconPropsWithFallback {
-  fallback: React.ReactElement;
+  fallback: JSX.Element;
   src?: string;
   alt?: string;
 }

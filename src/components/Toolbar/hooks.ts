@@ -7,7 +7,7 @@ import type {
   ShapeType,
 } from "white-web-sdk";
 import type { WindowManager } from "@netless/window-manager";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "preact/hooks";
 
 import { noop } from "../../internal";
 import { useWritable } from "../hooks";

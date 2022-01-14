@@ -3,7 +3,7 @@ import type { Room } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "preact/hooks";
 import { room } from "./mock";
 import { RedoUndo, Toolbar, PageControl, ZoomControl } from "../src";
 import {

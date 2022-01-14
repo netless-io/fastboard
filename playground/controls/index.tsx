@@ -1,6 +1,5 @@
-import type { ChangeEvent } from "react";
-
-import React, { useEffect } from "react";
+import type { JSX } from "preact/jsx-runtime";
+import { useEffect } from "preact/hooks";
 import { PlayerPhase } from "white-web-sdk";
 import { player, room } from "../mock";
 
@@ -13,12 +12,14 @@ export type StatePair<KV extends Record<string, unknown>> = KV extends Record<
     : never
   : never;
 
+type ChangeEvent<T extends EventTarget> = JSX.TargetedEvent<T>;
+
 export function ModeControls({
   mode,
   setMode,
 }: StatePair<{ mode: "online" | "replay" }>) {
   const update = (ev: ChangeEvent<HTMLInputElement>) => {
-    setMode(ev.target.value as "online" | "replay");
+    setMode(ev.currentTarget.value as "online" | "replay");
   };
 
   return (
@@ -52,7 +53,7 @@ export function LanguageControls({
   setLanguage,
 }: StatePair<{ language: "zh-CN" | "en" }>) {
   const update = (ev: ChangeEvent<HTMLInputElement>) => {
-    setLanguage(ev.target.value as "zh-CN" | "en");
+    setLanguage(ev.currentTarget.value as "zh-CN" | "en");
   };
 
   return (
@@ -91,7 +92,7 @@ export function WritableControls({
         <input
           type="checkbox"
           checked={writable}
-          onChange={ev => setWritable(ev.target.checked)}
+          onChange={ev => setWritable(ev.currentTarget.checked)}
         />
         Writable
       </label>
@@ -106,7 +107,7 @@ export function DarkControls({ dark, setDark }: StatePair<{ dark: boolean }>) {
         <input
           type="checkbox"
           checked={dark}
-          onChange={ev => setDark(ev.target.checked)}
+          onChange={ev => setDark(ev.currentTarget.checked)}
         />
         Dark
       </label>
@@ -124,7 +125,7 @@ export function RedoUndoControls({
         <input
           type="checkbox"
           checked={visible}
-          onChange={ev => setVisible(ev.target.checked)}
+          onChange={ev => setVisible(ev.currentTarget.checked)}
         />
         RedoUndo
       </label>
@@ -145,7 +146,7 @@ export function PageControlControls({
         <input
           type="checkbox"
           checked={visible}
-          onChange={ev => setVisible(ev.target.checked)}
+          onChange={ev => setVisible(ev.currentTarget.checked)}
         />
         PageControl
       </label>
@@ -163,7 +164,7 @@ export function ZoomControlControls({
         <input
           type="checkbox"
           checked={visible}
-          onChange={ev => setVisible(ev.target.checked)}
+          onChange={ev => setVisible(ev.currentTarget.checked)}
         />
         ZoomControl
       </label>
@@ -181,7 +182,7 @@ export function ToolbarControls({
         <input
           type="checkbox"
           checked={visible}
-          onChange={ev => setVisible(ev.target.checked)}
+          onChange={ev => setVisible(ev.currentTarget.checked)}
         />
         Toolbar
       </label>
@@ -207,7 +208,7 @@ export function PlayerControlControls({
         <input
           type="checkbox"
           checked={visible}
-          onChange={ev => setVisible(ev.target.checked)}
+          onChange={ev => setVisible(ev.currentTarget.checked)}
         />
         PlayerControl
       </label>

@@ -9,3 +9,8 @@ declare const process: {
     NODE_ENV: "production" | undefined;
   };
 };
+
+declare module "rc-slider" {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  export default null as any;
+}

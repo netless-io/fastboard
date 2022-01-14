@@ -1,6 +1,5 @@
 import type { IconProps } from "../../../types";
 
-import React from "react";
 import { getStroke } from "../../../theme";
 
 export const Eraser = (props: IconProps) => {

@@ -1,3 +1,4 @@
+import type { RegisterParams } from "@netless/window-manager";
 import { WindowManager } from "@netless/window-manager";
 
 import "./behaviors/register-apps";
@@ -27,12 +28,17 @@ export {
   usePlayerControl,
   type PlayerControlProps,
 } from "./components/PlayerControl";
-export {};
 
 export * from "./WhiteboardApp";
-export * from "./react";
 
-export const register = WindowManager.register.bind(WindowManager);
+export interface RegisterOptions extends RegisterParams {
+  appIcon?: string;
+  appText?: string;
+}
+
+export function register({ ...rest }: RegisterOptions) {
+  WindowManager.register(rest);
+}
 
 /**
  * @example

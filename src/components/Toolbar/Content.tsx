@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import clsx from "clsx";
+import { memo, useCallback, useEffect, useRef, useState } from "preact/compat";
 
 import { useInstance, clamp } from "../../internal";
 import { name } from "./Toolbar";
@@ -14,9 +15,8 @@ import { AppsButton } from "./components/AppsButton";
 import { PencilButton } from "./components/PencilButton";
 import { TextButton } from "./components/TextButton";
 import { ShapesButton } from "./components/ShapesButton";
-import clsx from "clsx";
 
-export const Content = React.memo(() => {
+export const Content = memo(() => {
   const app = useInstance();
   const ref = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);

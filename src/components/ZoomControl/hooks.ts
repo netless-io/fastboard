@@ -1,6 +1,6 @@
 import type { Room, RoomState } from "white-web-sdk";
 import type { WindowManager } from "@netless/window-manager";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "preact/hooks";
 import { clamp } from "../../internal";
 
 export const ScalePoints: readonly number[] = [

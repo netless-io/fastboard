@@ -84,3 +84,5 @@ export function makeSlideParams(scenes: SceneDefinition[]) {
 
   return { scenesWithoutPPT, taskId, url };
 }
+
+export const isBrowser = typeof window !== "undefined";

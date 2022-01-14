@@ -1,11 +1,11 @@
-import type { DependencyList } from "react";
 import type { Player } from "white-web-sdk";
+import type { Inputs } from "preact/hooks";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "preact/hooks";
 import { PlayerPhase } from "white-web-sdk";
 import { useLastValue } from "../../internal/hooks";
 
-const EMPTY_ARRAY: DependencyList = [];
+const EMPTY_ARRAY: Inputs = [];
 
 function useForceUpdate() {
   const [, forceUpdate_] = useState({});

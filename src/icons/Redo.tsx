@@ -1,6 +1,5 @@
 import type { IconProps } from "../types";
 
-import React from "react";
 import { themes } from "../theme";
 
 export function Redo({ theme = "light", active }: IconProps) {

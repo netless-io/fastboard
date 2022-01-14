@@ -1,18 +1,18 @@
 import type { i18n } from "i18next";
 import type { CommonProps, GenericIcon, Theme } from "../../types";
+
+import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-
-import React, { createContext, useCallback, useState } from "react";
-
-import { Icon } from "../../icons";
-import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
-import { Content } from "./Content";
+import { createContext } from "preact";
+import { useCallback, useEffect, useState } from "preact/hooks";
 
 import collapsePNG from "./components/assets/collapsed.png";
 import expandPNG from "./components/assets/expanded.png";
 
-import clsx from "clsx";
+import { Icon } from "../../icons";
 import { Mask } from "./components/Mask";
+import { Content } from "./Content";
+import { EmptyToolbarHook, useToolbar, type ToolbarHook } from "./hooks";
 
 export type ToolbarProps = CommonProps & {
   icons?: GenericIcon<
@@ -53,13 +53,22 @@ export const Toolbar = ({
   const [expanded, setExpanded] = useState(true);
   const hook = useToolbar(room, manager);
   const [toolbar, toolbarRef] = useState<HTMLDivElement | null>(null);
-  const [onHover, setOnHover] = useState<boolean>(false);
+  const [onHover, setOnHover] = useState(false);
+  const [delayedOnHover, setDelayedOnHover] = useState(false);
   const [pointEvents, setPointEvents] = useState(true);
   const disabled = !hook.writable;
 
   const toggle = useCallback(() => {
     setExpanded(e => !e);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDelayedOnHover(onHover);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [onHover]);
 
   return (
     <ToolbarContext.Provider value={{ theme, icons, ...hook, i18n }}>
@@ -89,7 +98,7 @@ export const Toolbar = ({
             style={{ pointerEvents: pointEvents ? "auto" : "none" }}
           >
             <Content />
-            {expanded && onHover && (
+            {expanded && (onHover || delayedOnHover) && (
               <Mask toolbar={toolbar}>
                 <div onClick={toggle}>
                   <img

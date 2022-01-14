@@ -1,7 +1,6 @@
 import type { i18n } from "i18next";
 
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import { useEffect, useState } from "preact/hooks";
 import "./style.scss";
 
 import { Online } from "./Online";
@@ -9,6 +8,7 @@ import { Replay } from "./Replay";
 import { DarkControls, LanguageControls, ModeControls } from "./controls";
 import { Handler } from "./controls/resize";
 import { createI18n } from "../src/i18n";
+import { render } from "preact";
 
 function App() {
   const [dark, set_dark] = useState(false);
@@ -54,4 +54,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.querySelector("#app"));
+render(<App />, document.querySelector("#app") as HTMLDivElement);

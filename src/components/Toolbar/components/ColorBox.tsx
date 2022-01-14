@@ -1,7 +1,7 @@
 import type { Color } from "white-web-sdk";
 
 import clsx from "clsx";
-import React, { useContext } from "react";
+import { useContext } from "preact/hooks";
 
 import { isEqualArray } from "../../../internal";
 import { ToolbarContext } from "../Toolbar";

@@ -1,8 +1,8 @@
 import type { Size } from "white-web-sdk";
 
 import clsx from "clsx";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { createPortal } from "preact/compat";
 
 export interface HandlerProps {
   target: HTMLDivElement;

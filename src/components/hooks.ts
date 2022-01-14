@@ -1,6 +1,6 @@
 import type { Room, WindowManager } from "@netless/window-manager";
 import { BuiltinApps } from "@netless/window-manager";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "preact/hooks";
 
 export function useWritable(room?: Room | null) {
   const [writable, setWritable] = useState(false);

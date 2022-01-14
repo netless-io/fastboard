@@ -1,10 +1,13 @@
 import type { WhiteboardApp } from "./index";
 
-import React, { forwardRef, useEffect, useRef } from "react";
+import type { JSX } from "preact/jsx-runtime";
+import type { Ref } from "preact";
+import { forwardRef, useRef } from "preact/compat";
+import { useEffect } from "preact/hooks";
 import { useLastValue } from "./internal/hooks";
 
 // https://itnext.io/reusing-the-ref-from-forwardref-with-react-hooks-4ce9df693dd
-function useCombinedRefs<T>(...refs: React.Ref<T>[]) {
+function useCombinedRefs<T>(...refs: Ref<T>[]) {
   const targetRef = useRef<T | null>(null);
 
   useEffect(() => {
@@ -30,10 +33,7 @@ function useCombinedRefs<T>(...refs: React.Ref<T>[]) {
  */
 export const Fastboard = forwardRef<
   HTMLDivElement,
-  { app?: WhiteboardApp | null } & React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  >
+  { app?: WhiteboardApp | null } & JSX.HTMLAttributes<HTMLDivElement>
 >(({ app, ...restProps }, outerRef) => {
   const innerRef = useRef<HTMLDivElement>(null);
   const ref = useCombinedRefs(outerRef, innerRef);

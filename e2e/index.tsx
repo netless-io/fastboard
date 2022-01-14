@@ -1,10 +1,10 @@
 import type { WhiteboardApp, WhiteboardAppConfig } from "../src";
 
-import { Fastboard } from "../src/react";
+import { Fastboard } from "../src/preact";
 import { createWhiteboardApp } from "../src";
 
-import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
+import { render } from "preact";
+import { useRef, useEffect, useState } from "preact/hooks";
 import { Handler } from "../playground/controls/resize";
 import "./index.scss";
 
@@ -55,4 +55,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById("app") as HTMLDivElement);

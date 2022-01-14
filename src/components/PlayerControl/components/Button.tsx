@@ -1,21 +1,23 @@
+import type { ComponentChildren, VNode } from "preact";
 import type { Placement } from "tippy.js";
 import type { Theme } from "../../../types";
 
 import clsx from "clsx";
-import React, { forwardRef, type PropsWithChildren } from "react";
-import Tippy from "@tippyjs/react";
 
+import { forwardRef } from "preact/compat";
 import { TopOffset } from "../../../theme";
+import { Tippy } from "../../Tippy";
 
-type ButtonProps = PropsWithChildren<{
+interface ButtonProps {
   theme: Theme;
-  content: React.ReactNode;
+  content?: VNode;
   disabled?: boolean;
   active?: boolean;
   onClick?: () => void;
   interactive?: boolean;
   placement?: Placement;
-}>;
+  children: ComponentChildren;
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
@@ -39,6 +41,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         placement={placement}
         offset={TopOffset}
+        delay={[1000, 400]}
         duration={300}
       >
         <button

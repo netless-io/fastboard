@@ -2,9 +2,11 @@
   "include": ["src", "playground", "e2e", "./package.json", "shim.d.ts"],
   "exclude": ["src/vue.ts"],
   "compilerOptions": {
+    "baseUrl": "./",
     "noEmit": true,
     "strict": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "module": "ESNext",
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
@@ -16,6 +18,9 @@
     "esModuleInterop": true,
     "useUnknownInCatchVariables": false,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "react": ["preact/compact"]
+    }
   }
 }

@@ -1,6 +1,4 @@
-import Tippy from "@tippyjs/react";
-import React, { useCallback } from "react";
-import { useContext } from "react";
+import { useCallback, useContext } from "preact/hooks";
 import { ApplianceNames } from "white-web-sdk";
 
 import { defaultHotKeys, useInstance } from "../../../internal";
@@ -13,6 +11,7 @@ import { ColorBox } from "./ColorBox";
 import { CutLine } from "./CutLine";
 import { Slider } from "./Slider";
 import { renderToolTip } from "./ApplianceButtons";
+import { Tippy } from "../../Tippy";
 
 export function PencilButton() {
   const app = useInstance();

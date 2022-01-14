@@ -1,15 +1,14 @@
 import type { CommonProps, GenericIcon } from "../../types";
 
 import clsx from "clsx";
-import React from "react";
-import Tippy from "@tippyjs/react";
 
-import { TopOffset } from "../../theme";
 import { Icon } from "../../icons";
-import { FilePlus } from "../../icons/FilePlus";
 import { ChevronLeft } from "../../icons/ChevronLeft";
 import { ChevronRight } from "../../icons/ChevronRight";
+import { FilePlus } from "../../icons/FilePlus";
+import { TopOffset } from "../../theme";
 import { useWritable } from "../hooks";
+import { Tippy } from "../Tippy";
 import { usePageControl } from "./hooks";
 
 export const name = "fastboard-page-control";
@@ -43,6 +42,7 @@ export function PageControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -69,6 +69,7 @@ export function PageControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -90,6 +91,7 @@ export function PageControl({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >

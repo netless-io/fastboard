@@ -1,18 +1,18 @@
+import type { ComponentType } from "preact";
+import type { ShapeType } from "white-web-sdk";
 import type { IconProps } from "../../../types";
 
-import Tippy from "@tippyjs/react";
-import React, { useContext } from "react";
-import type { ShapeType } from "white-web-sdk";
+import { useContext } from "preact/hooks";
 import { ApplianceNames } from "white-web-sdk";
-
 import { RightOffset } from "../../../theme";
+import { Tippy } from "../../Tippy";
 import { ApplianceShapes, Shapes, ShapesMap } from "../const";
 import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
+import { ColorBox } from "./ColorBox";
 import { CutLine } from "./CutLine";
 import { Slider } from "./Slider";
-import { ColorBox } from "./ColorBox";
 
 const ShapeTypes = new Set([...ApplianceShapes, ...Shapes]);
 
@@ -90,7 +90,7 @@ export function ShapesBox() {
 interface ApplianceShapeButtonProps {
   content?: string;
   Appliance: ApplianceNames;
-  Icon: React.ComponentType<IconProps>;
+  Icon: ComponentType<IconProps>;
 }
 
 function ApplianceShapeButton({
@@ -119,7 +119,7 @@ function ApplianceShapeButton({
 interface ShapeShapeButtonProps {
   content?: string;
   shape: ShapeType;
-  Icon: React.ComponentType<IconProps>;
+  Icon: ComponentType<IconProps>;
 }
 
 function ShapeShapeButton({ content, shape, Icon }: ShapeShapeButtonProps) {

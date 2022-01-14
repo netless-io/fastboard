@@ -1,14 +1,13 @@
 import type { CommonProps, GenericIcon } from "../../types";
 
 import clsx from "clsx";
-import React from "react";
-import Tippy from "@tippyjs/react";
 
 import { Icon } from "../../icons";
-import { Undo } from "../../icons/Undo";
 import { Redo } from "../../icons/Redo";
+import { Undo } from "../../icons/Undo";
 import { TopOffset } from "../../theme";
 import { useWritable } from "../hooks";
+import { Tippy } from "../Tippy";
 import { useRedoUndo } from "./hooks";
 
 export const name = "fastboard-redo-undo";
@@ -38,6 +37,7 @@ export function RedoUndo({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -59,6 +59,7 @@ export function RedoUndo({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >

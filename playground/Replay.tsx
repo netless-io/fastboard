@@ -3,7 +3,7 @@ import type { Player } from "white-web-sdk";
 import type { Theme } from "../src/types";
 
 import clsx from "clsx";
-import React, { useState } from "react";
+import { useState } from "preact/hooks";
 import { PlayerControl } from "../src/components/PlayerControl";
 import { player } from "./mock";
 import { PlayerControlControls } from "./controls";
