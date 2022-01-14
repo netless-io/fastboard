@@ -14,24 +14,17 @@ WindowManager.register({
 
 WindowManager.register({
   kind: "Monaco",
-  src: async () => {
-    const app = await import("@netless/app-monaco");
-    return app.default ?? app;
-  },
+  src: "https://cdn.jsdelivr.net/npm/@netless/app-monaco@latest/dist/main.iife.js",
 });
+
 WindowManager.register({
   kind: "Countdown",
-  src: async () => {
-    const app = await import("@netless/app-countdown");
-    return app.default ?? app;
-  },
+  src: "https://cdn.jsdelivr.net/npm/@netless/app-countdown@latest/dist/main.iife.js",
 });
+
 WindowManager.register({
   kind: "GeoGebra",
-  src: async () => {
-    const app = await import("@netless/app-geogebra");
-    return app.default ?? app;
-  },
+  src: "https://cdn.jsdelivr.net/npm/@netless/app-monaco@geogebra/dist/main.iife.js",
   appOptions: {
     HTML5Codebase:
       "https://flat-storage-cn-hz.whiteboard.agora.io/GeoGebra/HTML5/5.0/web3d",

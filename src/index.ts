@@ -27,8 +27,8 @@ export {
   usePlayerControl,
   type PlayerControlProps,
 } from "./components/PlayerControl";
-export {};
 
+export * from "./types";
 export * from "./WhiteboardApp";
 export * from "./react";
 

@@ -14,22 +14,6 @@
       "default": "./dist/index.es.js",
       "types": "./src/index.ts"
     },
-    "./vue": {
-      "node": {
-        "import": "./dist/vue.es.js",
-        "require": "./dist/vue.cjs.js"
-      },
-      "default": "./dist/vue.es.js",
-      "types": "./src/vue.ts"
-    },
-    "./svelte": {
-      "node": {
-        "import": "./dist/svelte.es.js",
-        "require": "./dist/svelte.cjs.js"
-      },
-      "default": "./dist/svelte.es.js",
-      "types": "./src/svelte.ts"
-    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -95,11 +79,10 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
-    "framer-motion": "^5.5.6",
-    "i18next": "^21.6.5",
+    "framer-motion": "^5.6.0",
+    "i18next": "^21.6.6",
     "rc-slider": "^9.7.5",
-    "tippy.js": "^6.3.7",
-    "vue-demi": "^0.12.1"
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.7.1",
@@ -108,7 +91,7 @@
     "@netless/app-geogebra": "^0.0.2",
     "@netless/app-monaco": "^0.1.12",
     "@netless/app-slide": "^0.0.55",
-    "@netless/window-manager": "^0.4.0-canary.11",
+    "@netless/window-manager": "^0.4.0-canary.16",
     "@types/node": "^17.0.8",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
@@ -124,12 +107,10 @@
     "react-dom": "^17.0.2",
     "rollup": "^2.63.0",
     "rollup-plugin-visualizer": "^5.5.2",
-    "sass": "^1.47.0",
-    "svelte": "^3.45.0",
+    "sass": "^1.48.0",
     "type-fest": "^2.9.0",
     "typescript": "^4.5.4",
-    "vite": "^2.7.10",
-    "vue": "^3.2.26",
+    "vite": "^2.7.12",
     "white-web-sdk": "^2.16.0"
   }
 }

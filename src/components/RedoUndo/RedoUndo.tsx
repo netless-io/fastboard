@@ -38,6 +38,7 @@ export function RedoUndo({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >
@@ -59,6 +60,7 @@ export function RedoUndo({
         theme={theme}
         disabled={disabled}
         placement="top"
+        delay={[1000, 400]}
         duration={300}
         offset={TopOffset}
       >

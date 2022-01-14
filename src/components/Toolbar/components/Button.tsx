@@ -38,6 +38,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || !writable}
         placement={placement}
         offset={placement.includes("right") ? RightOffset : undefined}
+        delay={[1000, 400]}
         duration={300}
       >
         <button

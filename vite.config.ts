@@ -16,22 +16,16 @@ export default defineConfig(({ mode }) => {
     build: {
       lib: {
         name: "Fastboard",
-        entry: path.resolve(process.cwd(), "./src/index.ts"),
+        entry: path.resolve(process.cwd(), "src/index.ts"),
         fileName: "index",
       },
       minify: isProd,
       sourcemap: isProd,
       outDir: "dist",
       rollupOptions: {
-        input: {
-          index: path.resolve(__dirname, "src/index.ts"),
-          vue: path.resolve(__dirname, "src/vue.ts"),
-          svelte: path.resolve(__dirname, "src/svelte.ts"),
-        },
         external: Object.keys({
           ...dependencies,
           ...peerDependencies,
-          "svelte/store": "*",
         }),
         output: formats.map(format => ({
           format,
