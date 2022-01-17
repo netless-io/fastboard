@@ -1,0 +1,22 @@
+{
+  "name": "test-react",
+  "private": true,
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@netless/fastboard": "workspace:*",
+    "@netless/fastboard-react": "workspace:*",
+    "@netless/window-manager": "^0.4.0-canary.17",
+    "clsx": "^1.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "white-web-sdk": "^2.16.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.1.4",
+    "sass": "^1.49.0",
+    "type-fest": "^2.9.0",
+    "vite": "^2.7.13"
+  }
+}

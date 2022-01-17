@@ -1,0 +1,41 @@
+.fastboard-root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fastboard-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fastboard-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: calc(100% - 48px);
+  padding: 16px;
+  z-index: 201;
+  display: flex;
+  align-items: center;
+}
+
+.fastboard-bottom-left {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  padding: 8px;
+  z-index: 200;
+}
+
+.fastboard-bottom-right {
+  @extend .fastboard-bottom-left;
+  left: initial;
+  right: 8px;
+}

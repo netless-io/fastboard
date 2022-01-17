@@ -1,26 +1,9 @@
 {
-  "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "svelte.enable-ts-plugin": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.addMissingImports": true
   },
-  "eslint.validate": ["svelte"],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
-  "cSpell.words": [
-    "clsx",
-    "demi",
-    "esbuild",
-    "fastboard",
-    "geogebra",
-    "Magix",
-    "preinstall",
-    "tippyjs"
-  ],
-  "i18n-ally.localesPaths": ["src/i18n"]
+  "cSpell.words": ["changesets", "fastboard", "geogebra", "pnpx", "tippyjs", "tsup"]
 }

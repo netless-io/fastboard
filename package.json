@@ -1,92 +1,32 @@
 {
-  "name": "@netless/fastboard",
-  "version": "0.0.11",
-  "description": "An open sourced sdk based on white-web-sdk.",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.es.js",
-  "types": "./src/index.ts",
-  "exports": {
-    ".": {
-      "node": {
-        "import": "./dist/index.es.js",
-        "require": "./dist/index.cjs.js"
-      },
-      "default": "./dist/index.es.js",
-      "types": "./src/index.ts"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "src",
-    "dist"
-  ],
+  "name": "fastboard-monorepo",
+  "private": "true",
   "scripts": {
-    "prepublishOnly": "esbuild-dev scripts/prepublish.ts",
     "preinstall": "npx only-allow pnpm",
-    "format": "prettier --write .",
-    "lint": "eslint --ext .ts,.tsx . && tsc",
-    "dev": "vite dev --host",
-    "build": "vite build",
-    "build:dev": "vite build --mode development"
-  },
-  "contributors": [
-    {
-      "name": "hyrious",
-      "email": "hyrious@outlook.com"
-    },
-    {
-      "name": "l1shen",
-      "email": "lishen1635@gmail.com"
-    }
-  ],
-  "license": "MIT",
-  "peerDependencies": {
-    "@netless/app-slide": "*",
-    "@netless/window-manager": "*",
-    "react": "*",
-    "react-dom": "*",
-    "white-web-sdk": "*"
-  },
-  "peerDependenciesMeta": {
-    "@netless/app-slide": {
-      "optional": true
-    }
-  },
-  "dependencies": {
-    "@tippyjs/react": "^4.2.6",
-    "clsx": "^1.1.1",
-    "framer-motion": "^5.6.0",
-    "i18next": "^21.6.6",
-    "rc-slider": "^9.7.5",
-    "tippy.js": "^6.3.7"
+    "lint": "eslint --ext .ts,.tsx . && prettier --check .",
+    "dev": "pnpm dev:react",
+    "dev:react": "pnpm dev --filter=test-react",
+    "build": "pnpm build --filter={packages}...",
+    "build:ci": "pnpm build --aggregate-output --filter={packages}..."
   },
   "devDependencies": {
-    "@hyrious/esbuild-dev": "^0.7.2",
-    "@hyrious/rimraf": "^0.1.0",
-    "@netless/app-countdown": "^0.0.1",
-    "@netless/app-geogebra": "^0.0.2",
-    "@netless/app-monaco": "^0.1.12",
-    "@netless/app-slide": "^0.0.55",
-    "@netless/window-manager": "^0.4.0-canary.17",
-    "@types/node": "^17.0.8",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.9.1",
-    "@typescript-eslint/parser": "^5.9.1",
-    "@vitejs/plugin-react": "^1.1.4",
-    "esbuild": "^0.14.11",
+    "@changesets/cli": "^2.19.0",
+    "@types/node": "^17.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
     "eslint": "^8.7.0",
     "eslint-define-config": "^1.2.2",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "2.5.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "rollup": "^2.64.0",
-    "rollup-plugin-visualizer": "^5.5.4",
-    "sass": "^1.48.0",
-    "type-fest": "^2.9.0",
+    "prettier": "^2.5.1",
     "typescript": "^4.5.4",
-    "vite": "^2.7.12",
-    "white-web-sdk": "^2.16.0"
+    "vite": "^2.7.13"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "react",
+        "react-dom"
+      ]
+    }
   }
 }

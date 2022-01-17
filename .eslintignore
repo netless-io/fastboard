@@ -1,5 +1,4 @@
-node_modules/
-dist/
-public/
-/.eslintrc.js
-/*.html
+node_modules
+dist
+.eslintrc.js
+*.html
