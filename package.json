@@ -41,38 +41,14 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@netless/app-countdown": "*",
-    "@netless/app-geogebra": "*",
-    "@netless/app-monaco": "*",
     "@netless/app-slide": "*",
     "@netless/window-manager": "*",
-    "@vue/composition-api": "*",
     "react": "*",
     "react-dom": "*",
-    "svelte": "*",
-    "vue": "*",
     "white-web-sdk": "*"
   },
   "peerDependenciesMeta": {
     "@netless/app-slide": {
-      "optional": true
-    },
-    "@netless/app-monaco": {
-      "optional": true
-    },
-    "@netless/app-countdown": {
-      "optional": true
-    },
-    "@netless/app-geogebra": {
-      "optional": true
-    },
-    "@vue/composition-api": {
-      "optional": true
-    },
-    "svelte": {
-      "optional": true
-    },
-    "vue": {
       "optional": true
     }
   },
@@ -85,13 +61,13 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "@hyrious/esbuild-dev": "^0.7.1",
+    "@hyrious/esbuild-dev": "^0.7.2",
     "@hyrious/rimraf": "^0.1.0",
     "@netless/app-countdown": "^0.0.1",
     "@netless/app-geogebra": "^0.0.2",
     "@netless/app-monaco": "^0.1.12",
     "@netless/app-slide": "^0.0.55",
-    "@netless/window-manager": "^0.4.0-canary.16",
+    "@netless/window-manager": "^0.4.0-canary.17",
     "@types/node": "^17.0.8",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
@@ -99,14 +75,14 @@
     "@typescript-eslint/parser": "^5.9.1",
     "@vitejs/plugin-react": "^1.1.4",
     "esbuild": "^0.14.11",
-    "eslint": "^8.6.0",
+    "eslint": "^8.7.0",
     "eslint-define-config": "^1.2.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "2.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "rollup": "^2.63.0",
-    "rollup-plugin-visualizer": "^5.5.2",
+    "rollup": "^2.64.0",
+    "rollup-plugin-visualizer": "^5.5.4",
     "sass": "^1.48.0",
     "type-fest": "^2.9.0",
     "typescript": "^4.5.4",
