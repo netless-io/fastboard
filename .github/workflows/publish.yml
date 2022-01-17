@@ -13,7 +13,7 @@ jobs:
         with:
           version: latest
           run_install: true
-      - run: pnpm build
+      - run: pnpm build:ci
       - name: Publish Package
         env:
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}

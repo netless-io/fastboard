@@ -1,21 +1,21 @@
 {
-  "include": ["src", "playground", "e2e", "./package.json", "shim.d.ts"],
-  "exclude": ["src/vue.ts"],
   "compilerOptions": {
-    "noEmit": true,
-    "strict": true,
-    "jsx": "react",
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["DOM", "ESNext"],
-    "types": ["vite/client"],
-    "moduleResolution": "Node",
+    "target": "es2017",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
     "isolatedModules": true,
+    "esModuleInterop": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "useUnknownInCatchVariables": false,
     "resolveJsonModule": true,
-    "skipLibCheck": true
+    "useUnknownInCatchVariables": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "paths": {
+      "fastboard": ["./packages/fastboard/src/index.ts"],
+      "fastboard-react": ["./packages/fastboard-react/src/index.ts"]
+    },
+    "types": ["vite/client"]
   }
 }
