@@ -4,6 +4,7 @@ import type {
   ApplianceNames,
   Camera,
   Color,
+  ConversionResponse,
   HotKeys,
   MemberState,
   Rectangle,
@@ -16,6 +17,7 @@ import type { FastboardDisposer, FastboardInternalValue } from "./value";
 
 import { BuiltinApps } from "@netless/window-manager";
 import { createValue } from "./value";
+import { makeSlideParams, genUID } from "./utils";
 
 export interface FastboardAppParams {
   readonly sdk: WhiteWebSdk;
@@ -59,7 +61,7 @@ export class FastboardApp {
 
   private assertNotDestroyed() {
     if (this._destroyed) {
-      throw new Error("Can not call any method on destroyed FastboardApp.");
+      throw new Error("[FastboardApp] Can not call any method on destroyed FastboardApp.");
     }
   }
 
@@ -134,7 +136,7 @@ export class FastboardApp {
         "onRoomStateChanged",
         ({ memberState }: { memberState?: RoomState["memberState"] }) => memberState && set(memberState)
       ),
-    this.room.setMemberState.bind(this.room)
+    this.manager.mainView.setMemberState.bind(this.manager.mainView)
   );
 
   destroy() {
@@ -185,7 +187,56 @@ export class FastboardApp {
     this.manager.mainView.setMemberState({ strokeColor });
   }
 
-  insertDocs(params: InsertDocsParams) {
+  /**
+   * Insert PDF/PPTX from conversion result.
+   * @param status https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress
+   */
+  insertDocs(filename: string, status: ConversionResponse): Promise<string | undefined>;
+
+  /**
+   * Manual way.
+   */
+  insertDocs(params: InsertDocsParams): Promise<string | undefined>;
+
+  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse) {
+    if (typeof arg1 === "object" && "fileType" in arg1) {
+      return this._insertDocsImpl(arg1);
+    } else if (arg2 && arg2.status !== "Finished") {
+      throw new Error("[FastboardApp] Can not insert a converting doc.");
+    } else if (arg2 && arg2.progress) {
+      const scenes: SceneDefinition[] = arg2.progress.convertedFileList.map((f, i) => ({
+        name: String(i + 1),
+        ppt: {
+          src: f.conversionFileUrl,
+          width: f.width,
+          height: f.height,
+          previewURL: f.preview,
+        },
+      }));
+      const uid = genUID();
+      const scenePath = `/${arg2.uuid}/${uid}`;
+      const { scenesWithoutPPT, taskId, url } = makeSlideParams(scenes);
+      if (taskId && url) {
+        return this._insertDocsImpl({
+          fileType: "pptx",
+          scenePath,
+          taskId,
+          title: arg1,
+          url,
+          scenes: scenesWithoutPPT,
+        });
+      } else {
+        return this._insertDocsImpl({
+          fileType: "pdf",
+          scenePath,
+          scenes,
+          title: arg1,
+        });
+      }
+    }
+  }
+
+  private _insertDocsImpl(params: InsertDocsParams) {
     this.assertNotDestroyed();
     switch (params.fileType) {
       case "pdf":
