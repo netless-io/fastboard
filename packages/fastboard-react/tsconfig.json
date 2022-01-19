@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src", "../fastboard/src/register-apps.ts"],
+  "include": ["src"],
   "compilerOptions": {
     "jsx": "react"
   }
