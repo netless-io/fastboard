@@ -1,9 +1,8 @@
 import type { FastboardApp } from "@netless/fastboard";
-import type { PropsWithChildren } from "react";
+import type { ForwardedRef } from "react";
 import type { Language, Theme } from "../typings";
 
-import React, { useCallback, useEffect } from "react";
-
+import React, { forwardRef, useCallback, useEffect } from "react";
 import { createI18n, I18nContext } from "../i18n";
 import { useAsyncValue, useForceUpdate } from "../internal";
 import { FastboardAppContext, ThemeContext, useFastboardApp, useHideControls } from "./hooks";
@@ -19,24 +18,32 @@ export interface FastboardProps {
   language?: Language;
 }
 
-export function Fastboard({ app, ...restProps }: PropsWithChildren<FastboardProps>) {
+export type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+export type WithForwardedRef<T = HTMLDivElement> = { forwardedRef: ForwardedRef<T> };
+
+export const Fastboard = forwardRef<HTMLDivElement, FastboardProps & DivProps>(function Fastboard(
+  { app, theme, layout, language, ...restProps },
+  ref
+) {
   if (!app) {
-    return <div className="fastboard-root" />;
+    return <div className="fastboard-root" ref={ref} {...restProps} />;
   }
 
   return (
     <FastboardAppContext.Provider value={app}>
-      <FastboardInternal {...restProps} />
+      <FastboardInternal forwardedRef={ref} {...{ theme, layout, language }} {...restProps} />
     </FastboardAppContext.Provider>
   );
-}
+});
 
 function FastboardInternal({
+  forwardedRef,
   language,
   layout = {},
   theme = "light",
   children,
-}: Omit<PropsWithChildren<FastboardProps>, "app">) {
+  ...restProps
+}: Omit<FastboardProps, "app"> & DivProps & WithForwardedRef) {
   const app = useFastboardApp();
   const forceUpdate = useForceUpdate();
   const i18n = useAsyncValue(() => createI18n({ language }));
@@ -66,7 +73,7 @@ function FastboardInternal({
   return (
     <ThemeContext.Provider value={theme}>
       <I18nContext.Provider value={i18n}>
-        <div className="fastboard-root">
+        <div {...restProps} className="fastboard-root" ref={forwardedRef}>
           <div className="fastboard-view" ref={useWhiteboard} />
           {children ? (
             children
