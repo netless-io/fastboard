@@ -24,7 +24,7 @@ WindowManager.register({
 
 WindowManager.register({
   kind: "GeoGebra",
-  src: "https://cdn.jsdelivr.net/npm/@netless/app-monaco@geogebra/dist/main.iife.js",
+  src: "https://cdn.jsdelivr.net/npm/@netless/app-geogebra@latest/dist/main.iife.js",
   appOptions: {
     HTML5Codebase: "https://flat-storage-cn-hz.whiteboard.agora.io/GeoGebra/HTML5/5.0/web3d",
   },

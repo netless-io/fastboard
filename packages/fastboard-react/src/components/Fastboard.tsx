@@ -53,9 +53,13 @@ function FastboardInternal({
     forceUpdate();
   }, [forceUpdate, i18n, language]);
 
+  useEffect(() => {
+    app.manager.setPrefersColorScheme(theme);
+  }, [app, theme]);
+
   const useWhiteboard = useCallback(
     (container: HTMLDivElement | null) => {
-      container && app && app.manager.bindContainer(container);
+      if (container && app) app.manager.bindContainer(container);
     },
     [app]
   );

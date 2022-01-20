@@ -47,9 +47,16 @@ function App() {
   return (
     <>
       <Fastboard app={app} language={language} theme={dark ? "dark" : "light"} />
-      <div className="bottom-hang">
+      <div className="right-hang">
         <DarkControls dark={dark} setDark={setDark} />
         <LanguageControls language={language} setLanguage={setLanguage} />
+        {app && (
+          <div className="row" style={{ display: "flex", gap: 5 }}>
+            <button onClick={() => app.insertCodeEditor()}>Code&nbsp;Editor</button>
+            <button onClick={() => app.insertCountdown()}>Countdown</button>
+            <button onClick={() => app.insertGeoGebra()}>GeoGebra</button>
+          </div>
+        )}
       </div>
       <Handler
         target={document.querySelector("#app") as HTMLDivElement}
