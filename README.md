@@ -2,12 +2,13 @@
 
 本库用于快速开始一个白板应用，基于 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 和 [netless-app](https://github.com/netless-io/netless-app) 实现。
 
+<p align=center>🚧 Working in Progress 🚧</p>
+
 ## 目录
 
 - [安装](#install)
 - [使用](#usage)
 - [进阶](./docs)
-- [开发](#develop)
 
 <h2 id="install">安装</h2>
 
@@ -174,6 +175,18 @@ const appId = await app.insertMedia("文件名.mp3", fileUrl);
 
 ```js
 const appId = await app.insertCodeEditor();
+```
+
+#### 插入 [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
+
+```js
+const appId = await app.insertCountdown();
+```
+
+#### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
+
+```js
+const appId = await app.insertGeoGebra();
 ```
 
 > 更多 `app` 请看 [netless-app](#https://github.com/netless-io/netless-app)
