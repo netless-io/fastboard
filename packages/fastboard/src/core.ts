@@ -32,11 +32,6 @@ export interface InsertDocsDynamic {
   readonly scenes?: SceneDefinition[];
 }
 
-export interface InsertMediaParams {
-  title: string;
-  src: string;
-}
-
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
 export type SetMemberStateFn = (partialMemberState: Partial<MemberState>) => void;
@@ -285,7 +280,7 @@ export class FastboardApp extends FastboardAppBase {
   /**
    * Insert the Media Player app.
    */
-  insertMedia({ title, src }: InsertMediaParams) {
+  insertMedia(title: string, src: string) {
     this._assertNotDestroyed();
     return this.manager.addApp({
       kind: BuiltinApps.MediaPlayer,

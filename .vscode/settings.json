@@ -5,5 +5,5 @@
     "source.fixAll": true,
     "source.addMissingImports": true
   },
-  "cSpell.words": ["changesets", "fastboard", "geogebra", "pnpx", "tippyjs", "tsup"]
+  "cSpell.words": ["changesets", "fastboard", "geogebra", "pnpx", "telebox", "tippyjs", "tsup"]
 }
