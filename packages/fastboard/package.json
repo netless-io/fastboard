@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
