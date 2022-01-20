@@ -12,10 +12,6 @@
     "useUnknownInCatchVariables": false,
     "strict": true,
     "skipLibCheck": true,
-    "paths": {
-      "fastboard": ["./packages/fastboard/src/index.ts"],
-      "fastboard-react": ["./packages/fastboard-react/src/index.ts"]
-    },
     "types": ["vite/client"]
   }
 }

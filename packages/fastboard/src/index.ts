@@ -6,6 +6,7 @@ import { WindowManager } from "@netless/window-manager";
 
 import "./register-apps";
 import { FastboardApp } from "./core";
+import { ensureWindowManager } from "./utils";
 
 export type { FastboardReadable, FastboardWritable } from "./value";
 
@@ -19,6 +20,20 @@ export interface FastboardOptions {
   managerConfig?: Omit<MountParams, "room">;
 }
 
+/**
+ * Create a FastboardApp instance.
+ * @example
+ * let app = await createFastboard({
+ *   sdkConfig: {
+ *     appIdentifier: import.meta.env.VITE_APPID,
+ *   },
+ *   joinRoom: {
+ *     uid: unique_id,
+ *     uuid: import.meta.env.VITE_ROOM_UUID,
+ *     roomToken: import.meta.env.VITE_ROOM_TOKEN,
+ *   },
+ * })
+ */
 export async function createFastboard({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
@@ -62,11 +77,4 @@ export async function createFastboard({
   });
 
   return new FastboardApp(sdk, room, manager, hotKeys);
-}
-
-function ensureWindowManager(joinRoom: JoinRoomParams) {
-  if (!joinRoom.invisiblePlugins || !joinRoom.invisiblePlugins.includes(WindowManager)) {
-    joinRoom.invisiblePlugins = [...(joinRoom.invisiblePlugins || []), WindowManager];
-  }
-  return joinRoom;
 }
