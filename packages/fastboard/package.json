@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,7 +11,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "cleanup": "rimraf dist"
   },
   "peerDependencies": {
     "@netless/app-slide": "*",

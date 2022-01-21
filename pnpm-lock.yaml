@@ -5,6 +5,7 @@ importers:
   .:
     specifiers:
       '@changesets/cli': ^2.19.0
+      '@hyrious/rimraf': ^0.1.0
       '@types/node': ^17.0.10
       '@typescript-eslint/eslint-plugin': ^5.10.0
       '@typescript-eslint/parser': ^5.10.0
@@ -16,6 +17,7 @@ importers:
       vite: ^2.7.13
     devDependencies:
       '@changesets/cli': 2.19.0
+      '@hyrious/rimraf': 0.1.0
       '@types/node': 17.0.10
       '@typescript-eslint/eslint-plugin': 5.10.0_3b6b276e93ead7cf6063f183a5e18d1f
       '@typescript-eslint/parser': 5.10.0_eslint@8.7.0+typescript@4.5.4
@@ -584,6 +586,12 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@hyrious/rimraf/0.1.0:
+    resolution: {integrity: sha512-EvPZVRkyJTzoBHOswuVK2hSAFGIfu9E0S7sCfOc7mvA+l2t1PxNZPVAflZuU/FJIzmV7wZAO57ISqf1j3wxFjA==}
+    engines: {node: '>=14.14.0'}
+    hasBin: true
     dev: true
 
   /@juggle/resize-observer/3.3.1:
