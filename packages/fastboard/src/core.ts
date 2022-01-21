@@ -112,6 +112,26 @@ export class FastboardApp extends FastboardAppBase {
   );
 
   /**
+   * 0..n-1, current index of main view scenes.
+   */
+  readonly sceneIndex = this.createValue(
+    this.manager.mainViewSceneIndex,
+    set => this._addManagerListener("mainViewSceneIndexChange", set),
+    this.manager.setMainViewSceneIndex.bind(this.manager)
+  );
+
+  // TODO: upgrade window-manager
+  /**
+   * How many pages are in the main view?
+   */
+  readonly sceneLength = this.createValue(this.room.state.sceneState.scenes.length, set =>
+    this._addRoomListener<RoomStateChanged>(
+      "onRoomStateChanged",
+      ({ sceneState: s }) => s && set(s.scenes.length)
+    )
+  );
+
+  /**
    * Undo a step on main view.
    */
   undo() {

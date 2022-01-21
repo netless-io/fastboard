@@ -1,67 +1,24 @@
-import type { Room, RoomState } from "white-web-sdk";
-import type { WindowManager } from "@netless/window-manager";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
+import { useFastboardApp, useFastboardValue } from "../hooks";
 
-export function usePageControl(room?: Room | null, manager?: WindowManager | null) {
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+export function usePageControl() {
+  const app = useFastboardApp();
+  const pageIndex = useFastboardValue(app.sceneIndex);
+  const pageCount = useFastboardValue(app.sceneLength);
 
   const addPage = useCallback(async () => {
-    if (manager && room) {
-      await manager.switchMainViewToWriter();
-      const path = room.state.sceneState.contextPath;
-      room.putScenes(path, [{}], pageIndex + 1);
-      await manager.setMainViewSceneIndex(pageIndex + 1);
-    } else if (!manager && room) {
-      const path = room.state.sceneState.contextPath;
-      room.putScenes(path, [{}], pageIndex + 1);
-      room.setSceneIndex(pageIndex + 1);
-    }
-  }, [room, manager, pageIndex]);
+    await app.manager.switchMainViewToWriter();
+    app.room.putScenes(app.manager.mainViewSceneDir, [{}], pageIndex + 1);
+    await app.manager.setMainViewSceneIndex(pageIndex + 1);
+  }, [app, pageIndex]);
 
-  const prevPage = useCallback(() => {
-    if (manager) {
-      manager.setMainViewSceneIndex(pageIndex - 1);
-    } else if (room) {
-      room.pptPreviousStep();
-    }
-  }, [room, manager, pageIndex]);
+  const prevPage = useCallback(async () => {
+    await app.manager.setMainViewSceneIndex(pageIndex - 1);
+  }, [app, pageIndex]);
 
-  const nextPage = useCallback(() => {
-    if (manager) {
-      manager.setMainViewSceneIndex(pageIndex + 1);
-    } else if (room) {
-      room.pptNextStep();
-    }
-  }, [room, manager, pageIndex]);
-
-  useEffect(() => {
-    if (room) {
-      setPageIndex(room.state.sceneState.index);
-      setPageCount(room.state.sceneState.scenes.length);
-
-      if (manager) {
-        manager.emitter.on("mainViewSceneIndexChange", setPageIndex);
-
-        return () => {
-          manager.emitter.off("mainViewSceneIndexChange", setPageIndex);
-        };
-      } else {
-        const onRoomStateChanged = (modifyState: Partial<RoomState>) => {
-          if (modifyState.sceneState) {
-            setPageIndex(modifyState.sceneState.index);
-            setPageCount(modifyState.sceneState.scenes.length);
-          }
-        };
-
-        room.callbacks.on("onRoomStateChanged", onRoomStateChanged);
-
-        return () => {
-          room.callbacks.off("onRoomStateChanged", onRoomStateChanged);
-        };
-      }
-    }
-  }, [room, manager]);
+  const nextPage = useCallback(async () => {
+    await app.manager.setMainViewSceneIndex(pageIndex + 1);
+  }, [app, pageIndex]);
 
   return { pageIndex, pageCount, prevPage, nextPage, addPage };
 }

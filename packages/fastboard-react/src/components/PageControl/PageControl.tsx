@@ -10,7 +10,7 @@ import { ChevronLeft } from "../../icons/ChevronLeft";
 import { ChevronRight } from "../../icons/ChevronRight";
 import { FilePlus } from "../../icons/FilePlus";
 import { TopOffset } from "../../theme";
-import { useFastboardApp, useTheme, useWritable } from "../hooks";
+import { useTheme, useWritable } from "../hooks";
 import { usePageControl } from "./hooks";
 
 export const name = "fastboard-page-control";
@@ -26,13 +26,11 @@ export function PageControl({
   nextIcon,
   nextIconDisable,
 }: PageControlProps) {
-  const app = useFastboardApp();
-
   theme = useTheme(theme);
   const { t } = useTranslation();
 
   const writable = useWritable();
-  const { pageIndex, pageCount, ...actions } = usePageControl(app.room, app.manager);
+  const { pageIndex, pageCount, ...actions } = usePageControl();
 
   const disabled = !writable;
 
