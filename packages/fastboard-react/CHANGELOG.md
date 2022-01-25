@@ -1,5 +1,27 @@
 # @netless/fastboard-react
 
+## 0.2.0
+
+### Minor Changes
+
+- 51c9f77: Move fastboard to fastboard-core, export a new fastboard package which does everything.
+
+  Example usage:
+
+  ```ts
+  import { createFastboard, mount } from "@netless/fastboard";
+
+  const app = await createFastboard({ ...config });
+  mount(app, document.getElementById("whiteboard"));
+  ```
+
+  It still depends on `react`, but surely we will migrate to svelte in some time.
+
+### Patch Changes
+
+- Updated dependencies [51c9f77]
+  - @netless/fastboard-core@0.2.0
+
 ## 0.1.1
 
 ### Patch Changes
