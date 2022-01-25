@@ -120,15 +120,11 @@ export class FastboardApp extends FastboardAppBase {
     this.manager.setMainViewSceneIndex.bind(this.manager)
   );
 
-  // TODO: upgrade window-manager
   /**
    * How many pages are in the main view?
    */
-  readonly sceneLength = this.createValue(this.room.state.sceneState.scenes.length, set =>
-    this._addRoomListener<RoomStateChanged>(
-      "onRoomStateChanged",
-      ({ sceneState: s }) => s && set(s.scenes.length)
-    )
+  readonly sceneLength = this.createValue(this.manager.mainViewScenesLength, set =>
+    this._addManagerListener("mainViewScenesLengthChange", set)
   );
 
   /**
