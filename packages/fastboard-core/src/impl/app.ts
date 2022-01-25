@@ -1,19 +1,76 @@
+import type { PublicEvent, WindowManager } from "@netless/window-manager";
 import type {
   AnimationMode,
   ApplianceNames,
   Camera,
   Color,
   ConversionResponse,
+  HotKeys,
   MemberState,
   Rectangle,
+  Room,
+  RoomCallbacks,
   RoomState,
   SceneDefinition,
   ShapeType,
+  ViewCallbacks,
+  WhiteWebSdk,
 } from "white-web-sdk";
+import type { FastboardDisposer, FastboardInternalValue } from "../helpers/value";
 
 import { BuiltinApps } from "@netless/window-manager";
-import { FastboardAppBase } from "./base";
-import { convertedFileToScene, genUID, getImageSize, makeSlideParams } from "./utils";
+import { convertedFileToScene, genUID, getImageSize, makeSlideParams } from "../helpers/utils";
+import { createValue } from "../helpers/value";
+
+class FastboardAppBase {
+  public constructor(
+    readonly sdk: WhiteWebSdk,
+    readonly room: Room,
+    readonly manager: WindowManager,
+    readonly hotKeys: Partial<HotKeys>
+  ) {}
+
+  protected readonly _disposers: FastboardDisposer[] = [];
+  protected _destroyed = false;
+  protected _assertNotDestroyed() {
+    if (this._destroyed) {
+      throw new Error("[FastboardApp] Can not call any method on destroyed FastboardApp.");
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected createValue: typeof createValue = (...args: [any, any]): any => {
+    const value = createValue(...args);
+    this._disposers.push((value as FastboardInternalValue<unknown>).dispose);
+    return value;
+  };
+
+  protected _addRoomListener<K extends keyof RoomCallbacks, T = RoomCallbacks[K]>(name: K, listener: T) {
+    this._assertNotDestroyed();
+    this.room.callbacks.on(name, listener);
+    return () => this.room.callbacks.off(name, listener);
+  }
+
+  protected _addManagerListener<K extends keyof PublicEvent>(name: K, set: (value: PublicEvent[K]) => void) {
+    this._assertNotDestroyed();
+    this.manager.emitter.on(name, set);
+    return () => this.manager.emitter.off(name, set);
+  }
+
+  protected _addMainViewListener<K extends keyof ViewCallbacks, T = ViewCallbacks[K]>(name: K, listener: T) {
+    this._assertNotDestroyed();
+    this.manager.mainView.callbacks.on(name, listener);
+    return () => this.manager.mainView.callbacks.off(name, listener);
+  }
+
+  public destroy() {
+    this._disposers.forEach(dispose => dispose());
+    this._disposers.length = 0;
+    this._destroyed = true;
+    this.manager.destroy();
+    return this.room.disconnect();
+  }
+}
 
 export interface InsertDocsStatic {
   readonly fileType: "pdf" | "ppt";
@@ -107,7 +164,11 @@ export class FastboardApp extends FastboardAppBase {
    */
   readonly memberState = this.createValue<MemberState, SetMemberStateFn>(
     this.room.state.memberState,
-    set => this._addRoomListener<RoomStateChanged>("onRoomStateChanged", ({ memberState: m }) => m && set(m)),
+    set =>
+      this._addRoomListener<"onRoomStateChanged", RoomStateChanged>(
+        "onRoomStateChanged",
+        ({ memberState: m }) => m && set(m)
+      ),
     this.manager.mainView.setMemberState.bind(this.manager.mainView)
   );
 

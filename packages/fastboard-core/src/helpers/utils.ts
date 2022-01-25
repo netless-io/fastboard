@@ -1,4 +1,4 @@
-import type { ConvertedFile, JoinRoomParams, SceneDefinition, Size } from "white-web-sdk";
+import type { ConvertedFile, JoinRoomParams, ReplayRoomParams, SceneDefinition, Size } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 
 export function noop() {
@@ -53,7 +53,7 @@ export function convertedFileToScene(f: ConvertedFile, i: number) {
   };
 }
 
-export function ensureWindowManager(joinRoom: JoinRoomParams) {
+export function ensureWindowManager<T extends JoinRoomParams | ReplayRoomParams>(joinRoom: T): T {
   if (!joinRoom.invisiblePlugins || !joinRoom.invisiblePlugins.includes(WindowManager)) {
     joinRoom.invisiblePlugins = [...(joinRoom.invisiblePlugins || []), WindowManager];
   }
