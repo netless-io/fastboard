@@ -8,3 +8,4 @@ export * from "./components/PageControl";
 export * from "./components/Toolbar";
 export * from "./components/PlayerControl";
 export * from "./components/Fastboard";
+export * from "./vanilla";

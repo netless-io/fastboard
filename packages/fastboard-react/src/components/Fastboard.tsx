@@ -1,4 +1,4 @@
-import type { FastboardApp } from "@netless/fastboard";
+import type { FastboardApp } from "@netless/fastboard-core";
 import type { ForwardedRef } from "react";
 import type { Language, Theme } from "../typings";
 
@@ -21,20 +21,19 @@ export interface FastboardProps {
 export type DivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 export type WithForwardedRef<T = HTMLDivElement> = { forwardedRef: ForwardedRef<T> };
 
-export const Fastboard = forwardRef<HTMLDivElement, FastboardProps & DivProps>(function Fastboard(
-  { app, theme, layout, language, ...restProps },
-  ref
-) {
-  if (!app) {
-    return <div className="fastboard-root" ref={ref} {...restProps} />;
-  }
+export const Fastboard = /* @__PURE__ */ forwardRef<HTMLDivElement, FastboardProps & DivProps>(
+  function Fastboard({ app, theme, layout, language, ...restProps }, ref) {
+    if (!app) {
+      return <div className="fastboard-root" ref={ref} {...restProps} />;
+    }
 
-  return (
-    <FastboardAppContext.Provider value={app}>
-      <FastboardInternal forwardedRef={ref} {...{ theme, layout, language }} {...restProps} />
-    </FastboardAppContext.Provider>
-  );
-});
+    return (
+      <FastboardAppContext.Provider value={app}>
+        <FastboardInternal forwardedRef={ref} {...{ theme, layout, language }} {...restProps} />
+      </FastboardAppContext.Provider>
+    );
+  }
+);
 
 function FastboardInternal({
   forwardedRef,

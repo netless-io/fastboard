@@ -1,4 +1,4 @@
-import type { FastboardApp, FastboardReadable } from "@netless/fastboard";
+import type { FastboardApp, FastboardReadable } from "@netless/fastboard-core";
 import type { Theme } from "../typings";
 
 import { BuiltinApps } from "@netless/window-manager";

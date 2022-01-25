@@ -13,9 +13,6 @@ export default defineConfig({
   loader: {
     ".png": "dataurl",
   },
-  esbuildOptions(options) {
-    options.ignoreAnnotations = true;
-  },
   esbuildPlugins: [
     {
       name: "sass",

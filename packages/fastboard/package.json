@@ -3,7 +3,6 @@
   "version": "0.1.1",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
-  "sideEffects": false,
   "files": [
     "src",
     "dist"
@@ -12,6 +11,10 @@
     "build": "tsup",
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@netless/fastboard-core": "workspace:*",
+    "@netless/fastboard-react": "workspace:*"
   },
   "peerDependencies": {
     "@netless/app-slide": "*",

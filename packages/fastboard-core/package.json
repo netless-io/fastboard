@@ -1,7 +1,7 @@
 {
-  "name": "@netless/fastboard-react",
+  "name": "@netless/fastboard-core",
   "version": "0.1.1",
-  "description": "A UI kit built on top of @netless/fastboard.",
+  "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
     "src",
@@ -12,28 +12,19 @@
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit"
   },
-  "dependencies": {
-    "@tippyjs/react": "^4.2.6",
-    "clsx": "^1.1.1",
-    "framer-motion": "^6.2.1",
-    "i18next": "^21.6.7",
-    "rc-slider": "^9.7.5"
-  },
   "peerDependencies": {
-    "@netless/fastboard-core": "*",
+    "@netless/app-slide": "*",
     "@netless/window-manager": ">=0.4.0",
-    "react": "*",
-    "react-dom": "*",
     "white-web-sdk": ">=2.16.0"
+  },
+  "peerDependenciesMeta": {
+    "@netless/app-slide": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@netless/app-slide": "^0.0.56",
-    "@netless/fastboard-core": "workspace:*",
     "@netless/window-manager": "^0.4.0-canary.24",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
-    "sass": "^1.49.0",
-    "tippy.js": "^6.3.7",
     "tsup": "^5.11.11",
     "white-web-sdk": "^2.16.1"
   },
