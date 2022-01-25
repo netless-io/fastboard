@@ -23,4 +23,5 @@ jobs:
           version: latest
           run_install: true
       - run: pnpm lint
+      - run: pnpm check
       - run: pnpm build:ci

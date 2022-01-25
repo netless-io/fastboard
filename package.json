@@ -4,6 +4,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
+    "check": "pnpm check --filter={packages}...",
     "dev": "pnpm dev:react",
     "dev:react": "pnpm dev --filter=test-react",
     "build": "pnpm cleanup && pnpm build --filter={packages}...",
@@ -11,16 +12,16 @@
     "cleanup": "pnpm cleanup -r"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.19.0",
+    "@changesets/cli": "^2.20.0",
     "@hyrious/rimraf": "^0.1.0",
-    "@types/node": "^17.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
+    "@types/node": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^8.7.0",
-    "eslint-define-config": "^1.2.2",
+    "eslint-define-config": "^1.2.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
-    "typescript": "^4.5.4",
+    "typescript": "^4.5.5",
     "vite": "^2.7.13"
   },
   "pnpm": {
