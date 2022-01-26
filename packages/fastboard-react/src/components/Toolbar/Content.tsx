@@ -78,8 +78,7 @@ export function Content({ onCollapse }: ContextProps) {
         <AppsButton />
       </div>
       {needScroll && <DownButton scrollTo={scrollTo} disabled={disableScrollDown} />}
-
-      <div className="fastboard-toolbar-mask" onClick={onCollapse}>
+      <div className={clsx("fastboard-toolbar-mask", theme)} onClick={onCollapse}>
         <Icon
           fallback={<img draggable={false} className={clsx(`${name}-mask-btn`, theme)} src={collapsePNG} />}
           src={disabled ? icons?.expandIconDisable : icons?.expandIcon}
