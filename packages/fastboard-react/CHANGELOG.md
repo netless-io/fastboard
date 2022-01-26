@@ -1,5 +1,18 @@
 # @netless/fastboard-react
 
+## 0.2.1
+
+### Patch Changes
+
+- 3e2bce8: (core) Add player.
+
+  (package) Move app-slide to dependencies.
+
+  (react) Improve toolbar styles.
+
+- Updated dependencies [3e2bce8]
+  - @netless/fastboard-core@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

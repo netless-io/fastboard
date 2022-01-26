@@ -1,19 +1,34 @@
 # @netless/fastboard
 
+## 0.2.1
+
+### Patch Changes
+
+- 3e2bce8: (core) Add player.
+
+  (package) Move app-slide to dependencies.
+
+  (react) Improve toolbar styles.
+
+- Updated dependencies [3e2bce8]
+  - @netless/fastboard-core@0.2.1
+  - @netless/fastboard-react@0.2.1
+
 ## 0.2.0
+
 ### Minor Changes
 
 - 51c9f77: Move fastboard to fastboard-core, export a new fastboard package which does everything.
-  
+
   Example usage:
-  
+
   ```ts
   import { createFastboard, mount } from "@netless/fastboard";
-  
+
   const app = await createFastboard({ ...config });
   mount(app, document.getElementById("whiteboard"));
   ```
-  
+
   It still depends on `react`, but surely we will migrate to svelte in some time.
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # test-react
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [3e2bce8]
+  - @netless/fastboard@0.2.1
+  - @netless/fastboard-react@0.2.1
+
 ## 0.1.2
 
 ### Patch Changes
