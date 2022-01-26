@@ -58,7 +58,6 @@ importers:
 
   packages/fastboard-react:
     specifiers:
-      '@netless/app-slide': ^0.0.56
       '@netless/fastboard-core': workspace:*
       '@netless/window-manager': ^0.4.0-canary.24
       '@tippyjs/react': ^4.2.6
@@ -79,7 +78,6 @@ importers:
       i18next: 21.6.9
       rc-slider: 9.7.5
     devDependencies:
-      '@netless/app-slide': 0.0.56
       '@netless/fastboard-core': link:../fastboard-core
       '@netless/window-manager': 0.4.0-canary.24_white-web-sdk@2.16.3
       '@types/react': 17.0.38
@@ -634,6 +632,7 @@ packages:
 
   /@netless/app-slide/0.0.56:
     resolution: {integrity: sha512-x4STJrQl/eoAnc7ctQ4NDDGWR7kc76s81RtxLZ7QatBM5XxG2XhVk5gguvW9vx3tnTR+XOOFDPQ55VGhEmf6oQ==}
+    dev: false
 
   /@netless/canvas-polyfill/0.0.4:
     resolution: {integrity: sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==}
