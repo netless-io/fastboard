@@ -12,5 +12,6 @@ pnpx changeset
 ```bash
 pnpx changeset version
 pnpm i
+pnpm build
 pnpm publish -r
 ```
