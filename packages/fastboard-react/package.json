@@ -15,8 +15,8 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
-    "framer-motion": "^6.2.1",
-    "i18next": "^21.6.7",
+    "framer-motion": "^6.2.3",
+    "i18next": "^21.6.9",
     "rc-slider": "^9.7.5"
   },
   "peerDependencies": {
@@ -27,7 +27,6 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "@netless/app-slide": "^0.0.56",
     "@netless/fastboard-core": "workspace:*",
     "@netless/window-manager": "^0.4.0-canary.24",
     "@types/react": "^17.0.38",
@@ -35,7 +34,7 @@
     "sass": "^1.49.0",
     "tippy.js": "^6.3.7",
     "tsup": "^5.11.11",
-    "white-web-sdk": "^2.16.1"
+    "white-web-sdk": "^2.16.3"
   },
   "publishConfig": {
     "main": "dist/index.js",

@@ -13,17 +13,19 @@
 <h2 id="install">安装</h2>
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk react react-dom
 </pre>
 
 > **注意：**@netless/window-manager 和 white-web-sdk 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/peer-dependency.md)。
+
+> React **暂时**是也依赖，目前我们的 UI 库使用了它开发，所以现在我们需要安装它。将来我们会把它去掉。
 
 <h2 id="usage">使用</h2>
 
 ### 原生 JavaScript
 
 ```js
-import { createFastboard } from "@netless/fastboard";
+import { createFastboard, mount } from "@netless/fastboard";
 
 let app;
 async function mountFastboard(div) {
@@ -43,12 +45,13 @@ async function mountFastboard(div) {
       cursor: true,
     },
   });
-  app.bindElement(div);
+  return mount(app, div);
 }
 
-mountFastboard(document.getElementById("whiteboard"));
+let dispose = mountFastboard(document.getElementById("whiteboard"));
 
 // 卸载 app
+dispose();
 app.destroy();
 ```
 
@@ -70,11 +73,12 @@ app.destroy();
 先安装 @netless/fastboard-react，再使用里面提供的 `<Fastboard />` 组件。
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b>
+npm add <b>@netless/fastboard-react</b> @netless/fastboard-core \
+        @netless/window-manager white-web-sdk react react-dom
 </pre>
 
 ```jsx
-import { createFastboard } from "@netless/fastboard";
+import { createFastboard } from "@netless/fastboard-core";
 import { Fastboard } from "@netless/fastboard-react";
 import ReactDOM from "react-dom";
 

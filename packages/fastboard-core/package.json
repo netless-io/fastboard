@@ -5,28 +5,26 @@
   "main": "src/index.ts",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "minimal.mjs",
+    "minimal.ts"
   ],
   "scripts": {
     "build": "tsup",
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit"
   },
+  "dependencies": {
+    "@netless/app-slide": "^0.0.56"
+  },
   "peerDependencies": {
-    "@netless/app-slide": "*",
     "@netless/window-manager": ">=0.4.0",
     "white-web-sdk": ">=2.16.0"
   },
-  "peerDependenciesMeta": {
-    "@netless/app-slide": {
-      "optional": true
-    }
-  },
   "devDependencies": {
-    "@netless/app-slide": "^0.0.56",
     "@netless/window-manager": "^0.4.0-canary.24",
     "tsup": "^5.11.11",
-    "white-web-sdk": "^2.16.1"
+    "white-web-sdk": "^2.16.3"
   },
   "publishConfig": {
     "main": "dist/index.js",
