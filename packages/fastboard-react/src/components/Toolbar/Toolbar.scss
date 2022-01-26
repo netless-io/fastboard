@@ -263,6 +263,13 @@ $name: "fastboard-toolbar";
     }
   }
 
+  &-mask {
+    position: absolute;
+    left: calc(100% + 1px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   &-mask-btn {
     width: 17px;
     height: 62px;
