@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.3
+
+### Patch Changes
+
+- eebefc0: fix: should hide mask button automatically
+
 ## 0.2.2
 
 ### Patch Changes

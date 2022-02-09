@@ -1,5 +1,13 @@
 # @netless/fastboard-react
 
+## 0.2.3
+
+### Patch Changes
+
+- eebefc0: fix: should hide mask button automatically
+- Updated dependencies [eebefc0]
+  - @netless/fastboard-core@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
