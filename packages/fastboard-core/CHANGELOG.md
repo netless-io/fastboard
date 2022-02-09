@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.4
+
+### Patch Changes
+
+- 9cd2a07: refactor: hide controls if not writable by default
+
 ## 0.2.3
 
 ### Patch Changes

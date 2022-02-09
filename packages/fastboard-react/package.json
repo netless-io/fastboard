@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A UI kit built on top of @netless/fastboard.",
   "main": "src/index.ts",
   "files": [

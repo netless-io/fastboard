@@ -1,5 +1,13 @@
 # @netless/fastboard-react
 
+## 0.2.4
+
+### Patch Changes
+
+- 9cd2a07: refactor: hide controls if not writable by default
+- Updated dependencies [9cd2a07]
+  - @netless/fastboard-core@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes
