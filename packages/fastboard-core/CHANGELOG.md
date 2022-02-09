@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.2
+
+### Patch Changes
+
+- 7831845: [5e2cb73] refactor: redo/undo bind to current window
+
 ## 0.2.1
 
 ### Patch Changes

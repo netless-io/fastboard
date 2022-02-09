@@ -1,5 +1,13 @@
 # @netless/fastboard-react
 
+## 0.2.2
+
+### Patch Changes
+
+- 7831845: [5e2cb73] refactor: redo/undo bind to current window
+- Updated dependencies [7831845]
+  - @netless/fastboard-core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
