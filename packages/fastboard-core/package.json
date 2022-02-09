@@ -22,9 +22,9 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "@netless/window-manager": "^0.4.0-canary.24",
+    "@netless/window-manager": "^0.4.0-canary.31",
     "tsup": "^5.11.11",
-    "white-web-sdk": "^2.16.3"
+    "white-web-sdk": "^2.16.5"
   },
   "publishConfig": {
     "main": "dist/index.js",

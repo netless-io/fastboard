@@ -100,11 +100,11 @@ export interface FastboardReplayOptions {
 /**
  * Create a FastboardPlayer instance.
  * @example
- * let app = await createFastboard({
+ * let app = await replayFastboard({
  *   sdkConfig: {
  *     appIdentifier: import.meta.env.VITE_APPID,
  *   },
- *   joinRoom: {
+ *   replayRoom: {
  *     uid: unique_id,
  *     uuid: import.meta.env.VITE_ROOM_UUID,
  *     roomToken: import.meta.env.VITE_ROOM_TOKEN,

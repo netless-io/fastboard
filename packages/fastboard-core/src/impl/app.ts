@@ -139,37 +139,29 @@ export class FastboardApp extends FastboardAppBase {
   /**
    * How many times can I call `app.redo()`?
    */
-  readonly canRedoSteps = this.createValue(this.manager.mainView.canRedoSteps, set =>
-    this._addMainViewListener("onCanRedoStepsUpdate", set)
+  readonly canRedoSteps = this.createValue(this.manager.canRedoSteps, set =>
+    this._addManagerListener("canRedoStepsChange", set)
   );
 
   /**
    * How many times can I call `app.undo()`?
    */
-  readonly canUndoSteps = this.createValue(this.manager.mainView.canUndoSteps, set =>
-    this._addMainViewListener("onCanUndoStepsUpdate", set)
+  readonly canUndoSteps = this.createValue(this.manager.canUndoSteps, set =>
+    this._addManagerListener("canUndoStepsChange", set)
   );
 
   /**
    * Current camera information of main view.
    */
-  readonly camera = this.createValue(
-    this.manager.mainView.camera,
-    set => this._addMainViewListener("onCameraUpdated", set),
-    this.manager.moveCamera.bind(this.manager)
+  readonly camera = this.createValue(this.manager.mainView.camera, set =>
+    this._addMainViewListener("onCameraUpdated", set)
   );
 
   /**
    * Current tool's info, like "is using pencil?", "what color?".
    */
-  readonly memberState = this.createValue<MemberState, SetMemberStateFn>(
-    this.room.state.memberState,
-    set =>
-      this._addRoomListener<"onRoomStateChanged", RoomStateChanged>(
-        "onRoomStateChanged",
-        ({ memberState: m }) => m && set(m)
-      ),
-    this.manager.mainView.setMemberState.bind(this.manager.mainView)
+  readonly memberState = this.createValue(this.room.state.memberState, set =>
+    this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m))
   );
 
   /**
