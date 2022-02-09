@@ -43,12 +43,14 @@ export function useMaximized() {
   return useBoxState() === "maximized";
 }
 
+const AppsShouldShowToolbar = /* @__PURE__ */ (() => [BuiltinApps.DocsViewer, "Slide"])();
+
 export function useHideControls() {
   const maximized = useMaximized();
   const focusedApp = useFocusedApp();
 
   if (maximized) {
-    if (Object.values(BuiltinApps).some(kind => focusedApp?.includes(kind))) {
+    if (AppsShouldShowToolbar.some(kind => focusedApp?.includes(kind))) {
       return "toolbar-only";
     } else {
       return true;
