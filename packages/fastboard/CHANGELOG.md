@@ -1,5 +1,17 @@
 # @netless/fastboard
 
+## 0.2.6
+
+### Patch Changes
+
+- 1790c6d: refactor: change camera bound from 0.1-10 to 0.3-3
+
+  refactor: remember last shape
+
+- Updated dependencies [1790c6d]
+  - @netless/fastboard-core@0.2.6
+  - @netless/fastboard-react@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes
