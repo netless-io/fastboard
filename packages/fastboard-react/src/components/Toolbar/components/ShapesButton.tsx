@@ -8,7 +8,6 @@ import { ApplianceNames } from "white-web-sdk";
 import { useTranslation } from "../../../i18n";
 import { RightOffset } from "../../../theme";
 import { ApplianceShapes, Shapes, ShapesMap } from "../const";
-import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 import { ColorBox } from "./ColorBox";
@@ -19,7 +18,7 @@ const ShapeTypes = new Set([...ApplianceShapes, ...Shapes]);
 
 export function ShapesButton() {
   const { t } = useTranslation();
-  const { theme, memberState } = useContext(ToolbarContext);
+  const { theme, memberState, lastShape } = useContext(ToolbarContext);
 
   const appliance = memberState?.currentApplianceName;
   const shape = memberState?.shapeType;
@@ -28,7 +27,7 @@ export function ShapesButton() {
 
   const active = ShapeTypes.has(key);
 
-  const CurrentIcon = ShapesMap[key] || Icons.Rectangle;
+  const CurrentIcon = ShapesMap[lastShape];
 
   return (
     <span className="fastboard-toolbar-btn-interactive">

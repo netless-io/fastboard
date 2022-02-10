@@ -1,13 +1,17 @@
 import type { ApplianceNames, Color, MemberState, ShapeType } from "white-web-sdk";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import { noop } from "../../internal";
 import { useFastboardApp, useFastboardValue, useWritable } from "../hooks";
+import { ShapesMap } from "./const";
+
+export type UnifiedShape = keyof typeof ShapesMap;
 
 export interface ToolbarHook {
   readonly writable: boolean;
   readonly memberState: MemberState | undefined;
+  readonly lastShape: UnifiedShape;
   cleanCurrentScene(): void;
   setAppliance(appliance: ApplianceNames, shape?: ShapeType): void;
   setStrokeWidth(width: number): void;
@@ -22,6 +26,7 @@ export function useToolbar(): ToolbarHook {
   const app = useFastboardApp();
   const writable = useWritable();
   const memberState = useRoomState();
+  const [lastShape, setLastShape] = useState<UnifiedShape>("rectangle" as ApplianceNames.rectangle);
 
   const cleanCurrentScene = useCallback(() => {
     app.cleanCurrentScene();
@@ -30,6 +35,11 @@ export function useToolbar(): ToolbarHook {
   const setAppliance = useCallback(
     (appliance: ApplianceNames, shape?: ShapeType) => {
       app.setAppliance(appliance, shape);
+      if (shape) {
+        setLastShape(shape);
+      } else if (appliance in ShapesMap) {
+        setLastShape(appliance as UnifiedShape);
+      }
     },
     [app]
   );
@@ -51,6 +61,7 @@ export function useToolbar(): ToolbarHook {
   return {
     writable,
     memberState,
+    lastShape,
     cleanCurrentScene,
     setAppliance,
     setStrokeWidth,
@@ -61,6 +72,7 @@ export function useToolbar(): ToolbarHook {
 export const EmptyToolbarHook: ToolbarHook = {
   writable: false,
   memberState: undefined,
+  lastShape: "rectangle" as ApplianceNames.rectangle,
   cleanCurrentScene: noop,
   setAppliance: noop,
   setStrokeWidth: noop,
