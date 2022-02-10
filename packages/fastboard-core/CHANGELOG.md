@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.5
+
+### Patch Changes
+
+- ae154b1: refactor: clean current window's scene
+
 ## 0.2.4
 
 ### Patch Changes

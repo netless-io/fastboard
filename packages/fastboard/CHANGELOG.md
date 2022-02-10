@@ -1,5 +1,14 @@
 # @netless/fastboard
 
+## 0.2.5
+
+### Patch Changes
+
+- ae154b1: refactor: clean current window's scene
+- Updated dependencies [ae154b1]
+  - @netless/fastboard-core@0.2.5
+  - @netless/fastboard-react@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
