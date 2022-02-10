@@ -217,7 +217,7 @@ export class FastboardApp extends FastboardAppBase {
    */
   cleanCurrentScene() {
     this._assertNotDestroyed();
-    this.manager.mainView.cleanCurrentScene();
+    this.manager.cleanCurrentScene();
   }
 
   /**
