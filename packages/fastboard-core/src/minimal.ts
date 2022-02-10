@@ -10,7 +10,7 @@ import type {
 } from "white-web-sdk";
 import type { MountParams } from "@netless/window-manager";
 
-import { DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
+import { contentModeScale, DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 
 import "./behaviors/register-apps";
@@ -84,6 +84,11 @@ export async function createFastboard({
     cursor: true,
     ...managerConfig,
     room,
+  });
+
+  manager.mainView.setCameraBound({
+    minContentMode: contentModeScale(0.3),
+    maxContentMode: contentModeScale(3),
   });
 
   return new FastboardApp(sdk, room, manager, hotKeys);
