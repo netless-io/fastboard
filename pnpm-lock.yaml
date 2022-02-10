@@ -32,34 +32,34 @@ importers:
     specifiers:
       '@netless/fastboard-core': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.0-canary.31
+      '@netless/window-manager': ^0.4.0
       tsup: ^5.11.11
-      white-web-sdk: ^2.16.5
+      white-web-sdk: ^2.16.6
     dependencies:
       '@netless/fastboard-core': link:../fastboard-core
       '@netless/fastboard-react': link:../fastboard-react
     devDependencies:
-      '@netless/window-manager': 0.4.0-canary.31_white-web-sdk@2.16.5
+      '@netless/window-manager': 0.4.0_white-web-sdk@2.16.6
       tsup: 5.11.11
-      white-web-sdk: 2.16.5
+      white-web-sdk: 2.16.6
 
   packages/fastboard-core:
     specifiers:
       '@netless/app-slide': ^0.0.56
-      '@netless/window-manager': ^0.4.0-canary.31
+      '@netless/window-manager': ^0.4.0
       tsup: ^5.11.11
-      white-web-sdk: ^2.16.5
+      white-web-sdk: ^2.16.6
     dependencies:
       '@netless/app-slide': 0.0.56
     devDependencies:
-      '@netless/window-manager': 0.4.0-canary.31_white-web-sdk@2.16.5
+      '@netless/window-manager': 0.4.0_white-web-sdk@2.16.6
       tsup: 5.11.11
-      white-web-sdk: 2.16.5
+      white-web-sdk: 2.16.6
 
   packages/fastboard-react:
     specifiers:
       '@netless/fastboard-core': workspace:*
-      '@netless/window-manager': ^0.4.0-canary.31
+      '@netless/window-manager': ^0.4.0
       '@tippyjs/react': ^4.2.6
       '@types/react': ^17.0.38
       '@types/react-dom': ^17.0.11
@@ -70,7 +70,7 @@ importers:
       sass: ^1.49.0
       tippy.js: ^6.3.7
       tsup: ^5.11.11
-      white-web-sdk: ^2.16.5
+      white-web-sdk: ^2.16.6
     dependencies:
       '@tippyjs/react': 4.2.6
       clsx: 1.1.1
@@ -79,13 +79,13 @@ importers:
       rc-slider: 9.7.5
     devDependencies:
       '@netless/fastboard-core': link:../fastboard-core
-      '@netless/window-manager': 0.4.0-canary.31_white-web-sdk@2.16.5
+      '@netless/window-manager': 0.4.0_white-web-sdk@2.16.6
       '@types/react': 17.0.38
       '@types/react-dom': 17.0.11
       sass: 1.49.0
       tippy.js: 6.3.7
       tsup: 5.11.11
-      white-web-sdk: 2.16.5
+      white-web-sdk: 2.16.6
 
   packages/playground:
     specifiers: {}
@@ -94,7 +94,7 @@ importers:
     specifiers:
       '@netless/fastboard': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.0-canary.31
+      '@netless/window-manager': ^0.4.0
       '@vitejs/plugin-react': ^1.1.4
       clsx: ^1.1.1
       react: ^17.0.2
@@ -102,15 +102,15 @@ importers:
       sass: ^1.49.0
       type-fest: ^2.10.0
       vite: ^2.7.13
-      white-web-sdk: ^2.16.5
+      white-web-sdk: ^2.16.6
     dependencies:
       '@netless/fastboard': link:../../fastboard
       '@netless/fastboard-react': link:../../fastboard-react
-      '@netless/window-manager': 0.4.0-canary.31_white-web-sdk@2.16.5
+      '@netless/window-manager': 0.4.0_white-web-sdk@2.16.6
       clsx: 1.1.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      white-web-sdk: 2.16.5
+      white-web-sdk: 2.16.6
     devDependencies:
       '@vitejs/plugin-react': 1.1.4
       sass: 1.49.0
@@ -347,6 +347,12 @@ packages:
 
   /@babel/runtime/7.16.7:
     resolution: {integrity: sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.9
+
+  /@babel/runtime/7.17.2:
+    resolution: {integrity: sha512-hzeyJyMA1YGdJTuWU0e/j4wKXrU4OMFvY2MSlaI9B7VQb0r5cxTE3EAIS2Q7Tn2RIcDkRvTA/v2JsAEhxe99uw==}
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
@@ -637,8 +643,8 @@ packages:
   /@netless/canvas-polyfill/0.0.4:
     resolution: {integrity: sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==}
 
-  /@netless/window-manager/0.4.0-canary.31_white-web-sdk@2.16.5:
-    resolution: {integrity: sha512-6AKtwyV6UWefiMxgSMDhPEXb8Kxlujkc5BMvptn3uirwrTgL79KyAtMVe7jrtU4y0gMNSyEQ0VtbiEhVJHG5uQ==}
+  /@netless/window-manager/0.4.0_white-web-sdk@2.16.6:
+    resolution: {integrity: sha512-NIuCSr9fDA79fRmC8ym77uvQ/U8zlZ84qh+8j5MlxFz7UjdM5LQvLXnXYAJOlCyjR0uhnqVhBHLFc9lYTbH/qA==}
     peerDependencies:
       white-web-sdk: ^2.16.0
     dependencies:
@@ -649,7 +655,7 @@ packages:
       side-effect-manager: 0.1.5
       uuid: 7.0.3
       video.js: 7.17.0
-      white-web-sdk: 2.16.5
+      white-web-sdk: 2.16.6
 
   /@netless/xml-js/1.6.15:
     resolution: {integrity: sha512-e0emMs7YtDB/ATUns1SJ61R9n9nfVvwwFodoc539Qt0ScksaCLCaFWgpEbLloj9sr60ry6Xd8QFHKULFIZB6zA==}
@@ -759,8 +765,8 @@ packages:
     resolution: {integrity: sha512-4YpbAsnJXWYK/fpTVFlMIcUIho2AYCi4wg5aNPrG1ng7fn/1/RZfCIpRCiBX+12RVa34RluilnvCqD+g3KiSiA==}
     dev: true
 
-  /@types/node/17.0.16:
-    resolution: {integrity: sha512-ydLaGVfQOQ6hI1xK2A5nVh8bl0OGoIfYMxPWHqqYe9bTkWCfqiVvZoh2I/QF2sNSkZzZyROBoTefIEI+PB6iIA==}
+  /@types/node/17.0.17:
+    resolution: {integrity: sha512-e8PUNQy1HgJGV3iU/Bp2+D/DXh3PYeyli8LgIwsQcs1Ar1LoaWHSIT6Rw+H2rNJmiq6SNWiDytfx8+gYj7wDHw==}
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -925,7 +931,7 @@ packages:
     resolution: {integrity: sha512-vdQA0lDYBXGJqV2T02AGqg1w4dcgyRoN+bYG+G8uF4DpCEMhEtUI0BA4tRu4/Njar8w/9D5k0a1KX40pcvM3fA==}
     engines: {node: '>=8', npm: '>=5'}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       '@videojs/vhs-utils': 3.0.4
       aes-decrypter: 3.1.2
       global: 4.4.0
@@ -938,14 +944,14 @@ packages:
     resolution: {integrity: sha512-hui4zOj2I1kLzDgf8QDVxD3IzrwjS/43KiS8IHQO0OeeSsb4pB/lgNt1NG7Dv0wMQfCccUpMVLGcK618s890Yg==}
     engines: {node: '>=8', npm: '>=5'}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       global: 4.4.0
-      url-toolkit: 2.2.3
+      url-toolkit: 2.2.5
 
   /@videojs/xhr/2.6.0:
     resolution: {integrity: sha512-7J361GiN1tXpm+gd0xz2QWr3xNWBE+rytvo8J3KuggFaLg+U37gZQ2BuPLcnkfGffy2e+ozY70RHC8jt7zjA6Q==}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       global: 4.4.0
       is-function: 1.0.2
 
@@ -986,7 +992,7 @@ packages:
   /aes-decrypter/3.1.2:
     resolution: {integrity: sha512-42nRwfQuPRj9R1zqZBdoxnaAmnIFyDi0MNyTVhjdFOd8fifXKKRfwIHIZ6AMn1or4x5WONzjwRTbTWcsIQ0O4A==}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       '@videojs/vhs-utils': 3.0.4
       global: 4.4.0
       pkcs7: 1.0.4
@@ -2489,7 +2495,7 @@ packages:
   /m3u8-parser/4.7.0:
     resolution: {integrity: sha512-48l/OwRyjBm+QhNNigEEcRcgbRvnUjL7rxs597HmW9QSNbyNvt+RcZ9T/d9vxi9A9z7EZrB1POtZYhdRlwYQkQ==}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       '@videojs/vhs-utils': 3.0.4
       global: 4.4.0
 
@@ -2636,7 +2642,7 @@ packages:
     resolution: {integrity: sha512-M5tAIdtBM2TN+OSTz/37T7V+h9ZLvhyNqq4TNIdtjAQ/Hg8UnMRf5nJQDjffcXag3POXi31yUJQEKOXdcAM/nw==}
     hasBin: true
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       '@videojs/vhs-utils': 3.0.4
       '@xmldom/xmldom': 0.7.5
       global: 4.4.0
@@ -2650,7 +2656,7 @@ packages:
     engines: {node: '>=8', npm: '>=5'}
     hasBin: true
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
 
   /mz/2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
@@ -2849,7 +2855,7 @@ packages:
     resolution: {integrity: sha512-afRERtHn54AlwaF2/+LFszyAANTCggGilmcmILUzEjvs3XgFZT+xE6+QWQcAGmu4xajy+Xtj7acLOPdx5/eXWQ==}
     hasBin: true
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
 
   /pkg-dir/4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
@@ -2943,7 +2949,7 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.1
-      '@types/node': 17.0.16
+      '@types/node': 17.0.17
       long: 4.0.0
 
   /pseudomap/1.0.2:
@@ -3702,8 +3708,8 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
-  /url-toolkit/2.2.3:
-    resolution: {integrity: sha512-Da75SQoxsZ+2wXS56CZBrj2nukQ4nlGUZUP/dqUBG5E1su5GKThgT94Q00x81eVII7AyS1Pn+CtTTZ4Z0pLUtQ==}
+  /url-toolkit/2.2.5:
+    resolution: {integrity: sha512-mtN6xk+Nac+oyJ/PrI7tzfmomRVNFIWKUbG8jdYFt52hxbiReFAXIjYskvu64/dvuW71IcB7lV8l0HvZMac6Jg==}
 
   /uuid/7.0.3:
     resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
@@ -3723,7 +3729,7 @@ packages:
   /video.js/7.17.0:
     resolution: {integrity: sha512-8RbLu9+Pdpep9OTPncUHIvZXFgn/7hKdPnSTE/lGSnlFSucXtTUBp41R7NDwncscMLQ0WgazUbmFlvr4MNWMbA==}
     dependencies:
-      '@babel/runtime': 7.16.7
+      '@babel/runtime': 7.17.2
       '@videojs/http-streaming': 2.12.0
       '@videojs/vhs-utils': 3.0.4
       '@videojs/xhr': 2.6.0
@@ -3827,8 +3833,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /white-web-sdk/2.16.5:
-    resolution: {integrity: sha512-rHhz833odANzqdQrLts0YguwfiYXksKdz738Fl4+3TiaI5oa2BtAU3pJHBU/0eq71mbA0Hc7tDbTVNAq4K9jug==}
+  /white-web-sdk/2.16.6:
+    resolution: {integrity: sha512-N2Hmj5kCVcfpa006ItdYB4ckhARulptLFG0qIBG2xwvf0SizVHkzzjNu5Lpe7SQzjOSmhjE2q3HJZw1LMZH2JA==}
     dependencies:
       '@juggle/resize-observer': 3.3.1
       '@netless/canvas-polyfill': 0.0.4
