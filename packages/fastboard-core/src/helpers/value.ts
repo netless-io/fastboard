@@ -1,5 +1,5 @@
 import { FastboardEmitter } from "./emitter";
-import { noop } from "./utils";
+import { noop, safe_not_equal } from "./utils";
 
 export type FastboardDisposer = () => void;
 
@@ -54,7 +54,9 @@ export function createValue<T>(
   const emitter = new FastboardEmitter<T>();
 
   function set(newValue: T) {
-    emitter.dispatch((value = newValue));
+    if (safe_not_equal(value, newValue)) {
+      emitter.dispatch((value = newValue));
+    }
   }
 
   const dispose = effect(set) || noop;
@@ -70,5 +72,13 @@ export function createValue<T>(
     return () => emitter.removeListener(callback);
   }
 
-  return { value, subscribe, reaction, setValue, dispose };
+  return {
+    get value() {
+      return value;
+    },
+    subscribe,
+    reaction,
+    setValue,
+    dispose,
+  };
 }

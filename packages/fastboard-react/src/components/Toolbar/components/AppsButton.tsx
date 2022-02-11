@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Tippy from "@tippyjs/react";
 import React, { useContext } from "react";
 
@@ -62,6 +63,7 @@ function renderAppsButtonContent(content?: React.ReactNode) {
 
 function DefaultApps() {
   const app = useFastboardApp();
+  const { appsStatus } = useContext(ToolbarContext);
 
   return (
     <>
@@ -69,13 +71,21 @@ function DefaultApps() {
         title="Code Editor"
         src={vscodePNG}
         alt="[code editor]"
+        appStatus={appsStatus["Monaco"]}
         onClick={app?.insertCodeEditor.bind(app)}
       />
-      <AppIcon title="GeoGebra" src={geogebraPNG} alt="[geogebra]" onClick={app?.insertGeoGebra.bind(app)} />
+      <AppIcon
+        title="GeoGebra"
+        src={geogebraPNG}
+        alt="[geogebra]"
+        appStatus={appsStatus["GeoGebra"]}
+        onClick={app?.insertGeoGebra.bind(app)}
+      />
       <AppIcon
         title="Countdown"
         src={countdownPNG}
         alt="[countdown]"
+        appStatus={appsStatus["Countdown"]}
         onClick={app?.insertCountdown.bind(app)}
       />
     </>
@@ -86,14 +96,28 @@ interface AppIconProps {
   title: string;
   src: string;
   alt: string;
+  appStatus?: {
+    status: "idle" | "loading" | "failed";
+    reason?: string | undefined;
+  };
   onClick?: () => void;
 }
 
-function AppIcon({ title, src, alt, onClick }: AppIconProps) {
+function AppIcon({ title, src, alt, appStatus, onClick }: AppIconProps) {
+  const { status = "idle", reason } = appStatus || {};
+  const loading = status === "loading";
+  const failed = status === "failed";
+  const unifiedTitle = loading ? "loading" : failed ? reason : title;
+
   return (
-    <span className="fastboard-toolbar-app-icon">
-      <Button placement="top" content={title} onClick={onClick}>
-        <img src={src} alt={alt} title={title} />
+    <span
+      className={clsx("fastboard-toolbar-app-icon", {
+        "fastboard-toolbar-app-is-loading": loading,
+        "fastboard-toolbar-app-is-failed": failed,
+      })}
+    >
+      <Button disabled={failed} placement="top" content={unifiedTitle} onClick={onClick}>
+        <img src={src} alt={alt} title={unifiedTitle} />
       </Button>
       <span className="fastboard-toolbar-app-icon-text">{title}</span>
     </span>

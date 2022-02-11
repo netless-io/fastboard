@@ -20,7 +20,13 @@ import { FastboardPlayer } from "./impl/player";
 
 export type { FastboardReadable, FastboardWritable } from "./helpers/value";
 
-export type { FastboardApp };
+export type {
+  FastboardApp,
+  AppsStatus,
+  InsertDocsDynamic,
+  InsertDocsParams,
+  InsertDocsStatic,
+} from "./impl/app";
 
 export interface FastboardOptions {
   sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState">;

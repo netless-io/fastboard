@@ -1,4 +1,5 @@
 import type { ApplianceNames, Color, MemberState, ShapeType } from "white-web-sdk";
+import type { AppsStatus } from "@netless/fastboard-core";
 
 import { useCallback, useState } from "react";
 
@@ -12,6 +13,7 @@ export interface ToolbarHook {
   readonly writable: boolean;
   readonly memberState: MemberState | undefined;
   readonly lastShape: UnifiedShape;
+  readonly appsStatus: AppsStatus;
   cleanCurrentScene(): void;
   setAppliance(appliance: ApplianceNames, shape?: ShapeType): void;
   setStrokeWidth(width: number): void;
@@ -22,10 +24,15 @@ export function useRoomState() {
   return useFastboardValue(useFastboardApp().memberState);
 }
 
+export function useAppsStatus() {
+  return useFastboardValue(useFastboardApp().appsStatus);
+}
+
 export function useToolbar(): ToolbarHook {
   const app = useFastboardApp();
   const writable = useWritable();
   const memberState = useRoomState();
+  const appsStatus = useAppsStatus();
   const [lastShape, setLastShape] = useState<UnifiedShape>("rectangle" as ApplianceNames.rectangle);
 
   const cleanCurrentScene = useCallback(() => {
@@ -62,6 +69,7 @@ export function useToolbar(): ToolbarHook {
     writable,
     memberState,
     lastShape,
+    appsStatus,
     cleanCurrentScene,
     setAppliance,
     setStrokeWidth,
@@ -73,6 +81,7 @@ export const EmptyToolbarHook: ToolbarHook = {
   writable: false,
   memberState: undefined,
   lastShape: "rectangle" as ApplianceNames.rectangle,
+  appsStatus: {},
   cleanCurrentScene: noop,
   setAppliance: noop,
   setStrokeWidth: noop,

@@ -95,6 +95,13 @@ export type SetMemberStateFn = (partialMemberState: Partial<MemberState>) => voi
 
 export type RoomStateChanged = (diff: Partial<RoomState>) => void;
 
+export interface AppsStatus {
+  [kind: string]: {
+    status: "idle" | "loading" | "failed";
+    reason?: string;
+  };
+}
+
 export class FastboardApp extends FastboardAppBase {
   /**
    * Render this app to some DOM.
@@ -178,6 +185,20 @@ export class FastboardApp extends FastboardAppBase {
    */
   readonly sceneLength = this.createValue(this.manager.mainViewScenesLength, set =>
     this._addManagerListener("mainViewScenesLengthChange", set)
+  );
+
+  private _appsStatus: AppsStatus = {};
+  /**
+   * Apps status.
+   */
+  readonly appsStatus = this.createValue<AppsStatus>({}, set =>
+    this._addManagerListener("loadApp", ({ kind, status, reason }) => {
+      this._appsStatus[kind] = {
+        status: status === "start" ? "loading" : status === "failed" ? "failed" : "idle",
+        reason,
+      };
+      set(this._appsStatus);
+    })
   );
 
   /**

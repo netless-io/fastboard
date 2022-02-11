@@ -21,8 +21,8 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "@netless/window-manager": "^0.4.0",
-    "tsup": "^5.11.11",
+    "@netless/window-manager": "^0.4.1-canary.0",
+    "tsup": "^5.11.13",
     "white-web-sdk": "^2.16.6"
   },
   "publishConfig": {

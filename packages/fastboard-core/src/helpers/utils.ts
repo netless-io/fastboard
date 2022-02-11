@@ -5,6 +5,10 @@ export function noop() {
   /* noop */
 }
 
+export function safe_not_equal(a: unknown, b: unknown) {
+  return a != a ? b == b : a !== b || (a && typeof a === "object") || typeof a === "function";
+}
+
 export function getImageSize(url: string, fallback: Size) {
   return new Promise<Size>(resolve => {
     const img = new Image();
