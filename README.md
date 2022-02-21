@@ -49,10 +49,13 @@ async function mountFastboard(div) {
   return mount(app, div);
 }
 
-let dispose = mountFastboard(document.getElementById("whiteboard"));
+let { update, destroy } = mountFastboard(document.getElementById("whiteboard"));
+
+// Update app
+update({ theme: "dark" });
 
 // Terminate app
-dispose();
+destroy();
 app.destroy();
 ```
 

@@ -48,10 +48,13 @@ async function mountFastboard(div) {
   return mount(app, div);
 }
 
-let dispose = mountFastboard(document.getElementById("whiteboard"));
+let { update, destroy } = mountFastboard(document.getElementById("whiteboard"));
 
-// 卸载 app
-dispose();
+// 更新 app 配置
+update({ theme: "dark" });
+
+// 关闭 app
+destroy();
 app.destroy();
 ```
 
