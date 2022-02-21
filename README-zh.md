@@ -154,12 +154,6 @@ app.setStrokeColor([r, g, b]);
 
 #### 插入 PDF、PPT 和 PPTX 文档
 
-> **注意：**插入 PPTX 需要先安装对应的包：
->
-> <pre class="language-bash">
-> npm add <b>@netless/app-slide</b>
-> </pre>
-
 ```js
 // 插入 PDF/PPT/PPTX 至主白板
 const appId = await app.insertDocs("文件名.pptx", conversionResponse);

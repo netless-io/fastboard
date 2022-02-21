@@ -8,16 +8,16 @@
   "dependencies": {
     "@netless/fastboard": "workspace:*",
     "@netless/fastboard-react": "workspace:*",
-    "@netless/window-manager": "^0.4.1-canary.0",
+    "@netless/window-manager": "^0.4.5",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "white-web-sdk": "^2.16.6"
+    "white-web-sdk": "^2.16.9"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.2.0",
-    "sass": "^1.49.7",
-    "type-fest": "^2.11.2",
-    "vite": "^2.8.0"
+    "sass": "^1.49.8",
+    "type-fest": "^2.12.0",
+    "vite": "^2.8.4"
   }
 }

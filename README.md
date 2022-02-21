@@ -148,12 +148,6 @@ app.setStrokeColor([r, g, b]);
 
 #### Insert PDF, PPT and PPTX
 
-> **Note:** You have to install `@netless/app-slide` before using this feature.
->
-> <pre class="language-bash">
-> npm add <b>@netless/app-slide</b>
-> </pre>
-
 ```js
 // insert PDF/PPT/PPTX to the main whiteboard
 const appId = await app.insertDocs("filename.pptx", conversionResponse);
