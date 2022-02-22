@@ -2,7 +2,7 @@ import type { ShapeType } from "white-web-sdk";
 import type { IconProps } from "../../../typings";
 
 import Tippy from "@tippyjs/react";
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { ApplianceNames } from "white-web-sdk";
 
 import { useTranslation } from "../../../i18n";
@@ -18,7 +18,7 @@ const ShapeTypes = new Set([...ApplianceShapes, ...Shapes]);
 
 export function ShapesButton() {
   const { t } = useTranslation();
-  const { theme, memberState, lastShape } = useContext(ToolbarContext);
+  const { writable, theme, memberState, lastShape, setAppliance } = useContext(ToolbarContext);
 
   const appliance = memberState?.currentApplianceName;
   const shape = memberState?.shapeType;
@@ -28,6 +28,14 @@ export function ShapesButton() {
   const active = ShapeTypes.has(key);
 
   const CurrentIcon = ShapesMap[lastShape];
+
+  const onClick = useCallback(() => {
+    if ((ApplianceShapes as readonly ApplianceNames[]).includes(lastShape as ApplianceNames)) {
+      setAppliance(lastShape as ApplianceNames);
+    } else if (Shapes.includes(lastShape as ShapeType)) {
+      setAppliance(ApplianceNames.shape, lastShape as ShapeType);
+    }
+  }, [lastShape, setAppliance]);
 
   return (
     <span className="fastboard-toolbar-btn-interactive">
@@ -41,7 +49,7 @@ export function ShapesButton() {
         arrow={false}
         interactive
       >
-        <Button content={t("shape")} active={active}>
+        <Button content={t("shape")} active={active} disabled={!writable} onClick={onClick}>
           <CurrentIcon theme={theme} active={active} />
           <span className="fastboard-toolbar-triangle" />
         </Button>
