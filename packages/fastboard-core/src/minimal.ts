@@ -29,7 +29,7 @@ export type {
 } from "./impl/app";
 
 export interface FastboardOptions {
-  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState">;
+  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & { region: string };
   joinRoom: Omit<JoinRoomParams, "useMultiViews" | "disableNewPencil" | "disableMagixEventDispatchLimit"> & {
     callbacks?: Partial<RoomCallbacks>;
   };
@@ -42,6 +42,7 @@ export interface FastboardOptions {
  * let app = await createFastboard({
  *   sdkConfig: {
  *     appIdentifier: import.meta.env.VITE_APPID,
+ *     region: "ch-hz",
  *   },
  *   joinRoom: {
  *     uid: unique_id,
@@ -101,7 +102,7 @@ export async function createFastboard({
 }
 
 export interface FastboardReplayOptions {
-  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState">;
+  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & { region: string };
   replayRoom: Omit<ReplayRoomParams, "useMultiViews"> & {
     callbacks?: Partial<PlayerCallbacks>;
   };
@@ -114,6 +115,7 @@ export interface FastboardReplayOptions {
  * let app = await replayFastboard({
  *   sdkConfig: {
  *     appIdentifier: import.meta.env.VITE_APPID,
+ *     region: "ch-hz",
  *   },
  *   replayRoom: {
  *     uid: unique_id,

@@ -16,6 +16,7 @@ function App() {
     createFastboard({
       sdkConfig: {
         appIdentifier: import.meta.env.VITE_APPID,
+        region: "cn-hz",
       },
       joinRoom: {
         uid: Math.random().toString(36).slice(2),
