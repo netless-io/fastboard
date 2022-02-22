@@ -73,7 +73,7 @@ class FastboardAppBase {
 }
 
 export interface InsertDocsStatic {
-  readonly fileType: "pdf" | "ppt";
+  readonly fileType: "pdf";
   readonly scenePath: string;
   readonly scenes: SceneDefinition[];
   readonly title?: string;
@@ -331,7 +331,6 @@ export class FastboardApp extends FastboardAppBase {
     this._assertNotDestroyed();
     switch (fileType) {
       case "pdf":
-      case "ppt":
         return this.manager.addApp({
           kind: "DocsViewer",
           options: { scenePath, title, scenes },

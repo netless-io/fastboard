@@ -77,7 +77,11 @@ function FastboardInternal({
     <ThemeContext.Provider value={theme}>
       <I18nContext.Provider value={i18n}>
         <div {...restProps} className="fastboard-root" ref={forwardedRef}>
-          <div className="fastboard-view" ref={useWhiteboard} />
+          <div
+            className="fastboard-view"
+            ref={useWhiteboard}
+            onPointerDownCapture={focusThisElementImmediate}
+          />
           {children ? (
             children
           ) : (
@@ -104,4 +108,8 @@ function FastboardInternal({
       </I18nContext.Provider>
     </ThemeContext.Provider>
   );
+}
+
+function focusThisElementImmediate(ev: React.PointerEvent<HTMLDivElement>) {
+  ev.currentTarget.focus();
 }

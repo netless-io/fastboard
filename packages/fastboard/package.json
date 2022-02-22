@@ -23,7 +23,7 @@
   "devDependencies": {
     "@netless/window-manager": "^0.4.5",
     "tsup": "^5.11.13",
-    "white-web-sdk": "^2.16.9"
+    "white-web-sdk": "^2.16.10"
   },
   "publishConfig": {
     "main": "dist/index.js",

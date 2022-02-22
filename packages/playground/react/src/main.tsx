@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import { DarkControls, LanguageControls } from "./controls";
 import { Handler } from "./controls/resize";
 import { useAsyncValue } from "./hooks";
+import { MP4, PDF, PNG, PNG2, PPT } from "./data";
 import "./main.scss";
 
 function App() {
@@ -51,11 +52,20 @@ function App() {
         <DarkControls dark={dark} setDark={setDark} />
         <LanguageControls language={language} setLanguage={setLanguage} />
         {app && (
-          <div className="row" style={{ display: "flex", gap: 5 }}>
-            <button onClick={() => app.insertCodeEditor()}>Code&nbsp;Editor</button>
-            <button onClick={() => app.insertCountdown()}>Countdown</button>
-            <button onClick={() => app.insertGeoGebra()}>GeoGebra</button>
-          </div>
+          <>
+            <div className="row" style={{ display: "flex", gap: 5 }}>
+              <button onClick={() => app.insertCodeEditor()}>Code&nbsp;Editor</button>
+              <button onClick={() => app.insertCountdown()}>Countdown</button>
+              <button onClick={() => app.insertGeoGebra()}>GeoGebra</button>
+            </div>
+            <div className="row" style={{ display: "flex", gap: 5 }}>
+              <button onClick={() => app.insertDocs(PDF)}>PDF</button>
+              <button onClick={() => app.insertDocs(PPT)}>PPT</button>
+              <button onClick={() => app.insertMedia(MP4.name, MP4.url)}>MP4</button>
+              <button onClick={() => app.insertImage(PNG.url)}>PNG</button>
+              <button onClick={() => app.insertImage(PNG2.url)}>PNG2</button>
+            </div>
+          </>
         )}
       </div>
       <Handler

@@ -15,7 +15,7 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
-    "framer-motion": "^6.2.6",
+    "framer-motion": "^6.2.7",
     "i18next": "^21.6.11",
     "rc-slider": "^9.7.5"
   },
@@ -34,7 +34,7 @@
     "sass": "^1.49.8",
     "tippy.js": "^6.3.7",
     "tsup": "^5.11.13",
-    "white-web-sdk": "^2.16.9"
+    "white-web-sdk": "^2.16.10"
   },
   "publishConfig": {
     "main": "dist/index.js",
