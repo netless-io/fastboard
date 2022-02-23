@@ -33,6 +33,7 @@ async function mountFastboard(div) {
     // [1]
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
+      region: "cn-hz", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
     },
     // [2]
     joinRoom: {
@@ -95,6 +96,7 @@ function App() {
     createFastboard({
       sdkConfig: {
         appIdentifier: "whiteboard-appid",
+        region: "cn-hz", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
       },
       joinRoom: {
         uid: "unique_id_for_each_client",
