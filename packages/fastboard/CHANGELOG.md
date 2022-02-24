@@ -1,5 +1,22 @@
 # @netless/fastboard
 
+## 0.2.7
+
+### Patch Changes
+
+- 9fc3bdc: apps status, `mount()` results, remember last shape and more.
+
+  - feat: add apps status
+  - refactor: change `mount()` result to `{ update(props), destroy() }`
+  - refactor: switch to last shape on click toolbar button
+  - refactor: remove misleading `fileType: "ppt"`
+  - refactor: make `sdkConfig.region` required
+  - refactor: add `appsConfig` on create
+
+- Updated dependencies [9fc3bdc]
+  - @netless/fastboard-core@0.2.7
+  - @netless/fastboard-react@0.2.7
+
 ## 0.2.6
 
 ### Patch Changes
