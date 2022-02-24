@@ -22,7 +22,7 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "@netless/window-manager": "^0.4.5",
+    "@netless/window-manager": "^0.4.7",
     "tsup": "^5.11.13",
     "white-web-sdk": "^2.16.10"
   },

@@ -59,6 +59,18 @@ let app = await createFastboard({
 | sdkConfig     | [required] WhiteWebSdkConfiguration | [SDK 配置](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)                         |
 | joinRoom      | [required] JoinRoomParams           | [加入房间配置](https://developer.netless.link/javascript-zh/home/construct-room-and-player)                   |
 | managerConfig | [optional] MountParams              | [WindowManager 配置](https://github.com/netless-io/window-manager/blob/master/docs/api.md#windowmanagermount) |
+| appsConfig    | [optional] AppsConfig               | 注册的 Netless App 的配置                                                                                     |
+
+```ts
+interface AppsConfig {
+  [kind: string]: {
+    src: string | NetlessApp<any, any, any, any> | (() => Promise<NetlessApp<any, any, any, any>>);
+    appOptions?: any;
+    addHooks?: ((emitter: Emittery<RegisterEvents<any>, RegisterEvents<...> & OmnipresentEventData, never>) => void) | undefined;
+    name?: string | undefined;
+  }
+}
+```
 
 ### mount
 

@@ -13,7 +13,9 @@ import type { MountParams } from "@netless/window-manager";
 import { contentModeScale, DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 
-import "./behaviors/register-apps";
+import type { AppsConfig } from "./behaviors/register-apps";
+
+import { DefaultApps, registerApps } from "./behaviors/register-apps";
 import { ensureWindowManager } from "./helpers/utils";
 import { FastboardApp } from "./impl/app";
 import { FastboardPlayer } from "./impl/player";
@@ -28,12 +30,16 @@ export type {
   InsertDocsStatic,
 } from "./impl/app";
 
+export type { AppsConfig };
+export { DefaultApps, registerApps };
+
 export interface FastboardOptions {
   sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & { region: string };
   joinRoom: Omit<JoinRoomParams, "useMultiViews" | "disableNewPencil" | "disableMagixEventDispatchLimit"> & {
     callbacks?: Partial<RoomCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
+  appsConfig?: AppsConfig;
 }
 
 /**
@@ -55,7 +61,10 @@ export async function createFastboard({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
+  appsConfig = DefaultApps,
 }: FastboardOptions) {
+  registerApps(appsConfig);
+
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
@@ -107,6 +116,7 @@ export interface FastboardReplayOptions {
     callbacks?: Partial<PlayerCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
+  appsConfig?: AppsConfig;
 }
 
 /**
@@ -128,7 +138,10 @@ export async function replayFastboard({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
+  appsConfig = DefaultApps,
 }: FastboardReplayOptions) {
+  registerApps(appsConfig);
+
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
