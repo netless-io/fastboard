@@ -6,9 +6,9 @@ import React from "react";
 
 import { useTranslation } from "../../i18n";
 import { Icon } from "../../icons";
-import { ChevronLeft } from "../../icons/ChevronLeft";
-import { ChevronRight } from "../../icons/ChevronRight";
-import { FilePlus } from "../../icons/FilePlus";
+import { Left } from "../../icons/Left";
+import { Right } from "../../icons/Right";
+import { WhiteboardAdd } from "../../icons/WhiteboardAdd";
 import { TopOffset } from "../../theme";
 import { useTheme, useWritable } from "../hooks";
 import { usePageControl } from "./hooks";
@@ -52,16 +52,14 @@ export function PageControl({
           disabled={disabled || pageIndex === 0}
           onClick={actions.prevPage}
         >
-          <Icon
-            fallback={<ChevronLeft theme={theme} />}
-            src={disabled ? prevIconDisable : prevIcon}
-            alt="[prev]"
-          />
+          <Icon fallback={<Left theme={theme} />} src={disabled ? prevIconDisable : prevIcon} alt="[prev]" />
         </button>
       </Tippy>
-      <span className={clsx(`${name}-page`, theme)}>{pageCount === 0 ? "\u2026" : pageIndex + 1}</span>
-      <span className={clsx(`${name}-slash`, theme)}>/</span>
-      <span className={clsx(`${name}-page-count`, theme)}>{pageCount}</span>
+      <span className={clsx(`${name}-text`, theme)}>
+        <span className={clsx(`${name}-page`, theme)}>{pageCount === 0 ? "\u2026" : pageIndex + 1}</span>
+        <span className={clsx(`${name}-slash`, theme)}>/</span>
+        <span className={clsx(`${name}-page-count`, theme)}>{pageCount}</span>
+      </span>
       <Tippy
         className="fastboard-tip"
         content={t("nextPage")}
@@ -77,11 +75,7 @@ export function PageControl({
           disabled={disabled || pageIndex === pageCount - 1}
           onClick={actions.nextPage}
         >
-          <Icon
-            fallback={<ChevronRight theme={theme} />}
-            src={disabled ? nextIconDisable : nextIcon}
-            alt="[next]"
-          />
+          <Icon fallback={<Right theme={theme} />} src={disabled ? nextIconDisable : nextIcon} alt="[next]" />
         </button>
       </Tippy>
       <Tippy
@@ -95,7 +89,11 @@ export function PageControl({
         offset={TopOffset}
       >
         <button className={clsx(`${name}-btn`, "add", theme)} disabled={disabled} onClick={actions.addPage}>
-          <Icon fallback={<FilePlus theme={theme} />} src={disabled ? addIconDisable : addIcon} alt="[add]" />
+          <Icon
+            fallback={<WhiteboardAdd theme={theme} />}
+            src={disabled ? addIconDisable : addIcon}
+            alt="[add]"
+          />
         </button>
       </Tippy>
     </div>

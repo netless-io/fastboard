@@ -9,8 +9,8 @@ $name: "fastboard-toolbar";
   gap: 4px;
   position: absolute;
   z-index: 100;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   .rc-slider {
     padding: 6px 0;
@@ -36,17 +36,18 @@ $name: "fastboard-toolbar";
 
   &.light {
     color: #333;
-    background-color: rgba($color: #fff, $alpha: 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-  }
-
-  &.expanded {
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e5e8f0;
   }
 
   &.dark {
     color: #ddd;
-    background-color: rgba($color: #333, $alpha: 0.85);
+    background-color: #14181e;
+    border: 1px solid #383b42;
+  }
+
+  &.expanded {
+    border: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   &.expanded:hover {
@@ -108,11 +109,11 @@ $name: "fastboard-toolbar";
     }
 
     &.light:not(:disabled):hover {
-      background-color: rgba(51, 129, 255, 0.1);
+      background-color: #ebf2ff;
     }
 
     &.dark:not(:disabled):hover {
-      background-color: rgba(51, 129, 255, 0.25);
+      background-color: #383b42;
     }
   }
 
@@ -228,7 +229,7 @@ $name: "fastboard-toolbar";
     }
 
     &-text {
-      font-size: 12px;
+      font-size: 14px;
       color: #5d5d5d;
       overflow: hidden;
       white-space: nowrap;

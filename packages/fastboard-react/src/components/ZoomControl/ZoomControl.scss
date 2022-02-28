@@ -7,19 +7,19 @@ $name: "fastboard-zoom-control";
   gap: 4px;
   padding: 4px;
   border-radius: 4px;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   &.light {
     color: #333;
-    background-color: rgba($color: #fff, $alpha: 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e5e8f0;
   }
 
   &.dark {
     color: #ddd;
-    background-color: rgba($color: #333, $alpha: 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.45);
+    background-color: #14181e;
+    border: 1px solid #383b42;
   }
 }
 
@@ -38,8 +38,8 @@ $name: "fastboard-zoom-control";
 
   svg,
   img {
-    width: 1em;
-    height: 1em;
+    width: 100%;
+    height: 100%;
   }
 
   &:disabled {
@@ -48,11 +48,11 @@ $name: "fastboard-zoom-control";
   }
 
   &.light:not(:disabled):hover {
-    background-color: rgba(51, 129, 255, 0.1);
+    background-color: #ebf2ff;
   }
 
   &.dark:not(:disabled):hover {
-    background-color: rgba(51, 129, 255, 0.25);
+    background-color: #383b42;
   }
 }
 
@@ -69,12 +69,16 @@ $name: "fastboard-zoom-control";
   }
 }
 
+.#{$name}-text {
+  line-height: 24px;
+}
+
 .#{$name}-percent {
   opacity: 0.6;
 }
 
 .#{$name}-scale,
 .#{$name}-percent {
-  font-size: 12px;
+  font-size: 14px;
   font-variant-numeric: tabular-nums;
 }

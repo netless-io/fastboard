@@ -55,8 +55,10 @@ export function ZoomControl({
           />
         </button>
       </Tippy>
-      <span className={clsx(`${name}-scale`, theme)}>{Math.ceil(scale * 100)}</span>
-      <span className={clsx(`${name}-percent`, theme)}>%</span>
+      <span className={clsx(`${name}-text`, theme)}>
+        <span className={clsx(`${name}-scale`, theme)}>{Math.ceil(scale * 100)}</span>
+        <span className={clsx(`${name}-percent`, theme)}>%</span>
+      </span>
       <Tippy
         className="fastboard-tip"
         content={t("zoomIn")}

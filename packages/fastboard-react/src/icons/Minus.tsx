@@ -8,8 +8,8 @@ export function Minus({ theme = "light", active }: IconProps) {
   const stroke = active ? config.activeColor : config.color;
 
   return (
-    <svg viewBox="0 0 24 24">
-      <path fill="none" stroke={stroke} strokeLinecap="round" strokeLinejoin="round" d="M7 12h10" />
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M5 12h14" stroke={stroke} strokeLinejoin="round" strokeWidth="1.25" />
     </svg>
   );
 }

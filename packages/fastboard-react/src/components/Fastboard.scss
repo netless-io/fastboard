@@ -36,6 +36,6 @@
 
 .fastboard-bottom-right {
   @extend .fastboard-bottom-left;
-  left: initial;
+  left: auto;
   right: 8px;
 }
