@@ -153,12 +153,12 @@ $name: "fastboard-toolbar";
     }
   }
 
-  &-section + &-mask {
+  &-section ~ &-mask {
     opacity: 0;
     transition: 0.5s opacity 0.4s;
   }
 
-  &-section:hover + &-mask,
+  &-section:hover ~ &-mask,
   &-mask:hover {
     opacity: 1;
     transition: 0.2s opacity;
