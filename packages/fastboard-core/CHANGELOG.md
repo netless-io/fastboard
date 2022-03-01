@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.8
+
+### Patch Changes
+
+- d44983f: update styles and edit cdn links.
+
 ## 0.2.7
 
 ### Patch Changes

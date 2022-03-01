@@ -1,5 +1,14 @@
 # @netless/fastboard
 
+## 0.2.8
+
+### Patch Changes
+
+- d44983f: update styles and edit cdn links.
+- Updated dependencies [d44983f]
+  - @netless/fastboard-core@0.2.8
+  - @netless/fastboard-react@0.2.8
+
 ## 0.2.7
 
 ### Patch Changes
