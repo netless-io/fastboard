@@ -12,6 +12,7 @@ import { Icons } from "../icons";
 import { ToolbarContext } from "../Toolbar";
 import { Button } from "./Button";
 import { useFastboardApp } from "../../hooks";
+import { Loading } from "../icons/Loading";
 
 export interface AppsButtonProps {
   content?: React.ReactNode;
@@ -104,22 +105,30 @@ interface AppIconProps {
 }
 
 function AppIcon({ title, src, alt, appStatus, onClick }: AppIconProps) {
+  const { theme } = useContext(ToolbarContext);
   const { status = "idle", reason } = appStatus || {};
   const loading = status === "loading";
   const failed = status === "failed";
   const unifiedTitle = loading ? "loading" : failed ? reason : title;
 
   return (
-    <span
-      className={clsx("fastboard-toolbar-app-icon", {
-        "fastboard-toolbar-app-is-loading": loading,
-        "fastboard-toolbar-app-is-failed": failed,
-      })}
-    >
-      <Button disabled={failed} placement="top" content={unifiedTitle} onClick={onClick}>
-        <img src={src} alt={alt} title={unifiedTitle} />
-      </Button>
-      <span className="fastboard-toolbar-app-icon-text">{title}</span>
-    </span>
+    <div className="fastboard-toolbar-app-icon-wrapper">
+      <span
+        className={clsx("fastboard-toolbar-app-icon", {
+          "fastboard-toolbar-app-is-loading": loading,
+          "fastboard-toolbar-app-is-failed": failed,
+        })}
+      >
+        <Button disabled={failed || loading} placement="top" content={unifiedTitle} onClick={onClick}>
+          <img src={src} alt={alt} title={unifiedTitle} />
+        </Button>
+        <span className="fastboard-toolbar-app-icon-text">{title}</span>
+      </span>
+      {loading && (
+        <span className="fastboard-toolbar-app-icon-mask">
+          <Loading theme={theme} />
+        </span>
+      )}
+    </div>
   );
 }

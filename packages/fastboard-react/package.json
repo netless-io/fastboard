@@ -28,10 +28,10 @@
   },
   "devDependencies": {
     "@netless/fastboard-core": "workspace:*",
-    "@netless/window-manager": "^0.4.7",
+    "@netless/window-manager": "^0.4.10",
     "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
-    "sass": "^1.49.8",
+    "@types/react-dom": "^17.0.12",
+    "sass": "^1.49.9",
     "tippy.js": "^6.3.7",
     "tsup": "^5.11.13",
     "white-web-sdk": "^2.16.10"

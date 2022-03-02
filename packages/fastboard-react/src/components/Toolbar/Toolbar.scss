@@ -173,7 +173,7 @@ $name: "fastboard-toolbar";
     gap: 8px;
 
     &.apps {
-      width: 240px - 8px * 2;
+      width: 240px + 8px * 2;
     }
   }
 
@@ -207,14 +207,33 @@ $name: "fastboard-toolbar";
     }
   }
 
+  &-app-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-app-icon-mask {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    animation: fastboard-app-loading-rotate 0.5s linear infinite;
+    transform-origin: center;
+  }
+
   &-app-is-loading {
-    opacity: 0.8;
     cursor: wait;
+    button:disabled {
+      cursor: wait;
+    }
   }
 
   &-app-is-failed {
-    opacity: 0.5;
     cursor: not-allowed;
+    button:disabled {
+      cursor: not-allowed;
+    }
   }
 
   &-app-icon {
@@ -311,5 +330,14 @@ $name: "fastboard-toolbar";
     align-items: center;
     position: absolute;
     left: 0;
+  }
+}
+
+@keyframes fastboard-app-loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
