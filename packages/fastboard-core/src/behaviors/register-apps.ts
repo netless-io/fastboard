@@ -19,11 +19,11 @@ export const DefaultApps: AppsConfig = {
     },
   },
   EmbeddedPage: {
-    src: "https://cdn.jsdelivr.net/npm/@netless/app-embedded-page@0.1.1/dist/main.iife.js",
+    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-embedded-page@0.1.1/dist/main.iife.js",
   },
   Player: {
     name: "NetlessAppMediaPlayer",
-    src: "https://cdn.jsdelivr.net/npm/@netless/app-media-player@0.1.1/dist/main.iife.js",
+    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-media-player@0.1.1/dist/main.iife.js",
   },
 };
 
