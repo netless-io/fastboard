@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.10
+
+### Patch Changes
+
+- 0a79e4a: release types.
+
 ## 0.2.9
 
 ### Patch Changes

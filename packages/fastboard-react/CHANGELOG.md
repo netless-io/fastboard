@@ -1,5 +1,13 @@
 # @netless/fastboard-react
 
+## 0.2.10
+
+### Patch Changes
+
+- 0a79e4a: release types.
+- Updated dependencies [0a79e4a]
+  - @netless/fastboard-core@0.2.10
+
 ## 0.2.9
 
 ### Patch Changes
