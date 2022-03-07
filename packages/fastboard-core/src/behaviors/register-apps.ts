@@ -18,6 +18,13 @@ export const DefaultApps: AppsConfig = {
       HTML5Codebase: "https://flat-storage-cn-hz.whiteboard.agora.io/GeoGebra/HTML5/5.0/web3d",
     },
   },
+  EmbeddedPage: {
+    src: "https://cdn.jsdelivr.net/npm/@netless/app-embedded-page@0.1.1/dist/main.iife.js",
+  },
+  Player: {
+    name: "NetlessAppMediaPlayer",
+    src: "https://cdn.jsdelivr.net/npm/@netless/app-media-player@0.1.1/dist/main.iife.js",
+  },
 };
 
 export function registerApps(config: AppsConfig) {

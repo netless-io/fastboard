@@ -60,6 +60,33 @@ function App() {
               <button onClick={() => app.insertGeoGebra()}>GeoGebra</button>
             </div>
             <div className="row" style={{ display: "flex", gap: 5 }}>
+              <button
+                onClick={() =>
+                  app.manager.addApp({
+                    kind: "EmbeddedPage",
+                    attributes: {
+                      src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+                    },
+                  })
+                }
+              >
+                Google&nbsp;Docs
+              </button>
+              <button
+                onClick={() =>
+                  app.manager.addApp({
+                    kind: "Player",
+                    attributes: {
+                      src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+                      provider: "youtube",
+                    },
+                  })
+                }
+              >
+                YouTube
+              </button>
+            </div>
+            <div className="row" style={{ display: "flex", gap: 5 }}>
               <button onClick={() => app.insertDocs(PDF)}>PDF</button>
               <button onClick={() => app.insertDocs(PPT)}>PPT</button>
               <button onClick={() => app.insertMedia(MP4.name, MP4.url)}>MP4</button>
