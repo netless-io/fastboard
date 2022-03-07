@@ -7,4 +7,5 @@ export default defineConfig({
   clean: true,
   platform: "browser",
   target: "es2017",
+  dts: true,
 });

@@ -39,6 +39,6 @@
   "publishConfig": {
     "main": "dist/index.js",
     "module": "dist/index.mjs",
-    "types": "src/index.ts"
+    "types": "dist/index.d.ts"
   }
 }

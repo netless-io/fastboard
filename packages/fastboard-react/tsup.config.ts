@@ -13,6 +13,7 @@ export default defineConfig({
   loader: {
     ".png": "dataurl",
   },
+  dts: true,
   esbuildPlugins: [
     {
       name: "sass",

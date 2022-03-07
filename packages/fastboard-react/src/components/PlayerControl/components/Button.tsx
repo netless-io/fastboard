@@ -1,4 +1,3 @@
-import type { Placement } from "tippy.js";
 import type { Theme } from "../../../typings";
 
 import clsx from "clsx";
@@ -14,7 +13,7 @@ type ButtonProps = PropsWithChildren<{
   active?: boolean;
   onClick?: () => void;
   interactive?: boolean;
-  placement?: Placement;
+  placement?: "top" | "right"; // not using tippy.js's placement to satisfy dts
 }>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
