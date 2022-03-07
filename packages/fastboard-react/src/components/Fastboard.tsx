@@ -10,6 +10,7 @@ import { PageControl } from "./PageControl";
 import { RedoUndo } from "./RedoUndo";
 import { Toolbar } from "./Toolbar";
 import { ZoomControl } from "./ZoomControl";
+import { hideAll } from "./tippy-util";
 
 export interface FastboardProps {
   app?: FastboardApp | null;
@@ -77,7 +78,7 @@ function FastboardInternal({
     <ThemeContext.Provider value={theme}>
       <I18nContext.Provider value={i18n}>
         <div {...restProps} className="fastboard-root" ref={forwardedRef}>
-          <div className="fastboard-view" ref={useWhiteboard} onTouchStartCapture={hackTippyHide} />
+          <div className="fastboard-view" ref={useWhiteboard} onTouchStartCapture={hideAll} />
           {children ? (
             children
           ) : (
@@ -104,10 +105,4 @@ function FastboardInternal({
       </I18nContext.Provider>
     </ThemeContext.Provider>
   );
-}
-
-function hackTippyHide() {
-  setTimeout(() => {
-    document.dispatchEvent(new MouseEvent("mousedown"));
-  });
 }

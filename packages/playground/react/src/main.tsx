@@ -1,5 +1,6 @@
 import type { Language } from "@netless/fastboard-react";
 
+import { DeviceType } from "white-web-sdk";
 import { createFastboard } from "@netless/fastboard";
 import { Fastboard } from "@netless/fastboard-react";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ function App() {
     createFastboard({
       sdkConfig: {
         appIdentifier: import.meta.env.VITE_APPID,
+        deviceType: DeviceType.Surface,
         region: "cn-hz",
       },
       joinRoom: {
