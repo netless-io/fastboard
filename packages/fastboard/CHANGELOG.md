@@ -1,5 +1,19 @@
 # @netless/fastboard
 
+## 0.2.9
+
+### Patch Changes
+
+- b99d989: replay mode and bug fixes.
+
+  - fixed drawer button not hiding on shorter screen.
+  - added replay mode.
+  - fixed tippy not hiding on some touch-input devices.
+
+- Updated dependencies [b99d989]
+  - @netless/fastboard-core@0.2.9
+  - @netless/fastboard-react@0.2.9
+
 ## 0.2.8
 
 ### Patch Changes
