@@ -22,15 +22,9 @@ import { FastboardPlayer } from "./impl/player";
 
 export type { FastboardReadable, FastboardWritable } from "./helpers/value";
 
-export type {
-  FastboardApp,
-  AppsStatus,
-  InsertDocsDynamic,
-  InsertDocsParams,
-  InsertDocsStatic,
-} from "./impl/app";
+export type { AppsStatus, InsertDocsDynamic, InsertDocsParams, InsertDocsStatic } from "./impl/app";
 
-export type { AppsConfig };
+export type { AppsConfig, FastboardApp, FastboardPlayer };
 export { DefaultApps, registerApps };
 
 export interface FastboardOptions {
@@ -155,11 +149,15 @@ export async function replayFastboard({
     callbacks
   );
 
-  const manager = await WindowManager.mount({
+  const managerPromise = WindowManager.mount({
     cursor: true,
     ...managerConfig,
     room: player as Displayer as Room,
   });
+
+  player.play();
+  const manager = await managerPromise;
+  player.pause();
 
   return new FastboardPlayer(sdk, player, manager);
 }

@@ -16,7 +16,7 @@
     "@tippyjs/react": "^4.2.6",
     "clsx": "^1.1.1",
     "framer-motion": "^6.2.8",
-    "i18next": "^21.6.12",
+    "i18next": "^21.6.13",
     "rc-slider": "^9.7.5"
   },
   "peerDependencies": {
@@ -30,7 +30,7 @@
     "@netless/fastboard-core": "workspace:*",
     "@netless/window-manager": "^0.4.10",
     "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.12",
+    "@types/react-dom": "^17.0.13",
     "sass": "^1.49.9",
     "tippy.js": "^6.3.7",
     "tsup": "^5.11.13",

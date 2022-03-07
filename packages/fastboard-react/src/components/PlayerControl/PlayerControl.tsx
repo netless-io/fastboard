@@ -1,4 +1,4 @@
-import type { Player } from "white-web-sdk";
+import type { FastboardPlayer } from "@netless/fastboard-core";
 import type { CommonProps, GenericIcon } from "../../typings";
 
 import Tippy from "@tippyjs/react";
@@ -17,7 +17,7 @@ import { Icons } from "./icons";
 
 export type PlayerControlProps = {
   autoHide?: boolean;
-  player?: Player;
+  player?: FastboardPlayer;
 } & Omit<CommonProps, "room"> &
   GenericIcon<"play" | "pause" | "loading">;
 
@@ -28,7 +28,7 @@ export function PlayerControl({ theme, autoHide = false, player: player_, ...ico
   const { t } = useTranslation();
 
   const [currentTime, setCurrentTime] = useState(0);
-  const player = usePlayerControl(player_);
+  const player = usePlayerControl(player_?.player);
 
   useEffect(() => {
     setCurrentTime(player.currentTime);

@@ -39,3 +39,8 @@
   left: auto;
   right: 8px;
 }
+
+.fastboard-bottom {
+  @extend .fastboard-bottom-left;
+  right: 8px;
+}

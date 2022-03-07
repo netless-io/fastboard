@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@changesets/cli': ^2.21.0
+      '@changesets/cli': ^2.21.1
       '@hyrious/rimraf': ^0.1.0
       '@types/node': ^17.0.21
       '@typescript-eslint/eslint-plugin': ^5.13.0
@@ -16,7 +16,7 @@ importers:
       typescript: ^4.6.2
       vite: ^2.8.6
     devDependencies:
-      '@changesets/cli': 2.21.0
+      '@changesets/cli': 2.21.1
       '@hyrious/rimraf': 0.1.0
       '@types/node': 17.0.21
       '@typescript-eslint/eslint-plugin': 5.13.0_33fffc354ccfa91fbe7d1677b9395a0a
@@ -62,10 +62,10 @@ importers:
       '@netless/window-manager': ^0.4.10
       '@tippyjs/react': ^4.2.6
       '@types/react': ^17.0.39
-      '@types/react-dom': ^17.0.12
+      '@types/react-dom': ^17.0.13
       clsx: ^1.1.1
       framer-motion: ^6.2.8
-      i18next: ^21.6.12
+      i18next: ^21.6.13
       rc-slider: ^9.7.5
       sass: ^1.49.9
       tippy.js: ^6.3.7
@@ -75,13 +75,13 @@ importers:
       '@tippyjs/react': 4.2.6
       clsx: 1.1.1
       framer-motion: 6.2.8
-      i18next: 21.6.12
+      i18next: 21.6.13
       rc-slider: 9.7.5
     devDependencies:
       '@netless/fastboard-core': link:../fastboard-core
       '@netless/window-manager': 0.4.10_white-web-sdk@2.16.10
       '@types/react': 17.0.39
-      '@types/react-dom': 17.0.12
+      '@types/react-dom': 17.0.13
       sass: 1.49.9
       tippy.js: 6.3.7
       tsup: 5.11.13_typescript@4.6.2
@@ -96,7 +96,7 @@ importers:
       '@netless/fastboard-react': workspace:*
       '@netless/window-manager': ^0.4.10
       '@types/react': ^17.0.39
-      '@types/react-dom': ^17.0.12
+      '@types/react-dom': ^17.0.13
       '@vitejs/plugin-react': ^1.2.0
       clsx: ^1.1.1
       react: ^17.0.2
@@ -115,7 +115,7 @@ importers:
       white-web-sdk: 2.16.10
     devDependencies:
       '@types/react': 17.0.39
-      '@types/react-dom': 17.0.12
+      '@types/react-dom': 17.0.13
       '@vitejs/plugin-react': 1.2.0
       sass: 1.49.9
       type-fest: 2.12.0
@@ -415,8 +415,8 @@ packages:
       semver: 5.7.1
     dev: true
 
-  /@changesets/assemble-release-plan/5.1.0:
-    resolution: {integrity: sha512-iYlqffCMhcwZ+6Cv8cimf10OBGYXQKufBI7J6htpRgCV2nT99RKXEjbYOtrXWKQqzu0XxOsk15apSEwjZN0JRw==}
+  /@changesets/assemble-release-plan/5.1.1:
+    resolution: {integrity: sha512-TQRZnK1sqYuoibJdSwpqE81rfDh0Xrkkr/M6bCQZ1ogGoRJNVbNYDWvNfkNvR4rEdRylri8cfKzffo/ruoy8QA==}
     dependencies:
       '@babel/runtime': 7.17.2
       '@changesets/errors': 0.1.4
@@ -432,18 +432,18 @@ packages:
       '@changesets/types': 4.1.0
     dev: true
 
-  /@changesets/cli/2.21.0:
-    resolution: {integrity: sha512-cJXRg28MmF9VbQrlwSjpY4AJA2xZUbXFCpQ3kFmX0IeppO7wknZ2QfocAhIqwM828t8d3R4Zpi5xnvJ/crIcQw==}
+  /@changesets/cli/2.21.1:
+    resolution: {integrity: sha512-4AJKo/UW0P217m2VHjiuhZy+CstLw54eu9I1fsY7tst76GeEN7mX0mVrTNEisR6CvOH7wLav3ITqvDcKVPbKsw==}
     hasBin: true
     dependencies:
       '@babel/runtime': 7.17.2
       '@changesets/apply-release-plan': 5.0.5
-      '@changesets/assemble-release-plan': 5.1.0
+      '@changesets/assemble-release-plan': 5.1.1
       '@changesets/changelog-git': 0.1.10
       '@changesets/config': 1.7.0
       '@changesets/errors': 0.1.4
       '@changesets/get-dependents-graph': 1.3.1
-      '@changesets/get-release-plan': 3.0.6
+      '@changesets/get-release-plan': 3.0.7
       '@changesets/git': 1.3.1
       '@changesets/logger': 0.0.5
       '@changesets/pre': 1.0.10
@@ -497,11 +497,11 @@ packages:
       semver: 5.7.1
     dev: true
 
-  /@changesets/get-release-plan/3.0.6:
-    resolution: {integrity: sha512-HpPyr8y6xkihy3rONLZ6OtfgYq88NotidPAuS3nwMeZjLHiIVLyejR2+/5q717f6HKcrATxAjTwMAcjl7X/uzA==}
+  /@changesets/get-release-plan/3.0.7:
+    resolution: {integrity: sha512-zDp6RIEKvERIF4Osy8sJ5BzqTiiLMhPWBO02y6w3nzTQJ0VBMaTs4hhwImQ/54O9I34eUHR3D0DwmwGQ27ifaw==}
     dependencies:
       '@babel/runtime': 7.17.2
-      '@changesets/assemble-release-plan': 5.1.0
+      '@changesets/assemble-release-plan': 5.1.1
       '@changesets/config': 1.7.0
       '@changesets/pre': 1.0.10
       '@changesets/read': 0.5.4
@@ -827,8 +827,8 @@ packages:
     resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==}
     dev: true
 
-  /@types/react-dom/17.0.12:
-    resolution: {integrity: sha512-SeJ430ndLI15JtRSHuzotn7AIdUtr8bdk6XW8mMfzjZo3vahRgJGHZqHiI4nAzCHTVG4qC21ObfsHBVUEHcDhg==}
+  /@types/react-dom/17.0.13:
+    resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
       '@types/react': 17.0.39
     dev: true
@@ -2352,8 +2352,8 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /i18next/21.6.12:
-    resolution: {integrity: sha512-xlGTPdu2g5PZEUIE6TA1mQ9EIAAv9nMFONzgwAIrKL/KTmYYWufQNGgOmp5Og1PvgUji+6i1whz0rMdsz1qaKw==}
+  /i18next/21.6.13:
+    resolution: {integrity: sha512-MVjNttw+5mIuu2/fwTpSU0EeI7iU/6pnDvGQboCzkILiv0/gD+FLZaF7qSHmUHO4ZkE6xJQ9SlBgGvMHxhC82Q==}
     dependencies:
       '@babel/runtime': 7.17.2
     dev: false

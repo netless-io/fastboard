@@ -68,6 +68,7 @@ function App() {
             </div>
           </>
         )}
+        <a href="/replay.html">Replay</a>
       </div>
       <Handler
         target={document.querySelector("#app") as HTMLDivElement}

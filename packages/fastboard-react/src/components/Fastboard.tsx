@@ -58,7 +58,7 @@ function FastboardInternal({
 
   const useWhiteboard = useCallback(
     (container: HTMLDivElement | null) => {
-      if (container && app) app.manager.bindContainer(container);
+      if (container && app) app.bindContainer(container);
     },
     [app]
   );
@@ -77,11 +77,7 @@ function FastboardInternal({
     <ThemeContext.Provider value={theme}>
       <I18nContext.Provider value={i18n}>
         <div {...restProps} className="fastboard-root" ref={forwardedRef}>
-          <div
-            className="fastboard-view"
-            ref={useWhiteboard}
-            onPointerDownCapture={focusThisElementImmediate}
-          />
+          <div className="fastboard-view" ref={useWhiteboard} onTouchStartCapture={hackTippyHide} />
           {children ? (
             children
           ) : (
@@ -110,6 +106,8 @@ function FastboardInternal({
   );
 }
 
-function focusThisElementImmediate(ev: React.PointerEvent<HTMLDivElement>) {
-  ev.currentTarget.focus();
+function hackTippyHide() {
+  setTimeout(() => {
+    document.dispatchEvent(new MouseEvent("mousedown"));
+  });
 }
