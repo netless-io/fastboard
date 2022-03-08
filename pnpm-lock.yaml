@@ -32,34 +32,34 @@ importers:
     specifiers:
       '@netless/fastboard-core': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.10
+      '@netless/window-manager': ^0.4.11-canary.1
       tsup: ^5.12.0
       white-web-sdk: ^2.16.10
     dependencies:
       '@netless/fastboard-core': link:../fastboard-core
       '@netless/fastboard-react': link:../fastboard-react
     devDependencies:
-      '@netless/window-manager': 0.4.10_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
       tsup: 5.12.0_typescript@4.6.2
       white-web-sdk: 2.16.10
 
   packages/fastboard-core:
     specifiers:
       '@netless/app-slide': ^0.0.56
-      '@netless/window-manager': ^0.4.10
+      '@netless/window-manager': ^0.4.11-canary.1
       tsup: ^5.12.0
       white-web-sdk: ^2.16.10
     dependencies:
       '@netless/app-slide': 0.0.56
     devDependencies:
-      '@netless/window-manager': 0.4.10_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
       tsup: 5.12.0_typescript@4.6.2
       white-web-sdk: 2.16.10
 
   packages/fastboard-react:
     specifiers:
       '@netless/fastboard-core': workspace:*
-      '@netless/window-manager': ^0.4.10
+      '@netless/window-manager': ^0.4.11-canary.1
       '@tippyjs/react': ^4.2.6
       '@types/react': ^17.0.39
       '@types/react-dom': ^17.0.13
@@ -79,7 +79,7 @@ importers:
       rc-slider: 9.7.5
     devDependencies:
       '@netless/fastboard-core': link:../fastboard-core
-      '@netless/window-manager': 0.4.10_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
       '@types/react': 17.0.39
       '@types/react-dom': 17.0.13
       sass: 1.49.9
@@ -94,7 +94,7 @@ importers:
     specifiers:
       '@netless/fastboard': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.10
+      '@netless/window-manager': ^0.4.11-canary.1
       '@types/react': ^17.0.39
       '@types/react-dom': ^17.0.13
       '@vitejs/plugin-react': ^1.2.0
@@ -108,7 +108,7 @@ importers:
     dependencies:
       '@netless/fastboard': link:../../fastboard
       '@netless/fastboard-react': link:../../fastboard-react
-      '@netless/window-manager': 0.4.10_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
       clsx: 1.1.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -681,8 +681,8 @@ packages:
       stylefire: 7.0.3
       value-enhancer: 0.0.8
 
-  /@netless/window-manager/0.4.10_white-web-sdk@2.16.10:
-    resolution: {integrity: sha512-z/yNNS2yZ6UEqXGWmtp+gF4wnOFCTwB9Qeky7HT7tOPmOjDq5wN3+q3yUz9rXhZBEtLkuvhUFcDjzSC4GsHu1w==}
+  /@netless/window-manager/0.4.11-canary.1_white-web-sdk@2.16.10:
+    resolution: {integrity: sha512-/ok/vyZoyEQMCAy7PSKMVyQK87d90LJtmu5DkGUyxHG4x1NjfidS87B8GEPhne2Vp0fh6V/vomxqd0CZH/RD7Q==}
     peerDependencies:
       white-web-sdk: ^2.16.0
     dependencies:
