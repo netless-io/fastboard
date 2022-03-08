@@ -44,11 +44,25 @@ importers:
       vite: 2.8.6_sass@1.49.9
       white-web-sdk: 2.16.10
 
+  packages/esbuild-plugin-inline-sass:
+    specifiers: {}
+
   packages/fastboard-core:
     specifiers:
       '@netless/app-slide': ^0.0.56
     dependencies:
       '@netless/app-slide': 0.0.56
+
+  packages/fastboard-ui:
+    specifiers:
+      '@netless/esbuild-plugin-inline-sass': workspace:*
+      '@netless/fastboard-core': workspace:*
+      tippy.js: ^6.3.7
+    dependencies:
+      tippy.js: 6.3.7
+    devDependencies:
+      '@netless/esbuild-plugin-inline-sass': link:../esbuild-plugin-inline-sass
+      '@netless/fastboard-core': link:../fastboard-core
 
 packages:
 
@@ -459,6 +473,10 @@ packages:
       style-value-types: 3.2.0
       tslib: 1.14.1
     dev: true
+
+  /@popperjs/core/2.11.2:
+    resolution: {integrity: sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==}
+    dev: false
 
   /@prefresh/babel-plugin/0.4.3:
     resolution: {integrity: sha512-fYAWbU1WDSLn108kKY4eDaaeUcnszFqXjgaGKYXNZ5NLulpRTpsrY+Sbfo9q8LDpWrBpqIgzjrwNnvglWI1xNQ==}
@@ -2447,6 +2465,12 @@ packages:
   /tiny-emitter/2.1.0:
     resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==}
     dev: true
+
+  /tippy.js/6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.2
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
