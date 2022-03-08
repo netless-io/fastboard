@@ -5,31 +5,31 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "check": "pnpm check --filter={packages}...",
-    "dev": "pnpm dev:react",
-    "dev:react": "pnpm dev --filter=test-react",
+    "dev:ui": "pnpm dev --filter=fastboard-ui",
+    "dev:react": "pnpm dev --filter=fastboard-react",
     "build": "pnpm cleanup && pnpm build --filter={packages}...",
     "build:ci": "pnpm build --aggregate-output --filter={packages}...",
     "cleanup": "pnpm cleanup -r"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.21.1",
     "@hyrious/rimraf": "^0.1.0",
+    "@netless/window-manager": "^0.4.10",
+    "@prefresh/vite": "^2.2.8",
     "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.13.0",
     "@typescript-eslint/parser": "^5.13.0",
+    "@vitejs/plugin-react": "^1.2.0",
+    "esbuild": "^0.14.23",
     "eslint": "^8.10.0",
     "eslint-define-config": "^1.2.5",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "preact": "^10.6.6",
     "prettier": "^2.5.1",
+    "sass": "^1.49.9",
+    "tsup": "^5.11.13",
+    "type-fest": "^2.12.0",
     "typescript": "^4.6.2",
-    "vite": "^2.8.6"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "react",
-        "react-dom"
-      ]
-    }
+    "vite": "^2.8.6",
+    "white-web-sdk": "^2.16.10"
   }
 }
