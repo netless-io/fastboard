@@ -22,6 +22,7 @@
     "esbuild": "^0.14.25",
     "eslint": "^8.10.0",
     "eslint-define-config": "^1.2.5",
+    "eslint-plugin-react": "^7.29.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "preact": "^10.6.6",
     "prettier": "^2.5.1",

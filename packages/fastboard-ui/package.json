@@ -23,6 +23,7 @@
     "types": "dist/index.d.ts"
   },
   "dependencies": {
+    "preact": "^10.6.6",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
