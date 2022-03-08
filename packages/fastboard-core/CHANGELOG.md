@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.11
+
+### Patch Changes
+
+- 0dfd8ed: hack to hide all tippy popup (again).
+
 ## 0.2.10
 
 ### Patch Changes

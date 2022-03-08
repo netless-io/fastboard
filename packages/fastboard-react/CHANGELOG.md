@@ -1,5 +1,13 @@
 # @netless/fastboard-react
 
+## 0.2.11
+
+### Patch Changes
+
+- 0dfd8ed: hack to hide all tippy popup (again).
+- Updated dependencies [0dfd8ed]
+  - @netless/fastboard-core@0.2.11
+
 ## 0.2.10
 
 ### Patch Changes
