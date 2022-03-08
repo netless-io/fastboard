@@ -1,3 +1,3 @@
-import "./behaviors/register-slide";
-
 export * from "./minimal";
+
+import "./behaviors/register-slide";

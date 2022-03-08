@@ -27,11 +27,9 @@ export const DefaultApps: AppsConfig = {
   },
 };
 
-export function registerApps(config: AppsConfig) {
-  for (const kind in config) {
-    if (Object.prototype.hasOwnProperty.call(config, kind)) {
-      const options = config[kind];
-      WindowManager.register({ kind, ...options });
-    }
+for (const kind in DefaultApps) {
+  if (Object.prototype.hasOwnProperty.call(DefaultApps, kind)) {
+    const options = DefaultApps[kind];
+    WindowManager.register({ kind, ...options });
   }
 }

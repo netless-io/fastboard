@@ -13,9 +13,6 @@ import type { MountParams } from "@netless/window-manager";
 import { contentModeScale, DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 
-import type { AppsConfig } from "./behaviors/register-apps";
-
-import { DefaultApps, registerApps } from "./behaviors/register-apps";
 import { ensureWindowManager } from "./helpers/utils";
 import { FastboardApp } from "./impl/app";
 import { FastboardPlayer } from "./impl/player";
@@ -24,8 +21,7 @@ export type { FastboardReadable, FastboardWritable } from "./helpers/value";
 
 export type { AppsStatus, InsertDocsDynamic, InsertDocsParams, InsertDocsStatic } from "./impl/app";
 
-export type { AppsConfig, FastboardApp, FastboardPlayer };
-export { DefaultApps, registerApps };
+export type { FastboardApp, FastboardPlayer };
 
 export interface FastboardOptions {
   sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & { region: string };
@@ -33,7 +29,6 @@ export interface FastboardOptions {
     callbacks?: Partial<RoomCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
-  appsConfig?: AppsConfig;
 }
 
 /**
@@ -42,7 +37,7 @@ export interface FastboardOptions {
  * let app = await createFastboard({
  *   sdkConfig: {
  *     appIdentifier: import.meta.env.VITE_APPID,
- *     region: "ch-hz",
+ *     region: "cn-hz",
  *   },
  *   joinRoom: {
  *     uid: unique_id,
@@ -55,10 +50,7 @@ export async function createFastboard({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
-  appsConfig = DefaultApps,
 }: FastboardOptions) {
-  registerApps(appsConfig);
-
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
@@ -110,7 +102,6 @@ export interface FastboardReplayOptions {
     callbacks?: Partial<PlayerCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
-  appsConfig?: AppsConfig;
 }
 
 /**
@@ -119,7 +110,7 @@ export interface FastboardReplayOptions {
  * let app = await replayFastboard({
  *   sdkConfig: {
  *     appIdentifier: import.meta.env.VITE_APPID,
- *     region: "ch-hz",
+ *     region: "cn-hz",
  *   },
  *   replayRoom: {
  *     uid: unique_id,
@@ -132,10 +123,7 @@ export async function replayFastboard({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
-  appsConfig = DefaultApps,
 }: FastboardReplayOptions) {
-  registerApps(appsConfig);
-
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
@@ -161,3 +149,5 @@ export async function replayFastboard({
 
   return new FastboardPlayer(sdk, player, manager);
 }
+
+import "./behaviors/register-apps";
