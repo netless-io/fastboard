@@ -2,10 +2,6 @@
   "extends": "../../tsconfig-base.json",
   "include": ["src"],
   "compilerOptions": {
-    "jsx": "react",
-    "paths": {
-      // see https://github.com/qmhc/vite-plugin-dts/issues/51
-      "tippy.js": ["./node_modules/tippy.js/"]
-    }
+    "jsx": "react"
   }
 }
