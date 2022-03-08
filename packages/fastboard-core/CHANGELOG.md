@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.12
+
+### Patch Changes
+
+- 564cfa7: remove `appsConfig`
+
 ## 0.2.11
 
 ### Patch Changes

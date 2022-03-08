@@ -1,5 +1,14 @@
 # @netless/fastboard
 
+## 0.2.12
+
+### Patch Changes
+
+- 564cfa7: remove `appsConfig`
+- Updated dependencies [564cfa7]
+  - @netless/fastboard-core@0.2.12
+  - @netless/fastboard-react@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes
