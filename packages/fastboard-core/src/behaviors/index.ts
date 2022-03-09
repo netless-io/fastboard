@@ -6,7 +6,7 @@ export interface AppsConfig {
   [kind: string]: Omit<RegisterParams, "kind">;
 }
 
-export const DefaultApps: AppsConfig = {
+const DefaultApps: AppsConfig = {
   Monaco: {
     src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-monaco/0.1.12/dist/main.iife.js",
   },
@@ -28,17 +28,15 @@ export const DefaultApps: AppsConfig = {
   },
 };
 
-export function registerApps(config: AppsConfig) {
-  WindowManager.register({
-    kind: "Slide",
-    appOptions: { debug: false },
-    src: AppSlide,
-  });
+WindowManager.register({
+  kind: "Slide",
+  appOptions: { debug: false },
+  src: AppSlide,
+});
 
-  for (const kind in config) {
-    if (Object.prototype.hasOwnProperty.call(config, kind)) {
-      const options = config[kind];
-      WindowManager.register({ kind, ...options });
-    }
+for (const kind in DefaultApps) {
+  if (Object.prototype.hasOwnProperty.call(DefaultApps, kind)) {
+    const options = DefaultApps[kind];
+    WindowManager.register({ kind, ...options });
   }
 }

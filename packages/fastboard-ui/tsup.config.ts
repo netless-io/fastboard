@@ -1,8 +1,9 @@
 import { defineConfig } from "tsup";
 import { sass } from "@netless/esbuild-plugin-inline-sass";
+import { main } from "./package.json";
 
 export default defineConfig({
-  entry: ["src/index.tsx"],
+  entry: [main],
   format: ["cjs", "esm"],
   sourcemap: true,
   clean: true,

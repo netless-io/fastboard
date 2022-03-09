@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import { sass } from "@netless/esbuild-plugin-inline-sass";
 import { main } from "./package.json";
 
 export default defineConfig({
@@ -8,5 +9,6 @@ export default defineConfig({
   clean: true,
   platform: "browser",
   target: "es2017",
+  esbuildPlugins: [sass()],
   dts: true,
 });

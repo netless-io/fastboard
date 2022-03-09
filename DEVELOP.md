@@ -12,7 +12,7 @@ graph LR
 
 ```yaml
 core: []
-ui: [core, preact]
+ui: [core@peer, preact]
 fastboard: [ui, core]
 fastboard-react: [fastboard, react@peer]
 ```

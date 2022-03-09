@@ -15,7 +15,6 @@ import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { readable, writable } from "../utils";
 import { ensure_window_manager } from "../internal";
-import { DefaultApps, registerApps } from "../behaviors";
 
 class FastboardPlayerBase {
   public constructor(readonly sdk: WhiteWebSdk, readonly player: Player, readonly manager: WindowManager) {}
@@ -156,10 +155,7 @@ export async function replayFastboard({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
-  appsConfig = DefaultApps,
 }: FastboardReplayOptions) {
-  registerApps(appsConfig);
-
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,

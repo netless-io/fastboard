@@ -23,7 +23,6 @@ import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
 import { BuiltinApps, WindowManager } from "@netless/window-manager";
 import { getImageSize, genUID, convertedFileToScene, makeSlideParams, readable, writable, warn } from "../utils";
 import { ensure_window_manager, transform_app_status } from "../internal";
-import { DefaultApps, registerApps } from "../behaviors";
 
 class FastboardAppBase {
   public constructor(
@@ -446,10 +445,7 @@ export async function createFastboard({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
-  appsConfig = DefaultApps,
 }: FastboardOptions) {
-  registerApps(appsConfig);
-
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
