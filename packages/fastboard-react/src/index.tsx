@@ -1,9 +1,9 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 export * from "@netless/fastboard";
 
 export class App extends Component {
   override render() {
-    return null;
+    return <div>hello</div>;
   }
 }

@@ -26,9 +26,4 @@ module.exports = defineConfig({
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
   },
-  settings: {
-    react: {
-      pragma: "h",
-    },
-  },
 });
