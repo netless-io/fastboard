@@ -32,40 +32,40 @@ importers:
     specifiers:
       '@netless/fastboard-core': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.11-canary.1
+      '@netless/window-manager': ^0.4.11
       tsup: ^5.12.0
       white-web-sdk: ^2.16.10
     dependencies:
       '@netless/fastboard-core': link:../fastboard-core
       '@netless/fastboard-react': link:../fastboard-react
     devDependencies:
-      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
-      tsup: 5.12.0_typescript@4.6.2
+      '@netless/window-manager': 0.4.11_white-web-sdk@2.16.10
+      tsup: 5.12.0
       white-web-sdk: 2.16.10
 
   packages/fastboard-core:
     specifiers:
       '@netless/app-slide': ^0.0.56
-      '@netless/window-manager': ^0.4.11-canary.1
+      '@netless/window-manager': ^0.4.11
       tsup: ^5.12.0
       white-web-sdk: ^2.16.10
     dependencies:
       '@netless/app-slide': 0.0.56
     devDependencies:
-      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
-      tsup: 5.12.0_typescript@4.6.2
+      '@netless/window-manager': 0.4.11_white-web-sdk@2.16.10
+      tsup: 5.12.0
       white-web-sdk: 2.16.10
 
   packages/fastboard-react:
     specifiers:
       '@netless/fastboard-core': workspace:*
-      '@netless/window-manager': ^0.4.11-canary.1
+      '@netless/window-manager': ^0.4.11
       '@tippyjs/react': ^4.2.6
-      '@types/react': ^17.0.39
+      '@types/react': ^17.0.40
       '@types/react-dom': ^17.0.13
       clsx: ^1.1.1
       framer-motion: ^6.2.8
-      i18next: ^21.6.13
+      i18next: ^21.6.14
       rc-slider: ^9.7.5
       sass: ^1.49.9
       tippy.js: ^6.3.7
@@ -75,16 +75,16 @@ importers:
       '@tippyjs/react': 4.2.6
       clsx: 1.1.1
       framer-motion: 6.2.8
-      i18next: 21.6.13
+      i18next: 21.6.14
       rc-slider: 9.7.5
     devDependencies:
       '@netless/fastboard-core': link:../fastboard-core
-      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
-      '@types/react': 17.0.39
+      '@netless/window-manager': 0.4.11_white-web-sdk@2.16.10
+      '@types/react': 17.0.40
       '@types/react-dom': 17.0.13
       sass: 1.49.9
       tippy.js: 6.3.7
-      tsup: 5.12.0_typescript@4.6.2
+      tsup: 5.12.0
       white-web-sdk: 2.16.10
 
   packages/playground:
@@ -94,8 +94,8 @@ importers:
     specifiers:
       '@netless/fastboard': workspace:*
       '@netless/fastboard-react': workspace:*
-      '@netless/window-manager': ^0.4.11-canary.1
-      '@types/react': ^17.0.39
+      '@netless/window-manager': ^0.4.11
+      '@types/react': ^17.0.40
       '@types/react-dom': ^17.0.13
       '@vitejs/plugin-react': ^1.2.0
       clsx: ^1.1.1
@@ -108,13 +108,13 @@ importers:
     dependencies:
       '@netless/fastboard': link:../../fastboard
       '@netless/fastboard-react': link:../../fastboard-react
-      '@netless/window-manager': 0.4.11-canary.1_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.11_white-web-sdk@2.16.10
       clsx: 1.1.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       white-web-sdk: 2.16.10
     devDependencies:
-      '@types/react': 17.0.39
+      '@types/react': 17.0.40
       '@types/react-dom': 17.0.13
       '@vitejs/plugin-react': 1.2.0
       sass: 1.49.9
@@ -681,8 +681,8 @@ packages:
       stylefire: 7.0.3
       value-enhancer: 0.0.8
 
-  /@netless/window-manager/0.4.11-canary.1_white-web-sdk@2.16.10:
-    resolution: {integrity: sha512-/ok/vyZoyEQMCAy7PSKMVyQK87d90LJtmu5DkGUyxHG4x1NjfidS87B8GEPhne2Vp0fh6V/vomxqd0CZH/RD7Q==}
+  /@netless/window-manager/0.4.11_white-web-sdk@2.16.10:
+    resolution: {integrity: sha512-m7O/8gZYlRo73qTMLOasyKUuVDfTugbe8yKBGUW++i/TDTndytIcsMOYa2b88PuV2Demanvg3Qn1u0+tTs76PA==}
     peerDependencies:
       white-web-sdk: ^2.16.0
     dependencies:
@@ -830,15 +830,15 @@ packages:
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
-      '@types/react': 17.0.39
+      '@types/react': 17.0.40
     dev: true
 
-  /@types/react/17.0.39:
-    resolution: {integrity: sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==}
+  /@types/react/17.0.40:
+    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
-      csstype: 3.0.10
+      csstype: 3.0.11
     dev: true
 
   /@types/retry/0.12.1:
@@ -1349,8 +1349,8 @@ packages:
       which: 2.0.2
     dev: true
 
-  /csstype/3.0.10:
-    resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==}
+  /csstype/3.0.11:
+    resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
     dev: true
 
   /csv-generate/3.4.3:
@@ -2362,8 +2362,8 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /i18next/21.6.13:
-    resolution: {integrity: sha512-MVjNttw+5mIuu2/fwTpSU0EeI7iU/6pnDvGQboCzkILiv0/gD+FLZaF7qSHmUHO4ZkE6xJQ9SlBgGvMHxhC82Q==}
+  /i18next/21.6.14:
+    resolution: {integrity: sha512-XL6WyD+xlwQwbieXRlXhKWoLb/rkch50/rA+vl6untHnJ+aYnkQ0YDZciTWE78PPhOpbi2gR0LTJCJpiAhA+uQ==}
     dependencies:
       '@babel/runtime': 7.17.2
     dev: false
@@ -3763,7 +3763,7 @@ packages:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: false
 
-  /tsup/5.12.0_typescript@4.6.2:
+  /tsup/5.12.0:
     resolution: {integrity: sha512-FGZZNikQYGlEPtKEnz04hEniEO9ctP0rfWOdDeJCpFY4sqQe+TE90YNsv/1g0FshXoGYAOTFDYAVHg6Ovh003Q==}
     hasBin: true
     peerDependencies:
@@ -3786,7 +3786,6 @@ packages:
       source-map: 0.7.3
       sucrase: 3.20.3
       tree-kill: 1.2.2
-      typescript: 4.6.2
     transitivePeerDependencies:
       - supports-color
       - ts-node
