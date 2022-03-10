@@ -5,7 +5,10 @@
     "@netless/fastboard": "0.2.12",
     "@netless/fastboard-core": "0.2.12",
     "@netless/fastboard-react": "0.2.12",
-    "test-react": "0.1.14"
+    "test-react": "0.1.14",
+    "playground": "0.1.0"
   },
-  "changesets": []
+  "changesets": [
+    "shiny-zebras-drive"
+  ]
 }

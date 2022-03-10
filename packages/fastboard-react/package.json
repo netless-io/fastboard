@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "0.2.12",
+  "version": "0.2.13-canary.0",
   "description": "A UI kit built on top of @netless/fastboard.",
   "main": "src/index.ts",
   "files": [
@@ -20,7 +20,7 @@
     "rc-slider": "^9.7.5"
   },
   "peerDependencies": {
-    "@netless/fastboard-core": "*",
+    "@netless/fastboard-core": "0.2.13-canary.0",
     "@netless/window-manager": ">=0.4.0",
     "react": "*",
     "react-dom": "*",

@@ -1,5 +1,13 @@
 # test-react
 
+## 0.1.15-canary.0
+
+### Patch Changes
+
+- Updated dependencies [8da5b0a]
+  - @netless/fastboard@0.2.13-canary.0
+  - @netless/fastboard-react@0.2.13-canary.0
+
 ## 0.1.14
 
 ### Patch Changes

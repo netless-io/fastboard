@@ -1,5 +1,11 @@
 # @netless/fastboard
 
+## 0.2.13-canary.0
+
+### Patch Changes
+
+- 8da5b0a: make mount() props optional
+
 ## 0.2.12
 
 ### Patch Changes
