@@ -1,0 +1,7 @@
+{
+  "name": "@netless/esbuild-plugin-inline-sass",
+  "version": "0.1.0",
+  "exports": "./index.mjs",
+  "types": "index.d.ts",
+  "private": true
+}

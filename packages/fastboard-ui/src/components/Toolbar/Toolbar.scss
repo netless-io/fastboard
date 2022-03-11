@@ -1,0 +1,69 @@
+@import "../theme.scss";
+
+$name: "fastboard-toolbar";
+
+.#{$name} {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transform: translateX(0);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.collapsed {
+    transform: translateX(-100%);
+  }
+}
+
+.#{$name}-handler {
+  position: absolute;
+  left: 100%;
+  width: 17px;
+  font-size: 0;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    appearance: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  svg {
+    opacity: 0;
+    transition: opacity 0.5s 1s;
+    pointer-events: none;
+  }
+
+  @each $name, $theme in $themes {
+    &.#{$name} &-bg-color {
+      fill: read($theme, "bg-color");
+    }
+    &.#{$name} &-border-color {
+      stroke: read($theme, "border-color");
+    }
+    &.#{$name} &-image-stroke-color {
+      stroke: read($theme, "color");
+    }
+    &.#{$name} &-image-fill-color {
+      fill: read($theme, "color");
+    }
+  }
+}
+
+.#{$name}:hover .#{$name}-handler svg,
+.#{$name}.collapsed .#{$name}-handler svg {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.#{$name}-btn {
+  @include btn(32px, 4px);
+}
+
+@import "./components/Slider.scss";
+@import "./components/Contents.scss";

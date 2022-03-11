@@ -1,0 +1,33 @@
+{
+  "name": "@netless/fastboard-ui",
+  "version": "0.3.0",
+  "description": "The front-end of @netless/fastboard-core.",
+  "main": "src/index.ts",
+  "svelte": "dist/index.svelte.mjs",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "cleanup": "rimraf dist",
+    "check": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "vite",
+    "test:ssr": "esbuild-dev test/ssr.ts"
+  },
+  "peerDependencies": {
+    "@netless/fastboard-core": "workspace:*"
+  },
+  "publishConfig": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts"
+  },
+  "dependencies": {
+    "tippy.js": "^6.3.7"
+  },
+  "devDependencies": {
+    "@netless/esbuild-plugin-inline-sass": "workspace:*",
+    "@netless/fastboard-core": "workspace:*"
+  }
+}

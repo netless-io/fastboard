@@ -1,0 +1,20 @@
+@import "../theme.scss";
+
+@each $name, $theme in $themes {
+  .fastboard-icon.#{$name} {
+    .fastboard-icon-stroke-color {
+      stroke: read($theme, "color");
+    }
+    .fastboard-icon-fill-color {
+      fill: read($theme, "color");
+    }
+    &.is-active {
+      .fastboard-icon-stroke-color {
+        stroke: read($theme, "active-color");
+      }
+      .fastboard-icon-fill-color {
+        fill: read($theme, "active-color");
+      }
+    }
+  }
+}

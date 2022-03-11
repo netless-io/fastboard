@@ -1,7 +1,8 @@
 import { defineConfig } from "tsup";
+import { main } from "./package.json";
 
 export default defineConfig({
-  entry: ["src/index.ts", "src/minimal.ts"],
+  entry: [main],
   format: ["cjs", "esm"],
   sourcemap: true,
   clean: true,

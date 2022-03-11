@@ -1,0 +1,15 @@
+@import "../theme.scss";
+
+$name: "fastboard-zoom-control";
+
+.#{$name} {
+  @include container;
+}
+
+.#{$name}-btn {
+  @include btn;
+}
+
+.#{$name}-text {
+  @include tabular-nums;
+}

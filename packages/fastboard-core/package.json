@@ -1,18 +1,16 @@
 {
   "name": "@netless/fastboard-core",
-  "version": "0.2.13-canary.0",
+  "version": "0.3.0",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
     "src",
-    "dist",
-    "minimal.mjs",
-    "minimal.ts"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
     "cleanup": "rimraf dist",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "build": "tsup"
   },
   "dependencies": {
     "@netless/app-slide": "^0.0.56"
@@ -20,11 +18,6 @@
   "peerDependencies": {
     "@netless/window-manager": ">=0.4.0",
     "white-web-sdk": ">=2.16.0"
-  },
-  "devDependencies": {
-    "@netless/window-manager": "^0.4.11",
-    "tsup": "^5.12.0",
-    "white-web-sdk": "^2.16.10"
   },
   "publishConfig": {
     "main": "dist/index.js",

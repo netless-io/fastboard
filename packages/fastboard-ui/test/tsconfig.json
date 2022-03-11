@@ -1,0 +1,10 @@
+{
+  "include": ["."],
+  "compilerOptions": {
+    "types": ["svelte"],
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node"
+  }
+}

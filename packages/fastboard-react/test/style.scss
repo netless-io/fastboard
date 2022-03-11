@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+}
+
+#app {
+  width: 400px;
+  height: 300px;
+  border: 1px solid;
+  margin: 0.5em;
+  position: relative;
+}
+
+.controller {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  border: 1px solid;
+  padding: 10px;
+  margin: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    select {
+      display: inline-block;
+    }
+  }
+}

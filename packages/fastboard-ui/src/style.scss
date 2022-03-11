@@ -1,0 +1,36 @@
+@import "./components/theme.scss";
+
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/themes/light.css";
+
+@import "./components/Icons/Icons.scss";
+@import "./components/RedoUndo/RedoUndo.scss";
+@import "./components/ZoomControl/ZoomControl.scss";
+@import "./components/PageControl/PageControl.scss";
+@import "./components/PlayerControl/PlayerControl.scss";
+@import "./components/Toolbar/Toolbar.scss";
+@import "./components/Fastboard/Fastboard.scss";
+
+.fastboard-tip {
+  font-family: inherit;
+  color: $grey-2;
+  background-color: $grey-12;
+
+  &[data-placement^="right"] > .tippy-arrow::before {
+    top: 4px;
+    border-width: 4px;
+    border-right-color: $grey-12;
+  }
+
+  &[data-placement^="top"] > .tippy-arrow::before {
+    left: 4px;
+    border-width: 4px;
+    border-top-color: $grey-12;
+  }
+}
+
+.fastboard-panel {
+  .tippy-content {
+    padding: 8px;
+  }
+}

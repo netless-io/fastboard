@@ -1,44 +1,35 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "0.2.13-canary.0",
-  "description": "A UI kit built on top of @netless/fastboard.",
-  "main": "src/index.ts",
+  "version": "0.3.0",
+  "description": "React components of @netless/fastboard.",
+  "main": "src/index.tsx",
   "files": [
     "src",
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
     "cleanup": "rimraf dist",
-    "check": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@tippyjs/react": "^4.2.6",
-    "clsx": "^1.1.1",
-    "framer-motion": "^6.2.8",
-    "i18next": "^21.6.14",
-    "rc-slider": "^9.7.5"
+    "check": "tsc --noEmit",
+    "build": "tsup",
+    "dev": "vite"
   },
   "peerDependencies": {
-    "@netless/fastboard-core": "0.2.13-canary.0",
-    "@netless/window-manager": ">=0.4.0",
-    "react": "*",
-    "react-dom": "*",
-    "white-web-sdk": ">=2.16.0"
+    "react": "*"
   },
-  "devDependencies": {
+  "dependencies": {
     "@netless/fastboard-core": "workspace:*",
-    "@netless/window-manager": "^0.4.11",
-    "@types/react": "^17.0.40",
-    "@types/react-dom": "^17.0.13",
-    "sass": "^1.49.9",
-    "tippy.js": "^6.3.7",
-    "tsup": "^5.12.0",
-    "white-web-sdk": "^2.16.10"
+    "@netless/fastboard-ui": "workspace:*"
   },
   "publishConfig": {
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts"
+  },
+  "devDependencies": {
+    "@netless/esbuild-plugin-inline-sass": "workspace:*",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

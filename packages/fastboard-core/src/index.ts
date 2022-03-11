@@ -1,3 +1,2 @@
-export * from "./minimal";
-
-import "./behaviors/register-slide";
+export * from "./utils";
+export * from "./impl";

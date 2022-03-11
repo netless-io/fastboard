@@ -1,8 +1,6 @@
 # @netless/fastboard
 
-[中文](./README-zh.md)
-
-[Sandbox Link](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts)
+[中文](./README-zh.md) | [Sandbox Link](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts)
 
 A starter library for making whiteboard web app, based on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk), [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) and [netless-app](https://github.com/netless-io/netless-app).
 
@@ -16,12 +14,10 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 ## Install
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk react react-dom
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 </pre>
 
 > **Note:** `@netless/window-manager` and `white-web-sdk` are **peerDependencies**.
-
-> React is also a dependency temporarily. We will remove it in the future.
 
 ## Usage
 
@@ -58,8 +54,8 @@ let { update, destroy } = mountFastboard(document.getElementById("whiteboard"));
 update({ theme: "dark" });
 
 // Terminate app
-destroy();
-app.destroy();
+destroy(); // close the ui
+app.destroy(); // disconnect the whiteboard
 ```
 
 <samp>[1]</samp> Read more about the SDK config at [Construct WhiteWebSDK object](https://developer.netless.link/javascript-en/home/construct-white-web-sdk)\
@@ -71,13 +67,11 @@ app.destroy();
 Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/fastboard-core \
-        @netless/window-manager white-web-sdk react react-dom
+npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom
 </pre>
 
 ```jsx
-import { createFastboard } from "@netless/fastboard-core";
-import { Fastboard } from "@netless/fastboard-react";
+import { createFastboard, Fastboard } from "@netless/fastboard-react";
 import ReactDOM from "react-dom";
 
 function App() {
@@ -111,7 +105,7 @@ function App() {
     // must be called only once
   }, []);
 
-  return <Fastboard app={app} language="zh-CN" theme="dark" />;
+  return <Fastboard app={app} language="en" theme="dark" />;
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));

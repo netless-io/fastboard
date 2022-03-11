@@ -1,0 +1,22 @@
+.draggable {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 9999;
+  transition: opacity 0.1s;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  &:hover {
+    opacity: 1;
+  }
+  &.active {
+    cursor: grabbing;
+  }
+}
+[data-theme="dark"] .draggable {
+  background-color: rgba(255, 255, 255, 0.25);
+}

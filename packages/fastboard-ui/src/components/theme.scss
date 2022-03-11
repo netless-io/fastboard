@@ -1,0 +1,91 @@
+@use "sass:color";
+@import "./variables.scss";
+
+$themes: (
+  light: (
+    color: $grey-6,
+    active-color: $blue-6,
+    bg-color: color.change(white, $alpha: 0.9),
+    hover-bg-color: $blue-1,
+    border-color: $grey-1,
+  ),
+  dark: (
+    color: $grey-5,
+    active-color: $blue-7,
+    bg-color: color.change($grey-10, $alpha: 0.9),
+    hover-bg-color: $grey-8,
+    border-color: $grey-8,
+  ),
+);
+
+@function read($theme, $name) {
+  @return var(--fastboard-#{$name}, map-get($theme, $name));
+}
+
+@mixin border-box {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: inherit;
+  }
+}
+
+@mixin tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@mixin container {
+  @include border-box;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: system-ui;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  @each $name, $theme in $themes {
+    &.#{$name} {
+      color: read($theme, "color");
+      background-color: read($theme, "bg-color");
+      border-color: read($theme, "border-color");
+    }
+  }
+}
+
+@mixin btn($size: 24px, $padding: 0) {
+  appearance: none;
+  cursor: pointer;
+  margin: 0;
+  border: 0;
+  padding: $padding;
+  width: $size;
+  height: $size;
+  background-color: transparent;
+  border-radius: 4px;
+  font-size: 0;
+  line-height: 1;
+  flex-shrink: 0;
+
+  svg,
+  img {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @each $name, $theme in $themes {
+    &.#{$name}:not(:disabled):hover {
+      background-color: read($theme, "hover-bg-color");
+    }
+  }
+}

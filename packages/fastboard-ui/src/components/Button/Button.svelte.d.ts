@@ -1,0 +1,26 @@
+import { SvelteComponentTyped } from "svelte";
+import type { Content, Placement } from "tippy.js";
+import type { Theme } from "../../typings";
+
+export declare interface ButtonProps {
+  class?: string;
+  name?: string;
+  theme?: Theme;
+  disabled?: boolean;
+  content?: Content;
+  placement?: Placement;
+  menu?: Content;
+  menu_placement?: Placement;
+}
+
+export declare interface ButtonEvents {
+  click: WindowEventMap["click"];
+}
+
+export declare interface ButtonSlots {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  default: {};
+}
+
+declare class Button extends SvelteComponentTyped<ButtonProps, ButtonEvents, ButtonSlots> {}
+export default Button;

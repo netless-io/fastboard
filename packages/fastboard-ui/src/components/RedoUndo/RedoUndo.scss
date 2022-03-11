@@ -1,0 +1,11 @@
+@import "../theme.scss";
+
+$name: "fastboard-redo-undo";
+
+.#{$name} {
+  @include container;
+}
+
+.#{$name}-btn {
+  @include btn;
+}

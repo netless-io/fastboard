@@ -1,29 +1,6 @@
 @import "@netless/window-manager/dist/style.css";
-@import "tippy.js/dist/tippy.css";
-@import "tippy.js/themes/light.css";
-@import "rc-slider/assets/index.css";
-@import "./components/Fastboard.scss";
-@import "./components/RedoUndo/RedoUndo.scss";
-@import "./components/PageControl/PageControl.scss";
-@import "./components/ZoomControl/ZoomControl.scss";
-@import "./components/Toolbar/Toolbar.scss";
-@import "./components/PlayerControl/PlayerControl.scss";
 
-.tippy-box.fastboard-tip {
-  color: #eee;
-  background-color: rgba($color: #000000, $alpha: 0.95);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-.tippy-box.fastboard-tip[data-placement^="right"] > .tippy-arrow::before {
-  top: 4px;
-  border-width: 4px;
-  border-right-color: #000;
-}
-
-.tippy-box.fastboard-tip[data-placement^="top"] > .tippy-arrow::before {
-  left: 4px;
-  border-width: 4px;
-  border-top-color: #000;
+.fastboard-react-div {
+  width: 100%;
+  height: 100%;
 }

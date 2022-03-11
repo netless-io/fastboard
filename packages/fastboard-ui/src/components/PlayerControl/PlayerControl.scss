@@ -1,0 +1,57 @@
+@import "../theme.scss";
+
+$name: "fastboard-player-control";
+
+.#{$name} {
+  @include container;
+  width: 100%;
+}
+
+.#{$name}-btn {
+  @include btn;
+  display: inline;
+
+  &.loading {
+    svg,
+    img {
+      animation: fastboard-player-control-rotate 0.5s linear infinite;
+    }
+  }
+
+  @keyframes fastboard-player-control-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  &.speed {
+    width: auto;
+    padding: 4px;
+    text-align: right;
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @each $name, $theme in $themes {
+    &.is-active.#{$name} {
+      color: read($theme, "active-color");
+    }
+  }
+}
+
+.#{$name}-speed-text {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  line-height: 16px;
+}
+
+.#{$name}-progress {
+  @extend .#{$name}-speed-text;
+  display: inline-flex;
+  align-items: center;
+}
+
+.#{$name}-panel.speed {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,166 @@
+@import "../../theme.scss";
+
+$name: "fastboard-toolbar";
+
+.#{$name}-contents {
+  @include container;
+  padding: 2px 0;
+  gap: 0;
+  flex-direction: column;
+
+  > .#{$name}-btn {
+    margin: 2px 4px;
+  }
+}
+
+.#{$name}-btn-interactive {
+  position: relative;
+}
+
+.#{$name}-triangle {
+  width: 0px;
+  height: 0px;
+  border-bottom: 4px solid;
+  border-left: 4px solid transparent;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.#{$name}-btn:focus + .#{$name}-triangle {
+  opacity: 0;
+}
+
+.#{$name}-scrollable {
+  padding: 2px 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.#{$name}-tooltip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.#{$name}-hotkey {
+  display: inline-flex;
+  margin-right: -4px;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(#fff, 0.1);
+  border-radius: 4px;
+}
+
+.#{$name}-panel-wrapper {
+  display: none;
+}
+
+.#{$name}-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.#{$name}-panel-divider {
+  height: 0.5px;
+  width: 100%;
+  margin: 4px 0;
+  background-color: rgba(#fff, 0.15);
+}
+
+.#{$name}-colors,
+.#{$name}-shapes {
+  display: grid;
+  align-self: center;
+  grid-template: repeat(2, 1fr) / repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+  gap: 4px;
+}
+
+.#{$name}-shape-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.#{$name}-color-btn {
+  @extend .#{$name}-shape-btn;
+  border: 1px solid transparent;
+
+  @each $name, $theme in $themes {
+    &.#{$name}.is-active {
+      border-color: read($theme, "active-color");
+    }
+  }
+}
+
+.#{$name}-color-item {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.#{$name}-panel.apps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.#{$name}-app-btn {
+  margin: 0;
+  border: 0;
+  padding: 4px;
+  background-color: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0;
+
+  &:disabled {
+    opacity: 0.8;
+  }
+
+  &-icon {
+    width: 32px;
+    height: 32px;
+    pointer-events: none;
+  }
+
+  &-text {
+    font-size: 14px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &.is-loading {
+    cursor: progress;
+  }
+
+  &.is-failed {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  @each $name, $theme in $themes {
+    &:not(:disabled, .is-loading, .is-failed):hover.#{$name} {
+      cursor: pointer;
+      background-color: read($theme, "hover-bg-color");
+    }
+
+    &-text.#{$name} {
+      color: read($theme, "color");
+    }
+  }
+}
