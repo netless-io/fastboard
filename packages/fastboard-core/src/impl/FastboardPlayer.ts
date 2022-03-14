@@ -147,7 +147,9 @@ export class FastboardPlayer extends FastboardPlayerBase {
 }
 
 export interface FastboardReplayOptions {
-  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState">;
+  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & {
+    region: NonNullable<WhiteWebSdkConfiguration["region"]>;
+  };
   replayRoom: Omit<ReplayRoomParams, "useMultiViews"> & {
     callbacks?: Partial<PlayerCallbacks>;
   };

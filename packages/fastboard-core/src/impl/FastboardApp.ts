@@ -445,7 +445,9 @@ export class FastboardApp extends FastboardAppBase {
 }
 
 export interface FastboardOptions {
-  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState">;
+  sdkConfig: Omit<WhiteWebSdkConfiguration, "useMobXState"> & {
+    region: NonNullable<WhiteWebSdkConfiguration["region"]>;
+  };
   joinRoom: Omit<JoinRoomParams, "useMultiViews" | "disableNewPencil" | "disableMagixEventDispatchLimit"> & {
     callbacks?: Partial<RoomCallbacks>;
   };
