@@ -6,6 +6,7 @@ export declare interface FastboardProps {
   app?: FastboardApp | null;
   theme?: Theme;
   language?: Language;
+  ref?: (container: HTMLElement) => void;
 }
 
 declare class Fastboard extends SvelteComponentTyped<FastboardProps> {}
