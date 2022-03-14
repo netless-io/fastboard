@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FastboardApp } from "@netless/fastboard-core";
   import type { Language, Theme } from "../../typings";
+  import { tippy_hide_all } from "../../actions/tippy";
   import RedoUndo from "../RedoUndo";
   import ZoomControl from "../ZoomControl";
   import PageControl from "../PageControl";
@@ -20,7 +21,7 @@
 </script>
 
 <div class="{name}-root" class:loading={!app}>
-  <div class="{name}-view" bind:this={container} />
+  <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
   <div class="{name}-left">
     <Toolbar {app} {theme} {language} />
   </div>

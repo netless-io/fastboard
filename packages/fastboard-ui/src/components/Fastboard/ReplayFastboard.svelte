@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FastboardPlayer } from "@netless/fastboard-core";
   import type { Language, Theme } from "../../typings";
+  import { tippy_hide_all } from "../../actions/tippy";
   import PlayerControl from "../PlayerControl";
 
   export let player: FastboardPlayer | null | undefined = null;
@@ -17,7 +18,7 @@
 </script>
 
 <div class="{name}-root" class:loading={!player}>
-  <div class="{name}-view" bind:this={container} />
+  <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
   <div class="{name}-bottom">
     <PlayerControl {player} {theme} {language} />
   </div>
