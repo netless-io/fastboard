@@ -9,14 +9,14 @@
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
   export let language: Language = "en";
-  export let ref: ((element: HTMLDivElement | null) => void) | undefined = undefined;
+  export let containerRef: ((element: HTMLDivElement | null) => void) | undefined = undefined;
 
   const name = "fastboard";
 
   let container: HTMLDivElement;
 
   $: if (app && container) app.bindContainer(container);
-  $: if (ref) ref(container || null);
+  $: if (containerRef) containerRef(container || null);
 </script>
 
 <div class="{name}-root" class:loading={!app}>

@@ -6,7 +6,7 @@ export declare interface ReplayFastboardProps {
   player?: FastboardPlayer | null;
   theme?: Theme;
   language?: Language;
-  ref?: (container: HTMLDivElement | null) => void;
+  containerRef?: (container: HTMLDivElement | null) => void;
 }
 
 declare class ReplayFastboard extends SvelteComponentTyped<ReplayFastboardProps> {}
