@@ -10,7 +10,8 @@
     "dev:ui": "pnpm dev --filter=fastboard-ui",
     "build": "pnpm build --filter={packages}...",
     "build:ci": "pnpm build --aggregate-output --filter={packages}...",
-    "cleanup": "pnpm cleanup -r"
+    "cleanup": "pnpm cleanup -r",
+    "release:pre": "esbuild-dev scripts/pre.ts"
   },
   "devDependencies": {
     "@hyrious/esbuild-dev": "^0.7.4",
@@ -22,12 +23,13 @@
     "@typescript-eslint/eslint-plugin": "^5.14.0",
     "@typescript-eslint/parser": "^5.14.0",
     "@vitejs/plugin-react": "^1.2.0",
-    "esbuild": "^0.14.25",
+    "esbuild": "^0.14.26",
     "eslint": "^8.11.0",
     "eslint-define-config": "^1.2.5",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.5.1",
     "sass": "^1.49.9",
+    "semver": "^7.3.5",
     "sveld": "^0.13.4",
     "svelte": "^3.46.4",
     "tsup": "^5.12.1",

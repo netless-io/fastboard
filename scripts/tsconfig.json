@@ -1,0 +1,10 @@
+{
+  "include": ["."],
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true
+  }
+}
