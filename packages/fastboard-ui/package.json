@@ -8,6 +8,7 @@
     "src",
     "dist"
   ],
+  "repository": "netless-io/fastboard",
   "scripts": {
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit",
