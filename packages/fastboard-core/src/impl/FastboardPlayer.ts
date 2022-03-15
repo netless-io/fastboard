@@ -184,6 +184,7 @@ export async function replayFastboard({
   player.play();
   const manager = await managerPromise;
   player.pause();
+  await player.seekToProgressTime(0);
 
   return new FastboardPlayer(sdk, player, manager);
 }
