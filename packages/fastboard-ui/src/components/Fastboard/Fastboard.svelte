@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FastboardApp } from "@netless/fastboard-core";
   import type { Language, Theme } from "../../typings";
+  import { onMount } from "svelte";
   import { tippy_hide_all } from "../../actions/tippy";
   import RedoUndo from "../RedoUndo";
   import ZoomControl from "../ZoomControl";
@@ -17,7 +18,15 @@
   let container: HTMLDivElement;
 
   $: if (app && container) app.bindContainer(container);
-  $: if (containerRef) containerRef(container || null);
+
+  onMount(() => {
+    if (containerRef) {
+      containerRef(container);
+      return () => {
+        if (containerRef) containerRef(null);
+      };
+    }
+  });
 </script>
 
 <div class="{name}-root" class:loading={!app}>

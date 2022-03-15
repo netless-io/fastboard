@@ -11,7 +11,7 @@ export default defineConfig([
     clean: true,
     platform: "browser",
     target: "es2017",
-    esbuildPlugins: [svelte(), sass()],
+    esbuildPlugins: [svelte({ compilerOptions: { dev: true } }), sass()],
     loader: { ".svg": "dataurl" },
     dts: true,
   },
@@ -23,7 +23,7 @@ export default defineConfig([
     clean: true,
     platform: "browser",
     target: "es2017",
-    esbuildPlugins: [svelte(), sass()],
+    esbuildPlugins: [svelte({ compilerOptions: { dev: true } }), sass()],
     loader: { ".svg": "dataurl" },
   },
 ]);

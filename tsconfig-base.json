@@ -1,6 +1,7 @@
 {
   "exclude": ["node_modules"],
   "compilerOptions": {
+    "noEmit": true,
     "target": "es2017",
     "module": "esnext",
     "lib": ["dom", "esnext"],

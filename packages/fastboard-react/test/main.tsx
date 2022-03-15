@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FastboardApp, Theme, Language } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
@@ -10,6 +11,7 @@ function App() {
   const [app, setApp] = useState<FastboardApp | null>(null);
   const [theme, setTheme] = useState<Theme>("light");
   const [lang, setLang] = useState<Language>("en");
+  const [, forceUpdate] = useState({});
 
   useEffect(() => {
     let app_instance: FastboardApp | undefined;
@@ -17,6 +19,7 @@ function App() {
     createFastboard({
       sdkConfig: {
         appIdentifier: import.meta.env.VITE_APPID,
+        region: "cn-hz",
       },
       joinRoom: {
         uid: genUID(),
@@ -27,6 +30,8 @@ function App() {
         cursor: true,
       },
     }).then(app => {
+      (window as any).app = app;
+      (window as any).forceUpdate = forceUpdate;
       setApp((app_instance = app));
     });
 
@@ -52,7 +57,14 @@ function App() {
 
   return (
     <>
-      <Fastboard app={app} theme={theme} language={lang} />
+      <Fastboard
+        app={app}
+        theme={theme}
+        language={lang}
+        containerRef={useCallback((el: HTMLDivElement | null) => {
+          console.log(el);
+        }, [])}
+      />
       <div className="controller">
         <label>
           <small>Theme</small>

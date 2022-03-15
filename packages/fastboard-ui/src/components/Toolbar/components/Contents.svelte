@@ -51,8 +51,15 @@
   $: shape = $memberState?.shapeType;
   $: status = app?.appsStatus;
 
-  let top = writable(0);
+  $: if (applianceShapes.includes(appliance as Appliance)) {
+    last_shape = appliance as Shape;
+  } else if (shape) {
+    last_shape = shape;
+  }
+
   $: max_scroll = scrollable ? $scroll_height + (32 + 8) * 2 - computed_height : 0;
+
+  let top = writable(0);
 
   function scroll_up() {
     $top = clamp($top - 32 - 4, 0, max_scroll);
@@ -79,11 +86,6 @@
     } else {
       app?.setAppliance("shape", last_shape as Exclude<Shape, Appliance>);
     }
-  }
-  $: if (applianceShapes.includes(appliance as Appliance)) {
-    last_shape = appliance as Shape;
-  } else if (shape) {
-    last_shape = shape;
   }
   function eraser() {
     app?.setAppliance("eraser");
