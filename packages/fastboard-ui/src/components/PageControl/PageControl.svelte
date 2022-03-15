@@ -49,6 +49,7 @@
 
   function addPage() {
     app?.addPage({ after: true });
+    app?.nextPage();
   }
 </script>
 
