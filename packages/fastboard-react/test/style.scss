@@ -31,3 +31,15 @@ body {
     }
   }
 }
+
+.links {
+  @extend .controller;
+  top: 72px;
+}
+
+.log {
+  @extend .links;
+  white-space: pre-wrap;
+  font-family: monospace;
+  width: max-content;
+}

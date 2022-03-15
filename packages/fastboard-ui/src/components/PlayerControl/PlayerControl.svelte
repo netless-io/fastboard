@@ -132,7 +132,7 @@
     menu={speed_panel}
     menu_placement="top-end"
   >
-    <span class="{name}-speed-text">{$speed}x</span>
+    <span class="{name}-speed-text">{$speed || 1}x</span>
   </Button>
 </div>
 

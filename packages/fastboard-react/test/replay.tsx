@@ -1,43 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FastboardApp, Theme, Language } from "..";
+import type { FastboardPlayer, Theme, Language } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
-import { createFastboard, genUID, Fastboard } from "../src";
+import { replayFastboard, ReplayFastboard } from "../src";
 import "./style.scss";
 
 function App() {
-  const [app, setApp] = useState<FastboardApp | null>(null);
+  const [log, setLog] = useState("preparing...");
+  const [player, setPlayer] = useState<FastboardPlayer | null>(null);
   const [theme, setTheme] = useState<Theme>("light");
   const [lang, setLang] = useState<Language>("en");
   const [, forceUpdate] = useState({});
 
   useEffect(() => {
-    let app_instance: FastboardApp | undefined;
+    let player_instance: FastboardPlayer | undefined;
 
-    createFastboard({
+    replayFastboard({
       sdkConfig: {
         appIdentifier: import.meta.env.VITE_APPID,
         region: "cn-hz",
       },
-      joinRoom: {
-        uid: genUID(),
-        uuid: import.meta.env.VITE_ROOM_UUID,
-        roomToken: import.meta.env.VITE_ROOM_TOKEN,
+      replayRoom: {
+        room: "b86bf2109dbb11ecbce43722439862b5",
+        roomToken:
+          "NETLESSROOM_YWs9c21nRzh3RzdLNk1kTkF5WCZub25jZT00NDViMDEzMC05ZGJjLTExZWMtYTYzZi02ZDIwNmVhNjI4YTgmcm9sZT0yJnNpZz0wMGQ2ZWNjNzkwYWJkM2JhMzVmMzhlNmYzMjk1NTZjOTY4MGNhYjY1N2I4ZjgxZWFkMTE3OWMxNDBlYTYyODE4JnV1aWQ9Yjg2YmYyMTA5ZGJiMTFlY2JjZTQzNzIyNDM5ODYyYjU",
+        beginTimestamp: 1646619090394,
+        duration: 70448,
+        callbacks: {
+          onPhaseChanged(phase) {
+            setLog(log => `${log}\nphase: ${phase}`);
+          },
+        },
       },
       managerConfig: {
         cursor: true,
       },
-    }).then(app => {
-      (window as any).app = app;
+    }).then(player => {
+      (window as any).player = player;
       (window as any).forceUpdate = forceUpdate;
-      setApp((app_instance = app));
+      setPlayer((player_instance = player));
     });
 
     return () => {
-      if (app_instance) {
-        app_instance.destroy();
+      if (player_instance) {
+        player_instance.destroy();
       }
     };
   }, []);
@@ -57,7 +65,7 @@ function App() {
 
   return (
     <>
-      <Fastboard app={app} theme={theme} language={lang} />
+      <ReplayFastboard player={player} theme={theme} language={lang} />
       <div className="controller">
         <label>
           <small>Theme</small>
@@ -74,9 +82,7 @@ function App() {
           </select>
         </label>
       </div>
-      <div className="links">
-        <a href="/replay.html">Replay</a>
-      </div>
+      <div className="log">{log}</div>
     </>
   );
 }

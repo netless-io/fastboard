@@ -100,25 +100,11 @@ export class FastboardPlayer extends FastboardPlayerBase {
     }
   );
 
-  private _setReady!: (value: boolean) => void;
-  readonly ready = readable(false, set => {
-    this._setReady = set;
-  });
+  readonly duration = readable(this.player.timeDuration);
 
-  private _setDuration!: (value: number) => void;
-  readonly duration = readable(0, set => {
-    this._setDuration = set;
-  });
-
-  readonly state = readable<PlayerState | null>(null, set => {
-    const update = () => set(this.player.state);
-    this.player.callbacks.once("onLoadFirstFrame", () => {
-      this._setDuration(this.player.timeDuration);
-      this._setReady(true);
-      update();
-    });
-    return this._addPlayerListener("onPlayerStateChanged", update);
-  });
+  readonly state = readable<PlayerState | null>(null, set =>
+    this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state))
+  );
 
   seek(timestamp: number) {
     this._assertNotDestroyed();
