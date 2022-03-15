@@ -49,6 +49,6 @@ for (const folder of packages) {
   const file = join("./packages", folder, "package.json");
   const pkg = JSON.parse(await readFile(file, "utf8"));
   pkg.version = nextVersion;
-  await writeFile(file, JSON.stringify(pkg, null, 2));
+  await writeFile(file, JSON.stringify(pkg, null, 2) + "\n");
   console.log("Updated " + folder);
 }
