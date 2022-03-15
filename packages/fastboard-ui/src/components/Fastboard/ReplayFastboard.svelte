@@ -21,6 +21,10 @@
     console.error(err);
   }
 
+  $: if (player && theme) {
+    player.manager.setPrefersColorScheme(theme);
+  }
+
   onMount(() => {
     if (containerRef) {
       containerRef(container);

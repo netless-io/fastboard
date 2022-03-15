@@ -24,6 +24,10 @@
     console.error(err);
   }
 
+  $: if (app && theme) {
+    app.manager.setPrefersColorScheme(theme);
+  }
+
   onMount(() => {
     if (containerRef) {
       containerRef(container);
