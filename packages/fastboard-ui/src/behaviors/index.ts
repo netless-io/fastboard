@@ -26,8 +26,8 @@ class AppsInToolbar {
       this._listeners = this._listeners.filter(item => item !== fn);
     };
   }
-  push(data: AppInToolbar) {
-    this._data.push(data);
+  push(...data: AppInToolbar[]) {
+    this._data.push(...data);
     this._listeners.forEach(fn => fn(this._data));
   }
   insert(data: AppInToolbar, index: number) {

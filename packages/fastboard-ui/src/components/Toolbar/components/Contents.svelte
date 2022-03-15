@@ -172,8 +172,8 @@
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} />
   </div>
-  <div class="{name}-panel apps" bind:this={apps_panel}>
-    {#each apps.data as netless_app (netless_app.kind)}
+  <div class="{name}-panel apps" style="--n:{$apps.length}" bind:this={apps_panel}>
+    {#each $apps as netless_app}
       {@const { icon, label, kind, onClick } = netless_app}
       {@const state = $status && $status[kind]}
       <button

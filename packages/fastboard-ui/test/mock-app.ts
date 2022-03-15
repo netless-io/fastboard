@@ -45,6 +45,11 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
   }
 
   const app: PartialDeep<FastboardApp> = {
+    manager: {
+      setPrefersColorScheme(scheme) {
+        console.log("setPrefersColorScheme", scheme);
+      },
+    },
     bindContainer(el) {
       el.style.cssText = "display: flex; align-items: center; justify-content: center;";
       el.textContent = "whiteboard container";

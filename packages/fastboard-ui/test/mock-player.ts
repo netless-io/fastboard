@@ -23,6 +23,11 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
   let timer = 0;
 
   const player: PartialDeep<FastboardPlayer> = {
+    manager: {
+      setPrefersColorScheme(scheme) {
+        console.log("setPrefersColorScheme", scheme);
+      },
+    },
     bindContainer(el) {
       el.style.cssText = "display: flex; align-items: center; justify-content: center;";
       el.textContent = "whiteboard container";

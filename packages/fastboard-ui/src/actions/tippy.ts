@@ -64,6 +64,7 @@ export function tippy_hide_all() {
 
 export const tippy_menu: Partial<Props> = {
   delay: 0,
+  duration: [50, 300],
   placement: "right-start",
   interactive: true,
   trigger: "click",

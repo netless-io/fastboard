@@ -112,14 +112,15 @@ $name: "fastboard-toolbar";
 
 .#{$name}-panel.apps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(min(var(--n, 3), 3), minmax(max-content, 1fr));
   gap: 4px;
 }
 
 .#{$name}-app-btn {
   margin: 0;
   border: 0;
-  padding: 4px;
+  border-radius: 2px;
+  padding: 4px 6px;
   background-color: transparent;
   display: inline-flex;
   flex-direction: column;
@@ -139,6 +140,7 @@ $name: "fastboard-toolbar";
 
   &-text {
     font-size: 14px;
+    line-height: 1;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
