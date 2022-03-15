@@ -17,7 +17,12 @@
 
   let container: HTMLDivElement;
 
-  $: if (app && container) app.bindContainer(container);
+  $: try {
+    if (app && container) app.bindContainer(container);
+  } catch (err) {
+    console.error("[fastboard] An error occurred while binding container");
+    console.error(err);
+  }
 
   onMount(() => {
     if (containerRef) {

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FastboardPlayer } from "@netless/fastboard-core";
   import type { Language, Theme } from "../../typings";
+  import { onMount } from "svelte";
   import { tippy_hide_all } from "../../actions/tippy";
   import PlayerControl from "../PlayerControl";
 
@@ -13,8 +14,21 @@
 
   let container: HTMLDivElement;
 
-  $: if (player && container) player.bindContainer(container);
-  $: if (containerRef) containerRef(container || null);
+  $: try {
+    if (player && container) player.bindContainer(container);
+  } catch (err) {
+    console.error("[fastboard] An error occurred while binding container");
+    console.error(err);
+  }
+
+  onMount(() => {
+    if (containerRef) {
+      containerRef(container);
+      return () => {
+        if (containerRef) containerRef(null);
+      };
+    }
+  });
 </script>
 
 <div class="{name}-root" class:loading={!player}>
