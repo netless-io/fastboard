@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-ui",
-  "version": "0.3.0-canary.4",
+  "version": "0.3.0-canary.5",
   "description": "The front-end of @netless/fastboard-core.",
   "main": "src/index.ts",
   "svelte": "dist/index.svelte.mjs",
