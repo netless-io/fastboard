@@ -74,21 +74,33 @@ export class FastboardPlayer extends FastboardPlayerBase {
     this.manager.bindCollectorContainer(container);
   }
 
+  /**
+   * Player current time in milliseconds.
+   */
   readonly currentTime = writable(
     this.player.progressTime,
     set => this._addPlayerListener("onProgressTimeChanged", set),
     this.player.seekToProgressTime.bind(this.player)
   );
 
+  /**
+   * Player state, like "is it playing?".
+   */
   readonly phase = readable<PlayerPhase>(this.player.phase, set =>
     this._addPlayerListener("onPhaseChanged", set)
   );
 
+  /**
+   * Will become true after buffering.
+   */
   readonly canplay = readable(this.player.isPlayable, set =>
     this._addPlayerListener("onIsPlayableChanged", set)
   );
 
   private _setSpeed!: (value: number) => void;
+  /**
+   * Playback speed, default `1`.
+   */
   readonly speed = writable(
     this.player.playbackSpeed,
     set => {
@@ -100,32 +112,53 @@ export class FastboardPlayer extends FastboardPlayerBase {
     }
   );
 
+  /**
+   * Playback duration in milliseconds.
+   */
   readonly duration = readable(this.player.timeDuration);
 
+  /**
+   * Get state of room at that time, like "who was in the room?".
+   */
   readonly state = readable<PlayerState | null>(null, set =>
     this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state))
   );
 
+  /**
+   * Seek to some time in milliseconds.
+   */
   seek(timestamp: number) {
     this._assertNotDestroyed();
     return this.player.seekToProgressTime(timestamp);
   }
 
+  /**
+   * Change player state to playing.
+   */
   play() {
     this._assertNotDestroyed();
     this.player.play();
   }
 
+  /**
+   * Change player state to paused.
+   */
   pause() {
     this._assertNotDestroyed();
     this.player.pause();
   }
 
+  /**
+   * Change player state to stopped.
+   */
   stop() {
     this._assertNotDestroyed();
     this.player.stop();
   }
 
+  /**
+   * Set playback speed, a shortcut for `speed.set(x)`.
+   */
   setSpeed(value: number) {
     this._assertNotDestroyed();
     this.speed.set(value);

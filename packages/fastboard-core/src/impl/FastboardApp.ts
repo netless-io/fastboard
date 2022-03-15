@@ -164,6 +164,11 @@ export class FastboardApp extends FastboardAppBase {
   );
 
   /**
+   * Is current room online?
+   */
+  readonly phase = readable<RoomPhase>(this.room.phase, set => this._addRoomListener("onPhaseChanged", set));
+
+  /**
    * Current window-manager's windows' state (is it maximized?).
    */
   readonly boxState = readable(this.manager.boxState, set => this._addManagerListener("boxStateChange", set));
