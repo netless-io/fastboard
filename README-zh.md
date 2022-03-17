@@ -2,8 +2,6 @@
 
 本库用于快速开始一个白板应用，基于 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 和 [netless-app](https://github.com/netless-io/netless-app) 实现。
 
-<p align=center>🚧 Working in Progress 🚧</p>
-
 ## 目录
 
 - [安装](#install)
