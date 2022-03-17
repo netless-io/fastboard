@@ -48,14 +48,14 @@ async function mountFastboard(div) {
   return mount(app, div);
 }
 
-let { update, destroy } = mountFastboard(document.getElementById("whiteboard"));
+mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
+  // Update app
+  update({ theme: "dark" });
 
-// Update app
-update({ theme: "dark" });
-
-// Terminate app
-destroy(); // close the ui
-app.destroy(); // disconnect the whiteboard
+  // Terminate app
+  destroy(); // close the ui
+  app.destroy(); // disconnect the whiteboard
+});
 ```
 
 <samp>[1]</samp> Read more about the SDK config at [Construct WhiteWebSDK object](https://developer.netless.link/javascript-en/home/construct-white-web-sdk)\

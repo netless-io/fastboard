@@ -47,14 +47,14 @@ async function mountFastboard(div) {
   return mount(app, div);
 }
 
-let { update, destroy } = mountFastboard(document.getElementById("whiteboard"));
+mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
+  // 更新 app 配置
+  update({ theme: "dark" });
 
-// 更新 app 配置
-update({ theme: "dark" });
-
-// 关闭 app
-destroy(); // 关闭 UI
-app.destroy(); // 断开连接
+  // 关闭 app
+  destroy(); // 关闭 UI
+  app.destroy(); // 断开连接
+});
 ```
 
 <samp>[1]</samp> 关于 SDK 更多配置请看 [构造 WhiteWebSDK](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)\
