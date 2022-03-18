@@ -167,18 +167,58 @@ Fastboard itself does not contain any logic about upload/save a file.
 
 ```js
 const appId = await app.insertCodeEditor();
+// Or
+const appId = await app.manager.addApp({
+  kind: "Monaco",
+  options: { title: "Code Editor" },
+});
 ```
 
 #### Insert [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
 
 ```js
 const appId = await app.insertCountdown();
+// Or
+const appId = await app.manager.addApp({
+  kind: "Countdown",
+  options: { title: "Countdown" },
+});
 ```
 
 #### Insert [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
 ```js
 const appId = await app.insertGeoGebra();
+// Or
+const appId = await app.manager.addApp({
+  kind: "GeoGebra",
+  options: { title: "GeoGebra" },
+});
+```
+
+#### Insert [@netless/app-media-player](https://github.com/netless-io/netless-app/tree/master/packages/app-media-player)
+
+```js
+const appId = await app.manager.addApp({
+  kind: "Player",
+  options: { title: "YouTube" },
+  attributes: {
+    src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+    provider: "youtube",
+  },
+});
+```
+
+#### Insert [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
+
+```js
+const appId = await app.manager.addApp({
+  kind: "EmbeddedPage",
+  options: { title: "Google Docs" },
+  attributes: {
+    src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+  },
+});
 ```
 
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).

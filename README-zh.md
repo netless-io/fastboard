@@ -174,18 +174,58 @@ const appId = await app.insertMedia("文件名.mp3", fileUrl);
 
 ```js
 const appId = await app.insertCodeEditor();
+// 或者
+const appId = await app.manager.addApp({
+  kind: "Monaco",
+  options: { title: "Code Editor" },
+});
 ```
 
 #### 插入 [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
 
 ```js
 const appId = await app.insertCountdown();
+// 或者
+const appId = await app.manager.addApp({
+  kind: "Countdown",
+  options: { title: "Countdown" },
+});
 ```
 
 #### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
 ```js
 const appId = await app.insertGeoGebra();
+// 或者
+const appId = await app.manager.addApp({
+  kind: "GeoGebra",
+  options: { title: "GeoGebra" },
+});
+```
+
+#### 插入 [@netless/app-media-player](https://github.com/netless-io/netless-app/tree/master/packages/app-media-player)
+
+```js
+const appId = await app.manager.addApp({
+  kind: "Player",
+  options: { title: "YouTube" },
+  attributes: {
+    src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+    provider: "youtube",
+  },
+});
+```
+
+#### 插入 [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
+
+```js
+const appId = await app.manager.addApp({
+  kind: "EmbeddedPage",
+  options: { title: "Google Docs" },
+  attributes: {
+    src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+  },
+});
 ```
 
 > 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。

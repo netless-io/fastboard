@@ -4,7 +4,7 @@ import type { FastboardApp, Theme, Language } from "..";
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
-import { createFastboard, genUID, Fastboard } from "../src";
+import { createFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
 
 function App() {
@@ -33,6 +33,37 @@ function App() {
       (window as any).app = app;
       (window as any).forceUpdate = forceUpdate;
       setApp((app_instance = app));
+      apps.push(
+        {
+          icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
+          kind: "Player",
+          label: "YouTube",
+          onClick(app) {
+            app.manager.addApp({
+              kind: "Player",
+              options: { title: "YouTube" },
+              attributes: {
+                src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+                provider: "youtube",
+              },
+            });
+          },
+        },
+        {
+          icon: "https://api.iconify.design/logos:google-icon.svg?color=currentColor",
+          kind: "EmbeddedPage",
+          label: "Google Docs",
+          onClick(app) {
+            app.manager.addApp({
+              kind: "EmbeddedPage",
+              options: { title: "Google Docs" },
+              attributes: {
+                src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+              },
+            });
+          },
+        }
+      );
     });
 
     return () => {

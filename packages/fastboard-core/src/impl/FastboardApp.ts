@@ -404,6 +404,18 @@ export class FastboardApp extends FastboardAppBase {
   }
 
   /**
+   * Insert the Media Player app.
+   */
+  insertMedia(title: string, src: string) {
+    this._assertNotDestroyed();
+    return this.manager.addApp({
+      kind: BuiltinApps.MediaPlayer,
+      options: { title },
+      attributes: { src },
+    });
+  }
+
+  /**
    * Insert the Monaco Code Editor app.
    */
   insertCodeEditor() {
@@ -422,18 +434,6 @@ export class FastboardApp extends FastboardAppBase {
     return this.manager.addApp({
       kind: "Countdown",
       options: { title: "Countdown" },
-    });
-  }
-
-  /**
-   * Insert the Media Player app.
-   */
-  insertMedia(title: string, src: string) {
-    this._assertNotDestroyed();
-    return this.manager.addApp({
-      kind: BuiltinApps.MediaPlayer,
-      options: { title },
-      attributes: { src },
     });
   }
 
