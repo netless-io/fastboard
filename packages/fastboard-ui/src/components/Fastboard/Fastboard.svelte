@@ -14,8 +14,26 @@
   export let containerRef: ((element: HTMLDivElement | null) => void) | undefined = undefined;
 
   const name = "fastboard";
+  const AppsShowToolbar = ["DocsViewer", "Slide"];
 
   let container: HTMLDivElement;
+  let layout: "hidden" | "toolbar-only" | "visible" = "hidden";
+
+  $: writable = app?.writable;
+  $: boxState = app?.boxState;
+  $: focusedApp = app?.focusedApp;
+
+  $: if (!$writable) {
+    layout = "hidden";
+  } else if ($boxState === "maximized") {
+    if ($focusedApp && AppsShowToolbar.some(kind => ($focusedApp || "").includes(kind))) {
+      layout = "toolbar-only";
+    } else {
+      layout = "hidden";
+    }
+  } else {
+    layout = "visible";
+  }
 
   $: try {
     if (app && container) app.bindContainer(container);
@@ -40,14 +58,18 @@
 
 <div class="{name}-root" class:loading={!app}>
   <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
-  <div class="{name}-left">
-    <Toolbar {app} {theme} {language} />
-  </div>
-  <div class="{name}-bottom-left">
-    <RedoUndo {app} {theme} {language} />
-    <ZoomControl {app} {theme} {language} />
-  </div>
-  <div class="{name}-bottom-right">
-    <PageControl {app} {theme} {language} />
-  </div>
+  {#if layout === "visible" || layout === "toolbar-only"}
+    <div class="{name}-left">
+      <Toolbar {app} {theme} {language} />
+    </div>
+  {/if}
+  {#if layout === "visible"}
+    <div class="{name}-bottom-left">
+      <RedoUndo {app} {theme} {language} />
+      <ZoomControl {app} {theme} {language} />
+    </div>
+    <div class="{name}-bottom-right">
+      <PageControl {app} {theme} {language} />
+    </div>
+  {/if}
 </div>
