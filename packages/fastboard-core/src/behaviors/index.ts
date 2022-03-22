@@ -1,6 +1,14 @@
 import type { RegisterParams } from "@netless/window-manager";
 import { WindowManager } from "@netless/window-manager";
-import AppSlide from "@netless/app-slide";
+import SlideApp, { apps, addHooks, previewSlide } from "@netless/app-slide";
+
+export type {
+  AppOptions as SlideOptions,
+  Controller as SlideController,
+  PreviewParams,
+  SlidePreviewer,
+} from "@netless/app-slide";
+export { previewSlide, SlideApp, addHooks as addSlideHooks, apps as slideApps };
 
 export interface AppsConfig {
   [kind: string]: Omit<RegisterParams, "kind">;
@@ -31,7 +39,8 @@ const DefaultApps: AppsConfig = {
 WindowManager.register({
   kind: "Slide",
   appOptions: { debug: false },
-  src: AppSlide,
+  src: SlideApp,
+  addHooks,
 });
 
 for (const kind in DefaultApps) {

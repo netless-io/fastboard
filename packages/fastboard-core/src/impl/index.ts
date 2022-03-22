@@ -1,4 +1,3 @@
 export * from "./FastboardApp";
 export * from "./FastboardPlayer";
-
-import "../behaviors";
+export * from "../behaviors";

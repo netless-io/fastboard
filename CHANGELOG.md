@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Re-export [`@netless/app-slide`](https://github.com/netless-io/netless-app/tree/master/packages/app-slide).
+
 ## 0.3.1
 
 - Hide controls if room is not writable, instead of making them not clickable.
