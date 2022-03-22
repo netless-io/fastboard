@@ -70,9 +70,9 @@ importers:
 
   packages/fastboard-core:
     specifiers:
-      '@netless/app-slide': ^0.0.57
+      '@netless/app-slide': ^0.1.0
     dependencies:
-      '@netless/app-slide': 0.0.57
+      '@netless/app-slide': 0.1.0
 
   packages/fastboard-react:
     specifiers:
@@ -460,8 +460,8 @@ packages:
     resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
     dev: true
 
-  /@netless/app-slide/0.0.57:
-    resolution: {integrity: sha512-kUEY9KOqoF6NCkOz0kxOyfPPYJYms/MCwOpEbq5z/8bgNMAC0SGeghEhvJiZz1Y2ZMJPCu6IJzNl53CpElvX1A==}
+  /@netless/app-slide/0.1.0:
+    resolution: {integrity: sha512-tivMMmd4vKr98AJixyxhHQkgheR8zOWV4mvq/yB2PCdkVpxfUtW4er9+mZ+CoOP6P/9X5kegL/vD49Gn8jYVeA==}
     dev: false
 
   /@netless/canvas-polyfill/0.0.4:
