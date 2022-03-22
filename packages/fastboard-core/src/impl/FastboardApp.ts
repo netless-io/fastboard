@@ -159,73 +159,93 @@ export class FastboardApp extends FastboardAppBase {
    */
   readonly writable = writable(
     this.room.isWritable,
-    set => this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable)),
+    set => {
+      this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable));
+      set(this.room.isWritable);
+    },
     this.room.setWritable.bind(this.room)
   );
 
   /**
    * Is current room online?
    */
-  readonly phase = readable<RoomPhase>(this.room.phase, set => this._addRoomListener("onPhaseChanged", set));
+  readonly phase = readable<RoomPhase>(this.room.phase, set => {
+    this._addRoomListener("onPhaseChanged", set);
+    set(this.room.phase);
+  });
 
   /**
    * Current window-manager's windows' state (is it maximized?).
    */
-  readonly boxState = readable(this.manager.boxState, set => this._addManagerListener("boxStateChange", set));
+  readonly boxState = readable(this.manager.boxState, set => {
+    this._addManagerListener("boxStateChange", set);
+    set(this.manager.boxState);
+  });
 
   /**
    * Current window-manager's focused app's id.
    * @example "HelloWorld-1A2b3C4d"
    */
-  readonly focusedApp = readable(this.manager.focused, set => this._addManagerListener("focusedChange", set));
+  readonly focusedApp = readable(this.manager.focused, set => {
+    this._addManagerListener("focusedChange", set);
+    set(this.manager.focused);
+  });
 
   /**
    * How many times can I call `app.redo()`?
    */
-  readonly canRedoSteps = readable(this.manager.canRedoSteps, set =>
-    this._addManagerListener("canRedoStepsChange", set)
-  );
+  readonly canRedoSteps = readable(this.manager.canRedoSteps, set => {
+    this._addManagerListener("canRedoStepsChange", set);
+    set(this.manager.canRedoSteps);
+  });
 
   /**
    * How many times can I call `app.undo()`?
    */
-  readonly canUndoSteps = readable(this.manager.canUndoSteps, set =>
-    this._addManagerListener("canUndoStepsChange", set)
-  );
+  readonly canUndoSteps = readable(this.manager.canUndoSteps, set => {
+    this._addManagerListener("canUndoStepsChange", set);
+    set(this.manager.canUndoSteps);
+  });
 
   /**
    * Current camera information of main view.
    *
    * Change the camera position by `app.moveCamera()`.
    */
-  readonly camera = readable(this.manager.mainView.camera, set =>
-    this._addMainViewListener("onCameraUpdated", set)
-  );
+  readonly camera = readable(this.manager.camera, set => {
+    this._addMainViewListener("onCameraUpdated", set);
+    set(this.manager.camera);
+  });
 
   /**
    * Current tool's info, like "is using pencil?", "what color?".
    *
    * Change the tool by `app.setAppliance()`.
    */
-  readonly memberState = readable(this.room.state.memberState, set =>
-    this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m))
-  );
+  readonly memberState = readable(this.room.state.memberState, set => {
+    this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m));
+    set(this.room.state.memberState);
+  });
 
   /**
    * 0..n-1, current index of main view scenes.
    */
   readonly sceneIndex = writable(
     this.manager.mainViewSceneIndex,
-    set => this._addManagerListener("mainViewSceneIndexChange", set),
+    set => {
+      this._addManagerListener("mainViewSceneIndexChange", set);
+      set(this.manager.mainViewSceneIndex);
+    },
     this.manager.setMainViewSceneIndex.bind(this.manager)
   );
 
   /**
    * How many pages are in the main view?
    */
-  readonly sceneLength = readable(this.manager.mainViewScenesLength, set =>
-    this._addManagerListener("mainViewScenesLengthChange", set)
-  );
+  readonly sceneLength = readable(this.manager.mainViewScenesLength, set => {
+    this._addManagerListener("mainViewScenesLengthChange", set);
+    set(this.manager.mainViewScenesLength);
+  });
 
   private _appsStatus: AppsStatus = {};
   /**

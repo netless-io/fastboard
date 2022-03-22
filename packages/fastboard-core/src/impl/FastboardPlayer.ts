@@ -79,23 +79,28 @@ export class FastboardPlayer extends FastboardPlayerBase {
    */
   readonly currentTime = writable(
     this.player.progressTime,
-    set => this._addPlayerListener("onProgressTimeChanged", set),
+    set => {
+      this._addPlayerListener("onProgressTimeChanged", set);
+      set(this.player.progressTime);
+    },
     this.player.seekToProgressTime.bind(this.player)
   );
 
   /**
    * Player state, like "is it playing?".
    */
-  readonly phase = readable<PlayerPhase>(this.player.phase, set =>
-    this._addPlayerListener("onPhaseChanged", set)
-  );
+  readonly phase = readable<PlayerPhase>(this.player.phase, set => {
+    this._addPlayerListener("onPhaseChanged", set);
+    set(this.player.phase);
+  });
 
   /**
    * Will become true after buffering.
    */
-  readonly canplay = readable(this.player.isPlayable, set =>
-    this._addPlayerListener("onIsPlayableChanged", set)
-  );
+  readonly canplay = readable(this.player.isPlayable, set => {
+    this._addPlayerListener("onIsPlayableChanged", set);
+    set(this.player.isPlayable);
+  });
 
   private _setPlaybackRate!: (value: number) => void;
   /**
@@ -105,6 +110,7 @@ export class FastboardPlayer extends FastboardPlayerBase {
     this.player.playbackSpeed,
     set => {
       this._setPlaybackRate = set;
+      set(this.player.playbackSpeed);
     },
     value => {
       this.player.playbackSpeed = value;
@@ -115,14 +121,17 @@ export class FastboardPlayer extends FastboardPlayerBase {
   /**
    * Playback duration in milliseconds.
    */
-  readonly duration = readable(this.player.timeDuration);
+  readonly duration = readable(this.player.timeDuration, set => {
+    set(this.player.timeDuration);
+  });
 
   /**
    * Get state of room at that time, like "who was in the room?".
    */
-  readonly state = readable<PlayerState | null>(null, set =>
-    this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state))
-  );
+  readonly state = readable<PlayerState>(this.player.state, set => {
+    this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state));
+    set(this.player.state);
+  });
 
   /**
    * Seek to some time in milliseconds.
