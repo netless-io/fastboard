@@ -58,18 +58,14 @@
 
 <div class="{name}-root" class:loading={!app}>
   <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
-  {#if layout === "visible" || layout === "toolbar-only"}
-    <div class="{name}-left">
-      <Toolbar {app} {theme} {language} />
-    </div>
-  {/if}
-  {#if layout === "visible"}
-    <div class="{name}-bottom-left">
-      <RedoUndo {app} {theme} {language} />
-      <ZoomControl {app} {theme} {language} />
-    </div>
-    <div class="{name}-bottom-right">
-      <PageControl {app} {theme} {language} />
-    </div>
-  {/if}
+  <div class="{name}-left" class:hidden={!(layout === "visible" || layout === "toolbar-only")}>
+    <Toolbar {app} {theme} {language} />
+  </div>
+  <div class="{name}-bottom-left" class:hidden={layout !== "visible"}>
+    <RedoUndo {app} {theme} {language} />
+    <ZoomControl {app} {theme} {language} />
+  </div>
+  <div class="{name}-bottom-right" class:hidden={layout !== "visible"}>
+    <PageControl {app} {theme} {language} />
+  </div>
 </div>

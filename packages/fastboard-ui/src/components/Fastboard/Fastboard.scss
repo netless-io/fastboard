@@ -47,3 +47,13 @@
   @extend .fastboard-bottom-left;
   right: 8px;
 }
+
+.fastboard-left,
+.fastboard-bottom,
+.fastboard-bottom-left,
+.fastboard-bottom-right {
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
