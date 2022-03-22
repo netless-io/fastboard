@@ -228,6 +228,8 @@ const appId = await app.manager.addApp({
 });
 ```
 
+> **注意：** EmbeddedPage 使用 [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 来显示外部资源，由于浏览器限制，您最好不要嵌套使用 iframe（即 iframe 内还有 iframe，通常来说浏览器会对第二层 iframe 增加十分多的限制或者根本无法使用）。
+
 > 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
 
 ## License

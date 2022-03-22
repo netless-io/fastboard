@@ -221,6 +221,8 @@ const appId = await app.manager.addApp({
 });
 ```
 
+> **Note:** EmbeddedPage uses [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to display external web resources, you'd better not embedding 2 more nested iframes (i.e. webpage>iframe1>iframe2) in the same page.
+
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).
 
 ## License
