@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "0.3.1",
+  "version": "0.3.2-canary.0",
   "description": "React components of @netless/fastboard.",
   "main": "src/index.tsx",
   "files": [
