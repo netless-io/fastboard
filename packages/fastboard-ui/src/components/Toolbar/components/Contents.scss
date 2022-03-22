@@ -7,7 +7,6 @@ $name: "fastboard-toolbar";
   padding: 2px 0;
   gap: 0;
   flex-direction: column;
-  pointer-events: auto;
 
   > .#{$name}-btn {
     margin: 2px 4px;

@@ -21,6 +21,7 @@
   top: 8px;
   left: 0;
   z-index: 200;
+  pointer-events: none;
 
   .fastboard-toolbar {
     padding-left: 16px;
@@ -35,6 +36,7 @@
   left: 8px;
   padding: 8px;
   z-index: 200;
+  pointer-events: none;
 }
 
 .fastboard-bottom-right {
@@ -52,7 +54,7 @@
 .fastboard-bottom,
 .fastboard-bottom-left,
 .fastboard-bottom-right {
-  &.hidden {
+  &.hidden * {
     opacity: 0;
     pointer-events: none;
   }
