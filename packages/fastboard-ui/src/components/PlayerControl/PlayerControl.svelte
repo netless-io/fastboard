@@ -46,7 +46,7 @@
   $: disabled = !canPlay;
   $: duration = player?.duration;
   $: current = player?.currentTime;
-  $: speed = player?.speed;
+  $: playbackRate = player?.playbackRate;
 
   $: phase = player?.phase;
   $: loading = $phase === "waitingFirstFrame" || $phase === "buffering";
@@ -76,9 +76,9 @@
     player.seek(seconds * 1000);
   }
 
-  function setSpeed(speed: number) {
+  function setPlaybackRate(speed: number) {
     if (!player) return;
-    player.setSpeed(speed);
+    player.setPlaybackRate(speed);
   }
 </script>
 
@@ -132,7 +132,7 @@
     menu={speed_panel}
     menu_placement="top-end"
   >
-    <span class="{name}-speed-text">{$speed || 1}x</span>
+    <span class="{name}-speed-text">{$playbackRate || 1}x</span>
   </Button>
 </div>
 
@@ -140,11 +140,11 @@
   <div class="{name}-panel speed" bind:this={speed_panel}>
     {#each speeds as s (s)}
       <Button
-        class="speed {s === $speed ? 'is-active' : ''}"
+        class="speed {s === $playbackRate ? 'is-active' : ''}"
         {name}
         {theme}
         {disabled}
-        on:click={() => setSpeed(s)}
+        on:click={() => setPlaybackRate(s)}
       >
         {s}x
       </Button>

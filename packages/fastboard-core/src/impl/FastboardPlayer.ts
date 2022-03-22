@@ -97,18 +97,18 @@ export class FastboardPlayer extends FastboardPlayerBase {
     this._addPlayerListener("onIsPlayableChanged", set)
   );
 
-  private _setSpeed!: (value: number) => void;
+  private _setPlaybackRate!: (value: number) => void;
   /**
    * Playback speed, default `1`.
    */
-  readonly speed = writable(
+  readonly playbackRate = writable(
     this.player.playbackSpeed,
     set => {
-      this._setSpeed = set;
+      this._setPlaybackRate = set;
     },
     value => {
       this.player.playbackSpeed = value;
-      this._setSpeed(value);
+      this._setPlaybackRate(value);
     }
   );
 
@@ -159,9 +159,9 @@ export class FastboardPlayer extends FastboardPlayerBase {
   /**
    * Set playback speed, a shortcut for `speed.set(x)`.
    */
-  setSpeed(value: number) {
+  setPlaybackRate(value: number) {
     this._assertNotDestroyed();
-    this.speed.set(value);
+    this.playbackRate.set(value);
   }
 }
 
