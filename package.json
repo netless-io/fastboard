@@ -4,7 +4,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
-    "check": "pnpm check --filter={packages}...",
+    "check": "pnpm check --filter={packages}... && svelte-check",
     "dev": "pnpm dev --filter=fastboard",
     "dev:react": "pnpm dev --filter=fastboard-react",
     "dev:ui": "pnpm dev --filter=fastboard-ui",
@@ -32,6 +32,7 @@
     "semver": "^7.3.5",
     "sveld": "^0.13.4",
     "svelte": "^3.46.4",
+    "svelte-check": "^2.4.6",
     "tsup": "^5.12.1",
     "type-fest": "^2.12.1",
     "typescript": "^4.6.2",

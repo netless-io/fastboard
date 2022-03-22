@@ -22,6 +22,7 @@ importers:
       semver: ^7.3.5
       sveld: ^0.13.4
       svelte: ^3.46.4
+      svelte-check: ^2.4.6
       tsup: ^5.12.1
       type-fest: ^2.12.1
       typescript: ^4.6.2
@@ -46,6 +47,7 @@ importers:
       semver: 7.3.5
       sveld: 0.13.4_sass@1.49.9
       svelte: 3.46.4
+      svelte-check: 2.4.6_sass@1.49.9+svelte@3.46.4
       tsup: 5.12.1_typescript@4.6.2
       type-fest: 2.12.1
       typescript: 4.6.2
@@ -2189,6 +2191,11 @@ packages:
       global: 4.4.0
     dev: true
 
+  /mri/1.2.0:
+    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
+    engines: {node: '>=4'}
+    dev: true
+
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -2578,6 +2585,13 @@ packages:
       individual: 2.0.0
     dev: true
 
+  /sade/1.8.1:
+    resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
+    engines: {node: '>=6'}
+    dependencies:
+      mri: 1.2.0
+    dev: true
+
   /safe-buffer/5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
     dev: true
@@ -2796,6 +2810,35 @@ packages:
       prettier: 2.6.0
       rollup: 2.68.0
       rollup-plugin-svelte: 7.1.0_rollup@2.68.0+svelte@3.46.4
+      svelte: 3.46.4
+      svelte-preprocess: 4.10.4_5de9086e77ba1b94df1ab23991e02ed0
+      typescript: 4.6.2
+    transitivePeerDependencies:
+      - '@babel/core'
+      - coffeescript
+      - less
+      - node-sass
+      - postcss
+      - postcss-load-config
+      - pug
+      - sass
+      - stylus
+      - sugarss
+    dev: true
+
+  /svelte-check/2.4.6_sass@1.49.9+svelte@3.46.4:
+    resolution: {integrity: sha512-luzdly7RJhyXucQe8ID/7CqDgXdMrPYXmyZBjCbp+cixzTopZotuWevrB5hWDOnOU19m2cyetigIIa7WDHnCmQ==}
+    hasBin: true
+    peerDependencies:
+      svelte: ^3.24.0
+    dependencies:
+      chokidar: 3.5.3
+      fast-glob: 3.2.11
+      import-fresh: 3.3.0
+      minimist: 1.2.5
+      picocolors: 1.0.0
+      sade: 1.8.1
+      source-map: 0.7.3
       svelte: 3.46.4
       svelte-preprocess: 4.10.4_5de9086e77ba1b94df1ab23991e02ed0
       typescript: 4.6.2
