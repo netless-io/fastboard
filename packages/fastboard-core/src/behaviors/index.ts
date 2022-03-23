@@ -49,3 +49,5 @@ for (const kind in DefaultApps) {
     WindowManager.register({ kind, ...options });
   }
 }
+
+export const register = WindowManager.register.bind(WindowManager);
