@@ -11,7 +11,7 @@
   "repository": "netless-io/fastboard",
   "scripts": {
     "cleanup": "rimraf dist",
-    "check": "tsc --noEmit",
+    "check": "tsc --noEmit && svelte-check",
     "build": "tsup",
     "dev": "vite",
     "test:ssr": "esbuild-dev test/ssr.ts"

@@ -4,7 +4,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
-    "check": "pnpm check --filter={packages}... && svelte-check",
+    "check": "pnpm check --filter={packages}...",
     "dev": "pnpm dev --filter=fastboard",
     "dev:react": "pnpm dev --filter=fastboard-react",
     "dev:ui": "pnpm dev --filter=fastboard-ui",
