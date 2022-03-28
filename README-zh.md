@@ -203,11 +203,11 @@ const appId = await app.manager.addApp({
 });
 ```
 
-#### 插入 [@netless/app-media-player](https://github.com/netless-io/netless-app/tree/master/packages/app-media-player)
+#### 插入 [@netless/app-plyr](https://github.com/netless-io/netless-app/tree/master/packages/app-plyr)
 
 ```js
 const appId = await app.manager.addApp({
-  kind: "Player",
+  kind: "Plyr",
   options: { title: "YouTube" },
   attributes: {
     src: "https://www.youtube.com/embed/bTqVqk7FSmY",

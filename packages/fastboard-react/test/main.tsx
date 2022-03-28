@@ -40,7 +40,7 @@ function App() {
           label: "YouTube",
           onClick(app) {
             app.manager.addApp({
-              kind: "Player",
+              kind: "Plyr",
               options: { title: "YouTube" },
               attributes: {
                 src: "https://www.youtube.com/embed/bTqVqk7FSmY",
