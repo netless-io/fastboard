@@ -91,6 +91,8 @@ type MountOptions = {
     zoom_control?: { enable?: boolean };
     page_control?: { enable?: boolean };
   };
+  // 白板的 div 出现的时候会触发这个回调
+  containerRef?: (container: HTMLDivElement | null) => void;
 };
 ```
 
