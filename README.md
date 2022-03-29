@@ -48,7 +48,16 @@ async function mountFastboard(div) {
 
 mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
   // Update app
-  update({ theme: "dark" });
+  update({
+    theme: "dark",
+    language: "en",
+    config: {
+      page_control: { enable: true },
+      redo_undo: { enable: true },
+      toolbar: { enable: true },
+      zoom_control: { enable: true },
+    },
+  });
 
   // Terminate app
   destroy(); // close the ui
@@ -74,6 +83,12 @@ import ReactDOM from "react-dom";
 
 function App() {
   const [app, setApp] = useState(null);
+  const [config] = useState(() => ({
+    page_control: { enable: true },
+    redo_undo: { enable: true },
+    toolbar: { enable: true },
+    zoom_control: { enable: true },
+  }));
 
   useEffect(() => {
     // hold the app instance in the closure.
@@ -103,7 +118,7 @@ function App() {
     // must be called only once
   }, []);
 
-  return <Fastboard app={app} language="en" theme="dark" />;
+  return <Fastboard app={app} language="en" theme="dark" config={config} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));

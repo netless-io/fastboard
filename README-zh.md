@@ -47,7 +47,16 @@ async function mountFastboard(div) {
 
 mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
   // 更新 app 配置
-  update({ theme: "dark" });
+  update({
+    theme: "dark",
+    language: "zh-CN",
+    config: {
+      page_control: { enable: true },
+      redo_undo: { enable: true },
+      toolbar: { enable: true },
+      zoom_control: { enable: true },
+    },
+  });
 
   // 关闭 app
   destroy(); // 关闭 UI
@@ -82,6 +91,12 @@ import ReactDOM from "react-dom";
 
 function App() {
   const [app, setApp] = useState(null);
+  const [config] = useState(() => ({
+    page_control: { enable: true },
+    redo_undo: { enable: true },
+    toolbar: { enable: true },
+    zoom_control: { enable: true },
+  }));
 
   useEffect(() => {
     // 在这个闭包内持有 app 实例，因为外面的 app 的最新值在这个闭包里拿不到
@@ -110,7 +125,7 @@ function App() {
     // 必须保证只 createFastboard 一次
   }, []);
 
-  return <Fastboard app={app} language="zh-CN" theme="dark" />;
+  return <Fastboard app={app} language="zh-CN" theme="dark" config={config} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
