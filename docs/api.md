@@ -84,6 +84,13 @@ type MountOptions = {
   theme?: "light" | "dark";
   // 默认 "en"
   language?: "en" | "zh-CN";
+  // 具体配置每个组件是否显示
+  config?: {
+    toolbar?: { enable?: boolean };
+    redo_undo?: { enable?: boolean };
+    zoom_control?: { enable?: boolean };
+    page_control?: { enable?: boolean };
+  };
 };
 ```
 
