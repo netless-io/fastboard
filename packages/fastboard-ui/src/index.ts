@@ -1,4 +1,4 @@
-export type { GenericIcon, Language, Theme } from "./typings";
+export * from "./typings";
 
 export { default as RedoUndo, type RedoUndoProps } from "./components/RedoUndo";
 export { default as PageControl, type PageControlProps } from "./components/PageControl";

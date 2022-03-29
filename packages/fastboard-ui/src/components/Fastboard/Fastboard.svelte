@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FastboardApp } from "@netless/fastboard-core";
-  import type { Language, Theme } from "../../typings";
+  import type { Language, Theme, FastboardUIConfig } from "../../typings";
   import { onMount } from "svelte";
   import { tippy_hide_all } from "../../actions/tippy";
   import RedoUndo from "../RedoUndo";
@@ -12,6 +12,7 @@
   export let theme: Theme = "light";
   export let language: Language = "en";
   export let containerRef: ((element: HTMLDivElement | null) => void) | undefined = undefined;
+  export let config: FastboardUIConfig = {};
 
   const name = "fastboard";
   const AppsShowToolbar = ["DocsViewer", "Slide"];
@@ -59,13 +60,21 @@
 <div class="{name}-root" class:loading={!app}>
   <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
   <div class="{name}-left" class:hidden={!(layout === "visible" || layout === "toolbar-only")}>
-    <Toolbar {app} {theme} {language} />
+    {#if config.toolbar?.enable !== false}
+      <Toolbar {app} {theme} {language} />
+    {/if}
   </div>
   <div class="{name}-bottom-left" class:hidden={layout !== "visible"}>
-    <RedoUndo {app} {theme} {language} />
-    <ZoomControl {app} {theme} {language} />
+    {#if config.redo_undo?.enable !== false}
+      <RedoUndo {app} {theme} {language} />
+    {/if}
+    {#if config.zoom_control?.enable !== false}
+      <ZoomControl {app} {theme} {language} />
+    {/if}
   </div>
   <div class="{name}-bottom-right" class:hidden={layout !== "visible"}>
-    <PageControl {app} {theme} {language} />
+    {#if config.page_control?.enable !== false}
+      <PageControl {app} {theme} {language} />
+    {/if}
   </div>
 </div>

@@ -1,11 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FastboardApp, Theme, Language } from "..";
+import type { FastboardApp, Theme, Language, FastboardUIConfig } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { createFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
+
+const FastboardLayout: FastboardUIConfig = {
+  page_control: { enable: false },
+  redo_undo: { enable: true },
+  toolbar: { enable: true },
+  zoom_control: { enable: true },
+};
 
 function App() {
   const [app, setApp] = useState<FastboardApp | null>(null);
@@ -88,7 +95,7 @@ function App() {
 
   return (
     <>
-      <Fastboard app={app} theme={theme} language={lang} />
+      <Fastboard app={app} theme={theme} language={lang} config={FastboardLayout} />
       <div className="controller">
         <label>
           <small>Theme</small>

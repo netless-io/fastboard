@@ -1,5 +1,5 @@
 import type { FastboardApp } from "@netless/fastboard-core";
-import type { Theme, Language } from "../../typings";
+import type { Theme, Language, FastboardUIConfig } from "../../typings";
 import { SvelteComponentTyped } from "svelte";
 
 export declare interface FastboardProps {
@@ -7,6 +7,7 @@ export declare interface FastboardProps {
   theme?: Theme;
   language?: Language;
   containerRef?: (container: HTMLDivElement | null) => void;
+  config?: FastboardUIConfig;
 }
 
 declare class Fastboard extends SvelteComponentTyped<FastboardProps> {}

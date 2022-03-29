@@ -1,6 +1,13 @@
 export * from "@netless/fastboard-core";
 export { apps } from "@netless/fastboard-ui";
-export type { Theme, Language, GenericIcon, AppInToolbar, AppsInToolbar } from "@netless/fastboard-ui";
+export type {
+  Theme,
+  Language,
+  GenericIcon,
+  AppInToolbar,
+  AppsInToolbar,
+  FastboardUIConfig,
+} from "@netless/fastboard-ui";
 export * from "./RedoUndo";
 export * from "./ZoomControl";
 export * from "./PageControl";
