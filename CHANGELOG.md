@@ -6,6 +6,7 @@
 - Rename `@netless/app-media-player` to `@netless/app-plyr`.
 - Update toolbar handler styles.
 - Added `config` field to the `Fastboard` component to hide controls.
+- Added `setTextColor` api.
 
 ## 0.3.1
 
