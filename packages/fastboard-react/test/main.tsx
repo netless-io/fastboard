@@ -40,37 +40,6 @@ function App() {
       (window as any).app = app;
       (window as any).forceUpdate = forceUpdate;
       setApp((app_instance = app));
-      apps.push(
-        {
-          icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
-          kind: "Player",
-          label: "YouTube",
-          onClick(app) {
-            app.manager.addApp({
-              kind: "Plyr",
-              options: { title: "YouTube" },
-              attributes: {
-                src: "https://www.youtube.com/embed/bTqVqk7FSmY",
-                provider: "youtube",
-              },
-            });
-          },
-        },
-        {
-          icon: "https://api.iconify.design/logos:google-icon.svg?color=currentColor",
-          kind: "EmbeddedPage",
-          label: "Google Docs",
-          onClick(app) {
-            app.manager.addApp({
-              kind: "EmbeddedPage",
-              options: { title: "Google Docs" },
-              attributes: {
-                src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
-              },
-            });
-          },
-        }
-      );
     });
 
     return () => {
@@ -118,6 +87,52 @@ function App() {
     </>
   );
 }
+
+apps.push(
+  {
+    icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
+    kind: "Player",
+    label: "YouTube",
+    onClick(app) {
+      app.manager.addApp({
+        kind: "Plyr",
+        options: { title: "YouTube" },
+        attributes: {
+          src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+          provider: "youtube",
+        },
+      });
+    },
+  },
+  {
+    icon: "https://api.iconify.design/logos:google-icon.svg?color=currentColor",
+    kind: "EmbeddedPage",
+    label: "Google Docs",
+    onClick(app) {
+      app.manager.addApp({
+        kind: "EmbeddedPage",
+        options: { title: "Google Docs" },
+        attributes: {
+          src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+        },
+      });
+    },
+  },
+  {
+    icon: "https://api.iconify.design/ic:baseline-slideshow.svg?color=currentColor",
+    kind: "Slide",
+    label: "Slide",
+    onClick(app) {
+      const taskId = "9abed6605bbc11ec88a83b917638a00c";
+      app.insertDocs({
+        fileType: "pptx",
+        scenePath: `/Slide/${taskId}`,
+        taskId,
+        title: "星空",
+      });
+    },
+  }
+);
 
 const root = document.getElementById("app") as HTMLDivElement;
 
