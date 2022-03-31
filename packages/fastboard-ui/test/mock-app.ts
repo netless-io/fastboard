@@ -23,6 +23,7 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     currentApplianceName: "pencil" as ApplianceNames.pencil,
     strokeColor: [255, 0, 0],
     strokeWidth: 2,
+    textColor: [255, 0, 0],
     textSize: 16,
   });
   const sceneIndex = writable(0);
@@ -115,6 +116,14 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     setStrokeColor(color: [number, number, number]) {
       console.log("setStrokeColor", color);
       memberState.update(e => ({ ...e, strokeColor: color }));
+    },
+    setTextColor(color: [number, number, number]) {
+      console.log("setTextColor", color);
+      memberState.update(e => ({ ...e, textColor: color }));
+    },
+    setTextSize(size: number) {
+      console.log("setTextSize", size);
+      memberState.update(e => ({ ...e, textSize: size }));
     },
     cleanCurrentScene() {
       console.log("cleanCurrentScene");

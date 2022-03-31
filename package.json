@@ -17,7 +17,7 @@
     "@hyrious/esbuild-dev": "^0.7.5",
     "@hyrious/esbuild-plugin-svelte": "^0.1.5",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/window-manager": "^0.4.19",
+    "@netless/window-manager": "^0.4.20",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.40",
     "@types/node": "^17.0.23",
     "@typescript-eslint/eslint-plugin": "^5.17.0",

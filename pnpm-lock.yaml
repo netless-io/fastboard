@@ -7,7 +7,7 @@ importers:
       '@hyrious/esbuild-dev': ^0.7.5
       '@hyrious/esbuild-plugin-svelte': ^0.1.5
       '@hyrious/rimraf': ^0.1.0
-      '@netless/window-manager': ^0.4.19
+      '@netless/window-manager': ^0.4.20
       '@sveltejs/vite-plugin-svelte': ^1.0.0-next.40
       '@types/node': ^17.0.23
       '@typescript-eslint/eslint-plugin': ^5.17.0
@@ -32,7 +32,7 @@ importers:
       '@hyrious/esbuild-dev': 0.7.5_esbuild@0.14.29
       '@hyrious/esbuild-plugin-svelte': 0.1.5_esbuild@0.14.29+svelte@3.46.5
       '@hyrious/rimraf': 0.1.0
-      '@netless/window-manager': 0.4.19_white-web-sdk@2.16.10
+      '@netless/window-manager': 0.4.20_white-web-sdk@2.16.10
       '@sveltejs/vite-plugin-svelte': 1.0.0-next.40_svelte@3.46.5+vite@2.9.0
       '@types/node': 17.0.23
       '@typescript-eslint/eslint-plugin': 5.17.0_689ff565753ecf7c3328c07fad067df5
@@ -479,8 +479,8 @@ packages:
       value-enhancer: 0.0.8
     dev: true
 
-  /@netless/window-manager/0.4.19_white-web-sdk@2.16.10:
-    resolution: {integrity: sha512-PeQrNgBUScMqnex8iPGSJ+OjIywXjNC4ueUCu/OBer80lEzZW0cVJm5lhT7mal7KN7xf9J3kXYyJElsFG3yNbg==}
+  /@netless/window-manager/0.4.20_white-web-sdk@2.16.10:
+    resolution: {integrity: sha512-gJp9EGtWA89AJB8O+6vNKmcqT7M+lh0eNJKVAa/BhW816Lap2NUcXqHBa8neEs6nnY5xUvXL9n7KxM+nv5x9Ow==}
     peerDependencies:
       white-web-sdk: ^2.16.0
     dependencies:

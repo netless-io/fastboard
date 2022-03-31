@@ -319,6 +319,16 @@ export class FastboardApp extends FastboardAppBase {
     this.manager.mainView.setMemberState({ strokeColor });
   }
 
+  setTextSize(textSize: number) {
+    this._assertNotDestroyed();
+    this.manager.mainView.setMemberState({ textSize });
+  }
+
+  setTextColor(textColor: Color) {
+    this._assertNotDestroyed();
+    this.manager.mainView.setMemberState({ textColor });
+  }
+
   prevPage() {
     this._assertNotDestroyed();
     return this.manager.prevPage();

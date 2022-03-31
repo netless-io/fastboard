@@ -16,6 +16,7 @@
   import Button from "../../Button";
   import StrokeWidth from "./StrokeWidth.svelte";
   import StrokeColor from "./StrokeColor.svelte";
+  import TextColor from "./TextColor.svelte";
   import Shapes from "./Shapes.svelte";
 
   export let app: FastboardApp | null | undefined = null;
@@ -163,7 +164,7 @@
     <StrokeColor {app} {theme} {disabled} />
   </div>
   <div class="{name}-panel text" bind:this={text_panel}>
-    <StrokeColor {app} {theme} {disabled} />
+    <TextColor {app} {theme} {disabled} />
   </div>
   <div class="{name}-panel shapes" bind:this={shapes_panel}>
     <Shapes {app} {theme} {language} {disabled} />

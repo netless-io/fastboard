@@ -15,6 +15,8 @@
   - [`setAppliance`](#setappliance)
   - [`setStrokeWidth`](#setstrokewidth)
   - [`setStrokeColor`](#setstrokecolor)
+  - [`setTextColor`](#settextcolor)
+  - [`setTextSize`](#settextsize)
   - [`insertImage`](#insertimage)
   - [`insertDocs`](#insertdocs)
   - [`insertMedia`](#insertmedia)
@@ -249,6 +251,22 @@ app.setStrokeWidth(1);
 
 ```js
 app.setStrokeColor([255, 0, 0]); // 红色
+```
+
+### setTextColor
+
+> 设置文字颜色
+
+```js
+app.setTextColor([255, 0, 0]); // 红色
+```
+
+### setTextSize
+
+> 设置文字大小
+
+```js
+app.setTextSize(16);
 ```
 
 ### insertImage
