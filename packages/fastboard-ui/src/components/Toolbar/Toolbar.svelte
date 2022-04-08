@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FastboardApp } from "@netless/fastboard-core";
-  import type { Language, Theme } from "../../typings";
+  import type { Language, Theme, ToolbarConfig } from "../../typings";
   import { writable as svelte_writable } from "svelte/store";
   import { height } from "../../actions/height";
   import { clamp } from "../helpers";
@@ -9,6 +9,7 @@
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
   export let language: Language = "en";
+  export let config: ToolbarConfig = {};
 
   const name = "fastboard-toolbar";
   const extra_height = (32 + 4 + 4) * 2;
@@ -22,11 +23,22 @@
 
   $: computed_height = clamp($container_height, extra_height, $scroll_height + extra_height);
   $: scrollable = $scroll_height + extra_height > $container_height;
+
+  $: hide_apps = config.apps?.enable === false;
 </script>
 
 <div class="{name} {theme}" class:collapsed use:height={container_height}>
   <div class="{name}-contents {theme}" style:height={scrollable ? computed_height + "px" : "auto"}>
-    <Contents {app} {theme} {language} {disabled} {scroll_height} {computed_height} {scrollable} />
+    <Contents
+      {app}
+      {theme}
+      {language}
+      {disabled}
+      {scroll_height}
+      {computed_height}
+      {scrollable}
+      {hide_apps}
+    />
   </div>
   <label class="{name}-handler {theme}">
     <input type="checkbox" bind:checked={collapsed} />

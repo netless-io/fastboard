@@ -16,10 +16,16 @@ export type GenericIcon<K extends string, E extends string = IconType> = {
 
 export type I18nData<T extends string> = Record<Language, Record<T, string>>;
 
+export interface ToolbarConfig {
+  apps?: {
+    enable?: boolean;
+  };
+}
+
 export interface FastboardUIConfig {
   toolbar?: {
     enable?: boolean;
-  };
+  } & ToolbarConfig;
   redo_undo?: {
     enable?: boolean;
   };

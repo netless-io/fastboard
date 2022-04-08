@@ -26,6 +26,7 @@
   export let scroll_height: Writable<number>;
   export let computed_height = 0;
   export let scrollable = false;
+  export let hide_apps = false;
 
   const name = "fastboard-toolbar";
 
@@ -147,9 +148,11 @@
   <Button class="clear" {...btn_props} on:click={clear} content={t.clear}>
     <Icons.Clear {theme} />
   </Button>
-  <Button class="apps" {...btn_props} content={t.apps} menu={apps_panel} menu_placement="right-end">
-    <Icons.Apps {theme} />
-  </Button>
+  {#if !hide_apps}
+    <Button class="apps" {...btn_props} content={t.apps} menu={apps_panel} menu_placement="right-end">
+      <Icons.Apps {theme} />
+    </Button>
+  {/if}
 </div>
 {#if scrollable}
   <Button class="scroll-down" {name} {theme} {disabled} on:click={scroll_down}>

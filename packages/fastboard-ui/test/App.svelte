@@ -23,6 +23,7 @@
       : "light"
     : "dark";
   let language: Language = is_client ? (navigator.language.startsWith("zh") ? "zh-CN" : "en") : "en";
+  let hide_apps = false;
 
   let tippy_content: HTMLDivElement;
   let tippy_content_text = "hello, world!";
@@ -57,7 +58,18 @@
 
 <div class="flex">
   <div class="container" use:resizable={{ defaultSize: { width: 480, height: 300 } }}>
-    <Fastboard {app} {theme} {language} />
+    <Fastboard
+      {app}
+      {theme}
+      {language}
+      config={{
+        toolbar: {
+          apps: {
+            enable: !hide_apps,
+          },
+        },
+      }}
+    />
   </div>
 
   <div class="temp" style="width: 144px; height: 48px">
@@ -115,6 +127,8 @@
     <input type="radio" id="lang-zh-CN" data-language="zh-CN" name="language"
            checked={language === "zh-CN"} on:change={toggle_language} />
     <label for="lang-zh-CN"><em>简体中文</em></label>
+    <input type="checkbox" id="hide_apps" bind:checked={hide_apps} />
+    <label for="hide_apps">Hide <kbd>APPS</kbd> Button</label>
   </div>
 </div>
 
