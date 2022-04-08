@@ -38,6 +38,10 @@ class AppsInToolbar {
     this._data = this._data.filter(item => !filter(item));
     this._listeners.forEach(fn => fn(this._data));
   }
+  clear() {
+    this._data.length = 0;
+    this._listeners.forEach(fn => fn(this._data));
+  }
 }
 
 export type { AppsInToolbar };

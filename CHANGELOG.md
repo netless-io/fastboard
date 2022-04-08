@@ -5,8 +5,9 @@
 - Re-export [`@netless/app-slide`](https://github.com/netless-io/netless-app/tree/master/packages/app-slide).
 - Rename `@netless/app-media-player` to `@netless/app-plyr`.
 - Update toolbar handler styles.
-- Added `config` field to the `Fastboard` component to hide controls.
 - Added `setTextColor` api.
+- Added `config` field to the `Fastboard` component to hide controls and apps button.
+- Added `apps` to control the content in apps panel.
 
 ## 0.3.1
 
