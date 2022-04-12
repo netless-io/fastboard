@@ -24,9 +24,8 @@ npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 ```js
 import { createFastboard, mount } from "@netless/fastboard";
 
-let app;
-async function mountFastboard(div) {
-  app = await createFastboard({
+async function main() {
+  const fastboard = await createFastboard({
     // [1]
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
@@ -38,17 +37,16 @@ async function mountFastboard(div) {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
-    // [3]
+    // [3] (optional)
     managerConfig: {
       cursor: true,
     },
   });
-  return mount(app, div);
-}
 
-mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
-  // Update app
-  update({
+  const ui = await mount(fastboard, document.getElementById("whiteboard"));
+
+  // Update Fastboard UI
+  ui.update({
     theme: "dark",
     language: "en",
     config: {
@@ -59,10 +57,16 @@ mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy })
     },
   });
 
-  // Terminate app
-  destroy(); // close the ui
-  app.destroy(); // disconnect the whiteboard
-});
+  // .....
+
+  // destroy Fastboard UI
+  ui.destroy();
+
+  // .....
+
+  // destroy Fastboard (disconnect from the whiteboard room)
+  fastboard.destroy();
+}
 ```
 
 <samp>[1]</samp> Read more about the SDK config at [Construct WhiteWebSDK object](https://developer.netless.link/javascript-en/home/construct-white-web-sdk)\
@@ -78,47 +82,30 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 </pre>
 
 ```jsx
-import { createFastboard, Fastboard } from "@netless/fastboard-react";
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
 import ReactDOM from "react-dom";
 
 function App() {
-  const [app, setApp] = useState(null);
-  const [config] = useState(() => ({
+  const fastboard = useFastboard(() => ({
+    sdkConfig: {
+      appIdentifier: "whiteboard-appid",
+      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
+    },
+    joinRoom: {
+      uid: "unique_id_for_each_client",
+      uuid: "room-uuid",
+      roomToken: "NETLESSROOM_...",
+    },
+  }));
+
+  const [uiConfig] = useState(() => ({
     page_control: { enable: true },
     redo_undo: { enable: true },
     toolbar: { enable: true },
     zoom_control: { enable: true },
   }));
 
-  useEffect(() => {
-    // hold the app instance in the closure.
-    // you can not rely on the outer "app" because this callback is only called once.
-    let app_instance;
-
-    createFastboard({
-      sdkConfig: {
-        appIdentifier: "whiteboard-appid",
-        region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
-      },
-      joinRoom: {
-        uid: "unique_id_for_each_client",
-        uuid: "room-uuid",
-        roomToken: "NETLESSROOM_...",
-      },
-    }).then(app => {
-      // save the app instance to outer "app", also hold it by itself
-      setApp((app_instance = app));
-    });
-
-    // terminate the app on component unmount
-    return () => {
-      if (app_instance) app_instance.destroy();
-    };
-
-    // must be called only once
-  }, []);
-
-  return <Fastboard app={app} language="en" theme="dark" config={config} />;
+  return <Fastboard app={fastboard} language="en" theme="dark" config={uiConfig} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));

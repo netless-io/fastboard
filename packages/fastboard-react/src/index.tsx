@@ -13,6 +13,7 @@ export * from "./ZoomControl";
 export * from "./PageControl";
 export * from "./Toolbar";
 export * from "./Fastboard";
+export { useFastboard } from "./hooks";
 
 import "./style.scss";
 

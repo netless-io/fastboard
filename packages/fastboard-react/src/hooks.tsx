@@ -1,7 +1,9 @@
 import type { SvelteComponent as SvelteComponentType } from "svelte";
 import type { DependencyList, EffectCallback, FunctionComponent } from "react";
+import type { FastboardApp, FastboardOptions } from "@netless/fastboard-core";
 
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createFastboard } from "@netless/fastboard-core";
 
 export const useIsomorphicLayoutEffect = typeof document !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -50,4 +52,29 @@ export function wrapReactComponent<Props>(
   ReactComponent.displayName = name;
 
   return ReactComponent;
+}
+
+export function useFastboard(config: () => FastboardOptions): FastboardApp | null {
+  const unmountRef = useRef(false);
+  const [fastboard, setFastboard] = useState<FastboardApp | null>(null);
+
+  useEffect(() => {
+    let fastboard: FastboardApp | null = null;
+
+    createFastboard(config()).then(app => {
+      if (!unmountRef.current) {
+        setFastboard((fastboard = app));
+      } else {
+        app.destroy();
+      }
+    });
+
+    return () => {
+      unmountRef.current = true;
+      fastboard && fastboard.destroy();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return fastboard;
 }

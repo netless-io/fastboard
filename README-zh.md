@@ -23,9 +23,8 @@ npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 ```js
 import { createFastboard, mount } from "@netless/fastboard";
 
-let app;
-async function mountFastboard(div) {
-  app = await createFastboard({
+async function main() {
+  const fastboard = await createFastboard({
     // [1]
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
@@ -37,19 +36,18 @@ async function mountFastboard(div) {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
-    // [3]
+    // [3] (可选)
     managerConfig: {
       cursor: true,
     },
   });
-  return mount(app, div);
-}
 
-mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy }) => {
-  // 更新 app 配置
-  update({
+  const ui = await mount(fastboard, document.getElementById("whiteboard"));
+
+  // 更新 Fastboard UI
+  ui.update({
     theme: "dark",
-    language: "zh-CN",
+    language: "en",
     config: {
       page_control: { enable: true },
       redo_undo: { enable: true },
@@ -58,10 +56,16 @@ mountFastboard(document.getElementById("whiteboard")).then(({ update, destroy })
     },
   });
 
-  // 关闭 app
-  destroy(); // 关闭 UI
-  app.destroy(); // 断开连接
-});
+  // .....
+
+  // 关闭 Fastboard UI
+  ui.destroy();
+
+  // .....
+
+  // 退出 Fastboard (从白板房间断开)
+  fastboard.destroy();
+}
 ```
 
 <samp>[1]</samp> 关于 SDK 更多配置请看 [构造 WhiteWebSDK](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)\
@@ -86,46 +90,30 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 </pre>
 
 ```jsx
-import { createFastboard, Fastboard } from "@netless/fastboard-react";
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
 import ReactDOM from "react-dom";
 
 function App() {
-  const [app, setApp] = useState(null);
-  const [config] = useState(() => ({
+  const fastboard = useFastboard(() => ({
+    sdkConfig: {
+      appIdentifier: "whiteboard-appid",
+      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
+    },
+    joinRoom: {
+      uid: "unique_id_for_each_client",
+      uuid: "room-uuid",
+      roomToken: "NETLESSROOM_...",
+    },
+  }));
+
+  const [uiConfig] = useState(() => ({
     page_control: { enable: true },
     redo_undo: { enable: true },
     toolbar: { enable: true },
     zoom_control: { enable: true },
   }));
 
-  useEffect(() => {
-    // 在这个闭包内持有 app 实例，因为外面的 app 的最新值在这个闭包里拿不到
-    let app_instance;
-
-    createFastboard({
-      sdkConfig: {
-        appIdentifier: "whiteboard-appid",
-        region: "cn-hz", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
-      },
-      joinRoom: {
-        uid: "unique_id_for_each_client",
-        uuid: "room-uuid",
-        roomToken: "NETLESSROOM_...",
-      },
-    }).then(app => {
-      // 修改外面的 app 状态，并且让 app_instance 持有此 app 实例
-      setApp((app_instance = app));
-    });
-
-    // 组件关闭的时候，卸载 app
-    return () => {
-      if (app_instance) app_instance.destroy();
-    };
-
-    // 必须保证只 createFastboard 一次
-  }, []);
-
-  return <Fastboard app={app} language="zh-CN" theme="dark" config={config} />;
+  return <Fastboard app={fastboard} language="en" theme="dark" config={uiConfig} />;
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));

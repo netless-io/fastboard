@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FastboardApp, Theme, Language, FastboardUIConfig } from "..";
+import type { Theme, Language, FastboardUIConfig } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
-import { createFastboard, genUID, Fastboard, apps } from "../src";
+import { useFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
 
 const FastboardLayout: FastboardUIConfig = {
@@ -15,39 +15,25 @@ const FastboardLayout: FastboardUIConfig = {
 };
 
 function App() {
-  const [app, setApp] = useState<FastboardApp | null>(null);
+  const app = useFastboard(() => ({
+    sdkConfig: {
+      appIdentifier: import.meta.env.VITE_APPID,
+      region: "cn-hz",
+    },
+    joinRoom: {
+      uid: genUID(),
+      uuid: import.meta.env.VITE_ROOM_UUID,
+      roomToken: import.meta.env.VITE_ROOM_TOKEN,
+    },
+    managerConfig: {
+      cursor: true,
+    },
+  }));
+
+  (window as any).app = app;
+
   const [theme, setTheme] = useState<Theme>("light");
   const [lang, setLang] = useState<Language>("en");
-  const [, forceUpdate] = useState({});
-
-  useEffect(() => {
-    let app_instance: FastboardApp | undefined;
-
-    createFastboard({
-      sdkConfig: {
-        appIdentifier: import.meta.env.VITE_APPID,
-        region: "cn-hz",
-      },
-      joinRoom: {
-        uid: genUID(),
-        uuid: import.meta.env.VITE_ROOM_UUID,
-        roomToken: import.meta.env.VITE_ROOM_TOKEN,
-      },
-      managerConfig: {
-        cursor: true,
-      },
-    }).then(app => {
-      (window as any).app = app;
-      (window as any).forceUpdate = forceUpdate;
-      setApp((app_instance = app));
-    });
-
-    return () => {
-      if (app_instance) {
-        app_instance.destroy();
-      }
-    };
-  }, []);
 
   const updateTheme = useCallback((ev: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(ev.currentTarget.value as Theme);
