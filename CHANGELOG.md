@@ -8,7 +8,7 @@
 - Added `setTextColor` api.
 - Added `config` field to the `Fastboard` component to hide controls and apps button.
 - Added `apps` to control the content in apps panel.
-- Added `useFastboard` hook to help calling async function in react.
+- Added `useFastboard` and `useReplayFastboard` hooks to help calling async function in react.
 
 ## 0.3.1
 

@@ -1,9 +1,14 @@
 import type { SvelteComponent as SvelteComponentType } from "svelte";
 import type { DependencyList, EffectCallback, FunctionComponent } from "react";
-import type { FastboardApp, FastboardOptions } from "@netless/fastboard-core";
+import type {
+  FastboardApp,
+  FastboardOptions,
+  FastboardPlayer,
+  FastboardReplayOptions,
+} from "@netless/fastboard-core";
 
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createFastboard } from "@netless/fastboard-core";
+import { createFastboard, replayFastboard } from "@netless/fastboard-core";
 
 export const useIsomorphicLayoutEffect = typeof document !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -62,6 +67,31 @@ export function useFastboard(config: () => FastboardOptions): FastboardApp | nul
     let fastboard: FastboardApp | null = null;
 
     createFastboard(config()).then(app => {
+      if (!unmountRef.current) {
+        setFastboard((fastboard = app));
+      } else {
+        app.destroy();
+      }
+    });
+
+    return () => {
+      unmountRef.current = true;
+      fastboard && fastboard.destroy();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return fastboard;
+}
+
+export function useReplayFastboard(config: () => FastboardReplayOptions): FastboardPlayer | null {
+  const unmountRef = useRef(false);
+  const [fastboard, setFastboard] = useState<FastboardPlayer | null>(null);
+
+  useEffect(() => {
+    let fastboard: FastboardPlayer | null = null;
+
+    replayFastboard(config()).then(app => {
       if (!unmountRef.current) {
         setFastboard((fastboard = app));
       } else {
