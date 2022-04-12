@@ -8,6 +8,7 @@ const root = document.getElementById("app") as HTMLDivElement;
 createFastboard({
   sdkConfig: {
     appIdentifier: import.meta.env.VITE_APPID,
+    region: "cn-hz",
   },
   joinRoom: {
     uid: genUID(),
