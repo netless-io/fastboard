@@ -5,7 +5,13 @@
 - [顶层方法](#top-level-functions)
   - [`createFastboard`](#createfastboard)
   - [`mount`](#mount)
-- [实例方法](#instance-methods)
+  - [`replayFastboard`](#replayfastboard)
+  - [`replay`](#replay)
+- [Fastboard 组件相关](#react-hooks)
+  - [`apps`](#apps)
+  - [`useFastboard`](#usefastboard)
+  - [`useReplayFastboard`](#usereplayfastboard)
+- [FastboardApp 实例方法](#instance-methods)
   - [`bindContainer`](#bindcontainer)
   - [`undo`](#undo)
   - [`redo`](#redo)
@@ -20,7 +26,7 @@
   - [`insertImage`](#insertimage)
   - [`insertDocs`](#insertdocs)
   - [`insertMedia`](#insertmedia)
-- [UI 相关属性](#ui-values)
+- [FastboardApp UI 相关属性](#ui-values)
   - [`writable`](#writable)
   - [`boxState`](#boxState)
   - [`focusedApp`](#focusedapp)
@@ -88,7 +94,7 @@ type MountOptions = {
   language?: "en" | "zh-CN";
   // 具体配置每个组件是否显示
   config?: {
-    toolbar?: { enable?: boolean };
+    toolbar?: { enable?: boolean; apps?: { enable?: boolean } };
     redo_undo?: { enable?: boolean };
     zoom_control?: { enable?: boolean };
     page_control?: { enable?: boolean };
@@ -108,6 +114,187 @@ type ReturnValue = {
   destroy: () => void;
 };
 ```
+
+### replayFastboard
+
+> 回放白板
+
+```js
+let player = await replayFastboard({
+  // 必填项只有下面这些
+  sdkConfig: {
+    appIdentifier: APPID,
+    region: "ch-hz",
+  },
+  replayRoom: {
+    uid: "unique_id",
+    uuid: ROOM_UUID,
+    roomToken: ROOM_TOKEN,
+  },
+  // 完整配置见下方
+});
+```
+
+参数
+
+| name          | type                                | desc                                                                                                          |
+| ------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| sdkConfig     | [required] WhiteWebSdkConfiguration | [SDK 配置](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)                         |
+| replayRoom    | [required] ReplayRoomParams         | [回放配置](https://developer.netless.link/javascript-zh/home/construct-room-and-player)                       |
+| managerConfig | [optional] MountParams              | [WindowManager 配置](https://github.com/netless-io/window-manager/blob/master/docs/api.md#windowmanagermount) |
+
+### replay
+
+> 将 FastboardPlayer 挂载到 DOM
+
+```js
+let ui = replay(player, document.getElementById("#board"));
+ui.update({ theme: "dark", language: "zh-CN" });
+ui.destroy();
+```
+
+参数
+
+| name   | type                       | desc                                  |
+| ------ | -------------------------- | ------------------------------------- |
+| player | [required] FastboardPlayer | 从 replayFastboard 获取的 player 对象 |
+| dom    | [required] HTMLElement     | 挂载的 DOM 元素                       |
+| opts   | [optional] ReplayProps     | UI 配置                               |
+
+```ts
+type ReplayProps = {
+  // 默认 "light"
+  theme?: "light" | "dark";
+  // 默认 "en"
+  language?: "en" | "zh-CN";
+  // 白板的 div 出现的时候会触发这个回调
+  containerRef?: (container: HTMLDivElement | null) => void;
+};
+```
+
+返回值
+
+```ts
+type ReturnValue = {
+  // 更新 UI
+  update: (opts: ReplayProps) => void;
+  // 卸载白板
+  destroy: () => void;
+};
+```
+
+<h2 id="react-hooks">组件相关</h2>
+
+### apps
+
+> 控制 Apps 菜单内容的单例对象
+
+```js
+// 例子：插入一个 YouTube 按钮，其功能是插入 Plyr 播放器播放指定地址的视频
+apps.push({
+  icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
+  kind: "Plyr",
+  label: "YouTube",
+  onClick(app) {
+    app.manager.addApp({
+      kind: "Plyr",
+      options: { title: "YouTube" },
+      attributes: {
+        src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+        provider: "youtube",
+      },
+    });
+  },
+});
+```
+
+接口
+
+```ts
+// 在最后增加一个按钮
+apps.push({
+  icon: "按钮图标地址",
+  kind: "唯一标识符",
+  label: "显示在按钮下面的文字",
+  onClick(app) {
+    // 点击时触发的回调
+  },
+});
+
+// 在指定位置插入一个按钮
+apps.insert({ icon, kind, label, onClick }, 0);
+
+// 删掉指定按钮
+apps.delete(config => config.kind === "Plyr");
+
+// 删掉所有按钮
+// 注意这不会导致工具栏上的 Apps 按钮消失，请通过 config.toolbar.apps.enable 设置
+apps.clear();
+```
+
+### useFastboard
+
+> 在 React Hooks 里辅助调用 `createFastboard` 的 hook
+
+```jsx
+function App {
+  const app = useFastboard(() => ({
+    // 必填项只有下面这些
+    sdkConfig: {
+      appIdentifier: APPID,
+      region: "ch-hz",
+    },
+    joinRoom: {
+      uid: "unique_id",
+      uuid: ROOM_UUID,
+      roomToken: ROOM_TOKEN,
+    },
+    // 完整配置见 createFastboard
+  }));
+  const [uiConfig] = useState(() => ({
+    page_control: { enable: true },
+    redo_undo: { enable: true },
+    toolbar: { enable: true, apps: { enable: true } },
+    zoom_control: { enable: true }
+  }));
+  return <Fastboard app={app} language="en" theme="dark" config={uiConfig} />;
+}
+```
+
+参数
+
+| name   | type                              | desc                      |
+| ------ | --------------------------------- | ------------------------- |
+| config | [required] () => FastboardOptions | 见 createFastboard 的参数 |
+
+### useReplayFastboard
+
+> 在 React Hooks 里辅助调用 `replayFastboard` 的 hook
+
+```jsx
+function App {
+  const player = useReplayFastboard(() => ({
+    // 必填项只有下面这些
+    sdkConfig: {
+      appIdentifier: APPID,
+      region: "ch-hz",
+    },
+    replayRoom: {
+      uid: "unique_id",
+      uuid: ROOM_UUID,
+      roomToken: ROOM_TOKEN,
+    },
+    // 完整配置见 replayFastboard
+  }));
+  return <ReplayFastboard player={player} language="en" theme="dark" />;
+}
+```
+
+参数
+
+| name   | type                                    | desc                      |
+| ------ | --------------------------------------- | ------------------------- |
+| config | [required] () => FastboardReplayOptions | 见 replayFastboard 的参数 |
 
 <h2 id="instance-methods">实例方法</h2>
 
@@ -450,7 +637,7 @@ type sceneLength = FastboardReadable<number>;
 
 ### appsStatus
 
-> 场景数量
+> app 加载状态
 
 类型
 

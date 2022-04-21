@@ -77,7 +77,7 @@ function App() {
 apps.push(
   {
     icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
-    kind: "Player",
+    kind: "Plyr",
     label: "YouTube",
     onClick(app) {
       app.manager.addApp({
