@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added track info in `window.__netlessUA`.
+
 ## 0.3.2
 
 - Re-export [`@netless/app-slide`](https://github.com/netless-io/netless-app/tree/master/packages/app-slide).

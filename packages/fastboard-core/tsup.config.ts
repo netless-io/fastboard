@@ -1,5 +1,5 @@
 import { defineConfig } from "tsup";
-import { main } from "./package.json";
+import { main, version } from "./package.json";
 
 export default defineConfig({
   entry: [main],
@@ -9,4 +9,8 @@ export default defineConfig({
   platform: "browser",
   target: "es2017",
   dts: true,
+  define: {
+    __NAME__: JSON.stringify("@netless/fastboard"),
+    __VERSION__: JSON.stringify(version),
+  },
 });
