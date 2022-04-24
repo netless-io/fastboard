@@ -7,36 +7,19 @@ The React wrapper of [@netless/fastboard-ui](https://github.com/netless-io/fastb
 ```js
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { createFastboard, Fastboard } from "@netless/fastboard-react";
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
 function App() {
-  const [app, setApp] = useState(null);
-
-  useEffect(() => {
-    let app_instance;
-
-    createFastboard({
-      sdkConfig: {
-        appIdentifier: "whiteboard_app_id",
-      },
-      joinRoom: {
-        uid: "unique_user_id",
-        uuid: "room-uuid",
-        roomToken: "NETLESSROOM_...",
-      },
-      managerConfig: {
-        cursor: true,
-      },
-    }).then(app => {
-      setApp((app_instance = app));
-    });
-
-    return () => {
-      if (app_instance) {
-        app_instance.destroy();
-      }
-    };
-  }, []);
+  const app = useFastboard(() => ({
+    sdkConfig: {
+      appIdentifier: "whiteboard_app_id",
+    },
+    joinRoom: {
+      uid: "unique_user_id",
+      uuid: "room-uuid",
+      roomToken: "NETLESSROOM_...",
+    },
+  }));
 
   return <Fastboard app={app} />;
 }
