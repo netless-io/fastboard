@@ -4,6 +4,8 @@
 
 A starter library for making whiteboard web app, based on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk), [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) and [netless-app](https://github.com/netless-io/netless-app).
 
+<img src="https://user-images.githubusercontent.com/8097890/165052277-f0bc1fba-c261-44a8-8219-cd7832ee3091.jpg" align="center">
+
 ## Table of Contents
 
 - [Install](#install)
