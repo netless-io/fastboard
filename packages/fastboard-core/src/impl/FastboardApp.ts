@@ -69,6 +69,9 @@ class FastboardAppBase {
     return () => this.manager.mainView.callbacks.off(name, listener);
   }
 
+  /**
+   * Destroy fastboard (disconnect from the whiteboard room).
+   */
   public destroy() {
     this._destroyed = true;
     this.manager.destroy();
@@ -104,21 +107,32 @@ export type {
   WindowManager,
 };
 
+/** pencil, eraser, rectangle... */
 export type Appliance = `${ApplianceNames}`;
+/** triangle, star... */
 export type Shape = `${ShapeType}`;
 
+/** Params for static docs, they are rendered as many images. */
 export interface InsertDocsStatic {
   readonly fileType: "pdf";
+  /** Unique string for binding whiteboard view to the doc. Must start with `/`. */
   readonly scenePath: string;
+  /** @example [{ name: '1', ppt: { src: 'url/to/ppt/1.png' } }] */
   readonly scenes: SceneDefinition[];
+  /** Window title. */
   readonly title?: string;
 }
 
+/** Params for slides, they are rendered in @netless/app-slide with animations. */
 export interface InsertDocsDynamic {
   readonly fileType: "pptx";
+  /** Unique string for binding whiteboard view to the doc. Must start with `/`. */
   readonly scenePath: string;
+  /** Conversion task id, see https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress. */
   readonly taskId: string;
+  /** Window title. */
   readonly title?: string;
+  /** Where the slide resource placed. @default `https://convertcdn.netless.link/dynamicConvert` */
   readonly url?: string;
   /** @example [{ name: '1' }, { name: '2' }, { name: '3' }] */
   readonly scenes?: SceneDefinition[];
@@ -130,9 +144,11 @@ export type SetMemberStateFn = (partialMemberState: Partial<MemberState>) => voi
 
 export type RoomStateChanged = (diff: Partial<RoomState>) => void;
 
+/** App download progress. */
 export interface AppsStatus {
   [kind: string]: {
     status: "idle" | "loading" | "failed";
+    /** Exist if status is `failed`. */
     reason?: string;
   };
 }
@@ -309,36 +325,64 @@ export class FastboardApp extends FastboardAppBase {
     });
   }
 
+  /**
+   * Set pencil and shape's thickness.
+   */
   setStrokeWidth(strokeWidth: number) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({ strokeWidth });
   }
 
+  /**
+   * Set pencil and shape's color.
+   */
   setStrokeColor(strokeColor: Color) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({ strokeColor });
   }
 
+  /**
+   * Set text size. Default is 16.
+   */
   setTextSize(textSize: number) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({ textSize });
   }
 
+  /**
+   * Set text color.
+   *
+   * @example
+   * setTextColor([0x66, 0xcc, 0xff])
+   */
   setTextColor(textColor: Color) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({ textColor });
   }
 
+  /**
+   * Goto previous page (the main whiteboard view).
+   */
   prevPage() {
     this._assertNotDestroyed();
     return this.manager.prevPage();
   }
 
+  /**
+   * Goto next page (the main whiteboard view).
+   */
   nextPage() {
     this._assertNotDestroyed();
     return this.manager.nextPage();
   }
 
+  /**
+   * Add one page to the main whiteboard view.
+   *
+   * @example
+   * addPage({ after: true }) // add one page right after current one.
+   * nextPage() // then, goto that page.
+   */
   addPage(params?: AddPageParams) {
     this._assertNotDestroyed();
     return this.manager.addPage(params);
@@ -346,6 +390,9 @@ export class FastboardApp extends FastboardAppBase {
 
   /**
    * Insert an image to the main view.
+   *
+   * @example
+   * insertImage("https://i.imgur.com/CzXTtJV.jpg")
    */
   async insertImage(url: string) {
     this._assertNotDestroyed();

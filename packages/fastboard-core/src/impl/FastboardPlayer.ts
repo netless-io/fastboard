@@ -185,7 +185,7 @@ export interface FastboardReplayOptions {
 }
 
 /**
- * Create a FastboardApp instance.
+ * Create a FastboardPlayer instance.
  * @example
  * let player = await replayFastboard({
  *   sdkConfig: {
