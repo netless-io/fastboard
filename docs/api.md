@@ -526,7 +526,7 @@ export interface FastboardWritable<T, SetFn = (value: T) => void> extends Fastbo
 
 ```js
 app.writable.value; // true | false
-app.writable.setValue(false); // 切换到不可写状态
+app.writable.set(false); // 切换到不可写状态
 app.writable.subscribe(value => {
   // value 变化时触发
 });
