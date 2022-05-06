@@ -193,9 +193,10 @@ export interface FastboardReplayOptions {
  *     region: 'cn-hz',
  *   },
  *   replayRoom: {
- *     uid: unique_id,
- *     uuid: import.meta.env.VITE_ROOM_UUID,
- *     roomToken: import.meta.env.VITE_ROOM_TOKEN,
+ *     room: "room uuid",
+ *     roomToken: "NETLESSROOM_...",
+ *     beginTimestamp: 1646619090394,
+ *     duration: 70448,
  *   },
  * })
  */
