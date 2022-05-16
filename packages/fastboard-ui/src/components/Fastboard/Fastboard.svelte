@@ -58,7 +58,7 @@
 </script>
 
 <div class="{name}-root" class:loading={!app}>
-  <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
+  <div class="{name}-view" bind:this={container} on:touchstart|capture|passive={tippy_hide_all} />
   <div class="{name}-left" class:hidden={!(layout === "visible" || layout === "toolbar-only")}>
     {#if config.toolbar?.enable !== false}
       <Toolbar {app} {theme} {language} config={config.toolbar} />

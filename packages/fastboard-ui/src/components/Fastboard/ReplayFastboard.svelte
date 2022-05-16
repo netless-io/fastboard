@@ -36,7 +36,7 @@
 </script>
 
 <div class="{name}-root" class:loading={!player}>
-  <div class="{name}-view" bind:this={container} on:touchstart|capture={tippy_hide_all} />
+  <div class="{name}-view" bind:this={container} on:touchstart|capture|passive={tippy_hide_all} />
   <div class="{name}-bottom">
     <PlayerControl {player} {theme} {language} />
   </div>
