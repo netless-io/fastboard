@@ -18,6 +18,7 @@
   import StrokeColor from "./StrokeColor.svelte";
   import TextColor from "./TextColor.svelte";
   import Shapes from "./Shapes.svelte";
+  import { tippy_hide_all } from "../../../actions/tippy";
 
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
@@ -180,6 +181,10 @@
     {#each $apps as netless_app}
       {@const { icon, label, kind, onClick } = netless_app}
       {@const state = $status && $status[kind]}
+      {@const on_click = () => {
+        app && onClick(app);
+        tippy_hide_all();
+      }}
       <button
         class="{name}-app-btn {kind} {theme}"
         class:is-loading={state && state.status === "loading"}
@@ -187,7 +192,7 @@
         title={label + (state && state.reason ? ": " + state.reason : "")}
         data-app-kind={netless_app.kind}
         disabled={state && state.status !== "idle"}
-        on:click={app && onClick.bind(null, app)}
+        on:click={on_click}
       >
         <img class="{name}-app-btn-icon {theme}" src={icon} alt={kind} title={label} />
         <span class="{name}-app-btn-text {theme}">{label}</span>

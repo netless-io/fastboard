@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added track info in `window.__netlessUA`.
+- Auto hide apps panel on click buttons on it.
 
 ## 0.3.2
 
