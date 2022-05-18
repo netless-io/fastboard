@@ -1,9 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.3.3
 
 - Added track info in `window.__netlessUA`.
 - Auto hide apps panel on click buttons on it.
+- Upgraded `@netless/app-slide` to `0.2.0`.
 
 ## 0.3.2
 
