@@ -5,6 +5,15 @@
     "source.fixAll": true,
     "source.addMissingImports": true
   },
+  "cSpell.ignorePaths": [
+    "docs/*.md",
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders"
+  ],
   "cSpell.words": [
     "canplay",
     "changesets",

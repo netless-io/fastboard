@@ -303,7 +303,7 @@ function App {
 > 绑定白板到 DOM（注意，这里只有白板本身，不包含任何外部组件）
 
 ```js
-app.bindContainer(document.getElementById("#whiteboard"));
+app.bindContainer(document.getElementById("whiteboard"));
 ```
 
 参数
