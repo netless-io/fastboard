@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Deprecated `insertCodeEditor` `insertGeoGebra` `insertCountdown` methods.
+
 ## 0.3.3
 
 - Added track info in `window.__netlessUA`.

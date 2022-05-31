@@ -52,7 +52,10 @@ export const apps = new AppsInToolbar([
     icon: code_editor_svg,
     label: "Code Editor",
     onClick(app) {
-      app.insertCodeEditor();
+      app.manager.addApp({
+        kind: "Monaco",
+        options: { title: "Code Editor" },
+      });
     },
   },
   {
@@ -60,7 +63,10 @@ export const apps = new AppsInToolbar([
     icon: geogebra_svg,
     label: "GeoGebra",
     onClick(app) {
-      app.insertGeoGebra();
+      app.manager.addApp({
+        kind: "GeoGebra",
+        options: { title: "GeoGebra" },
+      });
     },
   },
   {
@@ -68,7 +74,10 @@ export const apps = new AppsInToolbar([
     icon: countdown_svg,
     label: "Countdown",
     onClick(app) {
-      app.insertCountdown();
+      app.manager.addApp({
+        kind: "Countdown",
+        options: { title: "Countdown" },
+      });
     },
   },
 ]);

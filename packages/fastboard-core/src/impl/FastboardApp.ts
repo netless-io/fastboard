@@ -494,6 +494,7 @@ export class FastboardApp extends FastboardAppBase {
 
   /**
    * Insert the Monaco Code Editor app.
+   * @deprecated Use `app.manager.addApp({ kind: 'Monaco' })` instead.
    */
   insertCodeEditor() {
     this._assertNotDestroyed();
@@ -505,6 +506,7 @@ export class FastboardApp extends FastboardAppBase {
 
   /**
    * Insert the Countdown app.
+   * @deprecated Use `app.manager.addApp({ kind: 'Countdown' })` instead.
    */
   insertCountdown() {
     this._assertNotDestroyed();
@@ -516,6 +518,7 @@ export class FastboardApp extends FastboardAppBase {
 
   /**
    * Insert the GeoGebra app.
+   * @deprecated Use `app.manager.addApp({ kind: 'GeoGebra' })` instead.
    */
   insertGeoGebra() {
     this._assertNotDestroyed();

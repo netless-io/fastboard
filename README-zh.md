@@ -176,8 +176,6 @@ const appId = await app.insertMedia("文件名.mp3", fileUrl);
 #### 插入 [@netless/app-monaco](https://github.com/netless-io/netless-app/tree/master/packages/app-monaco)
 
 ```js
-const appId = await app.insertCodeEditor();
-// 或者
 const appId = await app.manager.addApp({
   kind: "Monaco",
   options: { title: "Code Editor" },
@@ -187,8 +185,6 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
 
 ```js
-const appId = await app.insertCountdown();
-// 或者
 const appId = await app.manager.addApp({
   kind: "Countdown",
   options: { title: "Countdown" },
@@ -198,8 +194,6 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
 ```js
-const appId = await app.insertGeoGebra();
-// 或者
 const appId = await app.manager.addApp({
   kind: "GeoGebra",
   options: { title: "GeoGebra" },
