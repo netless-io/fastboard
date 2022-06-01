@@ -5,7 +5,6 @@ import Balloon from "./Balloon.svelte";
 import BalloonBolded from "./BalloonBolded.svelte";
 import Circle from "./Circle.svelte";
 import CircleBolded from "./CircleBolded.svelte";
-import Clean from "./Clean.svelte";
 import Clear from "./Clear.svelte";
 import Click from "./Click.svelte";
 import ClickFilled from "./ClickFilled.svelte";
@@ -51,7 +50,6 @@ const Icons = {
   BalloonBolded,
   Circle,
   CircleBolded,
-  Clean,
   Clear,
   Click,
   ClickFilled,
