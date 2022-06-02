@@ -176,8 +176,8 @@ export class FastboardApp extends FastboardAppBase {
   readonly writable = writable(
     this.room.isWritable,
     set => {
-      this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable));
       set(this.room.isWritable);
+      return this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable));
     },
     this.room.setWritable.bind(this.room)
   );
@@ -186,16 +186,16 @@ export class FastboardApp extends FastboardAppBase {
    * Is current room online?
    */
   readonly phase = readable<RoomPhase>(this.room.phase, set => {
-    this._addRoomListener("onPhaseChanged", set);
     set(this.room.phase);
+    return this._addRoomListener("onPhaseChanged", set);
   });
 
   /**
    * Current window-manager's windows' state (is it maximized?).
    */
   readonly boxState = readable(this.manager.boxState, set => {
-    this._addManagerListener("boxStateChange", set);
     set(this.manager.boxState);
+    return this._addManagerListener("boxStateChange", set);
   });
 
   /**
@@ -203,24 +203,24 @@ export class FastboardApp extends FastboardAppBase {
    * @example "HelloWorld-1A2b3C4d"
    */
   readonly focusedApp = readable(this.manager.focused, set => {
-    this._addManagerListener("focusedChange", set);
     set(this.manager.focused);
+    return this._addManagerListener("focusedChange", set);
   });
 
   /**
    * How many times can I call `app.redo()`?
    */
   readonly canRedoSteps = readable(this.manager.canRedoSteps, set => {
-    this._addManagerListener("canRedoStepsChange", set);
     set(this.manager.canRedoSteps);
+    return this._addManagerListener("canRedoStepsChange", set);
   });
 
   /**
    * How many times can I call `app.undo()`?
    */
   readonly canUndoSteps = readable(this.manager.canUndoSteps, set => {
-    this._addManagerListener("canUndoStepsChange", set);
     set(this.manager.canUndoSteps);
+    return this._addManagerListener("canUndoStepsChange", set);
   });
 
   /**
@@ -229,8 +229,8 @@ export class FastboardApp extends FastboardAppBase {
    * Change the camera position by `app.moveCamera()`.
    */
   readonly camera = readable(this.manager.camera, set => {
-    this._addMainViewListener("onCameraUpdated", set);
     set(this.manager.camera);
+    return this._addMainViewListener("onCameraUpdated", set);
   });
 
   /**
@@ -239,8 +239,8 @@ export class FastboardApp extends FastboardAppBase {
    * Change the tool by `app.setAppliance()`.
    */
   readonly memberState = readable(this.room.state.memberState, set => {
-    this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m));
     set(this.room.state.memberState);
+    return this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m));
   });
 
   /**
@@ -249,8 +249,8 @@ export class FastboardApp extends FastboardAppBase {
   readonly sceneIndex = writable(
     this.manager.mainViewSceneIndex,
     set => {
-      this._addManagerListener("mainViewSceneIndexChange", set);
       set(this.manager.mainViewSceneIndex);
+      return this._addManagerListener("mainViewSceneIndexChange", set);
     },
     this.manager.setMainViewSceneIndex.bind(this.manager)
   );
@@ -259,8 +259,8 @@ export class FastboardApp extends FastboardAppBase {
    * How many pages are in the main view?
    */
   readonly sceneLength = readable(this.manager.mainViewScenesLength, set => {
-    this._addManagerListener("mainViewScenesLengthChange", set);
     set(this.manager.mainViewScenesLength);
+    return this._addManagerListener("mainViewScenesLengthChange", set);
   });
 
   private _appsStatus: AppsStatus = {};

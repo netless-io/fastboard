@@ -80,8 +80,8 @@ export class FastboardPlayer extends FastboardPlayerBase {
   readonly currentTime = writable(
     this.player.progressTime,
     set => {
-      this._addPlayerListener("onProgressTimeChanged", set);
       set(this.player.progressTime);
+      return this._addPlayerListener("onProgressTimeChanged", set);
     },
     this.player.seekToProgressTime.bind(this.player)
   );
@@ -90,16 +90,16 @@ export class FastboardPlayer extends FastboardPlayerBase {
    * Player state, like "is it playing?".
    */
   readonly phase = readable<PlayerPhase>(this.player.phase, set => {
-    this._addPlayerListener("onPhaseChanged", set);
     set(this.player.phase);
+    return this._addPlayerListener("onPhaseChanged", set);
   });
 
   /**
    * Will become true after buffering.
    */
   readonly canplay = readable(this.player.isPlayable, set => {
-    this._addPlayerListener("onIsPlayableChanged", set);
     set(this.player.isPlayable);
+    return this._addPlayerListener("onIsPlayableChanged", set);
   });
 
   private _setPlaybackRate!: (value: number) => void;
@@ -129,8 +129,8 @@ export class FastboardPlayer extends FastboardPlayerBase {
    * Get state of room at that time, like "who was in the room?".
    */
   readonly state = readable<PlayerState>(this.player.state, set => {
-    this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state));
     set(this.player.state);
+    return this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state));
   });
 
   /**
