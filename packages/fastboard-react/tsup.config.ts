@@ -11,4 +11,5 @@ export default defineConfig({
   target: "es2017",
   esbuildPlugins: [sass()],
   dts: true,
+  treeshake: true,
 });

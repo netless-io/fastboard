@@ -13,4 +13,5 @@ export default defineConfig({
     __NAME__: JSON.stringify("@netless/fastboard"),
     __VERSION__: JSON.stringify(version),
   },
+  treeshake: true,
 });

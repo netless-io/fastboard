@@ -14,6 +14,7 @@ export default defineConfig([
     esbuildPlugins: [svelte(), sass()],
     loader: { ".svg": "dataurl" },
     dts: true,
+    treeshake: true,
   },
   {
     entry: { "index.svelte": main },
@@ -25,5 +26,6 @@ export default defineConfig([
     target: "es2017",
     esbuildPlugins: [svelte(), sass()],
     loader: { ".svg": "dataurl" },
+    treeshake: true,
   },
 ]);
