@@ -1,3 +1,5 @@
+<svelte:options immutable />
+
 <script lang="ts">
   import type { FastboardPlayer } from "@netless/fastboard-core";
   import type { Language, Theme } from "../../typings";
