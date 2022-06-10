@@ -1,4 +1,4 @@
-## 如何将 fastboard 封装成你自己的 UI 库
+## 如何为 fastboard 实现 UI
 
 讲这个问题之前我们要先定义什么叫 <q>UI</q>，一个朴素的想法是把 UI 看成一个简单的 MVC 结构——数据 <q>流向</q> 视图，以及一系列操作可以修改数据。以这个 React 组件为例：
 
@@ -27,6 +27,7 @@ app.writable; // { value: true, subscribe/reaction, set? }
 **subscribe/reaction**
 
 监听值变化，回调参数是新的值。区别是 subscribe 会当场执行一次，reaction 不会。
+
 返回一个取消监听的函数。
 
 ```js
@@ -46,7 +47,7 @@ app.writable.set(true); // writable2: true
 
 **set**
 
-（可能存在）修改值，只有某些值可以被修改。
+（可能存在）修改值，只有某些值可以被修改，注意这个不一定会同步更新到 value 上，以 value 上的值为准。
 
 ### 封装成库
 
