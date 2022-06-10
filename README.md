@@ -45,7 +45,7 @@ async function main() {
     },
   });
 
-  const ui = await createUI(fastboard, document.getElementById("whiteboard"));
+  const ui = createUI(fastboard, document.getElementById("whiteboard"));
 
   // Update Fastboard UI
   ui.update({
