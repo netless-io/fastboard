@@ -5,7 +5,7 @@ A tiny wrapper of white-web-sdk and @netless/window-manager.
 ## Usage
 
 ```js
-import { createFastboard, mount } from "@netless/fastboard";
+import { createFastboard, createUI } from "@netless/fastboard";
 
 createFastboard({
   sdkConfig: {
@@ -20,7 +20,7 @@ createFastboard({
     cursor: true,
   },
 }).then(app => {
-  mount(app, document.getElementById("app"));
+  createUI(app, document.getElementById("app"));
 });
 ```
 

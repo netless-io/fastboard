@@ -44,7 +44,7 @@ room.bindHtmlElement(document.getElementById("whiteboard"));
 在 Fastboard 中如下：
 
 ```js
-import { createFastboard, mount } from "@netless/fastboard";
+import { createFastboard, createUI } from "@netless/fastboard";
 let fastboard = await createFastboard({
   sdkConfig: {
     appIdentifier: "whiteboard-appid",
@@ -56,10 +56,10 @@ let fastboard = await createFastboard({
     roomToken: "NETLESSROOM_...",
   },
 });
-let ui = mount(fastboard, document.getElementById("whiteboard"));
+let ui = createUI(fastboard, document.getElementById("whiteboard"));
 ```
 
-与原先只有一个白板不同，Fastboard 还内置了一套 UI 组件，你可以通过上面 `mount` 返回的 `ui`
+与原先只有一个白板不同，Fastboard 还内置了一套 UI 组件，你可以通过上面 `createUI` 返回的 `ui`
 变量来控制 ui 上各个组件的显示与隐藏，具体用法请看 [API](./api.md)。
 
 #### 退出房间

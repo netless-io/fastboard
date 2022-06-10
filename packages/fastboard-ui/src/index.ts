@@ -8,6 +8,7 @@ export { default as PlayerControl, type PlayerControlProps } from "./components/
 export { Fastboard, ReplayFastboard } from "./components/Fastboard";
 export type { FastboardProps, ReplayFastboardProps } from "./components/Fastboard";
 
+export * from "./helpers";
 export * from "./behaviors";
 
 import "./style.scss";

@@ -5,6 +5,7 @@
 - Deprecated `insertCodeEditor` `insertGeoGebra` `insertCountdown` methods.
 - Make `Fastboard` immutable.
 - Added `removePage` api.
+- Deprecated `mount`, `replay` api, introduce `createUI`, `createReplayUI` api.
 
 ## 0.3.3
 

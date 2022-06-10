@@ -24,7 +24,7 @@ npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 ### Vanilla JavaScript
 
 ```js
-import { createFastboard, mount } from "@netless/fastboard";
+import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
   const fastboard = await createFastboard({
@@ -45,7 +45,7 @@ async function main() {
     },
   });
 
-  const ui = await mount(fastboard, document.getElementById("whiteboard"));
+  const ui = await createUI(fastboard, document.getElementById("whiteboard"));
 
   // Update Fastboard UI
   ui.update({

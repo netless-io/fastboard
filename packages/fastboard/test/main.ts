@@ -1,6 +1,6 @@
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 
-import { createFastboard, mount, genUID } from "../src";
+import { createFastboard, createUI, genUID } from "../src";
 import "./style.scss";
 
 const root = document.getElementById("app") as HTMLDivElement;
@@ -19,9 +19,8 @@ createFastboard({
     cursor: true,
   },
 }).then(app => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).app = app;
-  mount(app, root);
+  (window as any).ui = createUI(app, root);
 });
 
 resizable(root, {

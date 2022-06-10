@@ -4,9 +4,7 @@
 
 - [顶层方法](#top-level-functions)
   - [`createFastboard`](#createfastboard)
-  - [`mount`](#mount)
   - [`replayFastboard`](#replayfastboard)
-  - [`replay`](#replay)
 - [Fastboard 组件相关](#react-hooks)
   - [`apps`](#apps)
   - [`useFastboard`](#usefastboard)
