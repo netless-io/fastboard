@@ -389,6 +389,19 @@ export class FastboardApp extends FastboardAppBase {
   }
 
   /**
+   * Remove one page at given index or current page (by default).
+   *
+   * Requires `@netless/window-manager` >= 0.4.30.
+   *
+   * @example
+   * removePage() // remove current page
+   */
+  removePage(index?: number) {
+    this._assertNotDestroyed();
+    return this.manager.removePage(index);
+  }
+
+  /**
    * Insert an image to the main view.
    *
    * @example

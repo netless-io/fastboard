@@ -4,6 +4,7 @@
 
 - Deprecated `insertCodeEditor` `insertGeoGebra` `insertCountdown` methods.
 - Make `Fastboard` immutable.
+- Added `removePage` api.
 
 ## 0.3.3
 
