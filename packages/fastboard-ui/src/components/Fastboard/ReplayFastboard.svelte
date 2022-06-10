@@ -15,15 +15,19 @@
   const name = "fastboard";
 
   let container: HTMLDivElement;
+  let mounted = false;
 
   $: try {
-    if (player && container) player.bindContainer(container);
+    if (player && container) {
+      player.bindContainer(container);
+      mounted = true;
+    }
   } catch (err) {
     console.error("[fastboard] An error occurred while binding container");
     console.error(err);
   }
 
-  $: if (player && theme) {
+  $: if (player && theme && mounted) {
     player.manager.setPrefersColorScheme(theme);
   }
 

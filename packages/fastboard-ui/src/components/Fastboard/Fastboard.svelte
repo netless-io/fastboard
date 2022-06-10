@@ -21,6 +21,7 @@
 
   let container: HTMLDivElement;
   let layout: "hidden" | "toolbar-only" | "visible" = "hidden";
+  let mounted = false;
 
   $: writable = app?.writable;
   $: boxState = app?.boxState;
@@ -39,13 +40,16 @@
   }
 
   $: try {
-    if (app && container) app.bindContainer(container);
+    if (app && container) {
+      app.bindContainer(container);
+      mounted = true;
+    }
   } catch (err) {
     console.error("[fastboard] An error occurred while binding container");
     console.error(err);
   }
 
-  $: if (app && theme) {
+  $: if (app && theme && mounted) {
     app.manager.setPrefersColorScheme(theme);
   }
 
