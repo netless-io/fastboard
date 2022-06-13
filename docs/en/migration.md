@@ -145,7 +145,7 @@ The position of the image is automatically calculated to the most suitable place
 
 #### Open Slides
 
-In white-web-sdk, slides are inserted throw the scenes API, which in practice we have found to be inconvenient in the following scenarios:
+In white-web-sdk, slides are inserted through the scenes API, which in practice we have found to be inconvenient in the following scenarios:
 
 - Multiple slides open at the same time.
 - PDF files are more easy to read in continuous scrolling rather than in pages.
