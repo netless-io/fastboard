@@ -27,6 +27,7 @@
     "eslint": "^8.17.0",
     "eslint-define-config": "^1.5.1",
     "eslint-plugin-react-hooks": "^4.5.0",
+    "fast-glob": "^3.2.11",
     "prettier": "^2.6.2",
     "sass": "^1.52.3",
     "semver": "^7.3.7",
@@ -34,6 +35,8 @@
     "svelte-check": "^2.7.2",
     "tsup": "^6.1.0",
     "type-fest": "^2.13.0",
+    "typedoc": "^0.22.17",
+    "typedoc-plugin-markdown": "^3.12.1",
     "typescript": "^4.7.3",
     "vite": "^2.9.10",
     "white-web-sdk": "^2.16.24"

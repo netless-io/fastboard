@@ -1,5 +1,6 @@
 node_modules
 dist
+temp
 .eslintcache
 .env
 *.local

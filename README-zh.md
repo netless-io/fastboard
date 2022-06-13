@@ -14,7 +14,7 @@
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 </pre>
 
-> **注意：**@netless/window-manager 和 white-web-sdk 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/peer-dependency.md)。
+> **注意：**@netless/window-manager 和 white-web-sdk 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
 <h2 id="usage">使用</h2>
 
@@ -121,7 +121,7 @@ ReactDOM.render(<App />, document.getElementById("app"));
 
 ### 使用白板功能
 
-[详细 API 文档见 docs/api.md](./docs/api.md)。
+[详细 API 文档](./docs/zh/api.md)。
 
 #### 插入图片
 
