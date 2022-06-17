@@ -43,6 +43,8 @@ async function main() {
     managerConfig: {
       cursor: true,
     },
+    // [4] (optional)
+    netlessApps: [],
   });
 
   const ui = createUI(fastboard, document.getElementById("whiteboard"));
@@ -148,6 +150,35 @@ app.setStrokeColor([r, g, b]);
 ```
 
 ### Netless Apps
+
+#### Register & Insert Apps
+
+Except for built-in apps in Fastboard, you can also insert your own apps. To do that,
+You have to register app at each client before entering room (`createFastboard`):
+
+```js
+import { register } from "@netless/fastboard";
+import MyApp from "my-app";
+
+register({ kind: MyApp.kind, src: MyApp });
+```
+
+Or you can set `netlessApps` in `createFastboard` config:
+
+```js
+createFastboard({
+  ..., // other config
+  netlessApps: [MyApp],
+});
+```
+
+Then add app into th room via:
+
+```js
+app.manager.addApp({ kind: MyApp.kind });
+```
+
+[Read more about Netless Apps.](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
 
 #### Insert PDF, PPT and PPTX
 

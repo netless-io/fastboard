@@ -6,6 +6,7 @@
 - Make `Fastboard` immutable.
 - Added `removePage` api.
 - Deprecated `mount`, `replay` api, introduce `createUI`, `createReplayUI` api.
+- Added optional `netlessApps` config in `createFastboard`.
 
 ## 0.3.3
 

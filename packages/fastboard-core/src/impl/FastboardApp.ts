@@ -1,4 +1,4 @@
-import type { AddPageParams, PublicEvent, MountParams } from "@netless/window-manager";
+import type { AddPageParams, PublicEvent, MountParams, NetlessApp } from "@netless/window-manager";
 import type {
   AnimationMode,
   ApplianceNames,
@@ -32,6 +32,7 @@ import {
   warn,
 } from "../utils";
 import { ensure_window_manager, transform_app_status } from "../internal";
+import { register } from "../behaviors";
 
 class FastboardAppBase {
   public constructor(
@@ -93,6 +94,7 @@ export type {
   JoinRoomParams,
   MemberState,
   MountParams,
+  NetlessApp,
   PublicEvent,
   Rectangle,
   Room,
@@ -550,6 +552,7 @@ export interface FastboardOptions {
     callbacks?: Partial<RoomCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
+  netlessApps?: NetlessApp[];
 }
 
 /**
@@ -571,6 +574,7 @@ export async function createFastboard({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
+  netlessApps,
 }: FastboardOptions) {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
@@ -590,6 +594,12 @@ export async function createFastboard({
     changeToArrow: "a",
     changeToHand: "h",
   };
+
+  if (netlessApps) {
+    netlessApps.forEach(app => {
+      register({ kind: app.kind, src: app });
+    });
+  }
 
   const room = await sdk.joinRoom(
     {

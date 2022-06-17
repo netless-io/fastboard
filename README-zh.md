@@ -40,6 +40,8 @@ async function main() {
     managerConfig: {
       cursor: true,
     },
+    // [4] (可选)
+    netlessApps: [],
   });
 
   const ui = createUI(fastboard, document.getElementById("whiteboard"));
@@ -155,6 +157,34 @@ app.setStrokeColor([r, g, b]);
 ```
 
 ### 使用 Apps
+
+#### 注册与使用 Apps
+
+除了 Fastboard 内置的一些官方 app，你也可以定义并使用自己编写的 app。在进入房间（`createFastboard`）前需要按以下操作先在各客户端注册 app：
+
+```js
+import { register } from "@netless/fastboard";
+import MyApp from "my-app";
+
+register({ kind: MyApp.kind, src: MyApp });
+```
+
+或者你也可以在 `createFastboard` 时设置 `netlessApps`：
+
+```js
+createFastboard({
+  ..., // 其他配置
+  netlessApps: [MyApp],
+});
+```
+
+接着在房间内调用以下接口插入 app：
+
+```js
+app.manager.addApp({ kind: MyApp.kind });
+```
+
+[在这里阅读更多有关开发 Netless App 的信息](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
 
 #### 插入 PDF、PPT 和 PPTX 文档
 
