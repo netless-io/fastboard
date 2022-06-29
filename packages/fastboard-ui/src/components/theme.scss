@@ -7,6 +7,7 @@ $themes: (
     active-color: $blue-6,
     bg-color: color.change(white, $alpha: 0.9),
     hover-bg-color: $blue-1,
+    active-bg-color: $blue-1,
     border-color: $grey-1,
   ),
   dark: (
@@ -14,6 +15,7 @@ $themes: (
     active-color: $blue-7,
     bg-color: color.change($grey-10, $alpha: 0.9),
     hover-bg-color: $grey-8,
+    active-bg-color: $grey-8,
     border-color: $grey-8,
   ),
 );
@@ -58,7 +60,7 @@ $themes: (
   }
 }
 
-@mixin btn($size: 24px, $padding: 0) {
+@mixin btn($size: 24px, $padding: 0, $radius: 4px) {
   appearance: none;
   cursor: pointer;
   margin: 0;
@@ -67,7 +69,7 @@ $themes: (
   width: $size;
   height: $size;
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: $radius;
   font-size: 0;
   line-height: 1;
   flex-shrink: 0;
@@ -85,8 +87,13 @@ $themes: (
   }
 
   @each $name, $theme in $themes {
-    &.#{$name}:not(:disabled):hover {
-      background-color: read($theme, "hover-bg-color");
+    &.#{$name}:not(:disabled) {
+      &:hover {
+        background-color: read($theme, "hover-bg-color");
+      }
+      &.is-active {
+        background-color: read($theme, "active-bg-color");
+      }
     }
   }
 }

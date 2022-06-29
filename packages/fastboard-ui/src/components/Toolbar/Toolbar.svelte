@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FastboardApp } from "@netless/fastboard-core";
-  import type { Language, Theme, ToolbarConfig } from "../../typings";
+  import type { Language, Theme } from "../../typings";
+  import type { ToolbarConfig } from ".";
   import { writable as svelte_writable } from "svelte/store";
   import { height } from "../../actions/height";
   import { clamp } from "../helpers";
@@ -25,6 +26,7 @@
   $: scrollable = $scroll_height + extra_height > $container_height;
 
   $: hide_apps = config.apps?.enable === false;
+  $: eraser_type = config.eraser?.behavior || "both";
 </script>
 
 <div class="{name} {theme}" class:collapsed use:height={container_height}>
@@ -38,24 +40,34 @@
       {computed_height}
       {scrollable}
       {hide_apps}
+      {eraser_type}
     />
   </div>
   <label class="{name}-handler {theme}">
     <input type="checkbox" bind:checked={collapsed} />
-    <svg fill="none" stroke-width="2" viewBox="0 0 32 120">
+    <svg width="17" height="42" viewBox="0 0 17 42" fill="none">
       <path
+        d="M0 41H12C14.2091 41 16 39.2091 16 37V5C16 2.79086 14.2091 1 12 1H0"
+        stroke="#000"
         fill="#fff"
-        stroke="none"
-        d="m0 0 24 16q6 4 6 14v60q0 10-6 14L0 120"
-        class="{name}-handler-bg-color"
+        class="{name}-handler-border-color {name}-handler-bg-color"
       />
-      <path stroke="#000" d="m0 0 24 16q6 4 6 14v60q0 10-6 14L0 120" class="{name}-handler-border-color" />
       {#if collapsed}
-        <path stroke="#000" d="M10 52v16" class="{name}-handler-image-stroke-color" />
-        <path fill="#000" stroke="none" d="M14 52v16l8-8z" class="{name}-handler-image-fill-color" />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M8 19L6 17V25L8 23L10 21L8 19ZM4 17H5V25H4V17Z"
+          fill="#fff"
+          class="{name}-handler-image-fill-color"
+        />
       {:else}
-        <path stroke="#000" d="M20 52v16" class="{name}-handler-image-stroke-color" />
-        <path fill="#000" stroke="none" d="M16 52v16l-8-8z" class="{name}-handler-image-fill-color" />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M6 19L8 17V25L6 23L4 21L6 19ZM10 17H9V25H10V17Z"
+          fill="#fff"
+          class="{name}-handler-image-fill-color"
+        />
       {/if}
     </svg>
   </label>

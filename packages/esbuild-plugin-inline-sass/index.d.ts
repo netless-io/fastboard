@@ -1,4 +1,4 @@
 import type { Plugin } from "esbuild";
 
-export function sass(): Plugin;
+export function sass(options?: { emitCss?: boolean; strip?: boolean }): Plugin;
 export default sass;

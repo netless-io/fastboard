@@ -7,7 +7,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   platform: "browser",
-  target: "es2017",
+  target: "esnext",
   dts: true,
   define: {
     __NAME__: JSON.stringify("@netless/fastboard"),

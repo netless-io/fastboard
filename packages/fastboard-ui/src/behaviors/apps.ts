@@ -1,7 +1,7 @@
 import type { FastboardApp } from "@netless/fastboard-core";
-import code_editor_svg from "./icons/visual-studio-code.svg";
-import geogebra_svg from "./icons/geogebra.svg";
-import countdown_svg from "./icons/countdown.svg";
+// import code_editor_svg from "./icons/visual-studio-code.svg";
+// import geogebra_svg from "./icons/geogebra.svg";
+// import countdown_svg from "./icons/countdown.svg";
 
 export interface AppInToolbar {
   kind: string;
@@ -46,38 +46,4 @@ class AppsInToolbar {
 
 export type { AppsInToolbar };
 
-export const apps = new AppsInToolbar([
-  {
-    kind: "Monaco",
-    icon: code_editor_svg,
-    label: "Code Editor",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "Monaco",
-        options: { title: "Code Editor" },
-      });
-    },
-  },
-  {
-    kind: "GeoGebra",
-    icon: geogebra_svg,
-    label: "GeoGebra",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "GeoGebra",
-        options: { title: "GeoGebra" },
-      });
-    },
-  },
-  {
-    kind: "Countdown",
-    icon: countdown_svg,
-    label: "Countdown",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "Countdown",
-        options: { title: "Countdown" },
-      });
-    },
-  },
-]);
+export const stockedApps = new AppsInToolbar([]);

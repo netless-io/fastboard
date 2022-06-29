@@ -1,6 +1,6 @@
 # @netless/fastboard
 
-[中文](./README-zh.md) | [Sandbox Link](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts)
+[中文](./README-zh.md) | [Sandbox](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts)
 
 A starter library for making whiteboard web app, based on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk), [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) and [netless-app](https://github.com/netless-io/netless-app).
 
@@ -10,6 +10,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 - [Install](#install)
 - [Usage](#usage)
+- [API Reference](./docs/api.md)
 
 ## Install
 
@@ -17,7 +18,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 </pre>
 
-> **Note:** `@netless/window-manager` and `white-web-sdk` are **peerDependencies**.
+> **Note**: `@netless/window-manager` and `white-web-sdk` are **peerDependencies**.
 
 ## Usage
 
@@ -136,7 +137,6 @@ fastboard.redo();
 
 ```js
 fastboard.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
-fastboard.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
 ```
 
 #### Set Tool
@@ -174,12 +174,20 @@ createFastboard({
 Then add app into the room via:
 
 ```js
-fastboard.manager.addApp({ kind: MyApp.kind });
+const appId = fastboard.manager.addApp({ kind: MyApp.kind });
+```
+
+Once inserted, it returns an ID of the app. You can use it to close the app:
+
+```js
+fastboard.manager.closeApp(appId);
 ```
 
 [Read more about Netless Apps.](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
 
 #### Insert PDF, PPT and PPTX
+
+Fastboard has built-in support for viewing [converted](https://developer.netless.link/server-en/home/server-conversion) files.
 
 ```js
 // insert PDF/PPT/PPTX to the main whiteboard
@@ -187,6 +195,19 @@ const appId = await fastboard.insertDocs("filename.pptx", conversionResponse);
 ```
 
 The `conversionResponse` is the result of [this api](https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress).
+
+> **Advanced Usage**
+>
+> If you already knows the conversion task uuid and token, you can insert the file with:
+>
+> ```js
+> fastboard.insertDocs({
+>   fileType: "pptx", // "pdf" | "pptx"
+>   scenePath: `/pptx/${taskId}`,
+>   taskId: taskId,
+>   title: "filename.pptx",
+> });
+> ```
 
 #### Insert Video & Audio
 
@@ -199,6 +220,13 @@ Fastboard itself does not contain any logic about upload/save a file.
 
 #### Insert [@netless/app-monaco](https://github.com/netless-io/netless-app/tree/master/packages/app-monaco)
 
+> **Note**: `@netless/app-monaco` is not installed by default, you have to install and register it before using this app.
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Monaco", src: () => import("@netless/app-monaco") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "Monaco",
@@ -207,6 +235,13 @@ const appId = await fastboard.manager.addApp({
 ```
 
 #### Insert [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
+
+> **Note**: `@netless/app-countdown` is not installed by default, you have to install and register it before using this app.
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Countdown", src: () => import("@netless/app-countdown") });
+> ```
 
 ```js
 const appId = await fastboard.manager.addApp({
@@ -217,6 +252,13 @@ const appId = await fastboard.manager.addApp({
 
 #### Insert [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
+> **Note**: `@netless/app-geogebra` is not installed by default, you have to install and register it before using this app.
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "GeoGebra", src: () => import("@netless/app-geogebra") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",
@@ -225,6 +267,13 @@ const appId = await fastboard.manager.addApp({
 ```
 
 #### Insert [@netless/app-plyr](https://github.com/netless-io/netless-app/tree/master/packages/app-plyr)
+
+> **Note**: `@netless/app-plyr` is not installed by default, you have to install and register it before using this app.
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Plyr", src: () => import("@netless/app-plyr") });
+> ```
 
 ```js
 const appId = await fastboard.manager.addApp({
@@ -239,6 +288,13 @@ const appId = await fastboard.manager.addApp({
 
 #### Insert [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
 
+> **Note**: `@netless/app-embedded-page` is not installed by default, you have to install and register it before using this app.
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "EmbeddedPage", src: () => import("@netless/app-embedded-page") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "EmbeddedPage",
@@ -249,7 +305,7 @@ const appId = await fastboard.manager.addApp({
 });
 ```
 
-> **Note:** EmbeddedPage uses [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to display external web resources, you'd better not embedding 2 more nested iframes (i.e. webpage>iframe1>iframe2) in the same page.
+> **Note**: EmbeddedPage uses [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to display external web resources, you'd better not embedding 2 more nested iframes (i.e. webpage>iframe1>iframe2) in the same page.
 
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).
 

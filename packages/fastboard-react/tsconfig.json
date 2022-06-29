@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig-base.json",
-  "include": ["src"],
+  "include": ["src", "../fastboard-core/src/behaviors/netless-ua.ts"],
   "compilerOptions": {
     "jsx": "react"
   }

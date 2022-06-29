@@ -17,14 +17,14 @@
   display: flex;
   align-items: center;
   position: absolute;
-  bottom: 62px;
+  bottom: 50px;
   top: 8px;
   left: 0;
   z-index: 200;
   pointer-events: none;
 
   .fastboard-toolbar {
-    padding-left: 16px;
+    padding-left: 8px;
   }
 }
 
@@ -34,7 +34,6 @@
   position: absolute;
   bottom: 8px;
   left: 8px;
-  padding: 8px;
   z-index: 200;
   pointer-events: none;
 }

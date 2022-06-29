@@ -7,6 +7,7 @@
   export { className as class };
   export let name = "fastboard-ui";
   export let theme: Theme = "light";
+  export let active = false;
   export let disabled = false;
   export let content: Content = "";
   export let placement: Placement = "top";
@@ -19,6 +20,7 @@
     <span class="{name}-btn-interactive {theme}" use:tippy={{ content, placement, className }}>
       <button
         class="{name}-btn {className} {theme}"
+        class:is-active={active}
         {disabled}
         on:click
         use:tippy={{
@@ -37,6 +39,7 @@
   {:else}
     <button
       class="{name}-btn {className} {theme}"
+      class:is-active={active}
       {disabled}
       on:click
       use:tippy={{ content, placement, className }}
@@ -45,7 +48,7 @@
     </button>
   {/if}
 {:else}
-  <button class="{name}-btn {className} {theme}" {disabled} on:click>
+  <button class="{name}-btn {className} {theme}" class:is-active={active} {disabled} on:click>
     <slot />
   </button>
 {/if}

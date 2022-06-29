@@ -28,7 +28,6 @@ export type Shape = typeof shapes[number];
 
 export const applianceShapes = shapes.slice(0, 4) as Appliance[];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const shapesIcon: Record<Shape, any> = {
   rectangle: Icons.Rectangle,
   ellipse: Icons.Circle,
@@ -40,7 +39,6 @@ export const shapesIcon: Record<Shape, any> = {
   speechBalloon: Icons.Balloon,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const shapesIconActive: Record<Shape, any> = {
   rectangle: Icons.RectangleBolded,
   ellipse: Icons.CircleBolded,
@@ -52,14 +50,29 @@ export const shapesIconActive: Record<Shape, any> = {
   speechBalloon: Icons.BalloonBolded,
 };
 
+export const erasers = ["eraser", "pencilEraser"] as const;
+
+export type Eraser = typeof erasers[number];
+
+export const eraserIcon: Record<Eraser, any> = {
+  eraser: Icons.Eraser,
+  pencilEraser: Icons.PencilEraser,
+};
+
+export const eraserIconActive: Record<Eraser, any> = {
+  eraser: Icons.EraserFilled,
+  pencilEraser: Icons.PencilEraserFilled,
+};
+
 export const i18n: I18nData<
-  "clicker" | "selector" | "pencil" | "text" | "shapes" | "eraser" | "clear" | "apps"
+  "clicker" | "selector" | "pencil" | "pencilEraser" | "text" | "shapes" | "eraser" | "clear" | "apps"
 > = {
   en: {
     clicker: "clicker",
     selector: "selector",
     pencil: "pencil",
     eraser: "eraser",
+    pencilEraser: "eraser",
     text: "text",
     shapes: "shapes",
     clear: "clear",
@@ -70,6 +83,7 @@ export const i18n: I18nData<
     selector: "选择",
     pencil: "铅笔",
     eraser: "橡皮",
+    pencilEraser: "板擦",
     text: "文字",
     shapes: "形状",
     clear: "清屏",

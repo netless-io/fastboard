@@ -14,7 +14,7 @@
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 </pre>
 
-> **注意：**@netless/window-manager 和 white-web-sdk 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+> **注意**：@netless/window-manager 和 white-web-sdk 是 peerDependency，你需要一并安装才可以使用 Fastboard。
 
 <h2 id="usage">使用</h2>
 
@@ -122,8 +122,6 @@ createRoot(document.getElementById("app")).render(<App />);
 
 ### 使用白板功能
 
-[详细 API 文档](./docs/zh/api.md)。
-
 #### 插入图片
 
 ```js
@@ -143,7 +141,6 @@ fastboard.redo();
 
 ```js
 fastboard.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
-fastboard.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
 ```
 
 #### 设置教具
@@ -180,19 +177,40 @@ createFastboard({
 接着在房间内调用以下接口插入 app：
 
 ```js
-fastboard.manager.addApp({ kind: MyApp.kind });
+const appId = fastboard.manager.addApp({ kind: MyApp.kind });
+```
+
+你可以使用 appId 来关闭 app：
+
+```js
+fastboard.manager.closeApp(appId);
 ```
 
 [在这里阅读更多有关开发 Netless App 的信息](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
 
 #### 插入 PDF、PPT 和 PPTX 文档
 
+Fastboard 内置支持同步查看 [转码](https://developer.netless.link/server-zh/home/server-conversion) 后的文档。
+
 ```js
 // 插入 PDF/PPT/PPTX 至主白板
 const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 ```
 
-其中 `conversionResponse` 是 [转码](https://developer.netless.link/server-zh/home/server-conversion#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6) 结果。
+其中 `conversionResponse` 是 [转码结果](https://developer.netless.link/server-zh/home/server-conversion#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6)。
+
+> **进阶用法**
+>
+> 如果你已经获得了转码 uuid 和 token，可以通过以下方式直接插入：
+>
+> ```js
+> fastboard.insertDocs({
+>   fileType: "pptx", // "pdf" | "pptx"
+>   scenePath: `/pptx/${taskId}`,
+>   taskId: taskId,
+>   title: "filename.pptx",
+> });
+> ```
 
 #### 插入音频、视频
 
@@ -204,6 +222,13 @@ const appId = await fastboard.insertMedia("文件名.mp3", fileUrl);
 
 #### 插入 [@netless/app-monaco](https://github.com/netless-io/netless-app/tree/master/packages/app-monaco)
 
+> **注意**：`@netless/app-monaco` 并没有内置，你需要先安装并注册此 app 才能使用：
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Monaco", src: () => import("@netless/app-monaco") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "Monaco",
@@ -212,6 +237,13 @@ const appId = await fastboard.manager.addApp({
 ```
 
 #### 插入 [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
+
+> **注意**：`@netless/app-countdown` 并没有内置，你需要先安装并注册此 app 才能使用：
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Countdown", src: () => import("@netless/app-countdown") });
+> ```
 
 ```js
 const appId = await fastboard.manager.addApp({
@@ -222,6 +254,13 @@ const appId = await fastboard.manager.addApp({
 
 #### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
+> **注意**：`@netless/app-geogebra` 并没有内置，你需要先安装并注册此 app 才能使用：
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "GeoGebra", src: () => import("@netless/app-geogebra") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",
@@ -230,6 +269,13 @@ const appId = await fastboard.manager.addApp({
 ```
 
 #### 插入 [@netless/app-plyr](https://github.com/netless-io/netless-app/tree/master/packages/app-plyr)
+
+> **注意**：`@netless/app-plyr` 并没有内置，你需要先安装并注册此 app 才能使用：
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "Plyr", src: () => import("@netless/app-plyr") });
+> ```
 
 ```js
 const appId = await fastboard.manager.addApp({
@@ -244,6 +290,13 @@ const appId = await fastboard.manager.addApp({
 
 #### 插入 [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
 
+> **注意**：`@netless/app-embedded-page` 并没有内置，你需要先安装并注册此 app 才能使用：
+>
+> ```js
+> import { register } from "@netless/fastboard";
+> register({ kind: "EmbeddedPage", src: () => import("@netless/app-embedded-page") });
+> ```
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "EmbeddedPage",
@@ -254,9 +307,9 @@ const appId = await fastboard.manager.addApp({
 });
 ```
 
-> **注意：** EmbeddedPage 使用 [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 来显示外部资源，由于浏览器限制，您最好不要嵌套使用 iframe（即 iframe 内还有 iframe，通常来说浏览器会对第二层 iframe 增加十分多的限制或者根本无法使用）。
+> **注意**：EmbeddedPage 使用 [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 来显示外部资源，由于浏览器限制，您最好不要嵌套使用 iframe（即 iframe 内还有 iframe，通常来说浏览器会对第二层 iframe 增加十分多的限制或者根本无法使用）。
 
-> 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
+更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
 
 ## License
 

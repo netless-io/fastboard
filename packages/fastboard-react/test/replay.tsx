@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FastboardPlayer, Theme, Language } from "..";
+import type { FastboardPlayer, Language, Theme } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
-import { replayFastboard, ReplayFastboard } from "../src";
+import { ReplayFastboard, replayFastboard } from "../src";
 import "./style.scss";
 
 function App() {
@@ -44,9 +43,7 @@ function App() {
     });
 
     return () => {
-      if (player_instance) {
-        player_instance.destroy();
-      }
+      if (player_instance) player_instance.destroy();
     };
   }, []);
 

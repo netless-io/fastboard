@@ -3,22 +3,23 @@
   import type { Writable } from "svelte/store";
   import type { Placement } from "tippy.js";
   import type { Language, Theme } from "../../../typings";
-  import type { Shape } from "./constants";
-  import { applianceShapes, shapesIcon, shapesIconActive } from "./constants";
+  import type { Shape, Eraser } from "./constants";
+  import { eraserIcon, eraserIconActive, applianceShapes, shapesIcon, shapesIconActive } from "./constants";
   import { writable } from "svelte/store";
   import { scrollHeight } from "../../../actions/height";
   import { scrollTop } from "../../../actions/scroll";
+  import { tippy_hide_all } from "../../../actions/tippy";
   import { clamp } from "../../helpers";
   import { i18n } from "./constants";
-  import { apps } from "../../../behaviors";
+  import { stockedApps } from "../../../behaviors";
   import { tooltip } from "./helper";
   import Icons from "../../Icons";
   import Button from "../../Button";
   import StrokeWidth from "./StrokeWidth.svelte";
   import StrokeColor from "./StrokeColor.svelte";
+  import PencilEraserSize from "./PencilEraserSize.svelte";
   import TextColor from "./TextColor.svelte";
   import Shapes from "./Shapes.svelte";
-  import { tippy_hide_all } from "../../../actions/tippy";
 
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
@@ -28,14 +29,17 @@
   export let computed_height = 0;
   export let scrollable = false;
   export let hide_apps = false;
+  export let eraser_type: "delete" | "pencil" | "both" = "both";
 
   const name = "fastboard-toolbar";
 
   let last_shape: Shape = "rectangle";
+  let last_eraser: Eraser = "pencilEraser";
 
   let pencil_panel: HTMLDivElement;
   let text_panel: HTMLDivElement;
   let shapes_panel: HTMLDivElement;
+  let eraser_panel: HTMLDivElement;
   let apps_panel: HTMLDivElement;
 
   let btn_props: { name: string; theme: Theme; disabled: boolean; placement: Placement };
@@ -47,6 +51,9 @@
     selector: tooltip(t.selector, hotkeys?.changeToSelector),
     pencil: tooltip(t.pencil, hotkeys?.changeToPencil),
     eraser: tooltip(t.eraser, hotkeys?.changeToEraser),
+    pencilEraser: tooltip(t.pencilEraser, hotkeys?.changeToPencilEraser),
+    eraserForPanel: tooltip(t.eraser, hotkeys?.changeToEraser),
+    pencilEraserForPanel: tooltip(t.pencilEraser, hotkeys?.changeToPencilEraser),
     text: tooltip(t.text, hotkeys?.changeToText),
   };
   $: memberState = app?.memberState;
@@ -58,6 +65,10 @@
     last_shape = appliance as Shape;
   } else if (shape) {
     last_shape = shape;
+  }
+
+  $: if (["pencilEraser", "eraser"].includes(appliance as Appliance)) {
+    last_eraser = appliance as "pencilEraser" | "eraser";
   }
 
   $: max_scroll = scrollable ? $scroll_height + (32 + 8) * 2 - computed_height : 0;
@@ -90,8 +101,14 @@
       app?.setAppliance("shape", last_shape as Exclude<Shape, Appliance>);
     }
   }
-  function eraser() {
+  function select_last_eraser() {
+    app?.setAppliance(last_eraser);
+  }
+  function select_eraser() {
     app?.setAppliance("eraser");
+  }
+  function select_pencil_eraser() {
+    app?.setAppliance("pencilEraser");
   }
   function clear() {
     app?.cleanCurrentScene();
@@ -104,48 +121,119 @@
   </Button>
 {/if}
 <div class="{name}-scrollable" class:scrollable use:scrollHeight={scroll_height} use:scrollTop={top}>
-  <Button class="clicker" {...btn_props} on:click={clicker} content={c.clicker}>
+  <Button
+    class="clicker"
+    active={appliance === "clicker"}
+    {...btn_props}
+    on:click={clicker}
+    content={c.clicker}
+  >
     {#if appliance === "clicker"}
       <Icons.ClickFilled {theme} active />
     {:else}
       <Icons.Click {theme} />
     {/if}
   </Button>
-  <Button class="selector" {...btn_props} on:click={selector} content={c.selector}>
+  <Button
+    class="selector"
+    active={appliance === "selector"}
+    {...btn_props}
+    on:click={selector}
+    content={c.selector}
+  >
     {#if appliance === "selector"}
       <Icons.SelectorFilled {theme} active />
     {:else}
       <Icons.Selector {theme} />
     {/if}
   </Button>
-  <Button class="pencil" {...btn_props} on:click={pencil} content={c.pencil} menu={pencil_panel}>
+  <Button
+    class="pencil"
+    active={appliance === "pencil"}
+    {...btn_props}
+    on:click={pencil}
+    content={c.pencil}
+    menu={pencil_panel}
+  >
     {#if appliance === "pencil"}
       <Icons.PencilFilled {theme} active />
     {:else}
       <Icons.Pencil {theme} />
     {/if}
   </Button>
-  <Button class="text" {...btn_props} on:click={text} content={c.text} menu={text_panel}>
+  <Button
+    class="text"
+    active={appliance === "text"}
+    {...btn_props}
+    on:click={text}
+    content={c.text}
+    menu={text_panel}
+  >
     {#if appliance === "text"}
       <Icons.TextFilled {theme} active />
     {:else}
       <Icons.Text {theme} />
     {/if}
   </Button>
-  <Button class="shapes" {...btn_props} on:click={select_last_shape} content={t.shapes} menu={shapes_panel}>
+  <Button
+    class="shapes"
+    active={appliance === last_shape || (appliance === "shape" && shape === last_shape)}
+    {...btn_props}
+    on:click={select_last_shape}
+    content={t.shapes}
+    menu={shapes_panel}
+  >
     {#if appliance === last_shape || (appliance === "shape" && shape === last_shape)}
       <svelte:component this={shapesIconActive[last_shape]} {theme} active />
     {:else}
       <svelte:component this={shapesIcon[last_shape]} {theme} />
     {/if}
   </Button>
-  <Button class="eraser" {...btn_props} on:click={eraser} content={c.eraser}>
-    {#if appliance === "eraser"}
-      <Icons.EraserFilled {theme} active />
-    {:else}
-      <Icons.Eraser {theme} />
-    {/if}
-  </Button>
+  {#if eraser_type === "delete"}
+    <Button
+      class="eraser"
+      active={appliance === "eraser"}
+      {...btn_props}
+      on:click={select_eraser}
+      content={c.eraser}
+    >
+      {#if appliance === "eraser"}
+        <Icons.EraserFilled {theme} active />
+      {:else}
+        <Icons.Eraser {theme} />
+      {/if}
+    </Button>
+  {:else if eraser_type === "pencil"}
+    <Button
+      class="eraser"
+      active={appliance === "pencilEraser"}
+      {...btn_props}
+      on:click={select_pencil_eraser}
+      content={c.pencilEraser}
+      menu={eraser_panel}
+    >
+      {#if appliance === "pencilEraser"}
+        <Icons.PencilEraserFilled {theme} active />
+      {:else}
+        <Icons.PencilEraser {theme} />
+      {/if}
+    </Button>
+  {:else}
+    <Button
+      class="eraser"
+      active={appliance === last_eraser}
+      {...btn_props}
+      on:click={select_last_eraser}
+      content={t[last_eraser]}
+      menu={eraser_panel}
+    >
+      {#if appliance === last_eraser}
+        <svelte:component this={eraserIconActive[last_eraser]} {theme} active />
+      {:else}
+        <svelte:component this={eraserIcon[last_eraser]} {theme} />
+      {/if}
+    </Button>
+  {/if}
   <Button class="clear" {...btn_props} on:click={clear} content={t.clear}>
     <Icons.Clear {theme} />
   </Button>
@@ -177,8 +265,48 @@
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} />
   </div>
-  <div class="{name}-panel apps" style="--n:{$apps.length}" bind:this={apps_panel}>
-    {#each $apps as netless_app}
+  <div class="{name}-panel eraser" bind:this={eraser_panel}>
+    {#if eraser_type === "both"}
+      <div class="{name}-panel-btns">
+        <Button
+          class="eraser"
+          active={appliance === "pencilEraser"}
+          {...btn_props}
+          on:click={select_pencil_eraser}
+          placement="top"
+          content={c.pencilEraserForPanel}
+        >
+          {#if appliance === "pencilEraser"}
+            <Icons.PencilEraserFilled {theme} active />
+          {:else}
+            <Icons.PencilEraser {theme} />
+          {/if}
+        </Button>
+        <Button
+          class="eraser"
+          active={appliance === "eraser"}
+          {...btn_props}
+          on:click={select_eraser}
+          placement="top"
+          content={c.eraserForPanel}
+        >
+          {#if appliance === "eraser"}
+            <Icons.EraserFilled {theme} active />
+          {:else}
+            <Icons.Eraser {theme} />
+          {/if}
+        </Button>
+      </div>
+      {#if appliance === "pencilEraser"}
+        <div class="{name}-panel-divider" />
+        <PencilEraserSize {app} {theme} {disabled} />
+      {/if}
+    {:else if eraser_type === "pencil"}
+      <PencilEraserSize {app} {theme} {disabled} />
+    {/if}
+  </div>
+  <div class="{name}-panel apps" style="--n:{$stockedApps.length}" bind:this={apps_panel}>
+    {#each $stockedApps as netless_app}
       {@const { icon, label, kind, onClick } = netless_app}
       {@const state = $status && $status[kind]}
       {@const on_click = () => {

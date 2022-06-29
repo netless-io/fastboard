@@ -19,7 +19,7 @@ if (is_client) {
             const el = instance.popper.firstElementChild;
             if (el) {
               el.classList.add("fastboard-tip");
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const extra = ((instance.props as any).className || "").trim();
               if (extra) {
                 el.classList.add(extra);
@@ -56,10 +56,14 @@ export const tippy: SvelteAction<Partial<Props & { className: string }>> = funct
 };
 
 export function tippy_hide_all() {
-  document.querySelectorAll("[data-tippy-root]").forEach(el => {
-    const instance = (el as unknown as { _tippy: Instance })._tippy;
-    if (instance) instance.hide();
-  });
+  document.querySelectorAll("[data-tippy-root]").forEach(tippy_hide);
+}
+
+export function tippy_hide(el: Element) {
+  const instance = (el as unknown as { _tippy: Instance })._tippy;
+  if (instance) {
+    instance.hide();
+  }
 }
 
 export const tippy_menu: Partial<Props> = {

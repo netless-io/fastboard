@@ -34,8 +34,8 @@
   let type: IconType;
   $: type = disabled ? "disable" : "normal";
 
-  $: index = app?.sceneIndex;
-  $: length = app?.sceneLength;
+  $: index = app?.pageIndex;
+  $: length = app?.pageLength;
   $: prev_disabled = disabled || !$index;
   $: next_disabled = disabled || $length == null || $index === $length - 1;
 

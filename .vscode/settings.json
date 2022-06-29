@@ -5,37 +5,5 @@
     "source.fixAll": true
   },
   "svelte.enable-ts-plugin": true,
-  "cSpell.ignorePaths": [
-    "docs/*.md",
-    "package-lock.json",
-    "node_modules",
-    "vscode-extension",
-    ".git/objects",
-    ".vscode",
-    ".vscode-insiders"
-  ],
-  "cSpell.words": [
-    "canplay",
-    "changesets",
-    "dasharray",
-    "fastboard",
-    "geogebra",
-    "iframes",
-    "Plyr",
-    "pnpx",
-    "preid",
-    "premajor",
-    "preminor",
-    "prepatch",
-    "sveld",
-    "telebox",
-    "tippyjs",
-    "touchstart",
-    "tsup",
-    "Unsubscriber",
-    "valuemax",
-    "valuemin",
-    "valuenow"
-  ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -24,6 +24,7 @@
     : "dark";
   let language: Language = is_client ? (navigator.language.startsWith("zh") ? "zh-CN" : "en") : "en";
   let hide_apps = false;
+  let eraser: "delete" | "pencil" | "both" = "both";
 
   let tippy_content: HTMLDivElement;
   let tippy_content_text = "hello, world!";
@@ -39,6 +40,10 @@
 
   function toggle_language(ev: { currentTarget: HTMLInputElement }) {
     language = ev.currentTarget.dataset.language as Language;
+  }
+
+  function toggle_eraser(ev: { currentTarget: HTMLInputElement }) {
+    eraser = ev.currentTarget.dataset.eraser as typeof eraser;
   }
 
   $: if (is_client) {
@@ -66,6 +71,9 @@
         toolbar: {
           apps: {
             enable: !hide_apps,
+          },
+          eraser: {
+            behavior: eraser,
           },
         },
       }}
@@ -115,10 +123,13 @@
 <div class="flex actions">
   <div class="row">
     <button on:click={create_app} disabled={app !== undefined}>createApp</button>
+
     <input type="checkbox" id="writable" bind:checked={$writable} />
     <label for="writable"><em>Writable</em></label>
+
     <input type="checkbox" id="theme" checked={theme === "dark"} on:change={toggle_theme} />
     <label for="theme"><em>Dark</em></label>
+
     <!-- prettier-ignore -->
     <input type="radio" id="lang-en" data-language="en" name="language"
            checked={language === "en"} on:change={toggle_language} />
@@ -127,8 +138,22 @@
     <input type="radio" id="lang-zh-CN" data-language="zh-CN" name="language"
            checked={language === "zh-CN"} on:change={toggle_language} />
     <label for="lang-zh-CN"><em>简体中文</em></label>
+
     <input type="checkbox" id="hide_apps" bind:checked={hide_apps} />
     <label for="hide_apps">Hide <kbd>APPS</kbd> Button</label>
+
+    <!-- prettier-ignore -->
+    <input type="radio" id="eraser-pencil" data-eraser="pencil" name="eraser"
+           checked={eraser === "pencil"} on:change={toggle_eraser}>
+    <label for="eraser-pencil">PencilEraser</label>
+    <!-- prettier-ignore -->
+    <input type="radio" id="eraser-delete" data-eraser="delete" name="eraser"
+           checked={eraser === "delete"} on:change={toggle_eraser}>
+    <label for="eraser-delete">DeleteEraser</label>
+    <!-- prettier-ignore -->
+    <input type="radio" id="eraser-both" data-eraser="both" name="eraser"
+           checked={eraser === "both"} on:change={toggle_eraser}>
+    <label for="eraser-both">DefaultEraser</label>
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 import "./style.scss";
 
 export * from "@netless/fastboard-core";
-export { apps } from "@netless/fastboard-ui";
+export { stockedApps } from "@netless/fastboard-ui";
 export type {
   Theme,
   Language,
@@ -10,11 +10,14 @@ export type {
   AppsInToolbar,
   FastboardUIConfig,
 } from "@netless/fastboard-ui";
-export * from "./RedoUndo";
-export * from "./ZoomControl";
-export * from "./PageControl";
-export * from "./Toolbar";
-export * from "./Fastboard";
+export * from "./components/RedoUndo";
+export * from "./components/ZoomControl";
+export * from "./components/PageControl";
+export * from "./components/Toolbar";
+export * from "./components/Fastboard";
+export * from "./behaviors";
+export * from "./create";
+export * from "./replay";
 export { useFastboard, useReplayFastboard } from "./hooks";
 
 // Caution about Export Namespace (Star)

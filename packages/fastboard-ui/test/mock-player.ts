@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FastboardPlayer, PlayerPhase, PlayerSeekingResult } from "@netless/fastboard-core";
 import type { Writable } from "svelte/store";
-import type { PartialDeep } from "type-fest";
 import { get, writable } from "svelte/store";
 
 export interface MockPlayer {
@@ -16,13 +14,13 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
   const canplay = writable(false);
   const currentTime = writable(0);
   const duration = writable(0);
-  const phase = writable<PlayerPhase>("waitingFirstFrame");
+  const phase = writable<PlayerPhase>("waitingFirstFrame" as PlayerPhase.WaitingFirstFrame);
   const ready = writable(false);
-  const speed = writable(1);
+  const playbackRate = writable(1);
 
   let timer = 0;
 
-  const player: PartialDeep<FastboardPlayer> = {
+  const player = {
     manager: {
       setPrefersColorScheme(scheme) {
         console.log("setPrefersColorScheme", scheme);
@@ -39,25 +37,24 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
     currentTime,
     duration: { subscribe: duration.subscribe },
     phase: { subscribe: phase.subscribe as any },
-    ready: { subscribe: ready.subscribe },
-    speed,
+    playbackRate,
     play() {
-      phase.set("playing");
+      phase.set("playing" as PlayerPhase.Playing);
       replay();
     },
     pause() {
       clearInterval(timer);
       timer = 0;
-      phase.set("pause");
+      phase.set("pause" as PlayerPhase.Pause);
     },
     seek(t) {
       console.log("seek", t);
       currentTime.set(t);
       return Promise.resolve("success" as PlayerSeekingResult);
     },
-    setSpeed(s) {
+    setPlaybackRate(s) {
       console.log("set speed", s);
-      speed.set(s);
+      playbackRate.set(s);
     },
   };
 
@@ -65,19 +62,17 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
     (player.player as any).phase = value;
   });
 
-  speed.subscribe(() => {
-    if (timer) {
-      replay();
-    }
+  playbackRate.subscribe(() => {
+    if (timer) replay();
   });
 
   setTimeout(() => {
     duration.set((12 * 60 + 34) * 1000);
     canplay.set(true);
-    phase.set("pause");
+    phase.set("pause" as PlayerPhase.Pause);
   }, 1000);
 
-  return [player as FastboardPlayer, { canplay, currentTime, phase, ready, speed }];
+  return [player as unknown as FastboardPlayer, { canplay, currentTime, phase, ready, speed: playbackRate }];
 
   function replay() {
     clearInterval(timer);
@@ -87,11 +82,11 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
         if (e > get(duration)) {
           clearInterval(timer);
           timer = 0;
-          phase.set("pause");
+          phase.set("pause" as PlayerPhase.Pause);
           return 0;
         }
         return e;
       });
-    }, 500 / get(speed));
+    }, 500 / get(playbackRate));
   }
 }

@@ -8,7 +8,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   platform: "browser",
-  target: "es2017",
+  target: "esnext",
   esbuildPlugins: [sass()],
   dts: true,
   treeshake: true,

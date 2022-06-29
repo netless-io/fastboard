@@ -29,7 +29,57 @@ function stub(path) {
   return STUB.replace("{{ path }}", JSON.stringify(path));
 }
 
-export function sass() {
+export function sass({ emitCss = false, strip = false } = {}) {
+  // remove this file
+  if (strip) {
+    return {
+      name: "strip-sass",
+      setup({ onResolve, onLoad }) {
+        onResolve({ filter: /\.scss$/, namespace: "file" }, args => {
+          return { path: args.path, namespace: "strip-sass" };
+        });
+        onLoad({ filter: /.*/, namespace: "strip-sass" }, () => {
+          // tsup will strip non-error warnings for us
+          return { contents: "" };
+        });
+      },
+    };
+  }
+
+  // output index.css
+  if (emitCss) {
+    return {
+      name: "emit-css",
+      setup({ onResolve, onLoad, esbuild }) {
+        onResolve({ filter: /\.scss$/, namespace: "file" }, args => {
+          const absPath = join(args.resolveDir, args.path);
+          return { path: args.path, namespace: "sass", pluginData: { absPath } };
+        });
+        onLoad({ filter: /.*/, namespace: "sass" }, async args => {
+          const { css } = SASS.compile(args.pluginData.absPath, {
+            style: "compressed",
+          });
+          const { outputFiles } = await esbuild.build({
+            stdin: {
+              contents: css,
+              loader: "css",
+              resolveDir: dirname(args.path),
+              sourcefile: args.path,
+            },
+            logLevel: "silent",
+            bundle: true,
+            minify: true,
+            write: false,
+            outdir: "dist",
+          });
+          const contents = outputFiles[0].text.trimEnd();
+          return { contents, loader: "css" };
+        });
+      },
+    };
+  }
+
+  // injectStyle(css)
   return {
     name: "inline-sass",
     setup({ onResolve, onLoad, esbuild }) {

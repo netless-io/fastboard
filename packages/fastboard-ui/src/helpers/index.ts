@@ -10,6 +10,8 @@ export interface UI {
   update(props?: FastboardProps): void;
   /** remove UI */
   destroy(): void;
+  /** div == null ? destroy() : mount() */
+  setElement(div: Element | null): void;
 }
 
 /**
@@ -20,29 +22,39 @@ export interface UI {
 export function createUI(app?: FastboardApp | null, div?: Element): UI {
   let fastboard: Fastboard | undefined;
 
-  const ui: UI = {
-    mount(div: Element, props?: FastboardProps) {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
-      fastboard = new Fastboard({ target: div, props: { app, ...props } });
-      return ui;
-    },
-    update(props?: FastboardProps) {
-      if (fastboard) {
-        fastboard.$set(props);
-      }
-    },
-    destroy() {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
-      fastboard = undefined;
-    },
-  };
+  function mount(div: Element, props?: FastboardProps) {
+    if (fastboard) {
+      fastboard.$destroy();
+    }
+    fastboard = new Fastboard({ target: div, props: { app, ...props } });
+    return ui;
+  }
+
+  function update(props?: FastboardProps) {
+    if (fastboard) {
+      fastboard.$set(props);
+    }
+  }
+
+  function destroy() {
+    if (fastboard) {
+      fastboard.$destroy();
+    }
+    fastboard = undefined;
+  }
+
+  function setElement(div: Element | null) {
+    if (div) {
+      mount(div);
+    } else {
+      destroy();
+    }
+  }
+
+  const ui: UI = { mount, update, destroy, setElement };
 
   if (div) {
-    ui.mount(div, { app });
+    mount(div, { app });
   }
 
   return ui;
@@ -55,6 +67,8 @@ export interface ReplayUI {
   update(props?: ReplayFastboardProps): void;
   /** remove UI */
   destroy(): void;
+  /** div == null ? destroy() : mount() */
+  setElement(div: Element | null): void;
 }
 
 /**
@@ -65,29 +79,39 @@ export interface ReplayUI {
 export function createReplayUI(player?: FastboardPlayer | null, div?: Element): ReplayUI {
   let fastboard: ReplayFastboard | undefined;
 
-  const ui: ReplayUI = {
-    mount(div: Element, props?: ReplayFastboardProps) {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
-      fastboard = new ReplayFastboard({ target: div, props: { player, ...props } });
-      return ui;
-    },
-    update(props?: ReplayFastboardProps) {
-      if (fastboard) {
-        fastboard.$set(props);
-      }
-    },
-    destroy() {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
-      fastboard = undefined;
-    },
-  };
+  function mount(div: Element, props?: ReplayFastboardProps) {
+    if (fastboard) {
+      fastboard.$destroy();
+    }
+    fastboard = new ReplayFastboard({ target: div, props: { player, ...props } });
+    return ui;
+  }
+
+  function update(props?: ReplayFastboardProps) {
+    if (fastboard) {
+      fastboard.$set(props);
+    }
+  }
+
+  function destroy() {
+    if (fastboard) {
+      fastboard.$destroy();
+    }
+    fastboard = undefined;
+  }
+
+  function setElement(div: Element | null) {
+    if (div) {
+      mount(div);
+    } else {
+      destroy();
+    }
+  }
+
+  const ui: ReplayUI = { mount, update, destroy, setElement };
 
   if (div) {
-    ui.mount(div, { player });
+    mount(div, { player });
   }
 
   return ui;

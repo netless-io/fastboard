@@ -1,6 +1,6 @@
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 
-import { createFastboard, createUI, genUID } from "../src";
+import { createFastboard, createUI } from "../src";
 import "./style.scss";
 
 const root = document.getElementById("app") as HTMLDivElement;
@@ -11,7 +11,7 @@ createFastboard({
     region: "cn-hz",
   },
   joinRoom: {
-    uid: genUID(),
+    uid: Math.random().toString(36).slice(2),
     uuid: import.meta.env.VITE_ROOM_UUID,
     roomToken: import.meta.env.VITE_ROOM_TOKEN,
   },
@@ -19,9 +19,7 @@ createFastboard({
     cursor: true,
   },
 }).then(app => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).app = app;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).ui = createUI(app, root);
 });
 

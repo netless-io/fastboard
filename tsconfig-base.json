@@ -14,6 +14,7 @@
     "useUnknownInCatchVariables": false,
     "strict": true,
     "skipLibCheck": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "stripInternal": true
   }
 }

@@ -1,14 +1,16 @@
-import type { SvelteComponent as SvelteComponentType } from "svelte";
-import type { DependencyList, EffectCallback, FunctionComponent } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import type {
   FastboardApp,
   FastboardOptions,
   FastboardPlayer,
   FastboardReplayOptions,
 } from "@netless/fastboard-core";
+import type { DependencyList, EffectCallback, FunctionComponent } from "react";
+import type { SvelteComponent as SvelteComponentType } from "svelte";
 
+import { createFastboard } from "./create";
+import { replayFastboard } from "./replay";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createFastboard, replayFastboard } from "@netless/fastboard-core";
 
 export const useIsomorphicLayoutEffect = typeof document !== "undefined" ? useLayoutEffect : useEffect;
 
@@ -25,7 +27,7 @@ export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
   }, deps);
 }
 
-export function wrapReactComponent<Props>(
+export function wrapReactComponent<Props extends Record<string, any> = any>(
   SvelteComponent: typeof SvelteComponentType,
   name: string
 ): FunctionComponent<Props> {
@@ -78,7 +80,6 @@ export function useFastboard(config: () => FastboardOptions): FastboardApp | nul
       unmountRef.current = true;
       fastboard && fastboard.destroy();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return fastboard;
@@ -103,7 +104,6 @@ export function useReplayFastboard(config: () => FastboardReplayOptions): Fastbo
       unmountRef.current = true;
       fastboard && fastboard.destroy();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return fastboard;

@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+- Removed `moveCameraToContain` api.
+- Removed previously deprecated api: `insertCodeEditor` `insertGeoGebra` `insertCountdown` `mount`, `replay`.
+- Added `baseCamera` as reflection of window manager's api.
+- Renamed `sceneIndex` &rarr; `pageIndex`, `sceneLength` &rarr; `pageLength`.
+- Removed `@netless/app-slide` from `fastboard-core`, add it to `fastboard`.
+- Added `pencilEraser` api and UI.
+- Removed `bindCollector` api.
+- Added `pageState` `jumpPage` api.
+- Added `toggleTextCanSelectText` api.
+- Fixed hardware acceleration issue on toolbar.
+
 ## 0.3.6
 
 - Added `syncedStore` api.

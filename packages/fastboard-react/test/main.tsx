@@ -1,16 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Theme, Language, FastboardUIConfig } from "..";
+import type { FastboardUIConfig, Language, Theme } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
-import { useFastboard, genUID, Fastboard, apps } from "../src";
+import { Fastboard, stockedApps, useFastboard } from "../src";
 import "./style.scss";
 
 const search = new URLSearchParams(location.search);
 
 const FastboardLayout: FastboardUIConfig = {
-  page_control: { enable: false },
+  page_control: { enable: true },
   redo_undo: { enable: true },
   toolbar: { enable: true },
   zoom_control: { enable: true },
@@ -23,7 +22,7 @@ function App() {
       region: "cn-hz",
     },
     joinRoom: {
-      uid: genUID(),
+      uid: Math.random().toString(36).slice(2),
       uuid: import.meta.env.VITE_ROOM_UUID,
       roomToken: import.meta.env.VITE_ROOM_TOKEN,
       isWritable: search.get("isWritable") === "1",
@@ -77,7 +76,58 @@ function App() {
   );
 }
 
-apps.push(
+stockedApps.push(
+  // {
+  //   icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
+  //   kind: "Plyr",
+  //   label: "YouTube",
+  //   onClick(app) {
+  //     app.manager.addApp({
+  //       kind: "Plyr",
+  //       options: { title: "YouTube" },
+  //       attributes: {
+  //         src: "https://www.youtube.com/embed/bTqVqk7FSmY",
+  //         provider: "youtube",
+  //       },
+  //     });
+  //   },
+  // },
+  // {
+  //   icon: "https://api.iconify.design/logos:google-icon.svg?color=currentColor",
+  //   kind: "EmbeddedPage",
+  //   label: "Google Docs",
+  //   onClick(app) {
+  //     app.manager.addApp({
+  //       kind: "EmbeddedPage",
+  //       options: { title: "Google Docs" },
+  //       attributes: {
+  //         src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
+  //       },
+  //     });
+  //   },
+  // },
+  {
+    icon: "https://api.iconify.design/ic:baseline-slideshow.svg?color=currentColor",
+    kind: "Slide",
+    label: "Slide",
+    onClick(app) {
+      const taskId = "9abed6605bbc11ec88a83b917638a00c";
+      app.insertDocs({
+        fileType: "pptx",
+        scenePath: `/Slide/${taskId}`,
+        taskId,
+        title: "星空",
+      });
+    },
+  },
+  {
+    icon: "https://api.iconify.design/material-symbols:video-stable-outline.svg?color=currentColor",
+    kind: "Media",
+    label: "Media",
+    onClick: app => {
+      app.insertMedia("a.mp4", "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4");
+    },
+  },
   {
     icon: "https://api.iconify.design/logos:youtube-icon.svg?color=currentColor",
     kind: "Plyr",
@@ -90,34 +140,6 @@ apps.push(
           src: "https://www.youtube.com/embed/bTqVqk7FSmY",
           provider: "youtube",
         },
-      });
-    },
-  },
-  {
-    icon: "https://api.iconify.design/logos:google-icon.svg?color=currentColor",
-    kind: "EmbeddedPage",
-    label: "Google Docs",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "EmbeddedPage",
-        options: { title: "Google Docs" },
-        attributes: {
-          src: "https://docs.google.com/document/d/1bd4SRb5BmTUjPGrFxU2V7KI2g_mQ-HQUBxKTxsEn5e4/edit?usp=sharing",
-        },
-      });
-    },
-  },
-  {
-    icon: "https://api.iconify.design/ic:baseline-slideshow.svg?color=currentColor",
-    kind: "Slide",
-    label: "Slide",
-    onClick(app) {
-      const taskId = "9abed6605bbc11ec88a83b917638a00c";
-      app.insertDocs({
-        fileType: "pptx",
-        scenePath: `/Slide/${taskId}`,
-        taskId,
-        title: "星空",
       });
     },
   }

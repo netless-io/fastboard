@@ -6,6 +6,7 @@ export declare interface ButtonProps {
   class?: string;
   name?: string;
   theme?: Theme;
+  active?: boolean;
   disabled?: boolean;
   content?: Content;
   placement?: Placement;

@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "0.3.6",
+  "version": "1.0.0-canary.7",
   "description": "React components of @netless/fastboard.",
   "main": "src/index.tsx",
   "files": [
@@ -15,16 +15,14 @@
     "dev": "vite"
   },
   "peerDependencies": {
-    "react": "*"
+    "@netless/window-manager": ">=1.0.0-canary.0",
+    "react": "*",
+    "white-web-sdk": ">=2.16.0"
   },
   "dependencies": {
+    "@netless/app-slide": "^0.3.0-canary.13",
     "@netless/fastboard-core": "workspace:*",
     "@netless/fastboard-ui": "workspace:*"
-  },
-  "publishConfig": {
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts"
   },
   "devDependencies": {
     "@netless/esbuild-plugin-inline-sass": "workspace:*",
@@ -32,5 +30,10 @@
     "@types/react-dom": "^18.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "publishConfig": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts"
   }
 }

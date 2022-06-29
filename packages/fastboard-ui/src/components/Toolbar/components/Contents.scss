@@ -20,8 +20,8 @@ $name: "fastboard-toolbar";
 .#{$name}-triangle {
   width: 0px;
   height: 0px;
-  border-bottom: 4px solid;
-  border-left: 4px solid transparent;
+  border-bottom: 3px solid;
+  border-left: 3px solid transparent;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -36,7 +36,7 @@ $name: "fastboard-toolbar";
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
 }
 
 .#{$name}-tooltip {
@@ -71,6 +71,17 @@ $name: "fastboard-toolbar";
   margin: 4px 0;
   background-color: rgba(#fff, 0.15);
 }
+
+.#{$name}-slider.pencil-eraser-size {
+  width: 136px;
+}
+
+// .#{$name}-panel-btns {
+//   // min-width: 108px;
+
+//   // .#{$name}-btn {
+//   // }
+// }
 
 .#{$name}-colors,
 .#{$name}-shapes {

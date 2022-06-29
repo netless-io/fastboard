@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
+
 import Apps from "./Apps.svelte";
 import Arrow from "./Arrow.svelte";
 import ArrowBolded from "./ArrowBolded.svelte";
@@ -18,6 +21,8 @@ import LineBolded from "./LineBolded.svelte";
 import Minus from "./Minus.svelte";
 import Pencil from "./Pencil.svelte";
 import PencilFilled from "./PencilFilled.svelte";
+import PencilEraser from "./PencilEraser.svelte";
+import PencilEraserFilled from "./PencilEraserFilled.svelte";
 import Plus from "./Plus.svelte";
 import Rectangle from "./Rectangle.svelte";
 import RectangleBolded from "./RectangleBolded.svelte";
@@ -63,6 +68,8 @@ const Icons = {
   Minus,
   Pencil,
   PencilFilled,
+  PencilEraser,
+  PencilEraserFilled,
   Plus,
   Rectangle,
   RectangleBolded,
