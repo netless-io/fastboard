@@ -172,7 +172,7 @@ createFastboard({
 });
 ```
 
-Then add app into th room via:
+Then add app into the room via:
 
 ```js
 app.manager.addApp({ kind: MyApp.kind });

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.4
 
 - Deprecated `insertCodeEditor` `insertGeoGebra` `insertCountdown` methods.
 - Make `Fastboard` immutable.
