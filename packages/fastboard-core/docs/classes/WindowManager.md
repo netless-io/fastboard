@@ -29,7 +29,7 @@
 - [bindMainView](WindowManager.md#bindmainview)
 - [boxManager](WindowManager.md#boxmanager)
 - [callbacks](WindowManager.md#callbacks)
-- [containerResizeObserver](WindowManager.md#containerresizeobserver)
+- [cameraUpdating](WindowManager.md#cameraupdating)
 - [containerSizeRatio](WindowManager.md#containersizeratio)
 - [cursorManager](WindowManager.md#cursormanager)
 - [dependencies](WindowManager.md#dependencies)
@@ -38,10 +38,14 @@
 - [ensureAttributes](WindowManager.md#ensureattributes)
 - [isDynamicPPT](WindowManager.md#isdynamicppt)
 - [isReplay](WindowManager.md#isreplay)
+- [moveCamera](WindowManager.md#movecamera)
+- [nextCamera](WindowManager.md#nextcamera)
+- [onCameraUpdated](WindowManager.md#oncameraupdated)
 - [readonly](WindowManager.md#readonly)
 - [setupScenePath](WindowManager.md#setupscenepath)
 - [version](WindowManager.md#version)
 - [viewMode](WindowManager.md#viewmode)
+- [viewMode$](WindowManager.md#viewmode$)
 - [container](WindowManager.md#container)
 - [containerSizeRatio](WindowManager.md#containersizeratio-1)
 - [debug](WindowManager.md#debug)
@@ -52,11 +56,12 @@
 - [kind](WindowManager.md#kind)
 - [params](WindowManager.md#params)
 - [playground](WindowManager.md#playground)
-- [wrapper](WindowManager.md#wrapper)
 
 ### Accessors
 
 - [apps](WindowManager.md#apps)
+- [baseCamera](WindowManager.md#basecamera)
+- [baseSize](WindowManager.md#basesize)
 - [boxState](WindowManager.md#boxstate)
 - [camera](WindowManager.md#camera)
 - [cameraState](WindowManager.md#camerastate)
@@ -66,6 +71,7 @@
 - [darkMode](WindowManager.md#darkmode)
 - [focused](WindowManager.md#focused)
 - [focusedView](WindowManager.md#focusedview)
+- [fullscreen](WindowManager.md#fullscreen)
 - [mainView](WindowManager.md#mainview)
 - [mainViewSceneDir](WindowManager.md#mainviewscenedir)
 - [mainViewSceneIndex](WindowManager.md#mainviewsceneindex)
@@ -74,6 +80,7 @@
 - [prefersColorScheme](WindowManager.md#preferscolorscheme)
 - [room](WindowManager.md#room)
 - [sceneState](WindowManager.md#scenestate)
+- [teleboxManager](WindowManager.md#teleboxmanager)
 - [topApp](WindowManager.md#topapp)
 - [registered](WindowManager.md#registered)
 
@@ -90,6 +97,7 @@
 - [completeImageUpload](WindowManager.md#completeimageupload)
 - [convertToPointInWorld](WindowManager.md#converttopointinworld)
 - [copy](WindowManager.md#copy)
+- [createPPTHandler](WindowManager.md#createppthandler)
 - [delete](WindowManager.md#delete)
 - [destroy](WindowManager.md#destroy)
 - [duplicate](WindowManager.md#duplicate)
@@ -98,10 +106,9 @@
 - [getMainViewScenePath](WindowManager.md#getmainviewscenepath)
 - [insertImage](WindowManager.md#insertimage)
 - [insertText](WindowManager.md#inserttext)
+- [jumpPage](WindowManager.md#jumppage)
 - [lockImage](WindowManager.md#lockimage)
 - [lockImages](WindowManager.md#lockimages)
-- [moveCamera](WindowManager.md#movecamera)
-- [moveCameraToContain](WindowManager.md#movecameratocontain)
 - [nextPage](WindowManager.md#nextpage)
 - [onAppDestroy](WindowManager.md#onappdestroy)
 - [onAttributesUpdate](WindowManager.md#onattributesupdate)
@@ -116,15 +123,19 @@
 - [safeSetAttributes](WindowManager.md#safesetattributes)
 - [safeUpdateAttributes](WindowManager.md#safeupdateattributes)
 - [setAttributes](WindowManager.md#setattributes)
+- [setBaseSize](WindowManager.md#setbasesize)
 - [setBoxState](WindowManager.md#setboxstate)
 - [setCameraBound](WindowManager.md#setcamerabound)
 - [setContainerSizeRatio](WindowManager.md#setcontainersizeratio)
+- [setContainerStyle](WindowManager.md#setcontainerstyle)
+- [setFullscreen](WindowManager.md#setfullscreen)
 - [setMainViewSceneIndex](WindowManager.md#setmainviewsceneindex)
 - [setMainViewScenePath](WindowManager.md#setmainviewscenepath)
 - [setMaximized](WindowManager.md#setmaximized)
 - [setMinimized](WindowManager.md#setminimized)
 - [setPrefersColorScheme](WindowManager.md#setpreferscolorscheme)
 - [setReadonly](WindowManager.md#setreadonly)
+- [setStageStyle](WindowManager.md#setstagestyle)
 - [setViewMode](WindowManager.md#setviewmode)
 - [switchMainViewToWriter](WindowManager.md#switchmainviewtowriter)
 - [undo](WindowManager.md#undo)
@@ -149,6 +160,10 @@
 
 InvisiblePlugin&lt;WindowMangerAttributes\&gt;.constructor
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:132
+
 ## Properties
 
 ### \_addApp
@@ -157,7 +172,7 @@ InvisiblePlugin&lt;WindowMangerAttributes\&gt;.constructor
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:135
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:151
 
 ___
 
@@ -167,7 +182,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:220
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:244
 
 ___
 
@@ -177,7 +192,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:111
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:126
 
 ___
 
@@ -187,7 +202,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:104
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:118
 
 ___
 
@@ -197,7 +212,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:107
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:121
 
 ___
 
@@ -211,7 +226,7 @@ InvisiblePlugin.attributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:478
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:478
 
 ___
 
@@ -221,7 +236,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:221
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:245
 
 ___
 
@@ -231,7 +246,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:112
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:127
 
 ___
 
@@ -245,17 +260,17 @@ InvisiblePlugin.callbacks
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:476
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:476
 
 ___
 
-### containerResizeObserver
+### cameraUpdating
 
-• `Private` `Optional` **containerResizeObserver**: `any`
+• `Private` **cameraUpdating**: `any`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:114
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:129
 
 ___
 
@@ -265,7 +280,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:115
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:131
 
 ___
 
@@ -275,7 +290,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:108
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:122
 
 ___
 
@@ -285,7 +300,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:103
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:117
 
 ___
 
@@ -299,17 +314,17 @@ InvisiblePlugin.displayer
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:474
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:474
 
 ___
 
 ### emitter
 
-• **emitter**: `Emittery`<[`PublicEvent`](../modules.md#publicevent), [`PublicEvent`](../modules.md#publicevent) & `OmnipresentEventData`, ``"ready"``\>
+• **emitter**: `Emittery`<[`PublicEvent`](../modules.md#publicevent), [`PublicEvent`](../modules.md#publicevent) & `_OmnipresentEventData`, ``"ready"``\>
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:106
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:120
 
 ___
 
@@ -319,7 +334,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:244
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:277
 
 ___
 
@@ -329,7 +344,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:243
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:276
 
 ___
 
@@ -339,7 +354,51 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:110
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:125
+
+___
+
+### moveCamera
+
+• **moveCamera**: (`camera`: `Partial`<[`Camera`](../modules.md#camera)\> & { `animationMode?`: [`AnimationMode`](../enums/AnimationMode.md)  }) => `void`
+
+#### Type declaration
+
+▸ (`camera`): `void`
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `camera` | `Partial`<[`Camera`](../modules.md#camera)\> & { `animationMode?`: [`AnimationMode`](../enums/AnimationMode.md)  } |
+
+##### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:236
+
+___
+
+### nextCamera
+
+• `Private` **nextCamera**: `any`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:130
+
+___
+
+### onCameraUpdated
+
+• `Private` **onCameraUpdated**: `any`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:239
 
 ___
 
@@ -349,7 +408,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:105
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:119
 
 ___
 
@@ -359,7 +418,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:136
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:152
 
 ___
 
@@ -369,7 +428,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:102
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:116
 
 ___
 
@@ -379,7 +438,17 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:109
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:123
+
+___
+
+### viewMode$
+
+• **viewMode$**: `Val`<`ViewMode`, `any`\>
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:124
 
 ___
 
@@ -389,7 +458,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:98
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:112
 
 ___
 
@@ -399,7 +468,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:100
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:114
 
 ___
 
@@ -409,7 +478,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:99
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:113
 
 ___
 
@@ -419,7 +488,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:95
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:110
 
 ___
 
@@ -429,7 +498,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:119
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:135
 
 ___
 
@@ -439,7 +508,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:118
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:134
 
 ___
 
@@ -449,7 +518,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:101
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:115
 
 ___
 
@@ -459,7 +528,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:94
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:109
 
 ___
 
@@ -469,7 +538,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:113
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:128
 
 ___
 
@@ -479,17 +548,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:97
-
-___
-
-### wrapper
-
-▪ `Static` `Optional` **wrapper**: `HTMLElement`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/index.d.ts:96
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:111
 
 ## Accessors
 
@@ -501,6 +560,38 @@ node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_mod
 
 `undefined` \| `Apps`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:208
+
+___
+
+### baseCamera
+
+• `get` **baseCamera**(): `undefined` \| { `centerX`: ``null`` \| `number` ; `centerY`: ``null`` \| `number` ; `id`: `string` ; `scale`: `number`  }
+
+#### Returns
+
+`undefined` \| { `centerX`: ``null`` \| `number` ; `centerY`: ``null`` \| `number` ; `id`: `string` ; `scale`: `number`  }
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:200
+
+___
+
+### baseSize
+
+• `get` **baseSize**(): `undefined` \| `ISize`
+
+#### Returns
+
+`undefined` \| `ISize`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:206
+
 ___
 
 ### boxState
@@ -510,6 +601,10 @@ ___
 #### Returns
 
 `undefined` \| ``"minimized"`` \| ``"maximized"`` \| ``"normal"``
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:209
 
 ___
 
@@ -521,6 +616,10 @@ ___
 
 [`Camera`](../modules.md#camera)
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:199
+
 ___
 
 ### cameraState
@@ -530,6 +629,10 @@ ___
 #### Returns
 
 `CameraState`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:207
 
 ___
 
@@ -541,6 +644,10 @@ ___
 
 `boolean`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:246
+
 ___
 
 ### canRedoSteps
@@ -550,6 +657,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:219
 
 ___
 
@@ -561,6 +672,10 @@ ___
 
 `number`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:220
+
 ___
 
 ### darkMode
@@ -570,6 +685,10 @@ ___
 #### Returns
 
 `boolean`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:210
 
 ___
 
@@ -581,6 +700,10 @@ ___
 
 `undefined` \| `string`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:213
+
 ___
 
 ### focusedView
@@ -590,6 +713,24 @@ ___
 #### Returns
 
 `undefined` \| `View`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:214
+
+___
+
+### fullscreen
+
+• `get` **fullscreen**(): `undefined` \| `TeleBoxFullscreen`
+
+#### Returns
+
+`undefined` \| `TeleBoxFullscreen`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:212
 
 ___
 
@@ -601,6 +742,10 @@ ___
 
 `View`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:198
+
 ___
 
 ### mainViewSceneDir
@@ -610,6 +755,10 @@ ___
 #### Returns
 
 `string`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:216
 
 ___
 
@@ -621,6 +770,10 @@ ___
 
 `number`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:215
+
 ___
 
 ### mainViewScenesLength
@@ -630,6 +783,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:218
 
 ___
 
@@ -645,6 +802,10 @@ ___
 
 PageController.pageState
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:222
+
 ___
 
 ### prefersColorScheme
@@ -654,6 +815,10 @@ ___
 #### Returns
 
 `undefined` \| ``"light"`` \| ``"dark"`` \| ``"auto"``
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:211
 
 ___
 
@@ -665,6 +830,10 @@ ___
 
 [`Room`](../interfaces/Room.md)
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:247
+
 ___
 
 ### sceneState
@@ -674,6 +843,24 @@ ___
 #### Returns
 
 `SceneState`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:221
+
+___
+
+### teleboxManager
+
+• `get` **teleboxManager**(): `TeleBoxManager`
+
+#### Returns
+
+`TeleBoxManager`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:223
 
 ___
 
@@ -685,6 +872,10 @@ ___
 
 `undefined` \| `string`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:217
+
 ___
 
 ### registered
@@ -694,6 +885,10 @@ ___
 #### Returns
 
 `Map`<`string`, `RegisterParams`<`any`, `any`, `any`\>\>
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:136
 
 ## Methods
 
@@ -715,6 +910,10 @@ ___
 
 InvisiblePlugin.\_dispose
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:494
+
 ___
 
 ### \_refresh
@@ -723,11 +922,13 @@ ___
 
 **`Inner`**
 
- 
-
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:266
 
 ___
 
@@ -753,6 +954,10 @@ ___
 
 `Promise`<`undefined` \| `string`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:150
+
 ___
 
 ### addPage
@@ -773,6 +978,10 @@ ___
 
 PageController.addPage
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:164
+
 ___
 
 ### bindCollectorContainer
@@ -788,6 +997,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:138
 
 ___
 
@@ -805,6 +1018,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:137
+
 ___
 
 ### cleanCurrentScene
@@ -814,6 +1031,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:252
 
 ___
 
@@ -833,6 +1054,10 @@ ___
 
 `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:235
+
 ___
 
 ### completeImageUpload
@@ -850,6 +1075,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:261
+
 ___
 
 ### convertToPointInWorld
@@ -866,6 +1095,10 @@ ___
 
 `Point`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:240
+
 ___
 
 ### copy
@@ -876,6 +1109,30 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:256
+
+___
+
+### createPPTHandler
+
+▸ **createPPTHandler**(): `Object`
+
+#### Returns
+
+`Object`
+
+| Name | Type |
+| :------ | :------ |
+| `onPageJumpTo` | (`_pptUUID`: `string`, `index`: `number`) => `void` |
+| `onPageToNext` | () => `void` |
+| `onPageToPrev` | () => `void` |
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:271
+
 ___
 
 ### delete
@@ -885,6 +1142,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:255
 
 ___
 
@@ -900,6 +1161,10 @@ ___
 
 InvisiblePlugin.destroy
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:243
+
 ___
 
 ### duplicate
@@ -909,6 +1174,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:258
 
 ___
 
@@ -930,6 +1199,10 @@ ___
 
 InvisiblePlugin.getAttributesValue
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:486
+
 ___
 
 ### getMainViewSceneIndex
@@ -942,6 +1215,10 @@ ___
 
 `number`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:178
+
 ___
 
 ### getMainViewScenePath
@@ -953,6 +1230,10 @@ ___
 #### Returns
 
 `undefined` \| `string`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:174
 
 ___
 
@@ -969,6 +1250,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:260
 
 ___
 
@@ -988,6 +1273,34 @@ ___
 
 `string`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:259
+
+___
+
+### jumpPage
+
+▸ **jumpPage**(`index`): `Promise`<`boolean`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `index` | `number` |
+
+#### Returns
+
+`Promise`<`boolean`\>
+
+#### Implementation of
+
+PageController.jumpPage
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:163
+
 ___
 
 ### lockImage
@@ -1005,6 +1318,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:262
+
 ___
 
 ### lockImages
@@ -1021,37 +1338,9 @@ ___
 
 `void`
 
-___
+#### Defined in
 
-### moveCamera
-
-▸ **moveCamera**(`camera`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `camera` | `Partial`<[`Camera`](../modules.md#camera)\> & { `animationMode?`: [`AnimationMode`](../enums/AnimationMode.md)  } |
-
-#### Returns
-
-`void`
-
-___
-
-### moveCameraToContain
-
-▸ **moveCameraToContain**(`rectangle`): `void`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `rectangle` | `Size` & { `originX`: `number` ; `originY`: `number`  } & `Readonly`<{ `animationMode?`: [`AnimationMode`](../enums/AnimationMode.md)  }\> |
-
-#### Returns
-
-`void`
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:263
 
 ___
 
@@ -1066,6 +1355,10 @@ ___
 #### Implementation of
 
 PageController.nextPage
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:161
 
 ___
 
@@ -1085,6 +1378,10 @@ app destroy 回调
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:190
 
 ___
 
@@ -1106,6 +1403,10 @@ ___
 
 InvisiblePlugin.onAttributesUpdate
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:482
+
 ___
 
 ### onDestroy
@@ -1120,6 +1421,10 @@ ___
 
 InvisiblePlugin.onDestroy
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:242
+
 ___
 
 ### paste
@@ -1129,6 +1434,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:257
 
 ___
 
@@ -1144,6 +1453,10 @@ ___
 
 PageController.prevPage
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:162
+
 ___
 
 ### queryAll
@@ -1155,6 +1468,10 @@ ___
 #### Returns
 
 `AppProxy`[]
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:227
 
 ___
 
@@ -1174,6 +1491,10 @@ ___
 
 `undefined` \| `AppProxy`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:231
+
 ___
 
 ### redo
@@ -1184,6 +1505,10 @@ ___
 
 `number`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:253
+
 ___
 
 ### refresh
@@ -1193,6 +1518,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:264
 
 ___
 
@@ -1218,6 +1547,10 @@ ___
 
 PageController.removePage
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:170
+
 ___
 
 ### safeSetAttributes
@@ -1233,6 +1566,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:248
 
 ___
 
@@ -1250,6 +1587,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:249
 
 ___
 
@@ -1271,6 +1612,30 @@ ___
 
 InvisiblePlugin.setAttributes
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:488
+
+___
+
+### setBaseSize
+
+▸ **setBaseSize**(`size`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `size` | `Size` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:270
+
 ___
 
 ### setBoxState
@@ -1286,6 +1651,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:195
 
 ___
 
@@ -1303,6 +1672,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:241
+
 ___
 
 ### setContainerSizeRatio
@@ -1318,6 +1691,50 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:267
+
+___
+
+### setContainerStyle
+
+▸ **setContainerStyle**(`style`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `style` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:268
+
+___
+
+### setFullscreen
+
+▸ **setFullscreen**(`fullscreen`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `fullscreen` | `TeleBoxFullscreen` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:251
 
 ___
 
@@ -1337,6 +1754,10 @@ ___
 
 `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:160
+
 ___
 
 ### setMainViewScenePath
@@ -1355,6 +1776,10 @@ ___
 
 `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:156
+
 ___
 
 ### setMaximized
@@ -1370,6 +1795,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:196
 
 ___
 
@@ -1387,6 +1816,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:197
+
 ___
 
 ### setPrefersColorScheme
@@ -1402,6 +1835,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:250
 
 ___
 
@@ -1421,6 +1858,30 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:182
+
+___
+
+### setStageStyle
+
+▸ **setStageStyle**(`style`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `style` | `string` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:269
+
 ___
 
 ### setViewMode
@@ -1439,6 +1900,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:194
+
 ___
 
 ### switchMainViewToWriter
@@ -1451,6 +1916,10 @@ ___
 
 `undefined` \| `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:186
+
 ___
 
 ### undo
@@ -1460,6 +1929,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:254
 
 ___
 
@@ -1482,6 +1955,10 @@ ___
 
 InvisiblePlugin.updateAttributes
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:490
+
 ___
 
 ### mount
@@ -1497,6 +1974,10 @@ ___
 #### Returns
 
 `Promise`<[`WindowManager`](WindowManager.md)\>
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:133
 
 ___
 
@@ -1524,6 +2005,10 @@ ___
 
 `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:142
+
 ___
 
 ### unregister
@@ -1541,3 +2026,7 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/index.d.ts:146

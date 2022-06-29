@@ -1,7 +1,7 @@
 import type { FastboardApp } from "@netless/fastboard-core";
-import code_editor_svg from "./icons/visual-studio-code.svg";
-import geogebra_svg from "./icons/geogebra.svg";
-import countdown_svg from "./icons/countdown.svg";
+// import code_editor_svg from "./icons/visual-studio-code.svg";
+// import geogebra_svg from "./icons/geogebra.svg";
+// import countdown_svg from "./icons/countdown.svg";
 
 export interface AppInToolbar {
   kind: string;
@@ -16,9 +16,11 @@ class AppsInToolbar {
   get data() {
     return this._data;
   }
+
   get length() {
     return this._data.length;
   }
+
   subscribe(fn: (data: AppInToolbar[]) => void) {
     this._listeners.push(fn);
     fn(this._data);
@@ -26,18 +28,22 @@ class AppsInToolbar {
       this._listeners = this._listeners.filter(item => item !== fn);
     };
   }
+
   push(...data: AppInToolbar[]) {
     this._data.push(...data);
     this._listeners.forEach(fn => fn(this._data));
   }
+
   insert(data: AppInToolbar, index: number) {
     this._data.splice(index, 0, data);
     this._listeners.forEach(fn => fn(this._data));
   }
+
   delete(filter: (data: AppInToolbar) => boolean) {
     this._data = this._data.filter(item => !filter(item));
     this._listeners.forEach(fn => fn(this._data));
   }
+
   clear() {
     this._data.length = 0;
     this._listeners.forEach(fn => fn(this._data));
@@ -46,38 +52,4 @@ class AppsInToolbar {
 
 export type { AppsInToolbar };
 
-export const apps = new AppsInToolbar([
-  {
-    kind: "Monaco",
-    icon: code_editor_svg,
-    label: "Code Editor",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "Monaco",
-        options: { title: "Code Editor" },
-      });
-    },
-  },
-  {
-    kind: "GeoGebra",
-    icon: geogebra_svg,
-    label: "GeoGebra",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "GeoGebra",
-        options: { title: "GeoGebra" },
-      });
-    },
-  },
-  {
-    kind: "Countdown",
-    icon: countdown_svg,
-    label: "Countdown",
-    onClick(app) {
-      app.manager.addApp({
-        kind: "Countdown",
-        options: { title: "Countdown" },
-      });
-    },
-  },
-]);
+export const apps = new AppsInToolbar([]);

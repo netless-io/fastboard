@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import type { SvelteComponent as SvelteComponentType } from "svelte";
 import type { DependencyList, EffectCallback, FunctionComponent } from "react";
 import type {
@@ -38,17 +39,13 @@ export function wrapReactComponent<Props>(
         component.current = new SvelteComponent({ target: container, props });
 
         return () => {
-          if (component.current) {
-            component.current.$destroy();
-          }
+          if (component.current) component.current.$destroy();
         };
       }
     }, [container]);
 
     useUpdateEffect(() => {
-      if (component.current) {
-        component.current.$set(props);
-      }
+      if (component.current) component.current.$set(props);
     }, [props]);
 
     return <div className="fastboard-react-div" ref={setContainer} />;
@@ -67,18 +64,14 @@ export function useFastboard(config: () => FastboardOptions): FastboardApp | nul
     let fastboard: FastboardApp | null = null;
 
     createFastboard(config()).then(app => {
-      if (!unmountRef.current) {
-        setFastboard((fastboard = app));
-      } else {
-        app.destroy();
-      }
+      if (!unmountRef.current) setFastboard((fastboard = app));
+      else app.destroy();
     });
 
     return () => {
       unmountRef.current = true;
       fastboard && fastboard.destroy();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return fastboard;
@@ -92,18 +85,14 @@ export function useReplayFastboard(config: () => FastboardReplayOptions): Fastbo
     let fastboard: FastboardPlayer | null = null;
 
     replayFastboard(config()).then(app => {
-      if (!unmountRef.current) {
-        setFastboard((fastboard = app));
-      } else {
-        app.destroy();
-      }
+      if (!unmountRef.current) setFastboard((fastboard = app));
+      else app.destroy();
     });
 
     return () => {
       unmountRef.current = true;
       fastboard && fastboard.destroy();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return fastboard;

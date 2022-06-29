@@ -57,8 +57,10 @@
 
   $: camera = app?.camera;
   $: scale = $camera?.scale ?? 1;
-  $: plus_disabled = disabled || next_scale(scale, 1) === scale;
-  $: minus_disabled = disabled || next_scale(scale, -1) === scale;
+  $: plus_disabled = disabled || next_scale(scale, 1) <= scale;
+  $: minus_disabled = disabled || next_scale(scale, -1) >= scale;
+
+  $: display_scale = clamp(Math.round(scale * 100), 30, 300);
 
   function plus() {
     app?.moveCamera({ scale: next_scale(scale, 1), centerX: 0, centerY: 0 });
@@ -83,7 +85,7 @@
     {#if $camera == null}
       &hellip;
     {:else}
-      {Math.ceil(scale * 100)}%
+      {display_scale}%
     {/if}
   </span>
   <Button class="minus" {name} {theme} disabled={minus_disabled} on:click={minus} content={t.minus}>

@@ -29,7 +29,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2249
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2265
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2213
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2229
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2229
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2245
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2237
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2253
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2253
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2269
 
 ___
 
@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2217
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2233
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2221
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2237
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2225
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2241
 
 ___
 
@@ -125,7 +125,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2209
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2225
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2233
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2249
 
 ___
 
@@ -149,7 +149,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2245
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2261
 
 ___
 
@@ -161,4 +161,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2241
+node_modules/.pnpm/white-web-sdk@2.16.27/node_modules/white-web-sdk/types/index.d.ts:2257

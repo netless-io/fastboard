@@ -144,7 +144,6 @@ app.redo();
 
 ```js
 app.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
-app.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
 ```
 
 #### 设置教具

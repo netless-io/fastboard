@@ -28,7 +28,6 @@ export type Shape = typeof shapes[number];
 
 export const applianceShapes = shapes.slice(0, 4) as Appliance[];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const shapesIcon: Record<Shape, any> = {
   rectangle: Icons.Rectangle,
   ellipse: Icons.Circle,
@@ -40,7 +39,6 @@ export const shapesIcon: Record<Shape, any> = {
   speechBalloon: Icons.Balloon,
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const shapesIconActive: Record<Shape, any> = {
   rectangle: Icons.RectangleBolded,
   ellipse: Icons.CircleBolded,

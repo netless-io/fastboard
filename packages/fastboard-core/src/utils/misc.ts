@@ -21,15 +21,13 @@ export function makeSlideParams(scenes: SceneDefinition[]) {
     // make sure scenesWithoutPPT.length === scenes.length
     emptyScenes.push({ name });
 
-    if (!ppt || !ppt.src.startsWith("ppt")) {
-      continue;
-    }
+    if (!ppt || !ppt.src.startsWith("ppt")) continue;
+
     const match = pptSrcRE.exec(ppt.src);
-    if (!match || !match.groups) {
-      continue;
-    }
+    if (!match || !match.groups) continue;
+
     taskId = match.groups.taskId;
-    url = "https" + match.groups.prefix;
+    url = `https${match.groups.prefix}`;
     break;
   }
 

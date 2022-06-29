@@ -22,28 +22,22 @@ export function createUI(app: FastboardApp, div?: Element): UI {
 
   const ui: UI = {
     mount(div: Element, props?: Omit<FastboardProps, "app">) {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
+      if (fastboard) fastboard.$destroy();
+
       fastboard = new Fastboard({ target: div, props: { app, ...props } });
       return ui;
     },
     update(props?: Omit<FastboardProps, "app">) {
-      if (fastboard) {
-        fastboard.$set(props);
-      }
+      if (fastboard) fastboard.$set(props);
     },
     destroy() {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
+      if (fastboard) fastboard.$destroy();
+
       fastboard = undefined;
     },
   };
 
-  if (div) {
-    ui.mount(div);
-  }
+  if (div) ui.mount(div);
 
   return ui;
 }
@@ -67,28 +61,22 @@ export function createReplayUI(player: FastboardPlayer, div?: Element): ReplayUI
 
   const ui: ReplayUI = {
     mount(div: Element, props?: Omit<ReplayFastboardProps, "player">) {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
+      if (fastboard) fastboard.$destroy();
+
       fastboard = new ReplayFastboard({ target: div, props: { player, ...props } });
       return ui;
     },
     update(props?: Omit<ReplayFastboardProps, "player">) {
-      if (fastboard) {
-        fastboard.$set(props);
-      }
+      if (fastboard) fastboard.$set(props);
     },
     destroy() {
-      if (fastboard) {
-        fastboard.$destroy();
-      }
+      if (fastboard) fastboard.$destroy();
+
       fastboard = undefined;
     },
   };
 
-  if (div) {
-    ui.mount(div);
-  }
+  if (div) ui.mount(div);
 
   return ui;
 }

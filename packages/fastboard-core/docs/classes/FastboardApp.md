@@ -1,12 +1,12 @@
 [@netless/fastboard-core](../README.md) / [Exports](../modules.md) / FastboardApp
 
-# Class: FastboardApp
+# Class: FastboardApp<TEventData\>
 
-## Hierarchy
+## Type parameters
 
-- `FastboardAppBase`
-
-  ↳ **`FastboardApp`**
+| Name | Type |
+| :------ | :------ |
+| `TEventData` | `any` |
 
 ## Table of contents
 
@@ -18,6 +18,8 @@
 
 - [\_appsStatus](FastboardApp.md#_appsstatus)
 - [\_destroyed](FastboardApp.md#_destroyed)
+- [\_disposers](FastboardApp.md#_disposers)
+- [\_syncRealCamera](FastboardApp.md#_syncrealcamera)
 - [appsStatus](FastboardApp.md#appsstatus)
 - [boxState](FastboardApp.md#boxstate)
 - [camera](FastboardApp.md#camera)
@@ -37,7 +39,6 @@
 
 ### Methods
 
-- [\_addMainViewListener](FastboardApp.md#_addmainviewlistener)
 - [\_addManagerListener](FastboardApp.md#_addmanagerlistener)
 - [\_addRoomListener](FastboardApp.md#_addroomlistener)
 - [\_assertNotDestroyed](FastboardApp.md#_assertnotdestroyed)
@@ -47,14 +48,10 @@
 - [bindContainer](FastboardApp.md#bindcontainer)
 - [cleanCurrentScene](FastboardApp.md#cleancurrentscene)
 - [destroy](FastboardApp.md#destroy)
-- [insertCodeEditor](FastboardApp.md#insertcodeeditor)
-- [insertCountdown](FastboardApp.md#insertcountdown)
 - [insertDocs](FastboardApp.md#insertdocs)
-- [insertGeoGebra](FastboardApp.md#insertgeogebra)
 - [insertImage](FastboardApp.md#insertimage)
 - [insertMedia](FastboardApp.md#insertmedia)
 - [moveCamera](FastboardApp.md#movecamera)
-- [moveCameraToContain](FastboardApp.md#movecameratocontain)
 - [nextPage](FastboardApp.md#nextpage)
 - [prevPage](FastboardApp.md#prevpage)
 - [redo](FastboardApp.md#redo)
@@ -64,13 +61,20 @@
 - [setStrokeWidth](FastboardApp.md#setstrokewidth)
 - [setTextColor](FastboardApp.md#settextcolor)
 - [setTextSize](FastboardApp.md#settextsize)
+- [toggleDottedLine](FastboardApp.md#toggledottedline)
 - [undo](FastboardApp.md#undo)
 
 ## Constructors
 
 ### constructor
 
-• **new FastboardApp**(`sdk`, `room`, `manager`, `hotKeys`, `syncedStore`)
+• **new FastboardApp**<`TEventData`\>(`sdk`, `room`, `manager`, `syncedStore`, `hotKeys`)
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TEventData` | `any` |
 
 #### Parameters
 
@@ -79,12 +83,12 @@
 | `sdk` | [`WhiteWebSdk`](WhiteWebSdk.md) |
 | `room` | [`Room`](../interfaces/Room.md) |
 | `manager` | [`WindowManager`](WindowManager.md) |
+| `syncedStore` | [`SyncedStore`](SyncedStore.md)<`TEventData`\> |
 | `hotKeys` | `Partial`<[`HotKeys`](../modules.md#hotkeys)\> |
-| `syncedStore` | `SyncedStore`<`any`\> |
 
-#### Inherited from
+#### Defined in
 
-FastboardAppBase.constructor
+[packages/fastboard-core/src/impl/FastboardApp.ts:228](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L228)
 
 ## Properties
 
@@ -94,21 +98,37 @@ FastboardAppBase.constructor
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:270](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L270)
+[packages/fastboard-core/src/impl/FastboardApp.ts:165](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L165)
 
 ___
 
 ### \_destroyed
 
-• `Protected` **\_destroyed**: `boolean` = `false`
-
-#### Inherited from
-
-FastboardAppBase.\_destroyed
+• `Private` **\_destroyed**: `boolean` = `false`
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:47](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L47)
+[packages/fastboard-core/src/impl/FastboardApp.ts:145](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L145)
+
+___
+
+### \_disposers
+
+• `Private` **\_disposers**: () => `void`[] = `[]`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:143](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L143)
+
+___
+
+### \_syncRealCamera
+
+• `Private` **\_syncRealCamera**: `SyncRealCamera`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:166](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L166)
 
 ___
 
@@ -120,7 +140,7 @@ Apps status.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:274](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L274)
+[packages/fastboard-core/src/impl/FastboardApp.ts:226](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L226)
 
 ___
 
@@ -132,7 +152,7 @@ Current window-manager's windows' state (is it maximized?).
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:200](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L200)
+[packages/fastboard-core/src/impl/FastboardApp.ts:181](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L181)
 
 ___
 
@@ -140,13 +160,13 @@ ___
 
 • `Readonly` **camera**: [`Readable`](../interfaces/Readable.md)<[`Camera`](../modules.md#camera)\>
 
-Current camera information of main view.
+Baseline camera information.
 
 Change the camera position by `app.moveCamera()`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:235](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L235)
+[packages/fastboard-core/src/impl/FastboardApp.ts:204](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L204)
 
 ___
 
@@ -158,7 +178,7 @@ How many times can I call `app.redo()`?
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:217](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L217)
+[packages/fastboard-core/src/impl/FastboardApp.ts:192](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L192)
 
 ___
 
@@ -170,7 +190,7 @@ How many times can I call `app.undo()`?
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:225](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L225)
+[packages/fastboard-core/src/impl/FastboardApp.ts:197](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L197)
 
 ___
 
@@ -182,13 +202,13 @@ Current window-manager's focused app's id.
 
 **`Example`**
 
- ```ts
+```ts
 "HelloWorld-1A2b3C4d"
 ```
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:209](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L209)
+[packages/fastboard-core/src/impl/FastboardApp.ts:187](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L187)
 
 ___
 
@@ -196,13 +216,9 @@ ___
 
 • `Readonly` **hotKeys**: `Partial`<[`HotKeys`](../modules.md#hotkeys)\>
 
-#### Inherited from
-
-FastboardAppBase.hotKeys
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:43](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L43)
+[packages/fastboard-core/src/impl/FastboardApp.ts:233](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L233)
 
 ___
 
@@ -210,13 +226,9 @@ ___
 
 • `Readonly` **manager**: [`WindowManager`](WindowManager.md)
 
-#### Inherited from
-
-FastboardAppBase.manager
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:42](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L42)
+[packages/fastboard-core/src/impl/FastboardApp.ts:231](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L231)
 
 ___
 
@@ -230,7 +242,7 @@ Change the tool by `app.setAppliance()`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:245](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L245)
+[packages/fastboard-core/src/impl/FastboardApp.ts:211](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L211)
 
 ___
 
@@ -242,7 +254,7 @@ Is current room online?
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:192](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L192)
+[packages/fastboard-core/src/impl/FastboardApp.ts:176](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L176)
 
 ___
 
@@ -250,13 +262,9 @@ ___
 
 • `Readonly` **room**: [`Room`](../interfaces/Room.md)
 
-#### Inherited from
-
-FastboardAppBase.room
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:41](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L41)
+[packages/fastboard-core/src/impl/FastboardApp.ts:230](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L230)
 
 ___
 
@@ -268,7 +276,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:253](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L253)
+[packages/fastboard-core/src/impl/FastboardApp.ts:216](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L216)
 
 ___
 
@@ -280,7 +288,7 @@ How many pages are in the main view?
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:265](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L265)
+[packages/fastboard-core/src/impl/FastboardApp.ts:221](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L221)
 
 ___
 
@@ -288,27 +296,19 @@ ___
 
 • `Readonly` **sdk**: [`WhiteWebSdk`](WhiteWebSdk.md)
 
-#### Inherited from
-
-FastboardAppBase.sdk
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:40](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L40)
+[packages/fastboard-core/src/impl/FastboardApp.ts:229](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L229)
 
 ___
 
 ### syncedStore
 
-• `Readonly` **syncedStore**: `SyncedStore`<`any`\>
-
-#### Inherited from
-
-FastboardAppBase.syncedStore
+• `Readonly` **syncedStore**: [`SyncedStore`](SyncedStore.md)<`TEventData`\>
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:44](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L44)
+[packages/fastboard-core/src/impl/FastboardApp.ts:232](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L232)
 
 ___
 
@@ -320,46 +320,13 @@ Is current room writable?
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:180](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L180)
+[packages/fastboard-core/src/impl/FastboardApp.ts:171](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L171)
 
 ## Methods
 
-### \_addMainViewListener
-
-▸ `Protected` **_addMainViewListener**<`K`\>(`name`, `listener`): () => `void`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`ViewCallbacks`](../modules.md#viewcallbacks) |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `name` | `K` |
-| `listener` | [`ViewCallbacks`](../modules.md#viewcallbacks)[`K`] |
-
-#### Returns
-
-`fn`
-
-▸ (): `void`
-
-##### Returns
-
-`void`
-
-#### Inherited from
-
-FastboardAppBase.\_addMainViewListener
-
-___
-
 ### \_addManagerListener
 
-▸ `Protected` **_addManagerListener**<`K`\>(`name`, `listener`): () => `void`
+▸ `Private` **_addManagerListener**<`K`\>(`name`, `listener`): () => `void`
 
 #### Type parameters
 
@@ -384,15 +351,15 @@ ___
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardAppBase.\_addManagerListener
+[packages/fastboard-core/src/impl/FastboardApp.ts:156](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L156)
 
 ___
 
 ### \_addRoomListener
 
-▸ `Protected` **_addRoomListener**<`K`\>(`name`, `listener`): () => `void`
+▸ `Private` **_addRoomListener**<`K`\>(`name`, `listener`): () => `void`
 
 #### Type parameters
 
@@ -417,23 +384,23 @@ ___
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardAppBase.\_addRoomListener
+[packages/fastboard-core/src/impl/FastboardApp.ts:150](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L150)
 
 ___
 
 ### \_assertNotDestroyed
 
-▸ `Protected` **_assertNotDestroyed**(): `void`
+▸ `Private` **_assertNotDestroyed**(): `void`
 
 #### Returns
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardAppBase.\_assertNotDestroyed
+[packages/fastboard-core/src/impl/FastboardApp.ts:146](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L146)
 
 ___
 
@@ -451,6 +418,10 @@ ___
 
 `Promise`<`undefined` \| `string`\>
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:510](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L510)
+
 ___
 
 ### addPage
@@ -461,7 +432,7 @@ Add one page to the main whiteboard view.
 
 **`Example`**
 
- ```ts
+```ts
 addPage({ after: true }) // add one page right after current one.
 nextPage() // then, goto that page.
 ```
@@ -475,6 +446,10 @@ nextPage() // then, goto that page.
 #### Returns
 
 `Promise`<`void`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:413](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L413)
 
 ___
 
@@ -494,6 +469,10 @@ Move window-manager's collector to some place.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:290](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L290)
+
 ___
 
 ### bindContainer
@@ -512,6 +491,10 @@ Render this app to some DOM.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:282](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L282)
+
 ___
 
 ### cleanCurrentScene
@@ -523,6 +506,10 @@ Delete all things on the main view.
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:334](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L334)
 
 ___
 
@@ -536,47 +523,15 @@ Destroy fastboard (disconnect from the whiteboard room).
 
 `Promise`<`void`\>
 
-#### Inherited from
+#### Defined in
 
-FastboardAppBase.destroy
-
-___
-
-### insertCodeEditor
-
-▸ **insertCodeEditor**(): `Promise`<`undefined` \| `string`\>
-
-Insert the Monaco Code Editor app.
-
-**`Deprecated`**
-
- Use `app.manager.addApp({ kind: 'Monaco' })` instead.
-
-#### Returns
-
-`Promise`<`undefined` \| `string`\>
-
-___
-
-### insertCountdown
-
-▸ **insertCountdown**(): `Promise`<`undefined` \| `string`\>
-
-Insert the Countdown app.
-
-**`Deprecated`**
-
- Use `app.manager.addApp({ kind: 'Countdown' })` instead.
-
-#### Returns
-
-`Promise`<`undefined` \| `string`\>
+[packages/fastboard-core/src/impl/FastboardApp.ts:298](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L298)
 
 ___
 
 ### insertDocs
 
-▸ **insertDocs**(`filename`, `status`): `Promise`<`undefined` \| `string`\>
+▸ **insertDocs**(`filename`, `response`): `Promise`<`undefined` \| `string`\>
 
 Insert PDF/PPTX from conversion result.
 
@@ -585,11 +540,34 @@ Insert PDF/PPTX from conversion result.
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `filename` | `string` | - |
-| `status` | [`ConversionResponse`](../modules.md#conversionresponse) | https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress |
+| `response` | [`ConversionResponse`](../modules.md#conversionresponse) | https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress |
 
 #### Returns
 
 `Promise`<`undefined` \| `string`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:467](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L467)
+
+▸ **insertDocs**(`filename`, `response`): `Promise`<`undefined` \| `string`\>
+
+Insert PDF/PPTX from projector conversion result.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `filename` | `string` | - |
+| `response` | [`ProjectorResponse`](../interfaces/ProjectorResponse.md) | https://developer.netless.link/server-zh/home/server-projector#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6 |
+
+#### Returns
+
+`Promise`<`undefined` \| `string`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:473](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L473)
 
 ▸ **insertDocs**(`params`): `Promise`<`undefined` \| `string`\>
 
@@ -597,7 +575,7 @@ Manual way.
 
 **`Example`**
 
- app.insertDocs({
+app.insertDocs({
   fileType: 'pptx',
   scenePath: `/pptx/${conversion.taskId}`,
   taskId: conversion.taskId,
@@ -614,21 +592,9 @@ Manual way.
 
 `Promise`<`undefined` \| `string`\>
 
-___
+#### Defined in
 
-### insertGeoGebra
-
-▸ **insertGeoGebra**(): `Promise`<`undefined` \| `string`\>
-
-Insert the GeoGebra app.
-
-**`Deprecated`**
-
- Use `app.manager.addApp({ kind: 'GeoGebra' })` instead.
-
-#### Returns
-
-`Promise`<`undefined` \| `string`\>
+[packages/fastboard-core/src/impl/FastboardApp.ts:485](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L485)
 
 ___
 
@@ -640,7 +606,7 @@ Insert an image to the main view.
 
 **`Example`**
 
- ```ts
+```ts
 insertImage("https://i.imgur.com/CzXTtJV.jpg")
 ```
 
@@ -654,13 +620,17 @@ insertImage("https://i.imgur.com/CzXTtJV.jpg")
 
 `Promise`<`void`\>
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:437](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L437)
+
 ___
 
 ### insertMedia
 
 ▸ **insertMedia**(`title`, `src`): `Promise`<`undefined` \| `string`\>
 
-Insert the Media Player app.
+Insert sounds and videos.
 
 #### Parameters
 
@@ -672,6 +642,10 @@ Insert the Media Player app.
 #### Returns
 
 `Promise`<`undefined` \| `string`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:531](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L531)
 
 ___
 
@@ -691,23 +665,9 @@ Move current main view's camera position.
 
 `void`
 
-___
+#### Defined in
 
-### moveCameraToContain
-
-▸ **moveCameraToContain**(`rectangle`): `void`
-
-Move current main view's camera to include a rectangle.
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `rectangle` | `Size` & { `originX`: `number` ; `originY`: `number`  } & { `animationMode?`: [`AnimationMode`](../enums/AnimationMode.md)  } |
-
-#### Returns
-
-`void`
+[packages/fastboard-core/src/impl/FastboardApp.ts:325](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L325)
 
 ___
 
@@ -721,6 +681,10 @@ Goto next page (the main whiteboard view).
 
 `Promise`<`boolean`\>
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:401](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L401)
+
 ___
 
 ### prevPage
@@ -732,6 +696,10 @@ Goto previous page (the main whiteboard view).
 #### Returns
 
 `Promise`<`boolean`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:393](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L393)
 
 ___
 
@@ -745,6 +713,10 @@ Redo a step on main view.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:317](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L317)
+
 ___
 
 ### removePage
@@ -757,7 +729,7 @@ Requires `@netless/window-manager` >= 0.4.30.
 
 **`Example`**
 
- ```ts
+```ts
 removePage() // remove current page
 ```
 
@@ -770,6 +742,10 @@ removePage() // remove current page
 #### Returns
 
 `Promise`<`boolean`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:426](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L426)
 
 ___
 
@@ -790,6 +766,10 @@ Set current tool, like "pencil".
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:342](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L342)
+
 ___
 
 ### setStrokeColor
@@ -807,6 +787,10 @@ Set pencil and shape's color.
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:361](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L361)
 
 ___
 
@@ -826,6 +810,10 @@ Set pencil and shape's thickness.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:353](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L353)
+
 ___
 
 ### setTextColor
@@ -836,7 +824,7 @@ Set text color.
 
 **`Example`**
 
- ```ts
+```ts
 setTextColor([0x66, 0xcc, 0xff])
 ```
 
@@ -849,6 +837,10 @@ setTextColor([0x66, 0xcc, 0xff])
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:380](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L380)
 
 ___
 
@@ -868,6 +860,30 @@ Set text size. Default is 16.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:369](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L369)
+
+___
+
+### toggleDottedLine
+
+▸ **toggleDottedLine**(`force?`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `force?` | `boolean` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:385](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L385)
+
 ___
 
 ### undo
@@ -879,3 +895,7 @@ Undo a step on main view.
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardApp.ts:309](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardApp.ts#L309)

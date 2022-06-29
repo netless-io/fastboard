@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { existsSync } from "fs";
 import { dirname, join, relative, sep } from "path";
 import SASS from "sass";
@@ -37,7 +36,7 @@ export function sass() {
 
       onResolve({ filter: /\.scss$/, namespace: "file" }, args => {
         const absPath = join(args.resolveDir, args.path);
-        const relPath = "." + sep + relative(cwd, absPath);
+        const relPath = `.${sep}${relative(cwd, absPath)}`;
         const resolved = existsSync(absPath) ? relPath : args.path;
         return { path: resolved, namespace: "inline-sass-stub" };
       });

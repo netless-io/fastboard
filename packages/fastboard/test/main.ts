@@ -19,9 +19,8 @@ createFastboard({
     cursor: true,
   },
 }).then(app => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).app = app;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   (window as any).ui = createUI(app, root);
 });
 

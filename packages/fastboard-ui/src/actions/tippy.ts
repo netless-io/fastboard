@@ -19,11 +19,9 @@ if (is_client) {
             const el = instance.popper.firstElementChild;
             if (el) {
               el.classList.add("fastboard-tip");
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const extra = ((instance.props as any).className || "").trim();
-              if (extra) {
-                el.classList.add(extra);
-              }
+              if (extra) el.classList.add(extra);
             }
           }
 

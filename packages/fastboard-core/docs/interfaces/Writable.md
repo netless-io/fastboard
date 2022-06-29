@@ -22,6 +22,7 @@
 
 ### Methods
 
+- [dispose](Writable.md#dispose)
 - [reaction](Writable.md#reaction)
 - [set](Writable.md#set)
 - [subscribe](Writable.md#subscribe)
@@ -39,9 +40,27 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/utils/store.ts#L8)
+[packages/fastboard-core/src/utils/store.ts:11](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L11)
 
 ## Methods
+
+### dispose
+
+▸ **dispose**(): `void`
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[Readable](Readable.md).[dispose](Readable.md#dispose)
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:7](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L7)
+
+___
 
 ### reaction
 
@@ -62,6 +81,10 @@
 
 [Readable](Readable.md).[reaction](Readable.md#reaction)
 
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:13](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L13)
+
 ___
 
 ### set
@@ -78,6 +101,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:17](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L17)
 
 ___
 
@@ -100,6 +127,10 @@ ___
 
 [Readable](Readable.md).[subscribe](Readable.md#subscribe)
 
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:12](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L12)
+
 ___
 
 ### update
@@ -116,3 +147,7 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:18](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L18)

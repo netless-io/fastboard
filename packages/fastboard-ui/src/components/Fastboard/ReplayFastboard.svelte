@@ -2,7 +2,7 @@
 
 <script lang="ts">
   import type { FastboardPlayer } from "@netless/fastboard-core";
-  import type { Language, Theme } from "../../typings";
+  import type { Language, ReplayFastboardUIConfig, Theme } from "../../typings";
   import { onMount } from "svelte";
   import { tippy_hide_all } from "../../actions/tippy";
   import PlayerControl from "../PlayerControl";
@@ -10,6 +10,7 @@
   export let player: FastboardPlayer | null | undefined = null;
   export let theme: Theme = "light";
   export let language: Language = "en";
+  export let config: ReplayFastboardUIConfig = {};
   export let containerRef: ((element: HTMLDivElement | null) => void) | undefined = undefined;
 
   const name = "fastboard";
@@ -51,6 +52,8 @@
 <div class="{name}-root" class:loading={!player}>
   <div class="{name}-view" bind:this={container} on:touchstart|capture={focus_me} />
   <div class="{name}-bottom">
-    <PlayerControl {player} {theme} {language} />
+    {#if config.player_control?.enable !== false}
+      <PlayerControl {player} {theme} {language} icons={config.player_control?.icons} />
+    {/if}
   </div>
 </div>

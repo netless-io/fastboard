@@ -1,4 +1,4 @@
-import type { AddPageParams, PublicEvent, MountParams, NetlessApp } from "@netless/window-manager";
+import type { AddPageParams, MountParams, NetlessApp, PublicEvent } from "@netless/window-manager";
 import type {
   AnimationMode,
   ApplianceNames,
@@ -11,77 +11,37 @@ import type {
   MemberState,
   Rectangle,
   Room,
-  RoomPhase as RoomPhaseEnum,
   RoomCallbacks,
+  RoomPhase as RoomPhaseEnum,
   RoomState,
   SceneDefinition,
   ShapeType,
   ViewCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
-import type { SyncedStore, Storage, Diff, DiffOne } from "@netless/synced-store";
+import type { Diff, DiffOne, Storage, SyncedStore } from "@netless/synced-store";
+import type { Disposable, Readable, Writable } from "../utils";
 
-import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
+import { DefaultHotKeys, WhiteWebSdk } from "white-web-sdk";
 import { BuiltinApps, WindowManager } from "@netless/window-manager";
 import { SyncedStorePlugin } from "@netless/synced-store";
 import {
-  getImageSize,
-  genUID,
   convertedFileToScene,
+  genUID,
+  getImageSize,
   makeSlideParams,
   readable,
-  writable,
   warn,
+  writable,
 } from "../utils";
-import { ensure_official_plugins, transform_app_status } from "../internal";
+import {
+  SyncRealCamera,
+  ensure_official_plugins,
+  is_store,
+  normalize_camera,
+  transform_app_status,
+} from "../internal";
 import { register } from "../behaviors";
-
-class FastboardAppBase<TEventData = any> {
-  public constructor(
-    readonly sdk: WhiteWebSdk,
-    readonly room: Room,
-    readonly manager: WindowManager,
-    readonly hotKeys: Partial<HotKeys>,
-    readonly syncedStore: SyncedStore<TEventData>
-  ) {}
-
-  protected _destroyed = false;
-  protected _assertNotDestroyed() {
-    if (this._destroyed) {
-      throw new Error("FastboardApp has been destroyed");
-    }
-  }
-
-  protected _addRoomListener<K extends keyof RoomCallbacks>(name: K, listener: RoomCallbacks[K]) {
-    this._assertNotDestroyed();
-    this.room.callbacks.on(name, listener);
-    return () => this.room.callbacks.off(name, listener);
-  }
-
-  protected _addManagerListener<K extends keyof PublicEvent>(
-    name: K,
-    listener: (value: PublicEvent[K]) => void
-  ) {
-    this._assertNotDestroyed();
-    this.manager.emitter.on(name, listener);
-    return () => this.manager.emitter.off(name, listener);
-  }
-
-  protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
-    this._assertNotDestroyed();
-    this.manager.mainView.callbacks.on(name, listener);
-    return () => this.manager.mainView.callbacks.off(name, listener);
-  }
-
-  /**
-   * Destroy fastboard (disconnect from the whiteboard room).
-   */
-  public destroy() {
-    this._destroyed = true;
-    this.manager.destroy();
-    return this.room.disconnect();
-  }
-}
 
 type RoomPhase = `${RoomPhaseEnum}`;
 
@@ -147,6 +107,23 @@ export interface InsertDocsDynamic {
   readonly scenes?: SceneDefinition[];
 }
 
+export interface ProjectorResponse {
+  uuid: string;
+  status: "Waiting" | "Converting" | "Finished" | "Fail";
+  /** 0..100 */
+  convertedPercentage: number;
+  /** https://example.org/path/to/dynamicConvert */
+  prefix: string;
+  pageCount: number;
+  /** {1:"{prefix}/{taskId}/preview/1.png"} */
+  previews: Record<number, string>;
+  /** {prefix}/{taskId}/jsonOutput/note.json */
+  note: string;
+  /** 20xxxxx */
+  errorCode: `${number}`;
+  errorMessage: string;
+}
+
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
 export type SetMemberStateFn = (partialMemberState: Partial<MemberState>) => void;
@@ -162,7 +139,142 @@ export interface AppsStatus {
   };
 }
 
-export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData> {
+export class FastboardApp<TEventData = any> {
+  private _disposers: (() => void)[] = [];
+
+  private _destroyed = false;
+  private _assertNotDestroyed() {
+    if (this._destroyed) throw new Error("FastboardApp has been destroyed");
+  }
+
+  private _addRoomListener<K extends keyof RoomCallbacks>(name: K, listener: RoomCallbacks[K]) {
+    this._assertNotDestroyed();
+    this.room.callbacks.on(name, listener);
+    return () => this.room.callbacks.off(name, listener);
+  }
+
+  private _addManagerListener<K extends keyof PublicEvent>(
+    name: K,
+    listener: (value: PublicEvent[K]) => void
+  ) {
+    this._assertNotDestroyed();
+    return this.manager.emitter.on(name, listener);
+  }
+
+  private _appsStatus: AppsStatus = {};
+  private _syncRealCamera: SyncRealCamera = new SyncRealCamera(this);
+
+  /**
+   * Is current room writable?
+   */
+  readonly writable: Writable<boolean>;
+
+  /**
+   * Is current room online?
+   */
+  readonly phase: Readable<RoomPhase>;
+
+  /**
+   * Current window-manager's windows' state (is it maximized?).
+   */
+  readonly boxState: Readable<"minimized" | "maximized" | "normal" | undefined>;
+
+  /**
+   * Current window-manager's focused app's id.
+   * @example "HelloWorld-1A2b3C4d"
+   */
+  readonly focusedApp: Readable<string | undefined>;
+
+  /**
+   * How many times can I call `app.redo()`?
+   */
+  readonly canRedoSteps: Readable<number>;
+
+  /**
+   * How many times can I call `app.undo()`?
+   */
+  readonly canUndoSteps: Readable<number>;
+
+  /**
+   * Baseline camera information.
+   *
+   * Change the camera position by `app.moveCamera()`.
+   */
+  readonly camera: Readable<Camera>;
+
+  /**
+   * Current tool's info, like "is using pencil?", "what color?".
+   *
+   * Change the tool by `app.setAppliance()`.
+   */
+  readonly memberState: Readable<MemberState>;
+
+  /**
+   * 0..n-1, current index of main view scenes.
+   */
+  readonly sceneIndex: Writable<number>;
+
+  /**
+   * How many pages are in the main view?
+   */
+  readonly sceneLength: Readable<number>;
+
+  /**
+   * Apps status.
+   */
+  readonly appsStatus: Readable<AppsStatus>;
+
+  constructor(
+    readonly sdk: WhiteWebSdk,
+    readonly room: Room,
+    readonly manager: WindowManager,
+    readonly syncedStore: SyncedStore<TEventData>,
+    readonly hotKeys: Partial<HotKeys>
+  ) {
+    this.writable = writable(
+      room.isWritable,
+      set => this._addRoomListener("onEnableWriteNowChanged", () => set(room.isWritable)),
+      room.setWritable.bind(room)
+    );
+    this.phase = readable(room.phase, set => this._addRoomListener("onPhaseChanged", set));
+    this.boxState = readable(manager.boxState, set => this._addManagerListener("boxStateChange", set));
+    this.focusedApp = readable(manager.focused, set => this._addManagerListener("focusedChange", set));
+    this.canRedoSteps = readable(manager.canRedoSteps, set =>
+      this._addManagerListener("canRedoStepsChange", set)
+    );
+    this.canUndoSteps = readable(manager.canUndoSteps, set =>
+      this._addManagerListener("canUndoStepsChange", set)
+    );
+    this.camera = readable(normalize_camera(manager.baseCamera), set => {
+      this._syncRealCamera.set = set;
+      return this._addManagerListener("baseCameraChange", baseCamera => {
+        this._syncRealCamera.reset();
+        set(normalize_camera(baseCamera));
+      });
+    });
+    this.memberState = readable(room.state.memberState, set =>
+      this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m))
+    );
+    this.sceneIndex = writable(
+      manager.mainViewSceneIndex,
+      set => this._addManagerListener("mainViewSceneIndexChange", set),
+      manager.setMainViewSceneIndex.bind(manager)
+    );
+    this.sceneLength = readable(manager.mainViewScenesLength, set =>
+      this._addManagerListener("mainViewScenesLengthChange", set)
+    );
+    this.appsStatus = readable((this._appsStatus = {}), set =>
+      this._addManagerListener("loadApp", ({ kind, status, reason }) => {
+        this._appsStatus[kind] = { status: transform_app_status(status), reason };
+        set(this._appsStatus);
+      })
+    );
+    Object.getOwnPropertyNames(this).forEach(key => {
+      const prop = (this as any)[key];
+      if (is_store(prop)) this._disposers.push((prop as Disposable).dispose.bind(prop));
+    });
+  }
+
   /**
    * Render this app to some DOM.
    */
@@ -180,108 +292,15 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
   }
 
   /**
-   * Is current room writable?
+   * Destroy fastboard (disconnect from the whiteboard room).
    */
-  readonly writable = writable(
-    this.room.isWritable,
-    set => {
-      set(this.room.isWritable);
-      return this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable));
-    },
-    this.room.setWritable.bind(this.room)
-  );
-
-  /**
-   * Is current room online?
-   */
-  readonly phase = readable<RoomPhase>(this.room.phase, set => {
-    set(this.room.phase);
-    return this._addRoomListener("onPhaseChanged", set);
-  });
-
-  /**
-   * Current window-manager's windows' state (is it maximized?).
-   */
-  readonly boxState = readable(this.manager.boxState, set => {
-    set(this.manager.boxState);
-    return this._addManagerListener("boxStateChange", set);
-  });
-
-  /**
-   * Current window-manager's focused app's id.
-   * @example "HelloWorld-1A2b3C4d"
-   */
-  readonly focusedApp = readable(this.manager.focused, set => {
-    set(this.manager.focused);
-    return this._addManagerListener("focusedChange", set);
-  });
-
-  /**
-   * How many times can I call `app.redo()`?
-   */
-  readonly canRedoSteps = readable(this.manager.canRedoSteps, set => {
-    set(this.manager.canRedoSteps);
-    return this._addManagerListener("canRedoStepsChange", set);
-  });
-
-  /**
-   * How many times can I call `app.undo()`?
-   */
-  readonly canUndoSteps = readable(this.manager.canUndoSteps, set => {
-    set(this.manager.canUndoSteps);
-    return this._addManagerListener("canUndoStepsChange", set);
-  });
-
-  /**
-   * Current camera information of main view.
-   *
-   * Change the camera position by `app.moveCamera()`.
-   */
-  readonly camera = readable(this.manager.camera, set => {
-    set(this.manager.camera);
-    return this._addMainViewListener("onCameraUpdated", set);
-  });
-
-  /**
-   * Current tool's info, like "is using pencil?", "what color?".
-   *
-   * Change the tool by `app.setAppliance()`.
-   */
-  readonly memberState = readable(this.room.state.memberState, set => {
-    set(this.room.state.memberState);
-    return this._addRoomListener("onRoomStateChanged", ({ memberState: m }) => m && set(m));
-  });
-
-  /**
-   * 0..n-1, current index of main view scenes.
-   */
-  readonly sceneIndex = writable(
-    this.manager.mainViewSceneIndex,
-    set => {
-      set(this.manager.mainViewSceneIndex);
-      return this._addManagerListener("mainViewSceneIndexChange", set);
-    },
-    this.manager.setMainViewSceneIndex.bind(this.manager)
-  );
-
-  /**
-   * How many pages are in the main view?
-   */
-  readonly sceneLength = readable(this.manager.mainViewScenesLength, set => {
-    set(this.manager.mainViewScenesLength);
-    return this._addManagerListener("mainViewScenesLengthChange", set);
-  });
-
-  private _appsStatus: AppsStatus = {};
-  /**
-   * Apps status.
-   */
-  readonly appsStatus = readable<AppsStatus>({}, set =>
-    this._addManagerListener("loadApp", ({ kind, status, reason }) => {
-      this._appsStatus[kind] = { status: transform_app_status(status), reason };
-      set(this._appsStatus);
-    })
-  );
+  destroy() {
+    this._destroyed = true;
+    this._disposers.forEach(dispose => dispose());
+    this._disposers.length = 0;
+    this.manager.destroy();
+    return this.room.disconnect();
+  }
 
   /**
    * Undo a step on main view.
@@ -302,17 +321,10 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
   /**
    * Move current main view's camera position.
    */
-  moveCamera(camera: Partial<Camera> & { animationMode?: AnimationMode | undefined }) {
+  moveCamera(camera: Partial<Camera> & { animationMode?: AnimationMode }) {
     this._assertNotDestroyed();
+    this._syncRealCamera.start(this.manager.mainView.camera.scale);
     this.manager.moveCamera(camera);
-  }
-
-  /**
-   * Move current main view's camera to include a rectangle.
-   */
-  moveCameraToContain(rectangle: Rectangle & { animationMode?: AnimationMode }) {
-    this._assertNotDestroyed();
-    this.manager.moveCameraToContain(rectangle);
   }
 
   /**
@@ -369,6 +381,11 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
     this.manager.mainView.setMemberState({ textColor });
   }
 
+  toggleDottedLine(force?: boolean) {
+    this._assertNotDestroyed();
+    this.manager.mainView.setMemberState({ dottedLine: force ?? !this.memberState.value.dottedLine });
+  }
+
   /**
    * Goto previous page (the main whiteboard view).
    */
@@ -418,8 +435,6 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
    */
   async insertImage(url: string) {
     this._assertNotDestroyed();
-    await this.manager.switchMainViewToWriter();
-
     const { divElement } = this.manager.mainView;
     const containerSize = {
       width: divElement?.scrollWidth || window.innerWidth,
@@ -440,16 +455,21 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
     // 2. move camera to fit image **height**
     width /= 0.8;
     height /= 0.8;
-    const originX = centerX - width / 2;
-    const originY = centerY - height / 2;
-    this.manager.moveCameraToContain({ originX, originY, width, height });
+    this.manager.moveCamera({ centerX: 0, centerY: 0 });
+    this.manager.setBaseSize({ width, height });
   }
 
   /**
    * Insert PDF/PPTX from conversion result.
-   * @param status https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress
+   * @param response https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress
    */
-  insertDocs(filename: string, status: ConversionResponse): Promise<string | undefined>;
+  insertDocs(filename: string, response: ConversionResponse): Promise<string | undefined>;
+
+  /**
+   * Insert PDF/PPTX from projector conversion result.
+   * @param response https://developer.netless.link/server-zh/home/server-projector#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6
+   */
+  insertDocs(filename: string, response: ProjectorResponse): Promise<string | undefined>;
 
   /**
    * Manual way.
@@ -463,13 +483,13 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
    */
   insertDocs(params: InsertDocsParams): Promise<string | undefined>;
 
-  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse) {
+  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse | ProjectorResponse) {
     this._assertNotDestroyed();
     if (typeof arg1 === "object" && "fileType" in arg1) {
       return this._insertDocsImpl(arg1);
     } else if (arg2 && arg2.status !== "Finished") {
       throw new Error("FastboardApp cannot insert a converting doc.");
-    } else if (arg2 && arg2.progress) {
+    } else if (arg2 && "progress" in arg2) {
       const title = arg1;
       const scenePath = `/${arg2.uuid}/${genUID()}`;
       const scenes1 = arg2.progress.convertedFileList.map(convertedFileToScene);
@@ -479,6 +499,12 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
       } else {
         return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes: scenes1, title });
       }
+    } else if (arg2 && "prefix" in arg2) {
+      const title = arg1;
+      const scenePath = `/${arg2.uuid}/${genUID()}`;
+      const taskId = arg2.uuid;
+      const url = arg2.prefix;
+      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
     }
   }
 
@@ -491,9 +517,7 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
           options: { scenePath, title, scenes },
         });
       case "pptx":
-        if (scenes && scenes[0].ppt) {
-          warn("no-ppt-in-scenes");
-        }
+        if (scenes && scenes[0].ppt) warn("no-ppt-in-scenes");
         return this.manager.addApp({
           kind: "Slide",
           options: { scenePath, title, scenes },
@@ -503,7 +527,7 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
   }
 
   /**
-   * Insert the Media Player app.
+   * Insert sounds and videos.
    */
   insertMedia(title: string, src: string) {
     this._assertNotDestroyed();
@@ -511,42 +535,6 @@ export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData>
       kind: BuiltinApps.MediaPlayer,
       options: { title },
       attributes: { src },
-    });
-  }
-
-  /**
-   * Insert the Monaco Code Editor app.
-   * @deprecated Use `app.manager.addApp({ kind: 'Monaco' })` instead.
-   */
-  insertCodeEditor() {
-    this._assertNotDestroyed();
-    return this.manager.addApp({
-      kind: "Monaco",
-      options: { title: "Code Editor" },
-    });
-  }
-
-  /**
-   * Insert the Countdown app.
-   * @deprecated Use `app.manager.addApp({ kind: 'Countdown' })` instead.
-   */
-  insertCountdown() {
-    this._assertNotDestroyed();
-    return this.manager.addApp({
-      kind: "Countdown",
-      options: { title: "Countdown" },
-    });
-  }
-
-  /**
-   * Insert the GeoGebra app.
-   * @deprecated Use `app.manager.addApp({ kind: 'GeoGebra' })` instead.
-   */
-  insertGeoGebra() {
-    this._assertNotDestroyed();
-    return this.manager.addApp({
-      kind: "GeoGebra",
-      options: { title: "GeoGebra" },
     });
   }
 }
@@ -611,6 +599,7 @@ export async function createFastboard<TEventData = any>({
   const room = await sdk.joinRoom(
     {
       floatBar: true,
+      disableEraseImage: true,
       hotKeys,
       ...ensure_official_plugins(joinRoomParams),
       useMultiViews: true,
@@ -628,10 +617,5 @@ export async function createFastboard<TEventData = any>({
     room,
   });
 
-  manager.mainView.setCameraBound({
-    minContentMode: contentModeScale(0.3),
-    maxContentMode: contentModeScale(3),
-  });
-
-  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore);
+  return new FastboardApp<TEventData>(sdk, room, manager, syncedStore, hotKeys);
 }

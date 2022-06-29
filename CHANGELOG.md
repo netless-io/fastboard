@@ -1,5 +1,10 @@
 # Changelog
 
+## (1.0) Unreleased
+
+- Removed `moveCameraToContain` api.
+- Removed previously deprecated api: `insertCodeEditor` `insertGeoGebra` `insertCountdown` `mount`, `replay`.
+
 ## Unreleased
 
 - Added `syncedStore` api.

@@ -10,9 +10,11 @@
 
 ## Hierarchy
 
-- **`Readable`**
+- [`Disposable`](Disposable.md)
 
-  ↳ [`Writable`](Writable.md)
+  ↳ **`Readable`**
+
+  ↳↳ [`Writable`](Writable.md)
 
 ## Table of contents
 
@@ -22,6 +24,7 @@
 
 ### Methods
 
+- [dispose](Readable.md#dispose)
 - [reaction](Readable.md#reaction)
 - [subscribe](Readable.md#subscribe)
 
@@ -33,9 +36,27 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/utils/store.ts#L8)
+[packages/fastboard-core/src/utils/store.ts:11](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L11)
 
 ## Methods
+
+### dispose
+
+▸ **dispose**(): `void`
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[Disposable](Disposable.md).[dispose](Disposable.md#dispose)
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:7](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L7)
+
+___
 
 ### reaction
 
@@ -51,6 +72,10 @@
 #### Returns
 
 [`Unsubscriber`](../modules.md#unsubscriber)
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:13](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L13)
 
 ___
 
@@ -68,3 +93,7 @@ ___
 #### Returns
 
 [`Unsubscriber`](../modules.md#unsubscriber)
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:12](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/utils/store.ts#L12)

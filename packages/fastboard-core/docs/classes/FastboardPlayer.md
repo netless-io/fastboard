@@ -1,12 +1,12 @@
 [@netless/fastboard-core](../README.md) / [Exports](../modules.md) / FastboardPlayer
 
-# Class: FastboardPlayer
+# Class: FastboardPlayer<TEventData\>
 
-## Hierarchy
+## Type parameters
 
-- `FastboardPlayerBase`
-
-  ↳ **`FastboardPlayer`**
+| Name | Type |
+| :------ | :------ |
+| `TEventData` | `any` |
 
 ## Table of contents
 
@@ -17,6 +17,7 @@
 ### Properties
 
 - [\_destroyed](FastboardPlayer.md#_destroyed)
+- [\_disposers](FastboardPlayer.md#_disposers)
 - [\_setPlaybackRate](FastboardPlayer.md#_setplaybackrate)
 - [canplay](FastboardPlayer.md#canplay)
 - [currentTime](FastboardPlayer.md#currenttime)
@@ -27,11 +28,10 @@
 - [player](FastboardPlayer.md#player)
 - [sdk](FastboardPlayer.md#sdk)
 - [state](FastboardPlayer.md#state)
+- [syncedStore](FastboardPlayer.md#syncedstore)
 
 ### Methods
 
-- [\_addMainViewListener](FastboardPlayer.md#_addmainviewlistener)
-- [\_addManagerListener](FastboardPlayer.md#_addmanagerlistener)
 - [\_addPlayerListener](FastboardPlayer.md#_addplayerlistener)
 - [\_assertNotDestroyed](FastboardPlayer.md#_assertnotdestroyed)
 - [bindCollector](FastboardPlayer.md#bindcollector)
@@ -47,7 +47,13 @@
 
 ### constructor
 
-• **new FastboardPlayer**(`sdk`, `player`, `manager`)
+• **new FastboardPlayer**<`TEventData`\>(`sdk`, `player`, `manager`, `syncedStore`)
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TEventData` | `any` |
 
 #### Parameters
 
@@ -56,24 +62,31 @@
 | `sdk` | [`WhiteWebSdk`](WhiteWebSdk.md) |
 | `player` | `Player` |
 | `manager` | [`WindowManager`](WindowManager.md) |
+| `syncedStore` | [`SyncedStore`](SyncedStore.md)<`TEventData`\> |
 
-#### Inherited from
+#### Defined in
 
-FastboardPlayerBase.constructor
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:70](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L70)
 
 ## Properties
 
 ### \_destroyed
 
-• `Protected` **\_destroyed**: `boolean` = `false`
-
-#### Inherited from
-
-FastboardPlayerBase.\_destroyed
+• `Private` **\_destroyed**: `boolean` = `false`
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:21](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L21)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:28](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L28)
+
+___
+
+### \_disposers
+
+• `Private` **\_disposers**: () => `void`[] = `[]`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:26](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L26)
 
 ___
 
@@ -97,7 +110,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:105](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L105)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:54](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L54)
 
 ___
 
@@ -109,7 +122,7 @@ Will become true after buffering.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:100](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L100)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:52](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L52)
 
 ___
 
@@ -121,7 +134,7 @@ Player current time in milliseconds.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:80](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L80)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:42](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L42)
 
 ___
 
@@ -133,7 +146,7 @@ Playback duration in milliseconds.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:124](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L124)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:63](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L63)
 
 ___
 
@@ -141,13 +154,9 @@ ___
 
 • `Readonly` **manager**: [`WindowManager`](WindowManager.md)
 
-#### Inherited from
-
-FastboardPlayerBase.manager
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:73](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L73)
 
 ___
 
@@ -159,7 +168,7 @@ Player state, like "is it playing?".
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:92](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L92)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:47](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L47)
 
 ___
 
@@ -171,7 +180,7 @@ Playback speed, default `1`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:109](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L109)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:58](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L58)
 
 ___
 
@@ -179,13 +188,9 @@ ___
 
 • `Readonly` **player**: `Player`
 
-#### Inherited from
-
-FastboardPlayerBase.player
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:72](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L72)
 
 ___
 
@@ -193,97 +198,37 @@ ___
 
 • `Readonly` **sdk**: [`WhiteWebSdk`](WhiteWebSdk.md)
 
-#### Inherited from
-
-FastboardPlayerBase.sdk
-
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:71](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L71)
 
 ___
 
 ### state
 
-• `Readonly` **state**: [`Readable`](../interfaces/Readable.md)<`PlayerState`\>
+• `Readonly` **state**: [`Readable`](../interfaces/Readable.md)<[`PlayerState`](../modules.md#playerstate)\>
 
 Get state of room at that time, like "who was in the room?".
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:131](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L131)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:68](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L68)
+
+___
+
+### syncedStore
+
+• `Readonly` **syncedStore**: [`SyncedStore`](SyncedStore.md)<`TEventData`\>
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:74](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L74)
 
 ## Methods
 
-### \_addMainViewListener
-
-▸ `Protected` **_addMainViewListener**<`K`\>(`name`, `listener`): () => `void`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`ViewCallbacks`](../modules.md#viewcallbacks) |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `name` | `K` |
-| `listener` | [`ViewCallbacks`](../modules.md#viewcallbacks)[`K`] |
-
-#### Returns
-
-`fn`
-
-▸ (): `void`
-
-##### Returns
-
-`void`
-
-#### Inherited from
-
-FastboardPlayerBase.\_addMainViewListener
-
-___
-
-### \_addManagerListener
-
-▸ `Protected` **_addManagerListener**<`K`\>(`name`, `listener`): () => `void`
-
-#### Type parameters
-
-| Name | Type |
-| :------ | :------ |
-| `K` | extends keyof [`PublicEvent`](../modules.md#publicevent) |
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `name` | `K` |
-| `listener` | (`value`: [`PublicEvent`](../modules.md#publicevent)[`K`]) => `void` |
-
-#### Returns
-
-`fn`
-
-▸ (): `void`
-
-##### Returns
-
-`void`
-
-#### Inherited from
-
-FastboardPlayerBase.\_addManagerListener
-
-___
-
 ### \_addPlayerListener
 
-▸ `Protected` **_addPlayerListener**<`K`\>(`name`, `listener`): () => `void`
+▸ `Private` **_addPlayerListener**<`K`\>(`name`, `listener`): () => `void`
 
 #### Type parameters
 
@@ -308,23 +253,23 @@ ___
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardPlayerBase.\_addPlayerListener
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:33](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L33)
 
 ___
 
 ### \_assertNotDestroyed
 
-▸ `Protected` **_assertNotDestroyed**(): `void`
+▸ `Private` **_assertNotDestroyed**(): `void`
 
 #### Returns
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardPlayerBase.\_assertNotDestroyed
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:29](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L29)
 
 ___
 
@@ -344,6 +289,10 @@ Move window-manager's collector to some place.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:113](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L113)
+
 ___
 
 ### bindContainer
@@ -362,19 +311,25 @@ Render this player to some DOM.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:105](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L105)
+
 ___
 
 ### destroy
 
 ▸ **destroy**(): `void`
 
+Destroy fastboard player.
+
 #### Returns
 
 `void`
 
-#### Inherited from
+#### Defined in
 
-FastboardPlayerBase.destroy
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:121](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L121)
 
 ___
 
@@ -388,6 +343,10 @@ Change player state to paused.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:145](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L145)
+
 ___
 
 ### play
@@ -399,6 +358,10 @@ Change player state to playing.
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:138](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L138)
 
 ___
 
@@ -418,6 +381,10 @@ Seek to some time in milliseconds.
 
 `Promise`<[`PlayerSeekingResult`](../enums/PlayerSeekingResult.md)\>
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:130](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L130)
+
 ___
 
 ### setPlaybackRate
@@ -436,6 +403,10 @@ Set playback speed, a shortcut for `speed.set(x)`.
 
 `void`
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:161](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L161)
+
 ___
 
 ### stop
@@ -447,3 +418,7 @@ Change player state to stopped.
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:153](https://github.com/netless-io/fastboard/blob/a90ccd5/packages/fastboard-core/src/impl/FastboardPlayer.ts#L153)

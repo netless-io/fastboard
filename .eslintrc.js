@@ -21,5 +21,14 @@ module.exports = defineConfig({
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
   },
+  overrides: [
+    {
+      files: ["packages/esbuild-plugin-inline-sass/*.mjs"],
+      env: {
+        node: true,
+      },
+    },
+  ],
 });

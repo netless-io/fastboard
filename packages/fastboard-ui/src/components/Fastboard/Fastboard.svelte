@@ -79,15 +79,15 @@
   </div>
   <div class="{name}-bottom-left" class:hidden={layout !== "visible"}>
     {#if config.redo_undo?.enable !== false}
-      <RedoUndo {app} {theme} {language} />
+      <RedoUndo {app} {theme} {language} icons={config.redo_undo?.icons} />
     {/if}
     {#if config.zoom_control?.enable !== false}
-      <ZoomControl {app} {theme} {language} />
+      <ZoomControl {app} {theme} {language} icons={config.zoom_control?.icons} />
     {/if}
   </div>
   <div class="{name}-bottom-right" class:hidden={layout !== "visible"}>
     {#if config.page_control?.enable !== false}
-      <PageControl {app} {theme} {language} />
+      <PageControl {app} {theme} {language} icons={config.page_control?.icons} />
     {/if}
   </div>
 </div>

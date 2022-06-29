@@ -29,6 +29,7 @@
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
+| `enableShadowDOM?` | `boolean` | App box enableShadowDom. Default true |
 | `height?` | `number` | Box height relative to whiteboard. 0~1. Default 0.5. |
 | `minheight?` | `number` | Minimum box height relative to whiteboard. 0~1. Default 340 / 720. |
 | `minwidth?` | `number` | Minimum box width relative to whiteboard. 0~1. Default 340 / 720. |
@@ -37,7 +38,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:8
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/typings.d.ts:9
 
 ___
 
@@ -47,7 +48,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:7
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/typings.d.ts:8
 
 ___
 
@@ -71,4 +72,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:20
+node_modules/.pnpm/@netless+window-manager@1.0.0-canary.45_white-web-sdk@2.16.27/node_modules/@netless/window-manager/dist/src/typings.d.ts:23

@@ -1,71 +1,104 @@
-import type { MountParams, NetlessApp, PublicEvent } from "@netless/window-manager";
+import type { MountParams, NetlessApp } from "@netless/window-manager";
 import type {
   Player,
-  PlayerPhase as PlayerPhaseEnum,
   PlayerCallbacks,
-  PlayerState,
+  PlayerPhase as PlayerPhaseEnum,
   PlayerSeekingResult,
+  PlayerState,
   ReplayRoomParams,
-  ViewCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
 import type { SyncedStore } from "@netless/synced-store";
+import type { Disposable, Readable, Writable } from "../utils";
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
-import { ensure_official_plugins } from "../internal";
+import { ensure_official_plugins, is_store } from "../internal";
 import { register } from "../behaviors";
 
-class FastboardPlayerBase<TEventData = any> {
-  public constructor(
-    readonly sdk: WhiteWebSdk,
-    readonly player: Player,
-    readonly manager: WindowManager,
-    readonly syncedStore: SyncedStore<TEventData>
-  ) {}
+type PlayerPhase = `${PlayerPhaseEnum}`;
 
-  protected _destroyed = false;
-  protected _assertNotDestroyed() {
-    if (this._destroyed) {
-      throw new Error("FastboardApp has been destroyed");
-    }
+export type { PlayerPhase, PlayerSeekingResult, PlayerState };
+
+export class FastboardPlayer<TEventData = any> {
+  private _disposers: (() => void)[] = [];
+
+  private _destroyed = false;
+  private _assertNotDestroyed() {
+    if (this._destroyed) throw new Error("FastboardApp has been destroyed");
   }
 
-  protected _addPlayerListener<K extends keyof PlayerCallbacks>(name: K, listener: PlayerCallbacks[K]) {
+  private _addPlayerListener<K extends keyof PlayerCallbacks>(name: K, listener: PlayerCallbacks[K]) {
     this._assertNotDestroyed();
     this.player.callbacks.on(name, listener);
     return () => this.player.callbacks.off(name, listener);
   }
 
-  protected _addManagerListener<K extends keyof PublicEvent>(
-    name: K,
-    listener: (value: PublicEvent[K]) => void
+  /**
+   * Player current time in milliseconds.
+   */
+  readonly currentTime: Writable<number>;
+
+  /**
+   * Player state, like "is it playing?".
+   */
+  readonly phase: Readable<PlayerPhase>;
+
+  /**
+   * Will become true after buffering.
+   */
+  readonly canplay: Readable<boolean>;
+
+  private _setPlaybackRate!: (value: number) => void;
+  /**
+   * Playback speed, default `1`.
+   */
+  readonly playbackRate: Writable<number>;
+
+  /**
+   * Playback duration in milliseconds.
+   */
+  readonly duration: Readable<number>;
+
+  /**
+   * Get state of room at that time, like "who was in the room?".
+   */
+  readonly state: Readable<PlayerState>;
+
+  constructor(
+    readonly sdk: WhiteWebSdk,
+    readonly player: Player,
+    readonly manager: WindowManager,
+    readonly syncedStore: SyncedStore<TEventData>
   ) {
-    this._assertNotDestroyed();
-    this.manager.emitter.on(name, listener);
-    return () => this.manager.emitter.off(name, listener);
+    this.currentTime = writable(
+      this.player.progressTime,
+      set => this._addPlayerListener("onProgressTimeChanged", set),
+      this.player.seekToProgressTime.bind(this.player)
+    );
+    this.phase = readable(this.player.phase, set => this._addPlayerListener("onPhaseChanged", set));
+    this.canplay = readable(this.player.isPlayable, set =>
+      this._addPlayerListener("onIsPlayableChanged", set)
+    );
+    this.playbackRate = writable(
+      this.player.playbackSpeed,
+      set => {
+        this._setPlaybackRate = set;
+      },
+      value => this._setPlaybackRate((this.player.playbackSpeed = value))
+    );
+    this.duration = readable(this.player.timeDuration);
+    this.state = readable(this.player.state, set =>
+      this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state))
+    );
+    Object.getOwnPropertyNames(this).forEach(key => {
+      const prop = (this as any)[key];
+      if (is_store(prop)) this._disposers.push((prop as Disposable).dispose.bind(prop));
+    });
   }
 
-  protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
-    this._assertNotDestroyed();
-    this.manager.mainView.callbacks.on(name, listener);
-    return () => this.manager.mainView.callbacks.off(name, listener);
-  }
-
-  public destroy() {
-    this._destroyed = true;
-    this.manager.destroy();
-    return this.player.callbacks.off();
-  }
-}
-
-type PlayerPhase = `${PlayerPhaseEnum}`;
-
-export type { PlayerPhase, PlayerSeekingResult };
-
-export class FastboardPlayer<TEventData = any> extends FastboardPlayerBase<TEventData> {
   /**
    * Render this player to some DOM.
    */
@@ -83,63 +116,13 @@ export class FastboardPlayer<TEventData = any> extends FastboardPlayerBase<TEven
   }
 
   /**
-   * Player current time in milliseconds.
+   * Destroy fastboard player.
    */
-  readonly currentTime = writable(
-    this.player.progressTime,
-    set => {
-      set(this.player.progressTime);
-      return this._addPlayerListener("onProgressTimeChanged", set);
-    },
-    this.player.seekToProgressTime.bind(this.player)
-  );
-
-  /**
-   * Player state, like "is it playing?".
-   */
-  readonly phase = readable<PlayerPhase>(this.player.phase, set => {
-    set(this.player.phase);
-    return this._addPlayerListener("onPhaseChanged", set);
-  });
-
-  /**
-   * Will become true after buffering.
-   */
-  readonly canplay = readable(this.player.isPlayable, set => {
-    set(this.player.isPlayable);
-    return this._addPlayerListener("onIsPlayableChanged", set);
-  });
-
-  private _setPlaybackRate!: (value: number) => void;
-  /**
-   * Playback speed, default `1`.
-   */
-  readonly playbackRate = writable(
-    this.player.playbackSpeed,
-    set => {
-      this._setPlaybackRate = set;
-      set(this.player.playbackSpeed);
-    },
-    value => {
-      this.player.playbackSpeed = value;
-      this._setPlaybackRate(value);
-    }
-  );
-
-  /**
-   * Playback duration in milliseconds.
-   */
-  readonly duration = readable(this.player.timeDuration, set => {
-    set(this.player.timeDuration);
-  });
-
-  /**
-   * Get state of room at that time, like "who was in the room?".
-   */
-  readonly state = readable<PlayerState>(this.player.state, set => {
-    set(this.player.state);
-    return this._addPlayerListener("onPlayerStateChanged", () => set(this.player.state));
-  });
+  destroy() {
+    this._destroyed = true;
+    this.manager.destroy();
+    this.player.callbacks.off();
+  }
 
   /**
    * Seek to some time in milliseconds.
@@ -153,7 +136,6 @@ export class FastboardPlayer<TEventData = any> extends FastboardPlayerBase<TEven
    * Change player state to playing.
    */
   play() {
-    this._assertNotDestroyed();
     this.player.play();
   }
 

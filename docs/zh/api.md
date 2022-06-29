@@ -14,7 +14,6 @@
   - [`undo`](#undo)
   - [`redo`](#redo)
   - [`moveCamera`](#movecamera)
-  - [`moveCameraToContain`](#movecameratocontain)
   - [`cleanCurrentScene`](#cleancurrentscene)
   - [`setAppliance`](#setappliance)
   - [`setStrokeWidth`](#setstrokewidth)
@@ -355,23 +354,6 @@ app.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
 | centerX | [optional] number | 0       | 视角的中心对准的点的 x 坐标（世界坐标系） |
 | centerY | [optional] number | 0       | 视角的中心对准的点的 y 坐标（世界坐标系） |
 | scale   | [optional] number | 1       | 缩放                                      |
-
-### moveCameraToContain
-
-> 移动视角到包含一个区域
-
-```js
-app.moveCameraToContain({ originX: -100, originY: -100, width: 200, height: 200 });
-```
-
-参数
-
-| name    | type              | desc     |
-| ------- | ----------------- | -------- |
-| originX | [required] number | 左上角 X |
-| originY | [required] number | 左上角 Y |
-| width   | [required] number | 宽       |
-| height  | [required] number | 高       |
 
 ### cleanCurrentScene
 

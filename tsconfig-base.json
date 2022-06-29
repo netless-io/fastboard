@@ -2,7 +2,7 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     "noEmit": true,
-    "target": "es2017",
+    "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",

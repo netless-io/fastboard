@@ -5,8 +5,7 @@ const ID_LEN = 20;
 const reusedIdCarrier = /* @__PURE__ */ Array(ID_LEN);
 
 export function genUID() {
-  for (let i = 0; i < ID_LEN; i++) {
-    reusedIdCarrier[i] = SOUP.charAt(Math.random() * SOUP_LEN);
-  }
+  for (let i = 0; i < ID_LEN; i++) reusedIdCarrier[i] = SOUP.charAt(Math.random() * SOUP_LEN);
+
   return reusedIdCarrier.join("");
 }

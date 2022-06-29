@@ -1,39 +1,19 @@
 import type { RegisterParams } from "@netless/window-manager";
 import { WindowManager } from "@netless/window-manager";
-import SlideApp, { apps, addHooks, previewSlide } from "@netless/app-slide";
+import SlideApp, { SlideViewer, addHooks, previewSlide, refrigerator } from "@netless/app-slide";
 
 export type {
   AppOptions as SlideOptions,
-  Controller as SlideController,
-  PreviewParams,
-  SlidePreviewer,
+  Attributes as SlideAttributes,
+  SlideState,
 } from "@netless/app-slide";
-export { previewSlide, SlideApp, addHooks as addSlideHooks, apps as slideApps };
+export { refrigerator, previewSlide, SlideApp, addHooks as addSlideHooks, SlideViewer };
 
 export interface AppsConfig {
   [kind: string]: Omit<RegisterParams, "kind">;
 }
 
-const DefaultApps: AppsConfig = {
-  Monaco: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-monaco/0.1.12/dist/main.iife.js",
-  },
-  Countdown: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-countdown/0.0.2/dist/main.iife.js",
-  },
-  GeoGebra: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-geogebra/0.0.4/dist/main.iife.js",
-    appOptions: {
-      HTML5Codebase: "https://flat-storage-cn-hz.whiteboard.agora.io/GeoGebra/HTML5/5.0/web3d",
-    },
-  },
-  EmbeddedPage: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-embedded-page/0.1.1/dist/main.iife.js",
-  },
-  Plyr: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-plyr/0.1.3/dist/main.iife.js",
-  },
-};
+const DefaultApps: AppsConfig = {};
 
 WindowManager.register({
   kind: "Slide",

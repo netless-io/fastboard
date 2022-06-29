@@ -18,8 +18,7 @@ export declare interface ButtonEvents {
 }
 
 export declare interface ButtonSlots {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  default: {};
+  default: any;
 }
 
 declare class Button extends SvelteComponentTyped<ButtonProps, ButtonEvents, ButtonSlots> {}
