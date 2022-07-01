@@ -75,8 +75,10 @@ importers:
   packages/fastboard-core:
     specifiers:
       '@netless/app-slide': ^0.2.2
+      '@netless/synced-store': ^1.1.5
     dependencies:
       '@netless/app-slide': 0.2.2
+      '@netless/synced-store': 1.1.5
 
   packages/fastboard-react:
     specifiers:
@@ -493,6 +495,13 @@ packages:
   /@netless/canvas-polyfill/0.0.4:
     resolution: {integrity: sha512-7NzsJrba0R/mq/l10SkIZQwbrNVJyPxZYrjK6xL3Ts732iWAVuS2UB0u3s6iGeUVcqV39A679yva8APWRl4M0A==}
     dev: true
+
+  /@netless/synced-store/1.1.5:
+    resolution: {integrity: sha512-ERXoJiPhsK26udMKhvcHhfzyUk1Q3JIIT71wgGoSoNiPpW2VCWQ4+FAFsoRwa0c1pM0wVHGRRcZkxvOTkXZvdg==}
+    requiresBuild: true
+    peerDependencies:
+      white-web-sdk: '>= 2.16'
+    dev: false
 
   /@netless/telebox-insider/0.2.26:
     resolution: {integrity: sha512-HOBi9HWK0Zf0nvzfjM0V/0QmZ69ec7L/lCKMwRcfiQHxAAJ/zo9fEm468WocYFsliixWW5L7HwMN0eHb0mw7hA==}

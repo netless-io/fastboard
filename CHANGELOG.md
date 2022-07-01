@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added `syncedStore` api.
+
 ## 0.3.4
 
 - Deprecated `insertCodeEditor` `insertGeoGebra` `insertCountdown` methods.

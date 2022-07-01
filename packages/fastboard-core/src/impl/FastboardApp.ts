@@ -22,6 +22,7 @@ import type {
 
 import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
 import { BuiltinApps, WindowManager } from "@netless/window-manager";
+import { SyncedStore } from "@netless/synced-store";
 import {
   getImageSize,
   genUID,
@@ -31,7 +32,7 @@ import {
   writable,
   warn,
 } from "../utils";
-import { ensure_window_manager, transform_app_status } from "../internal";
+import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors";
 
 class FastboardAppBase {
@@ -39,7 +40,8 @@ class FastboardAppBase {
     readonly sdk: WhiteWebSdk,
     readonly room: Room,
     readonly manager: WindowManager,
-    readonly hotKeys: Partial<HotKeys>
+    readonly hotKeys: Partial<HotKeys>,
+    readonly syncedStore: SyncedStore
   ) {}
 
   protected _destroyed = false;
@@ -605,13 +607,15 @@ export async function createFastboard({
     {
       floatBar: true,
       hotKeys,
-      ...ensure_window_manager(joinRoomParams),
+      ...ensure_official_plugins(joinRoomParams),
       useMultiViews: true,
       disableNewPencil: false,
       disableMagixEventDispatchLimit: true,
     },
     callbacks
   );
+
+  const syncedStore = await SyncedStore.init(room);
 
   const manager = await WindowManager.mount({
     cursor: true,
@@ -624,5 +628,5 @@ export async function createFastboard({
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp(sdk, room, manager, hotKeys);
+  return new FastboardApp(sdk, room, manager, hotKeys, syncedStore);
 }

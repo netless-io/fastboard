@@ -14,7 +14,8 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.2"
+    "@netless/app-slide": "^0.2.2",
+    "@netless/synced-store": "^1.1.5"
   },
   "peerDependencies": {
     "@netless/window-manager": ">=0.4.0",

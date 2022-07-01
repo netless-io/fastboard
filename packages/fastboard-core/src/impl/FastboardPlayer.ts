@@ -13,7 +13,7 @@ import type {
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { readable, writable } from "../utils";
-import { ensure_window_manager } from "../internal";
+import { ensure_official_plugins } from "../internal";
 
 class FastboardPlayerBase {
   public constructor(readonly sdk: WhiteWebSdk, readonly player: Player, readonly manager: WindowManager) {}
@@ -212,7 +212,7 @@ export async function replayFastboard({
 
   const player = await sdk.replayRoom(
     {
-      ...ensure_window_manager(replayRoomParams),
+      ...ensure_official_plugins(replayRoomParams),
       useMultiViews: true,
     },
     callbacks
