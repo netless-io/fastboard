@@ -21,6 +21,9 @@
     "@netless/window-manager": ">=0.4.0",
     "white-web-sdk": ">=2.16.0"
   },
+  "devDependencies": {
+    "white-web-sdk": "*"
+  },
   "publishConfig": {
     "main": "dist/index.js",
     "module": "dist/index.mjs",

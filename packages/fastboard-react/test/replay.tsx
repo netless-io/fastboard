@@ -2,7 +2,7 @@
 import type { FastboardPlayer, Theme, Language } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { replayFastboard, ReplayFastboard } from "../src";
 import "./style.scss";
@@ -88,8 +88,7 @@ function App() {
 }
 
 const root = document.getElementById("app") as HTMLDivElement;
-
-ReactDOM.render(<App />, root);
+ReactDOM.createRoot(root).render(<App />);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },

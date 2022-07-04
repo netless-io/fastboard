@@ -2,7 +2,7 @@
 import type { Theme, Language, FastboardUIConfig } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { useFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
@@ -121,8 +121,7 @@ apps.push(
 );
 
 const root = document.getElementById("app") as HTMLDivElement;
-
-ReactDOM.render(<App />, root);
+ReactDOM.createRoot(root).render(<App />);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },
