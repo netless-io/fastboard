@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added `syncedStore` api.
+- Fixed incorrect UI for user-defined hotKeys.
 
 ## 0.3.4
 

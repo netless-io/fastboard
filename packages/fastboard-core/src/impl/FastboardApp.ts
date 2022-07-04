@@ -628,5 +628,5 @@ export async function createFastboard({
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp(sdk, room, manager, hotKeys, syncedStore);
+  return new FastboardApp(sdk, room, manager, joinRoomParams.hotKeys || hotKeys, syncedStore);
 }
