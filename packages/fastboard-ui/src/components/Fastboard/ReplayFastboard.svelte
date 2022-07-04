@@ -39,10 +39,17 @@
       };
     }
   });
+
+  function focus_me() {
+    tippy_hide_all();
+    // workaround for some devices that enabled "windows ink"
+    let a = document.activeElement as HTMLElement | null;
+    a && a.blur && a.blur();
+  }
 </script>
 
 <div class="{name}-root" class:loading={!player}>
-  <div class="{name}-view" bind:this={container} on:touchstart|capture|passive={tippy_hide_all} />
+  <div class="{name}-view" bind:this={container} on:touchstart|capture={focus_me} />
   <div class="{name}-bottom">
     <PlayerControl {player} {theme} {language} />
   </div>

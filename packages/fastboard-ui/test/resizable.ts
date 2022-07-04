@@ -59,6 +59,7 @@ export const resizable: SvelteAction<ResizableProps> = function (div, props) {
 
   const pointer_down = (ev: PointerEvent) => {
     if (ev.target === handler) {
+      handler.setPointerCapture(ev.pointerId);
       saved = { x: ev.x, y: ev.y, ...size };
       update_active(true);
     }
@@ -75,8 +76,9 @@ export const resizable: SvelteAction<ResizableProps> = function (div, props) {
     }
   };
 
-  const pointer_up = () => {
+  const pointer_up = (ev: PointerEvent) => {
     update_active(false);
+    handler.releasePointerCapture(ev.pointerId);
   };
 
   window.addEventListener("pointerdown", pointer_down);

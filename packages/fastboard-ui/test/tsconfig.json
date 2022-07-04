@@ -1,7 +1,7 @@
 {
   "include": ["."],
   "compilerOptions": {
-    "types": ["svelte"],
+    "types": ["svelte", "vite/client"],
     "lib": ["DOM", "ESNext"],
     "module": "ESNext",
     "target": "ESNext",
