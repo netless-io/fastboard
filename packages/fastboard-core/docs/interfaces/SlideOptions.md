@@ -20,11 +20,15 @@
 
 • `Optional` **autoFPS**: `boolean`
 
-automatically decrease fps @default true
+automatically decrease fps
+
+**`Default`**
+
+ true
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:24
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:24
 
 ___
 
@@ -32,11 +36,15 @@ ___
 
 • `Optional` **autoResolution**: `boolean`
 
-whether to re-scale automatically @default true
+whether to re-scale automatically
+
+**`Default`**
+
+ true
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:26
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:26
 
 ___
 
@@ -48,7 +56,7 @@ background color for slide animations
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:18
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:18
 
 ___
 
@@ -60,7 +68,7 @@ show debug controller
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:14
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:14
 
 ___
 
@@ -68,11 +76,15 @@ ___
 
 • `Optional` **maxFPS**: `number`
 
-maximal fps @default 30
+maximal fps
+
+**`Default`**
+
+ 30
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:22
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:22
 
 ___
 
@@ -80,11 +92,15 @@ ___
 
 • `Optional` **minFPS**: `number`
 
-minimal fps @default 25
+minimal fps
+
+**`Default`**
+
+ 25
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:20
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:20
 
 ___
 
@@ -96,4 +112,4 @@ scale
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:16
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:16

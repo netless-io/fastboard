@@ -61,10 +61,6 @@
 
 FastboardPlayerBase.constructor
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
-
 ## Properties
 
 ### \_destroyed
@@ -77,7 +73,7 @@ FastboardPlayerBase.\_destroyed
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:21](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L21)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:21](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L21)
 
 ___
 
@@ -101,7 +97,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:105](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L105)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:105](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L105)
 
 ___
 
@@ -113,7 +109,7 @@ Will become true after buffering.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:100](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L100)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:100](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L100)
 
 ___
 
@@ -125,7 +121,7 @@ Player current time in milliseconds.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:80](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L80)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:80](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L80)
 
 ___
 
@@ -137,7 +133,7 @@ Playback duration in milliseconds.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:124](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L124)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:124](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L124)
 
 ___
 
@@ -149,6 +145,10 @@ ___
 
 FastboardPlayerBase.manager
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
+
 ___
 
 ### phase
@@ -159,7 +159,7 @@ Player state, like "is it playing?".
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:92](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L92)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:92](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L92)
 
 ___
 
@@ -171,7 +171,7 @@ Playback speed, default `1`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:109](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L109)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:109](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L109)
 
 ___
 
@@ -183,6 +183,10 @@ ___
 
 FastboardPlayerBase.player
 
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
+
 ___
 
 ### sdk
@@ -192,6 +196,10 @@ ___
 #### Inherited from
 
 FastboardPlayerBase.sdk
+
+#### Defined in
+
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:19](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L19)
 
 ___
 
@@ -203,7 +211,7 @@ Get state of room at that time, like "who was in the room?".
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:131](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L131)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:131](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L131)
 
 ## Methods
 
@@ -238,10 +246,6 @@ Get state of room at that time, like "who was in the room?".
 
 FastboardPlayerBase.\_addMainViewListener
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:43](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L43)
-
 ___
 
 ### \_addManagerListener
@@ -274,10 +278,6 @@ ___
 #### Inherited from
 
 FastboardPlayerBase.\_addManagerListener
-
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:34](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L34)
 
 ___
 
@@ -312,10 +312,6 @@ ___
 
 FastboardPlayerBase.\_addPlayerListener
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:28](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L28)
-
 ___
 
 ### \_assertNotDestroyed
@@ -329,10 +325,6 @@ ___
 #### Inherited from
 
 FastboardPlayerBase.\_assertNotDestroyed
-
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:22](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L22)
 
 ___
 
@@ -352,10 +344,6 @@ Move window-manager's collector to some place.
 
 `void`
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:72](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L72)
-
 ___
 
 ### bindContainer
@@ -374,10 +362,6 @@ Render this player to some DOM.
 
 `void`
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:64](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L64)
-
 ___
 
 ### destroy
@@ -392,10 +376,6 @@ ___
 
 FastboardPlayerBase.destroy
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:49](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L49)
-
 ___
 
 ### pause
@@ -408,10 +388,6 @@ Change player state to paused.
 
 `void`
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:155](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L155)
-
 ___
 
 ### play
@@ -423,10 +399,6 @@ Change player state to playing.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:147](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L147)
 
 ___
 
@@ -446,10 +418,6 @@ Seek to some time in milliseconds.
 
 `Promise`<[`PlayerSeekingResult`](../enums/PlayerSeekingResult.md)\>
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:139](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L139)
-
 ___
 
 ### setPlaybackRate
@@ -468,10 +436,6 @@ Set playback speed, a shortcut for `speed.set(x)`.
 
 `void`
 
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:171](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L171)
-
 ___
 
 ### stop
@@ -483,7 +447,3 @@ Change player state to stopped.
 #### Returns
 
 `void`
-
-#### Defined in
-
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:163](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L163)

@@ -18,7 +18,7 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:184](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L184)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:184](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L184)
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:181](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L181)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:181](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L181)
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:178](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardPlayer.ts#L178)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:178](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardPlayer.ts#L178)

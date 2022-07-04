@@ -2,7 +2,11 @@
 
 # Interface: InsertDocsDynamic
 
-Params for slides, they are rendered in @netless/app-slide with animations.
+Params for slides, they are rendered in
+
+**`Netless`**
+
+ /app-slide with animations.
 
 ## Table of contents
 
@@ -23,7 +27,7 @@ Params for slides, they are rendered in @netless/app-slide with animations.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:128](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L128)
+[packages/fastboard-core/src/impl/FastboardApp.ts:132](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L132)
 
 ___
 
@@ -35,7 +39,7 @@ Unique string for binding whiteboard view to the doc. Must start with `/`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:130](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L130)
+[packages/fastboard-core/src/impl/FastboardApp.ts:134](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L134)
 
 ___
 
@@ -43,11 +47,15 @@ ___
 
 • `Optional` `Readonly` **scenes**: [`SceneDefinition`](../modules.md#scenedefinition)[]
 
-**`example`** [{ name: '1' }, { name: '2' }, { name: '3' }]
+**`Example`**
+
+ ```ts
+[{ name: '1' }, { name: '2' }, { name: '3' }]
+```
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:138](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L138)
+[packages/fastboard-core/src/impl/FastboardApp.ts:142](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L142)
 
 ___
 
@@ -59,7 +67,7 @@ Conversion task id, see https://developer.netless.link/server-en/home/server-con
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:132](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L132)
+[packages/fastboard-core/src/impl/FastboardApp.ts:136](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L136)
 
 ___
 
@@ -71,7 +79,7 @@ Window title.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:134](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L134)
+[packages/fastboard-core/src/impl/FastboardApp.ts:138](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L138)
 
 ___
 
@@ -79,8 +87,12 @@ ___
 
 • `Optional` `Readonly` **url**: `string`
 
-Where the slide resource placed. @default `https://convertcdn.netless.link/dynamicConvert`
+Where the slide resource placed.
+
+**`Default`**
+
+ `https://convertcdn.netless.link/dynamicConvert`
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:136](https://github.com/netless-io/fastboard/blob/7fdd876/packages/fastboard-core/src/impl/FastboardApp.ts#L136)
+[packages/fastboard-core/src/impl/FastboardApp.ts:140](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L140)

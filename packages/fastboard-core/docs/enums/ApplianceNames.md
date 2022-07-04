@@ -23,142 +23,142 @@
 
 ### arrow
 
-• **arrow**
+• **arrow** = ``"arrow"``
 
 箭头工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2249
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2249
 
 ___
 
 ### clicker
 
-• **clicker**
+• **clicker** = ``"clicker"``
 
 互动工具（无默认行为，可供 plugin 自定义）
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2213
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2213
 
 ___
 
 ### ellipse
 
-• **ellipse**
+• **ellipse** = ``"ellipse"``
 
 圆形工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2229
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2229
 
 ___
 
 ### eraser
 
-• **eraser**
+• **eraser** = ``"eraser"``
 
 橡皮工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2237
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2237
 
 ___
 
 ### hand
 
-• **hand**
+• **hand** = ``"hand"``
 
 抓手工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2253
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2253
 
 ___
 
 ### laserPointer
 
-• **laserPointer**
+• **laserPointer** = ``"laserPointer"``
 
 激光笔
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2217
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2217
 
 ___
 
 ### pencil
 
-• **pencil**
+• **pencil** = ``"pencil"``
 
 铅笔工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2221
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2221
 
 ___
 
 ### rectangle
 
-• **rectangle**
+• **rectangle** = ``"rectangle"``
 
 矩形工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2225
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2225
 
 ___
 
 ### selector
 
-• **selector**
+• **selector** = ``"selector"``
 
 选择工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2209
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2209
 
 ___
 
 ### shape
 
-• **shape**
+• **shape** = ``"shape"``
 
 图形工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2233
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2233
 
 ___
 
 ### straight
 
-• **straight**
+• **straight** = ``"straight"``
 
 直线工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2245
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2245
 
 ___
 
 ### text
 
-• **text**
+• **text** = ``"text"``
 
 文字工具
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:2241
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2241

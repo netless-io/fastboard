@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Methods
+### Properties
 
 - [jumpToPage](SlideController.md#jumptopage)
 - [nextPage](SlideController.md#nextpage)
@@ -14,106 +14,134 @@
 - [prevStep](SlideController.md#prevstep)
 - [slide](SlideController.md#slide)
 
-## Methods
+## Properties
 
 ### jumpToPage
 
-▸ **jumpToPage**(`page`): `boolean`
+• **jumpToPage**: (`page`: `number`) => `boolean`
 
-#### Parameters
+#### Type declaration
+
+▸ (`page`): `boolean`
+
+##### Parameters
 
 | Name | Type |
 | :------ | :------ |
 | `page` | `number` |
 
-#### Returns
+##### Returns
 
 `boolean`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:35
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:35
 
 ___
 
 ### nextPage
 
-▸ **nextPage**(): `boolean`
+• **nextPage**: () => `boolean`
 
-#### Returns
+#### Type declaration
+
+▸ (): `boolean`
+
+##### Returns
 
 `boolean`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:33
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:33
 
 ___
 
 ### nextStep
 
-▸ **nextStep**(): `boolean`
+• **nextStep**: () => `boolean`
 
-#### Returns
+#### Type declaration
+
+▸ (): `boolean`
+
+##### Returns
 
 `boolean`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:31
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:31
 
 ___
 
 ### position
 
-▸ **position**(): `undefined` \| [page: number, pageCount: number]
+• **position**: () => `undefined` \| [page: number, pageCount: number]
 
-#### Returns
+#### Type declaration
+
+▸ (): `undefined` \| [page: number, pageCount: number]
+
+##### Returns
 
 `undefined` \| [page: number, pageCount: number]
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:30
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:30
 
 ___
 
 ### prevPage
 
-▸ **prevPage**(): `boolean`
+• **prevPage**: () => `boolean`
 
-#### Returns
+#### Type declaration
+
+▸ (): `boolean`
+
+##### Returns
 
 `boolean`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:34
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:34
 
 ___
 
 ### prevStep
 
-▸ **prevStep**(): `boolean`
+• **prevStep**: () => `boolean`
 
-#### Returns
+#### Type declaration
+
+▸ (): `boolean`
+
+##### Returns
 
 `boolean`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:32
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:32
 
 ___
 
 ### slide
 
-▸ **slide**(): `any`
+• **slide**: () => `any`
 
-#### Returns
+#### Type declaration
+
+▸ (): `any`
+
+##### Returns
 
 `any`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/index.d.ts:29
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:29

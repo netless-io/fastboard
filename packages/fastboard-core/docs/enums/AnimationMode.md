@@ -13,22 +13,22 @@
 
 ### Continuous
 
-• **Continuous**
+• **Continuous** = ``"continuous"``
 
 以播放渐变动画的方式移动视角
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:268
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:268
 
 ___
 
 ### Immediately
 
-• **Immediately**
+• **Immediately** = ``"immediately"``
 
 一瞬间就将视角移动到目标
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.24/node_modules/white-web-sdk/types/index.d.ts:272
+node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:272

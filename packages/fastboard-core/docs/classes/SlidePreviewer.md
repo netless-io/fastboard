@@ -56,10 +56,6 @@
 | `config` | `Object` |
 | `config.target` | `HTMLElement` |
 
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:21
-
 ## Properties
 
 ### $slide
@@ -68,7 +64,7 @@ node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:16
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:16
 
 ___
 
@@ -78,7 +74,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:12
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:12
 
 ___
 
@@ -88,7 +84,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:15
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:15
 
 ___
 
@@ -98,7 +94,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:43
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:43
 
 ___
 
@@ -108,7 +104,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:33
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:33
 
 ___
 
@@ -118,7 +114,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:51
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:51
 
 ___
 
@@ -143,7 +139,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:40
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:40
 
 ___
 
@@ -167,7 +163,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:49
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:49
 
 ___
 
@@ -191,7 +187,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:37
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:37
 
 ___
 
@@ -209,7 +205,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:48
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:48
 
 ___
 
@@ -227,7 +223,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:39
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:39
 
 ___
 
@@ -245,7 +241,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:38
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:38
 
 ___
 
@@ -255,7 +251,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:18
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:18
 
 ___
 
@@ -265,7 +261,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:20
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:20
 
 ___
 
@@ -283,7 +279,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:45
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:45
 
 ___
 
@@ -293,7 +289,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:19
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:19
 
 ___
 
@@ -303,7 +299,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:17
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:17
 
 ___
 
@@ -313,7 +309,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:14
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:14
 
 ___
 
@@ -323,7 +319,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:13
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:13
 
 ___
 
@@ -333,7 +329,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:11
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:11
 
 ## Methods
 
@@ -344,10 +340,6 @@ node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist
 #### Returns
 
 `void`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:44
 
 ___
 
@@ -364,10 +356,6 @@ ___
 #### Returns
 
 `number`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:46
 
 ___
 
@@ -386,10 +374,6 @@ ___
 
 `void`
 
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:34
-
 ___
 
 ### registerEventListeners
@@ -400,10 +384,6 @@ ___
 
 `void`
 
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:36
-
 ___
 
 ### registerHotKeys
@@ -413,8 +393,11 @@ ___
 In case you have a different window -- for example, in electron.
 Use this method to re-register hotkeys.
 
-**`example`**
+**`Example`**
+
+ ```ts
 previewer.registerHotKeys(windowLike)
+```
 
 #### Parameters
 
@@ -426,10 +409,6 @@ previewer.registerHotKeys(windowLike)
 
 `void`
 
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:32
-
 ___
 
 ### render
@@ -439,10 +418,6 @@ ___
 #### Returns
 
 `void`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:24
 
 ___
 
@@ -454,10 +429,6 @@ ___
 
 `HTMLDivElement`
 
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:47
-
 ___
 
 ### renderStyle
@@ -467,10 +438,6 @@ ___
 #### Returns
 
 `HTMLElement`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:35
 
 ___
 
@@ -487,7 +454,3 @@ ___
 #### Returns
 
 `string`
-
-#### Defined in
-
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:50

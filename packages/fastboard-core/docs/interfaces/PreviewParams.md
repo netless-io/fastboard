@@ -19,7 +19,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:4
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:4
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:7
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:7
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:5
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:5
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.1/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:6
+node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:6
