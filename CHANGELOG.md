@@ -4,6 +4,7 @@
 
 - Added `syncedStore` api.
 - Fixed incorrect UI for user-defined hotKeys.
+- Fixed whiteboard may lose focus on some devices.
 
 ## 0.3.4
 
