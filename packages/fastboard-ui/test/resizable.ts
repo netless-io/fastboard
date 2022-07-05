@@ -12,6 +12,7 @@ function create_handler() {
   const id = next_id();
   const el = document.createElement("div");
   el.classList.add("draggable");
+  el.style.touchAction = "none";
   el.id = `resizable-${id}`;
   return el;
 }
@@ -59,7 +60,6 @@ export const resizable: SvelteAction<ResizableProps> = function (div, props) {
 
   const pointer_down = (ev: PointerEvent) => {
     if (ev.target === handler) {
-      handler.setPointerCapture(ev.pointerId);
       saved = { x: ev.x, y: ev.y, ...size };
       update_active(true);
     }
@@ -76,9 +76,8 @@ export const resizable: SvelteAction<ResizableProps> = function (div, props) {
     }
   };
 
-  const pointer_up = (ev: PointerEvent) => {
+  const pointer_up = () => {
     update_active(false);
-    handler.releasePointerCapture(ev.pointerId);
   };
 
   window.addEventListener("pointerdown", pointer_down);
