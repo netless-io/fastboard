@@ -7,6 +7,8 @@ import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { useFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
 
+const search = new URLSearchParams(location.search);
+
 const FastboardLayout: FastboardUIConfig = {
   page_control: { enable: false },
   redo_undo: { enable: true },
@@ -24,6 +26,7 @@ function App() {
       uid: genUID(),
       uuid: import.meta.env.VITE_ROOM_UUID,
       roomToken: import.meta.env.VITE_ROOM_TOKEN,
+      isWritable: search.get("isWritable") === "1",
     },
     managerConfig: {
       cursor: true,
