@@ -19,10 +19,11 @@ import type {
   ViewCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
+import type { SyncedStore } from "@netless/synced-store";
 
 import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
 import { BuiltinApps, WindowManager } from "@netless/window-manager";
-import { SyncedStore } from "@netless/synced-store";
+import { SyncedStorePlugin } from "@netless/synced-store";
 import {
   getImageSize,
   genUID,
@@ -105,6 +106,7 @@ export type {
   RoomState,
   SceneDefinition,
   ShapeType,
+  SyncedStore,
   ViewCallbacks,
   WhiteWebSdk,
   WhiteWebSdkConfiguration,
@@ -615,7 +617,7 @@ export async function createFastboard({
     callbacks
   );
 
-  const syncedStore = await SyncedStore.init(room);
+  const syncedStore = await SyncedStorePlugin.init(room);
 
   const manager = await WindowManager.mount({
     cursor: true,

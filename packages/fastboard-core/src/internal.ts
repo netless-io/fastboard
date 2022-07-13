@@ -1,12 +1,12 @@
 import type { JoinRoomParams, ReplayRoomParams } from "white-web-sdk";
 import type { PublicEvent } from "@netless/window-manager";
 import { WindowManager } from "@netless/window-manager";
-import { SyncedStore } from "@netless/synced-store";
+import { SyncedStorePlugin } from "@netless/synced-store";
 
 export function ensure_official_plugins<T extends JoinRoomParams | ReplayRoomParams>(joinRoom: T): T {
   const plugins = new Set(joinRoom.invisiblePlugins || []);
   plugins.add(WindowManager);
-  plugins.add(SyncedStore);
+  plugins.add(SyncedStorePlugin);
   joinRoom.invisiblePlugins = [...plugins];
   return joinRoom;
 }
