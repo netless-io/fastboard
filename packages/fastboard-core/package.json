@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@netless/app-slide": "^0.2.2",
-    "@netless/synced-store": "^2.0.1"
+    "@netless/synced-store": "^2.0.2"
   },
   "peerDependencies": {
     "@netless/window-manager": ">=0.4.0",

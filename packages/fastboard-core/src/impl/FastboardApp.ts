@@ -19,7 +19,7 @@ import type {
   ViewCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
-import type { SyncedStore } from "@netless/synced-store";
+import type { SyncedStore, Storage, Diff, DiffOne } from "@netless/synced-store";
 
 import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
 import { BuiltinApps, WindowManager } from "@netless/window-manager";
@@ -107,6 +107,9 @@ export type {
   SceneDefinition,
   ShapeType,
   SyncedStore,
+  Storage,
+  Diff,
+  DiffOne,
   ViewCallbacks,
   WhiteWebSdk,
   WhiteWebSdkConfiguration,
