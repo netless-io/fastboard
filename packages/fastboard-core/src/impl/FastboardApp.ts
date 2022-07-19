@@ -577,7 +577,7 @@ export interface FastboardOptions {
  *   },
  * })
  */
-export async function createFastboard({
+export async function createFastboard<TEventData extends Record<string, any> = any>({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
@@ -620,7 +620,7 @@ export async function createFastboard({
     callbacks
   );
 
-  const syncedStore = await SyncedStorePlugin.init(room);
+  const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
 
   const manager = await WindowManager.mount({
     cursor: true,

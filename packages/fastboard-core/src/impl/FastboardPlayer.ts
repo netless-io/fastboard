@@ -1,4 +1,4 @@
-import type { MountParams, PublicEvent } from "@netless/window-manager";
+import type { MountParams, NetlessApp, PublicEvent } from "@netless/window-manager";
 import type {
   Player,
   PlayerPhase as PlayerPhaseEnum,
@@ -9,14 +9,22 @@ import type {
   ViewCallbacks,
   WhiteWebSdkConfiguration,
 } from "white-web-sdk";
+import type { SyncedStore } from "@netless/synced-store";
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
+import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
+import { register } from "../behaviors";
 
 class FastboardPlayerBase {
-  public constructor(readonly sdk: WhiteWebSdk, readonly player: Player, readonly manager: WindowManager) {}
+  public constructor(
+    readonly sdk: WhiteWebSdk,
+    readonly player: Player,
+    readonly manager: WindowManager,
+    readonly syncedStore: SyncedStore
+  ) {}
 
   protected _destroyed = false;
   protected _assertNotDestroyed() {
@@ -182,6 +190,7 @@ export interface FastboardReplayOptions {
     callbacks?: Partial<PlayerCallbacks>;
   };
   managerConfig?: Omit<MountParams, "room">;
+  netlessApps?: NetlessApp[];
 }
 
 /**
@@ -200,15 +209,22 @@ export interface FastboardReplayOptions {
  *   },
  * })
  */
-export async function replayFastboard({
+export async function replayFastboard<TEventData extends Record<string, any> = any>({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
+  netlessApps,
 }: FastboardReplayOptions) {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
   });
+
+  if (netlessApps) {
+    netlessApps.forEach(app => {
+      register({ kind: app.kind, src: app });
+    });
+  }
 
   const player = await sdk.replayRoom(
     {
@@ -217,6 +233,8 @@ export async function replayFastboard({
     },
     callbacks
   );
+
+  const syncedStore = await SyncedStorePlugin.init<TEventData>(player);
 
   const managerPromise = WindowManager.mount({
     cursor: true,
@@ -229,5 +247,5 @@ export async function replayFastboard({
   player.pause();
   await player.seekToProgressTime(0);
 
-  return new FastboardPlayer(sdk, player, manager);
+  return new FastboardPlayer(sdk, player, manager, syncedStore);
 }
