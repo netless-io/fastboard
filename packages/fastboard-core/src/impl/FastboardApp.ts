@@ -162,7 +162,7 @@ export interface AppsStatus {
   };
 }
 
-export class FastboardApp extends FastboardAppBase {
+export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData> {
   /**
    * Render this app to some DOM.
    */
@@ -588,7 +588,7 @@ export async function createFastboard<TEventData = any>({
     useMobXState: true,
   });
 
-  const hotKeys: Partial<HotKeys> = {
+  const hotKeys = joinRoomParams.hotKeys || {
     ...DefaultHotKeys,
     changeToSelector: "s",
     changeToLaserPointer: "z",
@@ -633,5 +633,5 @@ export async function createFastboard<TEventData = any>({
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp(sdk, room, manager, joinRoomParams.hotKeys || hotKeys, syncedStore);
+  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore);
 }

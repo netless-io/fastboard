@@ -65,7 +65,7 @@ type PlayerPhase = `${PlayerPhaseEnum}`;
 
 export type { PlayerPhase, PlayerSeekingResult };
 
-export class FastboardPlayer extends FastboardPlayerBase {
+export class FastboardPlayer<TEventData = any> extends FastboardPlayerBase<TEventData> {
   /**
    * Render this player to some DOM.
    */
@@ -247,5 +247,5 @@ export async function replayFastboard<TEventData = any>({
   player.pause();
   await player.seekToProgressTime(0);
 
-  return new FastboardPlayer(sdk, player, manager, syncedStore);
+  return new FastboardPlayer<TEventData>(sdk, player, manager, syncedStore);
 }
