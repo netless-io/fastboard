@@ -18,12 +18,12 @@ import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors";
 
-class FastboardPlayerBase {
+class FastboardPlayerBase<TEventData = any> {
   public constructor(
     readonly sdk: WhiteWebSdk,
     readonly player: Player,
     readonly manager: WindowManager,
-    readonly syncedStore: SyncedStore
+    readonly syncedStore: SyncedStore<TEventData>
   ) {}
 
   protected _destroyed = false;
@@ -209,7 +209,7 @@ export interface FastboardReplayOptions {
  *   },
  * })
  */
-export async function replayFastboard<TEventData extends Record<string, any> = any>({
+export async function replayFastboard<TEventData = any>({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
