@@ -5,9 +5,9 @@ import { Fastboard, ReplayFastboard } from "../components/Fastboard";
 
 export interface UI {
   /** render UI to div */
-  mount(div: Element, props?: Omit<FastboardProps, "app">): UI;
+  mount(div: Element, props?: FastboardProps): UI;
   /** update UI (theme, language, etc.) */
-  update(props?: Omit<FastboardProps, "app">): void;
+  update(props?: FastboardProps): void;
   /** remove UI */
   destroy(): void;
 }
@@ -17,18 +17,18 @@ export interface UI {
  * let ui = createUI(fastboardApp, document.getElementById("whiteboard"));
  * ui.update({ theme: "dark" })
  */
-export function createUI(app: FastboardApp, div?: Element): UI {
+export function createUI(app?: FastboardApp | null, div?: Element): UI {
   let fastboard: Fastboard | undefined;
 
   const ui: UI = {
-    mount(div: Element, props?: Omit<FastboardProps, "app">) {
+    mount(div: Element, props?: FastboardProps) {
       if (fastboard) {
         fastboard.$destroy();
       }
       fastboard = new Fastboard({ target: div, props: { app, ...props } });
       return ui;
     },
-    update(props?: Omit<FastboardProps, "app">) {
+    update(props?: FastboardProps) {
       if (fastboard) {
         fastboard.$set(props);
       }
@@ -42,7 +42,7 @@ export function createUI(app: FastboardApp, div?: Element): UI {
   };
 
   if (div) {
-    ui.mount(div);
+    ui.mount(div, { app });
   }
 
   return ui;
@@ -50,9 +50,9 @@ export function createUI(app: FastboardApp, div?: Element): UI {
 
 export interface ReplayUI {
   /** render UI to div */
-  mount(div: Element, props?: Omit<ReplayFastboardProps, "player">): ReplayUI;
+  mount(div: Element, props?: ReplayFastboardProps): ReplayUI;
   /** update UI (theme, language, etc.) */
-  update(props?: Omit<ReplayFastboardProps, "player">): void;
+  update(props?: ReplayFastboardProps): void;
   /** remove UI */
   destroy(): void;
 }
@@ -62,18 +62,18 @@ export interface ReplayUI {
  * let ui = createReplayUI(fastboardPlayer, document.getElementById("whiteboard"));
  * ui.update({ theme: "dark" })
  */
-export function createReplayUI(player: FastboardPlayer, div?: Element): ReplayUI {
+export function createReplayUI(player?: FastboardPlayer | null, div?: Element): ReplayUI {
   let fastboard: ReplayFastboard | undefined;
 
   const ui: ReplayUI = {
-    mount(div: Element, props?: Omit<ReplayFastboardProps, "player">) {
+    mount(div: Element, props?: ReplayFastboardProps) {
       if (fastboard) {
         fastboard.$destroy();
       }
       fastboard = new ReplayFastboard({ target: div, props: { player, ...props } });
       return ui;
     },
-    update(props?: Omit<ReplayFastboardProps, "player">) {
+    update(props?: ReplayFastboardProps) {
       if (fastboard) {
         fastboard.$set(props);
       }
@@ -87,7 +87,7 @@ export function createReplayUI(player: FastboardPlayer, div?: Element): ReplayUI
   };
 
   if (div) {
-    ui.mount(div);
+    ui.mount(div, { player });
   }
 
   return ui;
