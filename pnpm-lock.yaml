@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@hyrious/esbuild-dev': ^0.8.0
+      '@hyrious/esbuild-dev': ^0.8.1
       '@hyrious/esbuild-plugin-svelte': ^0.1.6
       '@hyrious/rimraf': ^0.1.0
       '@netless/window-manager': ^0.4.35
@@ -24,14 +24,14 @@ importers:
       svelte: ^3.49.0
       svelte-check: ^2.8.0
       tsup: ^6.1.3
-      type-fest: ^2.16.0
+      type-fest: ^2.17.0
       typedoc: ^0.23.8
-      typedoc-plugin-markdown: ^3.13.3
+      typedoc-plugin-markdown: ^3.13.4
       typescript: ^4.7.4
       vite: ^3.0.2
       white-web-sdk: ^2.16.27
     devDependencies:
-      '@hyrious/esbuild-dev': 0.8.0_esbuild@0.14.49
+      '@hyrious/esbuild-dev': 0.8.1_esbuild@0.14.49
       '@hyrious/esbuild-plugin-svelte': 0.1.6_uu65basplyqix5dmcy7m2ygbwu
       '@hyrious/rimraf': 0.1.0
       '@netless/window-manager': 0.4.35_white-web-sdk@2.16.27
@@ -51,9 +51,9 @@ importers:
       svelte: 3.49.0
       svelte-check: 2.8.0_sass@1.53.0+svelte@3.49.0
       tsup: 6.1.3_typescript@4.7.4
-      type-fest: 2.16.0
+      type-fest: 2.17.0
       typedoc: 0.23.8_typescript@4.7.4
-      typedoc-plugin-markdown: 3.13.3_typedoc@0.23.8
+      typedoc-plugin-markdown: 3.13.4_typedoc@0.23.8
       typescript: 4.7.4
       vite: 3.0.2_sass@1.53.0
       white-web-sdk: 2.16.27
@@ -414,8 +414,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@hyrious/esbuild-dev/0.8.0_esbuild@0.14.49:
-    resolution: {integrity: sha512-4sn0FSC//RhN/t0iYiUGdvPth3CiF/A4qnoHljp2TakPUQkhCjlHCJjPWbGCrFbFcCRrjZcrz21vQyHDUuhGZA==}
+  /@hyrious/esbuild-dev/0.8.1_esbuild@0.14.49:
+    resolution: {integrity: sha512-2qtDZLjfbUA/dP95voX+0tydzSEz2UC+t5zhpShe1nMmeVIQNML8QQAVRu4gv5voJY3SqKiOMFmH9NIqB9sZVA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -2881,8 +2881,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /type-fest/2.16.0:
-    resolution: {integrity: sha512-qpaThT2HQkFb83gMOrdKVsfCN7LKxP26Yq+smPzY1FqoHRjqmjqHXA7n5Gkxi8efirtbeEUxzfEdePthQWCuHw==}
+  /type-fest/2.17.0:
+    resolution: {integrity: sha512-U+g3/JVXnOki1kLSc+xZGPRll3Ah9u2VIG6Sn9iH9YX6UkPERmt6O/0fIyTgsd2/whV0+gAaHAg8fz6sG1QzMA==}
     engines: {node: '>=12.20'}
     dev: true
 
@@ -2890,8 +2890,8 @@ packages:
     resolution: {integrity: sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ==}
     engines: {node: '>= 10'}
 
-  /typedoc-plugin-markdown/3.13.3_typedoc@0.23.8:
-    resolution: {integrity: sha512-KKvFkQphRcH26NoBCKjjZ7a3rkPBQAOuWg1F4s+snDSWXfTyGWO5isgoe19VUbG87W8X/0x3uc/O0Nj7Qle3TQ==}
+  /typedoc-plugin-markdown/3.13.4_typedoc@0.23.8:
+    resolution: {integrity: sha512-E/EBBmu6ARtnbswZGtBVBB/BfukZiGMOlqPc0RXCI/NFitONBahFqbCAF5fKQlijlcfipJj5pw5AMFH3NytrAw==}
     peerDependencies:
       typedoc: '>=0.23.0'
     dependencies:
