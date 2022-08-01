@@ -1,10 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.3.6
 
 - Added `syncedStore` api.
 - Fixed incorrect UI for user-defined hotKeys.
 - Fixed whiteboard may lose focus on some devices.
+- Fixed `createUI` type.
 
 ## 0.3.4
 
