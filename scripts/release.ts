@@ -1,6 +1,6 @@
 // prerelease a canary version.
 import { createInterface } from "readline";
-import { readdir, readFile, writeFile } from "fs/promises";
+import { readFile, readdir, writeFile } from "fs/promises";
 import { join } from "path";
 import semver from "semver";
 
@@ -20,8 +20,8 @@ process.on("SIGINT", () => {
   process.exit(0);
 });
 
-console.log("Current version: " + version + "\nSelect next version:");
-console.log(`   0. input manually`);
+console.log(`Current version: ${version}\nSelect next version:`);
+console.log("   0. input manually");
 const choices = ["major", "minor", "patch", "premajor", "preminor", "prepatch", "prerelease"] as const;
 choices.forEach((type, i) => {
   console.log(`   ${i + 1}. ${semver.inc(version, type, preid)}`);
@@ -31,7 +31,7 @@ const index = parseInt(await prompt("> "));
 let nextVersion = version;
 if (index === 0) {
   nextVersion = await prompt("Input next version\n> ");
-} else if (1 <= index && index <= choices.length) {
+} else if (index >= 1 && index <= choices.length) {
   nextVersion = semver.inc(version, choices[index - 1], preid);
 } else {
   console.log("Invalid input");
@@ -49,6 +49,6 @@ for (const folder of packages) {
   const file = join("./packages", folder, "package.json");
   const pkg = JSON.parse(await readFile(file, "utf8"));
   pkg.version = nextVersion;
-  await writeFile(file, JSON.stringify(pkg, null, 2) + "\n");
-  console.log("Updated " + folder);
+  await writeFile(file, `${JSON.stringify(pkg, null, 2)}\n`);
+  console.log(`Updated ${folder}`);
 }

@@ -1,3 +1,5 @@
+import "./style.scss";
+
 export * from "@netless/fastboard-core";
 export { apps } from "@netless/fastboard-ui";
 export type {
@@ -14,8 +16,6 @@ export * from "./PageControl";
 export * from "./Toolbar";
 export * from "./Fastboard";
 export { useFastboard, useReplayFastboard } from "./hooks";
-
-import "./style.scss";
 
 // Caution about Export Namespace (Star)
 // esbuild can not handle nested `export *`, i.e. given two files:

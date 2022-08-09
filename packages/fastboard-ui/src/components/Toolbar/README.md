@@ -52,6 +52,6 @@ The `computed_height` is calculated by:
 
 ```js
 const max_height = button_height * 2 + scrollable_area_full_height;
-let full_height = container.height;
+const full_height = container.height;
 computed_height = full_height < max_height ? full_height : max_height;
 ```

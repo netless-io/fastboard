@@ -2,9 +2,9 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.addMissingImports": true
+    "source.fixAll": true
   },
+  "svelte.enable-ts-plugin": true,
   "cSpell.ignorePaths": [
     "docs/*.md",
     "package-lock.json",
@@ -36,5 +36,6 @@
     "valuemax",
     "valuemin",
     "valuenow"
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

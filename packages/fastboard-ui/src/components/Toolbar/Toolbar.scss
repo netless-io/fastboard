@@ -25,7 +25,7 @@ $name: "fastboard-toolbar";
   cursor: pointer;
   pointer-events: auto;
 
-  &:focus-within {
+  &:focus-visible {
     outline: 2px solid -webkit-focus-ring-color;
   }
 
