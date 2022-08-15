@@ -14,15 +14,15 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.5",
-    "@netless/synced-store": "^2.0.3"
+    "@netless/app-slide": "^0.2.7",
+    "@netless/synced-store": "^2.0.6"
   },
   "peerDependencies": {
     "@netless/window-manager": ">=0.4.0",
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.32"
+    "white-web-sdk": "^2.16.33"
   },
   "publishConfig": {
     "main": "dist/index.js",
