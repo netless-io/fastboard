@@ -44,19 +44,9 @@ async function main() {
     netlessApps: [],
   });
 
-  const ui = createUI(fastboard, document.getElementById("whiteboard"));
+  const container = createContainer();
 
-  // 更新 Fastboard UI
-  ui.update({
-    theme: "dark",
-    language: "en",
-    config: {
-      page_control: { enable: true },
-      redo_undo: { enable: true },
-      toolbar: { enable: true },
-      zoom_control: { enable: true },
-    },
-  });
+  const ui = createUI(fastboard, container);
 
   // .....
 
@@ -68,6 +58,20 @@ async function main() {
   // 退出 Fastboard (从白板房间断开)
   fastboard.destroy();
 }
+
+function createContainer() {
+  const container = document.createElement("div");
+  // 白板元素必须具有可见的大小
+  Object.assign(container.style, {
+    height: "400px",
+    border: "1px solid",
+    background: "#f1f2f3",
+  });
+  document.body.appendChild(container);
+  return container;
+}
+
+main().catch(console.error);
 ```
 
 <samp>[1]</samp> 关于 SDK 更多配置请看 [构造 WhiteWebSDK](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)\
@@ -93,13 +97,14 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 
 ```jsx
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
-import ReactDOM from "react-dom";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
 function App() {
   const fastboard = useFastboard(() => ({
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
-      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
+      region: "cn-hz", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
     },
     joinRoom: {
       uid: "unique_id_for_each_client",
@@ -108,17 +113,11 @@ function App() {
     },
   }));
 
-  const [uiConfig] = useState(() => ({
-    page_control: { enable: true },
-    redo_undo: { enable: true },
-    toolbar: { enable: true },
-    zoom_control: { enable: true },
-  }));
-
-  return <Fastboard app={fastboard} language="en" theme="dark" config={uiConfig} />;
+  return <Fastboard app={fastboard} />;
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+// 白板元素必须具有可见的大小
+createRoot(document.getElementById("app")).render(<App />);
 ```
 
 ### 使用白板功能

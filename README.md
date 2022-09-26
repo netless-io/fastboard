@@ -47,19 +47,9 @@ async function main() {
     netlessApps: [],
   });
 
-  const ui = createUI(fastboard, document.getElementById("whiteboard"));
+  const container = createContainer();
 
-  // Update Fastboard UI
-  ui.update({
-    theme: "dark",
-    language: "en",
-    config: {
-      page_control: { enable: true },
-      redo_undo: { enable: true },
-      toolbar: { enable: true },
-      zoom_control: { enable: true },
-    },
-  });
+  const ui = createUI(fastboard, container);
 
   // .....
 
@@ -71,6 +61,20 @@ async function main() {
   // destroy Fastboard (disconnect from the whiteboard room)
   fastboard.destroy();
 }
+
+function createContainer() {
+  const container = document.createElement("div");
+  // Must give it a visible size
+  Object.assign(container.style, {
+    height: "400px",
+    border: "1px solid",
+    background: "#f1f2f3",
+  });
+  document.body.appendChild(container);
+  return container;
+}
+
+main().catch(console.error);
 ```
 
 <samp>[1]</samp> Read more about the SDK config at [Construct WhiteWebSDK object](https://developer.netless.link/javascript-en/home/construct-white-web-sdk)\
@@ -87,7 +91,8 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 
 ```jsx
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
-import ReactDOM from "react-dom";
+import React from "react";
+import { createRoot } from "react-dom/client";
 
 function App() {
   const fastboard = useFastboard(() => ({
@@ -102,17 +107,11 @@ function App() {
     },
   }));
 
-  const [uiConfig] = useState(() => ({
-    page_control: { enable: true },
-    redo_undo: { enable: true },
-    toolbar: { enable: true },
-    zoom_control: { enable: true },
-  }));
-
-  return <Fastboard app={fastboard} language="en" theme="dark" config={uiConfig} />;
+  return <Fastboard app={fastboard} />;
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+// The root element must have a visible size
+createRoot(document.getElementById("app")).render(<App />);
 ```
 
 ### Whiteboard Functions
