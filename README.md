@@ -119,7 +119,7 @@ createRoot(document.getElementById("app")).render(<App />);
 #### Insert Picture
 
 ```js
-await app.insertImage(fileUrl);
+await fastboard.insertImage(fileUrl);
 ```
 
 The `fileUrl` is the url to load the image file, like "src" in `<img src>`.
@@ -128,24 +128,24 @@ Fastboard itself does not contain any logic about upload/save a file.
 #### Redo & Undo
 
 ```js
-app.undo();
-app.redo();
+fastboard.undo();
+fastboard.redo();
 ```
 
 #### Move Camera
 
 ```js
-app.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
-app.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
+fastboard.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
+fastboard.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
 ```
 
 #### Set Tool
 
 ```js
-app.setAppliance("pencil");
-app.setAppliance("shape", "triangle");
-app.setStrokeWidth(2);
-app.setStrokeColor([r, g, b]);
+fastboard.setAppliance("pencil");
+fastboard.setAppliance("shape", "triangle");
+fastboard.setStrokeWidth(2);
+fastboard.setStrokeColor([r, g, b]);
 ```
 
 ### Netless Apps
@@ -174,7 +174,7 @@ createFastboard({
 Then add app into the room via:
 
 ```js
-app.manager.addApp({ kind: MyApp.kind });
+fastboard.manager.addApp({ kind: MyApp.kind });
 ```
 
 [Read more about Netless Apps.](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
@@ -183,7 +183,7 @@ app.manager.addApp({ kind: MyApp.kind });
 
 ```js
 // insert PDF/PPT/PPTX to the main whiteboard
-const appId = await app.insertDocs("filename.pptx", conversionResponse);
+const appId = await fastboard.insertDocs("filename.pptx", conversionResponse);
 ```
 
 The `conversionResponse` is the result of [this api](https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress).
@@ -191,7 +191,7 @@ The `conversionResponse` is the result of [this api](https://developer.netless.l
 #### Insert Video & Audio
 
 ```js
-const appId = await app.insertMedia("filename.mp3", fileUrl);
+const appId = await fastboard.insertMedia("filename.mp3", fileUrl);
 ```
 
 The `fileUrl` is the url to load the media file, like "src" in `<video src>`.
@@ -200,7 +200,7 @@ Fastboard itself does not contain any logic about upload/save a file.
 #### Insert [@netless/app-monaco](https://github.com/netless-io/netless-app/tree/master/packages/app-monaco)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Monaco",
   options: { title: "Code Editor" },
 });
@@ -209,7 +209,7 @@ const appId = await app.manager.addApp({
 #### Insert [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Countdown",
   options: { title: "Countdown" },
 });
@@ -218,7 +218,7 @@ const appId = await app.manager.addApp({
 #### Insert [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",
   options: { title: "GeoGebra" },
 });
@@ -227,7 +227,7 @@ const appId = await app.manager.addApp({
 #### Insert [@netless/app-plyr](https://github.com/netless-io/netless-app/tree/master/packages/app-plyr)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Plyr",
   options: { title: "YouTube" },
   attributes: {
@@ -240,7 +240,7 @@ const appId = await app.manager.addApp({
 #### Insert [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "EmbeddedPage",
   options: { title: "Google Docs" },
   attributes: {

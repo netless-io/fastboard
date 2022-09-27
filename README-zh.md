@@ -127,7 +127,7 @@ createRoot(document.getElementById("app")).render(<App />);
 #### 插入图片
 
 ```js
-await app.insertImage(fileUrl);
+await fastboard.insertImage(fileUrl);
 ```
 
 其中 `fileUrl` 是该图片文件的 CDN 地址。本库并不包含任何上传、保存文件的逻辑和功能。
@@ -135,24 +135,24 @@ await app.insertImage(fileUrl);
 #### 撤销、重做
 
 ```js
-app.undo();
-app.redo();
+fastboard.undo();
+fastboard.redo();
 ```
 
 #### 移动视角
 
 ```js
-app.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
-app.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
+fastboard.moveCamera({ centerX: 0, centerY: 0, scale: 1 });
+fastboard.moveCameraToContain({ originX: -300, originY: -200, width: 600, height: 400 });
 ```
 
 #### 设置教具
 
 ```js
-app.setAppliance("pencil");
-app.setAppliance("shape", "triangle");
-app.setStrokeWidth(2);
-app.setStrokeColor([r, g, b]);
+fastboard.setAppliance("pencil");
+fastboard.setAppliance("shape", "triangle");
+fastboard.setStrokeWidth(2);
+fastboard.setStrokeColor([r, g, b]);
 ```
 
 ### 使用 Apps
@@ -180,7 +180,7 @@ createFastboard({
 接着在房间内调用以下接口插入 app：
 
 ```js
-app.manager.addApp({ kind: MyApp.kind });
+fastboard.manager.addApp({ kind: MyApp.kind });
 ```
 
 [在这里阅读更多有关开发 Netless App 的信息](https://github.com/netless-io/window-manager/blob/master/docs/develop-app.md)
@@ -189,7 +189,7 @@ app.manager.addApp({ kind: MyApp.kind });
 
 ```js
 // 插入 PDF/PPT/PPTX 至主白板
-const appId = await app.insertDocs("文件名.pptx", conversionResponse);
+const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 ```
 
 其中 `conversionResponse` 是 [转码](https://developer.netless.link/server-zh/home/server-conversion#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6) 结果。
@@ -197,7 +197,7 @@ const appId = await app.insertDocs("文件名.pptx", conversionResponse);
 #### 插入音频、视频
 
 ```js
-const appId = await app.insertMedia("文件名.mp3", fileUrl);
+const appId = await fastboard.insertMedia("文件名.mp3", fileUrl);
 ```
 
 其中 `fileUrl` 是该媒体文件的 CDN 地址。本库并不包含任何上传、保存文件的逻辑和功能。
@@ -205,7 +205,7 @@ const appId = await app.insertMedia("文件名.mp3", fileUrl);
 #### 插入 [@netless/app-monaco](https://github.com/netless-io/netless-app/tree/master/packages/app-monaco)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Monaco",
   options: { title: "Code Editor" },
 });
@@ -214,7 +214,7 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-countdown](https://github.com/netless-io/netless-app/tree/master/packages/app-countdown)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Countdown",
   options: { title: "Countdown" },
 });
@@ -223,7 +223,7 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",
   options: { title: "GeoGebra" },
 });
@@ -232,7 +232,7 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-plyr](https://github.com/netless-io/netless-app/tree/master/packages/app-plyr)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "Plyr",
   options: { title: "YouTube" },
   attributes: {
@@ -245,7 +245,7 @@ const appId = await app.manager.addApp({
 #### 插入 [@netless/app-embedded-page](https://github.com/netless-io/netless-app/tree/master/packages/app-embedded-page)
 
 ```js
-const appId = await app.manager.addApp({
+const appId = await fastboard.manager.addApp({
   kind: "EmbeddedPage",
   options: { title: "Google Docs" },
   attributes: {
