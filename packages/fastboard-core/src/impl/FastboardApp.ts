@@ -556,7 +556,7 @@ export interface FastboardOptions {
     region: NonNullable<WhiteWebSdkConfiguration["region"]>;
   };
   joinRoom: Omit<JoinRoomParams, "useMultiViews" | "disableNewPencil" | "disableMagixEventDispatchLimit"> & {
-    callbacks?: Partial<RoomCallbacks>;
+    callbacks?: Partial<Omit<RoomCallbacks, "onCanRedoStepsUpdate" | "onCanUndoStepsUpdate">>;
   };
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
