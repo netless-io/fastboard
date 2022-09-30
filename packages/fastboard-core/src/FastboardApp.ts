@@ -194,8 +194,10 @@ export class FastboardApp<
   /**
    * 0..n-1, current index of pages.
    */
-  readonly pageIndex = this._val(this.pageState.value.index, set =>
-    this.pageState.reaction(state => set(state.index))
+  readonly pageIndex = this._val(
+    this.pageState.value.index,
+    set => this.pageState.reaction(state => set(state.index)),
+    index => this.jumpPage(index)
   );
 
   /**
@@ -462,7 +464,7 @@ export class FastboardApp<
       const scenePath = `/${arg2.uuid}/${v4()}`;
       const taskId = arg2.uuid;
       const url = arg2.prefix;
-      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
+      return this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
     }
   }
 
