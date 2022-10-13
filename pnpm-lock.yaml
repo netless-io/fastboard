@@ -8,7 +8,7 @@ importers:
       '@hyrious/esbuild-plugin-svelte': ^0.1.6
       '@hyrious/rimraf': ^0.1.0
       '@netless/synced-store': ^2.0.7
-      '@netless/window-manager': 1.0.0-canary.61
+      '@netless/window-manager': 1.0.0-canary.63
       '@sveltejs/vite-plugin-svelte': 1.0.8
       '@types/node': ^18.7.23
       '@typescript-eslint/eslint-plugin': ^5.38.1
@@ -27,13 +27,13 @@ importers:
       tsup: ^6.2.3
       typescript: ^4.8.4
       vite: ^3.1.4
-      white-web-sdk: ^2.16.35
+      white-web-sdk: ^2.16.36
     devDependencies:
       '@hyrious/esbuild-dev': 0.8.5_esbuild@0.15.10
       '@hyrious/esbuild-plugin-svelte': 0.1.6_yrf2c7g4qxwb6mupfricf7halm
       '@hyrious/rimraf': 0.1.0
-      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.35
-      '@netless/window-manager': 1.0.0-canary.61_white-web-sdk@2.16.35
+      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.36
+      '@netless/window-manager': 1.0.0-canary.63_white-web-sdk@2.16.36
       '@sveltejs/vite-plugin-svelte': 1.0.8_svelte@3.50.1+vite@3.1.4
       '@types/node': 18.7.23
       '@typescript-eslint/eslint-plugin': 5.38.1_c7qepppml3d4ahu5cnfwqe6ltq
@@ -52,7 +52,7 @@ importers:
       tsup: 6.2.3_typescript@4.8.4
       typescript: 4.8.4
       vite: 3.1.4_sass@1.55.0
-      white-web-sdk: 2.16.35
+      white-web-sdk: 2.16.36
 
   packages/esbuild-plugin-inline-sass:
     specifiers: {}
@@ -74,12 +74,12 @@ importers:
     specifiers:
       '@lukeed/uuid': ^2.0.0
       '@netless/synced-store': ^2.0.7
-      white-web-sdk: ^2.16.35
+      white-web-sdk: ^2.16.36
     dependencies:
       '@lukeed/uuid': 2.0.0
-      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.35
+      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.36
     devDependencies:
-      white-web-sdk: 2.16.35
+      white-web-sdk: 2.16.36
 
   packages/fastboard-react:
     specifiers:
@@ -547,7 +547,7 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@netless/synced-store/2.0.7_white-web-sdk@2.16.35:
+  /@netless/synced-store/2.0.7_white-web-sdk@2.16.36:
     resolution: {integrity: sha512-E5ukXMTLa0Mlhlv9Rcy3MJSAM5kwiLoXQy42OCSIFdBR8jf0BKbSUXSjnA8J+FZq6UidNtGaadDWjhwlM1z5MA==}
     peerDependencies:
       white-web-sdk: '>= 2.16'
@@ -556,7 +556,7 @@ packages:
       remitter: 0.2.9
       side-effect-manager: 1.2.1
       value-enhancer: 1.3.2
-      white-web-sdk: 2.16.35
+      white-web-sdk: 2.16.36
 
   /@netless/telebox-insider/1.0.0-alpha.37:
     resolution: {integrity: sha512-Fazjl/sLaqXPASEvc3ZC+uQSzaCmlmOIpcTwokP//Hn9u4f6C1HvU1veIF1An+s6s44gSYkS9IegYZrGt5cOsg==}
@@ -570,16 +570,13 @@ packages:
       value-enhancer: 1.3.2
     dev: true
 
-  /@netless/window-manager/1.0.0-canary.61_white-web-sdk@2.16.35:
-    resolution: {integrity: sha512-37fwXPD3QjUj4DimOsVOpTr8/proELXmHexQbj5vdxquLLtUyhEth091z5vPEl4EkO7jOuPtuwm38Wak1QCBYw==}
+  /@netless/window-manager/1.0.0-canary.63_white-web-sdk@2.16.36:
+    resolution: {integrity: sha512-X3bfdrBAzCKenZnn/E6A9cxDUI+k6kTsVTMbmJ4fjf71bUy1fn60qknynanZduT1lYiv8UrOf5VDHfr3HuLn4g==}
     peerDependencies:
       white-web-sdk: ^2.16.0
-    peerDependenciesMeta:
-      white-web-sdk:
-        optional: true
     dependencies:
       '@juggle/resize-observer': 3.4.0
-      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.35
+      '@netless/synced-store': 2.0.7_white-web-sdk@2.16.36
       '@netless/telebox-insider': 1.0.0-alpha.37
       emittery: 0.11.0
       lodash: 4.17.21
@@ -587,7 +584,7 @@ packages:
       side-effect-manager: 1.2.1
       uuid: 7.0.3
       value-enhancer: 1.3.2
-      white-web-sdk: 2.16.35
+      white-web-sdk: 2.16.36
     dev: true
 
   /@netless/xml-js/1.6.15:
@@ -683,8 +680,6 @@ packages:
       vite: ^3.0.0
     peerDependenciesMeta:
       diff-match-patch:
-        optional: true
-      vite:
         optional: true
     dependencies:
       '@rollup/pluginutils': 4.2.1
@@ -2918,8 +2913,8 @@ packages:
       isexe: 2.0.0
     dev: true
 
-  /white-web-sdk/2.16.35:
-    resolution: {integrity: sha512-HgpTTPN0np9/4UWDVBFV05bpfEBHyN0mseXKdUjS+31VcjbvLhbeX7kSM3wRAEkh7svmzZAAUhOWwBHD14MACA==}
+  /white-web-sdk/2.16.36:
+    resolution: {integrity: sha512-qmyi6Slkxkbo7+FM3MudieQGhhKRtEztQaTDya1whl7ntD1BRavZzpRBgnJ1NMX2A1wKjILGHXRg9zyZhnAZaA==}
     dependencies:
       '@juggle/resize-observer': 3.4.0
       '@netless/canvas-polyfill': 0.0.4

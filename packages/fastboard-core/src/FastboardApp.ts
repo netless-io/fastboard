@@ -169,13 +169,6 @@ export class FastboardApp<
   );
 
   /**
-   * The synced camera state across all users.
-   */
-  readonly baseCamera = this._val(this.manager.baseCamera, set =>
-    addManagerListener(this.manager, "baseCameraChange", set)
-  );
-
-  /**
    * The local camera state of main view in window manager.
    *
    * Change the camera position by `fastboard.moveCamera()`.

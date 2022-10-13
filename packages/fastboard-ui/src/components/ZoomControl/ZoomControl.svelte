@@ -55,7 +55,7 @@
   let type: IconType;
   $: type = disabled ? "disable" : "normal";
 
-  $: camera = app?.baseCamera;
+  $: camera = app?.camera;
   $: scale = $camera?.scale ?? 1;
   $: plus_disabled = disabled || next_scale(scale, 1) <= scale;
   $: minus_disabled = disabled || next_scale(scale, -1) >= scale;

@@ -46,7 +46,6 @@ This document can also be applied to `@netless/fastboard-react`.
     - [fastboard.undo()](#fastboardundo)
     - [fastboard.redo()](#fastboardredo)
   - Camera
-    - [fastboard.baseCamera](#fastboardbasecamera)
     - [fastboard.camera](#fastboardcamera)
     - [fastboard.moveCamera(camera)](#fastboardmovecameracamera)
 
@@ -218,22 +217,6 @@ The number of steps that can be redone.
 - {Readable&lang;Integer&rang;}
 
 The number of steps that can be undone.
-
-### fastboard.baseCamera
-
-- {Readable&lang;BaseCamera|undefined&rang;}
-
-It can be undefined on first entering room.
-
-#### BaseCamera
-
-- {Object}
-
-The abstract camera state that synced to each client.
-
-- `scale` {Number} The scale of the camera.
-- `centerX` {Number} The x coordinate of the camera center.
-- `centerY` {Number} The y coordinate of the camera center.
 
 ### fastboard.camera
 

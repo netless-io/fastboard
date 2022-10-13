@@ -7,7 +7,7 @@ export default defineConfig([
   {
     entry: [main],
     format: ["cjs", "esm"],
-    sourcemap: true,
+    sourcemap: false,
     clean: true,
     platform: "browser",
     target: "esnext",
@@ -20,7 +20,7 @@ export default defineConfig([
     entry: { "index.svelte": main },
     format: ["esm"],
     external: ["svelte"],
-    sourcemap: true,
+    sourcemap: false,
     clean: true,
     platform: "browser",
     target: "esnext",

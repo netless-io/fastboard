@@ -22,7 +22,7 @@
     "@netless/synced-store": "^2.0.7"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.35"
+    "white-web-sdk": "^2.16.36"
   },
   "publishConfig": {
     "main": "dist/index.js",
