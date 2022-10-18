@@ -16,7 +16,7 @@ export interface AppsConfig {
 
 const DefaultApps: AppsConfig = {
   Monaco: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-monaco/0.1.12/dist/main.iife.js",
+    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-monaco/0.1.14-beta.1/dist/main.iife.js",
   },
   Countdown: {
     src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-countdown/0.0.2/dist/main.iife.js",
