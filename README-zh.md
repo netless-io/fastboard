@@ -194,6 +194,17 @@ const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 
 其中 `conversionResponse` 是 [转码](https://developer.netless.link/server-zh/home/server-conversion#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6) 结果。
 
+> **注意：** 如果你使用的是 [projector](https://developer.netless.link/server-zh/home/server-projector) 转码服务，请使用以下方式插入：
+>
+> ```js
+> const appId = await fastboard.insertDocs({
+>   fileType: "pptx",
+>   scenePath: `/pptx/${response.uuid}`,
+>   taskId: response.uuid,
+>   title: "filename.pptx",
+> });
+> ```
+
 #### 插入音频、视频
 
 ```js

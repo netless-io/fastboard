@@ -188,6 +188,17 @@ const appId = await fastboard.insertDocs("filename.pptx", conversionResponse);
 
 The `conversionResponse` is the result of [this api](https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress).
 
+> **Note:** If you're using the new [projector](https://developer.netless.link/server-zh/home/server-projector) api, please use the manual way:
+>
+> ```js
+> const appId = await fastboard.insertDocs({
+>   fileType: "pptx",
+>   scenePath: `/pptx/${response.uuid}`,
+>   taskId: response.uuid,
+>   title: "filename.pptx",
+> });
+> ```
+
 #### Insert Video & Audio
 
 ```js
