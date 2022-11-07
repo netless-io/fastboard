@@ -102,7 +102,11 @@ export class FastboardApp<
     this._destroyed = true;
     this._flushAllDisposers();
     this.manager.destroy();
-    await this.room.disconnect();
+    try {
+      await this.room.disconnect();
+    } catch {
+      // ignore
+    }
   }
 
   /**
