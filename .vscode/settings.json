@@ -5,5 +5,8 @@
     "source.fixAll": true
   },
   "svelte.enable-ts-plugin": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
 }

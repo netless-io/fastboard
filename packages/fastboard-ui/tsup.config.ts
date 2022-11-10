@@ -1,5 +1,4 @@
 import { defineConfig } from "tsup";
-import { svelte } from "@hyrious/esbuild-plugin-svelte";
 import { sass } from "@netless/esbuild-plugin-inline-sass";
 import { main } from "./package.json";
 
@@ -11,7 +10,7 @@ export default defineConfig([
     clean: true,
     platform: "browser",
     target: "esnext",
-    esbuildPlugins: [svelte(), sass({ emitCss: true })],
+    esbuildPlugins: [sass({ emitCss: true })],
     loader: { ".svg": "dataurl" },
     dts: true,
     treeshake: true,
@@ -24,7 +23,7 @@ export default defineConfig([
     clean: true,
     platform: "browser",
     target: "esnext",
-    esbuildPlugins: [svelte(), sass({ strip: true })],
+    esbuildPlugins: [sass({ strip: true })],
     loader: { ".svg": "dataurl" },
     treeshake: true,
   },

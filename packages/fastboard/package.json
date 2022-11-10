@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "1.0.0-canary.7",
+  "version": "1.0.0-canary.8",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [

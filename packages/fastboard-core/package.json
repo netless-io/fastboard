@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core",
-  "version": "1.0.0-canary.7",
+  "version": "1.0.0-canary.8",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
@@ -22,7 +22,7 @@
     "@netless/synced-store": "^2.0.7"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.36"
+    "white-web-sdk": "^2.16.37"
   },
   "publishConfig": {
     "main": "dist/index.js",

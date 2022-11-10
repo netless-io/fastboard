@@ -25,6 +25,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="fastboard-toolbar-colors {theme}" on:click={set_stroke_color}>
   {#each colorKeys as key (key)}
     <button

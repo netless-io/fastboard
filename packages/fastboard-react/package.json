@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "1.0.0-canary.7",
+  "version": "1.0.0-canary.8",
   "description": "React components of @netless/fastboard.",
   "main": "src/index.tsx",
   "files": [
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "@netless/esbuild-plugin-inline-sass": "workspace:*",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
