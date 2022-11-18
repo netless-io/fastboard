@@ -35,6 +35,10 @@ async function main() {
       uid: "unique_id_for_each_client",
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
+      // (可选)
+      userPayload: {
+        nickName: "喵喵",
+      },
     },
     // [3] (可选)
     managerConfig: {

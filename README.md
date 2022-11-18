@@ -38,6 +38,10 @@ async function main() {
       uid: "unique_id_for_each_client",
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
+      // (optional)
+      userPayload: {
+        nickName: "foo",
+      },
     },
     // [3] (optional)
     managerConfig: {
