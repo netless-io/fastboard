@@ -117,10 +117,20 @@ function App() {
     },
   }));
 
-  return <Fastboard app={fastboard} />;
+  // 白板元素必须具有可见的大小
+  return (
+    <div
+      style={{
+        height: "400px",
+        border: "1px solid",
+        background: "#f1f2f3",
+      }}
+    >
+      <Fastboard app={fastboard} />
+    </div>
+  );
 }
 
-// 白板元素必须具有可见的大小
 createRoot(document.getElementById("app")).render(<App />);
 ```
 

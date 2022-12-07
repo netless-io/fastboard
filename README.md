@@ -111,10 +111,20 @@ function App() {
     },
   }));
 
-  return <Fastboard app={fastboard} />;
+  // Container must have a visible size
+  return (
+    <div
+      style={{
+        height: "400px",
+        border: "1px solid",
+        background: "#f1f2f3",
+      }}
+    >
+      <Fastboard app={fastboard} />
+    </div>
+  );
 }
 
-// The root element must have a visible size
 createRoot(document.getElementById("app")).render(<App />);
 ```
 
