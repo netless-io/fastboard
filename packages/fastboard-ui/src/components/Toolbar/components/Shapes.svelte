@@ -65,6 +65,7 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="fastboard-toolbar-shapes {theme}" on:click={set_appliance_or_shape}>
   {#each shapes as key (key)}
     {@const is_selected = appliance === "shape" ? shape === key : appliance === key}

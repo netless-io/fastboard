@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.7
+
+- Added warning in `React.StrictMode`.
+
 ## 0.3.6
 
 - Added `syncedStore` api.

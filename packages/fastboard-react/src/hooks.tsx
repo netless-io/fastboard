@@ -27,35 +27,37 @@ export function useUpdateEffect(effect: EffectCallback, deps?: DependencyList) {
 
 // https://dev.to/ag-grid/react-18-avoiding-use-effect-getting-called-twice-4i9e
 export function useEffectOnce(effect: EffectCallback) {
-  const effectFn = useRef(effect)
-  const destroyFn = useRef<void | (() => void)>()
-  const effectCalled = useRef(false)
-  const rendered = useRef(false)
-  const [, refresh] = useState(0)
+  const effectFn = useRef(effect);
+  const destroyFn = useRef<void | (() => void)>();
+  const effectCalled = useRef(false);
+  const rendered = useRef(false);
+  const [, refresh] = useState(0);
 
   if (effectCalled.current) {
-    rendered.current = true
+    rendered.current = true;
   }
 
   useEffect(() => {
     if (!effectCalled.current) {
-      destroyFn.current = effectFn.current()
-      effectCalled.current = true
+      destroyFn.current = effectFn.current();
+      effectCalled.current = true;
     }
 
-    refresh(1)
+    refresh(1);
 
     return () => {
       if (rendered.current === false) {
-        console.warn("It seems you're under React.StrictMode, which could lead to unintended behavior. It is recommended to turn off it.")
-        return
+        console.warn(
+          "It seems you're under React.StrictMode, which could lead to unintended behavior. It is recommended to turn off it."
+        );
+        return;
       }
-      if (destroyFn.current) destroyFn.current()
-    }
-  }, [])
+      if (destroyFn.current) destroyFn.current();
+    };
+  }, []);
 }
 
-export function wrapReactComponent<Props>(
+export function wrapReactComponent<Props extends Record<string, any> | undefined>(
   SvelteComponent: typeof SvelteComponentType,
   name: string
 ): FunctionComponent<Props> {

@@ -18,7 +18,7 @@ import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors";
 
-class FastboardPlayerBase<TEventData = any> {
+class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   public constructor(
     readonly sdk: WhiteWebSdk,
     readonly player: Player,
@@ -65,7 +65,9 @@ type PlayerPhase = `${PlayerPhaseEnum}`;
 
 export type { PlayerPhase, PlayerSeekingResult };
 
-export class FastboardPlayer<TEventData = any> extends FastboardPlayerBase<TEventData> {
+export class FastboardPlayer<
+  TEventData extends Record<string, any> = any
+> extends FastboardPlayerBase<TEventData> {
   /**
    * Render this player to some DOM.
    */
@@ -209,7 +211,7 @@ export interface FastboardReplayOptions {
  *   },
  * })
  */
-export async function replayFastboard<TEventData = any>({
+export async function replayFastboard<TEventData extends Record<string, any> = any>({
   sdkConfig,
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,

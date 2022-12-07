@@ -36,7 +36,7 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors";
 
-class FastboardAppBase<TEventData = any> {
+class FastboardAppBase<TEventData extends Record<string, any> = any> {
   public constructor(
     readonly sdk: WhiteWebSdk,
     readonly room: Room,
@@ -162,7 +162,7 @@ export interface AppsStatus {
   };
 }
 
-export class FastboardApp<TEventData = any> extends FastboardAppBase<TEventData> {
+export class FastboardApp<TEventData extends Record<string, any> = any> extends FastboardAppBase<TEventData> {
   /**
    * Render this app to some DOM.
    */
@@ -577,7 +577,7 @@ export interface FastboardOptions {
  *   },
  * })
  */
-export async function createFastboard<TEventData = any>({
+export async function createFastboard<TEventData extends Record<string, any> = any>({
   sdkConfig,
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
