@@ -36,7 +36,7 @@ importers:
       '@hyrious/rimraf': 0.1.0
       '@netless/window-manager': 0.4.54_white-web-sdk@2.16.38
       '@sveltejs/vite-plugin-svelte': 1.4.0_svelte@3.54.0+vite@3.2.5
-      '@types/node': 18.7.11
+      '@types/node': 18.11.11
       '@typescript-eslint/eslint-plugin': 5.34.0_putdjeusjxvp4rlivl3gqkxfmm
       '@typescript-eslint/parser': 5.34.0_tg6quxtr5dyl3tikvj7rwonxxi
       '@vitejs/plugin-react': 2.0.1_vite@3.2.5
@@ -44,7 +44,7 @@ importers:
       eslint: 8.22.0
       eslint-define-config: 1.6.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.22.0
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       prettier: 2.8.0
       sass: 1.54.5
       semver: 7.3.7
@@ -55,7 +55,7 @@ importers:
       typedoc: 0.23.10_typescript@4.9.3
       typedoc-plugin-markdown: 3.13.4_typedoc@0.23.10
       typescript: 4.9.3
-      vite: 3.2.5_dtt7lpmtta6aeqem5ukkcem534
+      vite: 3.2.5_wbruqs3kiu2sdyra3q67gg6o3q
       white-web-sdk: 2.16.38
 
   packages/esbuild-plugin-inline-sass:
@@ -120,7 +120,7 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       '@jridgewell/gen-mapping': 0.1.1
-      '@jridgewell/trace-mapping': 0.3.15
+      '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
   /@babel/code-frame/7.18.6:
@@ -483,7 +483,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.14
-      '@jridgewell/trace-mapping': 0.3.15
+      '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
   /@jridgewell/resolve-uri/3.1.0:
@@ -498,13 +498,6 @@ packages:
 
   /@jridgewell/sourcemap-codec/1.4.14:
     resolution: {integrity: sha512-XPSJHWmi394fuUuzDnGz1wiKqWfo1yXecHQMRf2l6hztTO+nPru658AyDngaBe7isIxEkRsPR3FZh+s7iVa4Uw==}
-    dev: true
-
-  /@jridgewell/trace-mapping/0.3.15:
-    resolution: {integrity: sha512-oWZNOULl+UbhsgB51uuZzglikfIKSUBO/M9W2OfEjn7cmqoAiCgmv9lyACTUacZwBz0ITnJ2NqjU8Tx0DHL88g==}
-    dependencies:
-      '@jridgewell/resolve-uri': 3.1.0
-      '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
   /@jridgewell/trace-mapping/0.3.17:
@@ -656,7 +649,7 @@ packages:
       magic-string: 0.26.7
       svelte: 3.54.0
       svelte-hmr: 0.15.1_svelte@3.54.0
-      vite: 3.2.5_dtt7lpmtta6aeqem5ukkcem534
+      vite: 3.2.5_wbruqs3kiu2sdyra3q67gg6o3q
       vitefu: 0.2.2_vite@3.2.5
     transitivePeerDependencies:
       - supports-color
@@ -671,10 +664,6 @@ packages:
 
   /@types/node/18.11.11:
     resolution: {integrity: sha512-KJ021B1nlQUBLopzZmPBVuGU9un7WJd/W4ya7Ih02B4Uwky5Nja0yGYav2EfYIk0RR2Q9oVhf60S2XR1BCWJ2g==}
-
-  /@types/node/18.7.11:
-    resolution: {integrity: sha512-KZhFpSLlmK/sdocfSAjqPETTMd0ug6HIMIAwkwUpU79olnZdQtMxpQP+G1wDzCH7na+FltSIhbaZuKdwZ8RDrw==}
-    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -886,9 +875,9 @@ packages:
       '@babel/plugin-transform-react-jsx-development': 7.18.6_@babel+core@7.18.13
       '@babel/plugin-transform-react-jsx-self': 7.18.6_@babel+core@7.18.13
       '@babel/plugin-transform-react-jsx-source': 7.18.6_@babel+core@7.18.13
-      magic-string: 0.26.2
+      magic-string: 0.26.7
       react-refresh: 0.14.0
-      vite: 3.2.5_dtt7lpmtta6aeqem5ukkcem534
+      vite: 3.2.5_wbruqs3kiu2sdyra3q67gg6o3q
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1616,17 +1605,6 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
 
-  /fast-glob/3.2.11:
-    resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==}
-    engines: {node: '>=8.6.0'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.5
-    dev: true
-
   /fast-glob/3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
     engines: {node: '>=8.6.0'}
@@ -1786,7 +1764,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.2.11
+      fast-glob: 3.2.12
       ignore: 5.2.0
       merge2: 1.4.1
       slash: 3.0.0
@@ -1805,7 +1783,7 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
     dependencies:
-      minimist: 1.2.6
+      minimist: 1.2.7
       neo-async: 2.6.2
       source-map: 0.6.1
       wordwrap: 1.0.0
@@ -2052,13 +2030,6 @@ packages:
       sourcemap-codec: 1.4.8
     dev: true
 
-  /magic-string/0.26.2:
-    resolution: {integrity: sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==}
-    engines: {node: '>=12'}
-    dependencies:
-      sourcemap-codec: 1.4.8
-    dev: true
-
   /magic-string/0.26.7:
     resolution: {integrity: sha512-hX9XH3ziStPoPhJxLq1syWuZMxbDvGNbVchfrdCtanC7D13888bMFow61x8axrx+GfHLtVeAx2kxL7tTGRl+Ow==}
     engines: {node: '>=12'}
@@ -2131,10 +2102,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: 2.0.1
-    dev: true
-
-  /minimist/1.2.6:
-    resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
     dev: true
 
   /minimist/1.2.7:
@@ -2689,6 +2656,7 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
     dev: true
 
   /spark-md5/3.0.2:
@@ -3102,7 +3070,7 @@ packages:
       global: 4.4.0
     dev: true
 
-  /vite/3.2.5_dtt7lpmtta6aeqem5ukkcem534:
+  /vite/3.2.5_wbruqs3kiu2sdyra3q67gg6o3q:
     resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3127,7 +3095,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.7.11
+      '@types/node': 18.11.11
       esbuild: 0.15.18
       postcss: 8.4.19
       resolve: 1.22.1
@@ -3145,7 +3113,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 3.2.5_dtt7lpmtta6aeqem5ukkcem534
+      vite: 3.2.5_wbruqs3kiu2sdyra3q67gg6o3q
     dev: true
 
   /vscode-oniguruma/1.6.2:

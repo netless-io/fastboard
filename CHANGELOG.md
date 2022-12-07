@@ -3,6 +3,7 @@
 ## 0.3.7
 
 - Added warning in `React.StrictMode`.
+- Export helper functions like `addRoomListener` `addPlayerListener` `addViewListener` `addManagerListener`.
 
 ## 0.3.6
 
