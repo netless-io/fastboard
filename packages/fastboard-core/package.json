@@ -22,7 +22,7 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.34"
+    "white-web-sdk": "^2.16.38"
   },
   "publishConfig": {
     "main": "dist/index.js",

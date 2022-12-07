@@ -124,7 +124,11 @@ apps.push(
 );
 
 const root = document.getElementById("app") as HTMLDivElement;
-ReactDOM.createRoot(root).render(<App />);
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },
