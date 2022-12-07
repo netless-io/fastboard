@@ -10,7 +10,7 @@ export const scrollTop: SvelteAction<Writable<number>> = function (node, value) 
 
   function on_scroll() {
     clearTimeout(timer);
-    timer = setTimeout(() => value.set(node.scrollTop), 200);
+    timer = window.setTimeout(() => value.set(node.scrollTop), 200);
   }
 
   node.addEventListener("scroll", on_scroll);
