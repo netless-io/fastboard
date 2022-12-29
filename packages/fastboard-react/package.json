@@ -20,14 +20,14 @@
     "white-web-sdk": ">=2.16.0"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.3.0-canary.13",
+    "@netless/app-slide": "^0.3.0-canary.17",
     "@netless/fastboard-core": "workspace:*",
     "@netless/fastboard-ui": "workspace:*"
   },
   "devDependencies": {
     "@netless/esbuild-plugin-inline-sass": "workspace:*",
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.8",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

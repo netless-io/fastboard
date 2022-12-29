@@ -14,32 +14,35 @@
     "release": "esbuild-dev scripts/release.ts"
   },
   "devDependencies": {
-    "@hyrious/esbuild-dev": "^0.8.7",
+    "@hyrious/esbuild-dev": "^0.9.0",
     "@hyrious/esbuild-plugin-svelte": "^0.1.7",
     "@hyrious/rimraf": "^0.1.0",
     "@netless/synced-store": "^2.0.7",
-    "@netless/window-manager": "1.0.0-canary.69",
-    "@sveltejs/vite-plugin-svelte": "1.4.0",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.45.1",
-    "@typescript-eslint/parser": "^5.45.1",
-    "@vitejs/plugin-react": "^2.2.0",
-    "esbuild": "^0.15.18",
-    "eslint": "^8.29.0",
+    "@netless/window-manager": "1.0.0-canary.72",
+    "@sveltejs/vite-plugin-svelte": "2.0.2",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "@vitejs/plugin-react": "^3.0.0",
+    "esbuild": "^0.16.12",
+    "eslint": "^8.30.0",
     "eslint-define-config": "^1.12.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "fast-glob": "^3.2.12",
-    "prettier": "^2.8.0",
-    "sass": "^1.56.1",
+    "prettier": "^2.8.1",
+    "sass": "^1.57.1",
     "semver": "^7.3.8",
-    "svelte": "^3.54.0",
-    "svelte-check": "^2.10.1",
+    "svelte": "^3.55.0",
+    "svelte-check": "^3.0.1",
     "tsup": "^6.5.0",
-    "typescript": "^4.9.3",
-    "vite": "^3.2.5",
-    "white-web-sdk": "^2.16.38"
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3",
+    "white-web-sdk": "^2.16.40"
   },
   "pnpm": {
+    "overrides": {
+      "tsup>esbuild": "^0.16.12"
+    },
     "peerDependencyRules": {
       "ignoreMissing": [
         "@types/react",

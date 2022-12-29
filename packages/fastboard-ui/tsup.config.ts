@@ -13,7 +13,6 @@ export default defineConfig([
     esbuildPlugins: [sass({ emitCss: true })],
     loader: { ".svg": "dataurl" },
     dts: true,
-    treeshake: true,
   },
   {
     entry: { "index.svelte": main },
@@ -25,6 +24,5 @@ export default defineConfig([
     target: "esnext",
     esbuildPlugins: [sass({ strip: true })],
     loader: { ".svg": "dataurl" },
-    treeshake: true,
   },
 ]);

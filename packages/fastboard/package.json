@@ -19,7 +19,7 @@
     "white-web-sdk": ">=2.16.0"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.3.0-canary.13",
+    "@netless/app-slide": "^0.3.0-canary.17",
     "@netless/fastboard-core": "workspace:*",
     "@netless/fastboard-ui": "workspace:*"
   },
