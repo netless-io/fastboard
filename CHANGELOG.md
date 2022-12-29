@@ -1,5 +1,31 @@
 # Changelog
 
+## Unreleased
+
+- Fixed `fastboard-ui` CJS export not working well with `tippy.js`, this was caused by `tsup`'s `treeshake` option drops ESM behavior. While this often works well, it actually breaks the CJS export. Here's the details:
+
+  ```js
+  // old fastboard-ui/dist/index.js   (CJS export)
+  var Tippy = require('tippy.js')
+  Tippy.setDefaultProps({})
+  ```
+
+  ```js
+  // new fastboard-ui/dist/index.js   (CJS export)
+  var import_Tippy = __toESM(require('tippy.js'))
+  import_Tippy.default.setDefaultProps({})
+  ```
+
+  The `tippy.js` has this CJS export:
+
+  ```js
+  // tippy.js   (CJS export)
+  exports.__esModule = true
+  exports.default = Tippy
+  ```
+
+  `__toESM` here helps to convert the input in babel convention to an ESM module, which should fix this issue.
+
 ## 0.3.7
 
 - Added warning in `React.StrictMode`.

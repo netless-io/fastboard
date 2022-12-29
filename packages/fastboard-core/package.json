@@ -14,7 +14,7 @@
     "build": "tsup"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.8",
+    "@netless/app-slide": "^0.2.28",
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
@@ -22,7 +22,7 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.38"
+    "white-web-sdk": "^2.16.40"
   },
   "publishConfig": {
     "main": "dist/index.js",

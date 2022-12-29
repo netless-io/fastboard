@@ -4,7 +4,7 @@ import SlideApp, { apps, addHooks, previewSlide } from "@netless/app-slide";
 
 export type {
   AppOptions as SlideOptions,
-  Controller as SlideController,
+  AppResult as SlideController,
   PreviewParams,
   SlidePreviewer,
 } from "@netless/app-slide";
