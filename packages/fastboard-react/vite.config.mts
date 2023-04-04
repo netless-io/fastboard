@@ -1,8 +1,8 @@
 import type { Plugin } from "vite";
 
 import { defineConfig } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
 import react from "@vitejs/plugin-react";
+import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 const viteReactPlugins = react();
 // Remove `dedupe: ['react', 'react-dom']` from the viteReactRefresh plugin.
@@ -12,7 +12,7 @@ const viteReactRefresh = viteReactPlugins.find(
 delete viteReactRefresh.config;
 
 export default defineConfig({
-  plugins: [viteReactPlugins, svelte()],
+  plugins: [viteReactPlugins, svelte({ preprocess: vitePreprocess() })],
   envDir: "../..",
   define: { __NAME__: '"@netless/fastboard"', __VERSION__: '"develop"' },
 });
