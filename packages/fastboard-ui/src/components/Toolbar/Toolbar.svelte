@@ -25,6 +25,7 @@
   $: computed_height = clamp($container_height, extra_height, $scroll_height + extra_height);
   $: scrollable = $scroll_height + extra_height > $container_height;
 
+  $: hide_dotted = config.pencil?.dotted === false;
   $: hide_apps = config.apps?.enable === false;
   $: eraser_type = config.eraser?.behavior || "both";
 </script>
@@ -39,6 +40,7 @@
       {scroll_height}
       {computed_height}
       {scrollable}
+      {hide_dotted}
       {hide_apps}
       {eraser_type}
     />

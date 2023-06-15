@@ -23,6 +23,7 @@
       : "light"
     : "dark";
   let language: Language = is_client ? (navigator.language.startsWith("zh") ? "zh-CN" : "en") : "en";
+  let hide_dotted = false;
   let hide_apps = false;
   let eraser: "delete" | "pencil" | "both" = "both";
 
@@ -69,6 +70,9 @@
       {language}
       config={{
         toolbar: {
+          pencil: {
+            dotted: !hide_dotted,
+          },
           apps: {
             enable: !hide_apps,
           },
@@ -141,6 +145,9 @@
 
     <input type="checkbox" id="hide_apps" bind:checked={hide_apps} />
     <label for="hide_apps">Hide <kbd>APPS</kbd> Button</label>
+
+    <input type="checkbox" id="hide_dotted" bind:checked={hide_dotted} />
+    <label for="hide_dotted">Hide <kbd>Dotted</kbd></label>
 
     <!-- prettier-ignore -->
     <input type="radio" id="eraser-pencil" data-eraser="pencil" name="eraser"

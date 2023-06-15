@@ -3,6 +3,9 @@ import type { Theme, Language } from "../../typings";
 import { SvelteComponentTyped } from "svelte";
 
 export declare interface ToolbarConfig {
+  pencil?: {
+    dotted?: boolean;
+  };
   apps?: {
     enable?: boolean;
   };

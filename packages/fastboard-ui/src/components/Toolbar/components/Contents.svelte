@@ -28,6 +28,7 @@
   export let scroll_height: Writable<number>;
   export let computed_height = 0;
   export let scrollable = false;
+  export let hide_dotted = false;
   export let hide_apps = false;
   export let eraser_type: "delete" | "pencil" | "both" = "both";
 
@@ -258,29 +259,31 @@
 
 <div class="{name}-panel-wrapper" style="display:none">
   <div class="{name}-panel pencil" bind:this={pencil_panel}>
-    <div class="{name}-panel-btns">
-      <Button
-        class="pencil"
-        active={appliance === "pencil" && !dotted}
-        {...btn_props}
-        on:click={unset_dotted}
-        placement="top"
-        content={t.solid}
-      >
-        <Icons.Curve {theme} active={appliance === "pencil" && !dotted} />
-      </Button>
-      <Button
-        class="pencil"
-        active={appliance === "pencil" && dotted}
-        {...btn_props}
-        on:click={set_dotted}
-        placement="top"
-        content={t.dashed}
-      >
-        <Icons.CurveDashed {theme} active={appliance === "pencil" && dotted} />
-      </Button>
-    </div>
-    <div class="{name}-panel-divider" />
+    {#if !hide_dotted}
+      <div class="{name}-panel-btns">
+        <Button
+          class="pencil"
+          active={appliance === "pencil" && !dotted}
+          {...btn_props}
+          on:click={unset_dotted}
+          placement="top"
+          content={t.solid}
+        >
+          <Icons.Curve {theme} active={appliance === "pencil" && !dotted} />
+        </Button>
+        <Button
+          class="pencil"
+          active={appliance === "pencil" && dotted}
+          {...btn_props}
+          on:click={set_dotted}
+          placement="top"
+          content={t.dashed}
+        >
+          <Icons.CurveDashed {theme} active={appliance === "pencil" && dotted} />
+        </Button>
+      </div>
+      <div class="{name}-panel-divider" />
+    {/if}
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} />
