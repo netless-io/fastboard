@@ -58,6 +58,7 @@
   };
   $: memberState = app?.memberState;
   $: appliance = $memberState?.currentApplianceName;
+  $: dotted = $memberState?.dottedLine;
   $: shape = $memberState?.shapeType;
   $: status = app?.appsStatus;
 
@@ -93,6 +94,12 @@
   }
   function text() {
     app?.setAppliance("text");
+  }
+  function set_dotted() {
+    app?.toggleDottedLine(true);
+  }
+  function unset_dotted() {
+    app?.toggleDottedLine(false);
   }
   function select_last_shape() {
     if (applianceShapes.includes(last_shape as Appliance)) {
@@ -251,6 +258,29 @@
 
 <div class="{name}-panel-wrapper" style="display:none">
   <div class="{name}-panel pencil" bind:this={pencil_panel}>
+    <div class="{name}-panel-btns">
+      <Button
+        class="pencil"
+        active={appliance === "pencil" && !dotted}
+        {...btn_props}
+        on:click={unset_dotted}
+        placement="top"
+        content={t.solid}
+      >
+        <Icons.Curve {theme} active={appliance === "pencil" && !dotted} />
+      </Button>
+      <Button
+        class="pencil"
+        active={appliance === "pencil" && dotted}
+        {...btn_props}
+        on:click={set_dotted}
+        placement="top"
+        content={t.dashed}
+      >
+        <Icons.CurveDashed {theme} active={appliance === "pencil" && dotted} />
+      </Button>
+    </div>
+    <div class="{name}-panel-divider" />
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} />

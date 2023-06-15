@@ -128,6 +128,10 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
       console.log("setPencilEraserSize", size);
       memberState.update(e => ({ ...e, pencilEraserSize: size }));
     },
+    toggleDottedLine(force: boolean) {
+      console.log("toggleDottedLine", force);
+      memberState.update(e => ({ ...e, dottedLine: force ?? !e.dottedLine }));
+    },
     cleanCurrentScene() {
       console.log("cleanCurrentScene");
     },

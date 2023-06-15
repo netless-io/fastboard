@@ -39,7 +39,6 @@
     class="{name}-track {theme}"
     class:grabbing
     type="range"
-    role="slider"
     {disabled}
     {min}
     {max}

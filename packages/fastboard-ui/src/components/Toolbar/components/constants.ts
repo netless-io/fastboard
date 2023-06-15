@@ -24,7 +24,7 @@ export const shapes = [
   "speechBalloon",
 ] as const;
 
-export type Shape = typeof shapes[number];
+export type Shape = (typeof shapes)[number];
 
 export const applianceShapes = shapes.slice(0, 4) as Appliance[];
 
@@ -52,7 +52,7 @@ export const shapesIconActive: Record<Shape, any> = {
 
 export const erasers = ["eraser", "pencilEraser"] as const;
 
-export type Eraser = typeof erasers[number];
+export type Eraser = (typeof erasers)[number];
 
 export const eraserIcon: Record<Eraser, any> = {
   eraser: Icons.Eraser,
@@ -65,7 +65,17 @@ export const eraserIconActive: Record<Eraser, any> = {
 };
 
 export const i18n: I18nData<
-  "clicker" | "selector" | "pencil" | "pencilEraser" | "text" | "shapes" | "eraser" | "clear" | "apps"
+  | "clicker"
+  | "selector"
+  | "pencil"
+  | "pencilEraser"
+  | "text"
+  | "shapes"
+  | "eraser"
+  | "clear"
+  | "apps"
+  | "solid"
+  | "dashed"
 > = {
   en: {
     clicker: "clicker",
@@ -77,6 +87,8 @@ export const i18n: I18nData<
     shapes: "shapes",
     clear: "clear",
     apps: "apps",
+    solid: "solid",
+    dashed: "dashed",
   },
   "zh-CN": {
     clicker: "点击",
@@ -88,6 +100,8 @@ export const i18n: I18nData<
     shapes: "形状",
     clear: "清屏",
     apps: "Apps",
+    solid: "实线",
+    dashed: "虚线",
   },
 };
 

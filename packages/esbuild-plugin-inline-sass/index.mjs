@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { existsSync } from "fs";
 import { dirname, join, relative, sep } from "path";
-import SASS from "sass";
+import { compile } from "sass";
 
 const EmptySourceMap =
   "data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIiJdLCJtYXBwaW5ncyI6IkEifQ==";
@@ -56,7 +56,7 @@ export function sass({ emitCss = false, strip = false } = {}) {
           return { path: args.path, namespace: "sass", pluginData: { absPath } };
         });
         onLoad({ filter: /.*/, namespace: "sass" }, async args => {
-          const { css } = SASS.compile(args.pluginData.absPath, {
+          const { css } = compile(args.pluginData.absPath, {
             style: "compressed",
           });
           const { outputFiles } = await esbuild.build({
@@ -109,7 +109,7 @@ export function sass({ emitCss = false, strip = false } = {}) {
       });
 
       onLoad({ filter: /.*/, namespace: "inline-sass-content" }, async args => {
-        const { css } = SASS.compile(args.path, {
+        const { css } = compile(args.path, {
           style: "compressed",
         });
         const { outputFiles } = await esbuild.build({

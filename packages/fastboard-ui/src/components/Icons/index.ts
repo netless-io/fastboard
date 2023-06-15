@@ -46,6 +46,8 @@ import WhiteboardAdd from "./WhiteboardAdd.svelte";
 import Play from "./Play.svelte";
 import Pause from "./Pause.svelte";
 import Loading from "./Loading.svelte";
+import Curve from "./Curve.svelte";
+import CurveDashed from "./CurveDashed.svelte";
 
 const Icons = {
   Apps,
@@ -93,6 +95,8 @@ const Icons = {
   Play,
   Pause,
   Loading,
+  Curve,
+  CurveDashed,
 };
 
 export default Icons;
