@@ -149,6 +149,26 @@ export interface InsertDocsDynamic {
 
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
+export interface ProjectorResponse {
+  uuid: string;
+  status: "Waiting" | "Converting" | "Finished" | "Fail";
+  type: "dynamic" | "static";
+  /** 0..100 */
+  convertedPercentage: number;
+  /** https://example.org/path/to/dynamicConvert, only when type=dynamic */
+  prefix?: string;
+  pageCount?: number;
+  /** {1:"{prefix}/{taskId}/preview/1.png"}, only when type=dynamic and preview=true */
+  previews?: Record<number, string>;
+  /** {prefix}/{taskId}/jsonOutput/note.json */
+  note?: string;
+  /** {1:{width,height,url}}, only when type=static */
+  images?: Record<number, { width: number; height: number; url: string }>;
+  /** 20xxxxx */
+  errorCode?: string;
+  errorMessage?: string;
+}
+
 export type SetMemberStateFn = (partialMemberState: Partial<MemberState>) => void;
 
 export type RoomStateChanged = (diff: Partial<RoomState>) => void;
@@ -272,6 +292,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
     return this._addManagerListener("mainViewScenesLengthChange", set);
   });
 
+  /** @internal */
   private _appsStatus: AppsStatus = {};
   /**
    * Apps status.
@@ -452,6 +473,12 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   insertDocs(filename: string, status: ConversionResponse): Promise<string | undefined>;
 
   /**
+   * Insert PDF/PPTX from projector conversion result.
+   * @param response https://developer.netless.link/server-zh/home/server-projector#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6
+   */
+  insertDocs(filename: string, response: ProjectorResponse): Promise<string | undefined>;
+
+  /**
    * Manual way.
    * @example
    * app.insertDocs({
@@ -463,13 +490,13 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    */
   insertDocs(params: InsertDocsParams): Promise<string | undefined>;
 
-  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse) {
+  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse | ProjectorResponse) {
     this._assertNotDestroyed();
     if (typeof arg1 === "object" && "fileType" in arg1) {
       return this._insertDocsImpl(arg1);
     } else if (arg2 && arg2.status !== "Finished") {
       throw new Error("FastboardApp cannot insert a converting doc.");
-    } else if (arg2 && arg2.progress) {
+    } else if (arg2 && "progress" in arg2) {
       const title = arg1;
       const scenePath = `/${arg2.uuid}/${genUID()}`;
       const scenes1 = arg2.progress.convertedFileList.map(convertedFileToScene);
@@ -479,9 +506,27 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       } else {
         return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes: scenes1, title });
       }
+    } else if (arg2 && arg2.prefix) {
+      const title = arg1;
+      const scenePath = `/${arg2.uuid}/${genUID()}`;
+      const taskId = arg2.uuid;
+      const url = arg2.prefix;
+      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
+    } else if (arg2 && arg2.images) {
+      const title = arg1;
+      const scenePath = `/${arg2.uuid}/${genUID()}`;
+      const scenes: SceneDefinition[] = [];
+      for (const name in arg2.images) {
+        const { width, height, url } = arg2.images[name];
+        scenes.push({ name, ppt: { width, height, src: url } });
+      }
+      this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title });
+    } else {
+      throw new Error("Invalid input: not found 'progress', 'prefix' nor 'images'");
     }
   }
 
+  /** @internal */
   private _insertDocsImpl({ fileType, scenePath, title, scenes, ...attributes }: InsertDocsParams) {
     this._assertNotDestroyed();
     switch (fileType) {

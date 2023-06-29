@@ -112,6 +112,7 @@ export class FastboardPlayer<
     return this._addPlayerListener("onIsPlayableChanged", set);
   });
 
+  /** @internal */
   private _setPlaybackRate!: (value: number) => void;
   /**
    * Playback speed, default `1`.

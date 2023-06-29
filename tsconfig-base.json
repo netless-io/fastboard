@@ -12,6 +12,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "useUnknownInCatchVariables": false,
+    "stripInternal": true,
     "strict": true,
     "skipLibCheck": true,
     "types": ["vite/client"]

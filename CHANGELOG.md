@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added support for projector conversion responses in `insertDocs()`.
+
 - Added a helper function `dispatchDocsEvent()` to make it easier to control docs apps from code.
 
 - Fixed `fastboard-ui` CJS export not working well with `tippy.js`, this was caused by `tsup`'s `treeshake` option drops ESM behavior. While this often works well, it actually breaks the CJS export. Here's the details:
