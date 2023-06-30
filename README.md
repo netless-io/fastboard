@@ -31,7 +31,7 @@ async function main() {
     // [1]
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
-      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
+      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "eu"
     },
     // [2]
     joinRoom: {
@@ -102,7 +102,7 @@ function App() {
   const fastboard = useFastboard(() => ({
     sdkConfig: {
       appIdentifier: "whiteboard-appid",
-      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "gb-lon"
+      region: "us-sv", // "cn-hz" | "us-sv" | "sg" | "in-mum" | "eu"
     },
     joinRoom: {
       uid: "unique_id_for_each_client",
