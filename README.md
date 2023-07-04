@@ -202,7 +202,7 @@ const appId = await fastboard.insertDocs("filename.pptx", conversionResponse);
 
 The `conversionResponse` is the result of [this api](https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress).
 
-> **Note:** If you're using the new [projector](https://developer.netless.link/server-zh/home/server-projector) api, please use the manual way:
+> **Note**: If you're using the new [projector](https://developer.netless.link/server-zh/home/server-projector) api, there's another way:
 >
 > ```js
 > const appId = await fastboard.insertDocs({
@@ -212,6 +212,21 @@ The `conversionResponse` is the result of [this api](https://developer.netless.l
 >   title: "filename.pptx",
 > });
 > ```
+
+#### Control the PDF/PPTX Apps
+
+```js
+import { dispatchDocsEvent } from "@netless/fastboard";
+
+dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
+dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 }); // prevPage, nextStep, prevStep
+```
+
+By default it will dispatch event to the focused PDF/PPTX app, you can also specify the appId:
+
+```js
+dispatchDocsEvent(fastboard, "nextPage", { appId });
+```
 
 #### Insert Video & Audio
 
