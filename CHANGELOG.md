@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added methods `setPencilEraserSize(size)` and `toggleDottedLine()`.
+
 ## 0.3.8
 
 - Added support for projector conversion responses in `insertDocs()`.

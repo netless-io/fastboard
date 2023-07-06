@@ -391,6 +391,22 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   }
 
   /**
+   * Toggle dotted line effect on pencil.
+   */
+  toggleDottedLine(force?: boolean) {
+    this._assertNotDestroyed();
+    this.manager.mainView.setMemberState({ dottedLine: force ?? !this.memberState.value.dottedLine });
+  }
+
+  /**
+   * Set pencil eraser size.
+   */
+  setPencilEraserSize(size: number) {
+    this._assertNotDestroyed();
+    this.manager.mainView.setMemberState({ pencilEraserSize: size });
+  }
+
+  /**
    * Goto previous page (the main whiteboard view).
    */
   prevPage() {
