@@ -82,6 +82,6 @@ export async function build({ dir, main, version, dependencies, peerDependencies
   console.log("Built dist/index.{js|mjs} in", Date.now() - start + "ms");
 
   start = Date.now();
-  await dts.build(main, "dist/index.d.ts");
+  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal"] });
   console.log("Built dist/index.d.ts in", Date.now() - start + "ms");
 }

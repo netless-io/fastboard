@@ -1,10 +1,9 @@
 import type { Instance, Props } from "tippy.js";
 import type { SvelteAction } from "../typings";
-import { is_client } from "svelte/internal";
 
 import Tippy from "tippy.js";
 
-if (is_client) {
+if (typeof window !== "undefined") {
   Tippy.setDefaultProps({
     delay: [1000, 400],
     duration: 300,

@@ -3,7 +3,6 @@
   import type { Language, Theme } from "../src";
   import type { MockApp } from "./mock-app";
   import { onMount } from "svelte";
-  import { is_client } from "svelte/internal";
 
   import { tippy, tippy_menu } from "../src/actions/tippy";
   import { Fastboard } from "../src";
@@ -13,6 +12,8 @@
 
   import PlayerControl from "../src/components/PlayerControl";
   import Slider from "../src/components/Toolbar/components/Slider.svelte";
+
+  const is_client = typeof window !== "undefined";
 
   let app: FastboardApp | undefined;
   let player: FastboardPlayer | undefined;
