@@ -81,7 +81,7 @@ export function writable<T>(value: T, start: StartStopNotifier<T> = noop, set: S
     reaction: internal.reaction,
     set,
     update(fn: Updater<T>) {
-      set(fn(value));
+      set(fn(internal.value));
     },
   };
 }
