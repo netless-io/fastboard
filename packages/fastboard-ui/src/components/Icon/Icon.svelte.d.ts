@@ -1,4 +1,4 @@
-import { SvelteComponentTyped } from "svelte";
+import { SvelteComponentTyped } from "../../typings";
 
 export declare interface IconProps {
   src?: string;

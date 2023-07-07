@@ -1,4 +1,4 @@
-import type { SvelteComponent as SvelteComponentType } from "svelte";
+import type { SvelteComponentTyped } from "@netless/fastboard-ui";
 import type { DependencyList, EffectCallback, FunctionComponent } from "react";
 import type {
   FastboardApp,
@@ -58,12 +58,12 @@ export function useEffectOnce(effect: EffectCallback) {
 }
 
 export function wrapReactComponent<Props extends Record<string, any> | undefined>(
-  SvelteComponent: typeof SvelteComponentType,
+  SvelteComponent: typeof SvelteComponentTyped,
   name: string
 ): FunctionComponent<Props> {
   function ReactComponent(props: Props) {
     const [container, setContainer] = useState<HTMLDivElement | null>(null);
-    const component = useRef<SvelteComponentType | null>(null);
+    const component = useRef<SvelteComponentTyped | null>(null);
 
     useIsomorphicLayoutEffect(() => {
       if (container) {

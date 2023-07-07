@@ -8,6 +8,21 @@ export interface SvelteAction<T = void> {
   };
 }
 
+export declare class SvelteComponentTyped<
+  Props extends Record<string, any> = any,
+  Events extends Record<string, any> = any,
+  Slots extends Record<string, any> = any,
+> {
+  constructor(options: { target: Element; props?: Props });
+  $set(props?: Partial<Props>): void;
+  $on<K extends Extract<keyof Events, string>>(
+    type: K,
+    callback: ((e: Events[K]) => void) | null | undefined
+  ): () => void;
+  $destroy(): void;
+  [accessor: string]: any;
+}
+
 export type Theme = "light" | "dark";
 
 export type Language = "en" | "zh-CN";
