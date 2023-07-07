@@ -225,7 +225,7 @@ const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 import { dispatchDocsEvent } from "@netless/fastboard";
 
 dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
-dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 }); // prevPage, nextStep, prevStep
+dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
 ```
 
 默认情况下会发送事件给当前焦点所在的文档，如果需要指定文档，可以传入 `appId`：

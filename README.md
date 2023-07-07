@@ -219,7 +219,7 @@ The `conversionResponse` is the result of [this api](https://developer.netless.l
 import { dispatchDocsEvent } from "@netless/fastboard";
 
 dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
-dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 }); // prevPage, nextStep, prevStep
+dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
 ```
 
 By default it will dispatch event to the focused PDF/PPTX app, you can also specify the appId:
