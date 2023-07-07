@@ -7,6 +7,7 @@
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "esModuleInterop": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,

@@ -1,3 +1,7 @@
+/// <reference types="svelte/types/runtime/ambient.d.ts" />
+
+export { SvelteComponentTyped } from "svelte/internal";
+
 export interface SvelteAction<T = void> {
   (
     node: HTMLElement,
@@ -6,21 +10,6 @@ export interface SvelteAction<T = void> {
     update?: (parameters: T) => void;
     destroy?: () => void;
   };
-}
-
-export declare class SvelteComponentTyped<
-  Props extends Record<string, any> = any,
-  Events extends Record<string, any> = any,
-  Slots extends Record<string, any> = any,
-> {
-  constructor(options: { target: Element; props?: Props });
-  $set(props?: Partial<Props>): void;
-  $on<K extends Extract<keyof Events, string>>(
-    type: K,
-    callback: ((e: Events[K]) => void) | null | undefined
-  ): () => void;
-  $destroy(): void;
-  [accessor: string]: any;
 }
 
 export type Theme = "light" | "dark";

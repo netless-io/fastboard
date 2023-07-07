@@ -1,5 +1,6 @@
 import type { FastboardPlayer } from "@netless/fastboard-core";
-import type { Theme, Language, SvelteComponentTyped } from "../../typings";
+import type { Theme, Language } from "../../typings";
+import { SvelteComponentTyped } from "../../typings";
 
 export declare interface ReplayFastboardProps {
   player?: FastboardPlayer | null;

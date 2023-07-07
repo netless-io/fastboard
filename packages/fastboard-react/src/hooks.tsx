@@ -57,10 +57,10 @@ export function useEffectOnce(effect: EffectCallback) {
   }, []);
 }
 
-export function wrapReactComponent<Props extends Record<string, any> | undefined>(
-  SvelteComponent: typeof SvelteComponentTyped,
-  name: string
-): FunctionComponent<Props> {
+export function wrapReactComponent<
+  Props extends Record<string, any> | undefined,
+  Class extends typeof SvelteComponentTyped = any,
+>(SvelteComponent: Class, name: string): FunctionComponent<Props> {
   function ReactComponent(props: Props) {
     const [container, setContainer] = useState<HTMLDivElement | null>(null);
     const component = useRef<SvelteComponentTyped | null>(null);

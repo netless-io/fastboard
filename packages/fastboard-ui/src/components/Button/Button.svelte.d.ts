@@ -1,5 +1,6 @@
 import type { Content, Placement } from "tippy.js";
-import type { Theme, SvelteComponentTyped } from "../../typings";
+import type { Theme } from "../../typings";
+import { SvelteComponentTyped } from "../../typings";
 
 export declare interface ButtonProps {
   class?: string;
