@@ -64,6 +64,10 @@
 | :------ | :------ |
 | `params` | [`WhiteWebSdkConfiguration`](../modules.md#whitewebsdkconfiguration) |
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2791
+
 ## Properties
 
 ### akkoApp
@@ -72,7 +76,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2743
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2855
 
 ___
 
@@ -82,7 +86,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2787
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2899
 
 ___
 
@@ -92,7 +96,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2785
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2897
 
 ___
 
@@ -102,7 +106,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2745
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2857
 
 ___
 
@@ -114,7 +118,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2662
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2774
 
 ___
 
@@ -124,7 +128,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2761
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2873
 
 ___
 
@@ -134,7 +138,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2763
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2875
 
 ___
 
@@ -144,7 +148,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2765
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2877
 
 ___
 
@@ -154,7 +158,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2779
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2891
 
 ___
 
@@ -164,7 +168,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2759
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2871
 
 ___
 
@@ -174,7 +178,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2755
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2867
 
 ___
 
@@ -184,7 +188,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2757
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2869
 
 ___
 
@@ -194,7 +198,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2749
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2861
 
 ___
 
@@ -204,7 +208,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2781
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2893
 
 ___
 
@@ -214,7 +218,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2789
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2901
 
 ___
 
@@ -224,7 +228,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2791
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2903
 
 ___
 
@@ -234,7 +238,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2769
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2881
 
 ___
 
@@ -244,7 +248,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2783
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2895
 
 ___
 
@@ -254,7 +258,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2747
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2859
 
 ___
 
@@ -264,7 +268,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2773
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2885
 
 ___
 
@@ -274,7 +278,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2753
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2865
 
 ___
 
@@ -284,7 +288,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2741
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2853
 
 ___
 
@@ -297,7 +301,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2657
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2769
 
 ___
 
@@ -309,7 +313,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2672
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2784
 
 ___
 
@@ -321,7 +325,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2667
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2779
 
 ___
 
@@ -331,7 +335,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2777
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2889
 
 ___
 
@@ -341,7 +345,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2775
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2887
 
 ___
 
@@ -351,7 +355,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2771
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2883
 
 ___
 
@@ -361,7 +365,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2767
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2879
 
 ___
 
@@ -373,7 +377,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2677
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2789
 
 ___
 
@@ -383,7 +387,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2739
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2851
 
 ___
 
@@ -393,7 +397,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2751
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2863
 
 ___
 
@@ -403,7 +407,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2793
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2905
 
 ___
 
@@ -413,7 +417,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2737
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2849
 
 ## Methods
 
@@ -433,6 +437,10 @@ node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.
 
 `Promise`<`boolean`\>
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2819
+
 ___
 
 ### joinRoom
@@ -443,11 +451,11 @@ ___
 
 **`Throws`**
 
- 如果加入房间失败，则会异步地抛出错误
+如果加入房间失败，则会异步地抛出错误
 
 **`Example`**
 
- ```typescript
+```typescript
 const joinRoomParams = {...};
 const roomCallbacks = {...};
 
@@ -473,6 +481,10 @@ whiteWebSdk.joinRoom(joinRoomParams, roomCallbacks)
 
 异步地返回房间
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2814
+
 ___
 
 ### pptConverter
@@ -480,8 +492,6 @@ ___
 ▸ **pptConverter**(`roomToken`): `LegacyPPTConverter`
 
 **`Deprecated`**
-
- 
 
 #### Parameters
 
@@ -493,6 +503,10 @@ ___
 
 `LegacyPPTConverter`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2847
+
 ___
 
 ### replayRoom
@@ -503,11 +517,11 @@ ___
 
 **`Throws`**
 
- 如果加入房间失败，则会异步地抛出错误
+如果加入房间失败，则会异步地抛出错误
 
 **`Example`**
 
- ```typescript
+```typescript
 const replayRoomParams = {...};
 const replayCallbacks = {...};
 
@@ -532,3 +546,7 @@ whiteWebSdk.replayRoom(replayRoomParams, replayCallbacks)
 `Promise`<`Player`\>
 
 异步地返回房间
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2842

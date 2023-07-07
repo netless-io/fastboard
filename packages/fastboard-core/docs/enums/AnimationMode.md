@@ -19,7 +19,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:268
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:268
 
 ___
 
@@ -31,4 +31,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:272
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:272

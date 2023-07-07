@@ -15,11 +15,11 @@
 
 ### joinRoom
 
-• **joinRoom**: `Omit`<[`JoinRoomParams`](../modules.md#joinroomparams), ``"useMultiViews"`` \| ``"disableNewPencil"`` \| ``"disableMagixEventDispatchLimit"``\> & { `callbacks?`: `Partial`<[`RoomCallbacks`](../modules.md#roomcallbacks)\>  }
+• **joinRoom**: `Omit`<[`JoinRoomParams`](../modules.md#joinroomparams), ``"useMultiViews"`` \| ``"disableNewPencil"`` \| ``"disableMagixEventDispatchLimit"``\> & { `callbacks?`: `Partial`<`Omit`<[`RoomCallbacks`](../modules.md#roomcallbacks), ``"onCanUndoStepsUpdate"`` \| ``"onCanRedoStepsUpdate"``\>\>  }
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:553](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L553)
+[packages/fastboard-core/src/impl/FastboardApp.ts:623](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L623)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:556](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L556)
+[packages/fastboard-core/src/impl/FastboardApp.ts:626](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L626)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:557](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L557)
+[packages/fastboard-core/src/impl/FastboardApp.ts:627](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L627)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:550](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L550)
+[packages/fastboard-core/src/impl/FastboardApp.ts:620](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L620)

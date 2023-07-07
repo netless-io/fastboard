@@ -6,6 +6,7 @@
 
 ### Properties
 
+- [controller](SlideController.md#controller)
 - [jumpToPage](SlideController.md#jumptopage)
 - [nextPage](SlideController.md#nextpage)
 - [nextStep](SlideController.md#nextstep)
@@ -13,8 +14,27 @@
 - [prevPage](SlideController.md#prevpage)
 - [prevStep](SlideController.md#prevstep)
 - [slide](SlideController.md#slide)
+- [viewer](SlideController.md#viewer)
 
 ## Properties
+
+### controller
+
+• **controller**: () => `undefined` \| ``null`` \| `SlideController`
+
+#### Type declaration
+
+▸ (): `undefined` \| ``null`` \| `SlideController`
+
+##### Returns
+
+`undefined` \| ``null`` \| `SlideController`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1035
+
+___
 
 ### jumpToPage
 
@@ -36,7 +56,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:35
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1042
 
 ___
 
@@ -54,7 +74,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:33
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1040
 
 ___
 
@@ -72,7 +92,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:31
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1038
 
 ___
 
@@ -90,7 +110,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:30
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1037
 
 ___
 
@@ -108,7 +128,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:34
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1041
 
 ___
 
@@ -126,22 +146,40 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:32
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1039
 
 ___
 
 ### slide
 
-• **slide**: () => `any`
+• **slide**: () => `undefined` \| `Slide`
 
 #### Type declaration
 
-▸ (): `any`
+▸ (): `undefined` \| `Slide`
 
 ##### Returns
 
-`any`
+`undefined` \| `Slide`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/index.d.ts:29
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1036
+
+___
+
+### viewer
+
+• **viewer**: () => ``null`` \| `SlideDocsViewer`
+
+#### Type declaration
+
+▸ (): ``null`` \| `SlideDocsViewer`
+
+##### Returns
+
+``null`` \| `SlideDocsViewer`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:1034

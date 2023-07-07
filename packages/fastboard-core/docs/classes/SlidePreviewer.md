@@ -56,6 +56,10 @@
 | `config` | `Object` |
 | `config.target` | `HTMLElement` |
 
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:966
+
 ## Properties
 
 ### $slide
@@ -64,7 +68,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:16
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:961
 
 ___
 
@@ -74,7 +78,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:12
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:957
 
 ___
 
@@ -84,7 +88,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:15
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:960
 
 ___
 
@@ -94,7 +98,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:43
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:988
 
 ___
 
@@ -104,7 +108,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:33
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:978
 
 ___
 
@@ -114,7 +118,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:51
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:996
 
 ___
 
@@ -124,14 +128,14 @@ ___
 
 #### Type declaration
 
-▸ (`__namedParameters`): `void`
+▸ (`«destructured»`): `void`
 
 ##### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `__namedParameters` | `Object` |
-| `__namedParameters.error` | `Error` |
+| `«destructured»` | `Object` |
+| › `error` | `Error` |
 
 ##### Returns
 
@@ -139,7 +143,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:40
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:985
 
 ___
 
@@ -163,7 +167,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:49
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:994
 
 ___
 
@@ -187,7 +191,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:37
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:982
 
 ___
 
@@ -205,7 +209,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:48
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:993
 
 ___
 
@@ -223,7 +227,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:39
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:984
 
 ___
 
@@ -241,7 +245,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:38
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:983
 
 ___
 
@@ -251,7 +255,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:18
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:963
 
 ___
 
@@ -261,7 +265,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:20
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:965
 
 ___
 
@@ -279,7 +283,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:45
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:990
 
 ___
 
@@ -289,7 +293,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:19
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:964
 
 ___
 
@@ -299,17 +303,17 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:17
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:962
 
 ___
 
 ### slide
 
-• **slide**: `any`
+• **slide**: ``null`` \| `Slide`
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:14
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:959
 
 ___
 
@@ -319,7 +323,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:13
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:958
 
 ___
 
@@ -329,7 +333,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist/SlidePreviewer/index.d.ts:11
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:956
 
 ## Methods
 
@@ -340,6 +344,10 @@ node_modules/.pnpm/@netless+app-slide@0.2.2/node_modules/@netless/app-slide/dist
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:989
 
 ___
 
@@ -356,6 +364,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:991
 
 ___
 
@@ -374,6 +386,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:979
+
 ___
 
 ### registerEventListeners
@@ -383,6 +399,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:981
 
 ___
 
@@ -395,7 +415,7 @@ Use this method to re-register hotkeys.
 
 **`Example`**
 
- ```ts
+```ts
 previewer.registerHotKeys(windowLike)
 ```
 
@@ -409,6 +429,10 @@ previewer.registerHotKeys(windowLike)
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:977
+
 ___
 
 ### render
@@ -418,6 +442,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:969
 
 ___
 
@@ -429,6 +457,10 @@ ___
 
 `HTMLDivElement`
 
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:992
+
 ___
 
 ### renderStyle
@@ -438,6 +470,10 @@ ___
 #### Returns
 
 `HTMLElement`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:980
 
 ___
 
@@ -454,3 +490,7 @@ ___
 #### Returns
 
 `string`
+
+#### Defined in
+
+node_modules/.pnpm/@netless+app-slide@0.2.39/node_modules/@netless/app-slide/dist/index.d.ts:995

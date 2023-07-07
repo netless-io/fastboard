@@ -21,7 +21,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:3001
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:3115
 
 ___
 
@@ -33,7 +33,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:3005
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:3119
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2993
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:3107
 
 ___
 
@@ -57,4 +57,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:2997
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:3111

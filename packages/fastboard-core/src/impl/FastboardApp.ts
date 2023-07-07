@@ -46,18 +46,21 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
   ) {}
 
   protected _destroyed = false;
+  /** @internal */
   protected _assertNotDestroyed() {
     if (this._destroyed) {
       throw new Error("FastboardApp has been destroyed");
     }
   }
 
+  /** @internal */
   protected _addRoomListener<K extends keyof RoomCallbacks>(name: K, listener: RoomCallbacks[K]) {
     this._assertNotDestroyed();
     this.room.callbacks.on(name, listener);
     return () => this.room.callbacks.off(name, listener);
   }
 
+  /** @internal */
   protected _addManagerListener<K extends keyof PublicEvent>(
     name: K,
     listener: (value: PublicEvent[K]) => void
@@ -67,6 +70,7 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
     return () => this.manager.emitter.off(name, listener);
   }
 
+  /** @internal */
   protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
     this._assertNotDestroyed();
     this.manager.mainView.callbacks.on(name, listener);

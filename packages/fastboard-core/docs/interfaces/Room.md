@@ -58,6 +58,7 @@
 - [exportScene](Room.md#exportscene)
 - [fillSceneSnapshot](Room.md#fillscenesnapshot)
 - [generateScreenshot](Room.md#generatescreenshot)
+- [getBoundingRect](Room.md#getboundingrect)
 - [getInvisiblePlugin](Room.md#getinvisibleplugin)
 - [getPluginAttributes](Room.md#getpluginattributes)
 - [getPluginRectangle](Room.md#getpluginrectangle)
@@ -86,6 +87,7 @@
 - [scalePptToFit](Room.md#scaleppttofit)
 - [scenePathType](Room.md#scenepathtype)
 - [scenePreview](Room.md#scenepreview)
+- [screenshotToCanvas](Room.md#screenshottocanvas)
 - [setCameraBound](Room.md#setcamerabound)
 - [setGlobalState](Room.md#setglobalstate)
 - [setMemberState](Room.md#setmemberstate)
@@ -111,7 +113,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1529
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1601
 
 ___
 
@@ -123,7 +125,7 @@ ___
 
 **`Example`**
 
- ```typescript
+```typescript
 function sliceChangeCallback(slice) {
     // 监听到 onSliceChanged 回调
 }
@@ -145,7 +147,7 @@ Displayer.callbacks
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1216
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1278
 
 ___
 
@@ -157,7 +159,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1550
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1622
 
 ___
 
@@ -169,7 +171,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1545
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1617
 
 ___
 
@@ -185,7 +187,7 @@ Displayer.deviceType
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1242
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1304
 
 ___
 
@@ -203,7 +205,7 @@ Displayer.disableCameraTransform
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1282
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1344
 
 ___
 
@@ -216,7 +218,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1556
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1628
 
 ___
 
@@ -228,7 +230,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1561
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1633
 
 ___
 
@@ -245,7 +247,7 @@ Displayer.disableOthersSelectingBox
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1275
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1337
 
 ___
 
@@ -265,7 +267,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1574
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1646
 
 ___
 
@@ -281,7 +283,7 @@ Displayer.enableWriteNow
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1257
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1319
 
 ___
 
@@ -297,7 +299,7 @@ Displayer.handToolActive
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1269
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1331
 
 ___
 
@@ -313,7 +315,7 @@ Displayer.handToolKey
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1262
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1324
 
 ___
 
@@ -325,7 +327,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1540
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1612
 
 ___
 
@@ -342,7 +344,7 @@ Displayer.observerId
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1222
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1284
 
 ___
 
@@ -354,7 +356,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1524
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1596
 
 ___
 
@@ -370,7 +372,7 @@ Displayer.region
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1227
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1289
 
 ___
 
@@ -382,7 +384,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1519
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1591
 
 ___
 
@@ -398,7 +400,7 @@ Displayer.screenType
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1247
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1309
 
 ___
 
@@ -410,7 +412,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1514
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1586
 
 ___
 
@@ -426,7 +428,7 @@ Displayer.slice
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1232
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1294
 
 ___
 
@@ -443,7 +445,7 @@ Displayer.state
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1535
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1607
 
 ___
 
@@ -455,7 +457,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1579
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1651
 
 ___
 
@@ -467,7 +469,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1509
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1581
 
 ___
 
@@ -479,7 +481,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1504
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1576
 
 ___
 
@@ -495,7 +497,7 @@ Displayer.version
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1237
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1299
 
 ___
 
@@ -509,7 +511,7 @@ Displayer.views
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.d.ts:1264
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1326
 
 ## Methods
 
@@ -535,13 +537,17 @@ node_modules/.pnpm/white-web-sdk@2.16.25/node_modules/white-web-sdk/types/index.
 
 Displayer.addMagixEventListener
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1447
+
 ▸ **addMagixEventListener**(`event`, `listener`, `fireInterval`): `void`
 
 添加自定义事件监听器
 
 **`Example`**
 
- ```typescript
+```typescript
 function listener(events) {
     // 注意，事件会被攒起来，因此 events 是一个数组
     for (const event of events) {
@@ -567,6 +573,10 @@ displayer.addMagixEventListener("my-event", listener, 100);
 
 Displayer.addMagixEventListener
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1466
+
 ___
 
 ### bindHtmlElement
@@ -589,6 +599,10 @@ ___
 
 Displayer.bindHtmlElement
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1392
+
 ___
 
 ### cleanCurrentScene
@@ -606,6 +620,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1744
 
 ___
 
@@ -626,6 +644,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1786
 
 ___
 
@@ -658,6 +680,10 @@ ___
 
 Displayer.convertToPointInWorld
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1404
+
 ___
 
 ### copy
@@ -670,11 +696,15 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1808
+
 ___
 
 ### createInvisiblePlugin
 
-▸ **createInvisiblePlugin**<`K`, `A`, `P`\>(`pluginClass`, `attributes`): `Promise`<`InvisiblePlugin`<`A`\>\>
+▸ **createInvisiblePlugin**<`K`, `A`, `MA`, `P`\>(`pluginClass`, `attributes`): `Promise`<`InvisiblePlugin`<`A`, `MA`\>\>
 
 #### Type parameters
 
@@ -682,18 +712,23 @@ ___
 | :------ | :------ |
 | `K` | extends `string` |
 | `A` | extends `Object` |
-| `P` | extends `InvisiblePlugin`<`A`, `P`\> |
+| `MA` | extends `Object` |
+| `P` | extends `InvisiblePlugin`<`A`, `MA`\> |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `pluginClass` | `InvisiblePluginClass`<`K`, `A`, `P`\> |
+| `pluginClass` | `InvisiblePluginClass`<`K`, `A`, `MA`, `P`\> |
 | `attributes` | `A` |
 
 #### Returns
 
-`Promise`<`InvisiblePlugin`<`A`\>\>
+`Promise`<`InvisiblePlugin`<`A`, `MA`\>\>
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1788
 
 ___
 
@@ -722,6 +757,10 @@ ___
 
 Displayer.createScenesCallback
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1366
+
 ___
 
 ### delete
@@ -734,6 +773,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1828
+
 ___
 
 ### disconnect
@@ -745,6 +788,10 @@ ___
 #### Returns
 
 `Promise`<`void`\>
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1880
 
 ___
 
@@ -766,6 +813,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1730
+
 ___
 
 ### duplicate
@@ -777,6 +828,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1803
 
 ___
 
@@ -793,6 +848,10 @@ ___
 #### Inherited from
 
 Displayer.entireScenes
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1497
 
 ___
 
@@ -811,6 +870,10 @@ ___
 #### Returns
 
 `Promise`<`Blob`\>
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1760
 
 ___
 
@@ -838,6 +901,10 @@ ___
 
 Displayer.fillSceneSnapshot
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1429
+
 ___
 
 ### generateScreenshot
@@ -862,11 +929,41 @@ ___
 
 Displayer.generateScreenshot
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1424
+
+___
+
+### getBoundingRect
+
+▸ **getBoundingRect**(`scenePath`): [`Rectangle`](../modules.md#rectangle)
+
+获取某个场景里包含所有元素的矩形
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `scenePath` | `string` |
+
+#### Returns
+
+[`Rectangle`](../modules.md#rectangle)
+
+#### Inherited from
+
+Displayer.getBoundingRect
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1439
+
 ___
 
 ### getInvisiblePlugin
 
-▸ **getInvisiblePlugin**<`A`\>(`kind`): ``null`` \| `InvisiblePlugin`<`A`\>
+▸ **getInvisiblePlugin**<`A`, `MA`\>(`kind`): ``null`` \| `InvisiblePlugin`<`A`, `MA`\>
 
 获取特定的不可件插件
 
@@ -875,6 +972,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `A` | extends `Object` |
+| `MA` | extends `Object` |
 
 #### Parameters
 
@@ -884,11 +982,15 @@ ___
 
 #### Returns
 
-``null`` \| `InvisiblePlugin`<`A`\>
+``null`` \| `InvisiblePlugin`<`A`, `MA`\>
 
 #### Inherited from
 
 Displayer.getInvisiblePlugin
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1397
 
 ___
 
@@ -906,6 +1008,10 @@ ___
 
 `any`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1796
+
 ___
 
 ### getPluginRectangle
@@ -921,6 +1027,10 @@ ___
 #### Returns
 
 `undefined` \| [`Rectangle`](../modules.md#rectangle)
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1798
 
 ___
 
@@ -944,6 +1054,10 @@ ___
 
 Displayer.getScene
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1502
+
 ___
 
 ### importScene
@@ -965,6 +1079,10 @@ ___
 
 板书内部的内容，一定会存在 name 字段，该字段不可更改；最后插入的板书路径为 dir + name。如果想修改板书路径，可以再调用 mvScene API 进行修改。
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1768
+
 ___
 
 ### insertImage
@@ -984,6 +1102,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1774
+
 ___
 
 ### insertPlugin
@@ -1000,6 +1122,10 @@ ___
 #### Returns
 
 `string`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1790
 
 ___
 
@@ -1023,6 +1149,10 @@ ___
 
 该文字的标识符
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1853
+
 ___
 
 ### lockImage
@@ -1042,6 +1172,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1780
+
 ___
 
 ### lockImages
@@ -1059,6 +1193,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1834
 
 ___
 
@@ -1082,6 +1220,10 @@ ___
 
 Displayer.memberState
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1372
+
 ___
 
 ### moveCamera
@@ -1103,6 +1245,10 @@ ___
 #### Inherited from
 
 Displayer.moveCamera
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1377
 
 ___
 
@@ -1126,6 +1272,10 @@ ___
 
 Displayer.moveCameraToContain
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1384
+
 ___
 
 ### moveScene
@@ -1145,6 +1295,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1754
+
 ___
 
 ### moveSelectedComponentsToBottom
@@ -1156,6 +1310,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1844
 
 ___
 
@@ -1169,6 +1327,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1839
+
 ___
 
 ### paste
@@ -1180,6 +1342,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1813
 
 ___
 
@@ -1193,6 +1359,10 @@ PPT 翻页到下一页。如果当前 PPT 没有动画，则切换到顺位索�
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1870
+
 ___
 
 ### pptPreviousStep
@@ -1204,6 +1374,10 @@ PPT 翻页到前一页。如果当前 PPT 没有动画，则切换到顺位索�
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1875
 
 ___
 
@@ -1225,6 +1399,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1738
+
 ___
 
 ### redo
@@ -1236,6 +1414,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1823
 
 ___
 
@@ -1253,6 +1435,10 @@ ___
 #### Inherited from
 
 Displayer.refreshViewSize
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1350
 
 ___
 
@@ -1277,6 +1463,10 @@ ___
 
 Displayer.removeMagixEventListener
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1473
+
 ___
 
 ### removePlugin
@@ -1292,6 +1482,10 @@ ___
 #### Returns
 
 `boolean`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1792
 
 ___
 
@@ -1310,6 +1504,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1749
 
 ___
 
@@ -1333,6 +1531,10 @@ ___
 
 Displayer.scalePptToFit
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1486
+
 ___
 
 ### scenePathType
@@ -1354,6 +1556,10 @@ ___
 #### Inherited from
 
 Displayer.scenePathType
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1492
 
 ___
 
@@ -1381,6 +1587,41 @@ ___
 
 Displayer.scenePreview
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1419
+
+___
+
+### screenshotToCanvas
+
+▸ **screenshotToCanvas**(`context`, `scenePath`, `width`, `height`, `camera`, `ratio?`): `void`
+
+生成屏幕快照，并写入指定的 CanvasRenderingContext2D 对象中
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `context` | `CanvasRenderingContext2D` |
+| `scenePath` | `string` |
+| `width` | `number` |
+| `height` | `number` |
+| `camera` | [`Camera`](../modules.md#camera) |
+| `ratio?` | `number` |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+Displayer.screenshotToCanvas
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1434
+
 ___
 
 ### setCameraBound
@@ -1403,6 +1644,10 @@ ___
 
 Displayer.setCameraBound
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1355
+
 ___
 
 ### setGlobalState
@@ -1413,7 +1658,7 @@ ___
 
 **`Example`**
 
- ```typescript
+```typescript
 room.setGlobalState({
     foobar: "hello world",
 });
@@ -1423,7 +1668,7 @@ room.setGlobalState({
 
 **`Example`**
 
- ```typescript
+```typescript
 room.setGlobalState({
     foobar: undefined,
 });
@@ -1439,6 +1684,10 @@ room.setGlobalState({
 
 `GlobalState`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1678
+
 ___
 
 ### setMemberState
@@ -1449,7 +1698,7 @@ ___
 
 **`Example`**
 
- ```typescript
+```typescript
 room.setMemberState({
     foobar: "hello world",
 });
@@ -1457,7 +1706,7 @@ room.setMemberState({
 
 **`Example`**
 
- 也可以通过将某个字段置为 ``undefined``，来删掉该字段。
+也可以通过将某个字段置为 ``undefined``，来删掉该字段。
 
 ```typescript
 room.setMemberState({
@@ -1474,6 +1723,10 @@ room.setMemberState({
 #### Returns
 
 [`MemberState`](../modules.md#memberstate)
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1699
 
 ___
 
@@ -1493,6 +1746,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1714
+
 ___
 
 ### setScenePath
@@ -1511,6 +1768,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1709
+
 ___
 
 ### setViewMode
@@ -1528,6 +1789,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1704
 
 ___
 
@@ -1548,6 +1813,10 @@ ___
 
 `Promise`<`void`\>
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1657
+
 ___
 
 ### stopBlockTimestamp
@@ -1559,6 +1828,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1724
 
 ___
 
@@ -1578,6 +1851,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1719
+
 ___
 
 ### undo
@@ -1589,6 +1866,10 @@ ___
 #### Returns
 
 `number`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1818
 
 ___
 
@@ -1606,6 +1887,10 @@ ___
 #### Returns
 
 `boolean`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1794
 
 ___
 
@@ -1625,6 +1910,10 @@ ___
 
 `void`
 
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1865
+
 ___
 
 ### updateText
@@ -1643,6 +1932,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1860
 
 ___
 
@@ -1667,3 +1960,7 @@ ___
 #### Inherited from
 
 Displayer.waitMagixEvent
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1480

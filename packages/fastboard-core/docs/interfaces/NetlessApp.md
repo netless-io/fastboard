@@ -37,7 +37,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:8
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/typings.d.ts:8
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:7
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/typings.d.ts:7
 
 ___
 
@@ -71,4 +71,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.34_white-web-sdk@2.16.25/node_modules/@netless/window-manager/dist/typings.d.ts:20
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/typings.d.ts:20

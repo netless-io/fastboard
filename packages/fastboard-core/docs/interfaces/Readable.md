@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/utils/store.ts#L8)
+[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L8)
 
 ## Methods
 
@@ -52,6 +52,10 @@
 
 [`Unsubscriber`](../modules.md#unsubscriber)
 
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:10](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L10)
+
 ___
 
 ### subscribe
@@ -68,3 +72,7 @@ ___
 #### Returns
 
 [`Unsubscriber`](../modules.md#unsubscriber)
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:9](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L9)

@@ -21,7 +21,7 @@ Params for static docs, they are rendered as many images.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:121](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L121)
+[packages/fastboard-core/src/impl/FastboardApp.ts:130](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L130)
 
 ___
 
@@ -33,7 +33,7 @@ Unique string for binding whiteboard view to the doc. Must start with `/`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:123](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L123)
+[packages/fastboard-core/src/impl/FastboardApp.ts:132](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L132)
 
 ___
 
@@ -43,13 +43,13 @@ ___
 
 **`Example`**
 
- ```ts
+```ts
 [{ name: '1', ppt: { src: 'url/to/ppt/1.png' } }]
 ```
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:125](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L125)
+[packages/fastboard-core/src/impl/FastboardApp.ts:134](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L134)
 
 ___
 
@@ -61,4 +61,4 @@ Window title.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:127](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/impl/FastboardApp.ts#L127)
+[packages/fastboard-core/src/impl/FastboardApp.ts:136](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L136)

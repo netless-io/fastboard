@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/2826099/packages/fastboard-core/src/utils/store.ts#L8)
+[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L8)
 
 ## Methods
 
@@ -62,6 +62,10 @@
 
 [Readable](Readable.md).[reaction](Readable.md#reaction)
 
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:10](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L10)
+
 ___
 
 ### set
@@ -78,6 +82,10 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:14](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L14)
 
 ___
 
@@ -100,6 +108,10 @@ ___
 
 [Readable](Readable.md).[subscribe](Readable.md#subscribe)
 
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:9](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L9)
+
 ___
 
 ### update
@@ -116,3 +128,7 @@ ___
 #### Returns
 
 `void`
+
+#### Defined in
+
+[packages/fastboard-core/src/utils/store.ts:15](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L15)
