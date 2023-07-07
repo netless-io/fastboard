@@ -3,6 +3,7 @@
   "version": "0.3.8",
   "description": "The front-end of @netless/fastboard-core.",
   "main": "src/index.ts",
+  "svelte": "dist/index.svelte.mjs",
   "files": [
     "src",
     "dist"
