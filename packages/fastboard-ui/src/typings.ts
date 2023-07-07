@@ -1,5 +1,8 @@
 export interface SvelteAction<T = void> {
-  (node: HTMLElement, parameters: T): void | {
+  (
+    node: HTMLElement,
+    parameters: T
+  ): void | {
     update?: (parameters: T) => void;
     destroy?: () => void;
   };

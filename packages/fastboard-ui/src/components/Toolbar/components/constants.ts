@@ -24,7 +24,7 @@ export const shapes = [
   "speechBalloon",
 ] as const;
 
-export type Shape = typeof shapes[number];
+export type Shape = (typeof shapes)[number];
 
 export const applianceShapes = shapes.slice(0, 4) as Appliance[];
 

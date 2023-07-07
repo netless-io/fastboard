@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { existsSync } from "fs";
 import { dirname, join, relative, sep } from "path";
-import SASS from "sass";
+import * as SASS from "sass";
 
 const EmptySourceMap =
   "data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIiJdLCJtYXBwaW5ncyI6IkEifQ==";

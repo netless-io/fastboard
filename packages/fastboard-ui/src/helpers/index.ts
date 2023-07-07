@@ -29,7 +29,7 @@ export function createUI(app?: FastboardApp | null, div?: Element): UI {
       return ui;
     },
     update(props?: FastboardProps) {
-      if (fastboard) {
+      if (fastboard && props) {
         fastboard.$set(props);
       }
     },
@@ -74,7 +74,7 @@ export function createReplayUI(player?: FastboardPlayer | null, div?: Element): 
       return ui;
     },
     update(props?: ReplayFastboardProps) {
-      if (fastboard) {
+      if (fastboard && props) {
         fastboard.$set(props);
       }
     },

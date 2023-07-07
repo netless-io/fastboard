@@ -8,7 +8,6 @@ export interface MockPlayer {
   canplay: Writable<boolean>;
   currentTime: Writable<number>;
   phase: Writable<PlayerPhase>;
-  ready: Writable<boolean>;
   speed: Writable<number>;
 }
 
@@ -17,7 +16,6 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
   const currentTime = writable(0);
   const duration = writable(0);
   const phase = writable<PlayerPhase>("waitingFirstFrame");
-  const ready = writable(false);
   const speed = writable(1);
 
   let timer = 0;
@@ -39,8 +37,7 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
     currentTime,
     duration: { subscribe: duration.subscribe },
     phase: { subscribe: phase.subscribe as any },
-    ready: { subscribe: ready.subscribe },
-    speed,
+    playbackRate: speed,
     play() {
       phase.set("playing");
       replay();
@@ -55,7 +52,7 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
       currentTime.set(t);
       return Promise.resolve("success" as PlayerSeekingResult);
     },
-    setSpeed(s) {
+    setPlaybackRate(s) {
       console.log("set speed", s);
       speed.set(s);
     },
@@ -77,21 +74,24 @@ export function mockPlayer(): [player: FastboardPlayer, mock: MockPlayer] {
     phase.set("pause");
   }, 1000);
 
-  return [player as FastboardPlayer, { canplay, currentTime, phase, ready, speed }];
+  return [player as FastboardPlayer, { canplay, currentTime, phase, speed }];
 
   function replay() {
     clearInterval(timer);
-    timer = setInterval(() => {
-      currentTime.update(e => {
-        e += 500;
-        if (e > get(duration)) {
-          clearInterval(timer);
-          timer = 0;
-          phase.set("pause");
-          return 0;
-        }
-        return e;
-      });
-    }, 500 / get(speed));
+    timer = setInterval(
+      () => {
+        currentTime.update(e => {
+          e += 500;
+          if (e > get(duration)) {
+            clearInterval(timer);
+            timer = 0;
+            phase.set("pause");
+            return 0;
+          }
+          return e;
+        });
+      },
+      500 / get(speed)
+    );
   }
 }

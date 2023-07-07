@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
-  plugins: [svelte({ experimental: { useVitePreprocess: true } })],
+  plugins: [svelte({ preprocess: vitePreprocess() })],
   envDir: "../..",
   define: { __NAME__: '"@netless/fastboard"', __VERSION__: '"develop"' },
 });

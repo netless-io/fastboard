@@ -11,7 +11,7 @@
   "scripts": {
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit",
-    "build": "tsup",
+    "build": "buildtool",
     "dev": "vite"
   },
   "peerDependencies": {
@@ -27,6 +27,7 @@
     "types": "dist/index.d.ts"
   },
   "devDependencies": {
+    "@netless/buildtool": "workspace:*",
     "@netless/esbuild-plugin-inline-sass": "workspace:*",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",

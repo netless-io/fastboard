@@ -66,7 +66,7 @@ type PlayerPhase = `${PlayerPhaseEnum}`;
 export type { PlayerPhase, PlayerSeekingResult };
 
 export class FastboardPlayer<
-  TEventData extends Record<string, any> = any
+  TEventData extends Record<string, any> = any,
 > extends FastboardPlayerBase<TEventData> {
   /**
    * Render this player to some DOM.

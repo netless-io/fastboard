@@ -11,10 +11,10 @@
   "scripts": {
     "cleanup": "rimraf dist",
     "check": "tsc --noEmit",
-    "build": "tsup"
+    "build": "buildtool"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.28",
+    "@netless/app-slide": "^0.2.39",
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
@@ -22,7 +22,8 @@
     "white-web-sdk": ">=2.16.0"
   },
   "devDependencies": {
-    "white-web-sdk": "^2.16.40"
+    "@netless/buildtool": "workspace:*",
+    "white-web-sdk": "^2.16.42"
   },
   "publishConfig": {
     "main": "dist/index.js",

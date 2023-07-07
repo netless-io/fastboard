@@ -25,7 +25,7 @@ export function mount(app: FastboardApp, div: HTMLDivElement, options?: MountPro
 
   return {
     update(props?: MountProps) {
-      fastboard.$set(props);
+      if (props) fastboard.$set(props);
     },
     destroy() {
       fastboard.$destroy();
@@ -43,7 +43,7 @@ export function replay(player: FastboardPlayer, div: HTMLDivElement, options?: R
 
   return {
     update(props?: ReplayProps) {
-      replayFastboard.$set(props);
+      if (props) replayFastboard.$set(props);
     },
     destroy() {
       replayFastboard.$destroy();

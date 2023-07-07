@@ -1,0 +1,11 @@
+{
+  "name": "@netless/buildtool",
+  "version": "0.1.0",
+  "bin": "./cli.mjs",
+  "exports": "./index.mjs",
+  "types": "index.d.ts",
+  "private": true,
+  "devDependencies": {
+    "@netless/esbuild-plugin-inline-sass": "workspace:*"
+  }
+}

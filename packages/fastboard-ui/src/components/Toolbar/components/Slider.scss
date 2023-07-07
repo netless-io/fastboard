@@ -22,7 +22,9 @@ $thumb-color: white;
   background: $thumb-color;
   border: 0;
   border-radius: 100%;
-  box-shadow: 0 1px 1px rgba($shadow-color, 0.15), 0 0 0 1px rgba($shadow-color, 0.2);
+  box-shadow:
+    0 1px 1px rgba($shadow-color, 0.15),
+    0 0 0 1px rgba($shadow-color, 0.2);
   width: $thumb-height;
   height: $thumb-height;
   position: relative;
