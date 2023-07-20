@@ -205,11 +205,23 @@ The `conversionResponse` is the result of [this api](https://developer.netless.l
 > **Note**: If you're using the new [projector](https://developer.netless.link/server-zh/home/server-projector) api, there's another way:
 >
 > ```js
-> const appId = await fastboard.insertDocs({
+> const appId1 = await fastboard.insertDocs({
+>   fileType: "pdf",
+>   scenePath: `/pdf/${response.uuid}`,
+>   scenes: [
+>     { name: "1", ppt: { width: 714, height: 1010, src: images[1].url } },
+>     { name: "2", ppt: { width: 714, height: 1010, src: images[2].url } },
+>   ],
+>   title: "filename.pdf",
+> });
+>
+> const appId2 = await fastboard.insertDocs({
 >   fileType: "pptx",
 >   scenePath: `/pptx/${response.uuid}`,
 >   taskId: response.uuid,
 >   title: "filename.pptx",
+>   // "https://convertcdn.netless.link/dynamicConvert" by default
+>   url: response.prefix,
 > });
 > ```
 
@@ -226,6 +238,23 @@ By default it will dispatch event to the focused PDF/PPTX app, you can also spec
 
 ```js
 dispatchDocsEvent(fastboard, "nextPage", { appId });
+```
+
+#### Set PPTX Render Options
+
+```js
+import { register, SlideApp, addSlideHooks } from "@netless/fastboard";
+
+register({
+  kind: SlideApp.kind,
+  src: SlideApp,
+  appOptions: {
+    debug: true,
+    // ... your slide options here
+    // Note: import type {SlideOptions} to get type hints
+  },
+  addHooks: addSlideHooks,
+});
 ```
 
 #### Insert Video & Audio

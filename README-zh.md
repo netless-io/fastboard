@@ -211,11 +211,23 @@ const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 > **注意：** 如果你使用的是 [projector](https://developer.netless.link/server-zh/home/server-projector) 转码服务，也可以使用以下方式插入：
 >
 > ```js
-> const appId = await fastboard.insertDocs({
+> const appId1 = await fastboard.insertDocs({
+>   fileType: "pdf",
+>   scenePath: `/pdf/${response.uuid}`,
+>   scenes: [
+>     { name: "1", ppt: { width: 714, height: 1010, src: images[1].url } },
+>     { name: "2", ppt: { width: 714, height: 1010, src: images[2].url } },
+>   ],
+>   title: "filename.pdf",
+> });
+>
+> const appId2 = await fastboard.insertDocs({
 >   fileType: "pptx",
 >   scenePath: `/pptx/${response.uuid}`,
 >   taskId: response.uuid,
 >   title: "filename.pptx",
+>   // 默认为 "https://convertcdn.netless.link/dynamicConvert"
+>   url: response.prefix,
 > });
 > ```
 
@@ -232,6 +244,23 @@ dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
 
 ```js
 dispatchDocsEvent(fastboard, "nextPage", { appId });
+```
+
+#### 设置 PPTX 渲染参数
+
+```js
+import { register, SlideApp, addSlideHooks } from "@netless/fastboard";
+
+register({
+  kind: SlideApp.kind,
+  src: SlideApp,
+  appOptions: {
+    debug: true,
+    // ... 自定义渲染参数
+    // 引入 TypeScript 类型 SlideOptions 以获得提示
+  },
+  addHooks: addSlideHooks,
+});
 ```
 
 #### 插入音频、视频
