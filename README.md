@@ -249,13 +249,14 @@ register({
   kind: SlideApp.kind,
   src: SlideApp,
   appOptions: {
-    debug: true,
     // ... your slide options here
     // Note: import type {SlideOptions} to get type hints
   },
   addHooks: addSlideHooks,
 });
 ```
+
+[Read more about these options.](https://developer.netless.link/faq-zh/home/slide-render-options)
 
 #### Insert Video & Audio
 

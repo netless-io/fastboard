@@ -255,13 +255,14 @@ register({
   kind: SlideApp.kind,
   src: SlideApp,
   appOptions: {
-    debug: true,
     // ... 自定义渲染参数
     // 引入 TypeScript 类型 SlideOptions 以获得提示
   },
   addHooks: addSlideHooks,
 });
 ```
+
+[更多有关该渲染参数的信息](https://developer.netless.link/faq-zh/home/slide-render-options)
 
 #### 插入音频、视频
 
