@@ -454,10 +454,12 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   /**
    * Insert an image to the main view.
    *
+   * @param crossOrigin Whether to load the image with CORS enabled, default is `true`.
+   *
    * @example
    * insertImage("https://i.imgur.com/CzXTtJV.jpg")
    */
-  async insertImage(url: string) {
+  async insertImage(url: string, crossOrigin?: boolean | string) {
     this._assertNotDestroyed();
     await this.manager.switchMainViewToWriter();
 
@@ -469,13 +471,21 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
 
     // 1. shrink the image a little to fit container **width**
     const maxWidth = containerSize.width * 0.8;
-    let { width, height } = await getImageSize(url, containerSize);
+    let { width, height } = await getImageSize(url, containerSize, crossOrigin);
     const scale = Math.min(maxWidth / width, 1);
     const uuid = genUID();
     const { centerX, centerY } = this.manager.camera;
     width *= scale;
     height *= scale;
-    this.manager.mainView.insertImage({ uuid, centerX, centerY, width, height, locked: false });
+    this.manager.mainView.insertImage({
+      uuid,
+      centerX,
+      centerY,
+      width,
+      height,
+      locked: false,
+      crossOrigin,
+    });
     this.manager.mainView.completeImageUpload(uuid, url);
 
     // 2. move camera to fit image **height**

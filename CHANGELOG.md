@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added methods `setPencilEraserSize(size)` and `toggleDottedLine()`.
+- `insertImage()` learns a new param `crossOrigin`.
 
 ## 0.3.8
 

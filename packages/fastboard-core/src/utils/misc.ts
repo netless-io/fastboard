@@ -1,12 +1,42 @@
 import type { ConvertedFile, SceneDefinition, Size } from "white-web-sdk";
 
-export function getImageSize(url: string, fallback: Size) {
+export function getImageSize(url: string, fallback: Size, crossOrigin?: boolean | string) {
   return new Promise<Size>(resolve => {
     const img = new Image();
+    applyCrossOrigin(img, url, crossOrigin);
     img.onload = () => resolve(img);
     img.onerror = () => resolve(fallback);
     img.src = url;
   });
+}
+
+// https://github.com/pixijs/pixijs/blob/dev/packages/core/src/textures/resources/BaseImageResource.ts#L51
+function applyCrossOrigin(image: HTMLImageElement, src: string, crossOrigin?: boolean | string): void {
+  if (crossOrigin === undefined && !src.startsWith("data:")) {
+    image.crossOrigin = determineCrossOrigin(src);
+  } else if (crossOrigin !== false) {
+    image.crossOrigin = typeof crossOrigin === "string" ? crossOrigin : "anonymous";
+  }
+}
+
+function determineCrossOrigin(src: string): string {
+  if (src.startsWith("data:") || typeof window === "undefined" || !window.location) {
+    return "";
+  }
+  const loc = window.location;
+  try {
+    const parsedUrl = new URL(src, document.baseURI);
+    if (
+      parsedUrl.hostname !== loc.hostname ||
+      parsedUrl.port !== loc.port ||
+      parsedUrl.protocol !== loc.protocol
+    ) {
+      return "anonymous";
+    }
+    return "";
+  } catch {
+    return "";
+  }
 }
 
 export function makeSlideParams(scenes: SceneDefinition[]) {

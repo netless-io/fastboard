@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
-    "white-web-sdk": "^2.16.42"
+    "white-web-sdk": "^2.16.44"
   },
   "publishConfig": {
     "main": "dist/index.js",
