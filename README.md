@@ -10,6 +10,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 - [Install](#install)
 - [Usage](#usage)
+- [Customization](#customization)
 
 ## Install
 
@@ -322,6 +323,28 @@ const appId = await fastboard.manager.addApp({
 > **Note:** EmbeddedPage uses [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to display external web resources, you'd better not embedding 2 more nested iframes (i.e. webpage>iframe1>iframe2) in the same page.
 
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).
+
+## Customization
+
+Fastboard isn't that customizable due to its <q>fast</q> design goal.
+You may find it hard to add buttons to the toolbar or move the toolbar to another place.
+In which case, you can **hide the unwanted parts and write your own**:
+
+```jsx
+// vanilla js
+const ui = createUI(fastboard, container);
+ui.update({ config: { toolbar: { enable: false } } });
+
+// react
+return (
+  <>
+    <Fastboard app={fastboard} config={{ toolbar: { enable: false } }} />
+    <YourOwnUIComponent />
+  </>
+);
+```
+
+Then refer to the doc: [Write Your Own UI (for Fastboard)](./docs/en/ui.md).
 
 ## License
 

@@ -6,6 +6,7 @@
 
 - [安装](#install)
 - [使用](#usage)
+- [自定义](#customization)
 - [进阶](./docs)
 
 <h2 id="install">安装</h2>
@@ -326,7 +327,32 @@ const appId = await fastboard.manager.addApp({
 
 > **注意：** EmbeddedPage 使用 [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) 来显示外部资源，由于浏览器限制，您最好不要嵌套使用 iframe（即 iframe 内还有 iframe，通常来说浏览器会对第二层 iframe 增加十分多的限制或者根本无法使用）。
 
-> 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
+更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
+
+<h2 id="customization">自定义</h2>
+
+Fastboard 为了上手快，**不支持**高度定制化。如果你需要定制类似如下内容：
+
+- 在工具栏上添加按钮
+- 将工具栏移到右侧
+
+那么可以通过隐藏该组件，自行设计并实现：
+
+```jsx
+// 原生 JS
+const ui = createUI(fastboard, container);
+ui.update({ config: { toolbar: { enable: false } } });
+
+// React
+return (
+  <>
+    <Fastboard app={fastboard} config={{ toolbar: { enable: false } }} />
+    <YourOwnUIComponent />
+  </>
+);
+```
+
+请参考文档：[如何为 fastboard 实现 UI](./docs/zh/ui.md)
 
 ## License
 
