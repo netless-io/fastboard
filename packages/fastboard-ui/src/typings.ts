@@ -43,3 +43,9 @@ export interface FastboardUIConfig {
     enable?: boolean;
   };
 }
+
+export interface ReplayFastboardUIConfig {
+  player_control?: {
+    enable?: boolean;
+  };
+}
