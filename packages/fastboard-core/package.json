@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
