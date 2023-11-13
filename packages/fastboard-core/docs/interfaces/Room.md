@@ -97,6 +97,7 @@
 - [setWritable](Room.md#setwritable)
 - [stopBlockTimestamp](Room.md#stopblocktimestamp)
 - [syncBlockTimestamp](Room.md#syncblocktimestamp)
+- [syncMainView](Room.md#syncmainview)
 - [undo](Room.md#undo)
 - [updatePlugin](Room.md#updateplugin)
 - [updateSelectedText](Room.md#updateselectedtext)
@@ -113,7 +114,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1601
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1605
 
 ___
 
@@ -147,7 +148,7 @@ Displayer.callbacks
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1278
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1282
 
 ___
 
@@ -159,7 +160,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1622
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1626
 
 ___
 
@@ -171,7 +172,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1617
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1621
 
 ___
 
@@ -187,7 +188,7 @@ Displayer.deviceType
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1304
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1308
 
 ___
 
@@ -205,7 +206,7 @@ Displayer.disableCameraTransform
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1344
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1348
 
 ___
 
@@ -218,7 +219,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1628
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1632
 
 ___
 
@@ -230,7 +231,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1633
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1637
 
 ___
 
@@ -247,7 +248,7 @@ Displayer.disableOthersSelectingBox
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1337
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1341
 
 ___
 
@@ -267,7 +268,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1646
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1650
 
 ___
 
@@ -283,7 +284,7 @@ Displayer.enableWriteNow
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1319
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1323
 
 ___
 
@@ -299,7 +300,7 @@ Displayer.handToolActive
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1331
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1335
 
 ___
 
@@ -315,7 +316,7 @@ Displayer.handToolKey
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1324
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1328
 
 ___
 
@@ -327,7 +328,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1612
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1616
 
 ___
 
@@ -344,7 +345,7 @@ Displayer.observerId
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1284
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1288
 
 ___
 
@@ -356,7 +357,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1596
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1600
 
 ___
 
@@ -372,7 +373,7 @@ Displayer.region
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1289
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1293
 
 ___
 
@@ -384,7 +385,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1591
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1595
 
 ___
 
@@ -400,7 +401,7 @@ Displayer.screenType
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1309
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1313
 
 ___
 
@@ -412,7 +413,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1586
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1590
 
 ___
 
@@ -428,7 +429,7 @@ Displayer.slice
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1294
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1298
 
 ___
 
@@ -445,7 +446,7 @@ Displayer.state
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1607
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1611
 
 ___
 
@@ -457,7 +458,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1651
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1655
 
 ___
 
@@ -469,7 +470,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1581
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1585
 
 ___
 
@@ -481,7 +482,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1576
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1580
 
 ___
 
@@ -497,7 +498,7 @@ Displayer.version
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1299
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1303
 
 ___
 
@@ -511,7 +512,7 @@ Displayer.views
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1326
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1330
 
 ## Methods
 
@@ -539,7 +540,7 @@ Displayer.addMagixEventListener
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1447
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1451
 
 ▸ **addMagixEventListener**(`event`, `listener`, `fireInterval`): `void`
 
@@ -575,7 +576,7 @@ Displayer.addMagixEventListener
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1466
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1470
 
 ___
 
@@ -601,7 +602,7 @@ Displayer.bindHtmlElement
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1392
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1396
 
 ___
 
@@ -623,7 +624,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1744
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1750
 
 ___
 
@@ -647,7 +648,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1786
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1792
 
 ___
 
@@ -682,7 +683,7 @@ Displayer.convertToPointInWorld
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1404
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1408
 
 ___
 
@@ -698,7 +699,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1808
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1814
 
 ___
 
@@ -728,7 +729,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1788
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1794
 
 ___
 
@@ -759,7 +760,7 @@ Displayer.createScenesCallback
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1366
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1370
 
 ___
 
@@ -775,7 +776,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1828
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1834
 
 ___
 
@@ -791,7 +792,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1880
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1886
 
 ___
 
@@ -815,7 +816,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1730
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1736
 
 ___
 
@@ -831,7 +832,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1803
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1809
 
 ___
 
@@ -851,7 +852,7 @@ Displayer.entireScenes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1497
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1501
 
 ___
 
@@ -873,7 +874,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1760
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1766
 
 ___
 
@@ -903,7 +904,7 @@ Displayer.fillSceneSnapshot
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1429
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1433
 
 ___
 
@@ -931,7 +932,7 @@ Displayer.generateScreenshot
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1424
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1428
 
 ___
 
@@ -957,7 +958,7 @@ Displayer.getBoundingRect
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1439
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1443
 
 ___
 
@@ -990,7 +991,7 @@ Displayer.getInvisiblePlugin
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1397
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1401
 
 ___
 
@@ -1010,7 +1011,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1796
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1802
 
 ___
 
@@ -1030,7 +1031,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1798
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1804
 
 ___
 
@@ -1056,7 +1057,7 @@ Displayer.getScene
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1502
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1506
 
 ___
 
@@ -1081,7 +1082,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1768
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1774
 
 ___
 
@@ -1104,7 +1105,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1774
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1780
 
 ___
 
@@ -1125,7 +1126,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1790
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1796
 
 ___
 
@@ -1151,7 +1152,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1853
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1859
 
 ___
 
@@ -1174,7 +1175,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1780
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1786
 
 ___
 
@@ -1196,7 +1197,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1834
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1840
 
 ___
 
@@ -1222,7 +1223,7 @@ Displayer.memberState
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1372
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1376
 
 ___
 
@@ -1248,7 +1249,7 @@ Displayer.moveCamera
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1377
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1381
 
 ___
 
@@ -1274,7 +1275,7 @@ Displayer.moveCameraToContain
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1384
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1388
 
 ___
 
@@ -1297,7 +1298,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1754
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1760
 
 ___
 
@@ -1313,7 +1314,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1844
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1850
 
 ___
 
@@ -1329,7 +1330,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1839
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1845
 
 ___
 
@@ -1345,7 +1346,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1813
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1819
 
 ___
 
@@ -1361,7 +1362,7 @@ PPT 翻页到下一页。如果当前 PPT 没有动画，则切换到顺位索�
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1870
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1876
 
 ___
 
@@ -1377,7 +1378,7 @@ PPT 翻页到前一页。如果当前 PPT 没有动画，则切换到顺位索�
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1875
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1881
 
 ___
 
@@ -1401,7 +1402,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1738
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1744
 
 ___
 
@@ -1417,7 +1418,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1823
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1829
 
 ___
 
@@ -1438,7 +1439,7 @@ Displayer.refreshViewSize
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1350
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1354
 
 ___
 
@@ -1465,7 +1466,7 @@ Displayer.removeMagixEventListener
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1473
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1477
 
 ___
 
@@ -1485,7 +1486,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1792
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1798
 
 ___
 
@@ -1507,7 +1508,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1749
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1755
 
 ___
 
@@ -1533,7 +1534,7 @@ Displayer.scalePptToFit
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1486
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1490
 
 ___
 
@@ -1559,7 +1560,7 @@ Displayer.scenePathType
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1492
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1496
 
 ___
 
@@ -1589,7 +1590,7 @@ Displayer.scenePreview
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1419
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1423
 
 ___
 
@@ -1620,7 +1621,7 @@ Displayer.screenshotToCanvas
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1434
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1438
 
 ___
 
@@ -1646,7 +1647,7 @@ Displayer.setCameraBound
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1355
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1359
 
 ___
 
@@ -1686,7 +1687,7 @@ room.setGlobalState({
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1678
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1682
 
 ___
 
@@ -1726,7 +1727,7 @@ room.setMemberState({
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1699
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1703
 
 ___
 
@@ -1748,7 +1749,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1714
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1718
 
 ___
 
@@ -1770,7 +1771,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1709
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1713
 
 ___
 
@@ -1792,7 +1793,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1704
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1708
 
 ___
 
@@ -1815,7 +1816,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1657
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1661
 
 ___
 
@@ -1831,7 +1832,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1724
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1730
 
 ___
 
@@ -1853,7 +1854,27 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1719
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1725
+
+___
+
+### syncMainView
+
+▸ **syncMainView**(`view`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `view` | ``null`` \| `View` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1720
 
 ___
 
@@ -1869,7 +1890,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1818
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1824
 
 ___
 
@@ -1890,7 +1911,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1794
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1800
 
 ___
 
@@ -1912,7 +1933,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1865
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1871
 
 ___
 
@@ -1935,7 +1956,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1860
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1866
 
 ___
 
@@ -1963,4 +1984,4 @@ Displayer.waitMagixEvent
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1480
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1484

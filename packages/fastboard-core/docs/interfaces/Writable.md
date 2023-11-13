@@ -39,7 +39,7 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L8)
+[packages/fastboard-core/src/utils/store.ts:8](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L8)
 
 ## Methods
 
@@ -64,7 +64,7 @@
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:10](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L10)
+[packages/fastboard-core/src/utils/store.ts:10](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L10)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:14](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L14)
+[packages/fastboard-core/src/utils/store.ts:14](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L14)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:9](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L9)
+[packages/fastboard-core/src/utils/store.ts:9](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L9)
 
 ___
 
@@ -131,4 +131,4 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:15](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L15)
+[packages/fastboard-core/src/utils/store.ts:15](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L15)

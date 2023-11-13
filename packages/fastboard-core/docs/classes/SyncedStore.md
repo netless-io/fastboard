@@ -62,7 +62,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:12
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:12
 
 ## Properties
 
@@ -72,7 +72,7 @@ node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_module
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:8
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:8
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:9
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:9
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:7
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:7
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:11
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:11
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:10
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:10
 
 ___
 
@@ -122,7 +122,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:6
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:6
 
 ## Accessors
 
@@ -136,7 +136,7 @@ node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_module
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:14
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:14
 
 ___
 
@@ -150,7 +150,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:16
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:16
 
 ## Methods
 
@@ -180,7 +180,7 @@ Listen to events from others clients (and self messages).
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:22
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:22
 
 ___
 
@@ -206,7 +206,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:15
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:15
 
 ___
 
@@ -232,7 +232,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:18
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:18
 
 ___
 
@@ -259,7 +259,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:13
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:13
 
 ___
 
@@ -273,7 +273,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:26
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:26
 
 ___
 
@@ -302,7 +302,7 @@ Dispatch events to other clients (and self).
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:20
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:20
 
 ___
 
@@ -316,7 +316,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:25
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:25
 
 ___
 
@@ -345,7 +345,7 @@ Remove a Magix event listener.
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:24
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:24
 
 ___
 
@@ -365,4 +365,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/synced-store.d.ts:17
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/synced-store.d.ts:17

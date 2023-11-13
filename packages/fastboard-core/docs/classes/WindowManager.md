@@ -157,7 +157,7 @@ InvisiblePlugin&lt;WindowMangerAttributes, any\&gt;.constructor
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:116
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:116
 
 ## Properties
 
@@ -167,7 +167,7 @@ node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_mod
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:135
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:135
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:224
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:224
 
 ___
 
@@ -187,7 +187,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:111
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:111
 
 ___
 
@@ -197,7 +197,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:104
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:104
 
 ___
 
@@ -207,7 +207,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:107
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:107
 
 ___
 
@@ -221,7 +221,7 @@ InvisiblePlugin.attributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:483
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:487
 
 ___
 
@@ -231,7 +231,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:225
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:225
 
 ___
 
@@ -241,7 +241,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:112
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:112
 
 ___
 
@@ -255,7 +255,7 @@ InvisiblePlugin.callbacks
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:481
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:485
 
 ___
 
@@ -265,7 +265,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:114
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:114
 
 ___
 
@@ -275,7 +275,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:115
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:115
 
 ___
 
@@ -285,7 +285,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:108
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:108
 
 ___
 
@@ -295,7 +295,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:103
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:103
 
 ___
 
@@ -309,7 +309,7 @@ InvisiblePlugin.displayer
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:479
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:483
 
 ___
 
@@ -319,7 +319,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:106
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:106
 
 ___
 
@@ -329,7 +329,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:248
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:248
 
 ___
 
@@ -339,7 +339,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:247
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:247
 
 ___
 
@@ -349,7 +349,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:110
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:110
 
 ___
 
@@ -363,7 +363,7 @@ InvisiblePlugin.memberAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:485
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:489
 
 ___
 
@@ -373,7 +373,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:105
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:105
 
 ___
 
@@ -383,7 +383,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:136
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:136
 
 ___
 
@@ -393,7 +393,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:102
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:102
 
 ___
 
@@ -403,7 +403,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:109
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:109
 
 ___
 
@@ -413,7 +413,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:98
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:98
 
 ___
 
@@ -423,7 +423,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:100
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:100
 
 ___
 
@@ -433,7 +433,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:99
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:99
 
 ___
 
@@ -443,7 +443,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:95
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:95
 
 ___
 
@@ -453,7 +453,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:119
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:119
 
 ___
 
@@ -463,7 +463,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:118
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:118
 
 ___
 
@@ -473,7 +473,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:101
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:101
 
 ___
 
@@ -483,7 +483,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:94
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:94
 
 ___
 
@@ -493,7 +493,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:113
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:113
 
 ___
 
@@ -503,7 +503,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:97
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:97
 
 ___
 
@@ -513,7 +513,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:96
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:96
 
 ## Accessors
 
@@ -527,7 +527,7 @@ node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_mod
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:184
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:184
 
 ___
 
@@ -541,7 +541,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:185
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:185
 
 ___
 
@@ -555,7 +555,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:182
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:182
 
 ___
 
@@ -569,7 +569,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:183
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:183
 
 ___
 
@@ -583,7 +583,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:226
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:226
 
 ___
 
@@ -597,7 +597,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:194
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:194
 
 ___
 
@@ -611,7 +611,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:195
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:195
 
 ___
 
@@ -625,7 +625,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:186
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:186
 
 ___
 
@@ -639,7 +639,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:188
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:188
 
 ___
 
@@ -653,7 +653,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:189
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:189
 
 ___
 
@@ -667,7 +667,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:181
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:181
 
 ___
 
@@ -681,7 +681,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:191
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:191
 
 ___
 
@@ -695,7 +695,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:190
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:190
 
 ___
 
@@ -709,7 +709,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:193
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:193
 
 ___
 
@@ -727,7 +727,7 @@ PageController.pageState
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:197
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:197
 
 ___
 
@@ -741,7 +741,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:187
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:187
 
 ___
 
@@ -755,7 +755,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:227
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:227
 
 ___
 
@@ -769,7 +769,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:196
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:196
 
 ___
 
@@ -783,7 +783,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:192
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:192
 
 ___
 
@@ -797,7 +797,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:120
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:120
 
 ## Methods
 
@@ -821,7 +821,7 @@ InvisiblePlugin.\_dispose
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:509
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:513
 
 ___
 
@@ -837,7 +837,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:245
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:245
 
 ___
 
@@ -865,7 +865,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:134
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:134
 
 ___
 
@@ -889,7 +889,7 @@ PageController.addPage
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:147
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:147
 
 ___
 
@@ -909,7 +909,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:122
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:122
 
 ___
 
@@ -929,7 +929,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:121
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:121
 
 ___
 
@@ -943,7 +943,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:231
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:231
 
 ___
 
@@ -965,7 +965,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:209
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:209
 
 ___
 
@@ -986,7 +986,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:240
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:240
 
 ___
 
@@ -1006,7 +1006,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:220
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:220
 
 ___
 
@@ -1020,7 +1020,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:235
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:235
 
 ___
 
@@ -1034,7 +1034,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:234
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:234
 
 ___
 
@@ -1052,7 +1052,7 @@ InvisiblePlugin.destroy
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:223
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:223
 
 ___
 
@@ -1066,7 +1066,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:237
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:237
 
 ___
 
@@ -1088,7 +1088,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:213
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:213
 
 ___
 
@@ -1112,7 +1112,7 @@ InvisiblePlugin.getAttributesValue
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:495
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:499
 
 ___
 
@@ -1128,7 +1128,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:161
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:161
 
 ___
 
@@ -1144,7 +1144,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:157
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:157
 
 ___
 
@@ -1168,7 +1168,7 @@ InvisiblePlugin.getMemberAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:493
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:497
 
 ___
 
@@ -1192,7 +1192,7 @@ InvisiblePlugin.getMemberAttributesValue
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:497
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:501
 
 ___
 
@@ -1212,7 +1212,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:239
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:239
 
 ___
 
@@ -1234,7 +1234,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:238
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:238
 
 ___
 
@@ -1255,7 +1255,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:241
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:241
 
 ___
 
@@ -1275,7 +1275,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:242
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:242
 
 ___
 
@@ -1295,7 +1295,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:214
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:214
 
 ___
 
@@ -1315,7 +1315,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:217
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:217
 
 ___
 
@@ -1333,7 +1333,7 @@ PageController.nextPage
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:145
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:145
 
 ___
 
@@ -1356,7 +1356,7 @@ app destroy 回调
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:173
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:173
 
 ___
 
@@ -1380,7 +1380,7 @@ InvisiblePlugin.onAttributesUpdate
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:489
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:493
 
 ___
 
@@ -1398,7 +1398,7 @@ InvisiblePlugin.onDestroy
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:222
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:222
 
 ___
 
@@ -1412,7 +1412,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:236
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:236
 
 ___
 
@@ -1430,7 +1430,7 @@ PageController.prevPage
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:146
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:146
 
 ___
 
@@ -1446,7 +1446,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:201
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:201
 
 ___
 
@@ -1468,7 +1468,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:205
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:205
 
 ___
 
@@ -1482,7 +1482,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:232
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:232
 
 ___
 
@@ -1496,7 +1496,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:243
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:243
 
 ___
 
@@ -1524,7 +1524,7 @@ PageController.removePage
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:153
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:153
 
 ___
 
@@ -1544,7 +1544,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:228
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:228
 
 ___
 
@@ -1565,7 +1565,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:229
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:229
 
 ___
 
@@ -1589,7 +1589,7 @@ InvisiblePlugin.setAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:499
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:503
 
 ___
 
@@ -1609,7 +1609,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:178
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:178
 
 ___
 
@@ -1629,7 +1629,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:221
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:221
 
 ___
 
@@ -1649,7 +1649,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:246
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:246
 
 ___
 
@@ -1671,7 +1671,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:144
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:144
 
 ___
 
@@ -1693,7 +1693,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:140
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:140
 
 ___
 
@@ -1713,7 +1713,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:179
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:179
 
 ___
 
@@ -1737,7 +1737,7 @@ InvisiblePlugin.setMemberAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:501
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:505
 
 ___
 
@@ -1757,7 +1757,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:180
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:180
 
 ___
 
@@ -1777,7 +1777,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:230
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:230
 
 ___
 
@@ -1799,7 +1799,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:165
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:165
 
 ___
 
@@ -1821,7 +1821,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:177
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:177
 
 ___
 
@@ -1837,7 +1837,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:169
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:169
 
 ___
 
@@ -1851,7 +1851,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:233
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:233
 
 ___
 
@@ -1876,7 +1876,7 @@ InvisiblePlugin.updateAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:503
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:507
 
 ___
 
@@ -1901,7 +1901,7 @@ InvisiblePlugin.updateMemberAttributes
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:505
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:509
 
 ___
 
@@ -1921,7 +1921,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:117
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:117
 
 ___
 
@@ -1951,7 +1951,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:126
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:126
 
 ___
 
@@ -1973,4 +1973,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:130
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:130

@@ -61,7 +61,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:25
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:25
 
 ## Properties
 
@@ -71,7 +71,7 @@ node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_module
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:44
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:44
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:24
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:24
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:21
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:21
 
 ___
 
@@ -101,7 +101,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:20
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:20
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:22
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:22
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:45
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:45
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:23
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:23
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:19
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:19
 
 ___
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:18
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:18
 
 ___
 
@@ -184,7 +184,7 @@ Remove a listener from the eventName.
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:40
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:40
 
 ___
 
@@ -217,7 +217,7 @@ Add a listener to the eventName.
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:36
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:36
 
 ## Accessors
 
@@ -231,7 +231,7 @@ node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_module
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:43
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:43
 
 ___
 
@@ -245,7 +245,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:26
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:26
 
 ___
 
@@ -259,7 +259,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:27
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:27
 
 ## Methods
 
@@ -275,7 +275,7 @@ delete synced storage data and disconnect from synced storage
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:32
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:32
 
 ___
 
@@ -291,7 +291,7 @@ Disconnect from synced storage and release listeners
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:42
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:42
 
 ___
 
@@ -307,7 +307,7 @@ reset storage state to default state
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:30
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:30
 
 ___
 
@@ -327,4 +327,4 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/storage.d.ts:28
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/storage.d.ts:28

@@ -112,7 +112,7 @@
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/Page/PageController.d.ts:2
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/Page/PageController.d.ts:2
 
 ___
 
@@ -124,7 +124,7 @@ pencil, eraser, rectangle...
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:124](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L124)
+[packages/fastboard-core/src/impl/FastboardApp.ts:124](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L124)
 
 ___
 
@@ -142,7 +142,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:203
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:207
 
 ___
 
@@ -155,7 +155,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:75
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:75
 
 ___
 
@@ -175,7 +175,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2930
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:2936
 
 ___
 
@@ -191,7 +191,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/typings.d.ts:6
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/typings.d.ts:6
 
 ___
 
@@ -214,7 +214,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.42/node_modules/@netless/synced-store/dist/typings.d.ts:2
+node_modules/.pnpm/@netless+synced-store@2.0.7_white-web-sdk@2.16.44/node_modules/@netless/synced-store/dist/typings.d.ts:2
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:806
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:810
 
 ___
 
@@ -260,7 +260,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:719
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:723
 
 ___
 
@@ -270,7 +270,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:154](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L154)
+[packages/fastboard-core/src/impl/FastboardApp.ts:154](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L154)
 
 ___
 
@@ -280,7 +280,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2594
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:2600
 
 ___
 
@@ -308,7 +308,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2215
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:2221
 
 ___
 
@@ -335,7 +335,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:76
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:76
 
 ___
 
@@ -345,7 +345,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:68](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardPlayer.ts#L68)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:68](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardPlayer.ts#L68)
 
 ___
 
@@ -375,7 +375,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/callback.d.ts:6
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/callback.d.ts:6
 
 ___
 
@@ -385,7 +385,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:218
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:222
 
 ___
 
@@ -395,7 +395,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1922
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1928
 
 ___
 
@@ -405,7 +405,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:90](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L90)
+[packages/fastboard-core/src/impl/FastboardApp.ts:90](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L90)
 
 ___
 
@@ -415,7 +415,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2174
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:2180
 
 ___
 
@@ -439,7 +439,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:178](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L178)
+[packages/fastboard-core/src/impl/FastboardApp.ts:178](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L178)
 
 ___
 
@@ -456,7 +456,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1975
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1981
 
 ___
 
@@ -480,7 +480,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:176](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L176)
+[packages/fastboard-core/src/impl/FastboardApp.ts:176](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L176)
 
 ___
 
@@ -492,7 +492,7 @@ triangle, star...
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:126](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L126)
+[packages/fastboard-core/src/impl/FastboardApp.ts:126](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L126)
 
 ___
 
@@ -522,7 +522,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:5](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L5)
+[packages/fastboard-core/src/utils/store.ts:5](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L5)
 
 ___
 
@@ -552,7 +552,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:2](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L2)
+[packages/fastboard-core/src/utils/store.ts:2](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L2)
 
 ___
 
@@ -570,7 +570,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:3](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L3)
+[packages/fastboard-core/src/utils/store.ts:3](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L3)
 
 ___
 
@@ -600,7 +600,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:4](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L4)
+[packages/fastboard-core/src/utils/store.ts:4](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L4)
 
 ___
 
@@ -626,7 +626,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:1217
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:1221
 
 ___
 
@@ -664,7 +664,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/white-web-sdk@2.16.42/node_modules/white-web-sdk/types/index.d.ts:2389
+node_modules/.pnpm/white-web-sdk@2.16.44/node_modules/white-web-sdk/types/index.d.ts:2395
 
 ## Variables
 
@@ -706,7 +706,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/behaviors/index.ts:56](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/behaviors/index.ts#L56)
+[packages/fastboard-core/src/behaviors/index.ts:56](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/behaviors/index.ts#L56)
 
 ## Functions
 
@@ -740,7 +740,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/listen.ts:31](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/helpers/listen.ts#L31)
+[packages/fastboard-core/src/helpers/listen.ts:31](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/listen.ts#L31)
 
 ___
 
@@ -774,7 +774,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/listen.ts:13](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/helpers/listen.ts#L13)
+[packages/fastboard-core/src/helpers/listen.ts:13](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/listen.ts#L13)
 
 ___
 
@@ -808,7 +808,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/listen.ts:4](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/helpers/listen.ts#L4)
+[packages/fastboard-core/src/helpers/listen.ts:4](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/listen.ts#L4)
 
 ___
 
@@ -832,7 +832,7 @@ So that it will automatically freeze the app when it is not in focus.
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/typings.d.ts:69
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/typings.d.ts:69
 
 ___
 
@@ -866,7 +866,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/listen.ts:22](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/helpers/listen.ts#L22)
+[packages/fastboard-core/src/helpers/listen.ts:22](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/listen.ts#L22)
 
 ___
 
@@ -887,7 +887,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/misc.ts:37](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/misc.ts#L37)
+[packages/fastboard-core/src/utils/misc.ts:67](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/misc.ts#L67)
 
 ___
 
@@ -931,7 +931,7 @@ let app = await createFastboard({
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:645](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L645)
+[packages/fastboard-core/src/impl/FastboardApp.ts:655](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L655)
 
 ___
 
@@ -970,7 +970,7 @@ dispatchDocsEvent(fastboard, "prevPage", {appId:"Slide-1a2b3c4d"})
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/docs.ts:28](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/helpers/docs.ts#L28)
+[packages/fastboard-core/src/helpers/docs.ts:28](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/docs.ts#L28)
 
 ___
 
@@ -984,13 +984,13 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/uid.ts:7](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/uid.ts#L7)
+[packages/fastboard-core/src/utils/uid.ts:7](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/uid.ts#L7)
 
 ___
 
 ### getImageSize
 
-▸ **getImageSize**(`url`, `fallback`): `Promise`<`Size`\>
+▸ **getImageSize**(`url`, `fallback`, `crossOrigin?`): `Promise`<`Size`\>
 
 #### Parameters
 
@@ -998,6 +998,7 @@ ___
 | :------ | :------ |
 | `url` | `string` |
 | `fallback` | `Size` |
+| `crossOrigin?` | `string` \| `boolean` |
 
 #### Returns
 
@@ -1005,7 +1006,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/misc.ts:3](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/misc.ts#L3)
+[packages/fastboard-core/src/utils/misc.ts:3](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/misc.ts#L3)
 
 ___
 
@@ -1031,7 +1032,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/misc.ts:12](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/misc.ts#L12)
+[packages/fastboard-core/src/utils/misc.ts:42](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/misc.ts#L42)
 
 ___
 
@@ -1078,7 +1079,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:25](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L25)
+[packages/fastboard-core/src/utils/store.ts:25](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L25)
 
 ___
 
@@ -1108,7 +1109,7 @@ ___
 
 #### Defined in
 
-node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.42/node_modules/@netless/window-manager/dist/index.d.ts:126
+node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:126
 
 ___
 
@@ -1153,7 +1154,7 @@ let player = await replayFastboard({
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardPlayer.ts:219](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardPlayer.ts#L219)
+[packages/fastboard-core/src/impl/FastboardPlayer.ts:219](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardPlayer.ts#L219)
 
 ___
 
@@ -1173,7 +1174,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/warn.ts:7](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/warn.ts#L7)
+[packages/fastboard-core/src/utils/warn.ts:7](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/warn.ts#L7)
 
 ___
 
@@ -1201,4 +1202,4 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/utils/store.ts:74](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/utils/store.ts#L74)
+[packages/fastboard-core/src/utils/store.ts:74](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/utils/store.ts#L74)

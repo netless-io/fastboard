@@ -23,7 +23,7 @@ Params for slides, they are rendered in @netless/app-slide with animations.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:141](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L141)
+[packages/fastboard-core/src/impl/FastboardApp.ts:141](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L141)
 
 ___
 
@@ -35,7 +35,7 @@ Unique string for binding whiteboard view to the doc. Must start with `/`.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:143](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L143)
+[packages/fastboard-core/src/impl/FastboardApp.ts:143](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L143)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:151](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L151)
+[packages/fastboard-core/src/impl/FastboardApp.ts:151](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L151)
 
 ___
 
@@ -63,7 +63,7 @@ Conversion task id, see https://developer.netless.link/server-en/home/server-con
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:145](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L145)
+[packages/fastboard-core/src/impl/FastboardApp.ts:145](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L145)
 
 ___
 
@@ -75,7 +75,7 @@ Window title.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:147](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L147)
+[packages/fastboard-core/src/impl/FastboardApp.ts:147](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L147)
 
 ___
 
@@ -91,4 +91,4 @@ Where the slide resource placed.
 
 #### Defined in
 
-[packages/fastboard-core/src/impl/FastboardApp.ts:149](https://github.com/netless-io/fastboard/blob/1326312/packages/fastboard-core/src/impl/FastboardApp.ts#L149)
+[packages/fastboard-core/src/impl/FastboardApp.ts:149](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/impl/FastboardApp.ts#L149)
