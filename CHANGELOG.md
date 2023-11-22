@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Added method `jumpPage(index)`. Requires `@netless/window-manager` at least 0.4.63.
+
+  > [!NOTE]
+  > You can do this already in previous versions via `sceneIndex.set(index)`.
+
 ## 0.3.9
 
 - Added methods `setPencilEraserSize(size)` and `toggleDottedLine()`.

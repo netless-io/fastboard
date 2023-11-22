@@ -427,6 +427,14 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   }
 
   /**
+   * Goto any page (index range: 0..n-1)
+   */
+  jumpPage(index: number) {
+    this._assertNotDestroyed();
+    return this.manager.jumpPage(index);
+  }
+
+  /**
    * Add one page to the main whiteboard view.
    *
    * @example
