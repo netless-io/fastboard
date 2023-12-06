@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.10
 
 - Added method `jumpPage(index)`. Requires `@netless/window-manager` at least 0.4.63.
 
