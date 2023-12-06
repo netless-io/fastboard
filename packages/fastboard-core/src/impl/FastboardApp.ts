@@ -3,6 +3,7 @@ import type {
   AnimationMode,
   ApplianceNames,
   Camera,
+  CameraState,
   Color,
   ConversionResponse,
   HotKey,
@@ -73,6 +74,7 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
   /** @internal */
   protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
     this._assertNotDestroyed();
+    // Note: the callbacks will be invalid when reconnected, need rebind manually.
     this.manager.mainView.callbacks.on(name, listener);
     return () => this.manager.mainView.callbacks.off(name, listener);
   }
@@ -94,6 +96,7 @@ export type {
   AnimationMode,
   ApplianceNames,
   Camera,
+  CameraState,
   Color,
   ConversionResponse,
   HotKey,
@@ -261,9 +264,9 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    *
    * Change the camera position by `app.moveCamera()`.
    */
-  readonly camera = readable(this.manager.camera, set => {
-    set(this.manager.camera);
-    return this._addMainViewListener("onCameraUpdated", set);
+  readonly camera = readable(this.manager.cameraState, set => {
+    set(this.manager.cameraState);
+    return this._addManagerListener("cameraStateChange", set);
   });
 
   /**

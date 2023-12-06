@@ -7,6 +7,8 @@
   > [!NOTE]
   > You can do this already in previous versions via `sceneIndex.set(index)`.
 
+- Fixed `camera` not working after a reconnection.
+
 ## 0.3.9
 
 - Added methods `setPencilEraserSize(size)` and `toggleDottedLine()`.
