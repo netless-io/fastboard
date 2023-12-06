@@ -19,6 +19,22 @@ export function addPlayerListener<K extends keyof PlayerCallbacks>(
   return () => player.callbacks.off(name, listener);
 }
 
+/**
+ * Note: view listeners will be invalid on reconnection.
+ * You have to rebind them after the phase changed.
+ * @example
+ * const bindCamera = () => addViewListener(mainView, "onCameraUpdated", setCamera)
+ * let dispose = bindCamera(), phase_ = "disconnected"
+ * setCamera(mainView.camera)
+ * addRoomListener(room, "onPhaseChanged", (phase) => {
+ *   if (phase === "connected" && phase_ === "reconnecting") {
+ *     dispose()
+ *     dispose = bindCamera()
+ *     setCamera(mainView.camera)
+ *   }
+ *   phase_ = phase
+ * })
+ */
 export function addViewListener<K extends keyof ViewCallbacks>(
   view: View,
   name: K,
