@@ -346,6 +346,47 @@ return (
 
 Then refer to the doc: [Write Your Own UI (for Fastboard)](./docs/en/ui.md).
 
+## Error Handling
+
+You will get callbacks when:
+
+- Cannot connect to server at the very beginning
+- Connecting status changed (to `reconnecting` or `disconnected`)
+- Kicked from room (when the room is banned from the backend)
+
+Note that Fastboard will reconnect automatically internally, you only have to do things below to ensure the user experience.
+
+To properly handle these cases, please refer to this piece of code:
+
+```js
+try {
+  fastboard = await createFastboard({
+    sdkConfig: {
+      onWhiteSetupFailed(error) {
+        console.error("Failed to find the whiteboard server", error);
+      },
+    },
+    joinRoom: {
+      callbacks: {
+        onPhaseChanged(phase) {
+          if (phase === "reconnecting") console.log("Whiteboard connection lost, reconnecting...");
+        },
+        onDisconnectWithError(error) {
+          console.error("Failed to connect to whiteboard server");
+        },
+        onKickedWithReason(reason) {
+          console.log("You're kicked by", reason);
+          // Properly close this room
+          leaveRoom();
+        },
+      },
+    },
+  });
+} catch (error) {
+  console.error("Failed to join whiteboard room", error);
+}
+```
+
 ## License
 
 MIT @ [netless](https://github.com/netless-io)

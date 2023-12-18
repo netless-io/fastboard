@@ -354,6 +354,47 @@ return (
 
 请参考文档：[如何为 fastboard 实现 UI](./docs/zh/ui.md)
 
+<h2 id="#error-handling">异常处理</h2>
+
+你会因为以下情况收到异常回调：
+
+- 因为断网等无法连上白板服务器
+- 因为网络不稳自动进入重连状态
+- 房间被封禁
+
+注意，白板内部自带重试逻辑，用户无需手写，如果白板真的断开连接，你必须直接退出房间。
+
+请参考以下代码适当地处理这些异常情况：
+
+```js
+try {
+  fastboard = await createFastboard({
+    sdkConfig: {
+      onWhiteSetupFailed(error) {
+        console.error("Failed to find the whiteboard server", error);
+      },
+    },
+    joinRoom: {
+      callbacks: {
+        onPhaseChanged(phase) {
+          if (phase === "reconnecting") console.log("Whiteboard connection lost, reconnecting...");
+        },
+        onDisconnectWithError(error) {
+          console.error("Failed to connect to whiteboard server", error);
+        },
+        onKickedWithReason(reason) {
+          console.log("You're kicked by", reason);
+          // 正常退出房间
+          leaveRoom();
+        },
+      },
+    },
+  });
+} catch (error) {
+  console.error("Failed to join whiteboard room", error);
+}
+```
+
 ## License
 
 MIT @ [netless](https://github.com/netless-io)
