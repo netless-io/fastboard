@@ -232,6 +232,40 @@ const appId = await fastboard.insertDocs("文件名.pptx", conversionResponse);
 > });
 > ```
 
+#### 监听 PDF、PPTX 文档跳页事件
+
+> **注意：** 该功能需要你把以下依赖升级到对应版本以上
+>
+> - `@netless/app-slide` &ge; 0.2.50
+> - `@netless/window-manager` &ge; 0.4.66
+
+```js
+// PDF / 静态转码的文档
+const dispose = fastboard.manager.onAppEvent("DocsViewer", event => {
+  if (event.type === "pageStateChange") console.log(event.value);
+});
+// PPTX / 动态转码的文档
+const dispose = fastboard.manager.onAppEvent("Slide", console.log);
+
+onExitRoom(() => dispose());
+```
+
+上面的 `event` 对象结构如下：
+
+```json
+{
+  "kind": "Slide",
+  "appId": "Slide-aa1840ba",
+  "type": "pageStateChange",
+  "value": {
+    "index": 0,
+    "length": 12
+  }
+}
+```
+
+该方法返回一个取消监听的函数。
+
 #### 操作 PDF、PPTX 文档
 
 ```js

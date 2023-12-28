@@ -226,6 +226,40 @@ The `conversionResponse` is the result of [this api](https://developer.netless.l
 > });
 > ```
 
+#### Listen PDF/PPTX Page Change Event
+
+> **Note:** This feature requires the following versions of dependencies:
+>
+> - `@netless/app-slide` &ge; 0.2.50
+> - `@netless/window-manager` &ge; 0.4.66
+
+```js
+// For static documents i.e. PDF files
+const dispose = fastboard.manager.onAppEvent("DocsViewer", event => {
+  if (event.type === "pageStateChange") console.log(event.value);
+});
+// For dynamic documents i.e. PPTX files
+const dispose = fastboard.manager.onAppEvent("Slide", console.log);
+
+onExitRoom(() => dispose());
+```
+
+The `event` above will be like:
+
+```json
+{
+  "kind": "Slide",
+  "appId": "Slide-aa1840ba",
+  "type": "pageStateChange",
+  "value": {
+    "index": 0,
+    "length": 12
+  }
+}
+```
+
+The `dispose` above is a function to stop listening.
+
 #### Control the PDF/PPTX Apps
 
 ```js
