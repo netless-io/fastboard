@@ -76,3 +76,13 @@ $name: "fastboard-toolbar";
 
 @import "./components/Slider.scss";
 @import "./components/Contents.scss";
+
+.fastboard-right .#{$name}.collapsed {
+  transform: translateX(100%);
+}
+
+.fastboard-right .#{$name}-handler {
+  left: auto;
+  right: 100%;
+  transform: rotate(180deg);
+}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FastboardApp, FastboardPlayer } from "@netless/fastboard-core";
-  import type { Language, Theme } from "../src";
+  import type { Language, Theme, ToolbarItem } from "../src";
   import type { MockApp } from "./mock-app";
   import { onMount } from "svelte";
 
@@ -25,6 +25,19 @@
     : "dark";
   let language: Language = is_client ? (navigator.language.startsWith("zh") ? "zh-CN" : "en") : "en";
   let hide_apps = false;
+  let toolbar_items: Record<ToolbarItem, boolean> = {
+    clicker: true,
+    selector: true,
+    pencil: true,
+    text: true,
+    shapes: true,
+    eraser: true,
+    clear: true,
+  };
+
+  $: toolbar_items_value = Object.keys(toolbar_items).filter(k => toolbar_items[k]) as ToolbarItem[];
+
+  let toolbar_placement: "left" | "right" = "left";
 
   let tippy_content: HTMLDivElement;
   let tippy_content_text = "hello, world!";
@@ -40,6 +53,10 @@
 
   function toggle_language(ev: { currentTarget: HTMLInputElement }) {
     language = ev.currentTarget.dataset.language as Language;
+  }
+
+  function toggle_toolbar_placement(ev: { currentTarget: HTMLInputElement }) {
+    toolbar_placement = ev.currentTarget.dataset.placement as "left" | "right";
   }
 
   $: if (is_client) {
@@ -65,6 +82,8 @@
       {language}
       config={{
         toolbar: {
+          items: toolbar_items_value,
+          placement: toolbar_placement,
           apps: {
             enable: !hide_apps,
           },
@@ -130,6 +149,31 @@
     <label for="lang-zh-CN"><em>简体中文</em></label>
     <input type="checkbox" id="hide_apps" bind:checked={hide_apps} />
     <label for="hide_apps">Hide <kbd>APPS</kbd> Button</label>
+  </div>
+  <div class="row">
+    <span>Toolbar:</span>
+    <input type="checkbox" id="tool-clicker" bind:checked={toolbar_items.clicker} />
+    <label for="tool-clicker"><em>Clicker</em></label>
+    <input type="checkbox" id="tool-selector" bind:checked={toolbar_items.selector} />
+    <label for="tool-selector"><em>Selector</em></label>
+    <input type="checkbox" id="tool-pencil" bind:checked={toolbar_items.pencil} />
+    <label for="tool-pencil"><em>Pencil</em></label>
+    <input type="checkbox" id="tool-text" bind:checked={toolbar_items.text} />
+    <label for="tool-text"><em>Text</em></label>
+    <input type="checkbox" id="tool-shapes" bind:checked={toolbar_items.shapes} />
+    <label for="tool-shapes"><em>Shapes</em></label>
+    <input type="checkbox" id="tool-eraser" bind:checked={toolbar_items.eraser} />
+    <label for="tool-eraser"><em>Eraser</em></label>
+    <input type="checkbox" id="tool-clear" bind:checked={toolbar_items.clear} />
+    <label for="tool-clear"><em>Clear</em></label>
+    <!-- prettier-ignore -->
+    <input type="radio" name="toolbar-placement" id="tool-left" data-placement="left"
+           checked={toolbar_placement === "left"} on:change={toggle_toolbar_placement} />
+    <label for="tool-left"><em>Left</em></label>
+    <!-- prettier-ignore -->
+    <input type="radio" name="toolbar-placement" id="tool-right" data-placement="right"
+           checked={toolbar_placement === "right"} on:change={toggle_toolbar_placement} />
+    <label for="tool-right"><em>Right</em></label>
   </div>
 </div>
 

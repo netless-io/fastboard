@@ -28,6 +28,17 @@
   }
 }
 
+.fastboard-right {
+  @extend .fastboard-left;
+  left: auto;
+  right: 0;
+
+  .fastboard-toolbar {
+    padding-left: 0;
+    padding-right: 16px;
+  }
+}
+
 .fastboard-bottom-left {
   display: flex;
   gap: 10px;

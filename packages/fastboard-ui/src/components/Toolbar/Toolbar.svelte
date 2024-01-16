@@ -24,6 +24,8 @@
   $: computed_height = clamp($container_height, extra_height, $scroll_height + extra_height);
   $: scrollable = $scroll_height + extra_height > $container_height;
 
+  $: placement = config.placement || "left";
+  $: items = config.items;
   $: hide_apps = config.apps?.enable === false;
 </script>
 
@@ -37,6 +39,8 @@
       {scroll_height}
       {computed_height}
       {scrollable}
+      {placement}
+      {items}
       {hide_apps}
     />
   </div>

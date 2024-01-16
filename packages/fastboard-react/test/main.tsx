@@ -12,7 +12,7 @@ const search = new URLSearchParams(location.search);
 const FastboardLayout: FastboardUIConfig = {
   page_control: { enable: false },
   redo_undo: { enable: true },
-  toolbar: { enable: true },
+  toolbar: { enable: true, placement: "right" },
   zoom_control: { enable: true },
 };
 
@@ -26,7 +26,7 @@ function App() {
       uid: genUID(),
       uuid: import.meta.env.VITE_ROOM_UUID,
       roomToken: import.meta.env.VITE_ROOM_TOKEN,
-      isWritable: search.get("isWritable") === "1",
+      isWritable: search.get("isWritable") !== "0",
     },
     managerConfig: {
       cursor: true,

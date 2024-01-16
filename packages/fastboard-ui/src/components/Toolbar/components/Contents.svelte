@@ -1,24 +1,30 @@
 <script lang="ts">
-  import type { Appliance, FastboardApp } from "@netless/fastboard-core";
+  import type { FastboardApp } from "@netless/fastboard-core";
   import type { Writable } from "svelte/store";
-  import type { Placement } from "tippy.js";
-  import type { Language, Theme } from "../../../typings";
-  import type { Shape } from "./constants";
-  import { applianceShapes, shapesIcon, shapesIconActive } from "./constants";
+  import type { Language, Theme, ToolbarItem } from "../../../typings";
   import { writable } from "svelte/store";
   import { scrollHeight } from "../../../actions/height";
   import { scrollTop } from "../../../actions/scroll";
+  import { tippy_hide_all } from "../../../actions/tippy";
   import { clamp } from "../../helpers";
   import { i18n } from "./constants";
   import { apps } from "../../../behaviors";
   import { tooltip } from "./helper";
   import Icons from "../../Icons";
-  import Button from "../../Button";
+  import Button, { type ButtonProps } from "../../Button";
+
   import StrokeWidth from "./StrokeWidth.svelte";
   import StrokeColor from "./StrokeColor.svelte";
   import TextColor from "./TextColor.svelte";
-  import Shapes from "./Shapes.svelte";
-  import { tippy_hide_all } from "../../../actions/tippy";
+  import SelectShapes from "./SelectShapes.svelte";
+
+  import Clicker from "../definitions/Clicker.svelte";
+  import Selector from "../definitions/Selector.svelte";
+  import Pencil from "../definitions/Pencil.svelte";
+  import Text from "../definitions/Text.svelte";
+  import Shapes from "../definitions/Shapes.svelte";
+  import Eraser from "../definitions/Eraser.svelte";
+  import Clear from "../definitions/Clear.svelte";
 
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
@@ -27,19 +33,26 @@
   export let scroll_height: Writable<number>;
   export let computed_height = 0;
   export let scrollable = false;
+  export let placement: "left" | "right" = "left";
+  export let items: ToolbarItem[] = ["clicker", "selector", "pencil", "text", "shapes", "eraser", "clear"];
   export let hide_apps = false;
 
   const name = "fastboard-toolbar";
-
-  let last_shape: Shape = "rectangle";
 
   let pencil_panel: HTMLDivElement;
   let text_panel: HTMLDivElement;
   let shapes_panel: HTMLDivElement;
   let apps_panel: HTMLDivElement;
 
-  let btn_props: { name: string; theme: Theme; disabled: boolean; placement: Placement };
-  $: btn_props = { name, theme, disabled, placement: "right" };
+  let btn_props: Partial<ButtonProps>;
+  $: btn_props = {
+    name,
+    theme,
+    disabled,
+    placement: placement === "left" ? "right" : "left",
+    menu_placement: placement === "left" ? "right-start" : "left-start",
+  };
+
   $: t = i18n[language];
   $: hotkeys = app?.hotKeys;
   $: c = {
@@ -49,16 +62,10 @@
     eraser: tooltip(t.eraser, hotkeys?.changeToEraser),
     text: tooltip(t.text, hotkeys?.changeToText),
   };
+
   $: memberState = app?.memberState;
   $: appliance = $memberState?.currentApplianceName;
-  $: shape = $memberState?.shapeType;
   $: status = app?.appsStatus;
-
-  $: if (applianceShapes.includes(appliance as Appliance)) {
-    last_shape = appliance as Shape;
-  } else if (shape) {
-    last_shape = shape;
-  }
 
   $: max_scroll = scrollable ? $scroll_height + (32 + 8) * 2 - computed_height : 0;
 
@@ -83,13 +90,6 @@
   function text() {
     app?.setAppliance("text");
   }
-  function select_last_shape() {
-    if (applianceShapes.includes(last_shape as Appliance)) {
-      app?.setAppliance(last_shape as Appliance);
-    } else {
-      app?.setAppliance("shape", last_shape as Exclude<Shape, Appliance>);
-    }
-  }
   function eraser() {
     app?.setAppliance("eraser");
   }
@@ -104,53 +104,31 @@
   </Button>
 {/if}
 <div class="{name}-scrollable" class:scrollable use:scrollHeight={scroll_height} use:scrollTop={top}>
-  <Button class="clicker" {...btn_props} on:click={clicker} content={c.clicker}>
-    {#if appliance === "clicker"}
-      <Icons.ClickFilled {theme} active />
-    {:else}
-      <Icons.Click {theme} />
+  {#each items as item}
+    {#if item === "clicker"}
+      <Clicker {appliance} {theme} {btn_props} on:click={clicker} content={c.clicker} />
+    {:else if item === "selector"}
+      <Selector {appliance} {theme} {btn_props} on:click={selector} content={c.selector} />
+    {:else if item === "pencil"}
+      <Pencil {appliance} {theme} {btn_props} on:click={pencil} content={c.pencil} menu={pencil_panel} />
+    {:else if item === "text"}
+      <Text {appliance} {theme} {btn_props} on:click={text} content={c.text} menu={text_panel} />
+    {:else if item === "shapes"}
+      <Shapes {app} {appliance} {theme} {btn_props} content={t.shapes} menu={shapes_panel} />
+    {:else if item === "eraser"}
+      <Eraser {appliance} {theme} {btn_props} on:click={eraser} content={c.eraser} />
+    {:else if item === "clear"}
+      <Clear {theme} {btn_props} on:click={clear} content={t.clear} />
     {/if}
-  </Button>
-  <Button class="selector" {...btn_props} on:click={selector} content={c.selector}>
-    {#if appliance === "selector"}
-      <Icons.SelectorFilled {theme} active />
-    {:else}
-      <Icons.Selector {theme} />
-    {/if}
-  </Button>
-  <Button class="pencil" {...btn_props} on:click={pencil} content={c.pencil} menu={pencil_panel}>
-    {#if appliance === "pencil"}
-      <Icons.PencilFilled {theme} active />
-    {:else}
-      <Icons.Pencil {theme} />
-    {/if}
-  </Button>
-  <Button class="text" {...btn_props} on:click={text} content={c.text} menu={text_panel}>
-    {#if appliance === "text"}
-      <Icons.TextFilled {theme} active />
-    {:else}
-      <Icons.Text {theme} />
-    {/if}
-  </Button>
-  <Button class="shapes" {...btn_props} on:click={select_last_shape} content={t.shapes} menu={shapes_panel}>
-    {#if appliance === last_shape || (appliance === "shape" && shape === last_shape)}
-      <svelte:component this={shapesIconActive[last_shape]} {theme} active />
-    {:else}
-      <svelte:component this={shapesIcon[last_shape]} {theme} />
-    {/if}
-  </Button>
-  <Button class="eraser" {...btn_props} on:click={eraser} content={c.eraser}>
-    {#if appliance === "eraser"}
-      <Icons.EraserFilled {theme} active />
-    {:else}
-      <Icons.Eraser {theme} />
-    {/if}
-  </Button>
-  <Button class="clear" {...btn_props} on:click={clear} content={t.clear}>
-    <Icons.Clear {theme} />
-  </Button>
+  {/each}
   {#if !hide_apps}
-    <Button class="apps" {...btn_props} content={t.apps} menu={apps_panel} menu_placement="right-end">
+    <Button
+      class="apps"
+      {...btn_props}
+      content={t.apps}
+      menu={apps_panel}
+      menu_placement={placement === "left" ? "right-end" : "left-end"}
+    >
       <Icons.Apps {theme} />
     </Button>
   {/if}
@@ -171,7 +149,7 @@
     <TextColor {app} {theme} {disabled} />
   </div>
   <div class="{name}-panel shapes" bind:this={shapes_panel}>
-    <Shapes {app} {theme} {language} {disabled} />
+    <SelectShapes {app} {theme} {language} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />

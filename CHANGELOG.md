@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added toolbar config `placement: "left" | "right"` and `items: ToolbarItem[]` to further control the style of toolbar.
+
 ## 0.3.10
 
 - Added method `jumpPage(index)`. Requires `@netless/window-manager` at least 0.4.63.

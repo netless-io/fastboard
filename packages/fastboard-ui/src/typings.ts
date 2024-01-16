@@ -23,25 +23,21 @@ export type GenericIcon<K extends string, E extends string = IconType> = {
 
 export type I18nData<T extends string> = Record<Language, Record<T, string>>;
 
+export type ToolbarItem = "clicker" | "selector" | "pencil" | "text" | "shapes" | "eraser" | "clear";
+
 export interface ToolbarConfig {
-  apps?: {
-    enable?: boolean;
-  };
+  /** @default "left" */
+  placement?: "left" | "right";
+  /** @default ["clicker", "selector", "pencil", "text", "shapes", "eraser", "clear"] */
+  items?: ToolbarItem[];
+  apps?: { enable?: boolean };
 }
 
 export interface FastboardUIConfig {
-  toolbar?: {
-    enable?: boolean;
-  } & ToolbarConfig;
-  redo_undo?: {
-    enable?: boolean;
-  };
-  zoom_control?: {
-    enable?: boolean;
-  };
-  page_control?: {
-    enable?: boolean;
-  };
+  toolbar?: { enable?: boolean } & ToolbarConfig;
+  redo_undo?: { enable?: boolean };
+  zoom_control?: { enable?: boolean };
+  page_control?: { enable?: boolean };
 }
 
 export interface ReplayFastboardUIConfig {

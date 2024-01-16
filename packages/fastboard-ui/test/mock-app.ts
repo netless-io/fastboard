@@ -1,7 +1,7 @@
 import type {
   ApplianceNames,
   AppsStatus,
-  Camera,
+  CameraState,
   FastboardApp,
   MemberState,
   ShapeType,
@@ -28,7 +28,7 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
   });
   const sceneIndex = writable(0);
   const sceneLength = writable(15);
-  const camera = writable<Camera>({ centerX: 0, centerY: 0, scale: 1 });
+  const camera = writable<CameraState>({ centerX: 0, centerY: 0, scale: 1, width: 100, height: 100 });
   const appsStatus = writable<AppsStatus>({});
 
   function simulateLoadingApp(key: string, should_fail = false) {
@@ -49,6 +49,10 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     manager: {
       setPrefersColorScheme(scheme) {
         console.log("setPrefersColorScheme", scheme);
+      },
+      async addApp(args) {
+        console.log("addApp", args);
+        return "App-123";
       },
     },
     bindContainer(el) {
@@ -103,6 +107,7 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
       return Promise.resolve();
     },
     setAppliance(appliance, shape) {
+      console.log("setAppliance", appliance, shape);
       memberState.update(e => ({
         ...e,
         currentApplianceName: appliance as ApplianceNames,

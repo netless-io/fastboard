@@ -39,6 +39,13 @@
     layout = "visible";
   }
 
+  $: toolbar_has_items =
+    !config.toolbar ||
+    !config.toolbar.items ||
+    !config.toolbar.apps ||
+    config.toolbar.items.length > 0 ||
+    config.toolbar.apps.enable !== false;
+
   $: try {
     if (app && container) {
       app.bindContainer(container);
@@ -72,7 +79,10 @@
 
 <div class="{name}-root" class:loading={!app}>
   <div class="{name}-view" bind:this={container} on:touchstart|capture={focus_me} />
-  <div class="{name}-left" class:hidden={!(layout === "visible" || layout === "toolbar-only")}>
+  <div
+    class="{name}-{config.toolbar?.placement || 'left'}"
+    class:hidden={!toolbar_has_items || !(layout === "visible" || layout === "toolbar-only")}
+  >
     {#if config.toolbar?.enable !== false}
       <Toolbar {app} {theme} {language} config={config.toolbar} />
     {/if}
