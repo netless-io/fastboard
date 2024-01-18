@@ -363,6 +363,8 @@ const appId = await fastboard.manager.addApp({
 
 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
 
+也可以参考文档：[如何开发自定义窗口插件 Netless App](./docs/zh/app.md)。
+
 <h2 id="customization">自定义</h2>
 
 Fastboard 为了上手快，**不支持**高度定制化。如果你需要定制类似如下内容：

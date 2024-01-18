@@ -358,6 +358,8 @@ const appId = await fastboard.manager.addApp({
 
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).
 
+To develop your own app, see [Write you a Netless App](./docs/en/app.md).
+
 ## Customization
 
 Fastboard isn't that customizable due to its <q>fast</q> design goal.
