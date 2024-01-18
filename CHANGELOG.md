@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added toolbar config `placement: "left" | "right"` and `items: ToolbarItem[]` to further control the style of toolbar.
+- Fixed `insertDocs()` on projector's static response not returning the correct `appId`.
 
 ## 0.3.10
 

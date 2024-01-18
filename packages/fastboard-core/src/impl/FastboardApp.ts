@@ -561,7 +561,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
         const { width, height, url } = arg2.images[name];
         scenes.push({ name, ppt: { width, height, src: url } });
       }
-      this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title });
+      return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title });
     } else {
       throw new Error("Invalid input: not found 'progress', 'prefix' nor 'images'");
     }
