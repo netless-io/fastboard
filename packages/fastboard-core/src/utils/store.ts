@@ -64,6 +64,11 @@ export function readable<T>(value: T, start: StartStopNotifier<T> = noop): Reada
   }
   return {
     get value() {
+      if (subscribers.size === 0) {
+        stop = start(set) || noop;
+        stop();
+        stop = undefined;
+      }
       return value;
     },
     subscribe,

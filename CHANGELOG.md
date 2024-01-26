@@ -4,6 +4,7 @@
 
 - Added toolbar config `placement: "left" | "right"` and `items: ToolbarItem[]` to further control the style of toolbar.
 - Fixed `insertDocs()` on projector's static response not returning the correct `appId`.
+- Fixed states like `camera.value` not returning the latest value when no one listens to it.
 
 ## 0.3.10
 
