@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.11
 
 - Added toolbar config `placement: "left" | "right"` and `items: ToolbarItem[]` to further control the style of toolbar; added 2 more tools `hand` and `laserPointer` to `ToolbarItem`.
 - Fixed `insertDocs()` on projector's static response not returning the correct `appId`.
