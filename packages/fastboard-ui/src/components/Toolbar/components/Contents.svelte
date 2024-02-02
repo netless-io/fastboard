@@ -25,6 +25,8 @@
   import Shapes from "../definitions/Shapes.svelte";
   import Eraser from "../definitions/Eraser.svelte";
   import Clear from "../definitions/Clear.svelte";
+  import Hand from "../definitions/Hand.svelte";
+  import Laser from "../definitions/Laser.svelte";
 
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
@@ -61,6 +63,8 @@
     pencil: tooltip(t.pencil, hotkeys?.changeToPencil),
     eraser: tooltip(t.eraser, hotkeys?.changeToEraser),
     text: tooltip(t.text, hotkeys?.changeToText),
+    hand: tooltip(t.hand, hotkeys?.changeToHand),
+    laserPointer: tooltip(t.laserPointer, hotkeys?.changeToLaserPointer),
   };
 
   $: memberState = app?.memberState;
@@ -93,6 +97,12 @@
   function eraser() {
     app?.setAppliance("eraser");
   }
+  function hand() {
+    app?.setAppliance("hand");
+  }
+  function laserPointer() {
+    app?.setAppliance("laserPointer");
+  }
   function clear() {
     app?.cleanCurrentScene();
   }
@@ -119,6 +129,10 @@
       <Eraser {appliance} {theme} {btn_props} on:click={eraser} content={c.eraser} />
     {:else if item === "clear"}
       <Clear {theme} {btn_props} on:click={clear} content={t.clear} />
+    {:else if item === "hand"}
+      <Hand {appliance} {theme} {btn_props} on:click={hand} content={c.hand} />
+    {:else if item === "laserPointer"}
+      <Laser {appliance} {theme} {btn_props} on:click={laserPointer} content={c.laserPointer} />
     {/if}
   {/each}
   {#if !hide_apps}

@@ -23,7 +23,16 @@ export type GenericIcon<K extends string, E extends string = IconType> = {
 
 export type I18nData<T extends string> = Record<Language, Record<T, string>>;
 
-export type ToolbarItem = "clicker" | "selector" | "pencil" | "text" | "shapes" | "eraser" | "clear";
+export type ToolbarItem =
+  | "clicker"
+  | "selector"
+  | "pencil"
+  | "text"
+  | "shapes"
+  | "eraser"
+  | "clear"
+  | "hand"
+  | "laserPointer";
 
 export interface ToolbarConfig {
   /** @default "left" */
@@ -41,7 +50,5 @@ export interface FastboardUIConfig {
 }
 
 export interface ReplayFastboardUIConfig {
-  player_control?: {
-    enable?: boolean;
-  };
+  player_control?: { enable?: boolean };
 }

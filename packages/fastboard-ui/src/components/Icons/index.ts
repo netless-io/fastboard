@@ -10,8 +10,12 @@ import Click from "./Click.svelte";
 import ClickFilled from "./ClickFilled.svelte";
 import Diamond from "./Diamond.svelte";
 import Down from "./Down.svelte";
+import Drag from "./Drag.svelte";
+import DragFilled from "./DragFilled.svelte";
 import Eraser from "./Eraser.svelte";
 import EraserFilled from "./EraserFilled.svelte";
+import Laser from "./Laser.svelte";
+import LaserFilled from "./LaserFilled.svelte";
 import Left from "./Left.svelte";
 import Line from "./Line.svelte";
 import LineBolded from "./LineBolded.svelte";
@@ -55,8 +59,12 @@ const Icons = {
   ClickFilled,
   Diamond,
   Down,
+  Drag,
+  DragFilled,
   Eraser,
   EraserFilled,
+  Laser,
+  LaserFilled,
   Left,
   Line,
   LineBolded,

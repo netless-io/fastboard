@@ -5,7 +5,7 @@
   import { onMount } from "svelte";
 
   import { tippy, tippy_menu } from "../src/actions/tippy";
-  import { Fastboard } from "../src";
+  import { Fastboard, apps } from "../src";
   import { mockApp } from "./mock-app";
   import { mockPlayer } from "./mock-player";
   import { resizable } from "./resizable";
@@ -13,6 +13,7 @@
   import PlayerControl from "../src/components/PlayerControl";
   import Slider from "../src/components/Toolbar/components/Slider.svelte";
 
+  globalThis.apps = apps;
   const is_client = typeof window !== "undefined";
 
   let app: FastboardApp | undefined;
@@ -33,6 +34,8 @@
     shapes: true,
     eraser: true,
     clear: true,
+    hand: true,
+    laserPointer: true,
   };
 
   $: toolbar_items_value = Object.keys(toolbar_items).filter(k => toolbar_items[k]) as ToolbarItem[];
@@ -166,6 +169,10 @@
     <label for="tool-eraser"><em>Eraser</em></label>
     <input type="checkbox" id="tool-clear" bind:checked={toolbar_items.clear} />
     <label for="tool-clear"><em>Clear</em></label>
+    <input type="checkbox" id="tool-hand" bind:checked={toolbar_items.hand} />
+    <label for="tool-hand"><em>Hand</em></label>
+    <input type="checkbox" id="tool-laserPointer" bind:checked={toolbar_items.laserPointer} />
+    <label for="tool-laserPointer"><em>LaserPointer</em></label>
     <!-- prettier-ignore -->
     <input type="radio" name="toolbar-placement" id="tool-left" data-placement="left"
            checked={toolbar_placement === "left"} on:change={toggle_toolbar_placement} />

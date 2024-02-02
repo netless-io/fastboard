@@ -12,7 +12,11 @@ const search = new URLSearchParams(location.search);
 const FastboardLayout: FastboardUIConfig = {
   page_control: { enable: false },
   redo_undo: { enable: true },
-  toolbar: { enable: true, placement: "right" },
+  toolbar: {
+    enable: true,
+    placement: "right",
+    items: ["pencil", "eraser", "hand", "laserPointer"],
+  },
   zoom_control: { enable: true },
 };
 

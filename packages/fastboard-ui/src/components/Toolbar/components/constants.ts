@@ -1,5 +1,5 @@
 import type { Appliance, Color } from "@netless/fastboard-core";
-import type { I18nData } from "../../../typings";
+import type { I18nData, ToolbarItem } from "../../../typings";
 import Icons from "../../Icons";
 
 export const colors: Record<string, Color> = {
@@ -52,9 +52,7 @@ export const shapesIconActive: Record<Shape, any> = {
   speechBalloon: Icons.BalloonBolded,
 };
 
-export const i18n: I18nData<
-  "clicker" | "selector" | "pencil" | "text" | "shapes" | "eraser" | "clear" | "apps"
-> = {
+export const i18n: I18nData<ToolbarItem | "apps"> = {
   en: {
     clicker: "clicker",
     selector: "selector",
@@ -64,6 +62,8 @@ export const i18n: I18nData<
     shapes: "shapes",
     clear: "clear",
     apps: "apps",
+    hand: "hand",
+    laserPointer: "laser pointer",
   },
   "zh-CN": {
     clicker: "点击",
@@ -74,6 +74,8 @@ export const i18n: I18nData<
     shapes: "形状",
     clear: "清屏",
     apps: "Apps",
+    hand: "抓手",
+    laserPointer: "激光笔",
   },
 };
 
