@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed an error when UI config is updated to `{ toolbar: undefined }`.
+
 ## 0.3.11
 
 - Added toolbar config `placement: "left" | "right"` and `items: ToolbarItem[]` to further control the style of toolbar; added 2 more tools `hand` and `laserPointer` to `ToolbarItem`.

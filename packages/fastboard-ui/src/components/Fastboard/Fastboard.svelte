@@ -84,7 +84,7 @@
     class:hidden={!toolbar_has_items || !(layout === "visible" || layout === "toolbar-only")}
   >
     {#if config.toolbar?.enable !== false}
-      <Toolbar {app} {theme} {language} config={config.toolbar} />
+      <Toolbar {app} {theme} {language} config={config.toolbar || {}} />
     {/if}
   </div>
   <div class="{name}-bottom-left" class:hidden={layout !== "visible"}>

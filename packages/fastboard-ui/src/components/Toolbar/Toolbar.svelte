@@ -4,6 +4,7 @@
   import { writable as svelte_writable } from "svelte/store";
   import { height } from "../../actions/height";
   import { clamp } from "../helpers";
+  import { default_items } from "./components/constants";
   import Contents from "./components/Contents.svelte";
 
   export let app: FastboardApp | null | undefined = null;
@@ -25,7 +26,7 @@
   $: scrollable = $scroll_height + extra_height > $container_height;
 
   $: placement = config.placement || "left";
-  $: items = config.items;
+  $: items = config.items || default_items;
   $: hide_apps = config.apps?.enable === false;
 </script>
 

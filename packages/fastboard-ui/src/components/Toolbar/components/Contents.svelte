@@ -7,7 +7,7 @@
   import { scrollTop } from "../../../actions/scroll";
   import { tippy_hide_all } from "../../../actions/tippy";
   import { clamp } from "../../helpers";
-  import { i18n } from "./constants";
+  import { default_items, i18n } from "./constants";
   import { apps } from "../../../behaviors";
   import { tooltip } from "./helper";
   import Icons from "../../Icons";
@@ -36,7 +36,7 @@
   export let computed_height = 0;
   export let scrollable = false;
   export let placement: "left" | "right" = "left";
-  export let items: ToolbarItem[] = ["clicker", "selector", "pencil", "text", "shapes", "eraser", "clear"];
+  export let items: ToolbarItem[] = default_items;
   export let hide_apps = false;
 
   const name = "fastboard-toolbar";

@@ -2,6 +2,16 @@ import type { Appliance, Color } from "@netless/fastboard-core";
 import type { I18nData, ToolbarItem } from "../../../typings";
 import Icons from "../../Icons";
 
+export const default_items: ToolbarItem[] = [
+  "clicker",
+  "selector",
+  "pencil",
+  "text",
+  "shapes",
+  "eraser",
+  "clear",
+];
+
 export const colors: Record<string, Color> = {
   "#E02020": [224, 32, 32],
   "#F7B500": [247, 181, 0],
