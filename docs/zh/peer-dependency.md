@@ -14,6 +14,7 @@
 
 - `dependencies`：会被安装
 - `peerDependencies`：不会被安装，但是如果没装会有警告提示
+  - 最新版 npm / pnpm 中这个行为有所改变，默认会安装 peerDependencies，但如果另外标注了 [peerDependenciesMeta](https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependenciesmeta) 则不会安装
 - `devDependencies`：根本不看
 
 如果两个库的 `dependencies` 指向了不同版本的相同的依赖怎么办？例如假设我们用到了库 `A` 和 `B`，且 `A -> C@1` 表示 A 依赖 C 库的版本 1，`B -> C@2` 表示 B 依赖 C 库的版本 2。

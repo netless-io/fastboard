@@ -327,6 +327,9 @@ const appId = await fastboard.manager.addApp({
 
 #### 插入 [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
+> [!NOTE]
+> GeoGebra 使用 GPLv3 协议并且仅允许非商业的免费使用。如果要商用，请先阅读 GeoGebra 的许可协议：https://www.geogebra.org/license
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",

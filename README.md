@@ -322,6 +322,11 @@ const appId = await fastboard.manager.addApp({
 
 #### Insert [@netless/app-geogebra](https://github.com/netless-io/netless-app/tree/master/packages/app-geogebra)
 
+> [!NOTE]
+> GeoGebra is licensed under GPLv3 and is free only in non-commercial use.
+> If you want to use it in commercially, please refer to their license first:
+> https://www.geogebra.org/license
+
 ```js
 const appId = await fastboard.manager.addApp({
   kind: "GeoGebra",
