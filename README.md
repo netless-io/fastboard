@@ -165,6 +165,8 @@ fastboard.setStrokeColor([r, g, b]);
 
 ### Netless Apps
 
+To develop your own app, see [Write you a Netless App](./docs/en/app.md).
+
 #### Register & Insert Apps
 
 Except for built-in apps in Fastboard, you can also insert your own apps. To do that,
@@ -368,24 +370,72 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 ## Customization
 
 Fastboard isn't that customizable due to its <q>fast</q> design goal.
-You may find it hard to add buttons to the toolbar or move the toolbar to another place.
-In which case, you can **hide the unwanted parts and write your own**:
+But we do have some lightweight configuration for easy changes.
 
 ```jsx
 // vanilla js
 const ui = createUI(fastboard, container);
-ui.update({ config: { toolbar: { enable: false } } });
+ui.update({ config: { ...ui_config } });
 
 // react
-return (
-  <>
-    <Fastboard app={fastboard} config={{ toolbar: { enable: false } }} />
-    <YourOwnUIComponent />
-  </>
-);
+<Fastboard app={fastboard} config={{ ...ui_config }} />;
 ```
 
-Then refer to the doc: [Write Your Own UI (for Fastboard)](./docs/en/ui.md).
+The `ui_config` looks like:
+
+```js
+{
+  toolbar: {
+    enable: true,
+    placement: 'left',
+    items: ['pencil', 'eraser'],
+    apps: { enable: true },
+  },
+  redo_undo: { enable: true },
+  zoom_control: { enable: true },
+  page_control: { enable: true },
+}
+```
+
+For example, you can hide the zoom control component with:
+
+```jsx
+// vanilla js
+ui.update({ config: { zoom_control: { enable: false } } });
+// react
+<Fastboard app={fastboard} config={{ zoom_control: { enable: false } }} />;
+```
+
+Or change the items on toolbar with:
+
+> Available items:\
+> `clicker`, `selector`, `pencil`, `text`, `shapes`, `eraser`, `clear`, `hand`, `laserPointer`.
+
+```jsx
+const toolbar_items = ["pencil", "eraser"];
+// vanilla js
+ui.update({ config: { toolbar: { items: toolbar_items } } });
+// react
+<Fastboard app={fastboard} config={{ toolbar: { items: toolbar_items } }} />;
+```
+
+You can also write your own component with the same <q>source of truth</q> as Fastboard UI.
+Just disable those components and refer to [Write Your Own UI (for Fastboard)](./docs/en/ui.md).
+
+## Replay Mode
+
+Fastboard has a similar usage to replay a whiteboard.
+
+```jsx
+const player = await replayFastboard(...)
+const ui = createReplayUI(player, container);
+
+const player = useReplayFastboard(() => ({...}))
+return <ReplayFastboard player={player} />
+```
+
+The `player` instance is similar to a native video player that has methods like `play()` `stop()` `seek()` `pause()` etc.
+To sync the progress of the whiteboard player with other players (like a video player), see [@netless/sync-player](https://github.com/netless-io/sync-player).
 
 ## Error Handling
 
@@ -427,6 +477,8 @@ try {
   console.error("Failed to join whiteboard room", error);
 }
 ```
+
+The React way should be similar.
 
 ## License
 

@@ -172,6 +172,8 @@ fastboard.setStrokeColor([r, g, b]);
 
 ### 使用 Apps
 
+如果你需要自己开发插件，请参考文档：[如何开发自定义窗口插件 Netless App](./docs/zh/app.md)
+
 #### 注册与使用 Apps
 
 除了 Fastboard 内置的一些官方 app，你也可以定义并使用自己编写的 app。在进入房间（`createFastboard`）前需要按以下操作先在各客户端注册 app：
@@ -370,30 +372,74 @@ const appId = await fastboard.manager.addApp({
 
 <h2 id="customization">自定义</h2>
 
-Fastboard 为了上手快，**不支持**高度定制化。如果你需要定制类似如下内容：
-
-- 在工具栏上添加按钮
-- 将工具栏移到右侧
-
-那么可以通过隐藏该组件，自行设计并实现：
+Fastboard 为了上手快，**不支持**高度定制化。不过有一些轻量化配置：
 
 ```jsx
-// 原生 JS
+// vanilla js
 const ui = createUI(fastboard, container);
-ui.update({ config: { toolbar: { enable: false } } });
+ui.update({ config: { ...ui_config } });
 
-// React
-return (
-  <>
-    <Fastboard app={fastboard} config={{ toolbar: { enable: false } }} />
-    <YourOwnUIComponent />
-  </>
-);
+// react
+<Fastboard app={fastboard} config={{ ...ui_config }} />;
 ```
 
-请参考文档：[如何为 fastboard 实现 UI](./docs/zh/ui.md)
+上面的 `ui_config` 长这样：
 
-<h2 id="#error-handling">异常处理</h2>
+```js
+{
+  toolbar: {
+    enable: true,
+    placement: 'left',
+    items: ['pencil', 'eraser'],
+    apps: { enable: true },
+  },
+  redo_undo: { enable: true },
+  zoom_control: { enable: true },
+  page_control: { enable: true },
+}
+```
+
+例如，你可以像这样隐藏缩放栏：
+
+```jsx
+// vanilla js
+ui.update({ config: { zoom_control: { enable: false } } });
+// react
+<Fastboard app={fastboard} config={{ zoom_control: { enable: false } }} />;
+```
+
+或者改变工具栏上的按钮：
+
+> 可用配置项：\
+> `clicker`、`selector`、`pencil`、`text`、`shapes`、`eraser`、`clear`、`hand`、`laserPointer`.
+
+```jsx
+const toolbar_items = ["pencil", "eraser"];
+// vanilla js
+ui.update({ config: { toolbar: { items: toolbar_items } } });
+// react
+<Fastboard app={fastboard} config={{ toolbar: { items: toolbar_items } }} />;
+```
+
+也可以自己实现相关组件，请参考：[如何为 fastboard 实现 UI](./docs/zh/ui.md)
+
+<h2 id="replay-mode">回放模式</h2>
+
+白板本身有基于指令的录制功能，Fastboard 也为此实现了类似的组件和接口：
+
+```jsx
+const player = await replayFastboard(...)
+const ui = createReplayUI(player, container);
+
+const player = useReplayFastboard(() => ({...}))
+return <ReplayFastboard player={player} />
+```
+
+上面的 `player` 实例和原生的视频播放器类似，也有 `play()` `seek()` `pause()` 等方法。
+
+如果要让白板和其他视频播放器同步进度条，请参考库 [@netless/sync-player](https://github.com/netless-io/sync-player) 。
+
+<h2 id="error-handling">异常处理</h2>
 
 你会因为以下情况收到异常回调：
 
@@ -433,6 +479,8 @@ try {
   console.error("Failed to join whiteboard room", error);
 }
 ```
+
+React 组件的写法应该类似，这里不赘述。
 
 ## License
 
