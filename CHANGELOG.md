@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.12
 
 - Fixed an error when UI config is updated to `{ toolbar: undefined }`.
 
