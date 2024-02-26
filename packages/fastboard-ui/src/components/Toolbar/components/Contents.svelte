@@ -204,6 +204,7 @@
       {...btn_props}
       on:click={select_eraser}
       content={c.eraser}
+      menu={eraser_panel}
     >
       {#if appliance === "eraser"}
         <Icons.EraserFilled {theme} active />
@@ -242,9 +243,6 @@
       {/if}
     </Button>
   {/if}
-  <Button class="clear" {...btn_props} on:click={clear} content={t.clear}>
-    <Icons.Clear {theme} />
-  </Button>
   {#if !hide_apps}
     <Button class="apps" {...btn_props} content={t.apps} menu={apps_panel} menu_placement="right-end">
       <Icons.Apps {theme} />
@@ -329,13 +327,23 @@
             <Icons.Eraser {theme} />
           {/if}
         </Button>
+        <Button class="clear" {...btn_props} on:click={clear} placement="top" content={t.clear}>
+          <Icons.Clear {theme} />
+        </Button>
       </div>
       {#if appliance === "pencilEraser"}
         <div class="{name}-panel-divider" />
         <PencilEraserSize {app} {theme} {disabled} />
       {/if}
-    {:else if eraser_type === "pencil"}
-      <PencilEraserSize {app} {theme} {disabled} />
+    {:else}
+      <div class="{name}-panel-btns">
+        <Button class="clear" {...btn_props} on:click={clear} placement="top" content={t.clear}>
+          <Icons.Clear {theme} />
+        </Button>
+      </div>
+      {#if eraser_type === "pencil"}
+        <PencilEraserSize {app} {theme} {disabled} />
+      {/if}
     {/if}
   </div>
   <div class="{name}-panel apps" style="--n:{$stockedApps.length}" bind:this={apps_panel}>
