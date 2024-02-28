@@ -18,13 +18,23 @@
     "@netless/fastboard-core": "workspace:*",
     "@netless/fastboard-ui": "workspace:*"
   },
-  "publishConfig": {
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts"
-  },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
     "@netless/esbuild-plugin-inline-sass": "workspace:*"
+  },
+  "publishConfig": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "./lite": {
+        "types": "./dist/lite.d.ts",
+        "default": "./dist/lite.mjs"
+      }
+    }
   }
 }

@@ -21,11 +21,6 @@
     "@netless/fastboard-core": "workspace:*",
     "@netless/fastboard-ui": "workspace:*"
   },
-  "publishConfig": {
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts"
-  },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
     "@netless/esbuild-plugin-inline-sass": "workspace:*",
@@ -33,5 +28,20 @@
     "@types/react-dom": "^18.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "publishConfig": {
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "./lite": {
+        "types": "./dist/lite.d.ts",
+        "default": "./dist/lite.mjs"
+      }
+    }
   }
 }

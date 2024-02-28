@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added a <q>lite</q> version of Fastboard where `@netless/app-slide` is not registered.\
+  You can save about 2 MB of the bundle size.
+  If you do not want to use PPTX or want to load it dynamically, import `@netless/fastboard/lite` to use it.
+
 ## 0.3.12
 
 - Fixed an error when UI config is updated to `{ toolbar: undefined }`.

@@ -3,6 +3,10 @@
   "version": "0.3.12",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./lite": "./src/lite.ts"
+  },
   "files": [
     "src",
     "dist"
@@ -28,6 +32,16 @@
   "publishConfig": {
     "main": "dist/index.js",
     "module": "dist/index.mjs",
-    "types": "dist/index.d.ts"
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "./lite": {
+        "types": "./dist/lite.d.ts",
+        "default": "./dist/lite.mjs"
+      }
+    }
   }
 }

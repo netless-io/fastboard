@@ -16,7 +16,7 @@ import { WindowManager } from "@netless/window-manager";
 import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
-import { register } from "../behaviors";
+import { register } from "../behaviors/lite";
 
 class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   public constructor(

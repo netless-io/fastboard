@@ -35,7 +35,7 @@ import {
   warn,
 } from "../utils";
 import { ensure_official_plugins, transform_app_status } from "../internal";
-import { register } from "../behaviors";
+import { register } from "../behaviors/lite";
 
 class FastboardAppBase<TEventData extends Record<string, any> = any> {
   public constructor(
