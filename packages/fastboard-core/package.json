@@ -9,7 +9,8 @@
   },
   "files": [
     "src",
-    "dist"
+    "dist",
+    "lite.d.ts"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
