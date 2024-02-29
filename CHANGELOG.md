@@ -3,8 +3,11 @@
 ## Unreleased
 
 - Added a <q>lite</q> version of Fastboard where `@netless/app-slide` is not registered.\
-  You can save about 2 MB of the bundle size.
+  You can save about 1.8 MB of the bundle size.
   If you do not want to use PPTX or want to load it dynamically, import `@netless/fastboard/lite` to use it.
+
+  > [!NOTE]
+  > You set set `jspdf` as an external dependency to save another 1 MB if you do not need the export PDF function.
 
 ## 0.3.12
 

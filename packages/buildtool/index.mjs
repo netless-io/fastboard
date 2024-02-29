@@ -100,7 +100,12 @@ export async function build({
   if (!name.endsWith("-ui")) {
     let bundle = await rollup.rollup({
       input: name.endsWith("-core") ? "src/lite.ts" : main,
-      plugins: [esbuildPlugin([], { "@netless/fastboard-core": "@netless/fastboard-core/lite" })],
+      plugins: [
+        esbuildPlugin([], {
+          "@netless/fastboard-core": "@netless/fastboard-core/lite",
+          "@netless/fastboard-ui": "@netless/fastboard-ui/lite",
+        }),
+      ],
       external: [/^[@a-z]/],
     });
 
@@ -150,9 +155,10 @@ export async function build({
   if (name.endsWith("-core")) {
     await dts.build("src/lite.ts", "dist/lite.d.ts", { exclude: ["svelte", "svelte/internal"] });
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
-  } else if (!name.endsWith("-ui")) {
+  } else {
     let code = fs.readFileSync("dist/index.d.ts", "utf-8");
     code = code.replace(/@netless\/fastboard-core/g, "@netless/fastboard-core/lite");
+    code = code.replace(/@netless\/fastboard-ui/g, "@netless/fastboard-ui/lite");
     fs.writeFileSync("dist/lite.d.ts", code);
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
   }

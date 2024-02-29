@@ -6,7 +6,8 @@
   "svelte": "dist/index.svelte.mjs",
   "files": [
     "src",
-    "dist"
+    "dist",
+    "lite.d.ts"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
@@ -22,7 +23,17 @@
   "publishConfig": {
     "main": "dist/index.js",
     "module": "dist/index.mjs",
-    "types": "dist/index.d.ts"
+    "types": "dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "./lite": {
+        "types": "./dist/lite.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
   },
   "dependencies": {
     "tippy.js": "^6.3.7"
