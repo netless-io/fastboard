@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.13
 
 - Added a <q>lite</q> version of Fastboard where `@netless/app-slide` is not registered.\
   You can save about 1.8 MB of the bundle size.
