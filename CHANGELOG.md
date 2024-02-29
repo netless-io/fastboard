@@ -7,7 +7,7 @@
   If you do not want to use PPTX or want to load it dynamically, import `@netless/fastboard/lite` to use it.
 
   > [!NOTE]
-  > You set set `jspdf` as an external dependency to save another 1 MB if you do not need the export PDF function.
+  > You can set `jspdf` as an external dependency (Vite does this by default) to save another 1 MB if you do not need the export PDF function.
 
 ## 0.3.12
 
@@ -44,22 +44,22 @@
 
   ```js
   // old fastboard-ui/dist/index.js   (CJS export)
-  var Tippy = require('tippy.js')
-  Tippy.setDefaultProps({})
+  var Tippy = require("tippy.js");
+  Tippy.setDefaultProps({});
   ```
 
   ```js
   // new fastboard-ui/dist/index.js   (CJS export)
-  var import_Tippy = __toESM(require('tippy.js'))
-  import_Tippy.default.setDefaultProps({})
+  var import_Tippy = __toESM(require("tippy.js"));
+  import_Tippy.default.setDefaultProps({});
   ```
 
   The `tippy.js` has this CJS export:
 
   ```js
   // tippy.js   (CJS export)
-  exports.__esModule = true
-  exports.default = Tippy
+  exports.__esModule = true;
+  exports.default = Tippy;
   ```
 
   `__toESM` here helps to convert the input in babel convention to an ESM module, which should fix this issue.

@@ -147,7 +147,7 @@ export async function build({
   }
 
   start = Date.now();
-  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal"] });
+  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", "./lite"] });
   console.log("Built dist/index.d.ts in", Date.now() - start + "ms");
 
   // Generate dist/lite.d.ts
