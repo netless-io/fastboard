@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.3.14
 
 - Disable components on `room.phase` changed to non-`connected`.
+- Added `canOperate` to test if the room is connected and writable.
 
 ## 0.3.13
 
