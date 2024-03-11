@@ -1,4 +1,5 @@
 import type {
+  RoomPhase,
   ApplianceNames,
   AppsStatus,
   CameraState,
@@ -17,6 +18,7 @@ export interface MockApp {
 
 export function mockApp(): [app: FastboardApp, mock: MockApp] {
   const writable_ = writable(true);
+  const phase = writable<RoomPhase>("connected");
   const undoSteps = writable(0);
   const redoSteps = writable(0);
   const memberState = writable<MemberState>({
@@ -60,6 +62,7 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
       el.textContent = "whiteboard container";
     },
     writable: writable_,
+    phase,
     hotKeys: {
       changeToSelector: "s",
       changeToLaserPointer: "z",

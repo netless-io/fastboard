@@ -312,6 +312,13 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   );
 
   /**
+   * Returns `writable && phase === "connected"`.
+   */
+  get canOperate(): boolean {
+    return this.room.isWritable && this.room.phase === "connected";
+  }
+
+  /**
    * Undo a step on main view.
    */
   undo() {

@@ -16,7 +16,8 @@
   const extra_height = (32 + 4 + 4) * 2;
 
   $: writable = app?.writable;
-  $: disabled = !$writable;
+  $: phase = app?.phase;
+  $: disabled = !($writable && $phase === "connected");
 
   let collapsed = false;
   let container_height = svelte_writable(0);

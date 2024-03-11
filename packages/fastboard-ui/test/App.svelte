@@ -1,8 +1,9 @@
 <script lang="ts">
-  import type { FastboardApp, FastboardPlayer } from "@netless/fastboard-core";
+  import type { RoomPhase, FastboardApp, FastboardPlayer } from "@netless/fastboard-core";
   import type { Language, Theme, ToolbarItem } from "../src";
   import type { MockApp } from "./mock-app";
   import { onMount } from "svelte";
+  import { writable } from "svelte/store";
 
   import { tippy, tippy_menu } from "../src/actions/tippy";
   import { Fastboard, apps } from "../src";
@@ -68,7 +69,8 @@
   }
 
   $: mock_redo_undo = mock?.redo_undo;
-  $: writable = app?.writable;
+  $: writable_ = app?.writable;
+  $: phase = app?.phase || writable<RoomPhase>("disconnected");
   $: member_state = app?.memberState;
 
   onMount(() => {
@@ -138,8 +140,16 @@
 <div class="flex actions">
   <div class="row">
     <button on:click={create_app} disabled={app !== undefined}>createApp</button>
-    <input type="checkbox" id="writable" bind:checked={$writable} />
+    <input type="checkbox" id="writable" bind:checked={$writable_} />
     <label for="writable"><em>Writable</em></label>
+    <label for="writable"><em>Phase:</em></label>
+    <select id="phase" bind:value={$phase}>
+      <option value="connecting">connecting</option>
+      <option value="connected" selected>connected</option>
+      <option value="reconnecting">reconnecting</option>
+      <option value="disconnecting">disconnecting</option>
+      <option value="disconnected">disconnected</option>
+    </select>
     <input type="checkbox" id="theme" checked={theme === "dark"} on:change={toggle_theme} />
     <label for="theme"><em>Dark</em></label>
     <!-- prettier-ignore -->

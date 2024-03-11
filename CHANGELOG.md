@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Disable components on `room.phase` changed to non-`connected`.
+
 ## 0.3.13
 
 - Added a <q>lite</q> version of Fastboard where `@netless/app-slide` is not registered.\

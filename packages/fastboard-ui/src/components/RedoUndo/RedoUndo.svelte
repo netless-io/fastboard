@@ -26,7 +26,8 @@
   const name = "fastboard-redo-undo";
 
   $: writable = app?.writable;
-  $: disabled = !$writable;
+  $: phase = app?.phase;
+  $: disabled = !($writable && $phase === "connected");
   $: t = i18n[language];
 
   let type: IconType;
