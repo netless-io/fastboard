@@ -35,7 +35,7 @@
   const name = "fastboard-toolbar";
 
   let last_shape: Shape = "rectangle";
-  let last_eraser: Eraser = "pencilEraser";
+  let last_eraser: Eraser = "eraser";
 
   let pencil_panel: HTMLDivElement;
   let text_panel: HTMLDivElement;
@@ -301,20 +301,6 @@
       <div class="{name}-panel-btns">
         <Button
           class="eraser"
-          active={appliance === "pencilEraser"}
-          {...btn_props}
-          on:click={select_pencil_eraser}
-          placement="top"
-          content={c.pencilEraserForPanel}
-        >
-          {#if appliance === "pencilEraser"}
-            <Icons.PencilEraserFilled {theme} active />
-          {:else}
-            <Icons.PencilEraser {theme} />
-          {/if}
-        </Button>
-        <Button
-          class="eraser"
           active={appliance === "eraser"}
           {...btn_props}
           on:click={select_eraser}
@@ -325,6 +311,20 @@
             <Icons.EraserFilled {theme} active />
           {:else}
             <Icons.Eraser {theme} />
+          {/if}
+        </Button>
+        <Button
+          class="eraser"
+          active={appliance === "pencilEraser"}
+          {...btn_props}
+          on:click={select_pencil_eraser}
+          placement="top"
+          content={c.pencilEraserForPanel}
+        >
+          {#if appliance === "pencilEraser"}
+            <Icons.PencilEraserFilled {theme} active />
+          {:else}
+            <Icons.PencilEraser {theme} />
           {/if}
         </Button>
         <Button class="clear" {...btn_props} on:click={clear} placement="top" content={t.clear}>
