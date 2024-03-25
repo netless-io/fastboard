@@ -18,6 +18,8 @@ import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
 
+function noop() {}
+
 class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   public constructor(
     readonly sdk: WhiteWebSdk,
@@ -36,7 +38,7 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
 
   /** @internal */
   protected _addPlayerListener<K extends keyof PlayerCallbacks>(name: K, listener: PlayerCallbacks[K]) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     this.player.callbacks.on(name, listener);
     return () => this.player.callbacks.off(name, listener);
   }
@@ -46,14 +48,14 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
     name: K,
     listener: (value: PublicEvent[K]) => void
   ) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     this.manager.emitter.on(name, listener);
     return () => this.manager.emitter.off(name, listener);
   }
 
   /** @internal */
   protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     this.manager.mainView.callbacks.on(name, listener);
     return () => this.manager.mainView.callbacks.off(name, listener);
   }

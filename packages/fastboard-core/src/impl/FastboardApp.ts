@@ -37,6 +37,8 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
 
+function noop() {}
+
 class FastboardAppBase<TEventData extends Record<string, any> = any> {
   public constructor(
     readonly sdk: WhiteWebSdk,
@@ -56,7 +58,7 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
 
   /** @internal */
   protected _addRoomListener<K extends keyof RoomCallbacks>(name: K, listener: RoomCallbacks[K]) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     this.room.callbacks.on(name, listener);
     return () => this.room.callbacks.off(name, listener);
   }
@@ -66,14 +68,14 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
     name: K,
     listener: (value: PublicEvent[K]) => void
   ) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     this.manager.emitter.on(name, listener);
     return () => this.manager.emitter.off(name, listener);
   }
 
   /** @internal */
   protected _addMainViewListener<K extends keyof ViewCallbacks>(name: K, listener: ViewCallbacks[K]) {
-    this._assertNotDestroyed();
+    if (this._destroyed) return noop;
     // Note: the callbacks will be invalid when reconnected, need rebind manually.
     this.manager.mainView.callbacks.on(name, listener);
     return () => this.manager.mainView.callbacks.off(name, listener);
@@ -82,10 +84,10 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
   /**
    * Destroy fastboard (disconnect from the whiteboard room).
    */
-  public destroy() {
+  public async destroy() {
     this._destroyed = true;
     this.manager.destroy();
-    return this.room.disconnect();
+    await this.room.disconnect().catch(console.warn);
   }
 }
 
@@ -641,6 +643,12 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       kind: "GeoGebra",
       options: { title: "GeoGebra" },
     });
+  }
+
+  override async destroy() {
+    await super.destroy();
+    this.phase.dispose("disconnected");
+    this.writable.dispose(false);
   }
 }
 

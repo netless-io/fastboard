@@ -8,6 +8,7 @@ export interface Readable<T> {
   readonly value: T;
   subscribe(this: void, run: Subscriber<T>): Unsubscriber;
   reaction(this: void, run: Subscriber<T>): Unsubscriber;
+  dispose(value?: T): void;
 }
 
 export interface Writable<T> extends Readable<T> {
@@ -62,6 +63,14 @@ export function readable<T>(value: T, start: StartStopNotifier<T> = noop): Reada
       }
     };
   }
+  function dispose(new_value?: T) {
+    if (new_value !== undefined) {
+      set(new_value);
+    }
+    subscribers.clear();
+    stop && stop();
+    stop = undefined;
+  }
   return {
     get value() {
       if (subscribers.size === 0) {
@@ -73,6 +82,7 @@ export function readable<T>(value: T, start: StartStopNotifier<T> = noop): Reada
     },
     subscribe,
     reaction,
+    dispose,
   };
 }
 
@@ -88,5 +98,6 @@ export function writable<T>(value: T, start: StartStopNotifier<T> = noop, set: S
     update(fn: Updater<T>) {
       set(fn(internal.value));
     },
+    dispose: internal.dispose,
   };
 }

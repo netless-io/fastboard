@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Allow accessing `state.value` after destroying.
+
 ## 0.3.14
 
 - Disable components on `room.phase` changed to non-`connected`.
