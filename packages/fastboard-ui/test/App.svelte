@@ -89,6 +89,7 @@
         toolbar: {
           items: toolbar_items_value,
           placement: toolbar_placement,
+          collapsed: true,
           apps: {
             enable: !hide_apps,
           },

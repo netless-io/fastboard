@@ -19,7 +19,7 @@
   $: phase = app?.phase;
   $: disabled = !($writable && $phase === "connected");
 
-  let collapsed = false;
+  let collapsed = config.collapsed;
   let container_height = svelte_writable(0);
   let scroll_height = svelte_writable(0);
 

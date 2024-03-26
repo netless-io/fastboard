@@ -39,6 +39,9 @@ export interface ToolbarConfig {
   placement?: "left" | "right";
   /** @default ["clicker", "selector", "pencil", "text", "shapes", "eraser", "clear"] */
   items?: ToolbarItem[];
+  /** @default false */
+  collapsed?: boolean;
+  /** Control the last button which opens apps stock on toolbar. */
   apps?: { enable?: boolean };
 }
 
