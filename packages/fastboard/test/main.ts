@@ -22,7 +22,13 @@ createFastboard({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).app = app;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).ui = createUI(app, root);
+  let ui = (window as any).ui = createUI(app);
+
+  ui.mount(root, {
+    config: {
+      toolbar: { collapsed: true }
+    }
+  });
 });
 
 resizable(root, {

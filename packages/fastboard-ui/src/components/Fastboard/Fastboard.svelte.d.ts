@@ -6,6 +6,10 @@ export declare interface FastboardProps {
   app?: FastboardApp | null;
   theme?: Theme;
   language?: Language;
+  /**
+   * Note: updating this option does not take effect when the element was mounted.
+   * Make sure to set this option in `UI.mount(div, { containerRef })`.
+   */
   containerRef?: (container: HTMLDivElement | null) => void;
   config?: FastboardUIConfig;
 }

@@ -39,7 +39,11 @@ export interface ToolbarConfig {
   placement?: "left" | "right";
   /** @default ["clicker", "selector", "pencil", "text", "shapes", "eraser", "clear"] */
   items?: ToolbarItem[];
-  /** @default false */
+  /**
+   * Note: updating this option does not take effect when the element was mounted.
+   * Make sure to set this option in `UI.mount(div, { configs: { toolbar: { collapsed: true } } })`.
+   * @default false
+   */
   collapsed?: boolean;
   /** Control the last button which opens apps stock on toolbar. */
   apps?: { enable?: boolean };
