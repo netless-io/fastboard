@@ -4,6 +4,7 @@
 
 - Allow accessing `state.value` after destroying.
 - Added toolbar config `collapsed` to set the default collapsed state of toolbar.
+- Allow dragging from top-right corner of the window.
 
 ## 0.3.14
 

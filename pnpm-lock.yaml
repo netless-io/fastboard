@@ -21,8 +21,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/window-manager':
-        specifier: ^0.4.63
-        version: 0.4.63(white-web-sdk@2.16.44)
+        specifier: ^0.4.72
+        version: 0.4.72(white-web-sdk@2.16.44)
       '@sveltejs/vite-plugin-svelte':
         specifier: 2.4.2
         version: 2.4.2(svelte@3.59.2)(vite@4.4.1)
@@ -127,7 +127,7 @@ importers:
         version: 2.0.7(white-web-sdk@2.16.44)
       '@netless/window-manager':
         specifier: '>=0.4.0'
-        version: 0.4.63(white-web-sdk@2.16.44)
+        version: 0.4.72(white-web-sdk@2.16.44)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
@@ -780,8 +780,8 @@ packages:
       white-web-sdk: 2.16.44
     dev: false
 
-  /@netless/telebox-insider@0.2.27:
-    resolution: {integrity: sha512-6329Zf9Z8M7DI6EI4OyBM25HuVm1moKZfjuBguSEc6YkM0TvNFckq8UEszVYxPn4Wh5p1TJnho3i69gxzgXKLA==}
+  /@netless/telebox-insider@0.2.28:
+    resolution: {integrity: sha512-UJDCm/f7yjiIaWqbS20LDXfAG6RUxsXSktPDzmEr51MgsevpQ3u241hVlyOpKAXSeTR6B3ioRAKcgflOw5JvTQ==}
     dependencies:
       '@types/shallowequal': 1.1.5
       eventemitter3: 4.0.7
@@ -790,8 +790,8 @@ packages:
       stylefire: 7.0.3
       value-enhancer: 0.0.8
 
-  /@netless/window-manager@0.4.63(white-web-sdk@2.16.44):
-    resolution: {integrity: sha512-gwO4/ZVV1tfVcOlfoHzjFHbbYxR4EMxBzgvCacBFM34qEu6hvA4MvwPp4ICXj22Wf9UpmKZTljnCw/i+gBh+WA==}
+  /@netless/window-manager@0.4.72(white-web-sdk@2.16.44):
+    resolution: {integrity: sha512-oKN+nZo/jUyMjyppms9L/Cwdr9+r2e3abz59r8k1AjnaJOVpKQ4gdAn8tpvzQXEuuxP6DVgAknME54XLIqip8w==}
     peerDependencies:
       jspdf: 2.5.1
       white-web-sdk: ^2.16.0
@@ -800,11 +800,11 @@ packages:
         optional: true
     dependencies:
       '@juggle/resize-observer': 3.4.0
-      '@netless/telebox-insider': 0.2.27
+      '@netless/telebox-insider': 0.2.28
       emittery: 0.9.2
       lodash: 4.17.21
       p-retry: 4.6.2
-      side-effect-manager: 0.1.6
+      side-effect-manager: 0.1.5
       uuid: 7.0.3
       video.js: 8.6.1
       white-web-sdk: 2.16.44
@@ -2679,6 +2679,9 @@ packages:
       vscode-oniguruma: 1.7.0
       vscode-textmate: 8.0.0
     dev: true
+
+  /side-effect-manager@0.1.5:
+    resolution: {integrity: sha512-aAEXMS+9qW7rY2cwq4S6UjW3IBO/ZLWRI0sH1oGJ1eDE7YBFR1TW950qffnpx/0hByusAOVbu2zjThk9Vcjs+Q==}
 
   /side-effect-manager@0.1.6:
     resolution: {integrity: sha512-2AniIPP3EgNjlVSHzukf1v5v8Y3F+j6AWZPKLh+p/AM3FthtQYhBkkGeOYd1yH5USSCvSQ1qRsRVeYDuAjvZ+A==}
