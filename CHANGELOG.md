@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.15 (2024-04-03)
 
 - Allow accessing `state.value` after destroying.
 - Added toolbar config `collapsed` to set the default collapsed state of toolbar.
