@@ -7,6 +7,10 @@
 > [!NOTE]
 > 这个错误在 0.3.8 后已经被修复了，请检查你的依赖版本。
 
+### \[WindowManger\]: room must be switched to be writable
+
+Fastboard 需要至少一个有 `writer` 权限的用户进入房间来初始化数据，如果第一位用户没有这个权限就会报错。这里推荐给所有用户 (无论是你业务里的老师、学生、助教) 发放 `writer` 权限的 room token。同时，这种做法也有利于实现例如白板权限切换等业务，只需要相关用户调用 `fastboard.room.setWritable(true / false)` 即可。
+
 ### 如何使用代码操作 App
 
 不支持。或者说这部分交互完全由 App 本身定义，Fastboard (Window Manager) 只是提供了一些基建让他们实现同步。内置的那些 App（包括 PPT/PDF 文档查看器、音视频播放器、代码编辑器、倒计时、GeoGebra 等）均不支持任何外部操作。

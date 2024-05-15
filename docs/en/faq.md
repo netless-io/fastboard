@@ -13,6 +13,20 @@ This means that your bundler does not handle CJS-ESM interop well, see
 
 Please try another bundler like [esbuild](https://esbuild.github.io/) or [vite](https://vitejs.dev/).
 
+### \[WindowManger\]: room must be switched to be writable
+
+Fastboard requires at least one `writer` user to initialize the states.
+If the first user is not a `writer`, then the error will occur on the joinning room.
+It is recommended to give all users `writer` tokens no matter what their initial permissions should be.
+
+By giving all users `writer` tokens, it is also convenient to implement things like
+switching whiteboard permissions. It only needs relevant users to call the API:
+
+```js
+// disallow current user to operate the whiteboard
+fastboard.room.setWritable(false);
+```
+
 ### How to customize the toolbar's apps panel
 
 You can use the `apps` variable to do so, see
