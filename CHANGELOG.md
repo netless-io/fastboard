@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed `insertDocs()` to support projector's static response with `prefix` field.
+
 ## 0.3.15 (2024-04-03)
 
 - Allow accessing `state.value` after destroying.

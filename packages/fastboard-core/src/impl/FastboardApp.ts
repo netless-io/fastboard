@@ -164,7 +164,7 @@ export interface ProjectorResponse {
   type: "dynamic" | "static";
   /** 0..100 */
   convertedPercentage: number;
-  /** https://example.org/path/to/dynamicConvert, only when type=dynamic */
+  /** https://example.org/path/to/{static,dynamic}Convert */
   prefix?: string;
   pageCount?: number;
   /** {1:"{prefix}/{taskId}/preview/1.png"}, only when type=dynamic and preview=true */
@@ -556,12 +556,6 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       } else {
         return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes: scenes1, title });
       }
-    } else if (arg2 && arg2.prefix) {
-      const title = arg1;
-      const scenePath = `/${arg2.uuid}/${genUID()}`;
-      const taskId = arg2.uuid;
-      const url = arg2.prefix;
-      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
     } else if (arg2 && arg2.images) {
       const title = arg1;
       const scenePath = `/${arg2.uuid}/${genUID()}`;
@@ -571,6 +565,12 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
         scenes.push({ name, ppt: { width, height, src: url } });
       }
       return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title });
+    } else if (arg2 && arg2.prefix) {
+      const title = arg1;
+      const scenePath = `/${arg2.uuid}/${genUID()}`;
+      const taskId = arg2.uuid;
+      const url = arg2.prefix;
+      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
     } else {
       throw new Error("Invalid input: not found 'progress', 'prefix' nor 'images'");
     }
