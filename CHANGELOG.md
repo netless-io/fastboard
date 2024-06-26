@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.16 (2024-06-26)
 
 - Fixed `insertDocs()` to support projector's static response with `prefix` field.
 
