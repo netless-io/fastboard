@@ -7,14 +7,16 @@ Fastboard for quick, ** does not support ** high customization. If you want to c
 1. First, shield fastboard's built-in toolbar through enable: false in uiConfig.
 
 ```js
-    // vanilla js
-    const ui = createUI(fastboard, container);
-    ui.update({ config: { ... ui_config } });
+// vanilla js
+const ui = createUI(fastboard, container);
+ui.update({ config: { ...ui_config } });
 
-    // react
-    <Fastboard app={fastboard} config={{ ... ui_config }} />;
+// react
+<Fastboard app={fastboard} config={{ ...ui_config }} />;
 ```
+
 The 'ui_config' above looks like this:
+
 ```js
     {
         toolbar: { enable: false },
@@ -23,7 +25,9 @@ The 'ui_config' above looks like this:
         page_control: { enable: true },
     }
 ```
+
 2. Then implement a set of toolbar components and associate them with fastboard.
+
 ```jsx
     import { useFastboard, Fastboard } from "@netless/fastboard-react";
     import React from "react";
@@ -48,7 +52,9 @@ The 'ui_config' above looks like this:
 
     createRoot(document.getElementById("app")).render(<App />);
 ```
+
 Or native js
+
 ```js
     import { createFastboard, createUI } from "@netless/fastboard";
     async function main() {
@@ -80,8 +86,10 @@ Or native js
         return customToolbar;
     }
 ```
+
 3. API on toolbar component to respond to teaching AIDS
-[reference fastboard toolbar component calls](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/Toolbar/components/Contents.svelte)
+   [reference fastboard toolbar component calls](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/Toolbar/components/Contents.svelte)
+
 ```js
     //  const app = await createFastboard(...) ;
     //  const app = useFastboard(...) ;
@@ -136,6 +144,7 @@ Or native js
 ### Customize other controls
 
 In addition, we can also customize other controls in the above way.
+
 ```js
     {
         toolbar: {enable: false}, // Disable the toolbar control key
@@ -147,22 +156,24 @@ In addition, we can also customize other controls in the above way.
 
 **undo/redo**
 [reference fastboard undo/redo component calls](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/RedoUndo/RedoUndo.svelte)
+
 ```js
-    function undo() {
-        app.undo();
-    }
+function undo() {
+  app.undo();
+}
 
-    function redo() {
-        app.redo();
-    }
-    /** Gets the current number of undo-done */
-    app.canUndoSteps
-    /** Gets the current number of reworks */
-    app.canRedoSteps
-
+function redo() {
+  app.redo();
+}
+/** Gets the current number of undo-done */
+app.canUndoSteps;
+/** Gets the current number of reworks */
+app.canRedoSteps;
 ```
+
 **zoom**
 [reference fastboard zoom component calls](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/ZoomControl/ZoomControl.svelte)
+
 ```js
     type Camera = {
         / * *
@@ -182,28 +193,33 @@ In addition, we can also customize other controls in the above way.
         app.moveCamera(camera);
     }
 ```
+
 **page**
 [reference fastboard page component calls](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/PageControl/PageControl.svelte)
+
 ```js
-    function prevPage() {
-        app.prevPage();
-    }
+function prevPage() {
+  app.prevPage();
+}
 
-    function nextPage() {
-        app.nextPage();
-    }
+function nextPage() {
+  app.nextPage();
+}
 
-    function addPage() {
-        app.addPage({ after: true });
-        app.nextPage();
-    }
+function addPage() {
+  app.addPage({ after: true });
+  app.nextPage();
+}
 ```
 
 ### Attention items
+
 Note: The use of the above api must be a write permission call, can be obtained by listening to the 'app.writable' state to obtain whether it is writable.
+
 ```js
-    app.writable;  // { value: true, subscribe/reaction, set?  }
+app.writable; // { value: true, subscribe/reaction, set?  }
 ```
+
 **value**
 Fetch the current value directly.
 
@@ -214,19 +230,20 @@ The listening value changes, and the callback parameter is the new value. The di
 Returns a function that cancels listening.
 
 ```js
-    let dispose = app.writable.subscribe(value => {
-        console.log("writable:", value);
-    }); // writable: true
-    app.writable.reaction(value => {
-        console.log("writable2:", value);
-    }); // not print anything
+let dispose = app.writable.subscribe(value => {
+  console.log("writable:", value);
+}); // writable: true
+app.writable.reaction(value => {
+  console.log("writable2:", value);
+}); // not print anything
 
-    app.writable.set(false); // writable: false, writable2: false
+app.writable.set(false); // writable: false, writable2: false
 
-    dispose();
+dispose();
 
-    app.writable.set(true); // writable2: true
+app.writable.set(true); // writable2: true
 ```
+
 **set**
 
 Only some values can be modified. Note that this may not be synchronized to the value. The value on the value prevails.

@@ -4,7 +4,7 @@ Fastboard 为了上手快，**不支持**高度定制化。如果想定制自己
 
 ### 定制toolbar
 
-1、首先通过uiConfig中的``enable: false`` 屏蔽fastboard自带的toolbar.
+1、首先通过uiConfig中的`enable: false` 屏蔽fastboard自带的toolbar.
 
 ```js
 // vanilla js
@@ -14,7 +14,9 @@ ui.update({ config: { ...ui_config } });
 // react
 <Fastboard app={fastboard} config={{ ...ui_config }} />;
 ```
+
 上面的 `ui_config` 长这样：
+
 ```js
 {
   toolbar: { enable: false },
@@ -23,7 +25,9 @@ ui.update({ config: { ...ui_config } });
   page_control: { enable: true },
 }
 ```
+
 2、然后自己实现一套toolbar组件,并和fastboard进行关联.
+
 ```jsx
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 import React from "react";
@@ -48,7 +52,9 @@ function App() {
 
 createRoot(document.getElementById("app")).render(<App />);
 ```
+
 或者 原生js
+
 ```js
 import { createFastboard, createUI } from "@netless/fastboard";
 
@@ -60,7 +66,7 @@ async function main() {
 
   // .....
   // 退出 Fastboard (从白板房间断开)
-  fastboard.destroy(); 
+  fastboard.destroy();
 }
 function createContainer() {
   const container = document.createElement("div");
@@ -81,8 +87,10 @@ function createCustomToolbar() {
   return customToolbar;
 }
 ```
+
 3、toolbar组件上响应教具的API
 [参考fastboard的toolbar组件的调用](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/Toolbar/components/Contents.svelte)
+
 ```js
     //  const app = await createFastboard(...);
     //  const app = useFastboard(...);
@@ -107,11 +115,11 @@ function createCustomToolbar() {
     function eraser() {
         app?.setAppliance("eraser");
     }
-    // 抓手 
+    // 抓手
     function hand() {
         app?.setAppliance("hand");
     }
-    // 激光笔  
+    // 激光笔
     function laserPointer() {
         app?.setAppliance("laserPointer");
     }
@@ -137,6 +145,7 @@ function createCustomToolbar() {
 ### 定制其他控件
 
 除此,我们还可以通过上面的方式定制其他控键.
+
 ```js
     {
         toolbar: { enable: false },  // 关闭toolbar 控键
@@ -148,34 +157,36 @@ function createCustomToolbar() {
 
 **undo/redo**
 [参考fastboard的undo/redo组件的调用](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/RedoUndo/RedoUndo.svelte)
+
 ```js
-    function undo() {
-        app?.undo();
-    }
+function undo() {
+  app?.undo();
+}
 
-    function redo() {
-        app?.redo();
-    }
-    /** 获取当前可撤销做次数 */
-    app?.canUndoSteps
-    /** 获取当前可重做次数 */
-    app?.canRedoSteps
-
+function redo() {
+  app?.redo();
+}
+/** 获取当前可撤销做次数 */
+app?.canUndoSteps;
+/** 获取当前可重做次数 */
+app?.canRedoSteps;
 ```
+
 **zoom**
 [参考fastboard的zoom组件的调用](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/ZoomControl/ZoomControl.svelte)
+
 ```js
     type Camera = {
         /**
-         * 视角的中心对准的点的 x 坐标（世界坐标系） 
+         * 视角的中心对准的点的 x 坐标（世界坐标系）
          */
         centerX: number;
         /**
-         * 视角的中心对准的点的 y 坐标（世界坐标系） 
+         * 视角的中心对准的点的 y 坐标（世界坐标系）
          */
         centerY: number;
         /**
-         * 视角拉伸会导致物体放大缩小的倍率 
+         * 视角拉伸会导致物体放大缩小的倍率
          */
         scale: number;
     };
@@ -183,28 +194,33 @@ function createCustomToolbar() {
         app?.moveCamera(camera);
     }
 ```
+
 **page**
 [参考fastboard的zoom组件的调用](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/PageControl/PageControl.svelte)
+
 ```js
-    function prevPage() {
-        app?.prevPage();
-    }
+function prevPage() {
+  app?.prevPage();
+}
 
-    function nextPage() {
-        app?.nextPage();
-    }
+function nextPage() {
+  app?.nextPage();
+}
 
-    function addPage() {
-        app?.addPage({ after: true });
-        app?.nextPage();
-    }
+function addPage() {
+  app?.addPage({ after: true });
+  app?.nextPage();
+}
 ```
 
 ### 注意项
-注意:以上api的使用，必须是有写的权限下调用,可以通过监听``app.writable``状态获取是否可写.
+
+注意:以上api的使用，必须是有写的权限下调用,可以通过监听`app.writable`状态获取是否可写.
+
 ```js
-    app.writable; // { value: true, subscribe/reaction, set? }
+app.writable; // { value: true, subscribe/reaction, set? }
 ```
+
 **value**
 
 直接取到当前值。
@@ -216,18 +232,18 @@ function createCustomToolbar() {
 返回一个取消监听的函数。
 
 ```js
-    let dispose = app.writable.subscribe(value => {
-        console.log("writable:", value);
-    }); // writable: true
-    app.writable.reaction(value => {
-        console.log("writable2:", value);
-    }); // not print anything
+let dispose = app.writable.subscribe(value => {
+  console.log("writable:", value);
+}); // writable: true
+app.writable.reaction(value => {
+  console.log("writable2:", value);
+}); // not print anything
 
-    app.writable.set(false); // writable: false, writable2: false
+app.writable.set(false); // writable: false, writable2: false
 
-    dispose();
+dispose();
 
-    app.writable.set(true); // writable2: true
+app.writable.set(true); // writable2: true
 ```
 
 **set**
