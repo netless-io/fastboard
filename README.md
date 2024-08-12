@@ -420,7 +420,7 @@ ui.update({ config: { toolbar: { items: toolbar_items } } });
 ```
 
 You can also write your own component with the same <q>source of truth</q> as Fastboard UI.
-Just disable those components and refer to [Write Your Own UI (for Fastboard)](./docs/en/ui.md).
+Just disable those components and refer to [Write Your Own UI (for Fastboard)](./docs/en/ui.md) & [How do I customize Your own UI (for Fastboard)](./docs/en/customizeUI.md).
 
 ## Replay Mode
 
