@@ -421,7 +421,7 @@ ui.update({ config: { toolbar: { items: toolbar_items } } });
 <Fastboard app={fastboard} config={{ toolbar: { items: toolbar_items } }} />;
 ```
 
-也可以自己实现相关组件，请参考：[如何为 fastboard 实现 UI](./docs/zh/ui.md)
+也可以自己实现相关组件，请参考：[如何为 fastboard 实现 UI](./docs/zh/ui.md)以及[如何自定义fastboard UI](./docs//zh/customizeUI.md)
 
 <h2 id="replay-mode">回放模式</h2>
 
