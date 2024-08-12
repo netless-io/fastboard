@@ -1,6 +1,6 @@
 How do I customize the keys on fastboard
 
-Fastboard for quick, ** does not support ** high customization. If you want to customize your own controls, the controls refer to the introduction
+Fastboard for quick, **does not support** high customization. If you want to customize your own controls, you can refer to the following introduction
 
 ### Custom toolbar
 

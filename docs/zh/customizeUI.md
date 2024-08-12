@@ -1,6 +1,6 @@
 ## 如何自定义 fastboard上的控键
 
-Fastboard 为了上手快，**不支持**高度定制化。如果想定制自己的控键,控制参考一下的介绍
+Fastboard 为了上手快，**不支持**高度定制化。如果想定制自己的控件,可参考以下的介绍
 
 ### 定制toolbar
 
@@ -88,7 +88,7 @@ function createCustomToolbar() {
 }
 ```
 
-3、toolbar组件上响应教具的API
+3、toolbar组件调用教具的API
 [参考fastboard的toolbar组件的调用](https://github.com/netless-io/fastboard/blob/main/packages/fastboard-ui/src/components/Toolbar/components/Contents.svelte)
 
 ```js
