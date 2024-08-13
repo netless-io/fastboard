@@ -36,7 +36,15 @@ import {
 } from "../utils";
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
+import { ApplianceMultiPlugin, type AppliancePluginInstance, type AppliancePluginOptions } from "@netless/appliance-plugin";
 
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 function noop() {}
 
 class FastboardAppBase<TEventData extends Record<string, any> = any> {
@@ -45,7 +53,8 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
     readonly room: Room,
     readonly manager: WindowManager,
     readonly hotKeys: Partial<HotKeys>,
-    readonly syncedStore: SyncedStore<TEventData>
+    readonly syncedStore: SyncedStore<TEventData>,
+    readonly appliancePlugin?: AppliancePluginInstance
   ) {}
 
   protected _destroyed = false;
@@ -86,6 +95,7 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
    */
   public async destroy() {
     this._destroyed = true;
+    this.appliancePlugin?.destroy();
     this.manager.destroy();
     await this.room.disconnect().catch(console.warn);
   }
@@ -325,6 +335,10 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    */
   undo() {
     this._assertNotDestroyed();
+    if (this.appliancePlugin) {
+      this.appliancePlugin.undo();
+      return;
+    }
     this.manager.undo();
   }
 
@@ -333,6 +347,10 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    */
   redo() {
     this._assertNotDestroyed();
+    if (this.appliancePlugin) {
+      this.appliancePlugin.redo();
+      return;
+    }
     this.manager.redo();
   }
 
@@ -661,6 +679,7 @@ export interface FastboardOptions {
   };
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
+  enableAppliancePlugin?: boolean | AppliancePluginOptions;
 }
 
 /**
@@ -683,6 +702,7 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   joinRoom: { callbacks, ...joinRoomParams },
   managerConfig,
   netlessApps,
+  enableAppliancePlugin,
 }: FastboardOptions) {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
@@ -708,12 +728,19 @@ export async function createFastboard<TEventData extends Record<string, any> = a
       register({ kind: app.kind, src: app });
     });
   }
-
+  const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
+  if (enableAppliancePlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
+    joinRoomParamsWithPlugin.invisiblePlugins = [...joinRoomParamsWithPlugin.invisiblePlugins, ApplianceMultiPlugin];
+    if (managerConfig) {
+      managerConfig.supportAppliancePlugin = true;
+    }
+  }
+  
   const room = await sdk.joinRoom(
     {
       floatBar: true,
       hotKeys,
-      ...ensure_official_plugins(joinRoomParams),
+      ...joinRoomParamsWithPlugin,
       useMultiViews: true,
       disableNewPencil: false,
       disableMagixEventDispatchLimit: true,
@@ -726,13 +753,27 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   const manager = await WindowManager.mount({
     cursor: true,
     ...managerConfig,
-    room,
+    room
   });
-
+  let appliancePlugin: AppliancePluginInstance | undefined;
+  if (enableAppliancePlugin) {
+      const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
+      appliancePlugin = await ApplianceMultiPlugin.getInstance(manager,
+        {
+            options: {
+              cdn: {
+                fullWorkerUrl,
+                subWorkerUrl
+              },
+              ...applianceConfig,
+            }
+        }
+      );
+  }
   manager.mainView.setCameraBound({
     minContentMode: contentModeScale(0.3),
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore);
+  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore, appliancePlugin);
 }

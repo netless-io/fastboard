@@ -18,7 +18,8 @@
     "@hyrious/esbuild-dev": "^0.10.3",
     "@hyrious/esbuild-plugin-svelte": "^0.2.0",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/window-manager": "^0.4.72",
+    "@netless/window-manager": "^0.4.73",
+    "@netless/appliance-plugin": "^1.0.8",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -39,9 +40,9 @@
     "type-fest": "^3.12.0",
     "typedoc": "^0.24.8",
     "typedoc-plugin-markdown": "^3.15.3",
-    "typescript": "^5.1.6",
+    "typescript": "5.1.6",
     "vite": "^4.4.1",
-    "white-web-sdk": "^2.16.44"
+    "white-web-sdk": "^2.16.51"
   },
   "pnpm": {
     "peerDependencyRules": {

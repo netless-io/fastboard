@@ -18,6 +18,16 @@ import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
 
+import { ApplianceMultiPlugin, type AppliancePluginInstance, type AppliancePluginOptions } from "@netless/appliance-plugin";
+
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
 function noop() {}
 
 class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
@@ -25,7 +35,8 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
     readonly sdk: WhiteWebSdk,
     readonly player: Player,
     readonly manager: WindowManager,
-    readonly syncedStore: SyncedStore<TEventData>
+    readonly syncedStore: SyncedStore<TEventData>,
+    readonly appliancePlugin?: AppliancePluginInstance
   ) {}
 
   protected _destroyed = false;
@@ -63,6 +74,7 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   public destroy() {
     this._destroyed = true;
     this.manager.destroy();
+    this.appliancePlugin?.destroy();
     return this.player.callbacks.off();
   }
 }
@@ -200,6 +212,7 @@ export interface FastboardReplayOptions {
   };
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
+  enableAppliancePlugin?: boolean | AppliancePluginOptions;
 }
 
 /**
@@ -223,6 +236,7 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   replayRoom: { callbacks, ...replayRoomParams },
   managerConfig,
   netlessApps,
+  enableAppliancePlugin,
 }: FastboardReplayOptions) {
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
@@ -234,10 +248,16 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
       register({ kind: app.kind, src: app });
     });
   }
-
+  const replayRoomParamsWithPlugin = ensure_official_plugins(replayRoomParams);
+  if (enableAppliancePlugin && replayRoomParamsWithPlugin.invisiblePlugins) {
+    replayRoomParamsWithPlugin.invisiblePlugins = [...replayRoomParamsWithPlugin.invisiblePlugins, ApplianceMultiPlugin];
+    if (managerConfig) {
+      managerConfig.supportAppliancePlugin = true;
+    }
+  }
   const player = await sdk.replayRoom(
     {
-      ...ensure_official_plugins(replayRoomParams),
+      ...replayRoomParamsWithPlugin,
       useMultiViews: true,
     },
     callbacks
@@ -250,11 +270,25 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
     ...managerConfig,
     room: player,
   });
-
   player.play();
   const manager = await managerPromise;
+  let appliancePlugin: AppliancePluginInstance | undefined;
+  if (enableAppliancePlugin) {
+      const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
+      appliancePlugin = await ApplianceMultiPlugin.getInstance(manager,
+        {
+            options: {
+              cdn: {
+                fullWorkerUrl,
+                subWorkerUrl
+              },
+              ...applianceConfig,
+            }
+        }
+      );
+  }
   player.pause();
   await player.seekToProgressTime(0);
 
-  return new FastboardPlayer<TEventData>(sdk, player, manager, syncedStore);
+  return new FastboardPlayer<TEventData>(sdk, player, manager, syncedStore, appliancePlugin);
 }
