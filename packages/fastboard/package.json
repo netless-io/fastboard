@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
