@@ -4,7 +4,7 @@ import * as esbuild from "esbuild";
 import * as dts from "@hyrious/dts";
 import { svelte } from "@hyrious/esbuild-plugin-svelte";
 import { sass } from "@netless/esbuild-plugin-inline-sass";
-
+import rawPlugin from "../buildtool/rawLoader.mjs";
 /**
  * The output is always dist/index.{js|mjs|d.ts}.
  *
@@ -16,7 +16,7 @@ import { sass } from "@netless/esbuild-plugin-inline-sass";
  *   svelte?: string,
  *   dependencies?: Record<string, string>,
  *   peerDependencies?: Record<string, string>
- * }} pkg
+ * }}
  */
 export async function build({
   dir,
@@ -27,6 +27,7 @@ export async function build({
   dependencies,
   peerDependencies,
 }) {
+  // eslint-disable-next-line no-undef
   process.chdir(dir);
   fs.rmSync("dist", { recursive: true, force: true });
 
@@ -43,7 +44,7 @@ export async function build({
         sourcemap: true,
         write: false,
         target: ["es2017"],
-        plugins: [svelte(), sass()],
+        plugins: [rawPlugin(), svelte(), sass()],
         loader: {
           ".svg": "dataurl",
         },
@@ -70,7 +71,7 @@ export async function build({
   // Build dist/index.js
   let start = Date.now();
   {
-    let bundle = await rollup.rollup({
+    const bundle = await rollup.rollup({
       input: main,
       plugins: [esbuildPlugin()],
       external: [/^[@a-z]/],
@@ -98,7 +99,7 @@ export async function build({
   // Build dist/lite.js
   start = Date.now();
   if (!name.endsWith("-ui")) {
-    let bundle = await rollup.rollup({
+    const bundle = await rollup.rollup({
       input: name.endsWith("-core") ? "src/lite.ts" : main,
       plugins: [
         esbuildPlugin([], {
@@ -132,7 +133,7 @@ export async function build({
   // this also helps to avoid depending on svelte in fastboard/fastboard-react test.
   if (name.endsWith("-ui")) {
     start = Date.now();
-    let bundle = await rollup.rollup({
+    const bundle = await rollup.rollup({
       input: main,
       plugins: [esbuildPlugin(["svelte"])],
       external: [/^[@a-z]/],
@@ -153,7 +154,9 @@ export async function build({
   // Generate dist/lite.d.ts
   start = Date.now();
   if (name.endsWith("-core")) {
-    await dts.build("src/lite.ts", "dist/lite.d.ts", { exclude: ["svelte", "svelte/internal"] });
+    await dts.build("src/lite.ts", "dist/lite.d.ts", {
+      exclude: ["svelte", "svelte/internal", "@netless/appliance-plugin"],
+    });
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
   } else {
     let code = fs.readFileSync("dist/index.d.ts", "utf-8");

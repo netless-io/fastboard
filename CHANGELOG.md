@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.17 (2024-09-20)
+
+- Added `enableAppliancePlugin` in FastboardOptions to support new appliance plugins.
+
 ## 0.3.16 (2024-06-26)
 
 - Fixed `insertDocs()` to support projector's static response with `prefix` field.

@@ -18,14 +18,18 @@ import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
 
-import { ApplianceMultiPlugin, type AppliancePluginInstance, type AppliancePluginOptions } from "@netless/appliance-plugin";
+import {
+  ApplianceMultiPlugin,
+  type AppliancePluginInstance,
+  type AppliancePluginOptions,
+} from "@netless/appliance-plugin";
 
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+import fullWorkerString from "@netless/appliance-plugin/dist/fullWorker.js?raw";
+import subWorkerString from "@netless/appliance-plugin/dist/subWorker.js?raw";
 
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerBlob = new Blob([fullWorkerString], { type: "text/javascript" });
 const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerBlob = new Blob([subWorkerString], { type: "text/javascript" });
 const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
 function noop() {}
@@ -250,7 +254,10 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   }
   const replayRoomParamsWithPlugin = ensure_official_plugins(replayRoomParams);
   if (enableAppliancePlugin && replayRoomParamsWithPlugin.invisiblePlugins) {
-    replayRoomParamsWithPlugin.invisiblePlugins = [...replayRoomParamsWithPlugin.invisiblePlugins, ApplianceMultiPlugin];
+    replayRoomParamsWithPlugin.invisiblePlugins = [
+      ...replayRoomParamsWithPlugin.invisiblePlugins,
+      ApplianceMultiPlugin,
+    ];
     if (managerConfig) {
       managerConfig.supportAppliancePlugin = true;
     }
@@ -274,18 +281,16 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   const manager = await managerPromise;
   let appliancePlugin: AppliancePluginInstance | undefined;
   if (enableAppliancePlugin) {
-      const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
-      appliancePlugin = await ApplianceMultiPlugin.getInstance(manager,
-        {
-            options: {
-              cdn: {
-                fullWorkerUrl,
-                subWorkerUrl
-              },
-              ...applianceConfig,
-            }
-        }
-      );
+    const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
+    appliancePlugin = await ApplianceMultiPlugin.getInstance(manager, {
+      options: {
+        cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+        },
+        ...applianceConfig,
+      },
+    });
   }
   player.pause();
   await player.seekToProgressTime(0);

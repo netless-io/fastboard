@@ -18,7 +18,7 @@ function rawPlugin() {
       build.onLoad({ filter: /\?raw$/, namespace: "raw-loader" }, async args => {
         const fullPath = args.pluginData.isAbsolute
           ? args.path
-          : path.resolve(args.pluginData.resolveDir, "../../node_modules", args.path);
+          : path.resolve(args.pluginData.resolveDir, "../../../../node_modules", args.path);
         // console.log('rawPlugin-0', args, args.pluginData.resolveDir);
         // console.log('rawPlugin-1', args.path);
         // console.log('rawPlugin', fullPath);

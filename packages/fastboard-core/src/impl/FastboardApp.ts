@@ -36,14 +36,18 @@ import {
 } from "../utils";
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
-import { ApplianceMultiPlugin, type AppliancePluginInstance, type AppliancePluginOptions } from "@netless/appliance-plugin";
+import {
+  ApplianceMultiPlugin,
+  type AppliancePluginInstance,
+  type AppliancePluginOptions,
+} from "@netless/appliance-plugin";
 
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+import fullWorkerString from "@netless/appliance-plugin/dist/fullWorker.js?raw";
+import subWorkerString from "@netless/appliance-plugin/dist/subWorker.js?raw";
 
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerBlob = new Blob([fullWorkerString], { type: "text/javascript" });
 const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerBlob = new Blob([subWorkerString], { type: "text/javascript" });
 const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 function noop() {}
 
@@ -730,12 +734,15 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   }
   const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
   if (enableAppliancePlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
-    joinRoomParamsWithPlugin.invisiblePlugins = [...joinRoomParamsWithPlugin.invisiblePlugins, ApplianceMultiPlugin];
+    joinRoomParamsWithPlugin.invisiblePlugins = [
+      ...joinRoomParamsWithPlugin.invisiblePlugins,
+      ApplianceMultiPlugin,
+    ];
     if (managerConfig) {
       managerConfig.supportAppliancePlugin = true;
     }
   }
-  
+
   const room = await sdk.joinRoom(
     {
       floatBar: true,
@@ -753,22 +760,20 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   const manager = await WindowManager.mount({
     cursor: true,
     ...managerConfig,
-    room
+    room,
   });
   let appliancePlugin: AppliancePluginInstance | undefined;
   if (enableAppliancePlugin) {
-      const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
-      appliancePlugin = await ApplianceMultiPlugin.getInstance(manager,
-        {
-            options: {
-              cdn: {
-                fullWorkerUrl,
-                subWorkerUrl
-              },
-              ...applianceConfig,
-            }
-        }
-      );
+    const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
+    appliancePlugin = await ApplianceMultiPlugin.getInstance(manager, {
+      options: {
+        cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+        },
+        ...applianceConfig,
+      },
+    });
   }
   manager.mainView.setCameraBound({
     minContentMode: contentModeScale(0.3),
