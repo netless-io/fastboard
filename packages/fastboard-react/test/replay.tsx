@@ -19,15 +19,14 @@ function App() {
 
     replayFastboard({
       sdkConfig: {
-        appIdentifier: import.meta.env.VITE_APPID,
+        appIdentifier: import.meta.env.VITE_APPID || "123456789/123456789",
         region: "cn-hz",
       },
       replayRoom: {
-        room: "b86bf2109dbb11ecbce43722439862b5",
-        roomToken:
-          "NETLESSROOM_YWs9c21nRzh3RzdLNk1kTkF5WCZub25jZT00NDViMDEzMC05ZGJjLTExZWMtYTYzZi02ZDIwNmVhNjI4YTgmcm9sZT0yJnNpZz0wMGQ2ZWNjNzkwYWJkM2JhMzVmMzhlNmYzMjk1NTZjOTY4MGNhYjY1N2I4ZjgxZWFkMTE3OWMxNDBlYTYyODE4JnV1aWQ9Yjg2YmYyMTA5ZGJiMTFlY2JjZTQzNzIyNDM5ODYyYjU",
-        beginTimestamp: 1646619090394,
-        duration: 70448,
+        room: import.meta.env.VITE_ROOM_UUID || "b0c80aa0770011ef83863d0682a6c9bd",
+        roomToken: import.meta.env.VITE_ROOM_TOKEN || "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzI2ODg5NDMyMzc3Jm5vbmNlPWIwZWM4MjkwLTc3MDAtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTMzZGU0MDQ2ZDg5YzNkNDliOTFkMGQwZDYwOTY3MWIzYzU5NWQzN2IxNTFiZDhkM2Y2ZjYwYjFmODUwMWYxODQmdXVpZD1iMGM4MGFhMDc3MDAxMWVmODM4NjNkMDY4MmE2YzliZA",
+        beginTimestamp: 1726884289991,
+        duration: 36000,
         callbacks: {
           onPhaseChanged(phase) {
             setLog(log => `${log}\nphase: ${phase}`);
@@ -37,6 +36,7 @@ function App() {
       managerConfig: {
         cursor: true,
       },
+      enableAppliancePlugin: true
     }).then(player => {
       (window as any).player = player;
       (window as any).forceUpdate = forceUpdate;
