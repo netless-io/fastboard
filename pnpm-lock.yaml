@@ -6,6 +6,7 @@ settings:
 
 overrides:
   '@netless/window-manager': ^0.4.75
+  '@netless/appliance-plugin': ^1.0.10
 
 importers:
 
@@ -24,8 +25,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/appliance-plugin':
-        specifier: ^1.0.9
-        version: 1.0.9(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
+        specifier: ^1.0.10
+        version: 1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
       '@netless/window-manager':
         specifier: ^0.4.75
         version: 0.4.75(white-web-sdk@2.16.51)
@@ -128,6 +129,9 @@ importers:
       '@netless/app-slide':
         specifier: ^0.2.39
         version: 0.2.39
+      '@netless/appliance-plugin':
+        specifier: ^1.0.10
+        version: 1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
       '@netless/synced-store':
         specifier: ^2.0.7
         version: 2.0.7(white-web-sdk@2.16.51)
@@ -524,8 +528,8 @@ packages:
       jspdf:
         optional: true
 
-  '@netless/appliance-plugin@1.0.9':
-    resolution: {integrity: sha512-Ks/qqyVqkJ7wWu6/91q2JqjCkh3juh+hXCfWOx5rf3iNG/C89WmQPYmzVjl3vJO2ucAUDObkHhDXkOAsWix+nw==}
+  '@netless/appliance-plugin@1.0.10':
+    resolution: {integrity: sha512-kLGg+yv0lQEl42YahVZ76bSbLk9u1MtxEhBQNvkk1Y7R6nZRX4rYRdUx4JN7E9Co0o+NTVxlj24zgplio/RNSg==}
     peerDependencies:
       '@netless/window-manager': ^0.4.75
       white-web-sdk: '>= 2.16'
@@ -2443,7 +2447,7 @@ snapshots:
 
   '@netless/app-slide@0.2.39': {}
 
-  '@netless/appliance-plugin@1.0.9(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)':
+  '@netless/appliance-plugin@1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)':
     dependencies:
       '@netless/window-manager': 0.4.75(white-web-sdk@2.16.51)
       eventemitter2: 6.4.9
