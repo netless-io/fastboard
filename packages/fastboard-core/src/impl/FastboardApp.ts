@@ -519,7 +519,8 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
     const { centerX, centerY } = this.manager.camera;
     width *= scale;
     height *= scale;
-    this.manager.mainView.insertImage({
+    const obj = this.appliancePlugin || this.manager.mainView;
+    obj.insertImage({
       uuid,
       centerX,
       centerY,
@@ -528,7 +529,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       locked: false,
       crossOrigin,
     });
-    this.manager.mainView.completeImageUpload(uuid, url);
+    obj.completeImageUpload(uuid, url);
 
     // 2. move camera to fit image **height**
     width /= 0.8;
