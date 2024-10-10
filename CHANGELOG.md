@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.18 (2024-09-20)
+## 0.3.21 (2024-09-20)
 
 - Added `enableAppliancePlugin` in FastboardOptions to support new appliance plugins.
 
