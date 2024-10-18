@@ -2,20 +2,24 @@
 
 本库用于快速开始一个白板应用，基于 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 和 [netless-app](https://github.com/netless-io/netless-app) 实现。
 
+从0.3.21版本开始, fastboard 集成了[appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
+
+
 ## 目录
 
 - [安装](#install)
 - [使用](#usage)
+- [使用性能优化版本](#performance)
 - [自定义](#customization)
 - [进阶](./docs)
 
 <h2 id="install">安装</h2>
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk appliance-plugin
 </pre>
 
-> **注意：**@netless/window-manager 和 white-web-sdk 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+> **注意：**@netless/window-manager、white-web-sdk、appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
 <h2 id="usage">使用</h2>
 
@@ -47,6 +51,8 @@ async function main() {
     },
     // [4] (可选)
     netlessApps: [],
+    // [5] (可选), 开启appliance-plugin, 从0.3.21开始
+    enableAppliancePlugin: true,
   });
 
   const container = createContainer();
@@ -116,6 +122,8 @@ function App() {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
+    //  开启 appliance-plugin 插件
+    enableAppliancePlugin: true,
   }));
 
   // 白板元素必须具有可见的大小
@@ -369,6 +377,31 @@ const appId = await fastboard.manager.addApp({
 更多 app 请看 [netless-app](#https://github.com/netless-io/netless-app)。
 
 也可以参考文档：[如何开发自定义窗口插件 Netless App](./docs/zh/app.md)。
+
+<h2 id="performance">使用性能优化版本</h2>
+
+通过 ``enableAppliancePlugin`` 配置项开启 appliance-plugin 插件，以提升性能。
+
+### 示例代码
+```jsx
+function App() {
+  const fastboard = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    //  开启 appliance-plugin 插件
+    enableAppliancePlugin: true,
+  }));
+  ....
+}
+```
+### 注意
+
+- 在开启 appliance-plugin 插件后, 绘制的内容会显示,但是无法操作和升级, 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
+- 只有浏览器对 web API [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) 的完全支持,才能体验到更加的性能及丰富的教具功能体验。
 
 <h2 id="customization">自定义</h2>
 

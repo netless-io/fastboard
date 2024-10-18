@@ -6,11 +6,14 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 <img src="https://user-images.githubusercontent.com/8097890/165052277-f0bc1fba-c261-44a8-8219-cd7832ee3091.jpg" align="center">
 
+Starting with version 0.3.21, fastboard integrates the [appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
+
 ## Table of Contents
 
 - [Install](#install)
 - [Usage](#usage)
 - [Customization](#customization)
+- [Use performance](#performance)
 
 ## Install
 
@@ -366,6 +369,29 @@ const appId = await fastboard.manager.addApp({
 More apps goto [netless-app](#https://github.com/netless-io/netless-app).
 
 To develop your own app, see [Write you a Netless App](./docs/en/app.md).
+
+## performance
+
+Enable the appliance-plugin through the `enableAppliancePlugin` configuration item to improve performance.
+
+```jsx
+function App() {
+  const fastboard = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    //  use appliance-plugin
+    enableAppliancePlugin: true,
+  }));
+  ....
+}
+```
+**Note:**
+- After opening the appliance plugin, the drawn content will be displayed, but it cannot be manipulated and upgraded, so in order not to affect the experience, please use it on a whiteboard without any historical data. Similarly, when the plugin is closed, the newly drawn content will be lost. 
+- only the browser for web apis [offscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility) Full support, in order to experience more performance and rich teaching AIDS functional experience.
 
 ## Customization
 
