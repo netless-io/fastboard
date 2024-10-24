@@ -2,3 +2,5 @@ node_modules
 dist
 .eslintrc.js
 *.html
+*.md
+packages/fastboard-core/docs

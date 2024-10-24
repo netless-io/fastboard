@@ -2,7 +2,7 @@
 
 本库用于快速开始一个白板应用，基于 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 和 [netless-app](https://github.com/netless-io/netless-app) 实现。
 
-从0.3.21版本开始, fastboard 集成了[appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
+从0.3.21版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
 
 
 ## 目录
@@ -16,10 +16,10 @@
 <h2 id="install">安装</h2>
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk appliance-plugin
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
-> **注意：**@netless/window-manager、white-web-sdk、appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+> **注意：**@netless/window-manager、white-web-sdk、@netless/appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
 <h2 id="usage">使用</h2>
 
@@ -103,7 +103,7 @@ main().catch(console.error);
 先安装 @netless/fastboard-react，再使用里面提供的 `<Fastboard />` 组件。
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom
+npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
 
 ```jsx

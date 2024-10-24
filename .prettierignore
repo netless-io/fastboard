@@ -2,4 +2,6 @@ pnpm-lock.yaml
 dist
 *.html
 CHANGELOG.md
+*.md
 packages/fastboard-core/docs
+
