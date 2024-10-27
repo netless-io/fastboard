@@ -23,6 +23,10 @@ export const colors: Record<string, Color> = {
   "#6D7278": [109, 114, 120],
 };
 
+export const colorKeys = Object.keys(colors);
+
+export const default_colors: Color[] = Object.values(colors);
+
 export const shapes = [
   "rectangle",
   "ellipse",
@@ -88,5 +92,3 @@ export const i18n: I18nData<ToolbarItem | "apps"> = {
     laserPointer: "激光笔",
   },
 };
-
-export const colorKeys = Object.keys(colors);

@@ -1,4 +1,4 @@
-import type { FastboardApp, FastboardPlayer } from "@netless/fastboard-core";
+import type { Color, FastboardApp, FastboardPlayer } from "@netless/fastboard-core";
 import type { FastboardProps, ReplayFastboardProps } from "../components/Fastboard";
 
 import { Fastboard, ReplayFastboard } from "../components/Fastboard";
@@ -19,17 +19,49 @@ export interface UI {
  */
 export function createUI(app?: FastboardApp | null, div?: Element): UI {
   let fastboard: Fastboard | undefined;
+  let colors: Color[] | undefined;
+
+  if (app?.manager && app.manager.room) {
+    const floatBarOptions = ((app.manager.room as any).floatBarOptions) as { colors?: Color[] };
+    if (floatBarOptions.colors) {
+      colors = (floatBarOptions.colors) as Color[];
+    }
+  }
 
   const ui: UI = {
     mount(div: Element, props?: FastboardProps) {
       if (fastboard) {
         fastboard.$destroy();
       }
+      if (props?.config?.toolbar) {
+        const _colors = props.config.toolbar.colors;
+        if (!_colors && colors) {
+          props.config = {
+            ...props.config,
+            toolbar: {
+              ...props.config.toolbar,
+              colors,
+            },
+          };
+        }
+      }
       fastboard = new Fastboard({ target: div, props: { app, ...props } });
       return ui;
     },
     update(props?: FastboardProps) {
       if (fastboard && props) {
+        if (props?.config?.toolbar) {
+          const _colors = props.config.toolbar.colors;
+          if (!_colors && colors) {
+            props.config = {
+              ...props.config,
+              toolbar: {
+                ...props.config.toolbar,
+                colors,
+              },
+            };
+          }
+        }
         fastboard.$set(props);
       }
     },

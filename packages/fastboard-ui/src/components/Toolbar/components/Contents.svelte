@@ -7,7 +7,7 @@
   import { scrollTop } from "../../../actions/scroll";
   import { tippy_hide_all } from "../../../actions/tippy";
   import { clamp } from "../../helpers";
-  import { default_items, i18n } from "./constants";
+  import { default_colors, default_items, i18n } from "./constants";
   import { apps } from "../../../behaviors";
   import { tooltip } from "./helper";
   import Icons from "../../Icons";
@@ -38,6 +38,7 @@
   export let placement: "left" | "right" = "left";
   export let items: ToolbarItem[] = default_items;
   export let hide_apps = false;
+  export let colors = default_colors;
 
   const name = "fastboard-toolbar";
 
@@ -157,17 +158,17 @@
   <div class="{name}-panel pencil" bind:this={pencil_panel}>
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
-    <StrokeColor {app} {theme} {disabled} />
+    <StrokeColor {app} {theme} {disabled} {colors} />
   </div>
   <div class="{name}-panel text" bind:this={text_panel}>
-    <TextColor {app} {theme} {disabled} />
+    <TextColor {app} {theme} {disabled} {colors} />
   </div>
   <div class="{name}-panel shapes" bind:this={shapes_panel}>
     <SelectShapes {app} {theme} {language} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
-    <StrokeColor {app} {theme} {disabled} />
+    <StrokeColor {app} {theme} {disabled} {colors} />
   </div>
   <div class="{name}-panel apps" style="--n:{$apps.length}" bind:this={apps_panel}>
     {#each $apps as netless_app}

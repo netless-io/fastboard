@@ -4,7 +4,7 @@
   import { writable as svelte_writable } from "svelte/store";
   import { height } from "../../actions/height";
   import { clamp } from "../helpers";
-  import { default_items } from "./components/constants";
+  import { default_items, default_colors } from "./components/constants";
   import Contents from "./components/Contents.svelte";
 
   export let app: FastboardApp | null | undefined = null;
@@ -29,6 +29,7 @@
   $: placement = config.placement || "left";
   $: items = config.items || default_items;
   $: hide_apps = config.apps?.enable === false;
+  $: colors = (config?.colors && config.colors.length && config.colors) || default_colors;
 </script>
 
 <div class="{name} {theme}" class:collapsed use:height={container_height}>
@@ -44,6 +45,7 @@
       {placement}
       {items}
       {hide_apps}
+      {colors}
     />
   </div>
   <label class="{name}-handler {theme}">

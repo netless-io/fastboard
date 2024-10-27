@@ -1,5 +1,7 @@
 /// <reference types="svelte/types/runtime/ambient.d.ts" />
 
+import type { Color } from "@netless/fastboard-core";
+
 export { SvelteComponentTyped } from "svelte/internal";
 
 export interface SvelteAction<T = void> {
@@ -47,6 +49,8 @@ export interface ToolbarConfig {
   collapsed?: boolean;
   /** Control the last button which opens apps stock on toolbar. */
   apps?: { enable?: boolean };
+  /** 颜色 */
+  colors?: Color[];
 }
 
 export interface FastboardUIConfig {
