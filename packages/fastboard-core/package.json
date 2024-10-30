@@ -23,7 +23,7 @@
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
-    "@netless/appliance-plugin": ">=1.0.10",
+    "@netless/appliance-plugin": ">=1.1.1",
     "@netless/window-manager": ">=0.4.0",
     "white-web-sdk": ">=2.16.0"
   },

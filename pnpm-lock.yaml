@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@netless/window-manager': ^0.4.75
-  '@netless/appliance-plugin': ^1.0.10
+  '@netless/appliance-plugin': 1.1.1
 
 importers:
 
@@ -25,8 +25,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/appliance-plugin':
-        specifier: ^1.0.10
-        version: 1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
+        specifier: 1.1.1
+        version: 1.1.1(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
       '@netless/window-manager':
         specifier: ^0.4.75
         version: 0.4.75(white-web-sdk@2.16.51)
@@ -130,8 +130,8 @@ importers:
         specifier: ^0.2.39
         version: 0.2.39
       '@netless/appliance-plugin':
-        specifier: ^1.0.10
-        version: 1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
+        specifier: 1.1.1
+        version: 1.1.1(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)
       '@netless/synced-store':
         specifier: ^2.0.7
         version: 2.0.7(white-web-sdk@2.16.51)
@@ -528,8 +528,8 @@ packages:
       jspdf:
         optional: true
 
-  '@netless/appliance-plugin@1.0.10':
-    resolution: {integrity: sha512-kLGg+yv0lQEl42YahVZ76bSbLk9u1MtxEhBQNvkk1Y7R6nZRX4rYRdUx4JN7E9Co0o+NTVxlj24zgplio/RNSg==}
+  '@netless/appliance-plugin@1.1.1':
+    resolution: {integrity: sha512-gyOknRir6Ec/SEhP99IbLEJXpPlAxzZlcpnSwa+emu5tNMU6VixU7iWGIv0O+NQ7PTbzqbnqWaq2VDcB9GEHSw==}
     peerDependencies:
       '@netless/window-manager': ^0.4.75
       white-web-sdk: '>= 2.16'
@@ -1084,6 +1084,7 @@ packages:
   eslint@8.44.0:
     resolution: {integrity: sha512-0wpHoUbDUHgNCyvFB5aXLiQVfK9B0at6gUvzy83k4kAsQ/u769TQDX6iKC+aO4upIHO9WSaA3QoXYQDHbNwf1A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.0:
@@ -2447,7 +2448,7 @@ snapshots:
 
   '@netless/app-slide@0.2.39': {}
 
-  '@netless/appliance-plugin@1.0.10(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)':
+  '@netless/appliance-plugin@1.1.1(@netless/window-manager@0.4.75(white-web-sdk@2.16.51))(white-web-sdk@2.16.51)':
     dependencies:
       '@netless/window-manager': 0.4.75(white-web-sdk@2.16.51)
       eventemitter2: 6.4.9
