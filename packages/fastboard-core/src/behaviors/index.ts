@@ -12,6 +12,6 @@ export { previewSlide, SlideApp, addHooks as addSlideHooks, apps as slideApps };
 WindowManager.register({
   kind: "Slide",
   appOptions: { debug: false },
-  src: SlideApp,
+  src: SlideApp as any,
   addHooks,
 });

@@ -165,4 +165,99 @@ export async function build({
     fs.writeFileSync("dist/lite.d.ts", code);
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
   }
+
+  // Build dist/index.global.ts
+  const esbuildGlobalPlugin = (external, alias = {}) => ({
+    name: "esbuild",
+    async load(id) {
+      const { outputFiles } = await esbuild.build({
+        entryPoints: [id],
+        bundle: true,
+        format: "esm",
+        // The filename here does not really matter, because
+        // rollup will then merge sourcemaps and get the original input filename.
+        outfile: id.replace(/\.tsx?$/, ".global.js"),
+        sourcemap: true,
+        write: false,
+        target: ["es2017"],
+        plugins: [svelte(), sass()],
+        loader: {
+          ".svg": "dataurl",
+        },
+        define: {
+          __NAME__: '"@netless/fastboard"',
+          __VERSION__: JSON.stringify(version),
+        },
+        alias,
+        external: name.endsWith("-core") ? Object.keys({
+          ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+        }) : Object.keys({
+          ...dependencies,
+          ...peerDependencies,
+          ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+        }),
+      });
+      let code, map;
+      for (const { path, text } of outputFiles) {
+        if (path.endsWith(".map")) map = text;
+        else code = text;
+      }
+      return { code, map };
+    },
+  });
+
+  {
+    const start = Date.now();
+    // const bundle = await rollup.rollup({
+    //   input: main,
+    //   plugins: [esbuildGlobalPlugin()],
+    //   external: [/^[@a-z]/],
+    // });
+    // const iife = bundle.write({
+    //   file: "dist/index.global.js",
+    //   format: "iife",
+    //   name: `${name[0].toUpperCase()}${name.slice(1)}`,
+    // });
+    const bundle = await rollup.rollup({
+      input: main,
+      plugins: [
+        esbuildGlobalPlugin([], {
+          "@netless/fastboard-core": "@netless/fastboard-core/full",
+          "@netless/fastboard-ui": "@netless/fastboard-ui/full",
+        }),
+      ],
+      external: [/^[@a-z]/],
+    });
+
+    const esm = bundle.write({
+      file: "dist/full.mjs",
+      format: "es",
+      sourcemap: true,
+    });
+
+    const cjs = bundle.write({
+      file: "dist/full.js",
+      format: "cjs",
+      sourcemap: true,
+      interop: "auto",
+    });
+
+    await esm;
+    await cjs;
+    await bundle.close();
+    console.log("Built dist/full.{js|mjs} in", Date.now() - start + "ms");
+  }
+
+  start = Date.now();
+  if (name.endsWith("-core")) {
+    await dts.build("src/index.ts", "dist/full.d.ts", { exclude: ["svelte", "svelte/internal"] });
+    console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
+  } else {
+    let code = fs.readFileSync("dist/index.d.ts", "utf-8");
+    code = code.replace(/@netless\/fastboard-core/g, "@netless/fastboard-core/full");
+    code = code.replace(/@netless\/fastboard-ui/g, "@netless/fastboard-ui/full");
+    fs.writeFileSync("dist/full.d.ts", code);
+    console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
+  }
+
 }
