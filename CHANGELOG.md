@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.22 (2024-11-05)
+
+- Fastboard UI color menu to support custom color from ``JoinRoomParams.floatBar.color`` .
+
 ## 0.3.21 (2024-09-20)
 
 - Added `enableAppliancePlugin` in FastboardOptions to support new appliance plugins.
