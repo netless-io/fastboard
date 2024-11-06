@@ -19,6 +19,8 @@ import type {
   ShapeType,
   ViewCallbacks,
   WhiteWebSdkConfiguration,
+  RoomMember,
+  FloatBarOptions,
 } from "white-web-sdk";
 import type { SyncedStore, Storage, Diff, DiffOne } from "@netless/synced-store";
 
@@ -755,7 +757,6 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     },
     callbacks
   );
-
   const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
 
   const manager = await WindowManager.mount({
@@ -775,6 +776,18 @@ export async function createFastboard<TEventData extends Record<string, any> = a
         ...applianceConfig,
       },
     });
+  }
+  if (room.isWritable && ((room as any).floatBarOptions as FloatBarOptions)?.colors.length) {
+    const colors = (room as any).floatBarOptions?.colors;
+    const length = colors.length;
+    (room as any).getRoomMembers().map((c:RoomMember)=>{  
+        const index = c.memberId % length;
+        const color = colors[index];
+        manager.mainView.setMemberState({
+          strokeColor: color,
+          textColor: color,
+        });
+    })
   }
   manager.mainView.setCameraBound({
     minContentMode: contentModeScale(0.3),
