@@ -21,7 +21,7 @@ Starting with version 0.3.21, fastboard integrates the [@netless/appliance-plugi
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
-> **Note:** `@netless/window-manager` and `white-web-sdk` are **peerDependencies**.
+> **Note:** `@netless/window-manager`、`netless/appliance-plugin` and `white-web-sdk` are **peerDependencies**.
 
 ## Usage
 
@@ -53,6 +53,8 @@ async function main() {
     },
     // [4] (optional)
     netlessApps: [],
+    // [5] (Optional), turn on the appliance-plugin starting at 0.3.21
+    enableAppliancePlugin: true,
   });
 
   const container = createContainer();
@@ -94,7 +96,7 @@ main().catch(console.error);
 Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom
+npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
 
 ```jsx
@@ -113,6 +115,8 @@ function App() {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
+    //  开启 appliance-plugin 插件
+    enableAppliancePlugin: true,
   }));
 
   // Container must have a visible size
@@ -498,6 +502,8 @@ try {
         },
       },
     },
+    //  开启 appliance-plugin 插件
+    enableAppliancePlugin: true,
   });
 } catch (error) {
   console.error("Failed to join whiteboard room", error);
