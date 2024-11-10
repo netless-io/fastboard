@@ -28,10 +28,10 @@ function App() {
     },
     joinRoom: {
       uid: genUID(),
-      uuid: import.meta.env.VITE_ROOM_UUID || "b19acbd0783011ef83863d0682a6c9bd",
+      uuid: import.meta.env.VITE_ROOM_UUID || "586594d09dad11efacd4a7a764beb2c4",
       roomToken:
         import.meta.env.VITE_ROOM_TOKEN ||
-        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzI3MDIwMDAwNzg2Jm5vbmNlPWIxYzI5ZjIwLTc4MzAtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTU2YmEwZTdkMDExM2IxN2JmNmJjMGE1MzhmMGI4NWRjZDYxYzZjYjk5MWRhOGI2NjNkYTQ5ZTcxN2UzNGI4YmYmdXVpZD1iMTlhY2JkMDc4MzAxMWVmODM4NjNkMDY4MmE2YzliZA",
+        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxMTQxNzMxMTYzJm5vbmNlPTU4ODI5MmIwLTlkYWQtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTc0MmMwNmY0MmM0NzVjZjI2YTNkODE1ZTA1ODlmODU4ZGQyNzI1NWEwMmVjNWFmODkyYjg0NzgzMjBjNDVkODcmdXVpZD01ODY1OTRkMDlkYWQxMWVmYWNkNGE3YTc2NGJlYjJjNA",
       isWritable: search.get("isWritable") !== "0",
     },
     managerConfig: {

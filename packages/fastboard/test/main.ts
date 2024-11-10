@@ -1,9 +1,36 @@
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 
-import { createFastboard, createUI, genUID } from "../src";
+import { createFastboard, createUI, genUID, register, apps } from "../src";
 import "./style.scss";
 
 const root = document.getElementById("app") as HTMLDivElement;
+apps.push({
+  icon: "https://api.iconify.design/mdi:file-pdf.svg?color=%237f7f7f",
+  kind: "PDFjs",
+  label: "PDF.js",
+  async onClick(app) {
+    app.manager.addApp({
+      kind: "PDFjs",
+      options: {
+        title: "PDFjs",
+        scenePath: `/pdfjs/${Math.random().toString(36).slice(2)}`,
+      },
+      attributes: {
+        prefix: " https://white-cover.oss-cn-hangzhou.aliyuncs.com/flat/", // ! Required.
+        taskId: "e349fe51afb3493c893243789b467d6b", // ! Required.
+      },
+    });
+  },
+});
+register({
+  kind: "PDFjs",
+  src: "https://cdn.jsdelivr.net/npm/@netless/app-pdfjs@0.1.4",
+  name: "NetlessAppPDFjs",
+  appOptions: {
+    pdfjsLib: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.mjs',
+    workerSrc: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.worker.min.mjs'
+  }
+});
 createFastboard({
   sdkConfig: {
     appIdentifier: import.meta.env.VITE_APPID || "123456789/123456789",
@@ -11,12 +38,12 @@ createFastboard({
   },
   joinRoom: {
     uid: genUID(),
-    uuid: import.meta.env.VITE_ROOM_UUID || "a95b07b09b5711efacd4a7a764beb2c4",
+    uuid: import.meta.env.VITE_ROOM_UUID || "586594d09dad11efacd4a7a764beb2c4",
     useNativeClipboard: true,
     floatBar: true,
     roomToken:
       import.meta.env.VITE_ROOM_TOKEN ||
-      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMwODg1MDI3OTA2Jm5vbmNlPWE5NzIxMjIwLTliNTctMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTBlMjYwYjdkNmNhOGVlN2QzYTdhNjRjMzkyMzZmNWNlMzk4M2U1M2JlZWE5ZmQ0YmY4OTk3NGUyNDdhNTk4MzkmdXVpZD1hOTViMDdiMDliNTcxMWVmYWNkNGE3YTc2NGJlYjJjNA",
+      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxMTQxNzMxMTYzJm5vbmNlPTU4ODI5MmIwLTlkYWQtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTc0MmMwNmY0MmM0NzVjZjI2YTNkODE1ZTA1ODlmODU4ZGQyNzI1NWEwMmVjNWFmODkyYjg0NzgzMjBjNDVkODcmdXVpZD01ODY1OTRkMDlkYWQxMWVmYWNkNGE3YTc2NGJlYjJjNA",
   },
   managerConfig: {
     cursor: true,
