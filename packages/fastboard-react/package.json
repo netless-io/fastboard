@@ -6,7 +6,8 @@
   "files": [
     "src",
     "dist",
-    "lite.d.ts"
+    "lite.d.ts",
+    "full.d.ts"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
@@ -42,6 +43,10 @@
       "./lite": {
         "types": "./dist/lite.d.ts",
         "default": "./dist/lite.mjs"
+      },
+      "./full": {
+        "types": "./dist/full.d.ts",
+        "default": "./dist/full.mjs"
       }
     }
   }

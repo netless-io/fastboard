@@ -104,7 +104,7 @@ export async function build({
       plugins: [
         esbuildPlugin([], {
           "@netless/fastboard-core": "@netless/fastboard-core/lite",
-          "@netless/fastboard-ui": "@netless/fastboard-ui/lite",
+          // "@netless/fastboard-ui": "@netless/fastboard-ui/lite",
         }),
       ],
       external: [/^[@a-z]/],
@@ -148,7 +148,7 @@ export async function build({
   }
 
   start = Date.now();
-  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", "./lite"] });
+  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", "./lite", "./full"] });
   console.log("Built dist/index.d.ts in", Date.now() - start + "ms");
 
   // Generate dist/lite.d.ts
@@ -166,8 +166,8 @@ export async function build({
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
   }
 
-  // Build dist/index.global.ts
-  const esbuildGlobalPlugin = (external, alias = {}) => ({
+  // Build dist/full.js
+  const esbuildFullPlugin = (external, alias = {}) => ({
     name: "esbuild",
     async load(id) {
       const { outputFiles } = await esbuild.build({
@@ -176,7 +176,7 @@ export async function build({
         format: "esm",
         // The filename here does not really matter, because
         // rollup will then merge sourcemaps and get the original input filename.
-        outfile: id.replace(/\.tsx?$/, ".global.js"),
+        outfile: id.replace(/\.tsx?$/, ".js"),
         sourcemap: true,
         write: false,
         target: ["es2017"],
@@ -189,13 +189,15 @@ export async function build({
           __VERSION__: JSON.stringify(version),
         },
         alias,
-        external: name.endsWith("-core") ? Object.keys({
-          ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-        }) : Object.keys({
-          ...dependencies,
-          ...peerDependencies,
-          ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-        }),
+        external: name.endsWith("-core")
+          ? Object.keys({
+              ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+            })
+          : Object.keys({
+              ...dependencies,
+              ...peerDependencies,
+              ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+            }),
       });
       let code, map;
       for (const { path, text } of outputFiles) {
@@ -205,25 +207,13 @@ export async function build({
       return { code, map };
     },
   });
-
-  {
-    const start = Date.now();
-    // const bundle = await rollup.rollup({
-    //   input: main,
-    //   plugins: [esbuildGlobalPlugin()],
-    //   external: [/^[@a-z]/],
-    // });
-    // const iife = bundle.write({
-    //   file: "dist/index.global.js",
-    //   format: "iife",
-    //   name: `${name[0].toUpperCase()}${name.slice(1)}`,
-    // });
+  start = Date.now();
+  if (!name.endsWith("-ui")) {
     const bundle = await rollup.rollup({
-      input: main,
+      input: name.endsWith("-core") ? "src/full.ts" : main,
       plugins: [
-        esbuildGlobalPlugin([], {
+        esbuildFullPlugin([], {
           "@netless/fastboard-core": "@netless/fastboard-core/full",
-          "@netless/fastboard-ui": "@netless/fastboard-ui/full",
         }),
       ],
       external: [/^[@a-z]/],
@@ -247,10 +237,9 @@ export async function build({
     await bundle.close();
     console.log("Built dist/full.{js|mjs} in", Date.now() - start + "ms");
   }
-
   start = Date.now();
   if (name.endsWith("-core")) {
-    await dts.build("src/index.ts", "dist/full.d.ts", { exclude: ["svelte", "svelte/internal"] });
+    await dts.build("src/full.ts", "dist/full.d.ts", { exclude: ["svelte", "svelte/internal"] });
     console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
   } else {
     let code = fs.readFileSync("dist/index.d.ts", "utf-8");
@@ -259,5 +248,4 @@ export async function build({
     fs.writeFileSync("dist/full.d.ts", code);
     console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
   }
-
 }

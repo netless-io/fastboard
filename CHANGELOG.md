@@ -3,6 +3,10 @@
 ## 0.3.22 (2024-11-05)
 
 - Fastboard UI color menu to support custom color from ``JoinRoomParams.floatBar.color`` .
+- add `@netless/fastboard/full` or `@netless/fastboard-react/full` to import all the packages.
+  > [!NOTE]
+  > you must remove the `white-web-sdk` & `@netless/window-manager` & `jspdf` packages.
+
 
 ## 0.3.21 (2024-09-20)
 

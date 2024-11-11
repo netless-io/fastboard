@@ -8,6 +8,8 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 Starting with version 0.3.21, fastboard integrates the [@netless/appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
 
+Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/fastboard/full' or '@netless/fastboard-react/full', to resolve internal and external dependency conflicts.
+
 ## Table of Contents
 
 - [Install](#install)
@@ -17,18 +19,27 @@ Starting with version 0.3.21, fastboard integrates the [@netless/appliance-plugi
 
 ## Install
 
+#### Subcontracting mode
 <pre class="language-bash">
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
-> **Note:** `@netless/window-manager`、`netless/appliance-plugin` and `white-web-sdk` are **peerDependencies**.
+#### Full package mode
+<pre class="language-bash">
+npm add <b>@netless/fastboard</b>
+</pre>
+
+> **Note:** `@netless/window-manager`、`netless/appliance-plugin` and `white-web-sdk` are **peerDependencies**. If the reference is used in full packaging mode, then @netless/window-manager, white-web-sdk, and @netless/appliance-plugin can be installed without installation.
 
 ## Usage
 
 ### Vanilla JavaScript
 
 ```js
-import { createFastboard, createUI } from "@netless/fastboard";
+// Full package
+import { createFastboard, createUI } from "@netless/fastboard/full";
+// Subcontracting package
+// import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
   const fastboard = await createFastboard({
@@ -95,12 +106,24 @@ main().catch(console.error);
 
 Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 
+#### Full package
+
+<pre class="language-bash">
+npm add <b>@netless/fastboard-react</b> react react-dom
+</pre>
+
+
+#### Subcontracting package
+
 <pre class="language-bash">
 npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
 
 ```jsx
-import { useFastboard, Fastboard } from "@netless/fastboard-react";
+// Full package
+import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// Subcontracting package
+// import { useFastboard, Fastboard } from "@netless/fastboard-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 

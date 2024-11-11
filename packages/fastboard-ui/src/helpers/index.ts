@@ -22,9 +22,9 @@ export function createUI(app?: FastboardApp | null, div?: Element): UI {
   let colors: Color[] | undefined;
 
   if (app?.manager && app.manager.room) {
-    const floatBarOptions = ((app.manager.room as any).floatBarOptions) as { colors?: Color[] };
+    const floatBarOptions = (app.manager.room as any).floatBarOptions as { colors?: Color[] };
     if (floatBarOptions.colors) {
-      colors = (floatBarOptions.colors) as Color[];
+      colors = floatBarOptions.colors as Color[];
     }
   }
 

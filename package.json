@@ -41,13 +41,13 @@
     "typedoc": "^0.24.8",
     "typedoc-plugin-markdown": "^3.15.3",
     "typescript": "5.1.6",
-    "vite": "^4.4.1",
-    "white-web-sdk": "^2.16.51"
+    "vite": "^4.4.1"
   },
   "pnpm": {
     "overrides": {
       "@netless/window-manager": "^0.4.75",
-      "@netless/appliance-plugin": "1.1.2"
+      "@netless/appliance-plugin": "1.1.2",
+      "white-web-sdk": "^2.16.51"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

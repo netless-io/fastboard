@@ -27,9 +27,9 @@ register({
   src: "https://cdn.jsdelivr.net/npm/@netless/app-pdfjs@0.1.4",
   name: "NetlessAppPDFjs",
   appOptions: {
-    pdfjsLib: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.mjs',
-    workerSrc: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.worker.min.mjs'
-  }
+    pdfjsLib: "https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.min.mjs",
+    workerSrc: "https://cdn.jsdelivr.net/npm/pdfjs-dist@latest/build/pdf.worker.min.mjs",
+  },
 });
 createFastboard({
   sdkConfig: {
@@ -38,12 +38,12 @@ createFastboard({
   },
   joinRoom: {
     uid: genUID(),
-    uuid: import.meta.env.VITE_ROOM_UUID || "586594d09dad11efacd4a7a764beb2c4",
+    uuid: import.meta.env.VITE_ROOM_UUID || "b76630509f1211ef835aff90209b1830",
     useNativeClipboard: true,
     floatBar: true,
     roomToken:
       import.meta.env.VITE_ROOM_TOKEN ||
-      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxMTQxNzMxMTYzJm5vbmNlPTU4ODI5MmIwLTlkYWQtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTc0MmMwNmY0MmM0NzVjZjI2YTNkODE1ZTA1ODlmODU4ZGQyNzI1NWEwMmVjNWFmODkyYjg0NzgzMjBjNDVkODcmdXVpZD01ODY1OTRkMDlkYWQxMWVmYWNkNGE3YTc2NGJlYjJjNA",
+      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxMjk1MjIwODQ2Jm5vbmNlPWI3N2Q4OGUwLTlmMTItMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTMyYzc0NmI0YWM4NGUwYjgyMTg5ZWRhMWUzYmE3YWNhNzc1YTE1OGQ2YTExNjUyODlmNWE0ZDljM2I1ZjllNzAmdXVpZD1iNzY2MzA1MDlmMTIxMWVmODM1YWZmOTAyMDliMTgzMA",
   },
   managerConfig: {
     cursor: true,

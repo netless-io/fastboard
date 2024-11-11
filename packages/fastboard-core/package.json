@@ -5,12 +5,14 @@
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./lite": "./src/lite.ts"
+    "./lite": "./src/lite.ts",
+    "./full": "./src/full.ts"
   },
   "files": [
     "src",
     "dist",
-    "lite.d.ts"
+    "lite.d.ts",
+    "full.d.ts"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
@@ -19,17 +21,19 @@
     "build": "buildtool"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.39",
+    "@netless/app-slide": "^0.2.61",
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
-    "@netless/appliance-plugin": ">=1.1.1",
-    "@netless/window-manager": ">=0.4.0",
-    "white-web-sdk": ">=2.16.0"
+    "jspdf": ">=2.5.1",
+    "@netless/appliance-plugin": ">=1.1.2",
+    "@netless/window-manager": ">=0.4.75",
+    "white-web-sdk": ">=2.16.51"
   },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
-    "white-web-sdk": "^2.16.51"
+    "white-web-sdk": "^2.16.51",
+    "jspdf": "^2.5.1"
   },
   "publishConfig": {
     "main": "dist/index.js",
@@ -43,6 +47,10 @@
       "./lite": {
         "types": "./dist/lite.d.ts",
         "default": "./dist/lite.mjs"
+      },
+      "./full": {
+        "types": "./dist/full.d.ts",
+        "default": "./dist/full.mjs"
       }
     }
   }

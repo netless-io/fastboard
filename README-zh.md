@@ -4,6 +4,7 @@
 
 从0.3.21版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
 
+从0.3.22版本开始, fastboard 新增全打包文件, `@netless/fastboard/full` or `@netless/fastboard-react/full`, 用于解决内外依赖冲突问题.
 
 ## 目录
 
@@ -15,18 +16,28 @@
 
 <h2 id="install">安装</h2>
 
+#### 分包方式引用
 <pre class="language-bash">
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
-> **注意：**@netless/window-manager、white-web-sdk、@netless/appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+#### 全打包方式引用
+<pre class="language-bash">
+npm add <b>@netless/fastboard</b>
+</pre>
+
+> **注意：**@netless/window-manager、white-web-sdk、@netless/appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。如果使用全打包方式引用，则 @netless/window-manager、white-web-sdk、@netless/appliance-plugin 可以不用安装。
+
 
 <h2 id="usage">使用</h2>
 
 ### 原生 JavaScript
 
 ```js
-import { createFastboard, createUI } from "@netless/fastboard";
+// 全打包方式引用
+import { createFastboard, createUI } from "@netless/fastboard/full";
+// 分包引用
+// import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
   const fastboard = await createFastboard({
@@ -102,12 +113,23 @@ main().catch(console.error);
 
 先安装 @netless/fastboard-react，再使用里面提供的 `<Fastboard />` 组件。
 
+#### 全打包方式引用
+
+<pre class="language-bash">
+npm add <b>@netless/fastboard-react</b> react react-dom
+</pre>
+
+#### 分包方式引用
+
 <pre class="language-bash">
 npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
 
 ```jsx
-import { useFastboard, Fastboard } from "@netless/fastboard-react";
+// 全打包方式引用
+import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// 分包引用
+// import { useFastboard, Fastboard } from "@netless/fastboard-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 
