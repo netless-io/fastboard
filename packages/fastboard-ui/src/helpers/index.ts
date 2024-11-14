@@ -33,34 +33,22 @@ export function createUI(app?: FastboardApp | null, div?: Element): UI {
       if (fastboard) {
         fastboard.$destroy();
       }
-      if (props?.config?.toolbar) {
-        const _colors = props.config.toolbar.colors;
-        if (!_colors && colors) {
-          props.config = {
-            ...props.config,
-            toolbar: {
-              ...props.config.toolbar,
-              colors,
-            },
-          };
+      if (colors && props?.config && !props.config.toolbar?.colors) {
+        if (!props?.config.toolbar) {
+          props.config.toolbar = {};
         }
+        props.config.toolbar.colors = colors;
       }
       fastboard = new Fastboard({ target: div, props: { app, ...props } });
       return ui;
     },
     update(props?: FastboardProps) {
       if (fastboard && props) {
-        if (props?.config?.toolbar) {
-          const _colors = props.config.toolbar.colors;
-          if (!_colors && colors) {
-            props.config = {
-              ...props.config,
-              toolbar: {
-                ...props.config.toolbar,
-                colors,
-              },
-            };
+        if (colors && props?.config && !props.config.toolbar?.colors) {
+          if (!props?.config.toolbar) {
+            props.config.toolbar = {};
           }
+          props.config.toolbar.colors = colors;
         }
         fastboard.$set(props);
       }

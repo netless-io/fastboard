@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { FastboardApp } from "@netless/fastboard-core";
+  import type { Color, FastboardApp } from "@netless/fastboard-core";
   import type { Language, Theme, ToolbarConfig } from "../../typings";
   import { writable as svelte_writable } from "svelte/store";
   import { height } from "../../actions/height";
@@ -11,6 +11,7 @@
   export let theme: Theme = "light";
   export let language: Language = "en";
   export let config: ToolbarConfig = {};
+  export let colors: Color[] | undefined = undefined;
 
   const name = "fastboard-toolbar";
   const extra_height = (32 + 4 + 4) * 2;
@@ -29,7 +30,19 @@
   $: placement = config.placement || "left";
   $: items = config.items || default_items;
   $: hide_apps = config.apps?.enable === false;
-  $: colors = (config?.colors && config.colors.length && config.colors) || default_colors;
+
+  $: if (app?.manager && app?.manager.room) {
+    if (colors && !config.colors?.length) {
+      const floatBarOptions = (app?.manager.room as any).floatBarOptions as { colors?: Color[] };
+      if (floatBarOptions.colors) {
+        colors = floatBarOptions.colors as Color[];
+      }
+    } else {
+      colors = config.colors;
+    }
+  } else {
+    colors = default_colors;
+  }
 </script>
 
 <div class="{name} {theme}" class:collapsed use:height={container_height}>

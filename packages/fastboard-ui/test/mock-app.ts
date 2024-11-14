@@ -49,6 +49,17 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
 
   const app: PartialDeep<FastboardApp> = {
     manager: {
+      room: {
+        floatBarOptions: {
+          colors: [
+            [50, 197, 255],
+            [0, 145, 255],
+            [98, 54, 255],
+            [182, 32, 224],
+            [109, 114, 120],
+          ],
+        },
+      } as any,
       setPrefersColorScheme(scheme) {
         console.log("setPrefersColorScheme", scheme);
       },

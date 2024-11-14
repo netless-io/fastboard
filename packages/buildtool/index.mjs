@@ -180,7 +180,7 @@ export async function build({
         sourcemap: true,
         write: false,
         target: ["es2017"],
-        plugins: [svelte(), sass()],
+        plugins: [rawPlugin(), svelte(), sass()],
         loader: {
           ".svg": "dataurl",
         },

@@ -21,7 +21,7 @@ function rawPlugin() {
           : path.resolve(args.pluginData.resolveDir, "../../../../node_modules", args.path);
         // console.log('rawPlugin-0', args, args.pluginData.resolveDir);
         // console.log('rawPlugin-1', args.path);
-        // console.log('rawPlugin', fullPath);
+        // console.log('rawPlugin===>', fullPath);
         return {
           contents: await readFile(fullPath.replace(/\?raw$/, "")),
           loader: "text",

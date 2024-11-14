@@ -16,6 +16,10 @@ const FastboardLayout: FastboardUIConfig = {
     enable: true,
     placement: "right",
     items: ["pencil", "eraser", "hand", "laserPointer"],
+    colors: [
+      [50, 197, 255],
+      [0, 145, 255],
+    ],
   },
   zoom_control: { enable: true },
 };
@@ -28,11 +32,12 @@ function App() {
     },
     joinRoom: {
       uid: genUID(),
-      uuid: import.meta.env.VITE_ROOM_UUID || "586594d09dad11efacd4a7a764beb2c4",
+      uuid: import.meta.env.VITE_ROOM_UUID || "1bfe7360a23d11ef844c9de7e0348444",
       roomToken:
         import.meta.env.VITE_ROOM_TOKEN ||
-        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxMTQxNzMxMTYzJm5vbmNlPTU4ODI5MmIwLTlkYWQtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTc0MmMwNmY0MmM0NzVjZjI2YTNkODE1ZTA1ODlmODU4ZGQyNzI1NWEwMmVjNWFmODkyYjg0NzgzMjBjNDVkODcmdXVpZD01ODY1OTRkMDlkYWQxMWVmYWNkNGE3YTc2NGJlYjJjNA",
+        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzMxNjQzMjgyMDQyJm5vbmNlPTFjMjEzZGEwLWEyM2QtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPWM2MzYwMDU5MGRkOTY4NmJkYzEwMzYxNWEwYTJhODY1OWY1ZjFjNjZmNTRkY2FiMzVkMzE5YzQ4ZTk5YmIzOTYmdXVpZD0xYmZlNzM2MGEyM2QxMWVmODQ0YzlkZTdlMDM0ODQ0NA",
       isWritable: search.get("isWritable") !== "0",
+      floatBar: true,
     },
     managerConfig: {
       cursor: true,
