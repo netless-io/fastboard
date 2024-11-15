@@ -38,19 +38,9 @@ import {
 } from "../utils";
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
-import {
-  ApplianceMultiPlugin,
-  type AppliancePluginInstance,
-  type AppliancePluginOptions,
-} from "@netless/appliance-plugin";
+import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
+import type { AppliancePluginOptions, AppliancePluginInstance } from "@netless/appliance-plugin";
 
-import fullWorkerString from "@netless/appliance-plugin/dist/fullWorker.js?raw";
-import subWorkerString from "@netless/appliance-plugin/dist/subWorker.js?raw";
-
-const fullWorkerBlob = new Blob([fullWorkerString], { type: "text/javascript" });
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], { type: "text/javascript" });
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 function noop() {}
 
 class FastboardAppBase<TEventData extends Record<string, any> = any> {
@@ -686,7 +676,7 @@ export interface FastboardOptions {
   };
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
-  enableAppliancePlugin?: boolean | AppliancePluginOptions;
+  enableAppliancePlugin?: AppliancePluginOptions;
 }
 
 /**
@@ -711,6 +701,22 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   netlessApps,
   enableAppliancePlugin,
 }: FastboardOptions) {
+  const isEnableAppliancePlugin =
+    enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
+
+  const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
+  if (isEnableAppliancePlugin) {
+    if (joinRoomParamsWithPlugin.invisiblePlugins) {
+      joinRoomParamsWithPlugin.invisiblePlugins = [
+        ...joinRoomParamsWithPlugin.invisiblePlugins,
+        ApplianceMultiPlugin,
+      ];
+    }
+    if (managerConfig) {
+      managerConfig.supportAppliancePlugin = true;
+    }
+  }
+
   const sdk = new WhiteWebSdk({
     ...sdkConfig,
     useMobXState: true,
@@ -735,16 +741,6 @@ export async function createFastboard<TEventData extends Record<string, any> = a
       register({ kind: app.kind, src: app });
     });
   }
-  const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
-  if (enableAppliancePlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
-    joinRoomParamsWithPlugin.invisiblePlugins = [
-      ...joinRoomParamsWithPlugin.invisiblePlugins,
-      ApplianceMultiPlugin,
-    ];
-    if (managerConfig) {
-      managerConfig.supportAppliancePlugin = true;
-    }
-  }
 
   const room = await sdk.joinRoom(
     {
@@ -758,23 +754,15 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     callbacks
   );
   const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
-
   const manager = await WindowManager.mount({
     cursor: true,
     ...managerConfig,
     room,
   });
-  let appliancePlugin: AppliancePluginInstance | undefined;
-  if (enableAppliancePlugin) {
-    const applianceConfig = typeof enableAppliancePlugin === "object" ? enableAppliancePlugin : {};
-    appliancePlugin = await ApplianceMultiPlugin.getInstance(manager, {
-      options: {
-        cdn: {
-          fullWorkerUrl,
-          subWorkerUrl,
-        },
-        ...applianceConfig,
-      },
+  let appliancePluginInstance: AppliancePluginInstance | undefined;
+  if (isEnableAppliancePlugin && enableAppliancePlugin) {
+    appliancePluginInstance = await ApplianceMultiPlugin.getInstance(manager, {
+      options: enableAppliancePlugin,
     });
   }
   if (room.isWritable && ((room as any).floatBarOptions as FloatBarOptions)?.colors.length) {
@@ -794,5 +782,5 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore, appliancePlugin);
+  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore, appliancePluginInstance);
 }

@@ -7,6 +7,13 @@ import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { useFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
 
+import fullWorkerString from "@netless/appliance-plugin/dist/fullWorker.js?raw";
+import subWorkerString from "@netless/appliance-plugin/dist/subWorker.js?raw";
+const fullWorkerBlob = new Blob([fullWorkerString], { type: "text/javascript" });
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], { type: "text/javascript" });
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
 const search = new URLSearchParams(location.search);
 
 const FastboardLayout: FastboardUIConfig = {
@@ -42,7 +49,12 @@ function App() {
     managerConfig: {
       cursor: true,
     },
-    enableAppliancePlugin: true,
+    enableAppliancePlugin: {
+      cdn: {
+        fullWorkerUrl,
+        subWorkerUrl,
+      },
+    },
   }));
 
   (window as any).app = app;

@@ -18,7 +18,7 @@
     "@hyrious/esbuild-dev": "^0.10.3",
     "@hyrious/esbuild-plugin-svelte": "^0.2.0",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/appliance-plugin": "1.1.3",
+    "@netless/appliance-plugin": "1.1.4",
     "@netless/window-manager": "^0.4.75",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
@@ -32,7 +32,7 @@
     "fast-glob": "^3.3.0",
     "prettier": "^3.0.0",
     "rollup": "^3.26.2",
-    "sass": "^1.63.6",
+    "sass": "1.63.6",
     "semver": "^7.5.3",
     "svelte": "^3.59.2",
     "svelte-check": "^3.4.5",
@@ -46,7 +46,7 @@
   "pnpm": {
     "overrides": {
       "@netless/window-manager": "^0.4.75",
-      "@netless/appliance-plugin": "1.1.3",
+      "@netless/appliance-plugin": "1.1.4",
       "white-web-sdk": "^2.16.52"
     },
     "peerDependencyRules": {

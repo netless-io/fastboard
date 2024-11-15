@@ -4,7 +4,7 @@ import * as esbuild from "esbuild";
 import * as dts from "@hyrious/dts";
 import { svelte } from "@hyrious/esbuild-plugin-svelte";
 import { sass } from "@netless/esbuild-plugin-inline-sass";
-import rawPlugin from "../buildtool/rawLoader.mjs";
+// import rawPlugin from "../buildtool/rawLoader.mjs";
 /**
  * The output is always dist/index.{js|mjs|d.ts}.
  *
@@ -44,7 +44,7 @@ export async function build({
         sourcemap: true,
         write: false,
         target: ["es2017"],
-        plugins: [rawPlugin(), svelte(), sass()],
+        plugins: [svelte(), sass()],
         loader: {
           ".svg": "dataurl",
         },
@@ -76,7 +76,6 @@ export async function build({
       plugins: [esbuildPlugin()],
       external: [/^[@a-z]/],
     });
-
     const esm = bundle.write({
       file: "dist/index.mjs",
       format: "es",
@@ -180,7 +179,7 @@ export async function build({
         sourcemap: true,
         write: false,
         target: ["es2017"],
-        plugins: [rawPlugin(), svelte(), sass()],
+        plugins: [svelte(), sass()],
         loader: {
           ".svg": "dataurl",
         },
@@ -192,7 +191,7 @@ export async function build({
         external: name.endsWith("-core")
           ? Object.keys({
               ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-            })
+            }).concat("@netless/applicance-plugin")
           : Object.keys({
               ...dependencies,
               ...peerDependencies,

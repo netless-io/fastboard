@@ -6,7 +6,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 <img src="https://user-images.githubusercontent.com/8097890/165052277-f0bc1fba-c261-44a8-8219-cd7832ee3091.jpg" align="center">
 
-Starting with version 0.3.21, fastboard integrates the [@netless/appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
+Starting with version 0.3.22, fastboard integrates the [@netless/appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
 
 Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/fastboard/full' or '@netless/fastboard-react/full', to resolve internal and external dependency conflicts.
 
@@ -24,12 +24,16 @@ Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/f
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
+> **注意：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+
 #### Full package mode
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b>
+npm add <b>@netless/fastboard</b> @netless/appliance-plugin
 </pre>
 
-> **Note:** `@netless/window-manager`、`netless/appliance-plugin` and `white-web-sdk` are **peerDependencies**. If the reference is used in full packaging mode, then @netless/window-manager, white-web-sdk, and @netless/appliance-plugin can be installed without installation.
+> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+>
+> `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/zh/peer-dependency.md)
 
 ## Usage
 
@@ -39,7 +43,7 @@ npm add <b>@netless/fastboard</b>
 // Full package
 import { createFastboard, createUI } from "@netless/fastboard/full";
 // Subcontracting package
-// import { createFastboard, createUI } from "@netless/fastboard";
+import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
   const fastboard = await createFastboard({
@@ -64,8 +68,10 @@ async function main() {
     },
     // [4] (optional)
     netlessApps: [],
-    // [5] (Optional), turn on the appliance-plugin starting at 0.3.21
-    enableAppliancePlugin: true,
+    // [5] (Optional), turn on the appliance-plugin starting at 0.3.22
+    enableAppliancePlugin: {
+      ...
+    },
   });
 
   const container = createContainer();
@@ -123,7 +129,8 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 // Full package
 import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
 // Subcontracting package
-// import { useFastboard, Fastboard } from "@netless/fastboard-react";
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -139,7 +146,9 @@ function App() {
       roomToken: "NETLESSROOM_...",
     },
     //  开启 appliance-plugin 插件
-    enableAppliancePlugin: true,
+    enableAppliancePlugin: {
+      ...
+    },
   }));
 
   // Container must have a visible size
@@ -399,9 +408,23 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 
 ## performance
 
-Enable the appliance-plugin through the `enableAppliancePlugin` configuration item to improve performance.
+Enable the `@netless/appliance-plugin` through the `enableAppliancePlugin` configuration item to improve performance.Also refer to the document [appliance-plugin](./docs/en/appliance-plugin.md).
+
+> **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 
 ```jsx
+// Import the product directly by raw-loader
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// Import the CDN. A CDN is imported and needs to be deployed on its own CDN server, which must comply with the same-origin policy.
+const subWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/subWorker.js";
+const fullWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/fullWorker.js";
+
 function App() {
   const fastboard = useFastboard(() => ({
     sdkConfig: {
@@ -411,7 +434,12 @@ function App() {
       ...
     },
     //  use appliance-plugin
-    enableAppliancePlugin: true,
+    enableAppliancePlugin: {
+        cdn: {
+            fullWorkerUrl,
+            subWorkerUrl,
+        }
+    },
   }));
   ....
 }

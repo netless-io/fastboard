@@ -2,7 +2,7 @@
 
 本库用于快速开始一个白板应用，基于 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 和 [netless-app](https://github.com/netless-io/netless-app) 实现。
 
-从0.3.21版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
+从0.3.22版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
 
 从0.3.22版本开始, fastboard 新增全打包文件, `@netless/fastboard/full` or `@netless/fastboard-react/full`, 用于解决内外依赖冲突问题.
 
@@ -20,13 +20,16 @@
 <pre class="language-bash">
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
+> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。
 
 #### 全打包方式引用
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b>
+npm add <b>@netless/fastboard</b> @netless/appliance-plugin
 </pre>
 
-> **注意：**@netless/window-manager、white-web-sdk、@netless/appliance-plugin 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。如果使用全打包方式引用，则 @netless/window-manager、white-web-sdk、@netless/appliance-plugin 可以不用安装。
+> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。
+>
+> `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
 
 <h2 id="usage">使用</h2>
@@ -36,8 +39,9 @@ npm add <b>@netless/fastboard</b>
 ```js
 // 全打包方式引用
 import { createFastboard, createUI } from "@netless/fastboard/full";
+
 // 分包引用
-// import { createFastboard, createUI } from "@netless/fastboard";
+import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
   const fastboard = await createFastboard({
@@ -62,8 +66,10 @@ async function main() {
     },
     // [4] (可选)
     netlessApps: [],
-    // [5] (可选), 开启appliance-plugin, 从0.3.21开始
-    enableAppliancePlugin: true,
+    // [5] (可选), 开启appliance-plugin, 从0.3.22开始
+    enableAppliancePlugin: {
+      ...
+    },
   });
 
   const container = createContainer();
@@ -129,7 +135,8 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 // 全打包方式引用
 import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
 // 分包引用
-// import { useFastboard, Fastboard } from "@netless/fastboard-react";
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -145,7 +152,9 @@ function App() {
       roomToken: "NETLESSROOM_...",
     },
     //  开启 appliance-plugin 插件
-    enableAppliancePlugin: true,
+    enableAppliancePlugin: {
+      ...
+    },
   }));
 
   // 白板元素必须具有可见的大小
@@ -402,10 +411,23 @@ const appId = await fastboard.manager.addApp({
 
 <h2 id="performance">使用性能优化版本</h2>
 
-通过 ``enableAppliancePlugin`` 配置项开启 appliance-plugin 插件，以提升性能。
+通过 ``enableAppliancePlugin`` 配置项开启 appliance-plugin 插件，以提升性能, 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)。
+> **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
 
 ### 示例代码
 ```jsx
+// 直接通过raw-loader引入
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// CDN 引入, 需要部署到自己的CDN服务器上, 它必须遵守 同源策略 。
+const subWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/subWorker.js";
+const fullWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/fullWorker.js";
+
 function App() {
   const fastboard = useFastboard(() => ({
     sdkConfig: {
@@ -415,14 +437,19 @@ function App() {
       ...
     },
     //  开启 appliance-plugin 插件
-    enableAppliancePlugin: true,
+    enableAppliancePlugin: {
+        cdn: {
+            fullWorkerUrl,
+            subWorkerUrl,
+        }
+    }
   }));
   ....
 }
 ```
 ### 注意
 
-- 在开启 appliance-plugin 插件后, 绘制的内容会显示,但是无法操作和升级, 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
+- 在开启 appliance-plugin 插件后, 之前白板上旧绘制的内容会显示,但是无法操作和升级. 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
 - 只有浏览器对 web API [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) 的完全支持,才能体验到更加的性能及丰富的教具功能体验。
 
 <h2 id="customization">自定义</h2>
