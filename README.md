@@ -65,6 +65,8 @@ async function main() {
     // [3] (optional)
     managerConfig: {
       cursor: true,
+      // (Optional), turn on the appliance-plugin starting at 0.3.22
+      supportAppliancePlugin: true,
     },
     // [4] (optional)
     netlessApps: [],
@@ -112,18 +114,24 @@ main().catch(console.error);
 
 Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 
-#### Full package
-
-<pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> react react-dom
-</pre>
-
-
 #### Subcontracting package
 
 <pre class="language-bash">
 npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
+
+> **注意：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+
+
+#### Full package
+
+<pre class="language-bash">
+npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin
+</pre>
+
+> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+>
+> `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/zh/peer-dependency.md)
 
 ```jsx
 // Full package
@@ -145,7 +153,12 @@ function App() {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
-    //  开启 appliance-plugin 插件
+    managerConfig: {
+      cursor: true,
+      // (Optional), turn on the appliance-plugin starting at 0.3.22
+      supportAppliancePlugin: true,
+    },
+    // (Optional), turn on the appliance-plugin starting at 0.3.22
     enableAppliancePlugin: {
       ...
     },
@@ -408,7 +421,7 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 
 ## performance
 
-Enable the `@netless/appliance-plugin` through the `enableAppliancePlugin` configuration item to improve performance.Also refer to the document [appliance-plugin](./docs/en/appliance-plugin.md).
+Enable the `@netless/appliance-plugin` through the `enableAppliancePlugin` & `managerConfig.supportAppliancePlugin` configuration item to improve performance.Also refer to the document [appliance-plugin](./docs/en/appliance-plugin.md).
 
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 
@@ -432,6 +445,10 @@ function App() {
     },
     joinRoom: {
       ...
+    },
+    managerConfig: {
+      // (Optional), turn on the appliance-plugin
+      supportAppliancePlugin: true,
     },
     //  use appliance-plugin
     enableAppliancePlugin: {
@@ -553,8 +570,15 @@ try {
         },
       },
     },
-    //  开启 appliance-plugin 插件
-    enableAppliancePlugin: true,
+    managerConfig: {
+      cursor: true,
+      // (Optional), turn on the appliance-plugin starting at 0.3.22
+      supportAppliancePlugin: true,
+    },
+    // (Optional), turn on the appliance-plugin starting at 0.3.22
+    enableAppliancePlugin: {
+      ...
+    },
   });
 } catch (error) {
   console.error("Failed to join whiteboard room", error);

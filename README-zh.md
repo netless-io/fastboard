@@ -20,6 +20,7 @@
 <pre class="language-bash">
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
+
 > **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。
 
 #### 全打包方式引用
@@ -63,6 +64,8 @@ async function main() {
     // [3] (可选)
     managerConfig: {
       cursor: true,
+      // (可选), 开启appliance-plugin, 从0.3.22开始
+      supportAppliancePlugin: true,
     },
     // [4] (可选)
     netlessApps: [],
@@ -119,17 +122,24 @@ main().catch(console.error);
 
 先安装 @netless/fastboard-react，再使用里面提供的 `<Fastboard />` 组件。
 
-#### 全打包方式引用
-
-<pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> react react-dom
-</pre>
-
 #### 分包方式引用
 
 <pre class="language-bash">
 npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
+
+> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。
+
+#### 全打包方式引用
+
+<pre class="language-bash">
+npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin
+</pre>
+
+> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。
+>
+> `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin`、`react`、`react-dom` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+
 
 ```jsx
 // 全打包方式引用
@@ -151,6 +161,11 @@ function App() {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
+    //  开启 appliance-plugin 插件
+    managerConfig: {
+      cursor: true,
+      supportAppliancePlugin: true,
+    }
     //  开启 appliance-plugin 插件
     enableAppliancePlugin: {
       ...
@@ -411,7 +426,7 @@ const appId = await fastboard.manager.addApp({
 
 <h2 id="performance">使用性能优化版本</h2>
 
-通过 ``enableAppliancePlugin`` 配置项开启 appliance-plugin 插件，以提升性能, 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)。
+通过 `enableAppliancePlugin` 及 `managerConfig.supportAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能, 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)。
 > **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
 
 ### 示例代码
@@ -435,6 +450,10 @@ function App() {
     },
     joinRoom: {
       ...
+    },
+    //  开启 appliance-plugin 插件, 和windowManager 配置
+    managerConfig: {
+      supportAppliancePlugin: true
     },
     //  开启 appliance-plugin 插件
     enableAppliancePlugin: {
