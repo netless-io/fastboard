@@ -45,6 +45,8 @@ import WhiteboardAdd from "./WhiteboardAdd.svelte";
 import Play from "./Play.svelte";
 import Pause from "./Pause.svelte";
 import Loading from "./Loading.svelte";
+import LaserPen from "./LaserPen.svelte";
+import LaserPenFilled from "./LaserPenFilled.svelte";
 
 const Icons = {
   Apps,
@@ -94,6 +96,8 @@ const Icons = {
   Play,
   Pause,
   Loading,
+  LaserPen,
+  LaserPenFilled
 };
 
 export default Icons;

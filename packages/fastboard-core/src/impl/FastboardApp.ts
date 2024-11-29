@@ -1,7 +1,6 @@
 import type { AddPageParams, PublicEvent, MountParams, NetlessApp } from "@netless/window-manager";
 import type {
   AnimationMode,
-  ApplianceNames,
   Camera,
   CameraState,
   Color,
@@ -21,6 +20,7 @@ import type {
   WhiteWebSdkConfiguration,
   RoomMember,
   FloatBarOptions,
+  ApplianceNames,
 } from "white-web-sdk";
 import type { SyncedStore, Storage, Diff, DiffOne } from "@netless/synced-store";
 
@@ -39,7 +39,7 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
 import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
-import type { AppliancePluginOptions, AppliancePluginInstance } from "@netless/appliance-plugin";
+import type { AppliancePluginOptions, AppliancePluginInstance, ApplianceNames as ExtendApplianceNames, MemberState as ExtendMemberState} from "@netless/appliance-plugin";
 
 function noop() {}
 
@@ -129,10 +129,12 @@ export type {
   WhiteWebSdk,
   WhiteWebSdkConfiguration,
   WindowManager,
+  ExtendApplianceNames,
+  ExtendMemberState
 };
 
 /** pencil, eraser, rectangle... */
-export type Appliance = `${ApplianceNames}`;
+export type Appliance = `${ExtendApplianceNames}`;
 /** triangle, star... */
 export type Shape = `${ShapeType}`;
 
@@ -377,7 +379,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   /**
    * Set current tool, like "pencil".
    */
-  setAppliance(appliance: ApplianceNames | Appliance, shape?: ShapeType | Shape) {
+  setAppliance(appliance: ExtendApplianceNames | Appliance, shape?: ShapeType | Shape) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({
       currentApplianceName: appliance as ApplianceNames,

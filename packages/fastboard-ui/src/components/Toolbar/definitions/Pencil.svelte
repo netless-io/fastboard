@@ -9,10 +9,13 @@
   export let menu: ButtonProps["menu"] | undefined;
   export let appliance: ApplianceNames | undefined;
   export let theme: Theme = "light";
+  export let hasUseLaserPen: boolean = false;
 </script>
 
 <Button class="pencil" {...btn_props} on:click {content} {menu}>
-  {#if appliance === "pencil"}
+  {#if appliance === "pencil" && hasUseLaserPen}
+    <Icons.LaserPenFilled {theme} active />
+  {:else if appliance === "pencil"}
     <Icons.PencilFilled {theme} active />
   {:else}
     <Icons.Pencil {theme} />

@@ -60,6 +60,15 @@ $name: "fastboard-toolbar";
   display: none;
 }
 
+.#{$name}-panel-switch-pencil{
+  display: flex;
+}
+
+.#{$name}-panel-switch-btn{
+  width: 24px;
+  height: 24px;
+}
+
 .#{$name}-panel {
   display: flex;
   flex-direction: column;

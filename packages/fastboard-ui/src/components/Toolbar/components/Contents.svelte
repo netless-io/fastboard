@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { FastboardApp } from "@netless/fastboard-core";
+  import type { FastboardApp, ExtendMemberState } from "@netless/fastboard-core";
   import type { Writable } from "svelte/store";
   import type { Language, Theme, ToolbarItem } from "../../../typings";
   import { writable } from "svelte/store";
@@ -74,6 +74,9 @@
 
   $: max_scroll = scrollable ? $scroll_height + (32 + 8) * 2 - computed_height : 0;
 
+  $: hasAppliancePlugin = !!app?.appliancePlugin;
+  $: hasUseLaserPen = (hasAppliancePlugin && ($memberState as ExtendMemberState)?.useLaserPen) || false;
+
   let top = writable(0);
 
   function scroll_up() {
@@ -107,6 +110,9 @@
   function clear() {
     app?.cleanCurrentScene();
   }
+  function useLaserPen() {
+    app?.setAppliance("laserPen");
+  }
 </script>
 
 {#if scrollable}
@@ -121,7 +127,15 @@
     {:else if item === "selector"}
       <Selector {appliance} {theme} {btn_props} on:click={selector} content={c.selector} />
     {:else if item === "pencil"}
-      <Pencil {appliance} {theme} {btn_props} on:click={pencil} content={c.pencil} menu={pencil_panel} />
+      <Pencil
+        {hasUseLaserPen}
+        {appliance}
+        {theme}
+        {btn_props}
+        on:click={pencil}
+        content={c.pencil}
+        menu={pencil_panel}
+      />
     {:else if item === "text"}
       <Text {appliance} {theme} {btn_props} on:click={text} content={c.text} menu={text_panel} />
     {:else if item === "shapes"}
@@ -156,6 +170,23 @@
 
 <div class="{name}-panel-wrapper" style="display:none">
   <div class="{name}-panel pencil" bind:this={pencil_panel}>
+    <div class="{name}-panel-switch-pencil">
+      {#if !!app?.appliancePlugin && hasUseLaserPen}
+        <Button class="{name}-panel-switch-btn" {...btn_props} on:click={pencil}>
+          <Icons.Pencil {theme} />
+        </Button>
+        <Button class="{name}-panel-switch-btn" {...btn_props}>
+          <Icons.LaserPenFilled {theme} active />
+        </Button>
+      {:else if !!app?.appliancePlugin}
+        <Button class="{name}-panel-switch-btn" {...btn_props}>
+          <Icons.PencilFilled {theme} active />
+        </Button>
+        <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useLaserPen}>
+          <Icons.LaserPen {theme} />
+        </Button>
+      {/if}
+    </div>
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} {colors} />
