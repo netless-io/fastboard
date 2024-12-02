@@ -97,7 +97,7 @@ const Icons = {
   Pause,
   Loading,
   LaserPen,
-  LaserPenFilled
+  LaserPenFilled,
 };
 
 export default Icons;

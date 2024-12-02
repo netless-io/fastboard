@@ -39,7 +39,12 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
 import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
-import type { AppliancePluginOptions, AppliancePluginInstance, ApplianceNames as ExtendApplianceNames, MemberState as ExtendMemberState} from "@netless/appliance-plugin";
+import type {
+  AppliancePluginOptions,
+  AppliancePluginInstance,
+  ApplianceNames as ExtendApplianceNames,
+  MemberState as ExtendMemberState,
+} from "@netless/appliance-plugin";
 
 function noop() {}
 
@@ -130,7 +135,7 @@ export type {
   WhiteWebSdkConfiguration,
   WindowManager,
   ExtendApplianceNames,
-  ExtendMemberState
+  ExtendMemberState,
 };
 
 /** pencil, eraser, rectangle... */

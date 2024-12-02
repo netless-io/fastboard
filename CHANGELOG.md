@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0 (2024-12-02)
+
+- When turning on appliance plugin, Fastboard UI add `laserPen`.
+- update `@netless/window-manager` to `^1.0.0`.
+
 ## 0.3.22 (2024-11-05)
 
 - Fastboard UI color menu to support custom color from ``JoinRoomParams.floatBar.color`` .
