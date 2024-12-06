@@ -193,7 +193,7 @@ module: {
 - 服务端截图, appliance-plugin开启后, 笔记不能通过调用服务端截图方式获取截图,而需要改用`screenshotToCanvasAsync`获取
 
 #### 新功能
-1. 小地图功能
+1. 小地图功能 (Version >=1.1.6)
     ```js
     /** 创建小地图
      * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
@@ -203,7 +203,7 @@ module: {
     /** 销毁小地图 */
     destroyMiniMap(viewId: string): Promise<boolean>;
     ```
-2. 过滤笔记
+2. 过滤笔记 (Version >=1.1.6)
     ```js
     /** 过滤笔记
      * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
@@ -220,12 +220,64 @@ module: {
      */
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
-3. 分屏显示笔记(小白板功能),需要结合 `@netless/app-little-white-board`
+3. 分屏显示笔记(小白板功能),需要结合 `@netless/app-little-white-board` (Version >=1.1.3)
 
-4. 激光铅笔教具
+4. 激光铅笔教具 (Version >=1.1.1)
     ```js
-        import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
-        room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+    import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
+    room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+    ```
+5. 扩展教具 (Version >=1.1.1)
+    ```js
+    export enum EStrokeType {
+        /** 实心线条 */
+        Normal = 'Normal',
+        /** 带笔锋线条 */
+        Stroke = 'Stroke',
+        /** 虚线线条 */
+        Dotted = 'Dotted',
+        /** 长虚线线条 */
+        LongDotted = 'LongDotted'
+    };
+    export type ExtendMemberState = {
+        /** 当前用户所选择的教具 */
+        currentApplianceName: ApplianceNames;
+        /** 是否开启笔锋 */
+        strokeType?: EStrokeType;
+        /** 是否删除整条线段 */
+        isLine?: boolean;
+        /** 线框透明度 */
+        strokeOpacity?: number;
+        /** 是否开启激光笔 */
+        useLaserPen?: boolean;
+        /** 激光笔保持时间, second */
+        duration?: number;
+        /** 填充样式 */
+        fillColor?: Color;
+        /** 填充透明度 */
+        fillOpacity?: number;
+        /** 使用 ``shape`` 教具时，绘制图形的具体类型 */
+        shapeType?: ShapeType;
+        /** 多边形顶点数 */
+        vertices?:number;
+        /** 多边形向内顶点步长 */
+        innerVerticeStep?:number;
+        /** 多边形向内顶点与外顶点半径比率 */
+        innerRatio?: number;
+        /** 文字透明度 */
+        textOpacity?: number;
+        /** 文字背景颜色  */
+        textBgColor?: Color;
+        /** 文字背景颜色透明度 */
+        textBgOpacity?: number;
+        /** 位置 */
+        placement?: SpeechBalloonPlacement;
+    };
+    import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
+    /** 设置教具状态  */
+    room.setMemberState({ ... } as ExtendMemberState);
+    manager.mainView.setMemberState({ ... } as ExtendMemberState);
+    appliance.setMemberState({ ... } as ExtendMemberState);
     ```
 
 ### 配置参数

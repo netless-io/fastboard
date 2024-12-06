@@ -421,8 +421,7 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 
 ## performance
 
-Enable the `@netless/appliance-plugin` through the `enableAppliancePlugin` & `managerConfig.supportAppliancePlugin` configuration item to improve performance.Also refer to the document [appliance-plugin](./docs/en/appliance-plugin.md).
-
+Through ` enableAppliancePlugin ` and ` managerConfig. SupportAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 
 ```jsx

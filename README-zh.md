@@ -426,7 +426,7 @@ const appId = await fastboard.manager.addApp({
 
 <h2 id="performance">使用性能优化版本</h2>
 
-通过 `enableAppliancePlugin` 及 `managerConfig.supportAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能, 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)。
+通过 `enableAppliancePlugin` 及 `managerConfig.supportAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能以及提供[新的白板功能](https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E6%96%B0%E5%8A%9F%E8%83%BD), 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)了解更多内容。
 > **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
 
 ### 示例代码

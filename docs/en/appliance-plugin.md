@@ -190,7 +190,7 @@ The following interfaces are involved:
 - Server-side screenshot, after the appliance-plugin is turned on, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
 
 #### New features
-1. Minimap function
+1. Minimap function (Version >=1.1.6)
     ```js
     /** Create a minimap
      * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
@@ -200,7 +200,7 @@ The following interfaces are involved:
     /** Destroy minimap */
     destroyMiniMap(viewId: string): Promise<void>;
     ```
-2. Filter Elements
+2. Filter Elements (Version >=1.1.6)
     ```js
     /** Filter Elements
      * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
@@ -217,12 +217,64 @@ The following interfaces are involved:
      */
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
-3. Split screen display Elements (little whiteboard featrue), need to combine '@netless/app-little-white-board'
+3. Split screen display Elements (little whiteboard featrue), need to combine '@netless/app-little-white-board' (Version >=1.1.3)
 
-4. laserPen teaching aids
+4. laserPen teaching aids (Version >=1.1.1)
     ```js
-        import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
-        room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+    import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
+    room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+    ```
+5. Extended Teaching AIDS (Version >=1.1.1)
+    ```js
+    export enum EStrokeType { 
+        /** Solid line */ 
+        Normal = 'Normal', 
+        /** Line with pen edge */ 
+        Stroke = 'Stroke', 
+        /** Dotted line */ 
+        Dotted = 'Dotted', 
+        /** Long dotted line */ 
+        LongDotted = 'LongDotted' 
+    };
+    export type ExtendMemberState = {
+        /** The teaching AIDS selected by the current user */ 
+        currentApplianceName: ApplianceNames; 
+        /** Whether to open the pen tip */ 
+        strokeType? : EStrokeType; 
+        /** Whether to delete the entire line segment */ 
+        isLine? : boolean; 
+        /** Wireframe transparency */ 
+        strokeOpacity? : number; 
+        /** Whether to turn on laser pointer */ 
+        useLaserPen? : boolean; 
+        /** Laser pointer holding time, second */ 
+        duration? : number; 
+        /** Fill style */ 
+        fillColor? : Color; 
+        /** Fill transparency */ 
+        fillOpacity? : number; 
+        /** The specific type of graph to draw when using shape */ 
+        shapeType? : ShapeType; 
+        /** Number of polygon vertices */ 
+        vertices? :number; 
+        /** Length of the inner vertex of the polygon */ 
+        innerVerticeStep? :number; 
+        /** Ratio of the radius of the inner vertex of the polygon to the outer vertex */ 
+        innerRatio? : number; 
+        /** Text transparency */ 
+        textOpacity? : number; 
+        /** Text background color */ 
+        textBgColor? : Color; 
+        /** Text background color transparency */ 
+        textBgOpacity? : number; 
+        /** Location */ 
+        placement? : SpeechBalloonPlacement;
+    };
+    import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
+    /** Set the state of teaching AIDS  */
+    room.setMemberState({ ... } as ExtendMemberState);
+    manager.mainView.setMemberState({ ... } as ExtendMemberState);
+    appliance.setMemberState({ ... } as ExtendMemberState);
     ```
 
 ### Configure parameters 
