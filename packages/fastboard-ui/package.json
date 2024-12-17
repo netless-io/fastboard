@@ -1,13 +1,14 @@
 {
   "name": "@netless/fastboard-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The front-end of @netless/fastboard-core.",
   "main": "src/index.ts",
   "svelte": "dist/index.svelte.mjs",
   "files": [
     "src",
     "dist",
-    "lite.d.ts"
+    "lite.d.ts",
+    "full.d.ts"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
@@ -31,6 +32,10 @@
       },
       "./lite": {
         "types": "./dist/lite.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "./full": {
+        "types": "./dist/full.d.ts",
         "default": "./dist/index.mjs"
       }
     }
