@@ -1,5 +1,9 @@
 # Changelog
 
+
+## 1.0.1 (2024-12-17)
+- Fixed when import `@netless/fastboard-ui/full` the declaration file `full.d.ts` lost .
+
 ## 1.0.0 (2024-12-02)
 
 - When turning on appliance plugin, Fastboard UI add `laserPen`.
