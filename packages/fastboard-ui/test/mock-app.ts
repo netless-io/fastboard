@@ -4,9 +4,9 @@ import type {
   AppsStatus,
   CameraState,
   FastboardApp,
-  MemberState,
   ShapeType,
 } from "@netless/fastboard-core";
+import type { MemberState } from "@netless/appliance-plugin";
 import type { Readable } from "svelte/store";
 import type { PartialDeep } from "type-fest";
 import { derived, get, writable } from "svelte/store";
@@ -27,6 +27,8 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     strokeWidth: 2,
     textColor: [255, 0, 0],
     textSize: 16,
+    strokeOpacity: 1,
+    useLaserPen: false,
   });
   const sceneIndex = writable(0);
   const sceneLength = writable(15);
@@ -48,6 +50,15 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
   }
 
   const app: PartialDeep<FastboardApp> = {
+    appliancePlugin: {
+      setMemberState(modifyState: Partial<MemberState>) {
+        console.log("setMemberState", modifyState);
+        memberState.update(e => ({
+          ...e,
+          ...modifyState,
+        }));
+      },
+    },
     manager: {
       room: {
         floatBarOptions: {
@@ -122,11 +133,20 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     },
     setAppliance(appliance, shape) {
       console.log("setAppliance", appliance, shape);
-      memberState.update(e => ({
-        ...e,
-        currentApplianceName: appliance as ApplianceNames,
-        shapeType: appliance === "shape" ? (shape as ShapeType) : undefined,
-      }));
+      if (appliance === "laserPen") {
+        memberState.update(e => ({
+          ...e,
+          currentApplianceName: "pencil" as ApplianceNames,
+          useLaserPen: true,
+        }));
+      } else {
+        memberState.update(e => ({
+          ...e,
+          currentApplianceName: appliance as ApplianceNames,
+          useLaserPen: false,
+          shapeType: appliance === "shape" ? (shape as ShapeType) : undefined,
+        }));
+      }
     },
     setStrokeWidth(width: number) {
       console.log("setStrokeWidth", width);

@@ -76,6 +76,9 @@
 
   $: hasAppliancePlugin = !!app?.appliancePlugin;
   $: hasUseLaserPen = (hasAppliancePlugin && ($memberState as ExtendMemberState)?.useLaserPen) || false;
+  $: hasUseMarkPen =
+    (hasAppliancePlugin && ($memberState as ExtendMemberState)?.strokeOpacity === 0.5) || false;
+  $: pencilType = hasUseLaserPen ? "laser" : hasUseMarkPen ? "mark" : "pencil";
 
   let top = writable(0);
 
@@ -93,7 +96,15 @@
     app?.setAppliance("selector");
   }
   function pencil() {
-    app?.setAppliance("pencil");
+    if (hasAppliancePlugin) {
+      app?.appliancePlugin?.setMemberState({
+        currentApplianceName: "pencil",
+        useLaserPen: false,
+        strokeOpacity: 1,
+      } as ExtendMemberState);
+    } else {
+      app?.setAppliance("pencil");
+    }
   }
   function text() {
     app?.setAppliance("text");
@@ -111,7 +122,18 @@
     app?.cleanCurrentScene();
   }
   function useLaserPen() {
-    app?.setAppliance("laserPen");
+    app?.appliancePlugin?.setMemberState({
+      currentApplianceName: "laserPen",
+      useLaserPen: true,
+      strokeOpacity: 1,
+    } as ExtendMemberState);
+  }
+  function useMarkPen() {
+    app?.appliancePlugin?.setMemberState({
+      currentApplianceName: "pencil",
+      useLaserPen: false,
+      strokeOpacity: 0.5,
+    } as ExtendMemberState);
   }
 </script>
 
@@ -128,7 +150,7 @@
       <Selector {appliance} {theme} {btn_props} on:click={selector} content={c.selector} />
     {:else if item === "pencil"}
       <Pencil
-        {hasUseLaserPen}
+        {pencilType}
         {appliance}
         {theme}
         {btn_props}
@@ -171,20 +193,36 @@
 <div class="{name}-panel-wrapper" style="display:none">
   <div class="{name}-panel pencil" bind:this={pencil_panel}>
     <div class="{name}-panel-switch-pencil">
-      {#if !!app?.appliancePlugin && hasUseLaserPen}
-        <Button class="{name}-panel-switch-btn" {...btn_props} on:click={pencil}>
-          <Icons.Pencil {theme} />
-        </Button>
-        <Button class="{name}-panel-switch-btn" {...btn_props}>
-          <Icons.LaserPenFilled {theme} active />
-        </Button>
-      {:else if !!app?.appliancePlugin}
-        <Button class="{name}-panel-switch-btn" {...btn_props}>
-          <Icons.PencilFilled {theme} active />
-        </Button>
-        <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useLaserPen}>
-          <Icons.LaserPen {theme} />
-        </Button>
+      {#if !!app?.appliancePlugin}
+        {#if pencilType !== "pencil"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={pencil}>
+            <Icons.Pencil {theme} />
+          </Button>
+        {:else if pencilType === "pencil"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.PencilFilled {theme} active />
+          </Button>
+        {/if}
+
+        {#if pencilType === "laser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.LaserPenFilled {theme} active />
+          </Button>
+        {:else if pencilType !== "laser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useLaserPen}>
+            <Icons.LaserPen {theme} />
+          </Button>
+        {/if}
+
+        {#if pencilType === "mark"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.MarkPenFilled {theme} active />
+          </Button>
+        {:else if pencilType !== "mark"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useMarkPen}>
+            <Icons.MarkPen {theme} />
+          </Button>
+        {/if}
       {/if}
     </div>
     <StrokeWidth {app} {theme} {disabled} />

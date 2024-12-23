@@ -47,6 +47,8 @@ import Pause from "./Pause.svelte";
 import Loading from "./Loading.svelte";
 import LaserPen from "./LaserPen.svelte";
 import LaserPenFilled from "./LaserPenFilled.svelte";
+import MarkPen from "./MarkPen.svelte";
+import MarkPenFilled from "./MarkPenFilled.svelte";
 
 const Icons = {
   Apps,
@@ -98,6 +100,8 @@ const Icons = {
   Loading,
   LaserPen,
   LaserPenFilled,
+  MarkPen,
+  MarkPenFilled,
 };
 
 export default Icons;
