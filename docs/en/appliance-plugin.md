@@ -190,41 +190,12 @@ The following interfaces are involved:
 - Server-side screenshot, after the appliance-plugin is turned on, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
 
 #### New features
-1. Minimap function (Version >=1.1.6)
-    ```js
-    /** Create a minimap
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param div Small map DOM container
-     */
-    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
-    /** Destroy minimap */
-    destroyMiniMap(viewId: string): Promise<void>;
-    ```
-2. Filter Elements (Version >=1.1.6)
-    ```js
-    /** Filter Elements
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param filter filter condition
-     *  render: Whether notes can be rendered, [uid1, uid2,...] Or true. true, that is, both render, [uid1, uid2,...] The collection of user Uids rendered for the specified
-     *  hide: Note is hidden, [uid1, uid2,...] Or true. true, that is to hide, [uid1, uid2,...] To specify a hidden user uid collection
-     *  clear: Whether notes can be cleared, [uid1, uid2,...] Or true. true, that is, can be cleared, [uid1, uid2,...] Specifies a collection of user Uids that can be cleared
-     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users
-     */
-    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
-    /** Filter Elements
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users. Keep it the same as the filterRenderByUid setting
-     */
-    cancelFilterRender(viewId: string, isSync?:boolean): void;
-    ```
-3. Split screen display Elements (little whiteboard featrue), need to combine '@netless/app-little-white-board' (Version >=1.1.3)
-
-4. laserPen teaching aids (Version >=1.1.1)
+1. laserPen teaching aids (Version >=1.1.1)
     ```js
     import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
     room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
     ```
-5. Extended Teaching AIDS (Version >=1.1.1)
+2. Extended Teaching AIDS (Version >=1.1.1)
     ```js
     export enum EStrokeType { 
         /** Solid line */ 
@@ -276,7 +247,54 @@ The following interfaces are involved:
     manager.mainView.setMemberState({ ... } as ExtendMemberState);
     appliance.setMemberState({ ... } as ExtendMemberState);
     ```
+3. Split screen display Elements (little whiteboard featrue), need to combine '@netless/app-little-white-board' (Version >=1.1.3)
 
+4. Minimap function (Version >=1.1.6)
+    ```js
+    /** Create a minimap
+     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+     * @param div Small map DOM container
+     */
+    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
+    /** Destroy minimap */
+    destroyMiniMap(viewId: string): Promise<void>;
+    ```
+5. Filter Elements (Version >=1.1.6)
+    ```js
+    /** Filter Elements
+     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+     * @param filter filter condition
+     *  render: Whether notes can be rendered, [uid1, uid2,...] Or true. true, that is, both render, [uid1, uid2,...] The collection of user Uids rendered for the specified
+     *  hide: Note is hidden, [uid1, uid2,...] Or true. true, that is to hide, [uid1, uid2,...] To specify a hidden user uid collection
+     *  clear: Whether notes can be cleared, [uid1, uid2,...] Or true. true, that is, can be cleared, [uid1, uid2,...] Specifies a collection of user Uids that can be cleared
+     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users
+     */
+    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
+    /** Filter Elements
+     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users. Keep it the same as the filterRenderByUid setting
+     */
+    cancelFilterRender(viewId: string, isSync?:boolean): void;
+    ```
+6. Handwriting graphics automatic association function: 'autoDraw' (version >=1.1.7)
+    ```js
+    export type AutoDrawOptions = {
+        /** Automatically associate rest api addresses */
+        hostServer: string;
+        /** A container that holds a list of associated icons */
+        container: HTMLDivElement;
+        /** How long does the drawing end start activating the association */
+        delay?: number;
+    };
+    import { ApplianceMultiPlugin, AutoDrawPlugin } from '@netless/appliance-plugin';
+    const plugin = await ApplianceMultiPlugin.getInstance(...);
+    const autoDrawPlugin = new AutoDrawPlugin({
+        container: topBarDiv,
+        hostServer: 'https://autodraw-white-backup-hk-hkxykbfofr.cn-hongkong.fcapp.run',
+        delay: 2000
+    });
+    plugin.usePlugin(autoDrawPlugin);
+    ```
 ### Configure parameters 
 ``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)`` 
 - wm: WindowManager\room\player. In multi-window mode, you pass WindowManager, and in single-window mode, you pass room or player(whiteboard playback mode). 

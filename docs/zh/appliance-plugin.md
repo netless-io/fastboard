@@ -193,41 +193,12 @@ module: {
 - 服务端截图, appliance-plugin开启后, 笔记不能通过调用服务端截图方式获取截图,而需要改用`screenshotToCanvasAsync`获取
 
 #### 新功能
-1. 小地图功能 (Version >=1.1.6)
-    ```js
-    /** 创建小地图
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param div 小地图DOM容器
-     */
-    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
-    /** 销毁小地图 */
-    destroyMiniMap(viewId: string): Promise<boolean>;
-    ```
-2. 过滤笔记 (Version >=1.1.6)
-    ```js
-    /** 过滤笔记
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param filter 过滤条件
-     *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染, [uid1, uid2, ...] 为指定渲染的用户uid集合
-     *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏, [uid1, uid2, ...] 为指定隐藏的用户uid集合
-     *  clear: 笔记是否可被清除, [uid1, uid2, ...] 或 true. true, 即都可以被清除, [uid1, uid2, ...] 为指定可被清除的用户uid集合
-     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户
-     */
-    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
-    /** 取消过滤笔记
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
-     */
-    cancelFilterRender(viewId: string, isSync?:boolean): void;
-    ```
-3. 分屏显示笔记(小白板功能),需要结合 `@netless/app-little-white-board` (Version >=1.1.3)
-
-4. 激光铅笔教具 (Version >=1.1.1)
+1. 激光铅笔教具 (Version >=1.1.1)
     ```js
     import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
     room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
     ```
-5. 扩展教具 (Version >=1.1.1)
+2. 扩展教具 (Version >=1.1.1)
     ```js
     export enum EStrokeType {
         /** 实心线条 */
@@ -278,6 +249,53 @@ module: {
     room.setMemberState({ ... } as ExtendMemberState);
     manager.mainView.setMemberState({ ... } as ExtendMemberState);
     appliance.setMemberState({ ... } as ExtendMemberState);
+    ```
+3. 分屏显示笔记(小白板功能),需要结合 `@netless/app-little-white-board` (Version >=1.1.3)
+4. 小地图功能 (Version >=1.1.6)
+    ```js
+    /** 创建小地图
+     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+     * @param div 小地图DOM容器
+     */
+    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
+    /** 销毁小地图 */
+    destroyMiniMap(viewId: string): Promise<boolean>;
+    ```
+5. 过滤笔记 (Version >=1.1.6)
+    ```js
+    /** 过滤笔记
+     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+     * @param filter 过滤条件
+     *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染, [uid1, uid2, ...] 为指定渲染的用户uid集合
+     *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏, [uid1, uid2, ...] 为指定隐藏的用户uid集合
+     *  clear: 笔记是否可被清除, [uid1, uid2, ...] 或 true. true, 即都可以被清除, [uid1, uid2, ...] 为指定可被清除的用户uid集合
+     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户
+     */
+    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
+    /** 取消过滤笔记
+     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
+     */
+    cancelFilterRender(viewId: string, isSync?:boolean): void;
+    ```
+6. 手写图形自动联想功能:`autoDraw` (version >=1.1.7)
+    ```js
+    export type AutoDrawOptions = {
+        /** 自动联想rest api地址 */
+        hostServer: string;
+        /** 存放联想icon列表的容器 */
+        container: HTMLDivElement;
+        /** 绘制结束多久开始激活联想 */
+        delay?: number;
+    };
+    import { ApplianceMultiPlugin, AutoDrawPlugin } from '@netless/appliance-plugin';
+    const plugin = await ApplianceMultiPlugin.getInstance(...);
+    const autoDrawPlugin = new AutoDrawPlugin({
+        container: topBarDiv,
+        hostServer: 'https://autodraw-white-backup-hk-hkxykbfofr.cn-hongkong.fcapp.run',
+        delay: 2000
+    });
+    plugin.usePlugin(autoDrawPlugin);
     ```
 
 ### 配置参数

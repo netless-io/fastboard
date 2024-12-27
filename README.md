@@ -461,7 +461,8 @@ function App() {
 }
 ```
 **Note:**
-- After opening the appliance plugin, the drawn content will be displayed, but it cannot be manipulated and upgraded, so in order not to affect the experience, please use it on a whiteboard without any historical data. Similarly, when the plugin is closed, the newly drawn content will be lost. 
+- First, you must ensure that the appliance plugin configuration is enabled on all three ends of Android \ios\web. Notes drawn after appliance-plugin is enabled will not be displayed on the unoccupied whiteboard.
+- After the appliance plugin is turned on, the old contents drawn on the previous whiteboard are displayed, but cannot be manipulated and upgraded into new notes. So in order not to affect the experience, please use on a whiteboard without any historical data. Similarly, when the plugin is closed, the newly drawn content will be lost.
 - only the browser for web apis [offscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility) Full support, in order to experience more performance and rich teaching AIDS functional experience.
 
 ## Customization

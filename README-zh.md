@@ -468,7 +468,8 @@ function App() {
 ```
 ### 注意
 
-- 在开启 appliance-plugin 插件后, 之前白板上旧绘制的内容会显示,但是无法操作和升级. 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
+- 首先必需保证在安卓\ios\web,三端都开启 appliance-plugin 配置. appliance-plugin 开启后绘制的笔记在未开启的白板上不会显示.
+- 在开启 appliance-plugin 插件后, 之前白板上旧绘制的内容会显示,但是无法操作和升级成新的笔记. 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
 - 只有浏览器对 web API [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) 的完全支持,才能体验到更加的性能及丰富的教具功能体验。
 
 <h2 id="customization">自定义</h2>
