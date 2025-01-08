@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3 (2025-01-08)
+- Fixed Fastboard UI about toolbar pencil menu. 
+
 ## 1.0.2 (2024-12-23)
 - When turning on appliance plugin, Fastboard UI added `markPen`.
 

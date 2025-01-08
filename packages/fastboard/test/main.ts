@@ -45,7 +45,7 @@ createFastboard({
   },
   joinRoom: {
     uid: genUID(),
-    uuid: import.meta.env.VITE_ROOM_UUID || "f3e75f20c0f211ef940ec9f75538d484",
+    uuid: import.meta.env.VITE_ROOM_UUID || "08124220cd6511ef86b97fb673b68de6",
     // floatBar: {
     //   colors: [
     //       [224, 32, 32],
@@ -60,7 +60,7 @@ createFastboard({
     // },
     roomToken:
       import.meta.env.VITE_ROOM_TOKEN ||
-      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzM1MDE5OTE4MDM3Jm5vbmNlPWY0MDUyMDUwLWMwZjItMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPWZmNmQwNzU5NDJlNTc2ZGVhZWMwMzM5ZjUwYTkzMmNlM2M3MTBlZmRlNzczYjExMGE5YjMwOGRkMzUyNzM4MDkmdXVpZD1mM2U3NWYyMGMwZjIxMWVmOTQwZWM5Zjc1NTM4ZDQ4NA",
+      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzM2Mzg4MzI4NDQyJm5vbmNlPTA4MmU1NWEwLWNkNjUtMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTU2MmJlZjg0Njg4YjY4OTRjNGY5MzZlYzgyYzE0MmJjNjQ2ZDc2MDllZTRkZTEyYTk0NDAzMTVlMjMyMTQ4ZTImdXVpZD0wODEyNDIyMGNkNjUxMWVmODZiOTdmYjY3M2I2OGRlNg",
   },
   managerConfig: {
     cursor: true,
@@ -69,6 +69,10 @@ createFastboard({
     cdn: {
       fullWorkerUrl,
       subWorkerUrl,
+    },
+    strokeWidth: {
+      min: 1,
+      max: 32,
     },
   },
 }).then(app => {
