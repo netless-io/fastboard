@@ -36,7 +36,7 @@ import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 >
 >我们采用双worker并发来提高绘制效率,这样让它比主进程效率提高了40%以上.但是两个worker文件上的公共依赖都是重复的,所以如果直接构建到包中,那么会大大增加包体积.所以我们允许workerjs文件cdn部署,只要把@netless/appliance-plugin/cdn下的文件部署到cdn中即可,然后通过插件中的getInstance的第二个参数options.cdn中配置上两个workerjs的cdn地址即可.这样就可以解决包体积过大的问题.
 >
-> - **总包大概在400kB,两个wokerjs各有800kB.** 如果需要考虑构建的包体积大小的,请选择配置cdn.
+> **总包大概在400kB,两个wokerjs各有800kB.** 如果需要考虑构建的包体积大小的,请选择配置cdn.
 
 ### 接入方式参考
 

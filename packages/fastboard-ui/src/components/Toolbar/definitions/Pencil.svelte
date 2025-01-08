@@ -13,13 +13,23 @@
 </script>
 
 <Button class="pencil" {...btn_props} on:click {content} {menu}>
-  {#if appliance === "pencil" && pencilType === "mark"}
-    <Icons.MarkPenFilled {theme} active />
-  {:else if appliance === "pencil" && pencilType === "laser"}
-    <Icons.LaserPenFilled {theme} active />
-  {:else if appliance === "pencil" && pencilType === "pencil"}
-    <Icons.PencilFilled {theme} active />
-  {:else}
-    <Icons.Pencil {theme} />
+  {#if pencilType === "mark"}
+    {#if appliance === "pencil"}
+      <Icons.MarkPenFilled {theme} active />
+    {:else}
+      <Icons.MarkPen {theme} />
+    {/if}
+  {:else if pencilType === "laser"}
+    {#if appliance === "pencil"}
+      <Icons.LaserPenFilled {theme} active />
+    {:else}
+      <Icons.LaserPen {theme} />
+    {/if}
+  {:else if pencilType === "pencil"}
+    {#if appliance === "pencil"}
+      <Icons.PencilFilled {theme} active />
+    {:else}
+      <Icons.Pencil {theme} />
+    {/if}
   {/if}
 </Button>

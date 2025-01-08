@@ -97,13 +97,17 @@
   }
   function pencil() {
     if (hasAppliancePlugin) {
-      app?.appliancePlugin?.setMemberState({
-        currentApplianceName: "pencil",
-        useLaserPen: false,
-        strokeOpacity: 1,
-      } as ExtendMemberState);
+      if (appliance !== "pencil") {
+        if (pencilType === "mark") {
+          useMarkPen();
+        } else if (pencilType === "laser") {
+          useLaserPen();
+        } else {
+          usePencil();
+        }
+      }
     } else {
-      app?.setAppliance("pencil");
+      usePencil();
     }
   }
   function text() {
@@ -120,6 +124,17 @@
   }
   function clear() {
     app?.cleanCurrentScene();
+  }
+  function usePencil() {
+    if (hasAppliancePlugin) {
+      app?.appliancePlugin?.setMemberState({
+        currentApplianceName: "pencil",
+        useLaserPen: false,
+        strokeOpacity: 1,
+      } as ExtendMemberState);
+    } else {
+      app?.setAppliance("pencil");
+    }
   }
   function useLaserPen() {
     app?.appliancePlugin?.setMemberState({
@@ -195,7 +210,7 @@
     <div class="{name}-panel-switch-pencil">
       {#if !!app?.appliancePlugin}
         {#if pencilType !== "pencil"}
-          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={pencil}>
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={usePencil}>
             <Icons.Pencil {theme} />
           </Button>
         {:else if pencilType === "pencil"}
