@@ -24,7 +24,7 @@ Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/f
 npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
 </pre>
 
-> **注意：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
 
 #### Full package mode
 <pre class="language-bash">
@@ -33,7 +33,7 @@ npm add <b>@netless/fastboard</b> @netless/appliance-plugin
 
 > **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
 >
-> `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/zh/peer-dependency.md)
+> `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/en/peer-dependency.md)
 
 ## Usage
 
