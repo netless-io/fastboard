@@ -1,6 +1,6 @@
 # @netless/fastboard
 
-[Docs](./docs/en/) | [Sandbox](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts) | [中文](./README-zh.md)
+[Docs](./docs/en/) | [Sandbox](https://codesandbox.io/s/vanilla-fastboard-example-trns09?file=/src/index.ts) | [中文](./README-zh.md) | [Demo online](https://demo.whiteboard.agora.io)
 
 A starter library for making whiteboard web app, based on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk), [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) and [netless-app](https://github.com/netless-io/netless-app).
 
@@ -120,7 +120,7 @@ Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
 </pre>
 
-> **注意：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note:** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
 
 
 #### Full package
