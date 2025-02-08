@@ -34,7 +34,7 @@
   $: if (app?.manager && app?.manager.room) {
     if (colors && !config.colors?.length) {
       const floatBarOptions = (app?.manager.room as any).floatBarOptions as { colors?: Color[] };
-      if (floatBarOptions.colors) {
+      if (floatBarOptions?.colors) {
         colors = floatBarOptions.colors as Color[];
       }
     } else {

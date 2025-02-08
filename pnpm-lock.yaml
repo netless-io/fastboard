@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@netless/window-manager': ^1.0.0
-  '@netless/appliance-plugin': ^1.1.8
+  '@netless/appliance-plugin': ^1.1.9
   white-web-sdk: ^2.16.52
 
 importers:
@@ -26,8 +26,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/appliance-plugin':
-        specifier: ^1.1.8
-        version: 1.1.8(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
+        specifier: ^1.1.9
+        version: 1.1.9(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
       '@netless/window-manager':
         specifier: ^1.0.0
         version: 1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52)
@@ -128,8 +128,8 @@ importers:
         specifier: 0.2.62
         version: 0.2.62(jspdf@2.5.2)
       '@netless/appliance-plugin':
-        specifier: ^1.1.8
-        version: 1.1.8(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
+        specifier: ^1.1.9
+        version: 1.1.9(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
       '@netless/synced-store':
         specifier: ^2.0.7
         version: 2.0.9(white-web-sdk@2.16.52)
@@ -640,8 +640,8 @@ packages:
       jspdf:
         optional: true
 
-  '@netless/appliance-plugin@1.1.8':
-    resolution: {integrity: sha512-T1qK2uVvMSnO5uXSpdTJOYbKRKaznB4ncShS3MKpiYSKuBGp6uhUjjsKsBufDqQ/nc+qHnirFIb9K/22qg8bxQ==}
+  '@netless/appliance-plugin@1.1.9':
+    resolution: {integrity: sha512-VplYnBeVET3NWkEo3UGx6X36ZMdce34cz+efJX7YZXya+uwhyal0wX0qdt2RFvZ2L9h70rqORoCHm+uIPx/qzw==}
     peerDependencies:
       '@netless/window-manager': ^1.0.0
       white-web-sdk: ^2.16.52
@@ -2802,7 +2802,7 @@ snapshots:
     optionalDependencies:
       jspdf: 2.5.2
 
-  '@netless/appliance-plugin@1.1.8(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)':
+  '@netless/appliance-plugin@1.1.9(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)':
     dependencies:
       '@netless/window-manager': 1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52)
       eventemitter2: 6.4.9

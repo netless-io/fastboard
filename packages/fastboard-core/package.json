@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager and @netless/appliance-plugin.",
   "main": "src/index.ts",
   "exports": {
@@ -25,7 +25,7 @@
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
-    "@netless/appliance-plugin": ">=1.1.7",
+    "@netless/appliance-plugin": ">=1.1.9",
     "@netless/window-manager": ">=1.0.0",
     "jspdf": ">=2.5.1",
     "white-web-sdk": ">=2.16.52"
