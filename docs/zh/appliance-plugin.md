@@ -40,15 +40,82 @@ import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 
 ### 接入方式参考
 
-#### 多窗口模式(对接window-manager)
+#### fastboard(直接对接fastboard)
 ```js
+
+// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// 对接 fastboard-react
+// 全打包方式引用
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// 分包引用
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+const app = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      enableAppliancePlugin: true,
+      ...
+    },
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  }));
+
+// 对接 fastboard
+// 全打包方式引用
+// import { createFastboard, createUI } from "@netless/fastboard/full";
+// 分包引用
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      supportAppliancePlugin: true,
+      ...
+    },
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  });
+```
+
+#### 多窗口(直接对接window-manager)
+```js
+
 import '@netless/window-manager/dist/style.css';
 import '@netless/appliance-plugin/dist/style.css';
+
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
-// 全打包
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
-// 以下步骤可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源引入并通过bolb内联形式配置到options.cdn中.如?raw,这个需要打包器的支持,vite默认支持?raw,webpack需要配置.
+// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -72,17 +139,22 @@ if (manager) {
                     fullWorkerUrl,
                     subWorkerUrl,
                 }
+                ...
             }
         }
     );
 }
 ```
-#### 单白板(对接white-web-sdk)
+> **注意** 项目中需要引入css文件 `import '@netless/appliance-plugin/dist/style.css';`
+
+#### 单白板(直接对接white-web-sdk)
 ```js
+
+import '@netless/appliance-plugin/dist/style.css';
+
 import { WhiteWebSdk } from "white-web-sdk";
-// 全打包
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-// 以下步骤可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源引入并通过bolb内联形式配置到options.cdn中.如?raw,这个需要打包器的支持,vite默认支持?raw,webpack需要配置.
+// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -103,10 +175,13 @@ await ApplianceSinglePlugin.getInstance(room,
                 fullWorkerUrl,
                 subWorkerUrl,
             }
+            ...
         }
     }
 );
 ```
+> **注意** 项目中需要引入css文件 `import '@netless/appliance-plugin/dist/style.css';`
+
 #### 关于?raw的webpack配置
 ```js
 module: {

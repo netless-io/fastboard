@@ -38,17 +38,80 @@ import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 > - **The total package is about 300kB, and the two wokerjs are 600kB each** If you need to consider the size of the package you are building, select Configure cdn. 
  
 ### Access mode reference 
- 
-#### Multi-window mode (Interconnecting with window-manager) 
+
+#### fastboard(interconnection with fastboard)
+```js
+// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// interconnection with fastboard-react
+// Full package mode reference
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// Subcontract reference
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+const app = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      enableAppliancePlugin: true,
+      ...
+    },
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  }));
+
+// interconnection with fastboard
+// Full package mode reference
+// import { createFastboard, createUI } from "@netless/fastboard/full";
+// Subcontract reference
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      supportAppliancePlugin: true,
+      ...
+    },
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  });
+```
+
+#### Multi-window (Interconnecting with window-manager)
 ```js 
 import '@netless/window-manager/dist/style.css'; 
 import '@netless/appliance-plugin/dist/style.css'; 
 import { WhiteWebSdk } from "white-web-sdk"; 
 import { WindowManager } from "@netless/window-manager"; 
-// All bundled
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin'; 
-// cdn 
-// The following steps are optional. If you use cdn, you do not need to import from dist. If you import from dist, you need to import resources and configure them to options.cdn in bolb inline form. Such as? raw, this requires packaging support,vite default support? raw,webpack needs to be configured.
+// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -76,13 +139,14 @@ await ApplianceMultiPlugin.getInstance(manager,
         }
     ); 
 } 
-``` 
+```
+> **Note** the css file `import '@netless/appliance-plugin/dist/style.css'` needs to be imported into the project;
+
 #### Single whiteboard (interconnection with white-web-sdk) 
 ```js 
 import { WhiteWebSdk } from "white-web-sdk"; 
-// All bundled
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin'; 
-// The following steps are optional. If you use cdn, you do not need to import from dist. If you import from dist, you need to import resources and configure them to options.cdn in bolb inline form. Such as? raw, this requires packaging support,vite default support? raw,webpack needs to be configured.
+// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -107,6 +171,8 @@ await ApplianceSinglePlugin.getInstance(room,
     }
 ); 
 ```
+> **Note** the css file `import '@netless/appliance-plugin/dist/style.css'` needs to be imported into the project;
+
 #### About ’?raw‘ webpack configuration
 ```js
 module: {
