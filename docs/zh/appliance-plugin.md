@@ -405,7 +405,7 @@ module: {
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
     ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
-6. 手写图形自动联想功能:`autoDraw` (version >=1.1.7)
+<!-- 6. 手写图形自动联想功能:`autoDraw` (version >=1.1.7)
     ```js
     export type AutoDrawOptions = {
         /** 自动联想rest api地址 */
@@ -424,7 +424,7 @@ module: {
     });
     plugin.usePlugin(autoDrawPlugin);
     ```
-    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
+    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
 
 ### 配置参数
 ``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)``

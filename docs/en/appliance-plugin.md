@@ -392,7 +392,7 @@ The following interfaces are involved:
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
     ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
-6. Handwriting graphics automatic association function: 'autoDraw' (version >=1.1.7)
+<!-- 6. Handwriting graphics automatic association function: 'autoDraw' (version >=1.1.7)
     ```js
     export type AutoDrawOptions = {
         /** Automatically associate rest api addresses */
@@ -411,7 +411,7 @@ The following interfaces are involved:
     });
     plugin.usePlugin(autoDrawPlugin);
     ```
-    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
+    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
 ### Configure parameters 
 ``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)`` 
 - wm: WindowManager\room\player. In multi-window mode, you pass WindowManager, and in single-window mode, you pass room or player(whiteboard playback mode). 
