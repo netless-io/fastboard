@@ -244,12 +244,14 @@ The following interfaces are involved:
 - `cleanCurrentScene` 
  
 4. Customize 
-- `getBoundingRectAsync` Replace the api room.getBoundingRect
-- `screenshotToCanvasAsync` Replace the api room.screenshotToCanvas
-- `scenePreviewAsync` Replace the api room.scenePreview
+- `getBoundingRectAsync` Replace the api `room.getBoundingRect`
+- `screenshotToCanvasAsync` Replace the api `room.screenshotToCanvas`
+- `scenePreviewAsync` Replace the api `room.scenePreview`
 - `destroy` Destroy the instance of appliance-plugin
 - `addListener` add appliance plugin Listener
 - `removeListener` remove appliance plugin Listener
+- `disableDeviceInputs` Replace the api `room.disableDeviceInputs`
+- `disableEraseImage` Replace the api `room.disableEraseImage` **This method only suppert when currentApplianceName is `eraser`**
 
 5.Incompatible
 - `exportScene` When the appliance-plugin is enabled, notes cannot be exported in room mode

@@ -262,6 +262,8 @@ module: {
 - `destroy` 销毁appliance-plugin的实例
 - `addListener` 添加appliance-plugin内部事件监听器
 - `removeListener` 移除appliance-plugin内部事件监听器
+- `disableDeviceInputs` 替代接口 [room.disableDeviceInputs](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableDeviceInputs)
+- `disableEraseImage` 替代接口 [room.disableEraseImage](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableEraseImage) **该方法只禁止整体擦除的橡皮擦对图片的擦除, 局部橡皮擦无效**
 
 5. 不兼容
 - [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) appliance-plugin开启后,笔记不能按room的方式导出
