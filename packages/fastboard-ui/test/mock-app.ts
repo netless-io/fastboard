@@ -29,7 +29,8 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     textSize: 16,
     strokeOpacity: 1,
     useLaserPen: false,
-  });
+    pencilEraserSize: 3
+  }) as any;
   const sceneIndex = writable(0);
   const sceneLength = writable(15);
   const camera = writable<CameraState>({ centerX: 0, centerY: 0, scale: 1, width: 100, height: 100 });

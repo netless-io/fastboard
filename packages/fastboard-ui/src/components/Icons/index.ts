@@ -49,6 +49,8 @@ import LaserPen from "./LaserPen.svelte";
 import LaserPenFilled from "./LaserPenFilled.svelte";
 import MarkPen from "./MarkPen.svelte";
 import MarkPenFilled from "./MarkPenFilled.svelte";
+import EraserBitmap from "./EraserBitmap.svelte";
+import EraserBitmapFilled from "./EraserBitmapFilled.svelte";
 
 const Icons = {
   Apps,
@@ -102,6 +104,8 @@ const Icons = {
   LaserPenFilled,
   MarkPen,
   MarkPenFilled,
+  EraserBitmap,
+  EraserBitmapFilled
 };
 
 export default Icons;

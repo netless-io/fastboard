@@ -27,6 +27,7 @@
   import Clear from "../definitions/Clear.svelte";
   import Hand from "../definitions/Hand.svelte";
   import Laser from "../definitions/Laser.svelte";
+  import EraserSize from "./EraserSize.svelte";
 
   export let app: FastboardApp | null | undefined = null;
   export let theme: Theme = "light";
@@ -46,6 +47,7 @@
   let text_panel: HTMLDivElement;
   let shapes_panel: HTMLDivElement;
   let apps_panel: HTMLDivElement;
+  let eraser_panel: HTMLDivElement;
 
   let btn_props: Partial<ButtonProps>;
   $: btn_props = {
@@ -79,6 +81,8 @@
   $: hasUseMarkPen =
     (hasAppliancePlugin && ($memberState as ExtendMemberState)?.strokeOpacity === 0.5) || false;
   $: pencilType = hasUseLaserPen ? "laser" : hasUseMarkPen ? "mark" : "pencil";
+  $: hasUseEraserBitmap = hasAppliancePlugin && ($memberState as ExtendMemberState)?.isLine === false;
+  $: eraserType = hasUseEraserBitmap ? "pencilEraser" : "eraser";
 
   let top = writable(0);
 
@@ -114,7 +118,17 @@
     app?.setAppliance("text");
   }
   function eraser() {
-    app?.setAppliance("eraser");
+    if (hasAppliancePlugin) {
+      if (appliance !== "eraser") {
+        if (eraserType === "pencilEraser") {
+          useEraserBitmap();
+        } else {
+          useEraser();
+        }
+      }
+    } else {
+      useEraser();
+    }
   }
   function hand() {
     app?.setAppliance("hand");
@@ -150,6 +164,22 @@
       strokeOpacity: 0.5,
     } as ExtendMemberState);
   }
+  function useEraser() {
+    if (hasAppliancePlugin) {
+      app?.appliancePlugin?.setMemberState({
+        currentApplianceName: "eraser",
+        isLine: true,
+      } as ExtendMemberState);
+    } else {
+      app?.setAppliance("eraser");
+    }
+  }
+  function useEraserBitmap() {
+    app?.appliancePlugin?.setMemberState({
+      currentApplianceName: "pencilEraser",
+      isLine: false,
+    } as ExtendMemberState);
+  }
 </script>
 
 {#if scrollable}
@@ -178,7 +208,15 @@
     {:else if item === "shapes"}
       <Shapes {app} {appliance} {theme} {btn_props} content={t.shapes} menu={shapes_panel} />
     {:else if item === "eraser"}
-      <Eraser {appliance} {theme} {btn_props} on:click={eraser} content={c.eraser} />
+      <Eraser
+        {eraserType}
+        {appliance}
+        {theme}
+        {btn_props}
+        on:click={eraser}
+        content={c.eraser}
+        menu={hasAppliancePlugin ? eraser_panel : undefined}
+      />
     {:else if item === "clear"}
       <Clear {theme} {btn_props} on:click={clear} content={t.clear} />
     {:else if item === "hand"}
@@ -253,6 +291,32 @@
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} {colors} />
+  </div>
+  <div class="{name}-panel earser" bind:this={eraser_panel}>
+    <div class="{name}-panel-switch-earser">
+      {#if !!app?.appliancePlugin}
+        {#if eraserType !== "eraser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useEraser}>
+            <Icons.Eraser {theme} />
+          </Button>
+        {:else if eraserType === "eraser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.EraserFilled {theme} active />
+          </Button>
+        {/if}
+
+        {#if eraserType === "pencilEraser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.EraserBitmap {theme} active />
+          </Button>
+        {:else if eraserType !== "pencilEraser"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useEraserBitmap}>
+            <Icons.EraserBitmapFilled {theme} />
+          </Button>
+        {/if}
+      {/if}
+    </div>
+    <EraserSize {app} {theme} {disabled} />
   </div>
   <div class="{name}-panel apps" style="--n:{$apps.length}" bind:this={apps_panel}>
     {#each $apps as netless_app}
