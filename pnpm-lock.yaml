@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@netless/window-manager': ^1.0.0
-  '@netless/appliance-plugin': ^1.1.17-beta.4
+  '@netless/appliance-plugin': ^1.1.17-beta.10
   white-web-sdk: ^2.16.52
 
 importers:
@@ -26,8 +26,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/appliance-plugin':
-        specifier: 1.1.17-beta.4
-        version: 1.1.17-beta.4(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
+        specifier: ^1.1.17-beta.10
+        version: 1.1.17-beta.10(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
       '@netless/window-manager':
         specifier: ^1.0.0
         version: 1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52)
@@ -128,8 +128,8 @@ importers:
         specifier: 0.2.62
         version: 0.2.62(jspdf@2.5.2)
       '@netless/appliance-plugin':
-        specifier: ^1.1.17-beta.4
-        version: 1.1.17-beta.4(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
+        specifier: ^1.1.17-beta.10
+        version: 1.1.17-beta.10(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)
       '@netless/synced-store':
         specifier: ^2.0.7
         version: 2.0.9(white-web-sdk@2.16.52)
@@ -644,8 +644,8 @@ packages:
       jspdf:
         optional: true
 
-  '@netless/appliance-plugin@1.1.17-beta.4':
-    resolution: {integrity: sha512-Lzm42BT+FZDk6iTObAnM0m79fnSEYiQTRn6Qyti1Q8cpfOenejpgPv/P7cQ+PwsYt4calTcajkHTSJxswCywjA==}
+  '@netless/appliance-plugin@1.1.17-beta.10':
+    resolution: {integrity: sha512-saDpF4PhvYgyS8XVMlTR4zAjmkSq/qdHxbnyt0miboKYPE+rJwQNbsAwXQynH9P/VU4Hbih+OCSRUcmSAwHCXg==}
     peerDependencies:
       '@netless/window-manager': ^1.0.0
       white-web-sdk: ^2.16.52
@@ -1125,6 +1125,9 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  clipper-lib@6.4.2:
+    resolution: {integrity: sha512-knglhjQX5ihNj/XCIs6zCHrTemdvHY3LPZP9XB2nq2/3igyYMFueFXtfp84baJvEE+f8pO1ZS4UVeEgmLnAprQ==}
 
   clsx@1.2.1:
     resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
@@ -2810,9 +2813,10 @@ snapshots:
     optionalDependencies:
       jspdf: 2.5.2
 
-  '@netless/appliance-plugin@1.1.17-beta.4(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)':
+  '@netless/appliance-plugin@1.1.17-beta.10(@netless/window-manager@1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52))(white-web-sdk@2.16.52)':
     dependencies:
       '@netless/window-manager': 1.0.0(jspdf@2.5.2)(white-web-sdk@2.16.52)
+      clipper-lib: 6.4.2
       eventemitter2: 6.4.9
       lineclip: 1.1.5
       lodash: 4.17.21
@@ -3307,6 +3311,8 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  clipper-lib@6.4.2: {}
 
   clsx@1.2.1: {}
 
