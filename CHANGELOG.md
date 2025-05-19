@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 (2025-05-19)
+- update `@netless/appliance-plugin` to `^1.1.17`.
+- When turning on appliance plugin, Fastboard UI added `bitMapEraser`.
+
 ## 1.0.4 (2025-02-08)
 - Fixed Fastboard UI when `floatBar:false` toolbar unable to show.
 

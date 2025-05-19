@@ -105,7 +105,7 @@ const Icons = {
   MarkPen,
   MarkPenFilled,
   EraserBitmap,
-  EraserBitmapFilled
+  EraserBitmapFilled,
 };
 
 export default Icons;

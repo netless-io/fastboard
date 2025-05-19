@@ -29,7 +29,7 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
     textSize: 16,
     strokeOpacity: 1,
     useLaserPen: false,
-    pencilEraserSize: 3
+    pencilEraserSize: 3,
   }) as any;
   const sceneIndex = writable(0);
   const sceneLength = writable(15);

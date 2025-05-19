@@ -252,6 +252,7 @@ The following interfaces are involved:
 - `removeListener` remove appliance plugin Listener
 - `disableDeviceInputs` Replace the api `room.disableDeviceInputs`
 - `disableEraseImage` Replace the api `room.disableEraseImage` **This method only suppert when currentApplianceName is `eraser`**
+- `disableCameraTransform` Replace the api `room.disableCameraTransform`
 
 5.Incompatible
 - `exportScene` When the appliance-plugin is enabled, notes cannot be exported in room mode
