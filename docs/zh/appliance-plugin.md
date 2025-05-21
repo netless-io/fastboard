@@ -393,17 +393,17 @@ module: {
 5. 过滤笔记 (Version >=1.1.6)
     ```js
     /** 过滤笔记
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+     * @param viewId 多白板下的白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
      * @param filter 过滤条件
-     *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染, [uid1, uid2, ...] 为指定渲染的用户uid集合
-     *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏, [uid1, uid2, ...] 为指定隐藏的用户uid集合
-     *  clear: 笔记是否可被清除, [uid1, uid2, ...] 或 true. true, 即都可以被清除, [uid1, uid2, ...] 为指定可被清除的用户uid集合
-     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户
+     *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染; [uid1, uid2, ...] 为指定渲染的用户uid集合
+     *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏; [uid1, uid2, ...] 为指定隐藏的用户uid集合
+     *  clear: 笔记是否可被擦除, [uid1, uid2, ...] 或 true. true, 即都可以被擦除; [uid1, uid2, ...] 为指定可被擦除的用户uid集合
+     * @param isSync 是否同步到白板房间中, 默认为true, 即设置会同步给所有用户
      */
     filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
     /** 取消过滤笔记
      * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param isSync 是否同步到其他用户, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
+     * @param isSync 是否同步到白板房间中, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
      */
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
