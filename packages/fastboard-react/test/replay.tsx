@@ -38,7 +38,12 @@ function App() {
       managerConfig: {
         cursor: true,
       },
-      enableAppliancePlugin: true,
+      enableAppliancePlugin: {
+        cdn: {
+          fullWorkerUrl: "",
+          subWorkerUrl: "",
+        },
+      },
     }).then(player => {
       (window as any).player = player;
       (window as any).forceUpdate = forceUpdate;

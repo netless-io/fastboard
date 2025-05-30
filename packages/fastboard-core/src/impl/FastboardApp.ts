@@ -38,13 +38,26 @@ import {
 } from "../utils";
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
+
 import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
 import type {
   AppliancePluginOptions,
   AppliancePluginInstance,
   ApplianceNames as ExtendApplianceNames,
   MemberState as ExtendMemberState,
+  PublicEvent as AppliancePublicEvent,
+  PublicListener as AppliancePublicListener,
 } from "@netless/appliance-plugin";
+
+import { AppInMainViewPlugin } from "@netless/app-in-mainview-plugin";
+import type {
+  AppInMainViewOptions,
+  AppInMainViewInstance,
+  PublicEvent as AppInMainViewPublicEvent,
+  PublicListener as AppInMainViewPublicListener,
+  AppId,
+  AppValue,
+} from "@netless/app-in-mainview-plugin";
 
 function noop() {}
 
@@ -55,7 +68,8 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
     readonly manager: WindowManager,
     readonly hotKeys: Partial<HotKeys>,
     readonly syncedStore: SyncedStore<TEventData>,
-    readonly appliancePlugin?: AppliancePluginInstance
+    readonly appliancePlugin?: AppliancePluginInstance,
+    readonly appInMainViewPlugin?: AppInMainViewInstance
   ) {}
 
   protected _destroyed = false;
@@ -91,13 +105,34 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
     return () => this.manager.mainView.callbacks.off(name, listener);
   }
 
+  /** @internal */
+  protected _addApplianceListener<K extends AppliancePublicEvent>(
+    name: K,
+    listener: AppliancePublicListener[K]
+  ) {
+    if (this._destroyed || !this.appliancePlugin) return noop;
+    this.appliancePlugin.addListener(name, listener);
+    return () => this.appliancePlugin?.removeListener(name, listener);
+  }
+
+  /** @internal */
+  protected _addAppInMainViewListener<K extends AppInMainViewPublicEvent>(
+    name: K,
+    listener: AppInMainViewPublicListener[K]
+  ) {
+    if (this._destroyed || !this.appInMainViewPlugin) return noop;
+    this.appInMainViewPlugin.addListener(name, listener);
+    return () => this.appInMainViewPlugin?.removeListener(name, listener);
+  }
+
   /**
    * Destroy fastboard (disconnect from the whiteboard room).
    */
   public async destroy() {
     this._destroyed = true;
-    this.appliancePlugin?.destroy();
     this.manager.destroy();
+    this.appliancePlugin?.destroy();
+    this.appInMainViewPlugin?.destroy();
     await this.room.disconnect().catch(console.warn);
   }
 }
@@ -325,6 +360,29 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       set(this._appsStatus);
     })
   );
+
+  /** @internal */
+  private _visibleApps: Set<AppId> = new Set();
+  /**
+   * visible Apps, when appInMainViewPlugin is not enabled, it will be empty.
+   */
+  readonly visibleApps = readable<Set<AppId>>(this._visibleApps, set => {
+    if (!this.appInMainViewPlugin) {
+      set(this._visibleApps);
+      return;
+    }
+    const apps = this.appInMainViewPlugin.currentPageVisibleApps;
+    if (apps) {
+      this._visibleApps = apps;
+    }
+    set(this._visibleApps);
+    return this._addAppInMainViewListener("appMenuChange", (apps: Map<AppId, AppValue>) => {
+      this._visibleApps = new Set(
+        [...apps.entries()].filter(([_, { status }]) => status === "visible").map(([appId]) => appId)
+      );
+      set(this._visibleApps);
+    });
+  });
 
   /**
    * Returns `writable && phase === "connected"`.
@@ -684,6 +742,7 @@ export interface FastboardOptions {
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
   enableAppliancePlugin?: AppliancePluginOptions;
+  enableAppInMainViewPlugin?: true | AppInMainViewOptions;
 }
 
 /**
@@ -707,6 +766,7 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   managerConfig,
   netlessApps,
   enableAppliancePlugin,
+  enableAppInMainViewPlugin,
 }: FastboardOptions) {
   const isEnableAppliancePlugin =
     enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
@@ -722,6 +782,12 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     if (managerConfig) {
       managerConfig.supportAppliancePlugin = true;
     }
+  }
+  if (enableAppInMainViewPlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
+    joinRoomParamsWithPlugin.invisiblePlugins = [
+      ...joinRoomParamsWithPlugin.invisiblePlugins,
+      AppInMainViewPlugin,
+    ];
   }
 
   const sdk = new WhiteWebSdk({
@@ -766,6 +832,13 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     ...managerConfig,
     room,
   });
+  let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
+  if (enableAppInMainViewPlugin) {
+    appInMainViewPluginInstance = await AppInMainViewPlugin.getInstance(
+      manager,
+      enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
+    );
+  }
   let appliancePluginInstance: AppliancePluginInstance | undefined;
   if (isEnableAppliancePlugin && enableAppliancePlugin) {
     appliancePluginInstance = await ApplianceMultiPlugin.getInstance(manager, {
@@ -789,5 +862,13 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     maxContentMode: contentModeScale(3),
   });
 
-  return new FastboardApp<TEventData>(sdk, room, manager, hotKeys, syncedStore, appliancePluginInstance);
+  return new FastboardApp<TEventData>(
+    sdk,
+    room,
+    manager,
+    hotKeys,
+    syncedStore,
+    appliancePluginInstance,
+    appInMainViewPluginInstance
+  );
 }

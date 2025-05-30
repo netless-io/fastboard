@@ -12,6 +12,14 @@ export declare interface FastboardProps {
    */
   containerRef?: (container: HTMLDivElement | null) => void;
   config?: FastboardUIConfig;
+  /** Whether to forcibly display the toolbar */
+  force_show_toolbar?: boolean;
+  /** Whether to force the display of the redo undo button */
+  force_show_redo_undo?: boolean;
+  /** Whether to force the display of the zoom control button */
+  force_show_zoom_control?: boolean;
+  /** Whether to forcibly display the page control button */
+  force_show_page_control?: boolean;
 }
 
 declare class Fastboard extends SvelteComponentTyped<FastboardProps> {}

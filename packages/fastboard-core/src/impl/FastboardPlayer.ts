@@ -19,7 +19,11 @@ import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
 import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
 import type { AppliancePluginOptions, AppliancePluginInstance } from "@netless/appliance-plugin";
-
+import {
+  AppInMainViewPlugin,
+  type AppInMainViewOptions,
+  type AppInMainViewInstance,
+} from "@netless/app-in-mainview-plugin";
 function noop() {}
 
 class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
@@ -28,7 +32,8 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
     readonly player: Player,
     readonly manager: WindowManager,
     readonly syncedStore: SyncedStore<TEventData>,
-    readonly appliancePlugin?: AppliancePluginInstance
+    readonly appliancePlugin?: AppliancePluginInstance,
+    readonly appInMainViewPlugin?: AppInMainViewInstance
   ) {}
 
   protected _destroyed = false;
@@ -67,6 +72,7 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
     this._destroyed = true;
     this.manager.destroy();
     this.appliancePlugin?.destroy();
+    this.appInMainViewPlugin?.destroy();
     return this.player.callbacks.off();
   }
 }
@@ -205,6 +211,7 @@ export interface FastboardReplayOptions {
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
   enableAppliancePlugin?: AppliancePluginOptions;
+  enableAppInMainViewPlugin?: true | AppInMainViewOptions;
 }
 
 /**
@@ -229,6 +236,7 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   managerConfig,
   netlessApps,
   enableAppliancePlugin,
+  enableAppInMainViewPlugin,
 }: FastboardReplayOptions) {
   const isEnableAppliancePlugin =
     enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
@@ -241,9 +249,16 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
         ApplianceMultiPlugin,
       ];
     }
+
     if (managerConfig) {
       managerConfig.supportAppliancePlugin = true;
     }
+  }
+  if (enableAppInMainViewPlugin && replayRoomParamsWithPlugin.invisiblePlugins) {
+    replayRoomParamsWithPlugin.invisiblePlugins = [
+      ...replayRoomParamsWithPlugin.invisiblePlugins,
+      AppInMainViewPlugin,
+    ];
   }
 
   const sdk = new WhiteWebSdk({
@@ -280,8 +295,22 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
       options: enableAppliancePlugin,
     });
   }
+  let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
+  if (enableAppInMainViewPlugin) {
+    appInMainViewPluginInstance = await AppInMainViewPlugin.getInstance(
+      manager,
+      enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
+    );
+  }
   player.pause();
   await player.seekToProgressTime(0);
 
-  return new FastboardPlayer<TEventData>(sdk, player, manager, syncedStore, appliancePluginInstance);
+  return new FastboardPlayer<TEventData>(
+    sdk,
+    player,
+    manager,
+    syncedStore,
+    appliancePluginInstance,
+    appInMainViewPluginInstance
+  );
 }
