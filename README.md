@@ -424,8 +424,8 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 Through ` enableAppliancePlugin ` and ` managerConfig. SupportAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 
-```jsx
-// Import the product directly by raw-loader
+```js
+// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -433,12 +433,13 @@ const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
 const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
 const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
-// Import the CDN. A CDN is imported and needs to be deployed on its own CDN server, which must comply with the same-origin policy.
-const subWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/subWorker.js";
-const fullWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/fullWorker.js";
+// interconnection with fastboard-react
+// Full package mode reference
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// Subcontract reference
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
-function App() {
-  const fastboard = useFastboard(() => ({
+const app = useFastboard(() => ({
     sdkConfig: {
       ...
     },
@@ -446,19 +447,47 @@ function App() {
       ...
     },
     managerConfig: {
-      // (Optional), turn on the appliance-plugin
-      supportAppliancePlugin: true,
+      cursor: true,
+      enableAppliancePlugin: true,
+      ...
     },
-    //  use appliance-plugin
+    // about enableAppliancePlugin: https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#configure-parameters
     enableAppliancePlugin: {
-        cdn: {
-            fullWorkerUrl,
-            subWorkerUrl,
-        }
-    },
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
   }));
-  ....
-}
+
+// interconnection with fastboard
+// Full package mode reference
+// import { createFastboard, createUI } from "@netless/fastboard/full";
+// Subcontract reference
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      supportAppliancePlugin: true,
+      ...
+    },
+    // about enableAppliancePlugin: https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#configure-parameters
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  });
 ```
 **Note:**
 - First, you must ensure that the appliance plugin configuration is enabled on all three ends of Android \ios\web. Notes drawn after appliance-plugin is enabled will not be displayed on the unoccupied whiteboard.

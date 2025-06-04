@@ -6,6 +6,8 @@
 
 从0.3.22版本开始, fastboard 新增全打包文件, `@netless/fastboard/full` or `@netless/fastboard-react/full`, 用于解决内外依赖冲突问题.
 
+从1.0.6版本开始, fastboard 集成了[@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView)插件,用于分页管理课件
+
 ## 目录
 
 - [安装](#install)
@@ -13,6 +15,7 @@
 - [使用性能优化版本](#performance)
 - [自定义](#customization)
 - [进阶](./docs)
+- [分页管理课件](#appInMainView)
 
 <h2 id="install">安装</h2>
 
@@ -431,7 +434,7 @@ const appId = await fastboard.manager.addApp({
 
 ### 示例代码
 ```jsx
-// 直接通过raw-loader引入
+// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -439,38 +442,121 @@ const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
 const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
 const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
-// CDN 引入, 需要部署到自己的CDN服务器上, 它必须遵守 同源策略 。
-const subWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/subWorker.js";
-const fullWorkerUrl = "https://cdn.jsdelivr.net/npm/@netless/appliance-plugin@latest/dist/fullWorker.js";
+// 对接 fastboard-react
+// 全打包方式引用
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// 分包引用
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
-function App() {
-  const fastboard = useFastboard(() => ({
+const app = useFastboard(() => ({
     sdkConfig: {
       ...
     },
     joinRoom: {
       ...
     },
-    //  开启 appliance-plugin 插件, 和windowManager 配置
     managerConfig: {
-      supportAppliancePlugin: true
+      cursor: true,
+      enableAppliancePlugin: true,
+      ...
     },
-    //  开启 appliance-plugin 插件
+    // 更多的`enableAppliancePlugin`配置项参考:https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0
     enableAppliancePlugin: {
-        cdn: {
-            fullWorkerUrl,
-            subWorkerUrl,
-        }
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
     }
   }));
-  ....
-}
+
+// 对接 fastboard
+// 全打包方式引用
+// import { createFastboard, createUI } from "@netless/fastboard/full";
+// 分包引用
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      cursor: true,
+      supportAppliancePlugin: true,
+      ...
+    },
+    // 更多的`enableAppliancePlugin`配置项参考:https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0
+    enableAppliancePlugin: {
+      cdn: {
+          fullWorkerUrl,
+          subWorkerUrl,
+      }
+      ...
+    }
+  });
 ```
 ### 注意
 
 - 首先必需保证在安卓\ios\web,三端都开启 appliance-plugin 配置. appliance-plugin 开启后绘制的笔记在未开启的白板上不会显示.
 - 在开启 appliance-plugin 插件后, 之前白板上旧绘制的内容会显示,但是无法操作和升级成新的笔记. 所以为了不影响体验,请在一个无任何历史数据的白板上使用。同理插件关闭后, 新绘制的内容会丢失。
 - 只有浏览器对 web API [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9%E6%80%A7) 的完全支持,才能体验到更加的性能及丰富的教具功能体验。
+
+<h2 id="appInMainView">分页管理课件插件</h2>
+
+通过 `enableAppInMainViewPlugin` 配置项开启 `app-in-mainView-plugin` 插件, 可以改善fastboard对课件的管理方式, 允许用户切换主白板的页码显示或隐藏当前页面打开的课件。具体可参考文档:[app-in-mainview-plugin](https://github.com/netless-io/appInMainView?tab=readme-ov-file#fastboardwith-fastboard)了解更多内容。
+> **注意：** 开启分页管理课件插件,需要安装 ``@netless/app-in-mainview-plugin`` 。
+
+### 示例代码
+```jsx
+
+// 对接 fastboard-react
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+const app = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      ...
+    },
+    // 启用appInMainViewPlugin插件,
+    // 默认启用默认UI, 如果需要自定义UI, 可以传入enableDefaultUI: false
+    enableAppInMainViewPlugin: true || {
+        enableDefaultUI:  true,
+        language: "en",
+        ...
+    }
+  }));
+
+// 对接 fastboard
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      ...
+    },
+    // 启用appInMainViewPlugin插件,
+    // 默认启用默认UI, 如果需要自定义UI, 可以传入enableDefaultUI: false
+    enableAppInMainViewPlugin: true || {
+        enableDefaultUI:  true,
+        language: "en",
+        ...
+    }
+  });
+
+```
 
 <h2 id="customization">自定义</h2>
 

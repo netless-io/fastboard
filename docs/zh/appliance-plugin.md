@@ -433,21 +433,27 @@ module: {
 ``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)``
 - wm: `` WindowManager\room\player``。多窗口模式下传入的是WindowManager，单窗口模式下传入的是room或者player(白板回放模式)。
 - adaptor: 配置适配器.
-    - ``options: AppliancePluginOptions``; 必须配置, 两个worker的cdn地址。
+    - ``options: AppliancePluginOptions``; 必须配置,其中`cdn`为必填项。
         ```js
-            export type AppliancePluginOptions = {
+            export type AppliancePluginOptions =  {
                 /** cdn配置项 */
                 cdn: CdnOpt;
                 /** 同步数据配置项 */
                 syncOpt?: SyncOpt;
                 /** 画布配置项 */
                 canvasOpt?: CanvasOpt;
+                /** 指针配置项 */
+                cursor?: CursorOpt;
+                /** 画布缓存配置项 */
+                bufferSize?: BufferSizeOpt;
+                /** 贝塞尔优化配置项 */
+                bezier?: BezierOpt;
+                /** 局部橡皮擦配置项 */
+                pencilEraser?: PencilEraserOpt;
                 /** 线条粗细范围配置项 */
-                strokeWidth?: {
-                    min: number,
-                    max: number,
-                },
-                ...
+                strokeWidth?: StrokeWidthOpt,
+                /** 文字编辑器配置项 */
+                textEditor?: TextEditorOpt;
             }
         ```
     - ``cursorAdapter?: CursorAdapter``; 非必填, 单白板模式下, 配置的自定义鼠标样式。

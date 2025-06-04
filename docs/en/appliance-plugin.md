@@ -419,20 +419,27 @@ The following interfaces are involved:
 ``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)`` 
 - wm: WindowManager\room\player. In multi-window mode, you pass WindowManager, and in single-window mode, you pass room or player(whiteboard playback mode). 
 - adaptor: configures the adapter. 
-    - ``options: AppliancePluginOptions``; The cdn addresses of both workers must be configured. 
+    - ``options: AppliancePluginOptions``; It must be configured, among which `cdn` is a required field.
         ```js 
             export type AppliancePluginOptions = { 
-                /** cdn Configuration item */ 
+                /** cdn configuration item */ 
                 cdn: CdnOpt; 
-                /** Synchronize data configuration items */ 
+                /** Synchronous Data Configuration item */ 
                 syncOpt? : SyncOpt; 
                 /** Canvas configuration item */ 
                 canvasOpt? : CanvasOpt; 
-                /** stroke width range */
-                strokeWidth?: {
-                    min: number,
-                    max: number,
-                }
+                /** Pointer configuration item */ 
+                cursor? : CursorOpt; 
+                /** Canvas Cache configuration item */ 
+                bufferSize? : BufferSizeOpt; 
+                /** Bessel Optimization Configuration item */ 
+                bezier? : BezierOpt; 
+                /** Local Eraser configuration item */ 
+                pencilEraser? : PencilEraserOpt; 
+                /** Line thickness range configuration item */ 
+                strokeWidth? : StrokeWidthOpt, 
+                /** Text Editor configuration item */ 
+                textEditor? : TextEditorOpt;
             } 
         ```
     - ``cursorAdapter? : CursorAdapter``; This parameter is optional. In single whiteboard mode, customize the mouse style.
