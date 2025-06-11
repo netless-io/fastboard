@@ -21,17 +21,17 @@
 
 #### 分包方式引用
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。
+> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
 
 #### 全打包方式引用
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/appliance-plugin
+npm add <b>@netless/fastboard</b> @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。
+> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
 >
 > `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
@@ -76,6 +76,10 @@ async function main() {
     enableAppliancePlugin: {
       ...
     },
+    // [6] (可选), 开启app-in-mainview-plugin, 从1.0.6开始
+    enableAppInMainViewPlugin: {
+      language:  "zh-CN",
+    }
   });
 
   const container = createContainer();
@@ -128,18 +132,18 @@ main().catch(console.error);
 #### 分包方式引用
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
+npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。
+> **注意：** `@netless/appliance-plugin` 是开启 [性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
 
 #### 全打包方式引用
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin
+npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。
+> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 `@netless/appliance-plugin` 是开启[性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
 >
 > `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin`、`react`、`react-dom` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
 
@@ -173,6 +177,10 @@ function App() {
     enableAppliancePlugin: {
       ...
     },
+    // (可选), 开启app-in-mainview-plugin, 从1.0.6开始
+    enableAppInMainViewPlugin: {
+      language:  "zh-CN",
+    }
   }));
 
   // 白板元素必须具有可见的大小
@@ -506,7 +514,7 @@ const fastboard = await createFastboard({
 
 <h2 id="appInMainView">分页管理课件插件</h2>
 
-通过 `enableAppInMainViewPlugin` 配置项开启 `app-in-mainView-plugin` 插件, 可以改善fastboard对课件的管理方式, 允许用户切换主白板的页码显示或隐藏当前页面打开的课件。具体可参考文档:[app-in-mainview-plugin](https://github.com/netless-io/appInMainView?tab=readme-ov-file#fastboardwith-fastboard)了解更多内容。
+通过 `enableAppInMainViewPlugin` 配置项开启 `app-in-mainView-plugin` 插件, 可以改善fastboard对课件的管理方式, 允许用户切换主白板的页码显示或隐藏当前页面打开的课件。具体可参考文档:[app-in-mainview-plugin](https://github.com/netless-io/appInMainView/blob/main/README.zh-cn.md)了解更多内容。
 > **注意：** 开启分页管理课件插件,需要安装 ``@netless/app-in-mainview-plugin`` 。
 
 ### 示例代码
@@ -529,7 +537,7 @@ const app = useFastboard(() => ({
     // 默认启用默认UI, 如果需要自定义UI, 可以传入enableDefaultUI: false
     enableAppInMainViewPlugin: true || {
         enableDefaultUI:  true,
-        language: "en",
+        language: "zh-CN",
         ...
     }
   }));

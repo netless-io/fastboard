@@ -10,28 +10,31 @@ Starting with version 0.3.22, fastboard integrates the [@netless/appliance-plugi
 
 Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/fastboard/full' or '@netless/fastboard-react/full', to resolve internal and external dependency conflicts.
 
+Starting with version 1.0.6 fastboard integrates the [@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView) plug-in, used for paging management courseware.
+
 ## Table of Contents
 
 - [Install](#install)
 - [Usage](#usage)
 - [Customization](#customization)
 - [Use performance](#performance)
+- [Pagination management courseware](#appInMainView)
 
 ## Install
 
 #### Subcontracting mode
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **Note：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
 
 #### Full package mode
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/appliance-plugin
+npm add <b>@netless/fastboard</b> @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
 >
 > `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/en/peer-dependency.md)
 
@@ -74,6 +77,8 @@ async function main() {
     enableAppliancePlugin: {
       ...
     },
+    // [6] (Optional), turn on the app-in-mainview-plugin starting at 1.0.6
+    enableAppInMainViewPlugin: true
   });
 
   const container = createContainer();
@@ -117,19 +122,19 @@ Install `@netless/fastboard-react`, use the `<Fastboard />` component.
 #### Subcontracting package
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin
+npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **Note:** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note:** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
 
 
 #### Full package
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin
+npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin  @netless/app-in-mainview-plugin
 </pre>
 
-> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled.
+> **Note:** Full package reference, then `@netless/window-manager`, `white-web-sdk` can not be installed. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
 >
 > `@netless/window-manager`, `white-web-sdk`, `@netless/appliance-plugin` is peerDependency, if you're not sure what peerDependency means, You can read [Why Use peerDependency?](./docs/zh/peer-dependency.md)
 
@@ -162,6 +167,8 @@ function App() {
     enableAppliancePlugin: {
       ...
     },
+    // [6] (Optional), turn on the app-in-mainview-plugin starting at 1.0.6
+    enableAppInMainViewPlugin: true
   }));
 
   // Container must have a visible size
@@ -493,6 +500,65 @@ const fastboard = await createFastboard({
 - First, you must ensure that the appliance plugin configuration is enabled on all three ends of Android \ios\web. Notes drawn after appliance-plugin is enabled will not be displayed on the unoccupied whiteboard.
 - After the appliance plugin is turned on, the old contents drawn on the previous whiteboard are displayed, but cannot be manipulated and upgraded into new notes. So in order not to affect the experience, please use on a whiteboard without any historical data. Similarly, when the plugin is closed, the newly drawn content will be lost.
 - only the browser for web apis [offscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas#browser_compatibility) Full support, in order to experience more performance and rich teaching AIDS functional experience.
+
+## appInMainView
+
+Through `enableAppInMainViewPlugin` configuration items open `app-in-mainView-plugin` plug-in, can improve fastboard management way of courseware, allows the user to switch the main board of the page to show or hide the current page open courseware. Specific reference documents: [app-in-mainview-plugins](https://github.com/netless-io/appInMainView) for more content.
+> **Note**: To enable the pagination management courseware plugin, you need to install ``@netless/app-in-mainview-plugin``.
+
+```jsx
+
+// interconnection with fastboard-react
+// Full package mode reference
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// Subcontract reference
+import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+const app = useFastboard(() => ({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      ...
+    },
+    // Enable the appInMainViewPlugin plugin,
+    // The default UI is enabled by default. If you need to customize the UI, you can pass "enableDefaultUI: false"
+    enableAppInMainViewPlugin: true || {
+        enableDefaultUI:  true,
+        language: "en",
+        ...
+    }
+  }));
+
+// interconnection with fastboard
+// Full package mode reference
+// import { createFastboard, createUI } from "@netless/fastboard/full";
+// Subcontract reference
+import { createFastboard, createUI } from "@netless/fastboard";
+
+const fastboard = await createFastboard({
+    sdkConfig: {
+      ...
+    },
+    joinRoom: {
+      ...
+    },
+    managerConfig: {
+      ...
+    },
+    // Enable the appInMainViewPlugin plugin,
+    // The default UI is enabled by default. If you need to customize the UI, you can pass "enableDefaultUI: false"
+    enableAppInMainViewPlugin: true || {
+        enableDefaultUI:  true,
+        language: "en",
+        ...
+    }
+  });
+
+```
 
 ## Customization
 
