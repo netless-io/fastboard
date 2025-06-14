@@ -67,16 +67,16 @@ async function main() {
     // [3] (可选)
     managerConfig: {
       cursor: true,
-      // (可选), 开启appliance-plugin, 从0.3.22开始
+      // (可选), 开启appliance-plugin, 从0.3.22开始, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍 
       supportAppliancePlugin: true,
     },
     // [4] (可选)
     netlessApps: [],
-    // [5] (可选), 开启appliance-plugin, 从0.3.22开始
+    // [5] (可选), 开启appliance-plugin, 从0.3.22开始, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍
     enableAppliancePlugin: {
       ...
     },
-    // [6] (可选), 开启app-in-mainview-plugin, 从1.0.6开始
+    // [6] (可选), 开启app-in-mainview-plugin, 从1.0.6开始, 开启配置需要安装@netless/app-in-mainview-plugin,具体参考使分页管理课件介绍
     enableAppInMainViewPlugin: {
       language:  "zh-CN",
     }
@@ -168,16 +168,16 @@ function App() {
       uuid: "room-uuid",
       roomToken: "NETLESSROOM_...",
     },
-    //  开启 appliance-plugin 插件
+    // (可选), 开启 appliance-plugin 插件, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍
     managerConfig: {
       cursor: true,
       supportAppliancePlugin: true,
     }
-    //  开启 appliance-plugin 插件
+    // (可选), 开启 appliance-plugin 插件, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍
     enableAppliancePlugin: {
       ...
     },
-    // (可选), 开启app-in-mainview-plugin, 从1.0.6开始
+    // (可选), 开启app-in-mainview-plugin, 从1.0.6开始, 开启配置需要安装@netless/app-in-mainview-plugin,具体参考使分页管理课件介绍
     enableAppInMainViewPlugin: {
       language:  "zh-CN",
     }
@@ -477,6 +477,10 @@ const app = useFastboard(() => ({
       ...
     }
   }));
+  ...
+  // 通过`app.appliancePlugin`获取`AppliancePlugin`实例
+  app.appliancePlugin
+  ...
 
 // 对接 fastboard
 // 全打包方式引用
@@ -505,6 +509,10 @@ const fastboard = await createFastboard({
       ...
     }
   });
+  ...
+  // 通过`fastboard.appliancePlugin`获取`AppliancePlugin`实例
+  fastboard.appliancePlugin
+  ...
 ```
 ### 注意
 
@@ -541,6 +549,10 @@ const app = useFastboard(() => ({
         ...
     }
   }));
+  ...
+  // 通过`app.appInMainViewPlugin`获取`AppInMainViewPlugin`实例
+  app.appInMainViewPlugin
+  ...
 
 // 对接 fastboard
 import { createFastboard, createUI } from "@netless/fastboard";
@@ -563,7 +575,10 @@ const fastboard = await createFastboard({
         ...
     }
   });
-
+  ...
+  // 通过`fastboard.appInMainViewPlugin`获取`AppInMainViewPlugin`实例
+  fastboard.appInMainViewPlugin
+  ...
 ```
 
 <h2 id="customization">自定义</h2>

@@ -68,16 +68,16 @@ async function main() {
     // [3] (optional)
     managerConfig: {
       cursor: true,
-      // (Optional), turn on the appliance-plugin starting at 0.3.22
+      // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
       supportAppliancePlugin: true,
     },
     // [4] (optional)
     netlessApps: [],
-    // [5] (Optional), turn on the appliance-plugin starting at 0.3.22
+    // [5] (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
     enableAppliancePlugin: {
       ...
     },
-    // [6] (Optional), turn on the app-in-mainview-plugin starting at 1.0.6
+    // [6] (Optional), enable appin-Mainview-Plugin. Starting from 1.0.6, to enable the configuration, you need to install @netless/ appin-MainView-Plugin. For specific details, please refer to the introduction in the pagination Management courseware
     enableAppInMainViewPlugin: true
   });
 
@@ -160,14 +160,14 @@ function App() {
     },
     managerConfig: {
       cursor: true,
-      // (Optional), turn on the appliance-plugin starting at 0.3.22
+      // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
       supportAppliancePlugin: true,
     },
-    // (Optional), turn on the appliance-plugin starting at 0.3.22
+    // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
     enableAppliancePlugin: {
       ...
     },
-    // [6] (Optional), turn on the app-in-mainview-plugin starting at 1.0.6
+    // [6] (Optional), enable appin-Mainview-Plugin. Starting from 1.0.6, to enable the configuration, you need to install @netless/ appin-MainView-Plugin. For specific details, please refer to the introduction in the pagination Management courseware
     enableAppInMainViewPlugin: true
   }));
 
@@ -467,6 +467,10 @@ const app = useFastboard(() => ({
       ...
     }
   }));
+...
+// Obtain the instance of 'AppliancePlugin' through 'app.appliancePlugin'
+app.appliancePlugin
+...
 
 // interconnection with fastboard
 // Full package mode reference
@@ -495,6 +499,10 @@ const fastboard = await createFastboard({
       ...
     }
   });
+...
+// Obtain the instance of 'AppliancePlugin' through 'fastboard.appliancePlugin'
+fastboard.appliancePlugin
+...
 ```
 **Note:**
 - First, you must ensure that the appliance plugin configuration is enabled on all three ends of Android \ios\web. Notes drawn after appliance-plugin is enabled will not be displayed on the unoccupied whiteboard.
@@ -532,6 +540,10 @@ const app = useFastboard(() => ({
         ...
     }
   }));
+...
+// Obtain the instance of 'AppliancePlugin' through 'app.appInMainViewPlugin'
+app.appInMainViewPlugin
+...
 
 // interconnection with fastboard
 // Full package mode reference
@@ -557,6 +569,10 @@ const fastboard = await createFastboard({
         ...
     }
   });
+...
+// Obtain the instance of 'AppliancePlugin' through 'fastboard.appInMainViewPlugin'
+fastboard.appInMainViewPlugin
+...
 
 ```
 

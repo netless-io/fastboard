@@ -66,12 +66,12 @@ let app = await createFastboard({
 | joinRoom      | [required] JoinRoomParams           | [加入房间配置](https://developer.netless.link/javascript-zh/home/construct-room-and-player)                   |
 | managerConfig | [optional] MountParams              | [WindowManager 配置](https://github.com/netless-io/window-manager/blob/master/docs/api.md#windowmanagermount) |
 
-### mount
+### createUI
 
 > 将 FastboardApp 挂载到 DOM
 
 ```js
-let ui = mount(app, document.getElementById("#board"));
+let ui = createUI(app, document.getElementById("#board"));
 ui.update({ theme: "dark", language: "zh-CN" });
 ui.destroy();
 ```
