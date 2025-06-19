@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@netless/window-manager': ^1.0.4
+  '@netless/window-manager': ^1.0.5
   '@netless/appliance-plugin': ^1.1.17
   '@netless/app-in-mainview-plugin': ^0.0.7
   white-web-sdk: ^2.16.53
@@ -28,13 +28,13 @@ importers:
         version: 0.1.0
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.7
-        version: 0.0.7(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        version: 0.0.7(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/appliance-plugin':
         specifier: ^1.1.17
-        version: 1.1.17(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        version: 1.1.17(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/window-manager':
-        specifier: ^1.0.4
-        version: 1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53)
+        specifier: ^1.0.5
+        version: 1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53)
       '@sveltejs/vite-plugin-svelte':
         specifier: 2.4.2
         version: 2.4.2(svelte@3.59.2)(vite@4.5.14(@types/node@18.19.111)(sass@1.63.6))
@@ -130,19 +130,19 @@ importers:
     dependencies:
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.7
-        version: 0.0.7(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        version: 0.0.7(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/app-slide':
-        specifier: ^0.2.73
-        version: 0.2.73(jspdf@2.5.2)
+        specifier: ^0.2.75
+        version: 0.2.75(jspdf@2.5.2)
       '@netless/appliance-plugin':
         specifier: ^1.1.17
-        version: 1.1.17(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        version: 1.1.17(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/synced-store':
         specifier: ^2.0.7
         version: 2.0.9(white-web-sdk@2.16.53)
       '@netless/window-manager':
-        specifier: ^1.0.4
-        version: 1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53)
+        specifier: ^1.0.5
+        version: 1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
@@ -642,11 +642,11 @@ packages:
   '@netless/app-in-mainview-plugin@0.0.7':
     resolution: {integrity: sha512-ogO76obML/h+EhcpPR5O+zXlfeHlzUDOiSsV5bsUrZph9v/0QZ5fwuqoBAgKjqMZq37uXXPTlcmzLZuudrSJFw==}
     peerDependencies:
-      '@netless/window-manager': ^1.0.4
+      '@netless/window-manager': ^1.0.5
       white-web-sdk: ^2.16.53
 
-  '@netless/app-slide@0.2.73':
-    resolution: {integrity: sha512-vEKNjaj1DkxWihGaoDI6cC/obtWrARqhnY9YuQDDZDchfQMmo5CKzt6Rh3HUEu7EOhunhRTrRYX1mD6Xr4SoxQ==}
+  '@netless/app-slide@0.2.75':
+    resolution: {integrity: sha512-ZFD5gpN1PPfdveP5Z+lFvmgQr+vYuq5C3OgtjZheYB7M7dnJdbGstjL7hGKJwUxr1uwsBnSohXkkjzWmf4mG7Q==}
     peerDependencies:
       jspdf: 2.5.1
     peerDependenciesMeta:
@@ -656,7 +656,7 @@ packages:
   '@netless/appliance-plugin@1.1.17':
     resolution: {integrity: sha512-x7J4/sNJOBzrIMu9eL2ElEIck8zTPseUaC6TR8q/ygyRtFtYfN7SG6X6FekZB6/mhAnWry6Lr/10OAte5AMGUg==}
     peerDependencies:
-      '@netless/window-manager': ^1.0.4
+      '@netless/window-manager': ^1.0.5
       white-web-sdk: ^2.16.53
 
   '@netless/canvas-polyfill@0.0.4':
@@ -667,11 +667,11 @@ packages:
     peerDependencies:
       white-web-sdk: ^2.16.53
 
-  '@netless/telebox-insider@0.2.31':
-    resolution: {integrity: sha512-ZVbNga6CA8b5Y0MLqOA9o+hVqNSu4x5Xpihi0BXZ4ZS/5V1tuFB0t/wgrlEf0fnYcQEMuAYqxjyoH9IA/0yvBQ==}
+  '@netless/telebox-insider@0.2.32':
+    resolution: {integrity: sha512-UxHAFjFpGyrA5PuBck0vg5w0546HYsiAQY+0vz9TUXtCCBLI5u0Bu6whM2WGW4ovk/rlS3BU/g241vOG9u3Quw==}
 
-  '@netless/window-manager@1.0.4':
-    resolution: {integrity: sha512-4z88glPbnNnIue9FazT9oTsntI1OtPqOYmBu0CcaduZg+CIpPOa1o7OpWXgVgS1qlbEyNAxLYedBI3SLqRhl+g==}
+  '@netless/window-manager@1.0.5':
+    resolution: {integrity: sha512-RIk1ho93Jduu1WeQKM4uv7Qd7/Fw11AhCe73UUxdfsanUn8AJqRT4x09xRte9YODueY0RcIQLK/KyrGo0p2Tng==}
     peerDependencies:
       jspdf: 2.5.1
       white-web-sdk: ^2.16.53
@@ -2809,20 +2809,20 @@ snapshots:
       tess2: 1.0.0
       xtend: 4.0.2
 
-  '@netless/app-in-mainview-plugin@0.0.7(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
+  '@netless/app-in-mainview-plugin@0.0.7(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
     dependencies:
-      '@netless/window-manager': 1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53)
+      '@netless/window-manager': 1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53)
       eventemitter2: 6.4.9
       lodash: 4.17.21
       white-web-sdk: 2.16.53
 
-  '@netless/app-slide@0.2.73(jspdf@2.5.2)':
+  '@netless/app-slide@0.2.75(jspdf@2.5.2)':
     optionalDependencies:
       jspdf: 2.5.2
 
-  '@netless/appliance-plugin@1.1.17(@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
+  '@netless/appliance-plugin@1.1.17(@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
     dependencies:
-      '@netless/window-manager': 1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53)
+      '@netless/window-manager': 1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53)
       clipper-lib: 6.4.2
       eventemitter2: 6.4.9
       lineclip: 1.1.5
@@ -2846,12 +2846,12 @@ snapshots:
       value-enhancer: 3.1.5
       white-web-sdk: 2.16.53
 
-  '@netless/telebox-insider@0.2.31': {}
+  '@netless/telebox-insider@0.2.32': {}
 
-  '@netless/window-manager@1.0.4(jspdf@2.5.2)(white-web-sdk@2.16.53)':
+  '@netless/window-manager@1.0.5(jspdf@2.5.2)(white-web-sdk@2.16.53)':
     dependencies:
       '@juggle/resize-observer': 3.4.0
-      '@netless/telebox-insider': 0.2.31
+      '@netless/telebox-insider': 0.2.32
       emittery: 0.9.2
       lodash: 4.17.21
       p-retry: 4.6.2
