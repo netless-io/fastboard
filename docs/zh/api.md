@@ -4,6 +4,7 @@
 
 - [顶层方法](#top-level-functions)
   - [`createFastboard`](#createfastboard)
+  - [`createUI`](#createUI)
   - [`replayFastboard`](#replayfastboard)
 - [Fastboard 组件相关](#react-hooks)
   - [`apps`](#apps)
@@ -35,6 +36,11 @@
   - [`sceneIndex`](#sceneindex)
   - [`sceneLength`](#scenelength)
   - [`appsStatus`](#appsstatus)
+- [FastboardApp UI组件相关API](#ui-methods)
+  - [`toolbar`](#toolbar)
+  - [`redoUndo`](#redoUndo)
+  - [`zoom`](#zoom)
+  - [`page`](#page)
 
 <h2 id="top-level-functions">顶层方法</h2>
 
@@ -82,7 +88,6 @@ ui.destroy();
 | ---- | ----------------------- | ---------------------------------- |
 | app  | [required] FastboardApp | 从 createFastboard 获取的 app 对象 |
 | dom  | [required] HTMLElement  | 挂载的 DOM 元素                    |
-| opts | [optional] MountOptions | UI 配置                            |
 
 ```ts
 type MountOptions = {
@@ -647,4 +652,88 @@ type AppsStatus = {
     reason?: string;
   };
 };
+```
+
+<h2 id="ui-methods">FastboardApp UI组件相关API</h2>
+
+### toolbar
+
+> 参数配置 [`ToolbarConfig`](https://github.com/netless-io/fastboard/blob/050b991e6aa61034b06cf8f5a1ebd596e63381cf/packages/fastboard-ui/src/typings.ts#L39)
+>
+> 是否强制显示配置[`force_show_toolbar`](https://github.com/netless-io/fastboard/blob/050b991e6aa61034b06cf8f5a1ebd596e63381cf/packages/fastboard-ui/src/components/Fastboard/Fastboard.svelte.d.ts#L16)
+
+```ts
+ui.update({confog: {toolbar: {...}}, force_show_toolbar:...})
+```
+> 强制显示
+```ts
+ui.forceShowToolbar()
+```
+> 强制隐藏
+```ts
+ui.forceHideToolbar()
+```
+> 恢复默认
+```ts
+ui.recoverToolbar()
+```
+
+### redoUndo
+
+> 是否强制显示配置[`force_show_redo_undo`](https://github.com/netless-io/fastboard/blob/050b991e6aa61034b06cf8f5a1ebd596e63381cf/packages/fastboard-ui/src/components/Fastboard/Fastboard.svelte.d.ts#L18C3-L18C23)
+
+```ts
+ui.update({confog: {toolbar: {...}}, force_show_redo_undo:...})
+```
+> 强制显示
+```ts
+ui.forceShowRedoUndo()
+```
+> 强制隐藏
+```ts
+ui.forceHideRedoUndo()
+```
+> 恢复默认
+```ts
+ui.recoverRedoUndo()
+```
+
+### zoom
+
+> 是否强制显示配置[`force_show_zoom_control`](https://github.com/netless-io/fastboard/blob/050b991e6aa61034b06cf8f5a1ebd596e63381cf/packages/fastboard-ui/src/components/Fastboard/Fastboard.svelte.d.ts#L20C3-L20C26)
+
+```ts
+ui.update({confog: {toolbar: {...}}, force_show_zoom_control:...})
+```
+> 强制显示
+```ts
+ui.forceShowZoomControl()
+```
+> 强制隐藏
+```ts
+ui.forceHideZoomControl()
+```
+> 恢复默认
+```ts
+ui.recoverZoomControl()
+```
+
+### page
+
+> 是否强制显示配置[`force_show_page_control`](https://github.com/netless-io/fastboard/blob/050b991e6aa61034b06cf8f5a1ebd596e63381cf/packages/fastboard-ui/src/components/Fastboard/Fastboard.svelte.d.ts#L22C3-L22C26)
+
+```ts
+ui.update({confog: {toolbar: {...}}, force_show_page_control:...})
+```
+> 强制显示
+```ts
+ui.forceShowPageControl()
+```
+> 强制隐藏
+```ts
+ui.forceHidePageControl()
+```
+> 恢复默认
+```ts
+ui.recoverPageControl()
 ```
