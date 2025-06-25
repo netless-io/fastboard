@@ -848,13 +848,11 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   if (room.isWritable && ((room as any).floatBarOptions as FloatBarOptions)?.colors.length) {
     const colors = (room as any).floatBarOptions?.colors;
     const length = colors.length;
-    (room as any).getRoomMembers().map((c: RoomMember) => {
-      const index = c.memberId % length;
-      const color = colors[index];
-      manager.mainView.setMemberState({
-        strokeColor: color,
-        textColor: color,
-      });
+    const index = room.observerId % length;
+    const color = colors[index];
+    manager.mainView.setMemberState({
+      strokeColor: color,
+      textColor: color,
     });
   }
   manager.mainView.setCameraBound({
