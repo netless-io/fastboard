@@ -570,6 +570,8 @@ fastboard.appInMainViewPlugin
 ...
 
 ```
+**Note:**
+- Currently, only the web end supports the 'appInMainViewPlugin' plugin, while the mobile end does not support it for the time being.
 
 ## Customization
 

@@ -576,6 +576,8 @@ const fastboard = await createFastboard({
   fastboard.appInMainViewPlugin
   ...
 ```
+### 注意
+- 目前只有web端支持 `appInMainViewPlugin`插件, 移动端暂不支持。
 
 <h2 id="customization">自定义</h2>
 
