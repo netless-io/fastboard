@@ -18,7 +18,6 @@ import type {
   ShapeType,
   ViewCallbacks,
   WhiteWebSdkConfiguration,
-  RoomMember,
   FloatBarOptions,
   ApplianceNames,
 } from "white-web-sdk";
@@ -39,7 +38,6 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
 
-import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
 import type {
   AppliancePluginOptions,
   AppliancePluginInstance,
@@ -47,9 +45,9 @@ import type {
   MemberState as ExtendMemberState,
   PublicEvent as AppliancePublicEvent,
   PublicListener as AppliancePublicListener,
+  ApplianceMultiPlugin,
 } from "@netless/appliance-plugin";
 
-import { AppInMainViewPlugin } from "@netless/app-in-mainview-plugin";
 import type {
   AppInMainViewOptions,
   AppInMainViewInstance,
@@ -57,6 +55,7 @@ import type {
   PublicListener as AppInMainViewPublicListener,
   AppId,
   AppValue,
+  AppInMainViewPlugin,
 } from "@netless/app-in-mainview-plugin";
 
 function noop() {}
@@ -772,21 +771,27 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
 
   const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
+  let _ApplianceMultiPlugin: typeof ApplianceMultiPlugin | undefined;
   if (isEnableAppliancePlugin) {
+    const { ApplianceMultiPlugin } = await import("@netless/appliance-plugin");
+    _ApplianceMultiPlugin = ApplianceMultiPlugin;
     if (joinRoomParamsWithPlugin.invisiblePlugins) {
       joinRoomParamsWithPlugin.invisiblePlugins = [
         ...joinRoomParamsWithPlugin.invisiblePlugins,
-        ApplianceMultiPlugin,
+        _ApplianceMultiPlugin,
       ];
     }
     if (managerConfig) {
       managerConfig.supportAppliancePlugin = true;
     }
   }
+  let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
   if (enableAppInMainViewPlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
+    const { AppInMainViewPlugin } = await import("@netless/app-in-mainview-plugin");
+    _AppInMainViewPlugin = AppInMainViewPlugin;
     joinRoomParamsWithPlugin.invisiblePlugins = [
       ...joinRoomParamsWithPlugin.invisiblePlugins,
-      AppInMainViewPlugin,
+      _AppInMainViewPlugin,
     ];
   }
 
@@ -833,15 +838,15 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     room,
   });
   let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
-  if (enableAppInMainViewPlugin) {
-    appInMainViewPluginInstance = await AppInMainViewPlugin.getInstance(
+  if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
+    appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
       manager,
       enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
     );
   }
   let appliancePluginInstance: AppliancePluginInstance | undefined;
-  if (isEnableAppliancePlugin && enableAppliancePlugin) {
-    appliancePluginInstance = await ApplianceMultiPlugin.getInstance(manager, {
+  if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
+    appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
       options: enableAppliancePlugin,
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-ui",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "The front-end of @netless/fastboard-core.",
   "main": "src/index.ts",
   "svelte": "dist/index.svelte.mjs",

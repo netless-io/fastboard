@@ -48,7 +48,7 @@
     "overrides": {
       "@netless/window-manager": "^1.0.5",
       "@netless/appliance-plugin": "^1.1.17",
-      "@netless/app-in-mainview-plugin": "^0.0.7",
+      "@netless/app-in-mainview-plugin": "^0.0.9",
       "white-web-sdk": "^2.16.53"
     },
     "peerDependencyRules": {
