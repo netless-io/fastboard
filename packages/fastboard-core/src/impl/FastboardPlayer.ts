@@ -17,12 +17,15 @@ import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
-import { ApplianceMultiPlugin } from "@netless/appliance-plugin";
-import type { AppliancePluginOptions, AppliancePluginInstance } from "@netless/appliance-plugin";
-import {
+import type {
+  AppliancePluginOptions,
+  AppliancePluginInstance,
+  ApplianceMultiPlugin,
+} from "@netless/appliance-plugin";
+import type {
   AppInMainViewPlugin,
-  type AppInMainViewOptions,
-  type AppInMainViewInstance,
+  AppInMainViewOptions,
+  AppInMainViewInstance,
 } from "@netless/app-in-mainview-plugin";
 function noop() {}
 
@@ -242,11 +245,14 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
     enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
 
   const replayRoomParamsWithPlugin = ensure_official_plugins(replayRoomParams);
+  let _ApplianceMultiPlugin: typeof ApplianceMultiPlugin | undefined;
   if (isEnableAppliancePlugin) {
+    const { ApplianceMultiPlugin } = await import("@netless/appliance-plugin");
+    _ApplianceMultiPlugin = ApplianceMultiPlugin;
     if (replayRoomParamsWithPlugin.invisiblePlugins) {
       replayRoomParamsWithPlugin.invisiblePlugins = [
         ...replayRoomParamsWithPlugin.invisiblePlugins,
-        ApplianceMultiPlugin,
+        _ApplianceMultiPlugin,
       ];
     }
 
@@ -254,10 +260,13 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
       managerConfig.supportAppliancePlugin = true;
     }
   }
+  let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
   if (enableAppInMainViewPlugin && replayRoomParamsWithPlugin.invisiblePlugins) {
+    const { AppInMainViewPlugin } = await import("@netless/app-in-mainview-plugin");
+    _AppInMainViewPlugin = AppInMainViewPlugin;
     replayRoomParamsWithPlugin.invisiblePlugins = [
       ...replayRoomParamsWithPlugin.invisiblePlugins,
-      AppInMainViewPlugin,
+      _AppInMainViewPlugin,
     ];
   }
 
@@ -290,14 +299,14 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   player.play();
   const manager = await managerPromise;
   let appliancePluginInstance: AppliancePluginInstance | undefined;
-  if (isEnableAppliancePlugin && enableAppliancePlugin) {
-    appliancePluginInstance = await ApplianceMultiPlugin.getInstance(manager, {
+  if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
+    appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
       options: enableAppliancePlugin,
     });
   }
   let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
-  if (enableAppInMainViewPlugin) {
-    appInMainViewPluginInstance = await AppInMainViewPlugin.getInstance(
+  if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
+    appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
       manager,
       enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
     );

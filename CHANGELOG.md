@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 (2025-07-07)
+- update `@netless/app-slide` to `^0.2.78`.
+- update `@netless/window-manager` to `^1.0.5`.
+
 ## 1.0.6 (2025-06-10)
 - Added `enableAppInMainViewPlugin` in FastboardOptions to support app in mainView.
 - update `@netless/app-slide` to `^0.2.73`.
