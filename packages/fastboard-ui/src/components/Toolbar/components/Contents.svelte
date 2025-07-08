@@ -143,6 +143,7 @@
     if (hasAppliancePlugin) {
       app?.appliancePlugin?.setMemberState({
         currentApplianceName: "pencil",
+        strokeType: "Stroke",
         useLaserPen: false,
         strokeOpacity: 1,
       } as ExtendMemberState);
