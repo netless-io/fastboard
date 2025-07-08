@@ -338,7 +338,7 @@ The following interfaces are involved:
     ```js
     setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
     ```
-    ![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
+    ![Image](https://github.com/user-attachments/assets/fe9e6bdf-0141-4842-bfb5-522b6e76def3)
     - Set shape fill color and fill opacity
     ```js
     setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
@@ -365,7 +365,7 @@ The following interfaces are involved:
 
 
 3. Split screen display Elements (little whiteboard featrue), need to combine [`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
-    ![Image](https://github.com/user-attachments/assets/20810ea6-7d85-4e72-b75f-185599fffaf8)
+    ![Image](https://github.com/user-attachments/assets/e227bc0f-ea79-481e-95a9-18cc3648fa25)
 4. Minimap function (Version >=1.1.6)
     ```js
     /** Create a minimap

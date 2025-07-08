@@ -68,8 +68,6 @@ async function main() {
     // [3] (optional)
     managerConfig: {
       cursor: true,
-      // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
-      supportAppliancePlugin: true,
     },
     // [4] (optional)
     netlessApps: [],
@@ -160,8 +158,6 @@ function App() {
     },
     managerConfig: {
       cursor: true,
-      // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
-      supportAppliancePlugin: true,
     },
     // (Optional), enable the appliance-plugin plugin. To enable the configuration, you need to install @netless/appliance-plugin. For specific details, please refer to the introduction of the performance optimization version
     enableAppliancePlugin: {
@@ -428,7 +424,7 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 
 ## performance
 
-Through ` enableAppliancePlugin ` and ` managerConfig. SupportAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
+Through ` enableAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 
 ```js
@@ -487,7 +483,6 @@ const fastboard = await createFastboard({
     },
     managerConfig: {
       cursor: true,
-      supportAppliancePlugin: true,
       ...
     },
     // about enableAppliancePlugin: https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#configure-parameters

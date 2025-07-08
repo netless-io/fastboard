@@ -67,8 +67,6 @@ async function main() {
     // [3] (可选)
     managerConfig: {
       cursor: true,
-      // (可选), 开启appliance-plugin, 从0.3.22开始, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍 
-      supportAppliancePlugin: true,
     },
     // [4] (可选)
     netlessApps: [],
@@ -171,7 +169,6 @@ function App() {
     // (可选), 开启 appliance-plugin 插件, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍
     managerConfig: {
       cursor: true,
-      supportAppliancePlugin: true,
     }
     // (可选), 开启 appliance-plugin 插件, 开启配置需要安装@netless/appliance-plugin,具体参考使用性能优化版本介绍
     enableAppliancePlugin: {
@@ -437,7 +434,7 @@ const appId = await fastboard.manager.addApp({
 
 <h2 id="performance">使用性能优化版本</h2>
 
-通过 `enableAppliancePlugin` 及 `managerConfig.supportAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能以及提供[新的白板功能](https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E6%96%B0%E5%8A%9F%E8%83%BD), 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)了解更多内容。
+通过 `enableAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能以及提供[新的白板功能](https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E6%96%B0%E5%8A%9F%E8%83%BD), 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)了解更多内容。
 > **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
 
 ### 示例代码
@@ -497,7 +494,6 @@ const fastboard = await createFastboard({
     },
     managerConfig: {
       cursor: true,
-      supportAppliancePlugin: true,
       ...
     },
     // 更多的`enableAppliancePlugin`配置项参考:https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0
