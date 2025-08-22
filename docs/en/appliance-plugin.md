@@ -424,23 +424,38 @@ The following interfaces are involved:
             export type AppliancePluginOptions = { 
                 /** cdn configuration item */ 
                 cdn: CdnOpt; 
-                /** Synchronous Data Configuration item */ 
+                /** Additional configuration items */
+                extras?: ExtrasOptions;
+            };
+            export type CdnOpt = {
+                /**  full worker url Address, the thread for drawing complete data */
+                fullWorkerUrl?: string;
+                /** sub worker url Address, the thread that draws a frame of data */
+                subWorkerUrl?: string;
+            };
+            export type ExtrasOptions =  {
+                /** Whether to use worker, the default value is 'auto'
+                * auto: Automatic selection (Use webWorker if your browser supports offscreenCanvas; otherwise, use the main thread) 
+                * mainThread: Use the main thread, canvas, to draw data. 
+                */ 
+                useWorker? : UseWorkerType; 
+                /** Synchronize data configuration items */ 
                 syncOpt? : SyncOpt; 
-                /** Canvas configuration item */ 
+                /** Canvas Configuration item */ 
                 canvasOpt? : CanvasOpt; 
                 /** Pointer configuration item */ 
                 cursor? : CursorOpt; 
-                /** Canvas Cache configuration item */ 
+                /** Canvas cache configuration item */ 
                 bufferSize? : BufferSizeOpt; 
-                /** Bessel Optimization Configuration item */ 
+                /** Bezier Optimization Configuration items */ 
                 bezier? : BezierOpt; 
-                /** Local Eraser configuration item */ 
+                /** Local eraser configuration item */ 
                 pencilEraser? : PencilEraserOpt; 
                 /** Line thickness range configuration item */ 
                 strokeWidth? : StrokeWidthOpt, 
                 /** Text Editor configuration item */ 
                 textEditor? : TextEditorOpt;
-            } 
+            }
         ```
     - ``cursorAdapter? : CursorAdapter``; This parameter is optional. In single whiteboard mode, customize the mouse style.
     - ``logger?: Logger``; This parameter is optional. Configure the log printer object. The default output is on the local console. If logs need to be uploaded to the specified server, you need to manually configure the configuration.

@@ -138,7 +138,7 @@ if (manager) {
                 cdn: {
                     fullWorkerUrl,
                     subWorkerUrl,
-                }
+                },
                 ...
             }
         }
@@ -435,9 +435,24 @@ module: {
 - adaptor: 配置适配器.
     - ``options: AppliancePluginOptions``; 必须配置,其中`cdn`为必填项。
         ```js
-            export type AppliancePluginOptions =  {
+            export type AppliancePluginOptions = {
                 /** cdn配置项 */
                 cdn: CdnOpt;
+                /** 额外配置项 */
+                extras?: ExtrasOptions;
+            };
+            export type CdnOpt = {
+                /**  full worker url 地址, 绘制完整数据的线程 */
+                fullWorkerUrl?: string;
+                /** sub worker url 地址, 绘制一帧数据的线程 */
+                subWorkerUrl?: string;
+            };
+            export type ExtrasOptions =  {
+                /** 是否使用 worker, 默认值为 ``auto``
+                * auto: 自动选择(如果浏览器支持 offscreenCanvas 则使用 webWorker, 否则使用主线程)
+                * mainThread: 使用主线程, canvas 绘制数据。
+                */
+                useWorker?: UseWorkerType;
                 /** 同步数据配置项 */
                 syncOpt?: SyncOpt;
                 /** 画布配置项 */
