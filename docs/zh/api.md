@@ -130,9 +130,10 @@ let player = await replayFastboard({
     region: "ch-hz",
   },
   replayRoom: {
-    uid: "unique_id",
-    uuid: ROOM_UUID,
+    room: ROOM_UUID,
     roomToken: ROOM_TOKEN,
+    beginTimestamp, 
+    duration,
   },
   // 完整配置见下方
 });
@@ -283,9 +284,10 @@ function App {
       region: "ch-hz",
     },
     replayRoom: {
-      uid: "unique_id",
-      uuid: ROOM_UUID,
+      room: ROOM_UUID,
       roomToken: ROOM_TOKEN,
+      beginTimestamp, 
+      duration,
     },
     // 完整配置见 replayFastboard
   }));
