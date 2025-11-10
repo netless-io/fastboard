@@ -395,6 +395,98 @@ The following interfaces are involved:
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
     ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
+6. ExtrasOption Custom Tool Configuration
+    - Custom Pen Styles
+        - Dotted Stroke Style
+        ```ts
+            export type DottedOpt = {
+                /** Line cap style for dotted line, square: square cap, round: round cap, default value is round */
+                lineCap: "square" | "round";
+                /** Dotted line, single segment length, default value is 1, i.e., single segment length is 1 */
+                segment: number;
+                /** Dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
+                gap: number;
+            };
+            /** Dotted stroke style */
+            dottedStroke: {
+                lineCap: "round",
+                segment: 1,
+                gap: 2,
+            },
+        ```
+        ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
+        - Long Dotted Stroke Style
+        ```ts
+            export type LongDottedOpt = {
+                /** Line cap style for long dotted line, square: square cap, round: round cap, default value is round */
+                lineCap: "square" | "round";
+                /** Long dotted line, single segment length, default value is 1, i.e., single segment length is 1 * thickness */
+                segment: number;
+                /** Long dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
+                gap: number;
+            };
+            /** Long dotted stroke style */
+            longDottedStroke: {
+                lineCap: "round",
+                segment: 2,
+                gap: 3,
+            },
+        ```
+        ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
+        - Normal Pen Style
+        ```ts
+            export type NormalOpt = {
+                /** Line cap style, square: square cap, round: round cap, default value is round */
+                lineCap: "square" | "round";
+            };
+            /** Normal pen style */
+            normalStroke: {
+                lineCap: "round",
+            }
+        ```
+        ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+
+    - Text Custom Style
+    ```ts
+        export type TextEditorOpt = {
+            /** Whether to show the floating bar */
+            showFloatBar?: boolean;
+            /** Whether it can be switched by selector tool */
+            canSelectorSwitch?: boolean;
+            /** Whether to automatically wrap at the right boundary */
+            rightBoundBreak?: boolean;
+            /** Extended font list */
+            extendFontFaces?: { fontFamily: string; src: string }[];
+            /** Font loading timeout, unit: milliseconds */
+            loadFontFacesTimeout?: number;
+        };
+        // For example: Set unified font library
+        textEditor: {
+          showFloatBar: false,
+          canSelectorSwitch: false,
+          rightBoundBreak: true,
+          extendFontFaces: [
+            {
+              fontFamily: "Noto Sans SC",
+              src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
+            },
+          ],
+          loadFontFacesTimeout: 20000,
+        },
+    ```
+    Need to be combined with CSS style implementation
+    ```css
+    @font-face {
+        font-family: "Noto Sans SC";
+        src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
+            format("woff2");
+        font-display: swap;
+    }
+    html {
+        font-family: "Noto Sans SC";
+    }
+    ```
+
 <!-- 6. Handwriting graphics automatic association function: 'autoDraw' (version >=1.1.7)
     ```js
     export type AutoDrawOptions = {
@@ -434,6 +526,12 @@ The following interfaces are involved:
                 subWorkerUrl?: string;
             };
             export type ExtrasOptions =  {
+                /** Whether to use simple mode, default value is ``false`` 
+                 * true: Simple mode:
+                    1. Drawing will use a single worker, and Bezier smoothing cannot be used during pen drawing.
+                    2. Remove some new features: minimap, pointerPen (laser pointer), autoDraw plugin.
+                 */
+                useSimple: boolean;
                 /** Whether to use worker, the default value is 'auto'
                 * auto: Automatic selection (Use webWorker if your browser supports offscreenCanvas; otherwise, use the main thread) 
                 * mainThread: Use the main thread, canvas, to draw data. 
