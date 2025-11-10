@@ -375,8 +375,6 @@ module: {
     setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.SpeechBalloon, placement: 'bottomLeft'});
     ```
     ![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
-
-
 3. 分屏显示笔记(小白板功能),需要结合[`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
     ![Image](https://github.com/user-attachments/assets/20810ea6-7d85-4e72-b75f-185599fffaf8)
 4. 小地图功能 (Version >=1.1.6)
@@ -408,6 +406,97 @@ module: {
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
     ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
+6. ExtrasOption自定义教具配置
+    - 自定义画笔样式
+        - 短虚线样式
+        ```ts
+            export type DottedOpt = {
+                /** 虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
+                lineCap: "square" | "round";
+                /** 虚线,单线段长度, 默认值为 1, 即单线段长度为 1 */
+                segment: number;
+                /** 虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
+                gap: number;
+            };
+            /** 短虚线样式 */
+            dottedStroke: {
+                lineCap: "round",
+                segment: 1,
+                gap: 2,
+            },
+        ```
+        ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
+        - 长虚线样式
+        ```ts
+            export type LongDottedOpt = {
+                /** 长虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
+                lineCap: "square" | "round";
+                /** 长虚线,单线段长度, 默认值为 1, 即单线段长度为 1 * thickness */
+                segment: number;
+                /** 长虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
+                gap: number;
+            };
+            /** 长虚线线样式 */
+            longDottedStroke: {
+                lineCap: "round",
+                segment: 2,
+                gap: 3,
+            },
+        ```
+        ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
+        - 普通画笔样式
+        ```ts
+            export type NormalOpt = {
+                /** 端点样式, square: 平头, round: 圆头, 默认值为 round */
+                lineCap: "square" | "round";
+            };
+            /** 普通画笔样式 */
+            normalStroke: {
+                lineCap: "round",
+            }
+        ```
+        ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+
+    - 文字自定义样式
+    ```ts
+        export type TextEditorOpt = {
+            /** 是否显示浮动栏 */
+            showFloatBar?: boolean;
+            /** 是否可以通过selector教具切换 */
+            canSelectorSwitch?: boolean;
+            /** 是否右边界自动换行 */
+            rightBoundBreak?: boolean;
+            /** 扩展字体列表 */
+            extendFontFaces?: { fontFamily: string; src: string }[];
+            /** 加载字体超时时间，单位：毫秒 */
+            loadFontFacesTimeout?: number;
+        };
+        // 比如: 设置统一字体库
+        textEditor: {
+          showFloatBar: false,
+          canSelectorSwitch: false,
+          rightBoundBreak: true,
+          extendFontFaces: [
+            {
+              fontFamily: "Noto Sans SC",
+              src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
+            },
+          ],
+          loadFontFacesTimeout: 20000,
+        },
+    ```
+    需要结合css style实现
+    ```css
+    @font-face {
+        font-family: "Noto Sans SC";
+        src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
+            format("woff2");
+        font-display: swap;
+    }
+    html {
+        font-family: "Noto Sans SC";
+    }
+    ```
 <!-- 6. 手写图形自动联想功能:`autoDraw` (version >=1.1.7)
     ```js
     export type AutoDrawOptions = {
@@ -448,6 +537,12 @@ module: {
                 subWorkerUrl?: string;
             };
             export type ExtrasOptions =  {
+                /** 是否使用简单模式, 默认值为 ``false``
+                 * true: 简单模式:
+                    1、绘制将使用单worker绘制,画笔过程中无法使用贝塞尔圆滑处理。
+                    2、移除部分新功能:小地图、pointerPen(激光笔)、autoDraw插件。
+                 */
+                useSimple: boolean;
                 /** 是否使用 worker, 默认值为 ``auto``
                 * auto: 自动选择(如果浏览器支持 offscreenCanvas 则使用 webWorker, 否则使用主线程)
                 * mainThread: 使用主线程, canvas 绘制数据。
