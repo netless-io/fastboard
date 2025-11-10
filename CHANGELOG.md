@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 (2025-07-07)
+- update `@netless/appliance-plugin` to `^1.1.23`.
+- update `@netless/window-manager` to `^1.0.8`.
+
 ## 1.1.0 (2025-07-07)
 - update `@netless/app-slide` to `^0.2.78`.
 - update `@netless/window-manager` to `^1.0.5`.

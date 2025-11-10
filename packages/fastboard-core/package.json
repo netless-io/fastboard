@@ -26,8 +26,8 @@
   },
   "peerDependencies": {
     "@netless/app-in-mainview-plugin": ">=0.0.9",
-    "@netless/appliance-plugin": ">=1.1.17",
-    "@netless/window-manager": ">=1.0.5",
+    "@netless/appliance-plugin": ">=1.1.23",
+    "@netless/window-manager": ">=1.0.8",
     "jspdf": ">=2.5.1",
     "white-web-sdk": ">=2.16.53"
   },
@@ -35,11 +35,11 @@
     "@netless/buildtool": "workspace:*",
     "jspdf": "^2.5.1",
     "white-web-sdk": "^2.16.53",
-    "@netless/window-manager": "^1.0.5"
+    "@netless/window-manager": "^1.0.8"
   },
   "optionalDependencies": {
     "@netless/app-in-mainview-plugin": "^0.0.9",
-    "@netless/appliance-plugin": "^1.1.17"
+    "@netless/appliance-plugin": "^1.1.23"
   },
   "publishConfig": {
     "main": "dist/index.js",
