@@ -16,6 +16,7 @@
 - [自定义](#customization)
 - [进阶](./docs)
 - [分页管理课件](#appInMainView)
+- [回放](#replay-mode)
 
 <h2 id="install">安装</h2>
 
@@ -646,7 +647,37 @@ return <ReplayFastboard player={player} />
 
 上面的 `player` 实例和原生的视频播放器类似，也有 `play()` `seek()` `pause()` 等方法。
 
-如果要让白板和其他视频播放器同步进度条，请参考库 [@netless/sync-player](https://github.com/netless-io/sync-player) 。
+如果要让白板和其他视频播放器同步进度条，可以使用[@netless/combine-player](https://github.com/netless-io/netless-combine-player)或[@netless/sync-player](https://github.com/netless-io/sync-player) 。
+以下是`@netless/combine-player`的使用样例:
+```ts
+  import CombinePlayerFactory from '@netless/combine-player';
+  const player = await replayFastboard({
+    sdkConfig: {
+      appIdentifier,
+      region: "cn-hz",
+    },
+    replayRoom: {
+      room: uuid,
+      beginTimestamp,
+      duration,
+      roomToken,
+    },
+    managerConfig: {},
+    enableAppliancePlugin: {},
+  });
+  const whiteboard = document.getElementById("whiteboard") as HTMLDivElement;
+  player.bindContainer(whiteboard);
+  const factoryParams = {
+    url: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4",
+    videoDOM: document.getElementById('videoDom') as HTMLVideoElement, // 用于存放视频播放器的节点
+  };
+  const combinePlayer = new CombinePlayerFactory(player.player, factoryParams).create(false); 
+  (window as any).combinePlayer = combinePlayer;
+  // 调用方式
+  combinePlayer.seek();
+  combinePlayer.play();
+  combinePlayer.pause();
+```
 
 <h2 id="error-handling">异常处理</h2>
 
