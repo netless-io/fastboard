@@ -70,10 +70,12 @@ createFastboard({
       fullWorkerUrl,
       subWorkerUrl,
     },
-    strokeWidth: {
-      min: 1,
-      max: 32,
-    },
+    extras: {
+      strokeWidth: {
+        min: 1,
+        max: 32,
+      }
+    }
   },
   enableAppInMainViewPlugin: true,
 }).then(app => {
