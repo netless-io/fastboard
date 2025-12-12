@@ -8,7 +8,7 @@
 
 从1.0.6版本开始, fastboard 集成了[@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView)插件,用于分页管理课件
 
-[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 从1.0.10版本开始, 添加了 [`useBoxesStatus`](https://github.com/netless-io/window-manager/blob/master/docs/cn/api.md#windowmanagermount) 配置用于开启[netless-app](https://github.com/netless-io/netless-app)窗口状态可以独立管理.
+[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) 从1.0.10版本开始, 添加了 [`useBoxesStatus`](https://github.com/netless-io/window-manager/blob/master/README.zh-cn.md#%E7%8B%AC%E7%AB%8B%E7%AE%A1%E7%90%86%E7%AA%97%E5%8F%A3%E7%8A%B6%E6%80%81) 配置用于开启[netless-app](https://github.com/netless-io/netless-app)窗口状态可以独立管理.
 
 ## 目录
 
