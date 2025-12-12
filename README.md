@@ -12,6 +12,8 @@ Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/f
 
 Starting with version 1.0.6 fastboard integrates the [@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView) plug-in, used for paging management courseware.
 
+Starting with version 1.0.10, [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager) added the [`useBoxesStatus`](https://github.com/netless-io/window-manager/blob/master/docs/api.md#windowmanagermount) configuration to enable independent management of [netless-app](https://github.com/netless-io/netless-app) window states.
+
 ## Table of Contents
 
 - [Install](#install)
