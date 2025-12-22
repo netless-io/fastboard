@@ -1,16 +1,16 @@
 # appliance-plugin
 
-该插件基于 white-web-sdk 的插件机制, 实现了一套白板的教具的绘制工具. 同时也基于 @netless/window-manager, 实现了可多窗口上使用.
+该插件基于 white-web-sdk 的插件机制，实现了一套白板教具的绘制工具。同时也基于 @netless/window-manager，实现了可在多窗口上使用。
 
 ## 简介
 
-appliance-plugin, 依赖 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)、[@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager), 并基于web API对 [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas) 的支持.
+appliance-plugin 依赖 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk) 和 [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager)，并基于 Web API 对 [OffscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas) 的支持。
 
 ## 原理
 
-1. 该插件主要是基于SpriteJS的2D功能,支持 webgl2 渲染，并可向后兼容降级为 webgl 和 canvas2d
-2. 该插件通过双webWorker + offscreenCanvas机制,把绘制计算+渲染逻辑都放在独立的worker线程中处理.不占用主线程的cpu任务.
-3. 针对移动端有些终端不支持offscreenCanvas,则会把它放在主进程处理.
+1. 该插件主要是基于 SpriteJS 的 2D 功能，支持 WebGL2 渲染，并可向后兼容降级为 WebGL 和 Canvas2D。
+2. 该插件通过双 WebWorker + OffscreenCanvas 机制，把绘制计算和渲染逻辑都放在独立的 worker 线程中处理，不占用主线程的 CPU 任务。
+3. 针对移动端有些终端不支持 OffscreenCanvas，则会把它放在主线程处理。
 
 ## 插件用法
 
@@ -32,18 +32,18 @@ import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
 import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 ```
 
-> **workerjs文件cdn部署**
+> **worker.js 文件 CDN 部署**
 >
->我们采用双worker并发来提高绘制效率,这样让它比主进程效率提高了40%以上.但是两个worker文件上的公共依赖都是重复的,所以如果直接构建到包中,那么会大大增加包体积.所以我们允许workerjs文件cdn部署,只要把@netless/appliance-plugin/cdn下的文件部署到cdn中即可,然后通过插件中的getInstance的第二个参数options.cdn中配置上两个workerjs的cdn地址即可.这样就可以解决包体积过大的问题.
+> 我们采用双 worker 并发来提高绘制效率，这样让它比主线程效率提高了 40% 以上。但是两个 worker 文件上的公共依赖都是重复的，所以如果直接构建到包中，那么会大大增加包体积。所以我们允许 worker.js 文件 CDN 部署，只要把 `@netless/appliance-plugin/cdn` 下的文件部署到 CDN 中即可，然后通过插件中的 `getInstance` 的第二个参数 `options.cdn` 中配置上两个 worker.js 的 CDN 地址即可。这样就可以解决包体积过大的问题。
 >
-> **总包大概在400kB,两个wokerjs各有800kB.** 如果需要考虑构建的包体积大小的,请选择配置cdn.
+> **总包大概在 400kB，两个 worker.js 各有 800kB。** 如果需要考虑构建的包体积大小的，请选择配置 CDN。
 
 ### 接入方式参考
 
 #### fastboard(直接对接fastboard)
 ```js
 
-// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
+// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -115,7 +115,7 @@ import '@netless/appliance-plugin/dist/style.css';
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
-// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
+// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -129,7 +129,7 @@ const room = await whiteWebSdk.joinRoom({
     invisiblePlugins: [WindowManager, ApplianceMultiPlugin],
     useMultiViews: true, 
 })
-const manager = await WindowManager.mount({ room , container:elm, chessboard: true, cursor: true, supportAppliancePlugin: true});
+const manager = await WindowManager.mount({ room, container: elm, chessboard: true, cursor: true, supportAppliancePlugin: true});
 if (manager) {
     await manager.switchMainViewToWriter();
     await ApplianceMultiPlugin.getInstance(manager,
@@ -154,7 +154,7 @@ import '@netless/appliance-plugin/dist/style.css';
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-// 引入worker.js方式可选, 如果走cdn,可以不用从dist中引入,如果从dist中引入,需要以资源模块方式并通过bolb内联形式配置到options.cdn中.如`?raw`,这个需要打包器的支持,vite默认支持`?raw`,webpack需要配置 raw-loader or asset/source.
+// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -206,7 +206,7 @@ module: {
 
 #### 优化原有接口
 
-插件重新实现了一些room或windowmanager上的同名接口,但是我们内部已经通过``injectMethodToObject`` 重新注入回原来的对象中.从而外部用户无需任何改动.如以下几个:
+插件重新实现了一些 room 或 windowmanager 上的同名接口，但是我们内部已经通过 `injectMethodToObject` 重新注入回原来的对象中。从而外部用户无需任何改动。如以下几个：
 ```js
     // 内部 hack
     injectMethodToObject(windowmanager, 'undo');
@@ -238,12 +238,12 @@ module: {
 - `getImagesInformation`
 - [`cleanCurrentScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#cleanCurrentScene)
 
-2. windowmanager上接口
+2. WindowManager 接口
 - [`cleanCurrentScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#cleanCurrentScene)
 - [`canUndoSteps`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#canUndoSteps)
 - [`canRedoSteps`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#canUndoSteps)
 
-3. windowmanager的mainview上的接口
+3. WindowManager 的 mainView 上的接口
 - [`setMemberState`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#setmemberstate)
 - [`undo`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#undo)
 - [`redo`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#redo)
@@ -254,21 +254,21 @@ module: {
 - `getImagesInformation`
 - [`cleanCurrentScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#cleanCurrentScene)
 
-4. 自定义
-- `getBoundingRectAsync` 替代接口 room.getBoundingRect
-- `screenshotToCanvasAsync` 替代接口 [room.screenshotToCanvas](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#screenshotToCanvas)
-- `scenePreviewAsync` 替代接口 [room.scenePreview](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#scenePreview)
-- `fillSceneSnapshotAsync` 替代接口 [room.fillSceneSnapshot](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#fillSceneSnapshot)
-- `destroy` 销毁appliance-plugin的实例
-- `addListener` 添加appliance-plugin内部事件监听器
-- `removeListener` 移除appliance-plugin内部事件监听器
-- `disableDeviceInputs` 替代接口 [room.disableDeviceInputs](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableDeviceInputs)
-- `disableEraseImage` 替代接口 [room.disableEraseImage](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableEraseImage) **该方法只禁止整体擦除的橡皮擦对图片的擦除, 局部橡皮擦无效**
-- `disableCameraTransform` 替代接口 [room.disableCameraTransform](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableCameraTransform)
+4. 自定义接口
+- `getBoundingRectAsync` - 替代接口 `room.getBoundingRect`
+- `screenshotToCanvasAsync` - 替代接口 [room.screenshotToCanvas](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#screenshotToCanvas)
+- `scenePreviewAsync` - 替代接口 [room.scenePreview](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#scenePreview)
+- `fillSceneSnapshotAsync` - 替代接口 [room.fillSceneSnapshot](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#fillSceneSnapshot)
+- `destroy` - 销毁 appliance-plugin 的实例
+- `addListener` - 添加 appliance-plugin 内部事件监听器
+- `removeListener` - 移除 appliance-plugin 内部事件监听器
+- `disableDeviceInputs` - 替代接口 [room.disableDeviceInputs](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableDeviceInputs)
+- `disableEraseImage` - 替代接口 [room.disableEraseImage](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableEraseImage) **该方法只禁止整体擦除的橡皮擦对图片的擦除，局部橡皮擦无效**
+- `disableCameraTransform` - 替代接口 [room.disableCameraTransform](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableCameraTransform)
 
-5. 不兼容
-- [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) appliance-plugin开启后,笔记不能按room的方式导出
-- [服务端截图](https://doc.shengwang.cn/doc/whiteboard/restful/fastboard-sdk/restful-wb/operations/post-v5-rooms-uuid-screenshots), appliance-plugin开启后, 笔记不能通过调用服务端截图方式获取截图,而需要改用`screenshotToCanvasAsync`获取
+5. 不兼容接口
+- [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) - appliance-plugin 开启后，笔记不能按 room 的方式导出
+- [服务端截图](https://doc.shengwang.cn/doc/whiteboard/restful/fastboard-sdk/restful-wb/operations/post-v5-rooms-uuid-screenshots) - appliance-plugin 开启后，笔记不能通过调用服务端截图方式获取截图，而需要改用 `screenshotToCanvasAsync` 获取
 
 #### 新功能
 1. 激光铅笔教具 (Version >=1.1.1)
@@ -520,10 +520,10 @@ module: {
     ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
 
 ### 配置参数
-``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)``
-- wm: `` WindowManager\room\player``。多窗口模式下传入的是WindowManager，单窗口模式下传入的是room或者player(白板回放模式)。
-- adaptor: 配置适配器.
-    - ``options: AppliancePluginOptions``; 必须配置,其中`cdn`为必填项。
+`getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)`
+- `wm`: `WindowManager | Room | Player`。多窗口模式下传入的是 `WindowManager`，单窗口模式下传入的是 `Room` 或者 `Player`（白板回放模式）。
+- `adaptor`: 配置适配器。
+    - `options: AppliancePluginOptions` - 必须配置，其中 `cdn` 为必填项。
         ```js
             export type AppliancePluginOptions = {
                 /** cdn配置项 */
@@ -567,14 +567,14 @@ module: {
                 textEditor?: TextEditorOpt;
             }
         ```
-    - ``cursorAdapter?: CursorAdapter``; 非必填, 单白板模式下, 配置的自定义鼠标样式。
-    - ``logger?: Logger``; 非必填, 配置日志打印器对象. 不填写默认在本地console输出, 如果需要把日志上传到指定server, 则需要手动配置.
-        >如需要上传到白板日志服务器,可以把room上的logger配置到该项目。
+    - `cursorAdapter?: CursorAdapter` - 非必填，单白板模式下，配置的自定义鼠标样式。
+    - `logger?: Logger` - 非必填，配置日志打印器对象。不填写默认在本地 console 输出，如果需要把日志上传到指定 server，则需要手动配置。
+        > 如需要上传到白板日志服务器，可以把 `room.logger` 配置到该项目。
 
-### 前端调试介绍
-对接过程中如果想了解和跟踪插件内部状态,可以通过以下几个控制台指令,查看内部数据.
+### 前端调试
+对接过程中如果想了解和跟踪插件内部状态，可以通过以下几个控制台指令，查看内部数据。
 ```js
-const applianPlugin = await ApplianceSinglePlugin.getInstance(...)
-appliancePlugin.currentManager  // 可以查看到包版本号,内部状态等
-appliancePlugin.currentManager.consoleWorkerInfo()  // 可以查看到worker上的绘制信息
+const appliancePlugin = await ApplianceSinglePlugin.getInstance(...)
+appliancePlugin.currentManager  // 可以查看到包版本号，内部状态等
+appliancePlugin.currentManager.consoleWorkerInfo()  // 可以查看到 worker 上的绘制信息
 ```

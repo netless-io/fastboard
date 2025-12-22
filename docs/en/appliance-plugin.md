@@ -1,15 +1,16 @@
 # appliance-plugin 
- 
-This plugin is based on the plugin mechanism of white-web-sdk, and realizes a set of whiteboard teaching AIDS drawing tools. At the same time, it is also based on @netless/window-manager, which can be used on multiple Windows. 
+
+This plugin is based on the plugin mechanism of white-web-sdk, and implements a set of whiteboard teaching aids drawing tools. It is also based on @netless/window-manager, enabling usage across multiple windows. 
  
 ## Introduction 
  
-appliance-plugin, Depend on [white-web-SDK](https://www.npmjs.com/package/white-web-sdk), [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager), And based on web API support for [offscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas).
+appliance-plugin depends on [white-web-sdk](https://www.npmjs.com/package/white-web-sdk) and [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager), and is based on web API support for [OffscreenCanvas](https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas).
 
 ## Principle 
- 
-1. The plugin is mainly based on the 2D functionality of SpriteJS, supports webgl2 rendering, and is backward compatible with downgrades to webgl and canvas2d 
-2. The plugin uses the dual webWorker+offscreenCanvas mechanism to process the drawing calculation + rendering logic in a separate worker thread. Does not occupy cpu tasks of the main thread. 
+
+1. The plugin is mainly based on the 2D functionality of SpriteJS, supports WebGL2 rendering, and is backward compatible with downgrades to WebGL and Canvas2D.
+2. The plugin uses a dual WebWorker + OffscreenCanvas mechanism to process drawing calculations and rendering logic in a separate worker thread, which does not occupy CPU tasks of the main thread.
+3. For mobile devices that do not support OffscreenCanvas, the plugin will process it in the main thread.
  
 ## Plugin usage 
  
@@ -33,15 +34,17 @@ import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
  
 > workerjs file cdn deployment
 > 
-> We used two-worker concurrency to improve drawing efficiency, which improved it by more than 40% over single-thread efficiency. However, the common dependencies on the two worker files are repeated, so building directly into the package will greatly increase the package size. So we allow the workerjs file cdn deployment by simply deploying the file under @netless/appliance-plugin/cdn into the cdn and then configuring the c of the last two workerjs via the second parameter of getInstance in the plug-in, options.cdn The dn address is fine. This solves the problem of excessive package size
+> **Worker.js file CDN deployment**
 > 
-> - **The total package is about 300kB, and the two wokerjs are 600kB each** If you need to consider the size of the package you are building, select Configure cdn. 
+> We use two-worker concurrency to improve drawing efficiency, which improves it by more than 40% over single-thread efficiency. However, the common dependencies in the two worker files are repeated, so building directly into the package will greatly increase the package size. Therefore, we allow worker.js file CDN deployment by simply deploying the files under `@netless/appliance-plugin/cdn` to your CDN, and then configuring the two worker.js CDN addresses via the second parameter `options.cdn` of `getInstance` in the plugin. This solves the problem of excessive package size.
+> 
+> - **The total package is about 400kB, and the two worker.js files are 800kB each.** If you need to consider the size of the package you are building, please configure CDN. 
  
 ### Access mode reference 
 
 #### fastboard(interconnection with fastboard)
 ```js
-// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
+// The method of importing worker.js is optional. If CDN is used, it does not need to be imported from dist. If importing from dist, it needs to be configured into options.cdn in the form of a resource module and blob inline. For example, '?raw' requires bundler support. Vite supports '?raw' by default, while webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -111,7 +114,7 @@ import '@netless/appliance-plugin/dist/style.css';
 import { WhiteWebSdk } from "white-web-sdk"; 
 import { WindowManager } from "@netless/window-manager"; 
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin'; 
-// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
+// The method of importing worker.js is optional. If CDN is used, it does not need to be imported from dist. If importing from dist, it needs to be configured into options.cdn in the form of a resource module and blob inline. For example, '?raw' requires bundler support. Vite supports '?raw' by default, while webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -125,10 +128,10 @@ const room = await whiteWebSdk.joinRoom({
     invisiblePlugins: [WindowManager, ApplianceMultiPlugin], 
     useMultiViews: true, 
 }) 
-const manager = await WindowManager.mount({ room , container:elm, chessboard: true, cursor: true, supportAppliancePlugin: true}); 
+const manager = await WindowManager.mount({ room, container: elm, chessboard: true, cursor: true, supportAppliancePlugin: true}); 
 if (manager) { 
-// await manager.switchMainViewToWriter(); 
-await ApplianceMultiPlugin.getInstance(manager,
+    // await manager.switchMainViewToWriter(); 
+    await ApplianceMultiPlugin.getInstance(manager,
         {
             options: {
                 cdn: {
@@ -146,7 +149,7 @@ await ApplianceMultiPlugin.getInstance(manager,
 ```js 
 import { WhiteWebSdk } from "white-web-sdk"; 
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin'; 
-// The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
+// The method of importing worker.js is optional. If CDN is used, it does not need to be imported from dist. If importing from dist, it needs to be configured into options.cdn in the form of a resource module and blob inline. For example, '?raw' requires bundler support. Vite supports '?raw' by default, while webpack needs to configure raw-loader or asset/source.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
@@ -156,9 +159,9 @@ const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
  
 const whiteWebSdk = new WhiteWebSdk(...) 
 const room = await whiteWebSdk.joinRoom({ 
-... 
-invisiblePlugins: [ApplianceSinglePlugin], 
-wrappedComponents: [ApplianceSigleWrapper] 
+    ... 
+    invisiblePlugins: [ApplianceSinglePlugin], 
+    wrappedComponents: [ApplianceSigleWrapper] 
 }) 
 await ApplianceSinglePlugin.getInstance(room,
     {
@@ -197,7 +200,7 @@ module: {
 
 #### Optimize legacy interface
 
-The plugin re-implements some of the interfaces of the same name on room or Windows Manager, but internally we have re-injected them back into the original object via injectMethodToObject. No changes are required for external users. As follows:
+The plugin re-implements some interfaces with the same names on room or WindowManager, but internally we have re-injected them back into the original object via `injectMethodToObject`. No changes are required for external users. As follows:
 ```js
     // Internal hack
     injectMethodToObject(windowmanager, 'undo');
@@ -229,10 +232,12 @@ The following interfaces are involved:
 - `getImagesInformation` 
 - `cleanCurrentScene` 
  
-2. windowmanager upper interface 
-- `cleanCurrentScene` 
+2. WindowManager interface 
+- `cleanCurrentScene`
+- `canUndoSteps`
+- `canRedoSteps` 
  
-3. The mainview interface of windowmanager 
+3. WindowManager mainView interface 
 - `setMemberState` 
 - `undo` 
 - `redo` 
@@ -243,29 +248,30 @@ The following interfaces are involved:
 - `getImagesInformation` 
 - `cleanCurrentScene` 
  
-4. Customize 
-- `getBoundingRectAsync` Replace the api `room.getBoundingRect`
-- `screenshotToCanvasAsync` Replace the api `room.screenshotToCanvas`
-- `scenePreviewAsync` Replace the api `room.scenePreview`
-- `destroy` Destroy the instance of appliance-plugin
-- `addListener` add appliance plugin Listener
-- `removeListener` remove appliance plugin Listener
-- `disableDeviceInputs` Replace the api `room.disableDeviceInputs`
-- `disableEraseImage` Replace the api `room.disableEraseImage` **This method only suppert when currentApplianceName is `eraser`**
-- `disableCameraTransform` Replace the api `room.disableCameraTransform`
+4. Custom interfaces
+- `getBoundingRectAsync` - Replaces the API `room.getBoundingRect`
+- `screenshotToCanvasAsync` - Replaces the API `room.screenshotToCanvas`
+- `scenePreviewAsync` - Replaces the API `room.scenePreview`
+- `fillSceneSnapshotAsync` - Replaces the API `room.fillSceneSnapshot`
+- `destroy` - Destroys the instance of appliance-plugin
+- `addListener` - Adds appliance plugin listener
+- `removeListener` - Removes appliance plugin listener
+- `disableDeviceInputs` - Replaces the API `room.disableDeviceInputs`
+- `disableEraseImage` - Replaces the API `room.disableEraseImage` **This method only supports when currentApplianceName is `eraser`**
+- `disableCameraTransform` - Replaces the API `room.disableCameraTransform`
 
-5.Incompatible
-- `exportScene` When the appliance-plugin is enabled, notes cannot be exported in room mode
-- Server-side screenshot, after the appliance-plugin is turned on, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
+5. Incompatible interfaces
+- `exportScene` - When the appliance-plugin is enabled, notes cannot be exported in room mode
+- Server-side screenshot - After the appliance-plugin is turned on, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
 
 #### New features
-1. laserPen teaching aids (Version >=1.1.1)
+1. Laser pen teaching aid (Version >=1.1.1)
     ```js
     import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
     room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
     ```
     ![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
-2. Extended Teaching AIDS (Version >=1.1.1)
+2. Extended teaching aids (Version >=1.1.1)
     ```js
     export enum EStrokeType { 
         /** Solid line */ 
@@ -278,7 +284,7 @@ The following interfaces are involved:
         LongDotted = 'LongDotted' 
     };
     export type ExtendMemberState = {
-        /** The teaching AIDS selected by the current user */ 
+        /** The teaching aids selected by the current user */ 
         currentApplianceName: ApplianceNames; 
         /** Whether to open the pen tip */ 
         strokeType? : EStrokeType; 
@@ -312,7 +318,7 @@ The following interfaces are involved:
         placement? : SpeechBalloonPlacement;
     };
     import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
-    /** Set the state of teaching AIDS  */
+    /** Set the state of teaching aids  */
     room.setMemberState({ ... } as ExtendMemberState);
     manager.mainView.setMemberState({ ... } as ExtendMemberState);
     appliance.setMemberState({ ... } as ExtendMemberState);
@@ -338,7 +344,7 @@ The following interfaces are involved:
     ```js
     setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
     ```
-    ![Image](https://github.com/user-attachments/assets/fe9e6bdf-0141-4842-bfb5-522b6e76def3)
+    ![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
     - Set shape fill color and fill opacity
     ```js
     setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
@@ -364,7 +370,7 @@ The following interfaces are involved:
     ![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
 
 
-3. Split screen display Elements (little whiteboard featrue), need to combine [`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
+3. Split screen display elements (little whiteboard feature), need to combine [`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
     ![Image](https://github.com/user-attachments/assets/e227bc0f-ea79-481e-95a9-18cc3648fa25)
 4. Minimap function (Version >=1.1.6)
     ```js
@@ -374,10 +380,10 @@ The following interfaces are involved:
      */
     createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
     /** Destroy minimap */
-    destroyMiniMap(viewId: string): Promise<void>;
+    destroyMiniMap(viewId: string): Promise<boolean>;
     ```
     ![Image](https://github.com/user-attachments/assets/8888dc2f-ba66-4807-aa12-16530b3b8a3c)
-5. Filter Elements (Version >=1.1.6)
+5. Filter elements (Version >=1.1.6)
     ```js
     /** Filter Elements
      * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
@@ -395,7 +401,7 @@ The following interfaces are involved:
     cancelFilterRender(viewId: string, isSync?:boolean): void;
     ```
     ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
-6. ExtrasOption Custom Tool Configuration
+6. ExtrasOption custom tool configuration
     - Custom Pen Styles
         - Dotted Stroke Style
         ```ts
@@ -507,11 +513,11 @@ The following interfaces are involved:
     plugin.usePlugin(autoDrawPlugin);
     ```
     ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
-### Configure parameters 
-``getInstance(wm: WindowManager, adaptor: ApplianceAdaptor)`` 
-- wm: WindowManager\room\player. In multi-window mode, you pass WindowManager, and in single-window mode, you pass room or player(whiteboard playback mode). 
-- adaptor: configures the adapter. 
-    - ``options: AppliancePluginOptions``; It must be configured, among which `cdn` is a required field.
+### Configuration parameters 
+`getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)` 
+- `wm`: `WindowManager | Room | Player`. In multi-window mode, pass `WindowManager`. In single-window mode, pass `Room` or `Player` (whiteboard playback mode). 
+- `adaptor`: Configures the adapter. 
+    - `options: AppliancePluginOptions` - Must be configured, where `cdn` is a required field.
         ```js 
             export type AppliancePluginOptions = { 
                 /** cdn configuration item */ 
@@ -555,15 +561,15 @@ The following interfaces are involved:
                 textEditor? : TextEditorOpt;
             }
         ```
-    - ``cursorAdapter? : CursorAdapter``; This parameter is optional. In single whiteboard mode, customize the mouse style.
-    - ``logger?: Logger``; This parameter is optional. Configure the log printer object. The default output is on the local console. If logs need to be uploaded to the specified server, you need to manually configure the configuration.
-        >If you need to upload the log to the whiteboard log server, configure the `room.logger` to this item。
+    - `cursorAdapter?: CursorAdapter` - Optional. In single whiteboard mode, customize the mouse style.
+    - `logger?: Logger` - Optional. Configure the log printer object. The default output is on the local console. If logs need to be uploaded to the specified server, you need to manually configure it.
+        > If you need to upload the log to the whiteboard log server, configure `room.logger` to this item.
 
-### Front-end debugging introduction 
-During the interconnection process, if you want to understand and track the internal status of the plug-in, you can view the internal data through the following console commands. 
+### Front-end debugging 
+During the integration process, if you want to understand and track the internal status of the plugin, you can view the internal data through the following console commands. 
 
 ```js 
-const applianPlugin = await ApplianceSinglePlugin.getInstance(...) 
-applianPlugin.CurrentManager  // can see the package version number, internal state, etc 
-applianPlugin.CurrentManager.ConsoleWorkerInfo () // can check information to draw on the worker 
+const appliancePlugin = await ApplianceSinglePlugin.getInstance(...) 
+appliancePlugin.currentManager  // can see the package version number, internal state, etc 
+appliancePlugin.currentManager.consoleWorkerInfo()  // can check information to draw on the worker 
 ```
