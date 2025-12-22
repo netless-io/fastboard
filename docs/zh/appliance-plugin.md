@@ -208,22 +208,22 @@ module: {
 
 插件重新实现了一些 room 或 windowmanager 上的同名接口，但是我们内部已经通过 `injectMethodToObject` 重新注入回原来的对象中。从而外部用户无需任何改动。如以下几个：
 ```js
-    // 内部 hack
-    injectMethodToObject(windowmanager, 'undo');
-    injectMethodToObject(windowmanager, 'redo');
-    injectMethodToObject(windowmanager,'cleanCurrentScene');
-    injectMethodToObject(windowmanager,'insertImage');
-    injectMethodToObject(windowmanager,'completeImageUpload');
-    injectMethodToObject(windowmanager,'lockImage');
-    injectMethodToObject(room,'getImagesInformation');
-    injectMethodToObject(room,'callbacks');
-    injectMethodToObject(room,'screenshotToCanvasAsync');
-    injectMethodToObject(room,'getBoundingRectAsync');
-    injectMethodToObject(room,'scenePreviewAsync');
-    injectMethodToObject(windowmanager.mainView,'setMemberState');
-    // 这些我们可以通过前端日志看到调用行为,例如:
-    // [ApplianceMultiPlugin] setMemberState
-    // [ApplianceMultiPlugin] cleanCurrentScene
+// 内部 hack
+injectMethodToObject(windowmanager, 'undo');
+injectMethodToObject(windowmanager, 'redo');
+injectMethodToObject(windowmanager,'cleanCurrentScene');
+injectMethodToObject(windowmanager,'insertImage');
+injectMethodToObject(windowmanager,'completeImageUpload');
+injectMethodToObject(windowmanager,'lockImage');
+injectMethodToObject(room,'getImagesInformation');
+injectMethodToObject(room,'callbacks');
+injectMethodToObject(room,'screenshotToCanvasAsync');
+injectMethodToObject(room,'getBoundingRectAsync');
+injectMethodToObject(room,'scenePreviewAsync');
+injectMethodToObject(windowmanager.mainView,'setMemberState');
+// 这些我们可以通过前端日志看到调用行为,例如:
+// [ApplianceMultiPlugin] setMemberState
+// [ApplianceMultiPlugin] cleanCurrentScene
 ```
 具体涉及以下接口:
 
@@ -264,260 +264,339 @@ module: {
 - `removeListener` - 移除 appliance-plugin 内部事件监听器
 - `disableDeviceInputs` - 替代接口 [room.disableDeviceInputs](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableDeviceInputs)
 - `disableEraseImage` - 替代接口 [room.disableEraseImage](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableEraseImage) **该方法只禁止整体擦除的橡皮擦对图片的擦除，局部橡皮擦无效**
-- `disableCameraTransform` - 替代接口 [room.disableCameraTransform](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableCameraTransform)
+- `disableCameraTransform` - 替代接口 [room.disableCameraTransform](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#disableCameraTransform) (Version >=1.1.17)
+- `insertText` - 在指定位置插入文字 (Version >=1.1.18)
+- `updateText` - 编辑指定文字的内容 (Version >=1.1.18)
+- `blurText` - 失去文本焦点 (Version >=1.1.19)
+- `hasElements` - 指定场景下是否存在元素 (Version >=1.1.19)
+- `getElements` - 获取场景下的所有元素 (Version >=1.1.19)
+- `stopDraw` - 停止Draw事件 (Version >=1.1.19)
+- `setViewLocalScenePathChange` - 设置白板本地场景路径变化 (Version >=1.1.27)
 
 5. 不兼容接口
 - [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) - appliance-plugin 开启后，笔记不能按 room 的方式导出
 - [服务端截图](https://doc.shengwang.cn/doc/whiteboard/restful/fastboard-sdk/restful-wb/operations/post-v5-rooms-uuid-screenshots) - appliance-plugin 开启后，笔记不能通过调用服务端截图方式获取截图，而需要改用 `screenshotToCanvasAsync` 获取
 
 #### 新功能
-1. 激光铅笔教具 (Version >=1.1.1)
-    ```js
-    import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
-    room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
-    ```
-    ![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
-2. 扩展教具 (Version >=1.1.1)
-    在原来的[白板教具](https://doc.shengwang.cn/api-ref/whiteboard/javascript/globals.html#memberstate)类型上,增加了一些扩展功能属性,如下:
-    ```js
-    export enum EStrokeType {
-        /** 实心线条 */
-        Normal = 'Normal',
-        /** 带笔锋线条 */
-        Stroke = 'Stroke',
-        /** 虚线线条 */
-        Dotted = 'Dotted',
-        /** 长虚线线条 */
-        LongDotted = 'LongDotted'
-    };
-    export type ExtendMemberState = {
-        /** 当前用户所选择的教具 */
-        currentApplianceName: ApplianceNames;
-        /** 是否开启笔锋 */
-        strokeType?: EStrokeType;
-        /** 是否删除整条线段 */
-        isLine?: boolean;
-        /** 线框透明度 */
-        strokeOpacity?: number;
-        /** 是否开启激光笔 */
-        useLaserPen?: boolean;
-        /** 激光笔保持时间, second */
-        duration?: number;
-        /** 填充样式 */
-        fillColor?: Color;
-        /** 填充透明度 */
-        fillOpacity?: number;
-        /** 使用 ``shape`` 教具时，绘制图形的具体类型 */
-        shapeType?: ShapeType;
-        /** 多边形顶点数 */
-        vertices?:number;
-        /** 多边形向内顶点步长 */
-        innerVerticeStep?:number;
-        /** 多边形向内顶点与外顶点半径比率 */
-        innerRatio?: number;
-        /** 文字透明度 */
-        textOpacity?: number;
-        /** 文字背景颜色  */
-        textBgColor?: Color;
-        /** 文字背景颜色透明度 */
-        textBgOpacity?: number;
-        /** 位置 */
-        placement?: SpeechBalloonPlacement;
-    };
-    import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
-    /** 设置教具状态  */
-    room.setMemberState({ ... } as ExtendMemberState);
-    manager.mainView.setMemberState({ ... } as ExtendMemberState);
-    appliance.setMemberState({ ... } as ExtendMemberState);
-    ```
-    - 设置笔记类型:
-    ```js
-    // 实心线条
-    setMemberState({strokeType: EStrokeType.Normal });
-    // 带笔锋线条
-    setMemberState({strokeType: EStrokeType.Stroke });
-    // 虚线线条
-    setMemberState({strokeType: EStrokeType.Dotted });
-    // 长虚线线条
-    setMemberState({strokeType: EStrokeType.LongDotted });
-    ```
-    ![Image](https://github.com/user-attachments/assets/fabe4ea7-db42-4c31-a751-10df4dd82807)
-    - 设置笔记、图形边框透明度(马克笔):
-    ```js
-    setMemberState({strokeOpacity: 0.5 });
-    ```
-    ![Image](https://github.com/user-attachments/assets/1aac265d-9643-4858-bcc6-a43af94ed73e)
-    - 设置文字颜色、透明度、背景颜色、透明度
-    ```js
-    setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
-    ```
-    ![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
-    - 设置图形填充色及透明度
-    ```js
-    setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
-    ```
-    ![Image](https://github.com/user-attachments/assets/468b930c-3db0-4355-87be-6b55af764799)
-    - 自定义正多边形
-    ```js
-    // 正五边形
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Polygon, vertices: 5});
-    ```
-    ![Image](https://github.com/user-attachments/assets/f34540f5-d779-42f9-bb8a-91250fcfe4e1)
-    - 自定义星形
-    ```js
-    // 胖六角星
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Star, vertices: 12, innerVerticeStep: 2, innerRatio: 0.8});
-    ```
-    ![Image](https://github.com/user-attachments/assets/49215362-722a-47d3-998f-cc933a2b5126)
-    - 自定义泡泡框方向
-    ```js
-    // 左下角提示框
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.SpeechBalloon, placement: 'bottomLeft'});
-    ```
-    ![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
-3. 分屏显示笔记(小白板功能),需要结合[`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
-    ![Image](https://github.com/user-attachments/assets/20810ea6-7d85-4e72-b75f-185599fffaf8)
-4. 小地图功能 (Version >=1.1.6)
-    ```js
-    /** 创建小地图
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param div 小地图DOM容器
-     */
-    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
-    /** 销毁小地图 */
-    destroyMiniMap(viewId: string): Promise<boolean>;
-    ```
-    ![Image](https://github.com/user-attachments/assets/8888dc2f-ba66-4807-aa12-16530b3b8a3c)
-5. 过滤笔记 (Version >=1.1.6)
-    ```js
-    /** 过滤笔记
-     * @param viewId 多白板下的白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param filter 过滤条件
-     *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染; [uid1, uid2, ...] 为指定渲染的用户uid集合
-     *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏; [uid1, uid2, ...] 为指定隐藏的用户uid集合
-     *  clear: 笔记是否可被擦除, [uid1, uid2, ...] 或 true. true, 即都可以被擦除; [uid1, uid2, ...] 为指定可被擦除的用户uid集合
-     * @param isSync 是否同步到白板房间中, 默认为true, 即设置会同步给所有用户
-     */
-    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
-    /** 取消过滤笔记
-     * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
-     * @param isSync 是否同步到白板房间中, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
-     */
-    cancelFilterRender(viewId: string, isSync?:boolean): void;
-    ```
-    ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
-6. ExtrasOption自定义教具配置
-    - 自定义画笔样式
-        - 短虚线样式
-        ```ts
-            export type DottedOpt = {
-                /** 虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
-                lineCap: "square" | "round";
-                /** 虚线,单线段长度, 默认值为 1, 即单线段长度为 1 */
-                segment: number;
-                /** 虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
-                gap: number;
-            };
-            /** 短虚线样式 */
-            dottedStroke: {
-                lineCap: "round",
-                segment: 1,
-                gap: 2,
-            },
-        ```
-        ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
-        - 长虚线样式
-        ```ts
-            export type LongDottedOpt = {
-                /** 长虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
-                lineCap: "square" | "round";
-                /** 长虚线,单线段长度, 默认值为 1, 即单线段长度为 1 * thickness */
-                segment: number;
-                /** 长虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
-                gap: number;
-            };
-            /** 长虚线线样式 */
-            longDottedStroke: {
-                lineCap: "round",
-                segment: 2,
-                gap: 3,
-            },
-        ```
-        ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
-        - 普通画笔样式
-        ```ts
-            export type NormalOpt = {
-                /** 端点样式, square: 平头, round: 圆头, 默认值为 round */
-                lineCap: "square" | "round";
-            };
-            /** 普通画笔样式 */
-            normalStroke: {
-                lineCap: "round",
-            }
-        ```
-        ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+##### 激光铅笔教具 (Version >=1.1.1)
+```js
+import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
+room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+```
+![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
 
-    - 文字自定义样式
+##### 扩展教具 (Version >=1.1.1)
+在原来的[白板教具](https://doc.shengwang.cn/api-ref/whiteboard/javascript/globals.html#memberstate)类型上,增加了一些扩展功能属性,如下:
+
+```js
+export enum EStrokeType {
+    /** 实心线条 */
+    Normal = 'Normal',
+    /** 带笔锋线条 */
+    Stroke = 'Stroke',
+    /** 虚线线条 */
+    Dotted = 'Dotted',
+    /** 长虚线线条 */
+    LongDotted = 'LongDotted'
+};
+export type ExtendMemberState = {
+    /** 当前用户所选择的教具 */
+    currentApplianceName: ApplianceNames;
+    /** 是否开启笔锋 */
+    strokeType?: EStrokeType;
+    /** 是否删除整条线段 */
+    isLine?: boolean;
+    /** 线框透明度 */
+    strokeOpacity?: number;
+    /** 是否开启激光笔 */
+    useLaserPen?: boolean;
+    /** 激光笔保持时间, second */
+    duration?: number;
+    /** 填充样式 */
+    fillColor?: Color;
+    /** 填充透明度 */
+    fillOpacity?: number;
+    /** 使用 ``shape`` 教具时，绘制图形的具体类型 */
+    shapeType?: ShapeType;
+    /** 多边形顶点数 */
+    vertices?:number;
+    /** 多边形向内顶点步长 */
+    innerVerticeStep?:number;
+    /** 多边形向内顶点与外顶点半径比率 */
+    innerRatio?: number;
+    /** 文字透明度 */
+    textOpacity?: number;
+    /** 文字背景颜色  */
+    textBgColor?: Color;
+    /** 文字背景颜色透明度 */
+    textBgOpacity?: number;
+    /** 位置 */
+    placement?: SpeechBalloonPlacement;
+};
+import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
+/** 设置教具状态  */
+room.setMemberState({ ... } as ExtendMemberState);
+manager.mainView.setMemberState({ ... } as ExtendMemberState);
+appliance.setMemberState({ ... } as ExtendMemberState);
+```
+1. 设置笔记类型:
+```js
+// 实心线条
+setMemberState({strokeType: EStrokeType.Normal });
+// 带笔锋线条
+setMemberState({strokeType: EStrokeType.Stroke });
+// 虚线线条
+setMemberState({strokeType: EStrokeType.Dotted });
+// 长虚线线条
+setMemberState({strokeType: EStrokeType.LongDotted });
+```
+![Image](https://github.com/user-attachments/assets/fabe4ea7-db42-4c31-a751-10df4dd82807)
+
+2. 设置笔记、图形边框透明度(马克笔):
+```js
+setMemberState({strokeOpacity: 0.5 });
+```
+![Image](https://github.com/user-attachments/assets/1aac265d-9643-4858-bcc6-a43af94ed73e)
+
+3. 设置文字颜色、透明度、背景颜色、透明度
+```js
+setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
+```
+![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
+
+4. 设置图形填充色及透明度
+```js
+setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
+```
+![Image](https://github.com/user-attachments/assets/468b930c-3db0-4355-87be-6b55af764799)
+
+5. 自定义正多边形
+```js
+// 正五边形
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Polygon, vertices: 5});
+```
+![Image](https://github.com/user-attachments/assets/f34540f5-d779-42f9-bb8a-91250fcfe4e1)
+
+6. 自定义星形
+```js
+// 胖六角星
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Star, vertices: 12, innerVerticeStep: 2, innerRatio: 0.8});
+```
+![Image](https://github.com/user-attachments/assets/49215362-722a-47d3-998f-cc933a2b5126)
+
+7. 自定义泡泡框方向
+```js
+// 左下角提示框
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.SpeechBalloon, placement: 'bottomLeft'});
+```
+![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
+
+##### 分屏显示笔记(小白板功能),需要结合[`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
+![Image](https://github.com/user-attachments/assets/20810ea6-7d85-4e72-b75f-185599fffaf8)
+
+##### 小地图功能 (Version >=1.1.6)
+```js
+/** 创建小地图
+ * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+ * @param div 小地图DOM容器
+ */
+createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
+/** 销毁小地图 */
+destroyMiniMap(viewId: string): Promise<boolean>;
+```
+![Image](https://github.com/user-attachments/assets/8888dc2f-ba66-4807-aa12-16530b3b8a3c)
+
+##### 文字编辑API (Version >=1.1.18)
+```js
+/** 在指定位置插入文字
+ * @param x 第一个字的的左侧边中点，世界坐标系中的 x 坐标
+ * @param y 第一个字的的左侧边中点，世界坐标系中的 y 坐标
+ * @param textContent 初始化文字的内容，不传则为空
+ * @returns 该文字的标识符
+ */
+insertText(x: number, y: number, textContent?: string): string | undefined;
+
+/** 编辑指定文字的内容
+ * @param identifier 文字的标识符。为 insertText() 的返回值。
+ * @param textContent 文字要改成的内容
+ */
+updateText(identifier: string, textContent: string): void;
+
+/** 失去文本焦点 */
+blurText(): void;
+```
+
+##### 元素查询API (Version >=1.1.19)
+```js
+/** 指定场景下是否存在元素
+ * @param scenePath 场景路径, 默认取当前聚焦的场景
+ * @param filter 过滤条件
+ * @returns 是否存在元素
+ */
+hasElements(
+  scenePath?: string,
+  filter?: (toolsType: EToolsKey) => boolean,
+): boolean;
+
+/** 获取场景下的所有元素
+ * @param scenePath 场景路径, 默认取当前聚焦的场景
+ * @param filter 过滤条件
+ * @returns 所有元素
+ */
+getElements(
+  scenePath?: string,
+  filter?: (toolsType: EToolsKey) => boolean,
+): BaseCollectorReducerAction[];
+```
+
+##### 过滤笔记 (Version >=1.1.6)
+```js
+/** 过滤笔记
+ * @param viewId 多白板下的白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+ * @param filter 过滤条件
+ *  render: 笔记是否能要渲染, [uid1, uid2, ...] 或 true. true, 即都会渲染; [uid1, uid2, ...] 为指定渲染的用户uid集合
+ *  hide: 笔记是否隐藏, [uid1, uid2, ...] 或 true. true, 即都要隐藏; [uid1, uid2, ...] 为指定隐藏的用户uid集合
+ *  clear: 笔记是否可被擦除, [uid1, uid2, ...] 或 true. true, 即都可以被擦除; [uid1, uid2, ...] 为指定可被擦除的用户uid集合
+ * @param isSync 是否同步到白板房间中, 默认为true, 即设置会同步给所有用户
+ */
+filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
+/** 取消过滤笔记
+ * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+ * @param isSync 是否同步到白板房间中, 默认为true, 即会同步到其他用户. 请保持和filterRenderByUid设置的一致
+ */
+cancelFilterRender(viewId: string, isSync?:boolean): void;
+```
+![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
+
+##### 设置白板本地场景路径变化 (Version >=1.1.27)
+```js
+/** 设置白板本地场景路径变化
+ * @param viewId 多白板下白板ID, 主白板ID为 `mainView`, 其他白板ID为 addApp() return 的appID
+ * @param scenePath 要设置的场景路径
+ */
+setViewLocalScenePathChange(viewId: string, scenePath: string): Promise<void>;
+```
+
+##### ExtrasOption自定义教具配置
+1. 自定义画笔样式
+    - 短虚线样式
     ```ts
-        export type TextEditorOpt = {
-            /** 是否显示浮动栏 */
-            showFloatBar?: boolean;
-            /** 是否可以通过selector教具切换 */
-            canSelectorSwitch?: boolean;
-            /** 是否右边界自动换行 */
-            rightBoundBreak?: boolean;
-            /** 扩展字体列表 */
-            extendFontFaces?: { fontFamily: string; src: string }[];
-            /** 加载字体超时时间，单位：毫秒 */
-            loadFontFacesTimeout?: number;
-        };
-        // 比如: 设置统一字体库
-        textEditor: {
-          showFloatBar: false,
-          canSelectorSwitch: false,
-          rightBoundBreak: true,
-          extendFontFaces: [
-            {
-              fontFamily: "Noto Sans SC",
-              src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
-            },
-          ],
-          loadFontFacesTimeout: 20000,
-        },
-    ```
-    需要结合css style实现
-    ```css
-    @font-face {
-        font-family: "Noto Sans SC";
-        src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
-            format("woff2");
-        font-display: swap;
-    }
-    html {
-        font-family: "Noto Sans SC";
-    }
-    ```
-
-<!-- 6. 手写图形自动联想功能:`autoDraw` (version >=1.1.7)
-    ```js
-    export type AutoDrawOptions = {
-        /** 自动联想rest api地址 */
-        hostServer: string;
-        /** 存放联想icon列表的容器 */
-        container: HTMLDivElement;
-        /** 绘制结束多久开始激活联想 */
-        delay?: number;
+    export type DottedOpt = {
+        /** 虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
+        lineCap: "square" | "round";
+        /** 虚线,单线段长度, 默认值为 1, 即单线段长度为 1 */
+        segment: number;
+        /** 虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
+        gap: number;
     };
-    import { ApplianceMultiPlugin, AutoDrawPlugin } from '@netless/appliance-plugin';
-    const plugin = await ApplianceMultiPlugin.getInstance(...);
-    const autoDrawPlugin = new AutoDrawPlugin({
-        container: topBarDiv,
-        hostServer: 'https://autodraw-white-backup-hk-hkxykbfofr.cn-hongkong.fcapp.run',
-        delay: 2000
-    });
-    plugin.usePlugin(autoDrawPlugin);
+    /** 短虚线样式 */
+    dottedStroke: {
+        lineCap: "round",
+        segment: 1,
+        gap: 2,
+    },
     ```
-    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
+    ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
+    - 长虚线样式
+    ```ts
+    export type LongDottedOpt = {
+        /** 长虚线端点样式, square: 平头, round: 圆头, 默认值为 round */
+        lineCap: "square" | "round";
+        /** 长虚线,单线段长度, 默认值为 1, 即单线段长度为 1 * thickness */
+        segment: number;
+        /** 长虚线,单线段间隔, 默认值为 2, 即单线段间隔为 2 * thickness */
+        gap: number;
+    };
+    /** 长虚线线样式 */
+    longDottedStroke: {
+        lineCap: "round",
+        segment: 2,
+        gap: 3,
+    },
+    ```
+    ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
+    - 普通画笔样式
+    ```ts
+    export type NormalOpt = {
+        /** 端点样式, square: 平头, round: 圆头, 默认值为 round */
+        lineCap: "square" | "round";
+    };
+    /** 普通画笔样式 */
+    normalStroke: {
+        lineCap: "round",
+    }
+    ```
+    ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+
+2. 文字自定义样式
+```ts
+export type TextEditorOpt = {
+    /** 是否显示浮动栏 */
+    showFloatBar?: boolean;
+    /** 是否可以通过selector教具切换 */
+    canSelectorSwitch?: boolean;
+    /** 是否右边界自动换行 */
+    rightBoundBreak?: boolean;
+    /** 扩展字体列表 */
+    extendFontFaces?: { fontFamily: string; src: string }[];
+    /** 加载字体超时时间，单位：毫秒 */
+    loadFontFacesTimeout?: number;
+};
+// 比如: 设置统一字体库
+textEditor: {
+  showFloatBar: false,
+  canSelectorSwitch: false,
+  rightBoundBreak: true,
+  extendFontFaces: [
+    {
+      fontFamily: "Noto Sans SC",
+      src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
+    },
+  ],
+  loadFontFacesTimeout: 20000,
+},
+```
+需要结合css style实现
+```css
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
+        format("woff2");
+    font-display: swap;
+}
+html {
+    font-family: "Noto Sans SC";
+}
+```
+    
+##### 手写图形自动联想功能:`autoDraw`，需要结合[@netless/appliance-extend-auto-draw-plugin](https://www.npmjs.com/package/@netless/appliance-extend-auto-draw-plugin)
+```js
+export interface AutoDrawOptions {
+    /** 用于访问 OpenRouter 所有模型的 API 密钥 */
+    apiKey?: string;
+    /** 自定义使用的模型 */
+    customModel?: string;
+    /** 用于渲染图标的容器 */
+    container: HTMLDivElement;
+    /** 渲染图标的延迟时间，默认为 2000ms */
+    delay?: number;
+    /**
+     * 将文件上传到 OSS 服务器并返回 URL 地址，如果返回 undefined 则不会使用此功能
+     * @param file 文件对象
+     * @returns 图片 URL 字符串
+     */
+    uploadFile?: (file: File) => Promise<string | undefined>;
+}
+import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
+import { AutoDrawPlugin } from '@netless/appliance-extend-auto-draw-plugin';
+const plugin = await ApplianceMultiPlugin.getInstance(...);
+const autoDrawPlugin = new AutoDrawPlugin({
+    container: topBarDiv,
+    delay: 2000
+});
+plugin.usePlugin(autoDrawPlugin);
+```
+![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
 
 ### 配置参数
 `getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)`
@@ -525,47 +604,54 @@ module: {
 - `adaptor`: 配置适配器。
     - `options: AppliancePluginOptions` - 必须配置，其中 `cdn` 为必填项。
         ```js
-            export type AppliancePluginOptions = {
-                /** cdn配置项 */
-                cdn: CdnOpt;
-                /** 额外配置项 */
-                extras?: ExtrasOptions;
+        export type AppliancePluginOptions = {
+            /** cdn配置项 */
+            cdn: CdnOpt;
+            /** 额外配置项 */
+            extras?: ExtrasOptions;
+        };
+        export type CdnOpt = {
+            /**  full worker url 地址, 绘制完整数据的线程 */
+            fullWorkerUrl?: string;
+            /** sub worker url 地址, 绘制一帧数据的线程 */
+            subWorkerUrl?: string;
+        };
+        export type ExtrasOptions =  {
+            /** 是否使用简单模式, 默认值为 ``false``
+             * true: 简单模式:
+                1、绘制将使用单worker绘制,画笔过程中无法使用贝塞尔圆滑处理。
+                2、移除部分新功能:小地图、pointerPen(激光笔)、autoDraw插件。
+             */
+            useSimple: boolean;
+            /** 是否使用 worker, 默认值为 ``auto``
+            * auto: 自动选择(如果浏览器支持 offscreenCanvas 则使用 webWorker, 否则使用主线程)
+            * mainThread: 使用主线程, canvas 绘制数据。
+            */
+            useWorker?: UseWorkerType;
+            /** 同步数据配置项 */
+            syncOpt?: SyncOpt;
+            /** 画布配置项 */
+            canvasOpt?: CanvasOpt;
+            /** 指针配置项 */
+            cursor?: CursorOpt;
+            /** 画布缓存配置项 */
+            bufferSize?: BufferSizeOpt;
+            /** 贝塞尔优化配置项 */
+            bezier?: BezierOpt;
+            /** 局部橡皮擦配置项 */
+            pencilEraser?: PencilEraserOpt;
+            /** 线条粗细范围配置项 */
+            strokeWidth?: StrokeWidthOpt,
+            /** 文字编辑器配置项 */
+            textEditor?: TextEditorOpt;
+            /** 撤销重做配置项 */
+            undoRedo?: {
+                /** 是否启用全局撤销重做, 默认值为 false (Version >=1.1.27) */
+                enableGlobal?: boolean;
+                /** 撤销重做最大堆栈长度, 默认值为 20 */
+                maxStackLength?: number;
             };
-            export type CdnOpt = {
-                /**  full worker url 地址, 绘制完整数据的线程 */
-                fullWorkerUrl?: string;
-                /** sub worker url 地址, 绘制一帧数据的线程 */
-                subWorkerUrl?: string;
-            };
-            export type ExtrasOptions =  {
-                /** 是否使用简单模式, 默认值为 ``false``
-                 * true: 简单模式:
-                    1、绘制将使用单worker绘制,画笔过程中无法使用贝塞尔圆滑处理。
-                    2、移除部分新功能:小地图、pointerPen(激光笔)、autoDraw插件。
-                 */
-                useSimple: boolean;
-                /** 是否使用 worker, 默认值为 ``auto``
-                * auto: 自动选择(如果浏览器支持 offscreenCanvas 则使用 webWorker, 否则使用主线程)
-                * mainThread: 使用主线程, canvas 绘制数据。
-                */
-                useWorker?: UseWorkerType;
-                /** 同步数据配置项 */
-                syncOpt?: SyncOpt;
-                /** 画布配置项 */
-                canvasOpt?: CanvasOpt;
-                /** 指针配置项 */
-                cursor?: CursorOpt;
-                /** 画布缓存配置项 */
-                bufferSize?: BufferSizeOpt;
-                /** 贝塞尔优化配置项 */
-                bezier?: BezierOpt;
-                /** 局部橡皮擦配置项 */
-                pencilEraser?: PencilEraserOpt;
-                /** 线条粗细范围配置项 */
-                strokeWidth?: StrokeWidthOpt,
-                /** 文字编辑器配置项 */
-                textEditor?: TextEditorOpt;
-            }
+        }
         ```
     - `cursorAdapter?: CursorAdapter` - 非必填，单白板模式下，配置的自定义鼠标样式。
     - `logger?: Logger` - 非必填，配置日志打印器对象。不填写默认在本地 console 输出，如果需要把日志上传到指定 server，则需要手动配置。

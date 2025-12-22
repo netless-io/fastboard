@@ -257,22 +257,32 @@ The following interfaces are involved:
 - `addListener` - Adds appliance plugin listener
 - `removeListener` - Removes appliance plugin listener
 - `disableDeviceInputs` - Replaces the API `room.disableDeviceInputs`
-- `disableEraseImage` - Replaces the API `room.disableEraseImage` **This method only supports when currentApplianceName is `eraser`**
-- `disableCameraTransform` - Replaces the API `room.disableCameraTransform`
+- `disableEraseImage` - Replaces the API `room.disableEraseImage` **This method only prevents the overall eraser from erasing images, and the local eraser is not affected**
+- `disableCameraTransform` - Replaces the API `room.disableCameraTransform` (Version >=1.1.17)
+- `insertText` - Inserts text at the specified position (Version >=1.1.18)
+- `updateText` - Edits the content of the specified text (Version >=1.1.18)
+- `blurText` - Removes text focus (Version >=1.1.19)
+- `hasElements` - Checks if elements exist in the specified scene (Version >=1.1.19)
+- `getElements` - Gets all elements in the scene (Version >=1.1.19)
+- `stopDraw` - Stops Draw event (Version >=1.1.19)
+- `setViewLocalScenePathChange` - Sets the local scene path change of the whiteboard (Version >=1.1.27)
 
 5. Incompatible interfaces
 - `exportScene` - When the appliance-plugin is enabled, notes cannot be exported in room mode
 - Server-side screenshot - After the appliance-plugin is turned on, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
 
 #### New features
-1. Laser pen teaching aid (Version >=1.1.1)
-    ```js
-    import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
-    room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
-    ```
-    ![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
-2. Extended teaching aids (Version >=1.1.1)
-    ```js
+##### Laser pen teaching aid (Version >=1.1.1)
+```js
+import { EStrokeType, ApplianceNames } from '@netless/appliance-plugin';
+room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: EStrokeType.Normal});
+```
+![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
+
+##### Extended teaching aids (Version >=1.1.1)
+Based on the original [whiteboard teaching aids](https://doc.shengwang.cn/api-ref/whiteboard/javascript/globals.html#memberstate) types, some extended functional properties have been added, as follows:
+
+```js
     export enum EStrokeType { 
         /** Solid line */ 
         Normal = 'Normal', 
@@ -317,202 +327,271 @@ The following interfaces are involved:
         /** Location */ 
         placement? : SpeechBalloonPlacement;
     };
-    import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
-    /** Set the state of teaching aids  */
-    room.setMemberState({ ... } as ExtendMemberState);
-    manager.mainView.setMemberState({ ... } as ExtendMemberState);
-    appliance.setMemberState({ ... } as ExtendMemberState);
-    ```
-    - Set stroke type:
-    ```js
-    // Solid line
-    setMemberState({strokeType: EStrokeType.Normal });
-    // Line with pen edge
-    setMemberState({strokeType: EStrokeType.Stroke });
-    // Dotted line
-    setMemberState({strokeType: EStrokeType.Dotted });
-    // Long dotted line
-    setMemberState({strokeType: EStrokeType.LongDotted });
-    ```
-    ![Image](https://github.com/user-attachments/assets/fabe4ea7-db42-4c31-a751-10df4dd82807)
-    - Set stroke and shape border opacity (marker):
-    ```js
-    setMemberState({strokeOpacity: 0.5 });
-    ```
-    ![Image](https://github.com/user-attachments/assets/1aac265d-9643-4858-bcc6-a43af94ed73e)
-    - Set text color, text opacity, text background color, text background opacity
-    ```js
-    setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
-    ```
-    ![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
-    - Set shape fill color and fill opacity
-    ```js
-    setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
-    ```
-    ![Image](https://github.com/user-attachments/assets/468b930c-3db0-4355-87be-6b55af764799)
-    - Custom regular polygon
-    ```js
-    // regular pentagon
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Polygon, vertices: 5});
-    ```
-    ![Image](https://github.com/user-attachments/assets/f34540f5-d779-42f9-bb8a-91250fcfe4e1)
-    - Custom star shape
-    ```js
-    // fat hexagonal star
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Star, vertices: 12, innerVerticeStep: 2, innerRatio: 0.8});
-    ```
-    ![Image](https://github.com/user-attachments/assets/49215362-722a-47d3-998f-cc933a2b5126)
-    - Customize the placement of the speechballoon
-    ```js
-    // The dialog box in the lower left corner
-    setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.SpeechBalloon, placement: 'bottomLeft'});
-    ```
-    ![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
+import { ExtendMemberState, ApplianceNames } from '@netless/appliance-plugin';
+/** Set the state of teaching aids  */
+room.setMemberState({ ... } as ExtendMemberState);
+manager.mainView.setMemberState({ ... } as ExtendMemberState);
+appliance.setMemberState({ ... } as ExtendMemberState);
+```
+1. Set stroke type:
+```js
+// Solid line
+setMemberState({strokeType: EStrokeType.Normal });
+// Line with pen edge
+setMemberState({strokeType: EStrokeType.Stroke });
+// Dotted line
+setMemberState({strokeType: EStrokeType.Dotted });
+// Long dotted line
+setMemberState({strokeType: EStrokeType.LongDotted });
+```
+![Image](https://github.com/user-attachments/assets/fabe4ea7-db42-4c31-a751-10df4dd82807)
 
+2. Set stroke and shape border opacity (marker):
+```js
+setMemberState({strokeOpacity: 0.5 });
+```
+![Image](https://github.com/user-attachments/assets/1aac265d-9643-4858-bcc6-a43af94ed73e)
 
-3. Split screen display elements (little whiteboard feature), need to combine [`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
-    ![Image](https://github.com/user-attachments/assets/e227bc0f-ea79-481e-95a9-18cc3648fa25)
-4. Minimap function (Version >=1.1.6)
-    ```js
-    /** Create a minimap
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param div Small map DOM container
-     */
-    createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
-    /** Destroy minimap */
-    destroyMiniMap(viewId: string): Promise<boolean>;
-    ```
-    ![Image](https://github.com/user-attachments/assets/8888dc2f-ba66-4807-aa12-16530b3b8a3c)
-5. Filter elements (Version >=1.1.6)
-    ```js
-    /** Filter Elements
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param filter filter condition
-     *  render: Whether notes can be rendered, [uid1, uid2,...] Or true. true, that is, both render, [uid1, uid2,...] The collection of user Uids rendered for the specified
-     *  hide: Note is hidden, [uid1, uid2,...] Or true. true, that is to hide, [uid1, uid2,...] To specify a hidden user uid collection
-     *  clear: Whether notes can be cleared, [uid1, uid2,...] Or true. true, that is, can be cleared, [uid1, uid2,...] Specifies a collection of user Uids that can be cleared
-     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users
-     */
-    filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
-    /** Filter Elements
-     * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
-     * @param isSync Whether to synchronize data to other users. The default value is true, that is, the data will be synchronized to other users. Keep it the same as the filterRenderByUid setting
-     */
-    cancelFilterRender(viewId: string, isSync?:boolean): void;
-    ```
-    ![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
-6. ExtrasOption custom tool configuration
-    - Custom Pen Styles
-        - Dotted Stroke Style
-        ```ts
-            export type DottedOpt = {
-                /** Line cap style for dotted line, square: square cap, round: round cap, default value is round */
-                lineCap: "square" | "round";
-                /** Dotted line, single segment length, default value is 1, i.e., single segment length is 1 */
-                segment: number;
-                /** Dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
-                gap: number;
-            };
-            /** Dotted stroke style */
-            dottedStroke: {
-                lineCap: "round",
-                segment: 1,
-                gap: 2,
-            },
-        ```
-        ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
-        - Long Dotted Stroke Style
-        ```ts
-            export type LongDottedOpt = {
-                /** Line cap style for long dotted line, square: square cap, round: round cap, default value is round */
-                lineCap: "square" | "round";
-                /** Long dotted line, single segment length, default value is 1, i.e., single segment length is 1 * thickness */
-                segment: number;
-                /** Long dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
-                gap: number;
-            };
-            /** Long dotted stroke style */
-            longDottedStroke: {
-                lineCap: "round",
-                segment: 2,
-                gap: 3,
-            },
-        ```
-        ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
-        - Normal Pen Style
-        ```ts
-            export type NormalOpt = {
-                /** Line cap style, square: square cap, round: round cap, default value is round */
-                lineCap: "square" | "round";
-            };
-            /** Normal pen style */
-            normalStroke: {
-                lineCap: "round",
-            }
-        ```
-        ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+3. Set text color, text opacity, text background color, text background opacity
+```js
+setMemberState({textOpacity: 0.5, textBgOpacity: 0.5, textBgColor:[0, 0, 0]});
+```
+![Image](https://github.com/user-attachments/assets/b59a9864-8f3f-4700-abee-2ccbe264cc86)
 
-    - Text Custom Style
+4. Set shape fill color and fill opacity
+```js
+setMemberState({fillOpacity: 0.5, fillColor:[0, 0, 0]});
+```
+![Image](https://github.com/user-attachments/assets/468b930c-3db0-4355-87be-6b55af764799)
+
+5. Custom regular polygon
+```js
+// regular pentagon
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Polygon, vertices: 5});
+```
+![Image](https://github.com/user-attachments/assets/f34540f5-d779-42f9-bb8a-91250fcfe4e1)
+
+6. Custom star shape
+```js
+// fat hexagonal star
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.Star, vertices: 12, innerVerticeStep: 2, innerRatio: 0.8});
+```
+![Image](https://github.com/user-attachments/assets/49215362-722a-47d3-998f-cc933a2b5126)
+
+7. Customize the placement of the speechballoon
+```js
+// The dialog box in the lower left corner
+setMemberState({currentApplianceName: ApplianceNames.shape, shapeType: ShapeType.SpeechBalloon, placement: 'bottomLeft'});
+```
+![Image](https://github.com/user-attachments/assets/6d52dedf-ca21-406d-a353-d801273b98bf)
+
+##### Split screen display notes (little whiteboard feature), need to combine [`@netless/app-little-white-board`](https://github.com/netless-io/app-little-white-board) (Version >=1.1.3)
+![Image](https://github.com/user-attachments/assets/20810ea6-7d85-4e72-b75f-185599fffaf8)
+
+##### Minimap function (Version >=1.1.6)
+```js
+/** Create a minimap
+ * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+ * @param div Small map DOM container
+ */
+createMiniMap(viewId: string, div: HTMLElement): Promise<void>;
+/** Destroy minimap */
+destroyMiniMap(viewId: string): Promise<boolean>;
+```
+![Image](https://github.com/user-attachments/assets/8888dc2f-ba66-4807-aa12-16530b3b8a3c)
+
+##### Text editing API (Version >=1.1.18)
+```js
+/** Insert text at the specified position
+ * @param x The x coordinate of the midpoint of the left edge of the first character in the world coordinate system
+ * @param y The y coordinate of the midpoint of the left edge of the first character in the world coordinate system
+ * @param textContent The initial text content, empty if not provided
+ * @returns The identifier of the text
+ */
+insertText(x: number, y: number, textContent?: string): string | undefined;
+
+/** Edit the content of the specified text
+ * @param identifier The identifier of the text. It is the return value of insertText().
+ * @param textContent The content to change the text to
+ */
+updateText(identifier: string, textContent: string): void;
+
+/** Remove text focus */
+blurText(): void;
+```
+
+##### Element query API (Version >=1.1.19)
+```js
+/** Check if elements exist in the specified scene
+ * @param scenePath Scene path, defaults to the currently focused scene
+ * @param filter Filter condition
+ * @returns Whether elements exist
+ */
+hasElements(
+  scenePath?: string,
+  filter?: (toolsType: EToolsKey) => boolean,
+): boolean;
+
+/** Get all elements in the scene
+ * @param scenePath Scene path, defaults to the currently focused scene
+ * @param filter Filter condition
+ * @returns All elements
+ */
+getElements(
+  scenePath?: string,
+  filter?: (toolsType: EToolsKey) => boolean,
+): BaseCollectorReducerAction[];
+```
+
+##### Filter notes (Version >=1.1.6)
+```js
+/** Filter notes
+ * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+ * @param filter filter condition
+ *  render: Whether notes can be rendered, [uid1, uid2, ...] or true. true, that is, all will be rendered; [uid1, uid2, ...] is the set of user uids specified for rendering
+ *  hide: Whether notes are hidden, [uid1, uid2, ...] or true. true, that is, all will be hidden; [uid1, uid2, ...] is the set of user uids specified for hiding
+ *  clear: Whether notes can be erased, [uid1, uid2, ...] or true. true, that is, all can be erased; [uid1, uid2, ...] is the set of user uids specified for erasing
+ * @param isSync Whether to synchronize to the whiteboard room, default is true, that is, the setting will be synchronized to all users
+ */
+filterRenderByUid(viewId: string, filter: { render?: _ArrayTrue, hide?: _ArrayTrue, clear?: _ArrayTrue}, isSync?:boolean): void;
+/** Cancel filter notes
+ * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+ * @param isSync Whether to synchronize to the whiteboard room, default is true, that is, it will be synchronized to other users. Please keep it consistent with the filterRenderByUid setting
+ */
+cancelFilterRender(viewId: string, isSync?:boolean): void;
+```
+![Image](https://github.com/user-attachments/assets/7952ee1d-4f9c-4e86-802a-bac8e4ae6a51)
+
+##### Set whiteboard local scene path change (Version >=1.1.27)
+```js
+/** Set whiteboard local scene path change
+ * @param viewId ID of the whiteboard under windowManager. The ID of the main whiteboard is mainView, and the ID of other whiteboards is the appID of addApp() return
+ * @param scenePath The scene path to set
+ */
+setViewLocalScenePathChange(viewId: string, scenePath: string): Promise<void>;
+```
+
+##### ExtrasOption custom tool configuration
+1. Custom Pen Styles
+    - Dotted Stroke Style
     ```ts
-        export type TextEditorOpt = {
-            /** Whether to show the floating bar */
-            showFloatBar?: boolean;
-            /** Whether it can be switched by selector tool */
-            canSelectorSwitch?: boolean;
-            /** Whether to automatically wrap at the right boundary */
-            rightBoundBreak?: boolean;
-            /** Extended font list */
-            extendFontFaces?: { fontFamily: string; src: string }[];
-            /** Font loading timeout, unit: milliseconds */
-            loadFontFacesTimeout?: number;
-        };
-        // For example: Set unified font library
-        textEditor: {
-          showFloatBar: false,
-          canSelectorSwitch: false,
-          rightBoundBreak: true,
-          extendFontFaces: [
-            {
-              fontFamily: "Noto Sans SC",
-              src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
-            },
-          ],
-          loadFontFacesTimeout: 20000,
-        },
-    ```
-    Need to be combined with CSS style implementation
-    ```css
-    @font-face {
-        font-family: "Noto Sans SC";
-        src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
-            format("woff2");
-        font-display: swap;
-    }
-    html {
-        font-family: "Noto Sans SC";
-    }
-    ```
-
-<!-- 6. Handwriting graphics automatic association function: 'autoDraw' (version >=1.1.7)
-    ```js
-    export type AutoDrawOptions = {
-        /** Automatically associate rest api addresses */
-        hostServer: string;
-        /** A container that holds a list of associated icons */
-        container: HTMLDivElement;
-        /** How long does the drawing end start activating the association */
-        delay?: number;
+    export type DottedOpt = {
+        /** Line cap style for dotted line, square: square cap, round: round cap, default value is round */
+        lineCap: "square" | "round";
+        /** Dotted line, single segment length, default value is 1, i.e., single segment length is 1 */
+        segment: number;
+        /** Dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
+        gap: number;
     };
-    import { ApplianceMultiPlugin, AutoDrawPlugin } from '@netless/appliance-plugin';
-    const plugin = await ApplianceMultiPlugin.getInstance(...);
-    const autoDrawPlugin = new AutoDrawPlugin({
-        container: topBarDiv,
-        hostServer: 'https://autodraw-white-backup-hk-hkxykbfofr.cn-hongkong.fcapp.run',
-        delay: 2000
-    });
-    plugin.usePlugin(autoDrawPlugin);
+    /** Dotted stroke style */
+    dottedStroke: {
+        lineCap: "round",
+        segment: 1,
+        gap: 2,
+    },
     ```
-    ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7) -->
+    ![Image](https://github.com/user-attachments/assets/5dc7e2bf-c285-45f0-89d2-849b4792dc7e)
+    - Long Dotted Stroke Style
+    ```ts
+    export type LongDottedOpt = {
+        /** Line cap style for long dotted line, square: square cap, round: round cap, default value is round */
+        lineCap: "square" | "round";
+        /** Long dotted line, single segment length, default value is 1, i.e., single segment length is 1 * thickness */
+        segment: number;
+        /** Long dotted line, single segment gap, default value is 2, i.e., single segment gap is 2 * thickness */
+        gap: number;
+    };
+    /** Long dotted stroke style */
+    longDottedStroke: {
+        lineCap: "round",
+        segment: 2,
+        gap: 3,
+    },
+    ```
+    ![Image](https://github.com/user-attachments/assets/a305c1a1-b366-444a-ace6-3e0ecbf5ad19)
+    - Normal Pen Style
+    ```ts
+    export type NormalOpt = {
+        /** Line cap style, square: square cap, round: round cap, default value is round */
+        lineCap: "square" | "round";
+    };
+    /** Normal pen style */
+    normalStroke: {
+        lineCap: "round",
+    }
+    ```
+    ![Image](https://github.com/user-attachments/assets/23979f81-057a-408f-8302-de228ef00b4f)
+
+2. Text Custom Style
+```ts
+export type TextEditorOpt = {
+    /** Whether to show the floating bar */
+    showFloatBar?: boolean;
+    /** Whether it can be switched by selector tool */
+    canSelectorSwitch?: boolean;
+    /** Whether to automatically wrap at the right boundary */
+    rightBoundBreak?: boolean;
+    /** Extended font list */
+    extendFontFaces?: { fontFamily: string; src: string }[];
+    /** Font loading timeout, unit: milliseconds */
+    loadFontFacesTimeout?: number;
+};
+// For example: Set unified font library
+textEditor: {
+  showFloatBar: false,
+  canSelectorSwitch: false,
+  rightBoundBreak: true,
+  extendFontFaces: [
+    {
+      fontFamily: "Noto Sans SC",
+      src: "https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2",
+    },
+  ],
+  loadFontFacesTimeout: 20000,
+},
+```
+Need to be combined with CSS style implementation
+```css
+@font-face {
+    font-family: "Noto Sans SC";
+    src: url("https://fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-mu0SC55I.woff2")
+        format("woff2");
+    font-display: swap;
+}
+html {
+    font-family: "Noto Sans SC";
+}
+```
+
+#### Handwriting graphics automatic association function: `autoDraw`, need to combine [@netless/appliance-extend-auto-draw-plugin](https://www.npmjs.com/package/@netless/appliance-extend-auto-draw-plugin)
+```js
+export interface AutoDrawOptions {
+    /** API key for accessing all models of OpenRouter */
+    apiKey?: string;
+    /** Custom model to use */
+    customModel?: string;
+    /** Container for rendering icons */
+    container: HTMLDivElement;
+    /** Delay time for rendering icons, default is 2000ms */
+    delay?: number;
+    /**
+     * Upload file to OSS server and return URL address, if returns undefined then this function will not be used
+     * @param file File object
+     * @returns Image URL string
+     */
+    uploadFile?: (file: File) => Promise<string | undefined>;
+}
+import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
+import { AutoDrawPlugin } from '@netless/appliance-extend-auto-draw-plugin';
+const plugin = await ApplianceMultiPlugin.getInstance(...);
+const autoDrawPlugin = new AutoDrawPlugin({
+    container: topBarDiv,
+    delay: 2000
+});
+plugin.usePlugin(autoDrawPlugin);
+```
+![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
+
 ### Configuration parameters 
 `getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)` 
 - `wm`: `WindowManager | Room | Player`. In multi-window mode, pass `WindowManager`. In single-window mode, pass `Room` or `Player` (whiteboard playback mode). 
@@ -559,6 +638,13 @@ The following interfaces are involved:
                 strokeWidth? : StrokeWidthOpt, 
                 /** Text Editor configuration item */ 
                 textEditor? : TextEditorOpt;
+                /** Undo/Redo configuration item */ 
+                undoRedo?: {
+                    /** Whether to enable global undo/redo, default value is false (Version >=1.1.27) */
+                    enableGlobal?: boolean;
+                    /** Maximum stack length for undo/redo, default value is 20 */
+                    maxStackLength?: number;
+                };
             }
         ```
     - `cursorAdapter?: CursorAdapter` - Optional. In single whiteboard mode, customize the mouse style.
