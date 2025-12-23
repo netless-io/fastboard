@@ -191,7 +191,7 @@ export async function build({
         external: name.endsWith("-core")
           ? Object.keys({
               ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-            }).concat("@netless/applicance-plugin")
+            }).concat(["@netless/appliance-plugin"])
           : Object.keys({
               ...dependencies,
               ...peerDependencies,
