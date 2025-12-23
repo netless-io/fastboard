@@ -77,6 +77,8 @@
   $: max_scroll = scrollable ? $scroll_height + (32 + 8) * 2 - computed_height : 0;
 
   $: hasAppliancePlugin = !!app?.appliancePlugin;
+  $: showLaserPen =
+    (app?.appliancePlugin && !app?.appliancePlugin.currentManager?.pluginOptions.extras.useSimple) || false;
   $: hasUseLaserPen = (hasAppliancePlugin && ($memberState as ExtendMemberState)?.useLaserPen) || false;
   $: hasUseMarkPen =
     (hasAppliancePlugin && ($memberState as ExtendMemberState)?.strokeOpacity === 0.5) || false;
@@ -258,11 +260,11 @@
           </Button>
         {/if}
 
-        {#if pencilType === "laser"}
+        {#if showLaserPen && pencilType === "laser"}
           <Button class="{name}-panel-switch-btn" {...btn_props}>
             <Icons.LaserPenFilled {theme} active />
           </Button>
-        {:else if pencilType !== "laser"}
+        {:else if showLaserPen && pencilType !== "laser"}
           <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useLaserPen}>
             <Icons.LaserPen {theme} />
           </Button>

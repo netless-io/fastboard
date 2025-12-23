@@ -2,7 +2,7 @@
 import type { Theme, Language, FastboardUIConfig } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { useFastboard, genUID, Fastboard, apps } from "../src";
 import "./style.scss";
@@ -39,10 +39,10 @@ function App() {
     },
     joinRoom: {
       uid: genUID(),
-      uuid: import.meta.env.VITE_ROOM_UUID || "f3e75f20c0f211ef940ec9f75538d484",
+      uuid: import.meta.env.VITE_ROOM_UUID || "cbc67f00169f11f0826bfd782d7d3846",
       roomToken:
         import.meta.env.VITE_ROOM_TOKEN ||
-        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzM1MDE5OTE4MDM3Jm5vbmNlPWY0MDUyMDUwLWMwZjItMTFlZi05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPWZmNmQwNzU5NDJlNTc2ZGVhZWMwMzM5ZjUwYTkzMmNlM2M3MTBlZmRlNzczYjExMGE5YjMwOGRkMzUyNzM4MDkmdXVpZD1mM2U3NWYyMGMwZjIxMWVmOTQwZWM5Zjc1NTM4ZDQ4NA",
+        "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzY2NDk0MTI5OTI0Jm5vbmNlPTkwMzYwYzQwLWRmMzQtMTFmMC05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTY4YWM1MGEyNTZmNmZlZmFlYTM4NzRiZDlhYTE0MGQxZjFkYzY4YjhmNjI0YjVlOTRiYWRkNWQ0YTM1MzE3YzkmdXVpZD1jYmM2N2YwMDE2OWYxMWYwODI2YmZkNzgyZDdkMzg0Ng",
       isWritable: search.get("isWritable") !== "0",
       floatBar: true,
     },
@@ -148,11 +148,11 @@ apps.push(
 );
 
 const root = document.getElementById("app") as HTMLDivElement;
-ReactDOM.createRoot(root).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-);
+, root);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },

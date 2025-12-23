@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@netless/window-manager': ^1.0.8
-  '@netless/appliance-plugin': ^1.1.23
+  '@netless/appliance-plugin': ^1.1.28
   '@netless/app-in-mainview-plugin': ^0.0.9
   white-web-sdk: ^2.16.53
 
@@ -30,8 +30,8 @@ importers:
         specifier: ^0.0.9
         version: 0.0.9(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/appliance-plugin':
-        specifier: ^1.1.23
-        version: 1.1.23(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        specifier: ^1.1.28
+        version: 1.1.28(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/window-manager':
         specifier: ^1.0.8
         version: 1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53)
@@ -139,8 +139,8 @@ importers:
         specifier: ^0.0.9
         version: 0.0.9(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
       '@netless/appliance-plugin':
-        specifier: ^1.1.23
-        version: 1.1.23(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
+        specifier: ^1.1.28
+        version: 1.1.28(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
@@ -172,10 +172,10 @@ importers:
         version: link:../esbuild-plugin-inline-sass
       '@types/react':
         specifier: ^18.0.26
-        version: 18.3.26
+        version: 18.3.27
       '@types/react-dom':
         specifier: ^18.0.10
-        version: 18.3.7(@types/react@18.3.26)
+        version: 18.3.7(@types/react@18.3.27)
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -652,8 +652,8 @@ packages:
       jspdf:
         optional: true
 
-  '@netless/appliance-plugin@1.1.23':
-    resolution: {integrity: sha512-ThLWQ1Kjj8rY5HLmouyGh8k9SeWHKWk3ewfHVzuWv/+1c/rlzp+QEE5WE+DHnxo4jUEdSoCvLf2r0xR8A812fA==}
+  '@netless/appliance-plugin@1.1.28':
+    resolution: {integrity: sha512-dDSzV9negqLqgNe3BNVNDTCo8AXXrQU0TKw27wFBISbWTqprxYblR/7OrYqJVTFsa6LDwtVjjC6Xc30PMza6uA==}
     peerDependencies:
       '@netless/window-manager': ^1.0.8
       white-web-sdk: ^2.16.53
@@ -912,8 +912,8 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react@18.3.26':
-    resolution: {integrity: sha512-RFA/bURkcKzx/X9oumPG9Vp3D3JUgus/d0b67KB0t5S/raciymilkOa66olh78MUI92QLbEJevO7rvqU/kjwKA==}
+  '@types/react@18.3.27':
+    resolution: {integrity: sha512-cisd7gxkzjBKU2GgdYrTdtQx1SORymWyaAFhaxQPK9bYO9ot3Y5OikQRvY0VYQtvwjeQnizCINJAenh/V7MK2w==}
 
   '@types/retry@0.12.0':
     resolution: {integrity: sha512-wWKOClTTiizcZhXnPY4wikVAwmdYHp8q6DmC+EJUzAMsycb7HB32Kh9RN4+0gExjmPmZSAQjgURXIGATPegAvA==}
@@ -1224,8 +1224,8 @@ packages:
   cssfilter@0.0.10:
     resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
 
-  csstype@3.1.3:
-    resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+  csstype@3.2.3:
+    resolution: {integrity: sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -2826,7 +2826,7 @@ snapshots:
     optionalDependencies:
       jspdf: 2.5.2
 
-  '@netless/appliance-plugin@1.1.23(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
+  '@netless/appliance-plugin@1.1.28(@netless/window-manager@1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53))(white-web-sdk@2.16.53)':
     dependencies:
       '@netless/window-manager': 1.0.8(jspdf@2.5.2)(white-web-sdk@2.16.53)
       clipper-lib: 6.4.2
@@ -3050,14 +3050,14 @@ snapshots:
   '@types/raf@3.4.3':
     optional: true
 
-  '@types/react-dom@18.3.7(@types/react@18.3.26)':
+  '@types/react-dom@18.3.7(@types/react@18.3.27)':
     dependencies:
-      '@types/react': 18.3.26
+      '@types/react': 18.3.27
 
-  '@types/react@18.3.26':
+  '@types/react@18.3.27':
     dependencies:
       '@types/prop-types': 15.7.15
-      csstype: 3.1.3
+      csstype: 3.2.3
 
   '@types/retry@0.12.0': {}
 
@@ -3392,7 +3392,7 @@ snapshots:
 
   cssfilter@0.0.10: {}
 
-  csstype@3.1.3: {}
+  csstype@3.2.3: {}
 
   debug@4.4.3:
     dependencies:

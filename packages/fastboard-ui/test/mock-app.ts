@@ -52,6 +52,13 @@ export function mockApp(): [app: FastboardApp, mock: MockApp] {
 
   const app: PartialDeep<FastboardApp> = {
     appliancePlugin: {
+      currentManager: {
+        pluginOptions: {
+          extras: {
+            useSimple: false,
+          },
+        },
+      },
       setMemberState(modifyState: Partial<MemberState>) {
         console.log("setMemberState", modifyState);
         memberState.update(e => ({

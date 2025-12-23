@@ -2,7 +2,7 @@
 import type { FastboardPlayer, Theme, Language } from "..";
 
 import React, { useCallback, useEffect, useState } from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { resizable } from "@netless/fastboard-ui/test/resizable";
 import { replayFastboard, ReplayFastboard } from "../src";
 import "./style.scss";
@@ -72,7 +72,7 @@ function App() {
 
   return (
     <>
-      <ReplayFastboard player={player} theme={theme} language={lang} />
+      <ReplayFastboard player={player as any} theme={theme} language={lang} />
       <div className="controller">
         <label>
           <small>Theme</small>
@@ -95,7 +95,7 @@ function App() {
 }
 
 const root = document.getElementById("app") as HTMLDivElement;
-ReactDOM.createRoot(root).render(<App />);
+ReactDOM.render(<App />, root);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },
