@@ -151,8 +151,9 @@ const root = document.getElementById("app") as HTMLDivElement;
 ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
-, root);
+  </React.StrictMode>,
+  root
+);
 
 resizable(root, {
   defaultSize: { width: 400, height: 300 },

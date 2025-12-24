@@ -74,8 +74,8 @@ createFastboard({
       strokeWidth: {
         min: 1,
         max: 32,
-      }
-    }
+      },
+    },
   },
   enableAppInMainViewPlugin: true,
 }).then(app => {

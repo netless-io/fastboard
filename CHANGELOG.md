@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2 (2025-12-23)
+- fixed `@netless/fastboard/full` or `@netless/fastboard-react/full` in esm mode some iife package import error.
+- update `@netless/fastboard-ui` in `@netless/appliacne-plugin` config `pluginOptions.extras.useSimple` hide `LaserPen`
+- update `@netless/appliance-plugin` to `^1.1.28`.
+
 ## 1.1.1 (2025-07-07)
 - update `@netless/appliance-plugin` to `^1.1.23`.
 - update `@netless/window-manager` to `^1.0.8`.
