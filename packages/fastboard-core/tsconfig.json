@@ -3,6 +3,7 @@
   "include": ["src"],
   "exclude": ["node_modules", "**/node_modules/**", "**/.svelte2tsx-language-server-files/**"],
   "compilerOptions": {
-    "types": []
+    "types": [],
+    "skipLibCheck": true
   }
 }
