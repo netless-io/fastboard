@@ -20,7 +20,7 @@
     "@hyrious/rimraf": "^0.1.0",
     "@netless/app-in-mainview-plugin": "^0.0.9",
     "@netless/appliance-plugin": "^1.1.28",
-    "@netless/window-manager": "^1.0.8",
+    "@netless/window-manager": "^1.0.11",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -46,7 +46,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@netless/window-manager": "^1.0.8",
+      "@netless/window-manager": "^1.0.11",
       "@netless/appliance-plugin": "^1.1.28",
       "@netless/app-in-mainview-plugin": "^0.0.9",
       "white-web-sdk": "^2.16.53"
