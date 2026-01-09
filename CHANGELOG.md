@@ -1,4 +1,6 @@
 # Changelog
+## 1.1.3 (2026-01-09)
+- update `@netless/window-manager` to `^1.0.11`.
 
 ## 1.1.2 (2025-12-23)
 - fixed `@netless/fastboard/full` or `@netless/fastboard-react/full` in esm mode some iife package import error.

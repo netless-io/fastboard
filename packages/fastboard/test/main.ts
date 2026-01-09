@@ -45,7 +45,7 @@ createFastboard({
   },
   joinRoom: {
     uid: genUID(),
-    uuid: import.meta.env.VITE_ROOM_UUID || "cbc67f00169f11f0826bfd782d7d3846",
+    uuid: import.meta.env.VITE_ROOM_UUID || "17914650ebb511f099da218d71db282b",
     // floatBar: {
     //   colors: [
     //       [224, 32, 32],
@@ -60,10 +60,11 @@ createFastboard({
     // },
     roomToken:
       import.meta.env.VITE_ROOM_TOKEN ||
-      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzY2NDk0MTI5OTI0Jm5vbmNlPTkwMzYwYzQwLWRmMzQtMTFmMC05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTY4YWM1MGEyNTZmNmZlZmFlYTM4NzRiZDlhYTE0MGQxZjFkYzY4YjhmNjI0YjVlOTRiYWRkNWQ0YTM1MzE3YzkmdXVpZD1jYmM2N2YwMDE2OWYxMWYwODI2YmZkNzgyZDdkMzg0Ng",
+      "NETLESSROOM_YWs9VWtNUk92M1JIN2I2Z284dCZleHBpcmVBdD0xNzY3ODY4NzQ2NzQwJm5vbmNlPTE3YWU2YjQwLWViYjUtMTFmMC05NmE5LWFiMzg4NjE4OThhZiZyb2xlPTEmc2lnPTY0MzI5OTgzOTU5M2JhNjcwMGFhNDEwODQzZDBkYzZlMWYyNjVkOTQzMzE4YWVhZGI4YzY2ZTAyNjZlZmI1MzQmdXVpZD0xNzkxNDY1MGViYjUxMWYwOTlkYTIxOGQ3MWRiMjgyYg",
   },
   managerConfig: {
     cursor: true,
+    useBoxesStatus: true,
   },
   enableAppliancePlugin: {
     cdn: {
@@ -77,7 +78,7 @@ createFastboard({
       },
     },
   },
-  enableAppInMainViewPlugin: true,
+  // enableAppInMainViewPlugin: false,
 }).then(app => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any).app = app;
