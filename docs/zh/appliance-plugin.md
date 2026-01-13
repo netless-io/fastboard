@@ -657,10 +657,11 @@ plugin.usePlugin(autoDrawPlugin);
     - `logger?: Logger` - 非必填，配置日志打印器对象。不填写默认在本地 console 输出，如果需要把日志上传到指定 server，则需要手动配置。
         > 如需要上传到白板日志服务器，可以把 `room.logger` 配置到该项目。
 
-### 前端调试
+## 前端调试
 对接过程中如果想了解和跟踪插件内部状态，可以通过以下几个控制台指令，查看内部数据。
 ```js
 const appliancePlugin = await ApplianceSinglePlugin.getInstance(...)
 appliancePlugin.currentManager  // 可以查看到包版本号，内部状态等
 appliancePlugin.currentManager.consoleWorkerInfo()  // 可以查看到 worker 上的绘制信息
 ```
+## [changelog](https://github.com/duty-os/appliance-plugin/blob/master/CHANGELOG.md)

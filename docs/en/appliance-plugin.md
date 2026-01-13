@@ -651,7 +651,7 @@ plugin.usePlugin(autoDrawPlugin);
     - `logger?: Logger` - Optional. Configure the log printer object. The default output is on the local console. If logs need to be uploaded to the specified server, you need to manually configure it.
         > If you need to upload the log to the whiteboard log server, configure `room.logger` to this item.
 
-### Front-end debugging 
+## Front-end debugging 
 During the integration process, if you want to understand and track the internal status of the plugin, you can view the internal data through the following console commands. 
 
 ```js 
