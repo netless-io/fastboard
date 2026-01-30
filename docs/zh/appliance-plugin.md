@@ -1,6 +1,6 @@
 # appliance-plugin
 
-[English Documentation](README.md)
+[English Documentation](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md)
 
 该插件基于 white-web-sdk 的插件机制，实现了一套功能丰富的白板教具绘制工具。同时也基于 @netless/window-manager，实现了可在多窗口上使用。
 
