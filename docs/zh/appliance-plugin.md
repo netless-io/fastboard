@@ -1,16 +1,43 @@
 # appliance-plugin
 
-该插件基于 white-web-sdk 的插件机制，实现了一套白板教具的绘制工具。同时也基于 @netless/window-manager，实现了可在多窗口上使用。
+[English Documentation](README.md)
+
+该插件基于 white-web-sdk 的插件机制，实现了一套功能丰富的白板教具绘制工具。同时也基于 @netless/window-manager，实现了可在多窗口上使用。
 
 ## 简介
 
-appliance-plugin 依赖 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk) 和 [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager)，并基于 Web API 对 [OffscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas) 的支持。
+appliance-plugin 是一个高性能的白板绘制插件，依赖 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk) 和 [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager)，并基于 Web API 对 [OffscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas) 的支持。
+
+### 主要特性
+
+- 🎨 **丰富的绘制工具**：支持铅笔、橡皮擦、形状工具、文字、图片等多种绘制工具
+- ⚡ **高性能渲染**：采用双 WebWorker + OffscreenCanvas 机制，绘制效率比主线程提升 40% 以上
+- 🖼️ **多窗口支持**：支持多窗口场景，可在不同窗口上独立使用
+- 🎯 **激光笔工具**：支持激光笔功能，适合演示场景
+- 📝 **文字编辑**：支持文字插入、编辑、样式设置等功能
+- 🗺️ **小地图功能**：提供小地图导航功能，方便查看整体内容
+- 🔄 **撤销重做**：支持全局撤销重做功能
+- 🎭 **自定义样式**：支持自定义画笔样式、文字样式等
+- 🔌 **插件扩展**：支持通过插件机制扩展功能（如 autoDraw 手写图形自动联想）
 
 ## 原理
 
-1. 该插件主要是基于 SpriteJS 的 2D 功能，支持 WebGL2 渲染，并可向后兼容降级为 WebGL 和 Canvas2D。
-2. 该插件通过双 WebWorker + OffscreenCanvas 机制，把绘制计算和渲染逻辑都放在独立的 worker 线程中处理，不占用主线程的 CPU 任务。
-3. 针对移动端有些终端不支持 OffscreenCanvas，则会把它放在主线程处理。
+1. **渲染引擎**：该插件主要是基于 SpriteJS 的 2D 功能，支持 WebGL2 渲染，并可向后兼容降级为 WebGL 和 Canvas2D。
+2. **多线程架构**：该插件通过双 WebWorker + OffscreenCanvas 机制，把绘制计算和渲染逻辑都放在独立的 worker 线程中处理，不占用主线程的 CPU 任务。
+   - **Full Worker**：负责绘制完整数据的线程
+   - **Sub Worker**：负责绘制一帧数据的线程
+3. **兼容性处理**：针对移动端有些终端不支持 OffscreenCanvas，则会自动降级到主线程处理。
+
+### 支持的绘制工具
+
+插件支持以下绘制工具：
+
+- **基础工具**：铅笔、橡皮擦、局部橡皮擦、位图橡皮擦、选择工具、抓手工具
+- **形状工具**：直线、箭头、矩形、圆形、三角形、菱形、多边形、星形、聊天泡泡框
+- **文字工具**：支持文字输入、编辑、样式设置
+- **图片工具**：支持图片插入和编辑
+- **特殊工具**：激光笔、背景 SVG
+- **互动工具**：点击互动工具（可供插件自定义行为）
 
 ## 插件用法
 
@@ -36,7 +63,7 @@ import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 >
 > 我们采用双 worker 并发来提高绘制效率，这样让它比主线程效率提高了 40% 以上。但是两个 worker 文件上的公共依赖都是重复的，所以如果直接构建到包中，那么会大大增加包体积。所以我们允许 worker.js 文件 CDN 部署，只要把 `@netless/appliance-plugin/cdn` 下的文件部署到 CDN 中即可，然后通过插件中的 `getInstance` 的第二个参数 `options.cdn` 中配置上两个 worker.js 的 CDN 地址即可。这样就可以解决包体积过大的问题。
 >
-> **总包大概在 400kB，两个 worker.js 各有 800kB。** 如果需要考虑构建的包体积大小的，请选择配置 CDN。
+> 如果需要考虑构建的包体积大小的，请选择配置 CDN。
 
 ### 接入方式参考
 
@@ -107,6 +134,7 @@ const fastboard = await createFastboard({
 ```
 
 #### 多窗口(直接对接window-manager)
+
 ```js
 
 import '@netless/window-manager/dist/style.css';
@@ -145,9 +173,11 @@ if (manager) {
     );
 }
 ```
+
 > **注意** 项目中需要引入css文件 `import '@netless/appliance-plugin/dist/style.css';`
 
 #### 单白板(直接对接white-web-sdk)
+
 ```js
 
 import '@netless/appliance-plugin/dist/style.css';
@@ -180,9 +210,11 @@ await ApplianceSinglePlugin.getInstance(room,
     }
 );
 ```
+
 > **注意** 项目中需要引入css文件 `import '@netless/appliance-plugin/dist/style.css';`
 
 #### 关于?raw的webpack配置
+
 ```js
 module: {
     rules: [
@@ -215,16 +247,21 @@ injectMethodToObject(windowmanager,'cleanCurrentScene');
 injectMethodToObject(windowmanager,'insertImage');
 injectMethodToObject(windowmanager,'completeImageUpload');
 injectMethodToObject(windowmanager,'lockImage');
+injectMethodToObject(windowmanager, "insertText");
+injectMethodToObject(windowmanager, "updateText");
 injectMethodToObject(room,'getImagesInformation');
 injectMethodToObject(room,'callbacks');
 injectMethodToObject(room,'screenshotToCanvasAsync');
 injectMethodToObject(room,'getBoundingRectAsync');
 injectMethodToObject(room,'scenePreviewAsync');
+injectMethodToObject(room, "fillSceneSnapshotAsync");
+injectMethodToObject(room, "setWritable");
 injectMethodToObject(windowmanager.mainView,'setMemberState');
 // 这些我们可以通过前端日志看到调用行为,例如:
 // [ApplianceMultiPlugin] setMemberState
 // [ApplianceMultiPlugin] cleanCurrentScene
 ```
+
 具体涉及以下接口:
 
 1. room上接口
@@ -272,6 +309,9 @@ injectMethodToObject(windowmanager.mainView,'setMemberState');
 - `getElements` - 获取场景下的所有元素 (Version >=1.1.19)
 - `stopDraw` - 停止Draw事件 (Version >=1.1.19)
 - `setViewLocalScenePathChange` - 设置白板本地场景路径变化 (Version >=1.1.27)
+- `insertMarkmap` - 插入markdow文本到白板 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
+- `updateMarkmap` - 修改白板中的markdow文本 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
+- `insertBackgroundImage` - 插入白板的背景图片 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
 
 5. 不兼容接口
 - [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) - appliance-plugin 开启后，笔记不能按 room 的方式导出
@@ -598,6 +638,75 @@ plugin.usePlugin(autoDrawPlugin);
 ```
 ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
 
+##### 插入思维导图(需要markdown文本) (Version >=1.1.32)
+```ts
+import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
+const plugin = await ApplianceMultiPlugin.getInstance(manager, {
+    options: {
+        cdn: {...}
+        extras: {
+            ...,
+            useBackgroundThread: true,
+        }
+    },
+});
+const markId = await plugin.insertMarkmap(viewId, {
+    data: `# 一集标题
+## 二级标题1
+### 三级标题1
+### 三级标题2
+#### 四级标题1
+#### 四级标题2
+#### 四级标题3
+## 二级标题2
+### 三级标题1
+### 三级标题2`,
+    uuid: '唯一标识',
+    centerX: 0,
+    centerY: 0,
+    width: 200,
+    height: 200,
+    locked: false,
+});
+plugin.updateMarkmap(viewId, markId, {
+    data: `# 一集标题
+## 二级标题1
+## 二级标题2
+### 三级标题1
+### 三级标题2`,
+    uuid: '唯一标识',
+    centerX: 0,
+    centerY: 0,
+    width: 200,
+    height: 200,
+    locked: false,
+} )
+
+```
+![Image](https://github.com/user-attachments/assets/0d278bd5-1cc7-413f-881c-8a43ef1429e3)
+##### 插入背景图  (Version >=1.1.32)
+```ts
+import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
+const plugin = await ApplianceMultiPlugin.getInstance(manager, {
+    options: {
+        cdn: {...}
+        extras: {
+            ...,
+            useBackgroundThread: true,
+        }
+    },
+});
+plugin.insertBackgroundImage(viewId, {
+    src: 'https://example.com/background.png'
+    uuid: '唯一标识',
+    centerX: 0,
+    centerY: 0,
+    width: 200,
+    height: 200,
+    locked: true,
+})
+```
+
 ### 配置参数
 `getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)`
 - `wm`: `WindowManager | Room | Player`。多窗口模式下传入的是 `WindowManager`，单窗口模式下传入的是 `Room` 或者 `Player`（白板回放模式）。
@@ -622,12 +731,17 @@ plugin.usePlugin(autoDrawPlugin);
                 1、绘制将使用单worker绘制,画笔过程中无法使用贝塞尔圆滑处理。
                 2、移除部分新功能:小地图、pointerPen(激光笔)、autoDraw插件。
              */
-            useSimple: boolean;
+            useSimple?: boolean;
             /** 是否使用 worker, 默认值为 ``auto``
             * auto: 自动选择(如果浏览器支持 offscreenCanvas 则使用 webWorker, 否则使用主线程)
             * mainThread: 使用主线程, canvas 绘制数据。
             */
             useWorker?: UseWorkerType;
+            /** 是否使用 backgroundThread, 默认值为 ``false``
+             * true: 使用 backgroundThread, 可以调用 ``insertMarkmap``, ``updateMarkmap``, ``insertBackgroundImage``
+             * false: 不使用 backgroundThread
+             */
+            useBackgroundThread?: boolean;
             /** 同步数据配置项 */
             syncOpt?: SyncOpt;
             /** 画布配置项 */
@@ -657,11 +771,174 @@ plugin.usePlugin(autoDrawPlugin);
     - `logger?: Logger` - 非必填，配置日志打印器对象。不填写默认在本地 console 输出，如果需要把日志上传到指定 server，则需要手动配置。
         > 如需要上传到白板日志服务器，可以把 `room.logger` 配置到该项目。
 
-## 前端调试
+### 前端调试
+
 对接过程中如果想了解和跟踪插件内部状态，可以通过以下几个控制台指令，查看内部数据。
+
 ```js
 const appliancePlugin = await ApplianceSinglePlugin.getInstance(...)
 appliancePlugin.currentManager  // 可以查看到包版本号，内部状态等
 appliancePlugin.currentManager.consoleWorkerInfo()  // 可以查看到 worker 上的绘制信息
 ```
+
+## 使用示例
+
+### 基础使用示例
+
+```js
+import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
+import '@netless/appliance-plugin/dist/style.css';
+
+// 方式1: 使用 CDN（推荐生产环境）
+const plugin = await ApplianceSinglePlugin.getInstance(room, {
+  options: {
+    cdn: {
+      fullWorkerUrl: 'https://your-cdn.com/fullWorker.js',
+      subWorkerUrl: 'https://your-cdn.com/subWorker.js',
+    },
+  },
+});
+
+// 方式2: 使用本地 worker 文件（适合开发环境）
+import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
+import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
+const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
+const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
+const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+const plugin = await ApplianceSinglePlugin.getInstance(room, {
+  options: {
+    cdn: {
+      fullWorkerUrl,
+      subWorkerUrl,
+    },
+  },
+});
+```
+
+### 切换绘制工具
+
+```js
+import { ApplianceNames, EStrokeType } from '@netless/appliance-plugin';
+
+// 切换到铅笔工具
+room.setMemberState({ currentApplianceName: ApplianceNames.pencil });
+
+// 切换到矩形工具
+room.setMemberState({ currentApplianceName: ApplianceNames.rectangle });
+
+// 切换到激光笔工具
+room.setMemberState({ 
+  currentApplianceName: ApplianceNames.laserPen,
+  strokeType: EStrokeType.Normal 
+});
+
+// 切换到文字工具
+room.setMemberState({ currentApplianceName: ApplianceNames.text });
+```
+
+### 自定义样式示例
+
+```js
+// 设置画笔样式为虚线
+room.setMemberState({ 
+  strokeType: EStrokeType.Dotted,
+  strokeOpacity: 0.8 
+});
+
+// 设置图形填充
+room.setMemberState({ 
+  fillColor: [255, 0, 0],  // 红色
+  fillOpacity: 0.5 
+});
+
+// 设置文字样式
+room.setMemberState({ 
+  textOpacity: 0.9,
+  textBgColor: [255, 255, 0],  // 黄色背景
+  textBgOpacity: 0.3 
+});
+```
+
+### 文字编辑示例
+
+```js
+// 在指定位置插入文字
+const textId = plugin.insertText(100, 100, 'Hello World');
+
+// 编辑文字内容
+plugin.updateText(textId, 'Updated Text');
+
+// 移除文字焦点
+plugin.blurText();
+```
+
+### 小地图功能示例
+
+```js
+// 创建小地图
+const minimapDiv = document.getElementById('minimap');
+await plugin.createMiniMap('mainView', minimapDiv);
+
+// 销毁小地图
+await plugin.destroyMiniMap('mainView');
+```
+
+### 撤销重做示例
+
+```js
+// 撤销操作
+const undoSteps = plugin.undo();
+
+// 重做操作
+const redoSteps = plugin.redo();
+
+// 检查是否可以撤销/重做
+const canUndo = plugin.canUndoSteps() > 0;
+const canRedo = plugin.canRedoSteps() > 0;
+```
+
+## 常见问题
+
+### 1. 如何选择合适的接入方式？
+
+- **fastboard**：如果你使用的是 fastboard 框架，推荐使用 fastboard 的集成方式，配置最简单
+- **多窗口场景**：如果需要多窗口功能，使用 `ApplianceMultiPlugin`
+- **单白板场景**：如果只需要单白板功能，使用 `ApplianceSinglePlugin`
+
+### 2. Worker 文件部署方式选择？
+
+- **CDN 部署**（推荐）：适合生产环境，可以减少主包体积（主包约 400kB，两个 worker 各约 800kB）
+- **本地打包**：适合开发环境或对包体积不敏感的场景
+
+### 3. 性能优化建议
+
+- 使用 CDN 部署 worker 文件，减少主包体积
+- 合理配置 `bufferSize`，根据设备性能调整画布缓存大小
+- 在移动端或低性能设备上，可以考虑使用 `useSimple: true` 简单模式
+- 如有非必要的功能, 可以不用开启 `useBackgroundThread: true`
+
+### 4. 兼容性说明
+
+- 支持现代浏览器（Chrome、Firefox、Safari、Edge）
+- 移动端浏览器支持情况取决于 OffscreenCanvas 支持情况
+- 不支持 OffscreenCanvas 的设备会自动降级到主线程模式
+
+## 版本历史
+
+详细的版本更新记录请查看 [CHANGELOG.md](./CHANGELOG.md)
+
+## 许可证
+
+MIT License
+
+## 相关链接
+
+- [white-web-sdk](https://www.npmjs.com/package/white-web-sdk)
+- [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager)
+- [fastboard](https://github.com/netless-io/fastboard)
+- [官方文档](https://doc.shengwang.cn/)
+
+
 ## [changelog](https://github.com/duty-os/appliance-plugin/blob/master/CHANGELOG.md)
