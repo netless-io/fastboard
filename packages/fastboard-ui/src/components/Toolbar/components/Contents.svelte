@@ -82,7 +82,9 @@
   $: hasUseLaserPen = (hasAppliancePlugin && ($memberState as ExtendMemberState)?.useLaserPen) || false;
   $: hasUseMarkPen =
     (hasAppliancePlugin && ($memberState as ExtendMemberState)?.strokeOpacity === 0.5) || false;
-  $: pencilType = hasUseLaserPen ? "laser" : hasUseMarkPen ? "mark" : "pencil";
+  $: hasUseStroke =
+    (hasAppliancePlugin && ($memberState as ExtendMemberState)?.strokeType === "Stroke") || false;
+  $: pencilType = hasUseLaserPen ? "laser" : hasUseMarkPen ? "mark" : hasUseStroke ? "stroke" : "pencil";
   $: hasUseEraserBitmap = hasAppliancePlugin && ($memberState as ExtendMemberState)?.isLine === false;
   $: eraserType = hasUseEraserBitmap ? "pencilEraser" : "eraser";
 
@@ -108,12 +110,14 @@
           useMarkPen();
         } else if (pencilType === "laser") {
           useLaserPen();
+        } else if (pencilType === "stroke") {
+          useStrokePencil();
         } else {
-          usePencil();
+          useNormalPencil();
         }
       }
     } else {
-      usePencil();
+      useNormalPencil();
     }
   }
   function text() {
@@ -141,17 +145,25 @@
   function clear() {
     app?.cleanCurrentScene();
   }
-  function usePencil() {
+  function useNormalPencil() {
     if (hasAppliancePlugin) {
       app?.appliancePlugin?.setMemberState({
         currentApplianceName: "pencil",
-        strokeType: "Stroke",
+        strokeType: "Normal",
         useLaserPen: false,
         strokeOpacity: 1,
       } as ExtendMemberState);
     } else {
       app?.setAppliance("pencil");
     }
+  }
+  function useStrokePencil() {
+    app?.appliancePlugin?.setMemberState({
+      currentApplianceName: "pencil",
+      strokeType: "Stroke",
+      useLaserPen: false,
+      strokeOpacity: 1,
+    } as ExtendMemberState);
   }
   function useLaserPen() {
     app?.appliancePlugin?.setMemberState({
@@ -251,12 +263,22 @@
     <div class="{name}-panel-switch-pencil">
       {#if !!app?.appliancePlugin}
         {#if pencilType !== "pencil"}
-          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={usePencil}>
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useNormalPencil}>
             <Icons.Pencil {theme} />
           </Button>
         {:else if pencilType === "pencil"}
           <Button class="{name}-panel-switch-btn" {...btn_props}>
             <Icons.PencilFilled {theme} active />
+          </Button>
+        {/if}
+
+        {#if pencilType === "stroke"}
+          <Button class="{name}-panel-switch-btn" {...btn_props}>
+            <Icons.StrokePencilFilled {theme} active />
+          </Button>
+        {:else if pencilType !== "stroke"}
+          <Button class="{name}-panel-switch-btn" {...btn_props} on:click={useStrokePencil}>
+            <Icons.StrokePencil {theme} />
           </Button>
         {/if}
 
@@ -281,6 +303,7 @@
         {/if}
       {/if}
     </div>
+    <div class="{name}-panel-divider" />
     <StrokeWidth {app} {theme} {disabled} />
     <div class="{name}-panel-divider" />
     <StrokeColor {app} {theme} {disabled} {colors} />

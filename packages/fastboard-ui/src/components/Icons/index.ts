@@ -22,6 +22,8 @@ import LineBolded from "./LineBolded.svelte";
 import Minus from "./Minus.svelte";
 import Pencil from "./Pencil.svelte";
 import PencilFilled from "./PencilFilled.svelte";
+import StrokePencil from "./BrushPen.svelte";
+import StrokePencilFilled from "./BrushPenFilled.svelte";
 import Plus from "./Plus.svelte";
 import Rectangle from "./Rectangle.svelte";
 import RectangleBolded from "./RectangleBolded.svelte";
@@ -106,6 +108,8 @@ const Icons = {
   MarkPenFilled,
   EraserBitmap,
   EraserBitmapFilled,
+  StrokePencil,
+  StrokePencilFilled
 };
 
 export default Icons;

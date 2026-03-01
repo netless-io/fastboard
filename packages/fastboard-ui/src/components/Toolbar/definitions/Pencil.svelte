@@ -25,6 +25,12 @@
     {:else}
       <Icons.LaserPen {theme} />
     {/if}
+  {:else if pencilType === "stroke"}
+    {#if appliance === "pencil"}
+      <Icons.StrokePencilFilled {theme} active />
+    {:else}
+      <Icons.StrokePencil {theme} />
+    {/if}
   {:else if pencilType === "pencil"}
     {#if appliance === "pencil"}
       <Icons.PencilFilled {theme} active />
