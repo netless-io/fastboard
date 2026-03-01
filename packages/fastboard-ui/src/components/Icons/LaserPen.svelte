@@ -6,7 +6,7 @@
 </script>
 
 <svg fill="none" viewBox="0 0 24 24" class="fastboard-icon {theme}" class:is-active={active}>
-  <g stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" transform="rotate(0 10 10)">
+  <g stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" transform="rotate(0 10 10) translate(3 2)">
     <path
       class="fastboard-icon-stroke-color"
       clip-rule="evenodd"
