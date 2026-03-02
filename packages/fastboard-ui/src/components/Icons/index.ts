@@ -109,7 +109,7 @@ const Icons = {
   EraserBitmap,
   EraserBitmapFilled,
   StrokePencil,
-  StrokePencilFilled
+  StrokePencilFilled,
 };
 
 export default Icons;
