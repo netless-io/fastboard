@@ -59,30 +59,49 @@ import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
 import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 ```
 
-> **worker.js 文件 CDN 部署**
+> **worker.js 文件与 CDN / 静态资源**
 >
-> 我们采用双 worker 并发来提高绘制效率，这样让它比主线程效率提高了 40% 以上。但是两个 worker 文件上的公共依赖都是重复的，所以如果直接构建到包中，那么会大大增加包体积。所以我们允许 worker.js 文件 CDN 部署，只要把 `@netless/appliance-plugin/cdn` 下的文件部署到 CDN 中即可，然后通过插件中的 `getInstance` 的第二个参数 `options.cdn` 中配置上两个 worker.js 的 CDN 地址即可。这样就可以解决包体积过大的问题。
+> 我们采用双 worker 并发来提高绘制效率，比主线程效率提高 40% 以上。两个 worker 文件的公共依赖重复，直接打进包体会显著增加体积，因此推荐通过 `options.cdn` 指定 worker 地址，有两种常见方式：
 >
-> 如果需要考虑构建的包体积大小的，请选择配置 CDN。
+> 1. **CDN 方式**：将 `@netless/appliance-plugin/cdn` 下的 `fullWorker.js`、`subWorker.js` 部署到 CDN，在插件的 `getInstance` 的第二个参数 `options.cdn` 中传入这两个文件的 CDN 地址（`fullWorkerUrl`、`subWorkerUrl`）。
+> ***注意***：CDN 配置的 URL 必须同源，否则 worker 线程会无法加载。
+>
+> 2. **静态资源方式**：将 `fullWorker.js`、`subWorker.js` 放到项目的静态目录（如 Vite 的 `public/`），不参与打包。在代码中基于 `import.meta.env.BASE_URL`（或等效的 publicPath）拼出完整 URL，传入 `options.cdn`。同源请求、不占打包体积，也无需 Blob 内联，内存占用更小。
+>
+> 若需控制包体积，请使用上述任一方式配置 `options.cdn`。
 
 ### 接入方式参考
 
-#### fastboard(直接对接fastboard)
+#### 引入worker.js
 ```js
+// 引入 worker 方式三选一：
+// 方式一：静态资源（推荐）- 将 fullWorker.js、subWorker.js 放到 public 等静态目录，同源请求、不占打包体积
+const workerBase = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const fullWorkerUrl = workerBase + 'fullWorker.js';
+const subWorkerUrl = workerBase + 'subWorker.js';
 
-// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
+// 方式二：CDN - 将 @netless/appliance-plugin/cdn 下文件部署到 CDN 后，此处写 CDN 地址、不占打包体积 注意: 域名一定要同源
+const fullWorkerUrl = 'https://your-cdn.com/fullWorker.js';
+const subWorkerUrl = 'https://your-cdn.com/subWorker.js';
+
+// 方式三：从 dist 以 ?raw 内联为 Blob（需打包器支持 ?raw，如 Vite / webpack raw-loader）这种方式会占用一定内存.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+const fullWorkerUrl = URL.createObjectURL(new Blob([fullWorkerString], { type: 'text/javascript' }));
+const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'text/javascript' }));
+```
 
+#### fastboard(直接对接fastboard)
+```js
 // 对接 fastboard-react
 // 全打包方式引用
 // import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
 // 分包引用
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+// 引入 worker 方式三选一：
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const app = useFastboard(() => ({
     sdkConfig: {
@@ -110,6 +129,10 @@ const app = useFastboard(() => ({
 // import { createFastboard, createUI } from "@netless/fastboard/full";
 // 分包引用
 import { createFastboard, createUI } from "@netless/fastboard";
+
+// 引入 worker 方式三选一：
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const fastboard = await createFastboard({
     sdkConfig: {
@@ -143,13 +166,10 @@ import '@netless/appliance-plugin/dist/style.css';
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
-// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// 引入 worker 方式三选一：
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const whiteWebSdk = new WhiteWebSdk(...)
 const room = await whiteWebSdk.joinRoom({
@@ -184,13 +204,10 @@ import '@netless/appliance-plugin/dist/style.css';
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-// 引入 worker.js 方式可选，如果走 CDN，可以不用从 dist 中引入。如果从 dist 中引入，需要以资源模块方式并通过 blob 内联形式配置到 options.cdn 中。如 `?raw`，这个需要打包器的支持，vite 默认支持 `?raw`，webpack 需要配置 raw-loader 或 asset/source。
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// 引入 worker 方式三选一：
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const whiteWebSdk = new WhiteWebSdk(...)
 const room = await whiteWebSdk.joinRoom({

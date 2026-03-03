@@ -59,30 +59,50 @@ import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
 import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 ```
 
-> **worker.js file CDN deployment**
+> **worker.js files: CDN & static assets**
 >
-> We use dual worker concurrency to improve drawing efficiency, which makes it more than 40% more efficient than the main thread. However, the common dependencies on the two worker files are duplicated, so if we build them directly into the package, it will greatly increase the package size. So we allow worker.js files to be deployed via CDN. Just deploy the files under `@netless/appliance-plugin/cdn` to the CDN, and then configure the CDN addresses of the two worker.js files in the second parameter `options.cdn` of `getInstance` in the plugin. This solves the problem of excessive package size.
+> We use dual workers for higher drawing efficiency (40%+ over the main thread). The two worker files share duplicated dependencies, so bundling them would significantly increase package size. We recommend providing worker URLs via `options.cdn`. Two common approaches:
 >
-> **The total package is about 400kB, and the two worker.js files are 800kB each.** If you need to consider the size of the build package, please choose to configure CDN.
+> 1. **CDN**: Deploy `fullWorker.js` and `subWorker.js` from `@netless/appliance-plugin/cdn` to your CDN, then pass their URLs as `fullWorkerUrl` and `subWorkerUrl` in the plugin’s `getInstance` second argument `options.cdn`.
+> ***Note***: CDN URLs must be same-origin with your app, or the workers will fail to load.
+>
+> 2. **Static assets**: Put `fullWorker.js` and `subWorker.js` in your project’s static directory (e.g. Vite’s `public/`), so they are not bundled. In code, build full URLs from `import.meta.env.BASE_URL` (or your publicPath) and pass them to `options.cdn`. Same-origin, no bundle bloat, no Blob inline, lower memory use.
+>
+> To keep bundle size down, configure `options.cdn` using one of the above.
 
 ### Access Mode Reference
 
-#### fastboard (Direct integration with fastboard)
+#### Introducing worker.js
 ```js
+// Choose one of three ways to provide worker URLs:
 
-// The method of importing worker.js is optional. If using CDN, you don't need to import from dist. If importing from dist, you need to configure it into options.cdn in the form of a resource module and blob inline. Such as `?raw`, this requires packer support. Vite supports `?raw` by default, webpack needs to configure raw-loader or asset/source.
+// Option 1: Static assets (recommended) — put fullWorker.js & subWorker.js in public (or similar); same-origin, no bundle cost
+const workerBase = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
+const fullWorkerUrl = workerBase + 'fullWorker.js';
+const subWorkerUrl = workerBase + 'subWorker.js';
+
+// Option 2: CDN — after deploying files from @netless/appliance-plugin/cdn to your CDN, set URLs here. Note: must be same-origin
+const fullWorkerUrl = 'https://your-cdn.com/fullWorker.js';
+const subWorkerUrl = 'https://your-cdn.com/subWorker.js';
+
+// Option 3: Inline via ?raw as Blob (requires ?raw support, e.g. Vite or webpack raw-loader). Uses more memory.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+const fullWorkerUrl = URL.createObjectURL(new Blob([fullWorkerString], { type: 'text/javascript' }));
+const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'text/javascript' }));
+```
 
+#### fastboard (Direct integration with fastboard)
+```js
 // Integration with fastboard-react
 // Full package mode reference
 // import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
 // Subpackage reference
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
+
+// Use one of the three worker options from "Introducing worker.js" above:
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const app = useFastboard(() => ({
     sdkConfig: {
@@ -110,6 +130,10 @@ const app = useFastboard(() => ({
 // import { createFastboard, createUI } from "@netless/fastboard/full";
 // Subpackage reference
 import { createFastboard, createUI } from "@netless/fastboard";
+
+// Use one of the three worker options from "Introducing worker.js" above:
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const fastboard = await createFastboard({
     sdkConfig: {
@@ -143,13 +167,10 @@ import '@netless/appliance-plugin/dist/style.css';
 import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
-// The method of importing worker.js is optional. If using CDN, you don't need to import from dist. If importing from dist, you need to configure it into options.cdn in the form of a resource module and blob inline. Such as `?raw`, this requires packer support. Vite supports `?raw` by default, webpack needs to configure raw-loader or asset/source.
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// Use one of the three worker options from "Introducing worker.js" above:
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const whiteWebSdk = new WhiteWebSdk(...)
 const room = await whiteWebSdk.joinRoom({
@@ -184,13 +205,10 @@ import '@netless/appliance-plugin/dist/style.css';
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-// The method of importing worker.js is optional. If using CDN, you don't need to import from dist. If importing from dist, you need to configure it into options.cdn in the form of a resource module and blob inline. Such as `?raw`, this requires packer support. Vite supports `?raw` by default, webpack needs to configure raw-loader or asset/source.
-import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
-import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
-const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
-const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
-const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
-const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
+
+// Use one of the three worker options from "Introducing worker.js" above:
+const fullWorkerUrl = ...;
+const subWorkerUrl = ...;
 
 const whiteWebSdk = new WhiteWebSdk(...)
 const room = await whiteWebSdk.joinRoom({
