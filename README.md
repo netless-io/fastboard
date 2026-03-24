@@ -8,7 +8,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 Starting with version 0.3.22, fastboard integrates the [@netless/appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
 
-Starting with version 0.3.22, fastboard added a fully packaged file, '@netless/fastboard/full' or '@netless/fastboard-react/full', to resolve internal and external dependency conflicts.
+Starting with version 0.3.22, fastboard provides standalone full packages, `@netless/fastboard-full` and `@netless/fastboard-react-full`, to resolve internal and external dependency conflicts.
 
 Starting with version 1.0.6 fastboard integrates the [@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView) plug-in, used for paging management courseware.
 
@@ -46,7 +46,7 @@ npm add <b>@netless/fastboard</b> @netless/appliance-plugin @netless/app-in-main
 
 ```js
 // Full package
-import { createFastboard, createUI } from "@netless/fastboard/full";
+import { createFastboard, createUI } from "@netless/fastboard-full";
 // Subcontracting package
 import { createFastboard, createUI } from "@netless/fastboard";
 
@@ -140,7 +140,7 @@ npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugi
 
 ```jsx
 // Full package
-import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // Subcontracting package
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -440,7 +440,7 @@ const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
 // interconnection with fastboard-react
 // Full package mode reference
-// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // Subcontract reference
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -472,7 +472,7 @@ app.appliancePlugin
 
 // interconnection with fastboard
 // Full package mode reference
-// import { createFastboard, createUI } from "@netless/fastboard/full";
+// import { createFastboard, createUI } from "@netless/fastboard-full";
 // Subcontract reference
 import { createFastboard, createUI } from "@netless/fastboard";
 
@@ -515,7 +515,7 @@ Through `enableAppInMainViewPlugin` configuration items open `app-in-mainView-pl
 
 // interconnection with fastboard-react
 // Full package mode reference
-// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // Subcontract reference
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -544,7 +544,7 @@ app.appInMainViewPlugin
 
 // interconnection with fastboard
 // Full package mode reference
-// import { createFastboard, createUI } from "@netless/fastboard/full";
+// import { createFastboard, createUI } from "@netless/fastboard-full";
 // Subcontract reference
 import { createFastboard, createUI } from "@netless/fastboard";
 

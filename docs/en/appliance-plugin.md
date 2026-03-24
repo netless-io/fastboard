@@ -96,7 +96,7 @@ const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'te
 ```js
 // Integration with fastboard-react
 // Full package mode reference
-// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // Subpackage reference
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -127,7 +127,7 @@ const app = useFastboard(() => ({
 
 // Integration with fastboard
 // Full package mode reference
-// import { createFastboard, createUI } from "@netless/fastboard/full";
+// import { createFastboard, createUI } from "@netless/fastboard-full";
 // Subpackage reference
 import { createFastboard, createUI } from "@netless/fastboard";
 

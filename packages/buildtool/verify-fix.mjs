@@ -3,10 +3,10 @@
 import fs from "fs";
 import path from "path";
 
-const fullMjsPath = path.join(process.cwd(), "../fastboard-core/dist/full.mjs");
+const fullMjsPath = path.join(process.cwd(), "../fastboard-core-full/dist/index.mjs");
 
 if (!fs.existsSync(fullMjsPath)) {
-  console.log("❌ full.mjs 文件不存在，请先构建包");
+  console.log("❌ full bundle 文件不存在，请先构建 @netless/fastboard-core-full");
   console.log("   路径:", fullMjsPath);
   process.exit(1);
 }

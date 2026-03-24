@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["."],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "paths": {
+      "@netless/fastboard-react-lite": ["../../fastboard-react/src/index.tsx"],
+      "@netless/fastboard-core": ["../../fastboard-core-lite/src/index.ts"],
+      "@netless/fastboard-ui": ["../../fastboard-ui/src/index.ts"]
+    }
+  }
+}

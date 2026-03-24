@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig-base.json",
+  "include": ["../fastboard-react/src"],
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@netless/fastboard-core": ["../fastboard-core-full/src/index.ts"],
+      "@netless/fastboard-ui": ["../fastboard-ui/src/index.ts"]
+    }
+  }
+}

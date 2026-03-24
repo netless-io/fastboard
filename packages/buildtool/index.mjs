@@ -1,4 +1,6 @@
 import fs from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import * as rollup from "rollup";
 import * as esbuild from "esbuild";
 import * as dts from "@hyrious/dts";
@@ -15,7 +17,8 @@ import { sass } from "@netless/esbuild-plugin-inline-sass";
  *   main: string,
  *   svelte?: string,
  *   dependencies?: Record<string, string>,
- *   peerDependencies?: Record<string, string>
+ *   peerDependencies?: Record<string, string>,
+ *   optionalDependencies?: Record<string, string>
  * }}
  */
 export async function build({
@@ -26,10 +29,92 @@ export async function build({
   version,
   dependencies,
   peerDependencies,
+  optionalDependencies,
 }) {
   // eslint-disable-next-line no-undef
   process.chdir(dir);
   fs.rmSync("dist", { recursive: true, force: true });
+  const buildtoolDir = dirname(fileURLToPath(import.meta.url));
+  const protobufjsInquireBrowserShim = resolve(buildtoolDir, "shims/protobufjs-inquire-browser.js");
+
+  const localName = name.split("/").pop() || name;
+  const standaloneMode = localName.endsWith("-lite")
+    ? "lite"
+    : localName.endsWith("-full")
+      ? "full"
+      : null;
+  const packageFamily = localName.replace(/-(lite|full)$/, "");
+  const isCorePackage = packageFamily === "fastboard-core";
+  const isUIPackage = packageFamily === "fastboard-ui";
+  const shouldBuildModeDts = !standaloneMode && isUIPackage;
+  const coreOptionalPlugins = [
+    "@netless/appliance-plugin",
+    "@netless/app-in-mainview-plugin",
+  ];
+  const isCoreOptionalPlugin = id =>
+    coreOptionalPlugins.some(pkg => id === pkg || id.startsWith(`${pkg}/`));
+  const nodeBuiltins = [
+    "fs",
+    "path",
+    "url",
+    "crypto",
+    "stream",
+    "util",
+    "events",
+    "buffer",
+    "process",
+    "os",
+    "net",
+    "tls",
+    "http",
+    "https",
+    "dns",
+    "zlib",
+    "querystring",
+    "readline",
+    "child_process",
+    "cluster",
+    "dgram",
+    "punycode",
+    "string_decoder",
+    "sys",
+    "timers",
+    "tty",
+    "vm",
+    "worker_threads",
+  ];
+  const runtimeModePackage = (pkg, mode) =>
+    standaloneMode
+      ? pkg === "fastboard-core"
+        ? `@netless/${pkg}-${mode}`
+        : `@netless/${pkg}`
+      : `@netless/${pkg}/${mode}`;
+  const typeModePackage = (pkg, mode) =>
+    standaloneMode
+      ? pkg === "fastboard-core"
+        ? `@netless/${pkg}-${mode}`
+        : `@netless/${pkg}/${mode}`
+      : `@netless/${pkg}/${mode}`;
+  const getRuntimeAlias = mode => {
+    const alias = {};
+    const coreTarget = runtimeModePackage("fastboard-core", mode);
+    const uiTarget = runtimeModePackage("fastboard-ui", mode);
+    if (coreTarget !== "@netless/fastboard-core") {
+      alias["@netless/fastboard-core"] = coreTarget;
+    }
+    if (uiTarget !== "@netless/fastboard-ui") {
+      alias["@netless/fastboard-ui"] = uiTarget;
+    }
+    return alias;
+  };
+  const getFullBuildAlias = mode => ({
+    ...(mode ? getRuntimeAlias(mode) : {}),
+    ...(isCorePackage ? { "@protobufjs/inquire": protobufjsInquireBrowserShim } : {}),
+  });
+  const replaceModeImports = (code, mode) =>
+    code
+      .replace(/@netless\/fastboard-core(?![/-])/g, typeModePackage("fastboard-core", mode))
+      .replace(/@netless\/fastboard-ui(?![/-])/g, typeModePackage("fastboard-ui", mode));
 
   const esbuildPlugin = (external, alias = {}) => ({
     name: "esbuild",
@@ -49,13 +134,14 @@ export async function build({
           ".svg": "dataurl",
         },
         define: {
-          __NAME__: '"@netless/fastboard"',
+          __NAME__: JSON.stringify(name),
           __VERSION__: JSON.stringify(version),
         },
         alias,
         external: Object.keys({
           ...dependencies,
           ...peerDependencies,
+          ...optionalDependencies,
           ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
         }),
       });
@@ -68,55 +154,34 @@ export async function build({
     },
   });
 
-  // 构建 dist/index.js
-  let start = Date.now();
-  {
+  const buildBundle = async ({ input, output, alias = {}, full = false, extraExternal = [] }) => {
     const bundle = await rollup.rollup({
-      input: main,
-      plugins: [esbuildPlugin()],
-      external: [/^[@a-z]/],
-    });
-    const esm = bundle.write({
-      file: "dist/index.mjs",
-      format: "es",
-      sourcemap: true,
-    });
-
-    const cjs = bundle.write({
-      file: "dist/index.js",
-      format: "cjs",
-      sourcemap: true,
-      interop: "auto",
-    });
-
-    await esm;
-    await cjs;
-    await bundle.close();
-    console.log("Built dist/index.{js|mjs} in", Date.now() - start + "ms");
-  }
-
-  // 构建 dist/lite.js
-  start = Date.now();
-  if (!name.endsWith("-ui")) {
-    const bundle = await rollup.rollup({
-      input: name.endsWith("-core") ? "src/lite.ts" : main,
+      input,
       plugins: [
-        esbuildPlugin([], {
-          "@netless/fastboard-core": "@netless/fastboard-core/lite",
-          // "@netless/fastboard-ui": "@netless/fastboard-ui/lite",
-        }),
+        full ? esbuildFullPlugin(extraExternal, alias) : esbuildPlugin(extraExternal, alias),
+        ...(full ? [fixIIFEPlugin()] : []),
       ],
-      external: [/^[@a-z]/],
+      external: full && isCorePackage
+        ? id => {
+            if (isCoreOptionalPlugin(id)) {
+              return true;
+            }
+            if (id.startsWith("node:") || (!id.includes("/") && !id.includes("\\"))) {
+              return nodeBuiltins.includes(id);
+            }
+            return false;
+          }
+        : [/^[@a-z]/],
     });
 
     const esm = bundle.write({
-      file: "dist/lite.mjs",
+      file: `dist/${output}.mjs`,
       format: "es",
       sourcemap: true,
     });
 
     const cjs = bundle.write({
-      file: "dist/lite.js",
+      file: `dist/${output}.js`,
       format: "cjs",
       sourcemap: true,
       interop: "auto",
@@ -125,16 +190,39 @@ export async function build({
     await esm;
     await cjs;
     await bundle.close();
-    console.log("Built dist/lite.{js|mjs} in", Date.now() - start + "ms");
+  };
+
+  let start = Date.now();
+  if (standaloneMode === "lite") {
+    await buildBundle({
+      input: main,
+      output: "index",
+      alias: getRuntimeAlias("lite"),
+    });
+  } else if (standaloneMode === "full") {
+    await buildBundle({
+      input: main,
+      output: "index",
+      alias: getFullBuildAlias("full"),
+      full: true,
+    });
+  } else {
+    await buildBundle({
+      input: main,
+      output: "index",
+    });
   }
+  console.log("Built dist/index.{js|mjs} in", Date.now() - start + "ms");
 
   // 为 UI 包生成 dist/index.svelte.mjs，
   // 这也有助于避免在 fastboard/fastboard-react 测试中依赖 svelte。
-  if (name.endsWith("-ui")) {
+  if (isUIPackage) {
     start = Date.now();
     const bundle = await rollup.rollup({
       input: main,
-      plugins: [esbuildPlugin(["svelte"])],
+      plugins: [
+        esbuildPlugin(["svelte"], standaloneMode ? getRuntimeAlias(standaloneMode) : {}),
+      ],
       external: [/^[@a-z]/],
     });
     await bundle.write({
@@ -147,77 +235,84 @@ export async function build({
   }
 
   start = Date.now();
-  await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", "./lite", "./full"] });
+  if (standaloneMode === "lite" && isCorePackage) {
+    await dts.build(main, "dist/index.d.ts", {
+      exclude: ["svelte", "svelte/internal", ...coreOptionalPlugins],
+    });
+  } else if (standaloneMode === "full" && isCorePackage) {
+    await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", ...coreOptionalPlugins] });
+  } else {
+    await dts.build(main, "dist/index.d.ts", { exclude: ["svelte", "svelte/internal", "./lite", "./full"] });
+    if (standaloneMode) {
+      const code = replaceModeImports(fs.readFileSync("dist/index.d.ts", "utf-8"), standaloneMode);
+      fs.writeFileSync("dist/index.d.ts", code);
+    }
+  }
   console.log("Built dist/index.d.ts in", Date.now() - start + "ms");
 
-  // 生成 dist/lite.d.ts
-  start = Date.now();
-  if (name.endsWith("-core")) {
-    await dts.build("src/lite.ts", "dist/lite.d.ts", {
-      exclude: ["svelte", "svelte/internal", "@netless/appliance-plugin"],
-    });
-    console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
-  } else {
-    let code = fs.readFileSync("dist/index.d.ts", "utf-8");
-    code = code.replace(/@netless\/fastboard-core/g, "@netless/fastboard-core/lite");
-    code = code.replace(/@netless\/fastboard-ui/g, "@netless/fastboard-ui/lite");
-    fs.writeFileSync("dist/lite.d.ts", code);
+  if (shouldBuildModeDts) {
+    start = Date.now();
+    fs.writeFileSync("dist/lite.d.ts", replaceModeImports(fs.readFileSync("dist/index.d.ts", "utf-8"), "lite"));
     console.log("Built dist/lite.d.ts in", Date.now() - start + "ms");
   }
 
   // 构建 dist/full.js
-  const esbuildFullPlugin = (external, alias = {}) => ({
-    name: "esbuild",
-    async load(id) {
-      const { outputFiles } = await esbuild.build({
-        entryPoints: [id],
-        bundle: true,
-        format: "esm",
-        // 这里的文件名并不重要，因为
-        // rollup 会合并 sourcemap 并获取原始输入文件名。
-        outfile: id.replace(/\.tsx?$/, ".js"),
-        sourcemap: true,
-        write: false,
-        target: ["es2017"],
-        plugins: [svelte(), sass()],
-        loader: {
-          ".svg": "dataurl",
-        },
-        define: {
-          __NAME__: '"@netless/fastboard"',
-          __VERSION__: JSON.stringify(version),
-        },
-        alias,
-        // 对于完整构建，打包除 @netless/appliance-plugin 之外的所有内容
-        // 这适用于完整构建的 -core 和非 -core 包
-        // 原始逻辑：-core 包打包所有内容，非 -core 排除 dependencies/peerDependencies
-        // 但对于完整构建，我们希望所有包都打包所有内容
-        external: name.endsWith("-core")
-          ? Object.keys({
-              ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-            }).concat(["@netless/appliance-plugin"])
-          : Object.keys({
-              ...dependencies,
-              ...peerDependencies,
-              ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
-            }),
-      });
-      let code, map;
-      for (const { path, text } of outputFiles) {
-        if (path.endsWith(".map")) map = text;
-        else code = text;
-      }
-      return { code, map };
-    },
-  });
+  function esbuildFullPlugin(external, alias = {}) {
+    return {
+      name: "esbuild",
+      async load(id) {
+        const { outputFiles } = await esbuild.build({
+          entryPoints: [id],
+          bundle: true,
+          format: "esm",
+          // 这里的文件名并不重要，因为
+          // rollup 会合并 sourcemap 并获取原始输入文件名。
+          outfile: id.replace(/\.tsx?$/, ".js"),
+          sourcemap: true,
+          write: false,
+          target: ["es2017"],
+          plugins: [svelte(), sass()],
+          loader: {
+            ".svg": "dataurl",
+          },
+          define: {
+            __NAME__: JSON.stringify(name),
+            __VERSION__: JSON.stringify(version),
+          },
+          alias,
+          // 对于完整构建，打包除 core 可选插件之外的所有内容
+          // 这适用于完整构建的 -core 和非 -core 包
+          // 原始逻辑：-core 包打包所有内容，非 -core 排除 dependencies/peerDependencies
+          // 但对于完整构建，我们希望所有包都打包所有内容
+          external: isCorePackage
+            ? Object.keys({
+                ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+              }).concat(coreOptionalPlugins)
+            : Object.keys({
+                ...dependencies,
+                ...peerDependencies,
+                ...optionalDependencies,
+                ...(external && external.reduce((acc, cur) => ((acc[cur] = true), acc), {})),
+              }),
+        });
+        let code, map;
+        for (const { path, text } of outputFiles) {
+          if (path.endsWith(".map")) map = text;
+          else code = text;
+        }
+        return { code, map };
+      },
+    };
+  }
 
   // 修复被 __commonJS 包装后无法正确导出的 IIFE 库的插件
   // 问题：这些 IIFE 首先检查 define.amd，如果存在，它们不会设置 module2.exports
   // 这导致 require_xxx() 在带有 AMD 加载器的浏览器环境中返回空对象
   // 解决方案：在 define.amd 分支中添加 module2.exports = value; 以确保它始终被设置
-  const fixIIFEPlugin = () => ({
-    name: "fix-iife",
-    renderChunk(code, chunk, options) {
+  function fixIIFEPlugin() {
+    return {
+      name: "fix-iife",
+      renderChunk(code, chunk, options) {
       let modified = false;
       let fixCount = 0;
       const originalCode = code;
@@ -319,99 +414,12 @@ export async function build({
       }
 
       return { code, map: null };
-    },
-  });
-  start = Date.now();
-  if (!name.endsWith("-ui")) {
-    const bundle = await rollup.rollup({
-      input: name.endsWith("-core") ? "src/full.ts" : main,
-      plugins: [
-        esbuildFullPlugin([], {
-          "@netless/fastboard-core": "@netless/fastboard-core/full",
-        }),
-        fixIIFEPlugin(),
-      ],
-      // 对于 -core 包：打包除 Node.js 内置模块之外的所有内容（完整打包）
-      // 对于非 -core 包：保持原始行为（排除以 @ 或小写字母开头的包）
-      external: name.endsWith("-core")
-        ? id => {
-            // 对于 -core 包，仅排除 Node.js 内置模块
-            if (id.startsWith("node:") || (!id.includes("/") && !id.includes("\\"))) {
-              const nodeBuiltins = [
-                "fs",
-                "path",
-                "url",
-                "crypto",
-                "stream",
-                "util",
-                "events",
-                "buffer",
-                "process",
-                "os",
-                "net",
-                "tls",
-                "http",
-                "https",
-                "dns",
-                "zlib",
-                "querystring",
-                "readline",
-                "child_process",
-                "cluster",
-                "dgram",
-                "punycode",
-                "string_decoder",
-                "sys",
-                "timers",
-                "tty",
-                "vm",
-                "worker_threads",
-              ];
-              return nodeBuiltins.includes(id);
-            }
-            // 在打包中包含所有其他包（white-web-sdk、decimal.js 等）
-            return false;
-          }
-        : [/^[@a-z]/], // 对于非 -core 包，保持原始行为
-    });
-
-    // 为浏览器环境输出 ES 模块格式
-    // 注意：此打包文件用于浏览器。fixIIFEPlugin 确保
-    // 即使浏览器环境中存在 AMD 加载器（define.amd），
-    // 被 __commonJS 包装的 CommonJS 模块也能正常工作。
-    const esm = bundle.write({
-      file: "dist/full.mjs",
-      format: "es",
-      sourcemap: true,
-      // ES 模块格式在现代浏览器中原生支持
-      // 不需要额外的浏览器特定配置
-    });
-
-    // 为 Node.js 环境输出 CommonJS 格式
-    // 注意：fixIIFEPlugin 还修复 CJS 输出，使其在浏览器中工作
-    // 当被可能注入 AMD 加载器的工具（如 webpack）打包时
-    const cjs = bundle.write({
-      file: "dist/full.js",
-      format: "cjs",
-      sourcemap: true,
-      interop: "auto",
-      // 具有自动互操作的 CommonJS 格式，以获得更好的兼容性
-    });
-
-    await esm;
-    await cjs;
-    await bundle.close();
-    console.log("Built dist/full.{js|mjs} in", Date.now() - start + "ms");
+      },
+    };
   }
-  start = Date.now();
-  if (name.endsWith("-core")) {
-    await dts.build("src/full.ts", "dist/full.d.ts", { exclude: ["svelte", "svelte/internal"] });
-    console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
-  } else {
-    let code = fs.readFileSync("dist/index.d.ts", "utf-8");
-    code = code.replace(/@netless\/fastboard-core/g, "@netless/fastboard-core/full");
-    code = code.replace(/@netless\/fastboard-ui/g, "@netless/fastboard-ui/full");
-    fs.writeFileSync("dist/full.d.ts", code);
+  if (shouldBuildModeDts) {
+    start = Date.now();
+    fs.writeFileSync("dist/full.d.ts", replaceModeImports(fs.readFileSync("dist/index.d.ts", "utf-8"), "full"));
     console.log("Built dist/full.d.ts in", Date.now() - start + "ms");
   }
 }

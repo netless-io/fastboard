@@ -1,10 +1,19 @@
 // prerelease a canary version.
 import { createInterface } from "readline";
-import { readFile, readdir, writeFile } from "fs/promises";
+import { access, readFile, readdir, writeFile } from "fs/promises";
 import { join } from "path";
 import semver from "semver";
 
-const packages = (await readdir("./packages")).filter(e => e.startsWith("fastboard"));
+const packageDirs = (await readdir("./packages")).filter(e => e.startsWith("fastboard"));
+const packages: string[] = [];
+for (const folder of packageDirs) {
+  try {
+    await access(join("./packages", folder, "package.json"));
+    packages.push(folder);
+  } catch {
+    // Ignore stale directories that are no longer publishable packages.
+  }
+}
 const mainPkg = JSON.parse(await readFile(join("./packages", "fastboard/package.json"), "utf8"));
 
 const version = mainPkg.version;

@@ -1,13 +1,11 @@
 {
   "name": "@netless/fastboard",
-  "version": "1.1.4",
+  "version": "1.1.5-beta.1",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
     "src",
-    "dist",
-    "lite.d.ts",
-    "full.d.ts"
+    "dist"
   ],
   "repository": "netless-io/fastboard",
   "scripts": {
@@ -32,14 +30,6 @@
       ".": {
         "types": "./dist/index.d.ts",
         "default": "./dist/index.mjs"
-      },
-      "./lite": {
-        "types": "./dist/lite.d.ts",
-        "default": "./dist/lite.mjs"
-      },
-      "./full": {
-        "types": "./dist/full.d.ts",
-        "default": "./dist/full.mjs"
       }
     }
   }

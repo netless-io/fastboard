@@ -4,7 +4,7 @@
 
 从0.3.22版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
 
-从0.3.22版本开始, fastboard 新增全打包文件, `@netless/fastboard/full` or `@netless/fastboard-react/full`, 用于解决内外依赖冲突问题.
+从0.3.22版本开始, fastboard 提供独立的 full 包 `@netless/fastboard-full` 和 `@netless/fastboard-react-full`, 用于解决内外依赖冲突问题.
 
 从1.0.6版本开始, fastboard 集成了[@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView)插件,用于分页管理课件
 
@@ -45,7 +45,7 @@ npm add <b>@netless/fastboard</b> @netless/appliance-plugin @netless/app-in-main
 
 ```js
 // 全打包方式引用
-import { createFastboard, createUI } from "@netless/fastboard/full";
+import { createFastboard, createUI } from "@netless/fastboard-full";
 
 // 分包引用
 import { createFastboard, createUI } from "@netless/fastboard";
@@ -151,7 +151,7 @@ npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugi
 
 ```jsx
 // 全打包方式引用
-import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // 分包引用
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -452,7 +452,7 @@ const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
 // 对接 fastboard-react
 // 全打包方式引用
-// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // 分包引用
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -484,7 +484,7 @@ const app = useFastboard(() => ({
 
 // 对接 fastboard
 // 全打包方式引用
-// import { createFastboard, createUI } from "@netless/fastboard/full";
+// import { createFastboard, createUI } from "@netless/fastboard-full";
 // 分包引用
 import { createFastboard, createUI } from "@netless/fastboard";
 

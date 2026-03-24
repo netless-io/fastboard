@@ -155,6 +155,77 @@ importers:
         specifier: ^1.1.33
         version: 1.1.33(@netless/window-manager@1.0.11(jspdf@2.5.2)(white-web-sdk@2.16.53))(markmap-common@0.18.9)(white-web-sdk@2.16.53)
 
+  packages/fastboard-core-full:
+    dependencies:
+      '@netless/app-slide':
+        specifier: ^0.2.78
+        version: 0.2.93(jspdf@2.5.2)
+      '@netless/synced-store':
+        specifier: ^2.0.7
+        version: 2.0.9(white-web-sdk@2.16.53)
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
+      '@netless/window-manager':
+        specifier: ^1.0.11
+        version: 1.0.11(jspdf@2.5.2)(white-web-sdk@2.16.53)
+      jspdf:
+        specifier: ^2.5.1
+        version: 2.5.2
+      white-web-sdk:
+        specifier: ^2.16.53
+        version: 2.16.53
+    optionalDependencies:
+      '@netless/appliance-plugin':
+        specifier: ^1.1.33
+        version: 1.1.33(@netless/window-manager@1.0.11(jspdf@2.5.2)(white-web-sdk@2.16.53))(markmap-common@0.18.9)(white-web-sdk@2.16.53)
+
+  packages/fastboard-core-lite:
+    dependencies:
+      '@netless/app-slide':
+        specifier: ^0.2.78
+        version: 0.2.93(jspdf@2.5.2)
+      '@netless/synced-store':
+        specifier: ^2.0.7
+        version: 2.0.9(white-web-sdk@2.16.53)
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
+      '@netless/window-manager':
+        specifier: ^1.0.11
+        version: 1.0.11(jspdf@2.5.2)(white-web-sdk@2.16.53)
+      white-web-sdk:
+        specifier: ^2.16.53
+        version: 2.16.53
+
+  packages/fastboard-full:
+    dependencies:
+      '@netless/fastboard-core-full':
+        specifier: workspace:*
+        version: link:../fastboard-core-full
+      '@netless/fastboard-ui':
+        specifier: workspace:*
+        version: link:../fastboard-ui
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
+
+  packages/fastboard-lite:
+    dependencies:
+      '@netless/fastboard-core-lite':
+        specifier: workspace:*
+        version: link:../fastboard-core-lite
+      '@netless/fastboard-ui':
+        specifier: workspace:*
+        version: link:../fastboard-ui
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
+
   packages/fastboard-react:
     dependencies:
       '@netless/fastboard-core':
@@ -170,6 +241,56 @@ importers:
       '@netless/esbuild-plugin-inline-sass':
         specifier: workspace:*
         version: link:../esbuild-plugin-inline-sass
+      '@types/react':
+        specifier: ^18.0.26
+        version: 18.3.27
+      '@types/react-dom':
+        specifier: ^18.0.10
+        version: 18.3.7(@types/react@18.3.27)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+
+  packages/fastboard-react-full:
+    dependencies:
+      '@netless/fastboard-core-full':
+        specifier: workspace:*
+        version: link:../fastboard-core-full
+      '@netless/fastboard-ui':
+        specifier: workspace:*
+        version: link:../fastboard-ui
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
+      '@types/react':
+        specifier: ^18.0.26
+        version: 18.3.27
+      '@types/react-dom':
+        specifier: ^18.0.10
+        version: 18.3.7(@types/react@18.3.27)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+
+  packages/fastboard-react-lite:
+    dependencies:
+      '@netless/fastboard-core-lite':
+        specifier: workspace:*
+        version: link:../fastboard-core-lite
+      '@netless/fastboard-ui':
+        specifier: workspace:*
+        version: link:../fastboard-ui
+    devDependencies:
+      '@netless/buildtool':
+        specifier: workspace:*
+        version: link:../buildtool
       '@types/react':
         specifier: ^18.0.26
         version: 18.3.27

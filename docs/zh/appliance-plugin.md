@@ -95,7 +95,7 @@ const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'te
 ```js
 // 对接 fastboard-react
 // 全打包方式引用
-// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
 // 分包引用
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
@@ -126,7 +126,7 @@ const app = useFastboard(() => ({
 
 // 对接 fastboard
 // 全打包方式引用
-// import { createFastboard, createUI } from "@netless/fastboard/full";
+// import { createFastboard, createUI } from "@netless/fastboard-full";
 // 分包引用
 import { createFastboard, createUI } from "@netless/fastboard";
 

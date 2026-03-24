@@ -20,10 +20,10 @@ const DefaultApps: AppsConfig = {
     },
   },
   EmbeddedPage: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-embedded-page/0.1.1/dist/main.iife.js",
+    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-embedded-page/0.1.3/dist/main.iife.js",
   },
   Plyr: {
-    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-plyr/0.1.3/dist/main.iife.js",
+    src: "https://netless-app.oss-cn-hangzhou.aliyuncs.com/@netless/app-plyr/0.2.12/dist/main.iife.js",
   },
 };
 

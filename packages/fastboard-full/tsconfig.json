@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig-base.json",
+  "include": ["../fastboard/src"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@netless/fastboard-core": ["../fastboard-core-full/src/index.ts"],
+      "@netless/fastboard-ui": ["../fastboard-ui/src/index.ts"]
+    }
+  }
+}
