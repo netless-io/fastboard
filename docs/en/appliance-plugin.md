@@ -205,7 +205,6 @@ import '@netless/appliance-plugin/dist/style.css';
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-
 // Use one of the three worker options from "Introducing worker.js" above:
 const fullWorkerUrl = ...;
 const subWorkerUrl = ...;
@@ -336,6 +335,36 @@ room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: 
 ```
 ![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
 
+##### Auto Shape: One-stroke Quick Shape Drawing (Version >=1.1.33)
+When enabled, users still draw with the `Pencil` tool. On pointer up, the plugin tries to recognize the completed stroke as a regular shape and outputs the corresponding shape instead of a normal pencil path.
+
+```js
+import { ApplianceNames, EStrokeType } from '@netless/appliance-plugin';
+
+room.setMemberState({
+  currentApplianceName: ApplianceNames.pencil,
+  autoShape: true,
+  strokeType: EStrokeType.Normal,
+});
+```
+
+The current version supports single-stroke recognition for:
+
+- `Straight`
+- `Arrow`
+- `Rectangle`
+- `Ellipse / Circle`
+- `Triangle`
+- `Rhombus`
+- `Five-point Star`
+
+Recommendations:
+
+- Use the `Pencil` tool
+- Complete the gesture in one stroke
+- Draw `Rectangle`, `Ellipse / Circle`, `Triangle`, and `Five-point Star` as closed strokes
+- Draw `Arrow` and `Straight` as open single strokes
+
 ##### Extended Tools (Version >=1.1.1)
 On the original [whiteboard tools](https://api-ref.agora.io/en/interactive-whiteboard-sdk/web/2.x/globals.html#memberstate) type, some extended function attributes have been added, as follows:
 
@@ -361,6 +390,8 @@ export type ExtendMemberState = {
     strokeOpacity?: number;
     /** Whether to enable laser pointer */
     useLaserPen?: boolean;
+    /** Whether to enable one-stroke auto shape recognition */
+    autoShape?: boolean;
     /** Laser pointer holding time, second */
     duration?: number;
     /** Fill style */

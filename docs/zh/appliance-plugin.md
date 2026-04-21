@@ -342,6 +342,36 @@ room.setMemberState({currentApplianceName: ApplianceNames.laserPen, strokeType: 
 ```
 ![Image](https://github.com/user-attachments/assets/3cd10c3a-b17b-4c01-b9d4-868c69116d96)
 
+##### Auto Shape: 一笔快速绘制成图形 (Version >=1.1.33)
+开启后，用户仍使用 `Pencil` 教具，抬笔时会尝试把这一笔手势识别成规则图形，并直接生成对应的 shape，而不是普通铅笔路径。
+
+```js
+import { ApplianceNames, EStrokeType } from '@netless/appliance-plugin';
+
+room.setMemberState({
+  currentApplianceName: ApplianceNames.pencil,
+  autoShape: true,
+  strokeType: EStrokeType.Normal,
+});
+```
+
+当前版本支持单笔识别以下图形：
+
+- `Straight`
+- `Arrow`
+- `Rectangle`
+- `Ellipse / Circle`
+- `Triangle`
+- `Rhombus`
+- `Five-point Star`
+
+建议：
+
+- 使用 `Pencil` 教具
+- 尽量一笔完成
+- 闭合绘制矩形、圆/椭圆、三角形、五角星
+- 箭头和直线保持单笔非闭合
+
 ##### 扩展教具 (Version >=1.1.1)
 在原来的[白板教具](https://doc.shengwang.cn/api-ref/whiteboard/javascript/globals.html#memberstate)类型上,增加了一些扩展功能属性,如下:
 
@@ -367,6 +397,8 @@ export type ExtendMemberState = {
     strokeOpacity?: number;
     /** 是否开启激光笔 */
     useLaserPen?: boolean;
+    /** 是否开启单笔自动识别图形 */
+    autoShape?: boolean;
     /** 激光笔保持时间, second */
     duration?: number;
     /** 填充样式 */
