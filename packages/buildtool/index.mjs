@@ -36,6 +36,14 @@ export async function build({
   fs.rmSync("dist", { recursive: true, force: true });
   const buildtoolDir = dirname(fileURLToPath(import.meta.url));
   const protobufjsInquireBrowserShim = resolve(buildtoolDir, "shims/protobufjs-inquire-browser.js");
+  const appliancePluginLoader = resolve(
+    buildtoolDir,
+    "../fastboard-core/src/impl/appliance-plugin-loader.ts",
+  );
+  const appliancePluginFullLoader = resolve(
+    buildtoolDir,
+    "../fastboard-core/src/impl/appliance-plugin-loader.full.ts",
+  );
 
   const localName = name.split("/").pop() || name;
   const standaloneMode = localName.endsWith("-lite")
@@ -96,7 +104,9 @@ export async function build({
         : `@netless/${pkg}/${mode}`
       : `@netless/${pkg}/${mode}`;
   const getRuntimeAlias = mode => {
-    const alias = {};
+    const alias = {
+      "@fastboard-internal/appliance-plugin-loader": appliancePluginLoader,
+    };
     const coreTarget = runtimeModePackage("fastboard-core", mode);
     const uiTarget = runtimeModePackage("fastboard-ui", mode);
     if (coreTarget !== "@netless/fastboard-core") {
@@ -110,6 +120,9 @@ export async function build({
   const getFullBuildAlias = mode => ({
     ...(mode ? getRuntimeAlias(mode) : {}),
     ...(isCorePackage ? { "@protobufjs/inquire": protobufjsInquireBrowserShim } : {}),
+    ...(isCorePackage
+      ? { "@fastboard-internal/appliance-plugin-loader": appliancePluginFullLoader }
+      : {}),
   });
   const replaceModeImports = (code, mode) =>
     code
@@ -210,6 +223,9 @@ export async function build({
     await buildBundle({
       input: main,
       output: "index",
+      alias: {
+        "@fastboard-internal/appliance-plugin-loader": appliancePluginLoader,
+      },
     });
   }
   console.log("Built dist/index.{js|mjs} in", Date.now() - start + "ms");

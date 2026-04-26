@@ -17,6 +17,7 @@ import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
+import { loadApplianceMultiPluginModule } from "@fastboard-internal/appliance-plugin-loader";
 import type {
   AppliancePluginOptions,
   AppliancePluginInstance,
@@ -247,9 +248,9 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   const replayRoomParamsWithPlugin = ensure_official_plugins(replayRoomParams);
   let _ApplianceMultiPlugin: typeof ApplianceMultiPlugin | undefined;
   if (isEnableAppliancePlugin) {
-    const { ApplianceMultiPlugin } = await import("@netless/appliance-plugin");
+    const { ApplianceMultiPlugin } = await loadApplianceMultiPluginModule();
     _ApplianceMultiPlugin = ApplianceMultiPlugin;
-    if (replayRoomParamsWithPlugin.invisiblePlugins) {
+    if (replayRoomParamsWithPlugin.invisiblePlugins && _ApplianceMultiPlugin) {
       replayRoomParamsWithPlugin.invisiblePlugins = [
         ...replayRoomParamsWithPlugin.invisiblePlugins,
         _ApplianceMultiPlugin,

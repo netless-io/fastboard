@@ -33,6 +33,12 @@ export default defineConfig({
         find: /^@netless\/fastboard-ui$/,
         replacement: fileURLToPath(new URL("../fastboard-ui/dist/index.svelte.mjs", import.meta.url)),
       },
+      {
+        find: /^@fastboard-internal\/appliance-plugin-loader$/,
+        replacement: fileURLToPath(
+          new URL("../fastboard-core/src/impl/appliance-plugin-loader.full.ts", import.meta.url)
+        ),
+      },
     ],
   },
   define: { __NAME__: '"@netless/fastboard-react-full"', __VERSION__: '"develop"' },

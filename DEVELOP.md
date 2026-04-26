@@ -20,14 +20,14 @@ pnpm cleanup
 pnpm build
 
 # publish everything
-pnpm publish -r [--tag canary]
+pnpm publish -r [--tag beta] [--no-git-checks]
 
 # publish [normal]
-pnpm -r --filter @netless/fastboard --filter @netless/fastboard-react --filter @netless/fastboard-core --filter @netless/fastboard-ui publish [--tag canary]
+pnpm -r --filter @netless/fastboard --filter @netless/fastboard-react --filter @netless/fastboard-core --filter @netless/fastboard-ui publish [--tag beta]
 
 # publish [lite]
-pnpm -r --filter @netless/fastboard-lite --filter @netless/fastboard-react-lite --filter @netless/fastboard-core-lite publish [--tag canary]
+pnpm -r --filter @netless/fastboard-lite --filter @netless/fastboard-react-lite --filter @netless/fastboard-core-lite publish [--tag beta]
 
 # publish [full]
-pnpm -r --filter @netless/fastboard-full --filter @netless/fastboard-react-full --filter @netless/fastboard-core-full publish [--tag canary]
+pnpm -r --filter @netless/fastboard-full --filter @netless/fastboard-react-full --filter @netless/fastboard-core-full publish [--tag beta]
 ```

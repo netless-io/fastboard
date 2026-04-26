@@ -6,7 +6,9 @@
     "lint": "eslint --ext .ts,.tsx . && prettier --check .",
     "check": "pnpm -r check",
     "dev": "pnpm -F=fastboard dev",
+    "dev:full": "pnpm -F=fastboard-full dev",
     "dev:react": "pnpm -F=fastboard-react dev",
+    "dev:react-full": "pnpm -F=fastboard-react-full dev",
     "dev:ui": "pnpm -F=fastboard-ui dev",
     "build": "pnpm -r build",
     "build:ci": "pnpm --aggregate-output -r build",
@@ -19,7 +21,7 @@
     "@hyrious/esbuild-plugin-svelte": "^0.2.0",
     "@hyrious/rimraf": "^0.1.0",
     "@netless/app-in-mainview-plugin": "^0.0.9",
-    "@netless/appliance-plugin": "^1.1.33",
+    "@netless/appliance-plugin": "^1.1.34-beta.3",
     "@netless/window-manager": "^1.0.11",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
@@ -47,9 +49,9 @@
   "pnpm": {
     "overrides": {
       "@netless/window-manager": "^1.0.11",
-      "@netless/appliance-plugin": "^1.1.33",
+      "@netless/appliance-plugin": "^1.1.34-beta.3",
       "@netless/app-in-mainview-plugin": "^0.0.9",
-      "white-web-sdk": "^2.16.53"
+      "white-web-sdk": "^2.16.54"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

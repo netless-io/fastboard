@@ -4,7 +4,7 @@
 
 从0.3.22版本开始, fastboard 集成了[@netless/appliance-plugin](./docs/zh/appliance-plugin.md)插件,以便于提供更优性能及更丰富的教具功能
 
-从0.3.22版本开始, fastboard 提供独立的 full 包 `@netless/fastboard-full` 和 `@netless/fastboard-react-full`, 用于解决内外依赖冲突问题.
+从0.3.22版本开始, fastboard 提供独立的 full 包 `@netless/fastboard-full` 和 `@netless/fastboard-react-full`, 用于解决内外依赖冲突问题。请使用这两个独立包名，而不是旧的子路径写法。
 
 从1.0.6版本开始, fastboard 集成了[@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView)插件,用于分页管理课件
 
@@ -31,12 +31,12 @@ npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless
 
 #### 全打包方式引用
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/appliance-plugin @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard-full</b> @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 @netless/appliance-plugin 是开启[性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
+> **注意：** 使用 `@netless/fastboard-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装，full 包会自动加载它内部的 `@netless/appliance-plugin/bridge` 入口。`@netless/app-in-mainview-plugin` 仅在开启 [分页管理课件](#appInMainView) 时需要安装。
 >
-> `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+> 如果在 full 模式下启用 `enableAppliancePlugin`，请使用带有 `./bridge` 导出的 `@netless/appliance-plugin` 版本，例如 `>= 1.1.34-beta.2`。业务代码不需要手动引入 `@netless/appliance-plugin/bridge`。
 
 
 <h2 id="usage">使用</h2>
@@ -141,12 +141,12 @@ npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk re
 #### 全打包方式引用
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard-react-full</b> react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
 </pre>
 
-> **注意：** 全打包方式引用，则 `@netless/window-manager`、`white-web-sdk` 可以不用安装。而 `@netless/appliance-plugin` 是开启[性能优化版本](#performance) 才需要安装。`@netless/app-in-mainview-plugin` 是开启 [分页管理课件](#appInMainView) 才需要安装。
+> **注意：** 使用 `@netless/fastboard-react-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装，full 包会自动加载它内部的 `@netless/appliance-plugin/bridge` 入口。`@netless/app-in-mainview-plugin` 仅在开启 [分页管理课件](#appInMainView) 时需要安装。
 >
-> `@netless/window-manager`、`white-web-sdk`、`@netless/appliance-plugin`、`react`、`react-dom` 是 peerDependency，如果你不清楚 peerDependency 是什么意思，可以阅读 [《为什么使用 peerDependency ？》](./docs/zh/peer-dependency.md)。
+> 如果在 full 模式下启用 `enableAppliancePlugin`，请使用带有 `./bridge` 导出的 `@netless/appliance-plugin` 版本，例如 `>= 1.1.34-beta.2`。业务代码不需要手动引入 `@netless/appliance-plugin/bridge`。
 
 
 ```jsx
@@ -439,6 +439,8 @@ const appId = await fastboard.manager.addApp({
 
 通过 `enableAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能以及提供[新的白板功能](https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E6%96%B0%E5%8A%9F%E8%83%BD), 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)了解更多内容。
 > **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
+>
+> **Full 模式说明：** 使用 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 时，fastboard 会在内部加载 `@netless/appliance-plugin/bridge`。业务代码仍然只需要通过 `enableAppliancePlugin` 传配置，不需要手动引入 `bridge`。
 
 ### 示例代码
 ```jsx

@@ -24,6 +24,12 @@ export default defineConfig({
         find: /^@netless\/fastboard-ui$/,
         replacement: fileURLToPath(new URL("../fastboard-ui/src/index.ts", import.meta.url)),
       },
+      {
+        find: /^@fastboard-internal\/appliance-plugin-loader$/,
+        replacement: fileURLToPath(
+          new URL("../fastboard-core/src/impl/appliance-plugin-loader.full.ts", import.meta.url)
+        ),
+      },
     ],
   },
   define: { __NAME__: '"@netless/fastboard-full"', __VERSION__: '"develop"' },
