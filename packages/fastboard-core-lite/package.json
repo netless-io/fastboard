@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core-lite",
-  "version": "1.1.5-beta.4",
+  "version": "1.1.5-beta.6",
   "description": "Lite version of @netless/fastboard-core, without heavy dependencies bundled.",
   "source": "../fastboard-core/src/lite.ts",
   "main": "dist/index.js",
@@ -15,25 +15,26 @@
     "build": "buildtool"
   },
   "dependencies": {
-    "@netless/app-slide": "^0.2.78",
+    "@netless/app-slide": "^0.2.99",
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
     "@netless/app-in-mainview-plugin": ">=0.0.9",
-    "@netless/appliance-plugin": ">=1.1.28",
-    "@netless/window-manager": ">=1.0.11",
+    "@netless/appliance-plugin": ">=1.1.35",
+    "@netless/window-manager": ">=1.0.14",
     "white-web-sdk": ">=2.16.54"
   },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
     "white-web-sdk": "^2.16.54",
-    "@netless/window-manager": "^1.0.11"
+    "@netless/window-manager": "^1.0.14"
   },
   "optionalDependencies": {
     "@netless/app-in-mainview-plugin": "^0.0.9",
-    "@netless/appliance-plugin": "^1.1.28"
+    "@netless/appliance-plugin": "^1.1.35"
   },
   "publishConfig": {
+    "access": "public",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

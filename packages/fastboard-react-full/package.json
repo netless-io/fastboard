@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-react-full",
-  "version": "1.1.5-beta.4",
+  "version": "1.1.5-beta.6",
   "description": "Full React components of @netless/fastboard.",
   "source": "../fastboard-react/src/index.tsx",
   "main": "dist/index.js",
@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0"
   },
   "publishConfig": {
+    "access": "public",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

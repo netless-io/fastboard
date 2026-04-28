@@ -1,8 +1,16 @@
 {
   "name": "@netless/fastboard-react",
-  "version": "1.1.5-beta.4",
+  "version": "1.1.5-beta.6",
   "description": "React components of @netless/fastboard.",
   "main": "src/index.tsx",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "files": [
     "src",
     "dist"
@@ -30,6 +38,7 @@
     "react-dom": "^18.2.0"
   },
   "publishConfig": {
+    "access": "public",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

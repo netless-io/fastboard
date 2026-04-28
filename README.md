@@ -8,7 +8,7 @@ A starter library for making whiteboard web app, based on [white-web-sdk](https:
 
 Starting with version 0.3.22, fastboard integrates the [@netless/appliance-plugin](./docs/en/appliance-plugin.md) plug-in to provide better performance and richer teaching AIDS features
 
-Starting with version 0.3.22, fastboard provides standalone full packages, `@netless/fastboard-full` and `@netless/fastboard-react-full`, to resolve internal and external dependency conflicts. Use these package names instead of the old subpath forms.
+Fastboard now exposes separate normal / lite / full package names. Use `@netless/fastboard`, `@netless/fastboard-lite`, `@netless/fastboard-full` and their React counterparts instead of the old runtime subpath forms such as `@netless/fastboard/full`.
 
 Starting with version 1.0.6 fastboard integrates the [@netless/app-in-mainview-plugin](https://github.com/netless-io/appInMainView) plug-in, used for paging management courseware.
 
@@ -21,24 +21,49 @@ Starting with version 1.0.10, [@netless/window-manager](https://www.npmjs.com/pa
 - [Customization](#customization)
 - [Use performance](#performance)
 - [Pagination management courseware](#appInMainView)
+- [Full compatibility](#full-compatibility)
 
 ## Install
 
-#### Subcontracting mode
+### Package modes
+
+Fastboard now uses standalone package names for the three runtime modes:
+
+| Mode | Vanilla entry | React entry | Core package | UI package | Runtime characteristics |
+| --- | --- | --- | --- | --- | --- |
+| normal | `@netless/fastboard` | `@netless/fastboard-react` | `@netless/fastboard-core` | `@netless/fastboard-ui` | `white-web-sdk`, `@netless/window-manager`, and optional plugins stay external |
+| lite | `@netless/fastboard-lite` | `@netless/fastboard-react-lite` | `@netless/fastboard-core-lite` | `@netless/fastboard-ui` | standalone replacement for the old lite runtime entry; runtime deps stay external like normal |
+| full | `@netless/fastboard-full` | `@netless/fastboard-react-full` | `@netless/fastboard-core-full` | `@netless/fastboard-ui` | bundles `white-web-sdk`, `@netless/window-manager`, and `jspdf`; `@netless/appliance-plugin` and `@netless/app-in-mainview-plugin` still stay external |
+
+Notes:
+
+- `@netless/fastboard`, `@netless/fastboard-react`, and `@netless/fastboard-core` are normal-only runtime entries.
+- `@netless/fastboard-ui` is shared by all three modes. `@netless/fastboard-ui/lite` and `@netless/fastboard-ui/full` remain type-only subpaths for mode-specific typings.
+
+### Vanilla JavaScript
+
+#### Normal package mode
 <pre class="language-bash">
-npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk @netless/appliance-plugin @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard</b> @netless/window-manager white-web-sdk
 </pre>
 
-> **Note：** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
+> **Note：** Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled. Add `@netless/app-in-mainview-plugin` only when [Pagination management courseware](#appInMainView) is enabled.
+
+#### Lite package mode
+<pre class="language-bash">
+npm add <b>@netless/fastboard-lite</b> @netless/window-manager white-web-sdk
+</pre>
+
+> **Note:** Lite mode keeps `white-web-sdk` and `@netless/window-manager` external, just like normal mode. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled. Add `@netless/app-in-mainview-plugin` only when [Pagination management courseware](#appInMainView) is enabled.
 
 #### Full package mode
 <pre class="language-bash">
-npm add <b>@netless/fastboard-full</b> @netless/appliance-plugin @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard-full</b>
 </pre>
 
-> **Note:** When using `@netless/fastboard-full`, do not install `@netless/window-manager` or `white-web-sdk` together with it. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled, and the full package will load its internal `@netless/appliance-plugin/bridge` entry automatically. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
+> **Note:** When using `@netless/fastboard-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; fastboard full loads its internal `@netless/appliance-plugin/bridge` entry automatically, and in practice you should use `@netless/appliance-plugin >= 1.1.35` (`./bridge` first appeared in `>= 1.1.34-beta.2`).
 >
-> When `enableAppliancePlugin` is enabled in full package mode, please use an `@netless/appliance-plugin` version that exposes `./bridge` (for example `>= 1.1.34-beta.2`). App code does not need to import `@netless/appliance-plugin/bridge` manually.
+> If you need `@netless/app-in-mainview-plugin`, note that it still stays external in full mode, but fastboard now loads `@netless/app-in-mainview-plugin/bridge` internally and reuses the bundled full runtime. Keep using `enableAppInMainViewPlugin` in app code and do not import `bridge` manually; in practice, use `@netless/app-in-mainview-plugin >= 0.0.10`.
 
 ## Usage
 
@@ -46,8 +71,10 @@ npm add <b>@netless/fastboard-full</b> @netless/appliance-plugin @netless/app-in
 
 ```js
 // Full package
-import { createFastboard, createUI } from "@netless/fastboard-full";
-// Subcontracting package
+// import { createFastboard, createUI } from "@netless/fastboard-full";
+// Lite package
+// import { createFastboard, createUI } from "@netless/fastboard-lite";
+// Normal package
 import { createFastboard, createUI } from "@netless/fastboard";
 
 async function main() {
@@ -117,31 +144,40 @@ main().catch(console.error);
 
 ### React
 
-Install `@netless/fastboard-react`, use the `<Fastboard />` component.
+Install the React entry for the mode you choose, then use the `<Fastboard />` component.
 
-#### Subcontracting package
+#### Normal package mode
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react</b> @netless/window-manager white-web-sdk react react-dom @netless/appliance-plugin @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard-react</b> react react-dom @netless/window-manager white-web-sdk
 </pre>
 
-> **Note:** The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
+> **Note:** Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled. Add `@netless/app-in-mainview-plugin` only when [Pagination management courseware](#appInMainView) is enabled.
 
+#### Lite package mode
+
+<pre class="language-bash">
+npm add <b>@netless/fastboard-react-lite</b> react react-dom @netless/window-manager white-web-sdk
+</pre>
+
+> **Note:** Lite React mode keeps `white-web-sdk` and `@netless/window-manager` external, just like normal mode. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled. Add `@netless/app-in-mainview-plugin` only when [Pagination management courseware](#appInMainView) is enabled.
 
 #### Full package
 
 <pre class="language-bash">
-npm add <b>@netless/fastboard-react-full</b> react react-dom @netless/appliance-plugin  @netless/app-in-mainview-plugin
+npm add <b>@netless/fastboard-react-full</b> react react-dom
 </pre>
 
-> **Note:** When using `@netless/fastboard-react-full`, do not install `@netless/window-manager` or `white-web-sdk` together with it. The `@netless/appliance-plugin` needs to be installed only when [Use performance](#performance) is enabled, and the full package will load its internal `@netless/appliance-plugin/bridge` entry automatically. The `@netless/app-in-mainview-plugin` needs to be installed only when [Pagination management courseware](#appInMainView) is enabled.
+> **Note:** When using `@netless/fastboard-react-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; fastboard full loads its internal `@netless/appliance-plugin/bridge` entry automatically, and in practice you should use `@netless/appliance-plugin >= 1.1.35`.
 >
-> When `enableAppliancePlugin` is enabled in full package mode, please use an `@netless/appliance-plugin` version that exposes `./bridge` (for example `>= 1.1.34-beta.2`). App code does not need to import `@netless/appliance-plugin/bridge` manually.
+> If you need `@netless/app-in-mainview-plugin`, note that it still stays external in full mode, but fastboard now loads `@netless/app-in-mainview-plugin/bridge` internally and reuses the bundled full runtime. Keep using `enableAppInMainViewPlugin` in app code and do not import `bridge` manually; in practice, use `@netless/app-in-mainview-plugin >= 0.0.10`.
 
 ```jsx
 // Full package
-import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
-// Subcontracting package
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
+// Lite package
+// import { useFastboard, Fastboard } from "@netless/fastboard-react-lite";
+// Normal package
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
 import React from "react";
@@ -429,7 +465,7 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 Through ` enableAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 >
-> **Full package note:** When using `@netless/fastboard-full` or `@netless/fastboard-react-full`, fastboard loads `@netless/appliance-plugin/bridge` internally. Keep using `enableAppliancePlugin` in your fastboard config; do not import `bridge` manually in app code.
+> **Full package note:** When using `@netless/fastboard-full` or `@netless/fastboard-react-full`, fastboard loads `@netless/appliance-plugin/bridge` internally. Keep using `enableAppliancePlugin` in your fastboard config; do not import `bridge` manually in app code. In practice, use `@netless/appliance-plugin >= 1.1.35`.
 
 ```js
 // The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.
@@ -512,6 +548,8 @@ fastboard.appliancePlugin
 
 Through `enableAppInMainViewPlugin` configuration items open `app-in-mainView-plugin` plug-in, can improve fastboard management way of courseware, allows the user to switch the main board of the page to show or hide the current page open courseware. Specific reference documents: [app-in-mainview-plugins](https://github.com/netless-io/appInMainView) for more content.
 > **Note**: To enable the pagination management courseware plugin, you need to install ``@netless/app-in-mainview-plugin``.
+>
+> **Full package note:** `@netless/app-in-mainview-plugin` still stays external in full mode, but `@netless/fastboard-full` / `@netless/fastboard-react-full` now load `@netless/app-in-mainview-plugin/bridge` internally. Keep using `enableAppInMainViewPlugin` in app code and do not import `bridge` manually; in practice, use `@netless/app-in-mainview-plugin >= 0.0.10`.
 
 ```jsx
 
@@ -576,6 +614,29 @@ fastboard.appInMainViewPlugin
 ```
 **Note:**
 - Currently, only the web end supports the 'appInMainViewPlugin' plugin, while the mobile end does not support it for the time being.
+
+## Full compatibility
+
+`@netless/fastboard-full` and `@netless/fastboard-react-full` bundle the core SDK runtime, but not every third-party package is a safe fit yet.
+
+### Supported in full
+
+- `@netless/appliance-plugin`: supported through the internal `@netless/appliance-plugin/bridge` loading path. Use `@netless/appliance-plugin >= 1.1.35` in practice.
+- `@netless/app-in-mainview-plugin`: supported through the internal `@netless/app-in-mainview-plugin/bridge` loading path. The package still stays external; use `@netless/app-in-mainview-plugin >= 0.0.10` in practice.
+
+### Not recommended in full
+
+- `@netless/window-manager-paste-extend`: may pull docs/media app chains that reintroduce independent SDK runtimes. We have already seen `window.__netlessJavaScriptLoader was override` during validation.
+
+### High-risk packages, verify before production
+
+- `@netless/app-plyr`
+- `@netless/app-docs-viewer`
+- `@netless/app-little-white-board`
+- `@netless/window-manager-ai-extend`
+- `@netless/window-manager-maths-kit-extend`
+
+As a rule of thumb, any package that directly imports `white-web-sdk` or `@netless/window-manager`, dynamically loads its own app/plugin bundle, or depends on runtime class identity should be treated as full-mode risky until it ships a bridge or dedicated full entry.
 
 ## Customization
 

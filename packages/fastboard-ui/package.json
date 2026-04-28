@@ -1,9 +1,25 @@
 {
   "name": "@netless/fastboard-ui",
-  "version": "1.1.5-beta.4",
+  "version": "1.1.5-beta.6",
   "description": "The front-end of @netless/fastboard-core.",
   "main": "src/index.ts",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "svelte": "dist/index.svelte.mjs",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./lite": {
+      "types": "./dist/lite.d.ts",
+      "default": "./dist/index.mjs"
+    },
+    "./full": {
+      "types": "./dist/full.d.ts",
+      "default": "./dist/index.mjs"
+    }
+  },
   "files": [
     "src",
     "dist",
@@ -22,6 +38,7 @@
     "@netless/fastboard-core": "workspace:*"
   },
   "publishConfig": {
+    "access": "public",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

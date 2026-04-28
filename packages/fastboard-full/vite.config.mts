@@ -5,7 +5,7 @@ import { svelte, vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
   plugins: [svelte({ preprocess: vitePreprocess() })],
-  envDir: "../..",
+  envDir: ".",
   build: {
     outDir: "test-dist",
     emptyOutDir: true,

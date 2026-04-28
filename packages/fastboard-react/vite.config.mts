@@ -13,6 +13,6 @@ delete viteReactRefresh.config;
 
 export default defineConfig({
   plugins: [viteReactPlugins, svelte()],
-  envDir: "../..",
+  envDir: ".",
   define: { __NAME__: '"@netless/fastboard"', __VERSION__: '"develop"' },
 });

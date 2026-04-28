@@ -23,8 +23,8 @@ import type {
 } from "white-web-sdk";
 import type { SyncedStore, Storage, Diff, DiffOne } from "@netless/synced-store";
 
-import { DefaultHotKeys, WhiteWebSdk, contentModeScale } from "white-web-sdk";
-import { BuiltinApps, WindowManager } from "@netless/window-manager";
+import { autorun, DefaultHotKeys, WhiteWebSdk, contentModeScale, toJS } from "white-web-sdk";
+import { BuiltinApps, ExtendPlugin, WindowManager } from "@netless/window-manager";
 import { SyncedStorePlugin } from "@netless/synced-store";
 import {
   getImageSize,
@@ -38,6 +38,8 @@ import {
 import { ensure_official_plugins, transform_app_status } from "../internal";
 import { register } from "../behaviors/lite";
 import { loadApplianceMultiPluginModule } from "@fastboard-internal/appliance-plugin-loader";
+import { loadAppInMainViewPluginModule } from "@fastboard-internal/app-in-mainview-plugin-loader";
+import { attachFastboardBridgeRuntime } from "./bridge-runtime";
 
 import type {
   AppliancePluginOptions,
@@ -788,7 +790,7 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   }
   let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
   if (enableAppInMainViewPlugin && joinRoomParamsWithPlugin.invisiblePlugins) {
-    const { AppInMainViewPlugin } = await import("@netless/app-in-mainview-plugin");
+    const { AppInMainViewPlugin } = await loadAppInMainViewPluginModule();
     _AppInMainViewPlugin = AppInMainViewPlugin;
     joinRoomParamsWithPlugin.invisiblePlugins = [
       ...joinRoomParamsWithPlugin.invisiblePlugins,
@@ -837,6 +839,15 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     cursor: true,
     ...managerConfig,
     room,
+  });
+  attachFastboardBridgeRuntime(manager, {
+    whiteWebSdk: {
+      autorun,
+      toJS,
+    },
+    windowManager: {
+      ExtendPlugin,
+    },
   });
   let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
   if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {

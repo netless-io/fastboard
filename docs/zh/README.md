@@ -1,6 +1,7 @@
 ## 目录
 
 - [完整 API 使用参考](./api.md)
+- [Full/Lite 拆包与 Full 兼容性改造纪要](./full-package-refactor-summary.md)
 - [为什么使用 peerDependency ？](./peer-dependency.md)
 - [如何为 fastboard 实现 UI](./ui.md)
 - [如何开发自定义窗口插件 Netless App](./app.md)

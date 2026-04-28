@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard",
-  "version": "1.1.5-beta.4",
+  "version": "1.1.5-beta.6",
   "description": "A tiny wrapper of white-web-sdk and @netless/window-manager.",
   "main": "src/index.ts",
   "files": [
@@ -23,6 +23,7 @@
     "@netless/esbuild-plugin-inline-sass": "workspace:*"
   },
   "publishConfig": {
+    "access": "public",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",

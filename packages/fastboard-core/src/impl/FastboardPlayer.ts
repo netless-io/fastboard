@@ -11,13 +11,15 @@ import type {
 } from "white-web-sdk";
 import type { SyncedStore } from "@netless/synced-store";
 
-import { WhiteWebSdk } from "white-web-sdk";
-import { WindowManager } from "@netless/window-manager";
+import { autorun, toJS, WhiteWebSdk } from "white-web-sdk";
+import { ExtendPlugin, WindowManager } from "@netless/window-manager";
 import { SyncedStorePlugin } from "@netless/synced-store";
 import { readable, writable } from "../utils";
 import { ensure_official_plugins } from "../internal";
 import { register } from "../behaviors/lite";
 import { loadApplianceMultiPluginModule } from "@fastboard-internal/appliance-plugin-loader";
+import { loadAppInMainViewPluginModule } from "@fastboard-internal/app-in-mainview-plugin-loader";
+import { attachFastboardBridgeRuntime } from "./bridge-runtime";
 import type {
   AppliancePluginOptions,
   AppliancePluginInstance,
@@ -263,7 +265,7 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   }
   let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
   if (enableAppInMainViewPlugin && replayRoomParamsWithPlugin.invisiblePlugins) {
-    const { AppInMainViewPlugin } = await import("@netless/app-in-mainview-plugin");
+    const { AppInMainViewPlugin } = await loadAppInMainViewPluginModule();
     _AppInMainViewPlugin = AppInMainViewPlugin;
     replayRoomParamsWithPlugin.invisiblePlugins = [
       ...replayRoomParamsWithPlugin.invisiblePlugins,
@@ -299,6 +301,15 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   });
   player.play();
   const manager = await managerPromise;
+  attachFastboardBridgeRuntime(manager, {
+    whiteWebSdk: {
+      autorun,
+      toJS,
+    },
+    windowManager: {
+      ExtendPlugin,
+    },
+  });
   let appliancePluginInstance: AppliancePluginInstance | undefined;
   if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
     appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {

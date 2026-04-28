@@ -44,6 +44,14 @@ export async function build({
     buildtoolDir,
     "../fastboard-core/src/impl/appliance-plugin-loader.full.ts",
   );
+  const appInMainViewPluginLoader = resolve(
+    buildtoolDir,
+    "../fastboard-core/src/impl/app-in-mainview-plugin-loader.ts",
+  );
+  const appInMainViewPluginFullLoader = resolve(
+    buildtoolDir,
+    "../fastboard-core/src/impl/app-in-mainview-plugin-loader.full.ts",
+  );
 
   const localName = name.split("/").pop() || name;
   const standaloneMode = localName.endsWith("-lite")
@@ -106,6 +114,7 @@ export async function build({
   const getRuntimeAlias = mode => {
     const alias = {
       "@fastboard-internal/appliance-plugin-loader": appliancePluginLoader,
+      "@fastboard-internal/app-in-mainview-plugin-loader": appInMainViewPluginLoader,
     };
     const coreTarget = runtimeModePackage("fastboard-core", mode);
     const uiTarget = runtimeModePackage("fastboard-ui", mode);
@@ -121,7 +130,10 @@ export async function build({
     ...(mode ? getRuntimeAlias(mode) : {}),
     ...(isCorePackage ? { "@protobufjs/inquire": protobufjsInquireBrowserShim } : {}),
     ...(isCorePackage
-      ? { "@fastboard-internal/appliance-plugin-loader": appliancePluginFullLoader }
+      ? {
+          "@fastboard-internal/appliance-plugin-loader": appliancePluginFullLoader,
+          "@fastboard-internal/app-in-mainview-plugin-loader": appInMainViewPluginFullLoader,
+        }
       : {}),
   });
   const replaceModeImports = (code, mode) =>
@@ -225,6 +237,7 @@ export async function build({
       output: "index",
       alias: {
         "@fastboard-internal/appliance-plugin-loader": appliancePluginLoader,
+        "@fastboard-internal/app-in-mainview-plugin-loader": appInMainViewPluginLoader,
       },
     });
   }

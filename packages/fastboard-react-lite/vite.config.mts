@@ -14,7 +14,7 @@ delete viteReactRefresh.config;
 
 export default defineConfig({
   plugins: [viteReactPlugins, svelte()],
-  envDir: "../..",
+  envDir: ".",
   build: {
     outDir: "test-dist",
     emptyOutDir: true,
