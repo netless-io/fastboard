@@ -295,13 +295,13 @@ WindowManager.register({
 
 ### 6.1 当前依赖策略
 
-- `@netless/fastboard-react` -> `link:../fastboard/packages/fastboard-react`
-- `@netless/fastboard-react-full` -> `link:../fastboard/packages/fastboard-react-full`
+- `@netless/fastboard-react` -> `1.1.5-beta.7`
+- `@netless/fastboard-react-full` -> `1.1.5-beta.7`
 - `@netless/app-in-mainview-plugin` -> `link:../appInMainView`
 - `@netless/appliance-plugin` -> `link:../appliance-plugin`
 - `@netless/window-manager` -> 通过 pnpm override 指向本地 `../window-manager`
-- `@netless/window-manager-maths-kit-extend` -> `link:../window-manager-extend/packages/maths-kit`
-- `@netless/window-manager-paste-extend` -> `link:../window-manager-extend/packages/paste`
+- `@netless/window-manager-maths-kit-extend` -> `0.0.3`
+- `@netless/window-manager-paste-extend` -> `0.0.6`
 - `@netless/app-little-white-board` -> **registry 包 `0.0.4`**
 
 ### 6.2 当前 Vite 关键配置
@@ -465,6 +465,44 @@ WindowManager.register({
   - `pageErrors=[]`
   - `window.mathsKitPlugin === true`
 
+### 7.5 2026-04-28 追加问题：`usePlugin=1` 下 `MathsKit` 首次写入 `mathsKits` 会打到 undefined
+
+用户后续手动回归补充发现：
+
+- `full-room` 且 `plugin=` 为空时，`MathsKit` 正常
+- `full-room?usePlugin=1` 时，`MathsKit` 仍可能报：
+  - `TypeError: Cannot set properties of undefined (setting 'mathsKits')`
+
+当前判断：
+
+- 根因不在 `appliance-plugin` 本身
+- 更像是 `window-manager-extend/packages/maths-kit` 在 app view / LittleBoard 场景下，首次写入 `mathsKits` 时直接走了深层 `safeUpdateAttributes(['mathsKits', ...])`
+- 但这时 invisible plugin attributes 的根节点还没有建立，导致白板 SDK 内部 setter 对 `mathsKits` 的父节点写入失败
+
+本次继续落地的修正方向：
+
+- `maths-kit` 改成和 `window-manager` 自己的 `apps / boxesStatus` 一样的防御式写法
+- 当 `mathsKits` 根节点或 `appId` 节点尚不存在时：
+  - 直接用 `safeSetAttributes({ mathsKits: ... })` 一次性建树
+- 只有在树已存在时，才继续走细粒度 `safeUpdateAttributes`
+
+本次追加验证结果：
+
+- 在 `appliance-plugin@1.1.35` 的 `fastboard-demo` 副本上，用 `http://localhost:3000/full-room/<uuid>?usePlugin=1`
+- 先创建 `LittleBoard`
+- 再对当前 focused app view 执行：
+  - `window.mathsKitPlugin.create(<LittleBoardAppId>, 'Ruler')`
+
+结果：
+
+- `mathsKits` 已正常写入为：
+  - `mathsKits[LittleBoard-xxx][Ruler-xxx] = {...}`
+- `pageErrors=[]`
+- 没有再出现：
+  - `Cannot set properties of undefined (setting 'mathsKits')`
+- 也没有连带重新触发：
+  - `window.__netlessJavaScriptLoader was override`
+
 ## 8. 后续未完成项
 
 当前还没有完全结束的事项如下：
@@ -571,3 +609,172 @@ WindowManager.register({
 1. `appliance-plugin` bridge 异步 chunk 是否仍间接拉起主包 chunk
 2. `window-manager-extend` 的任意 bridge 包是否再次引入第二份 SDK
 3. Vite 是否再次把 linked 包错误预构建进 `.vite/deps`
+
+## 11. 当前建议的发版清单
+
+下面这份清单只基于“本轮 full-room / `override` / `MathsKit` / `LittleBoard` 修复”本身来给出。
+
+### 11.1 必须先发布的上游包
+
+这些包当前仍在本地 link / override 或直接承载了本轮修复，建议先发：
+
+1. `@netless/window-manager`
+   - 当前本地版本：`1.0.13-test.20`
+   - 本轮作用：
+     - `BuiltinApps.ts` 中 `MediaPlayer` 懒加载
+   - 建议：
+     - 发布一个**高于当前线上 `1.0.13`** 的新版本
+     - 如果要给业务方直接吃，优先考虑正式 patch/minor，而不是继续只留在 `-test.*`
+
+2. `@netless/window-manager-maths-kit-extend`
+   - 当前本地版本：`0.0.2`
+   - 本轮作用：
+     - bridge bundle 改为复用 full runtime
+     - bridge bundle 内置兼容 `ExtendPlugin` 基类
+     - `mathsKits` 首次写入改成防御式建树，修掉 `setting 'mathsKits' of undefined`
+   - 这是**本轮最核心的上游修复包之一**
+
+3. `@netless/window-manager-paste-extend`
+   - 当前本地版本：`0.0.5`
+   - 本轮作用：
+     - bridge bundle 改为和 `maths-kit` 同样的最小 bridge 模式
+   - 虽然本轮主要问题集中在 `MathsKit`，但为了最终彻底去掉本地 link，建议一起发
+
+### 11.2 当前不需要因为这轮问题额外发版的包
+
+1. `@netless/appliance-plugin`
+   - 已实际验证：
+     - `1.1.35` 下
+       - `full-room?usePlugin=1` 无 `window.__netlessJavaScriptLoader was override`
+       - `LittleBoard` 正常
+   - 结论：
+     - **这轮问题不要求你额外发布新的 appliance-plugin**
+     - demo / fastboard 可以继续依赖 `1.1.35` 作为当前稳定基线
+
+2. `window-manager-extend/packages/ai`
+3. `window-manager-extend/packages/background`
+4. `window-manager-extend/packages/scrollbar`
+5. `window-manager-extend/packages/wheel`
+   - 这些子包本地虽然也有 bridge 相关改造痕迹
+   - 但**不是这轮 full-room / LittleBoard / MathsKit 修复成立的必要前提**
+   - 可以不并入本次最小发版集合
+
+### 11.3 fastboard 侧建议发布的包
+
+这轮 fastboard 本身的源码修复主要落在：
+
+- `@netless/fastboard-core`
+- `@netless/fastboard-core-full`
+
+以及它们的外层封装：
+
+- `@netless/fastboard`
+- `@netless/fastboard-full`
+- `@netless/fastboard-react`
+- `@netless/fastboard-react-full`
+
+如果你要让 `fastboard-demo` 最终完全切回包依赖，并继续保留 React 接入方式，那么**至少需要有一套新的 fastboard React 包可发布**。
+
+### 11.4 fastboard 侧当前的发布注意项
+
+当前状态不是完全无风险，主要有一条要单独注意：
+
+- `@netless/fastboard-react`
+- `@netless/fastboard-react-full`
+
+在本地重新 build 时，`JS dist` 已经能重新产出并被 demo 运行时消费，但 `d.ts` 阶段仍报：
+
+- `Module '"@netless/fastboard-core"' has no exported member 'FastboardApp'`
+- 以及同类导出错误
+
+因此：
+
+- 如果你要做**干净可复现**的正式发版，建议先修掉这组 React 包的类型打包问题
+- 如果不修，它会成为 fastboard React 包发版前的明确风险项
+
+### 11.5 fastboard-demo 最终需要替换成包依赖的项
+
+当前这条目标已经完成：
+
+- `fastboard-demo/package.json` 中已**没有**本地 `link:` 依赖
+- `fastboard-demo` 的 `pnpm.overrides` 中也已**没有**本地 `link:` override
+
+当前 `fastboard-demo` 已切回包依赖的关键项包括：
+
+- `@netless/app-in-mainview-plugin`
+- `@netless/app-plyr`
+- `@netless/fastboard-react`
+- `@netless/fastboard-react-full`
+- `@netless/window-manager`
+- `@netless/window-manager-maths-kit-extend`
+- `@netless/window-manager-paste-extend`
+
+其中本轮真正新增需要你先发出去的，是：
+
+- 新版 `@netless/window-manager`
+- 新版 `@netless/window-manager-maths-kit-extend`
+- 新版 `@netless/window-manager-paste-extend`
+- 新版 fastboard 相关包
+
+而下面这些如果对应版本已经在线上可用，则不需要本轮再从源码仓库新发：
+
+- `@netless/appliance-plugin` -> 继续用 `1.1.35`
+- `@netless/app-in-mainview-plugin` -> 可切到已发布的 `>=0.0.10`
+- `@netless/app-plyr` -> 可切到已发布的 `0.2.12`（或你希望的线上版本）
+
+### 11.6 建议的手动发版顺序
+
+建议按这个顺序：
+
+1. 先发布上游运行时包
+   - `@netless/window-manager`
+   - `@netless/window-manager-maths-kit-extend`
+   - `@netless/window-manager-paste-extend`
+
+2. 再回到 `fastboard`
+   - 更新本地测试/依赖指向到刚发的新包版本
+   - 回归 `full-room`
+   - 发布新的 fastboard 包集合
+
+3. 最后更新 `fastboard-demo`
+   - 把所有 `link:` 依赖切回包版本
+   - 去掉 `@netless/window-manager` 的本地 override
+   - 固定 `@netless/appliance-plugin` 到 `1.1.35` 或你最终确认的线上版本
+
+### 11.7 最小可行发版集合
+
+如果你只想先解决本轮问题，最小集合可以收敛成：
+
+- `@netless/window-manager`
+- `@netless/window-manager-maths-kit-extend`
+- `@netless/window-manager-paste-extend`
+- fastboard 新版本（至少覆盖 demo 实际使用到的 React/full 入口）
+
+而不是把 `window-manager-extend/packages/*` 全部子包都一起发一遍。
+
+### 11.8 当前依赖版本调整进度
+
+当前已先在源码仓库里把 `fastboard` / `fastboard-demo` 对 `@netless/window-manager` 的目标依赖版本统一调整为 `1.0.14`：
+
+- `fastboard/package.json`
+  - 根 `devDependencies["@netless/window-manager"]` -> `^1.0.14`
+  - `pnpm.overrides["@netless/window-manager"]` -> `1.0.14`
+- `fastboard/packages/fastboard-core/package.json`
+  - peer range -> `>=1.0.14`
+  - dev dependency -> `^1.0.14`
+- `fastboard/packages/fastboard-core-full/package.json`
+  - dev dependency -> `^1.0.14`
+- `fastboard/packages/fastboard-core-lite/package.json`
+  - peer range -> `>=1.0.14`
+  - dev dependency -> `^1.0.14`
+- `fastboard-demo/package.json`
+  - dependency -> `1.0.14`
+  - `pnpm.overrides["@netless/window-manager"]` -> `1.0.14`
+
+`fastboard-demo` 当前还继续推进了一步：
+
+- `@netless/window-manager-maths-kit-extend` 已从本地 `link:` 切到已发布的 `0.0.3`
+- `@netless/window-manager-paste-extend` 已从本地 `link:` 切到已发布的 `0.0.6`
+- `@netless/fastboard-react` 已从本地 `link:` 切到已发布的 `1.1.5-beta.7`
+- `@netless/fastboard-react-full` 已从本地 `link:` 切到已发布的 `1.1.5-beta.7`
+- `fastboard-demo` 当前已无本地 `link:` 依赖和本地 `link` override

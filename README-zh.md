@@ -626,22 +626,22 @@ const fastboard = await createFastboard({
 
 `@netless/fastboard-full` 和 `@netless/fastboard-react-full` 会把核心运行时打进包里，但这不代表所有第三方生态包都已经天然兼容 full。
 
+以下状态基于当前 full 基线整理：full 包内部已对齐 `@netless/window-manager 1.0.14`，并按 `@netless/appliance-plugin 1.1.35` 做过联调回归。
+
 ### 已确认可用
 
 - `@netless/appliance-plugin`：已通过内部 `@netless/appliance-plugin/bridge` 方案接入 full，实际建议使用 `@netless/appliance-plugin >= 1.1.35`。
 - `@netless/app-in-mainview-plugin`：已通过内部 `@netless/app-in-mainview-plugin/bridge` 方案接入 full，包本身仍保持 external，实际建议使用 `@netless/app-in-mainview-plugin >= 0.0.10`。
+- `@netless/app-little-white-board`：当前联调基线使用 `0.0.4`，配合 `@netless/appliance-plugin 1.1.35` 已回归通过。
 
-### 当前不建议在 full 下直接开启
+### 建议保留专项验证
 
-- `@netless/window-manager-paste-extend`：可能继续拉起 docs/media 等外部 app 链，验证中已经出现过 `window.__netlessJavaScriptLoader was override`。
+- `@netless/window-manager-maths-kit-extend`：当前联调基线使用 `0.0.3`。
+- `@netless/window-manager-paste-extend`：当前联调基线使用 `0.0.6`。
+- `@netless/app-plyr`：当前联调基线使用 `0.2.12`。
 
-### 高风险包，建议上线前单独验证
-
-- `@netless/app-plyr`
-- `@netless/app-docs-viewer`
-- `@netless/app-little-white-board`
-- `@netless/window-manager-ai-extend`
-- `@netless/window-manager-maths-kit-extend`
+### 暂未纳入当前 full 兼容基线
+- `@netless/window-manager-ai-extend`。
 
 通用判断规则：
 

@@ -619,22 +619,22 @@ fastboard.appInMainViewPlugin
 
 `@netless/fastboard-full` and `@netless/fastboard-react-full` bundle the core SDK runtime, but not every third-party package is a safe fit yet.
 
+The following status is based on the current full baseline: full is aligned with `@netless/window-manager 1.0.14` and has been regression-tested with `@netless/appliance-plugin 1.1.35`.
+
 ### Supported in full
 
 - `@netless/appliance-plugin`: supported through the internal `@netless/appliance-plugin/bridge` loading path. Use `@netless/appliance-plugin >= 1.1.35` in practice.
 - `@netless/app-in-mainview-plugin`: supported through the internal `@netless/app-in-mainview-plugin/bridge` loading path. The package still stays external; use `@netless/app-in-mainview-plugin >= 0.0.10` in practice.
+- `@netless/app-little-white-board`: the current regression baseline uses `0.0.4` and has passed regression together with `@netless/appliance-plugin 1.1.35`.
 
-### Not recommended in full
+### Needs dedicated validation
 
-- `@netless/window-manager-paste-extend`: may pull docs/media app chains that reintroduce independent SDK runtimes. We have already seen `window.__netlessJavaScriptLoader was override` during validation.
+- `@netless/window-manager-maths-kit-extend`: the current regression baseline uses `0.0.3`.
+- `@netless/window-manager-paste-extend`: the current regression baseline uses `0.0.6`.
+- `@netless/app-plyr`: the current regression baseline uses `0.2.12`.
 
-### High-risk packages, verify before production
-
-- `@netless/app-plyr`
-- `@netless/app-docs-viewer`
-- `@netless/app-little-white-board`
-- `@netless/window-manager-ai-extend`
-- `@netless/window-manager-maths-kit-extend`
+### Not part of the current full compatibility baseline
+- `@netless/window-manager-ai-extend`.
 
 As a rule of thumb, any package that directly imports `white-web-sdk` or `@netless/window-manager`, dynamically loads its own app/plugin bundle, or depends on runtime class identity should be treated as full-mode risky until it ships a bridge or dedicated full entry.
 

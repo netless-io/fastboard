@@ -1,7 +1,12 @@
 # Changelog
+## 1.1.5 (2026-04-28)
+- update `@netless/appliance-plugin` to `^1.0.35`.
+- update `@netless/window-manager` to `^1.0.14`.
+- Fastboard now exposes separate `normal / lite / full` package.
+
 ## 1.1.4 (2026-03-01)
 - update `@netless/appliance-plugin` to `^1.0.33`.
-- add StrokePencil and NormalPencil to `@netless/fastboard-ui`
+- add StrokePencil and NormalPencil to `@netless/fastboard-ui`.
 
 ## 1.1.3 (2026-01-09)
 - update `@netless/window-manager` to `^1.0.11`.

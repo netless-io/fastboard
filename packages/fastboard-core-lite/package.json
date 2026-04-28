@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core-lite",
-  "version": "1.1.5-beta.6",
+  "version": "1.1.5",
   "description": "Lite version of @netless/fastboard-core, without heavy dependencies bundled.",
   "source": "../fastboard-core/src/lite.ts",
   "main": "dist/index.js",
