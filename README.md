@@ -61,7 +61,9 @@ npm add <b>@netless/fastboard-lite</b> @netless/window-manager white-web-sdk
 npm add <b>@netless/fastboard-full</b>
 </pre>
 
-> **Note:** When using `@netless/fastboard-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; fastboard full loads its internal `@netless/appliance-plugin/bridge` entry automatically, and in practice you should use `@netless/appliance-plugin >= 1.1.35` (`./bridge` first appeared in `>= 1.1.34-beta.2`).
+> **Note:** When using `@netless/fastboard-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; install a version that exposes `./bridge`, and in practice use `@netless/appliance-plugin >= 1.1.35` (`./bridge` first appeared in `>= 1.1.34-beta.2`).
+>
+> Keep importing `@netless/appliance-plugin` in app code. You do not need, and generally should not, replace it with `@netless/appliance-plugin/bridge`. The `/bridge` entry is loaded internally by fastboard full to reuse the bundled `white-web-sdk` runtime.
 >
 > If you need `@netless/app-in-mainview-plugin`, note that it still stays external in full mode, but fastboard now loads `@netless/app-in-mainview-plugin/bridge` internally and reuses the bundled full runtime. Keep using `enableAppInMainViewPlugin` in app code and do not import `bridge` manually; in practice, use `@netless/app-in-mainview-plugin >= 0.0.10`.
 
@@ -168,7 +170,9 @@ npm add <b>@netless/fastboard-react-lite</b> react react-dom @netless/window-man
 npm add <b>@netless/fastboard-react-full</b> react react-dom
 </pre>
 
-> **Note:** When using `@netless/fastboard-react-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; fastboard full loads its internal `@netless/appliance-plugin/bridge` entry automatically, and in practice you should use `@netless/appliance-plugin >= 1.1.35`.
+> **Note:** When using `@netless/fastboard-react-full`, do not install `@netless/window-manager`, `white-web-sdk`, or `jspdf` together with it. Add `@netless/appliance-plugin` only when [Use performance](#performance) is enabled; install a version that exposes `./bridge`, and in practice use `@netless/appliance-plugin >= 1.1.35`.
+>
+> Keep importing `@netless/appliance-plugin` in app code. You do not need, and generally should not, replace it with `@netless/appliance-plugin/bridge`. The `/bridge` entry is loaded internally by fastboard full to reuse the bundled `white-web-sdk` runtime.
 >
 > If you need `@netless/app-in-mainview-plugin`, note that it still stays external in full mode, but fastboard now loads `@netless/app-in-mainview-plugin/bridge` internally and reuses the bundled full runtime. Keep using `enableAppInMainViewPlugin` in app code and do not import `bridge` manually; in practice, use `@netless/app-in-mainview-plugin >= 0.0.10`.
 
@@ -465,7 +469,7 @@ To develop your own app, see [Write you a Netless App](./docs/en/app.md).
 Through ` enableAppliancePlugin ` configuration items open appliance-plugins plugin. In order to enhance performance and provide [new whiteboard features](https://github.com/netless-io/fastboard/blob/main/docs/en/appliance-plugin.md#new-features), or refer to the [appliance-plugin](./docs/en/appliance-plugin.md) document for more information.
 > **Note:** To enable the use of the performance optimized version, you need to install `@netless/appliance-plugin`.
 >
-> **Full package note:** When using `@netless/fastboard-full` or `@netless/fastboard-react-full`, fastboard loads `@netless/appliance-plugin/bridge` internally. Keep using `enableAppliancePlugin` in your fastboard config; do not import `bridge` manually in app code. In practice, use `@netless/appliance-plugin >= 1.1.35`.
+> **Full package note:** When using `@netless/fastboard-full` or `@netless/fastboard-react-full`, fastboard loads `@netless/appliance-plugin/bridge` internally. Keep using `enableAppliancePlugin` in your fastboard config and keep importing `@netless/appliance-plugin` in app code; do not manually switch your app import to `@netless/appliance-plugin/bridge`. In practice, use `@netless/appliance-plugin >= 1.1.35`.
 
 ```js
 // The method of importing worker.js is optional. If cdn is used, it does not need to be imported from dist. If dist is imported, it needs to be configured into options.cdn in the form of resource module and bolb inline. Such as '?raw', this requires packer support,vite default support '?raw',webpack needs to configure raw-loader or asset/source.

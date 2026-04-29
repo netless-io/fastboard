@@ -47,7 +47,9 @@ appliance-plugin 是一个高性能的白板绘制插件，依赖 [white-web-sdk
 npm install @netless/appliance-plugin
 ```
 
-> **Fastboard full 包说明：** 如果你是通过 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 配合 `enableAppliancePlugin` 使用，请安装带有 `./bridge` 导出的 `@netless/appliance-plugin` 版本，例如 `>= 1.1.34-beta.2`。fastboard 会在内部加载这个 bridge 入口，业务代码只需要在类型、样式或 worker 资源场景下继续使用 `@netless/appliance-plugin` 即可。
+> **Fastboard full 包说明：** 如果你是通过 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 配合 `enableAppliancePlugin` 使用，请安装带有 `./bridge` 导出的 `@netless/appliance-plugin` 版本，建议 `>= 1.1.35`（`./bridge` 首次出现在 `>= 1.1.34-beta.2`）。
+>
+> 业务代码继续引用 `@netless/appliance-plugin` 即可，不需要也不建议手动改成 `@netless/appliance-plugin/bridge`。`@netless/appliance-plugin/bridge` 由 fastboard full 在内部加载，用来复用 full 内部已经 bundled 的 `white-web-sdk` runtime。
 
 ### 注册插件
 
@@ -160,7 +162,7 @@ const fastboard = await createFastboard({
   });
 ```
 
-> **注意：** 在 fastboard full 模式下，`@netless/fastboard-full` / `@netless/fastboard-react-full` 会在内部加载 `@netless/appliance-plugin/bridge`。业务代码只需要配置 `enableAppliancePlugin` 并提供 worker 地址，不需要手动引入 `@netless/appliance-plugin/bridge`。
+> **注意：** 在 fastboard full 模式下，`@netless/fastboard-full` / `@netless/fastboard-react-full` 会在内部加载 `@netless/appliance-plugin/bridge`。业务代码只需要配置 `enableAppliancePlugin` 并提供 worker 地址，同时继续引用 `@netless/appliance-plugin` 即可；不需要也不建议手动引入 `@netless/appliance-plugin/bridge`。
 
 #### 多窗口(直接对接window-manager)
 

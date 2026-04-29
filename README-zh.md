@@ -59,7 +59,9 @@ npm add <b>@netless/fastboard-lite</b> @netless/window-manager white-web-sdk
 npm add <b>@netless/fastboard-full</b>
 </pre>
 
-> **注意：** 使用 `@netless/fastboard-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`、`jspdf`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装；full 包会自动加载它内部的 `@netless/appliance-plugin/bridge` 入口，实际建议直接使用 `@netless/appliance-plugin >= 1.1.35`（`./bridge` 首次出现在 `>= 1.1.34-beta.2`）。
+> **注意：** 使用 `@netless/fastboard-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`、`jspdf`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装；请安装带有 `./bridge` 导出的版本，实际建议直接使用 `@netless/appliance-plugin >= 1.1.35`（`./bridge` 首次出现在 `>= 1.1.34-beta.2`）。
+>
+> 业务代码继续引用 `@netless/appliance-plugin` 即可，不需要也不建议手动改成 `@netless/appliance-plugin/bridge`。`@netless/appliance-plugin/bridge` 由 full 包在内部加载，用来复用 full 内部已经 bundled 的 `white-web-sdk` runtime。
 >
 > 如果你需要 `@netless/app-in-mainview-plugin`，它在 full 模式下仍然保持 external，但 fastboard 会在内部加载 `@netless/app-in-mainview-plugin/bridge` 并复用 full 内部 runtime。业务代码继续使用 `enableAppInMainViewPlugin` 即可，不需要手动引入 `bridge`；实际建议使用 `@netless/app-in-mainview-plugin >= 0.0.10`。
 
@@ -178,7 +180,9 @@ npm add <b>@netless/fastboard-react-lite</b> react react-dom @netless/window-man
 npm add <b>@netless/fastboard-react-full</b> react react-dom
 </pre>
 
-> **注意：** 使用 `@netless/fastboard-react-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`、`jspdf`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装；full 包会自动加载它内部的 `@netless/appliance-plugin/bridge` 入口，实际建议直接使用 `@netless/appliance-plugin >= 1.1.35`。
+> **注意：** 使用 `@netless/fastboard-react-full` 时，不要再额外安装 `@netless/window-manager`、`white-web-sdk`、`jspdf`。`@netless/appliance-plugin` 仅在开启 [性能优化版本](#performance) 时需要安装；请安装带有 `./bridge` 导出的版本，实际建议直接使用 `@netless/appliance-plugin >= 1.1.35`。
+>
+> 业务代码继续引用 `@netless/appliance-plugin` 即可，不需要也不建议手动改成 `@netless/appliance-plugin/bridge`。`@netless/appliance-plugin/bridge` 由 full 包在内部加载，用来复用 full 内部已经 bundled 的 `white-web-sdk` runtime。
 >
 > 如果你需要 `@netless/app-in-mainview-plugin`，它在 full 模式下仍然保持 external，但 fastboard 会在内部加载 `@netless/app-in-mainview-plugin/bridge` 并复用 full 内部 runtime。业务代码继续使用 `enableAppInMainViewPlugin` 即可，不需要手动引入 `bridge`；实际建议使用 `@netless/app-in-mainview-plugin >= 0.0.10`。
 
@@ -476,7 +480,7 @@ const appId = await fastboard.manager.addApp({
 通过 `enableAppliancePlugin` 配置项开启 appliance-plugin 插件，以提升性能以及提供[新的白板功能](https://github.com/netless-io/fastboard/blob/main/docs/zh/appliance-plugin.md#%E6%96%B0%E5%8A%9F%E8%83%BD), 也可以参考文档:[appliance-plugin](./docs/zh/appliance-plugin.md)了解更多内容。
 > **注意：** 开启使用性能优化版本,需要安装 ``@netless/appliance-plugin`` 。
 >
-> **Full 模式说明：** 使用 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 时，fastboard 会在内部加载 `@netless/appliance-plugin/bridge`。业务代码仍然只需要通过 `enableAppliancePlugin` 传配置，不需要手动引入 `bridge`。实际建议使用 `@netless/appliance-plugin >= 1.1.35`。
+> **Full 模式说明：** 使用 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 时，fastboard 会在内部加载 `@netless/appliance-plugin/bridge`。业务代码仍然通过 `enableAppliancePlugin` 传配置，并继续引用 `@netless/appliance-plugin` 即可；不需要也不建议手动引入 `@netless/appliance-plugin/bridge`。实际建议使用 `@netless/appliance-plugin >= 1.1.35`。
 
 ### 示例代码
 ```jsx

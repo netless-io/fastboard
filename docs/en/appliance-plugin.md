@@ -47,7 +47,9 @@ The plugin supports the following drawing tools:
 npm install @netless/appliance-plugin
 ```
 
-> **Fastboard full packages:** If you are using `@netless/fastboard-full` or `@netless/fastboard-react-full` together with `enableAppliancePlugin`, install an `@netless/appliance-plugin` version that exposes `./bridge` (for example `>= 1.1.34-beta.2`). Fastboard loads that bridge entry internally, so app code should still import `@netless/appliance-plugin` only when needed for types, CSS, or worker assets.
+> **Fastboard full packages:** If you are using `@netless/fastboard-full` or `@netless/fastboard-react-full` together with `enableAppliancePlugin`, install an `@netless/appliance-plugin` version that exposes `./bridge`. We recommend `>= 1.1.35` (`./bridge` first appeared in `>= 1.1.34-beta.2`).
+>
+> Keep importing `@netless/appliance-plugin` in app code. You do not need, and generally should not, replace it with `@netless/appliance-plugin/bridge`. The `/bridge` entry is loaded internally by fastboard full to reuse the bundled `white-web-sdk` runtime.
 
 ### Register Plugin
 
@@ -161,7 +163,7 @@ const fastboard = await createFastboard({
   });
 ```
 
-> **Note:** In fastboard full mode, `@netless/appliance-plugin/bridge` is loaded internally by `@netless/fastboard-full` / `@netless/fastboard-react-full`. You only need to configure `enableAppliancePlugin` and provide worker URLs; do not import `@netless/appliance-plugin/bridge` manually in app code.
+> **Note:** In fastboard full mode, `@netless/appliance-plugin/bridge` is loaded internally by `@netless/fastboard-full` / `@netless/fastboard-react-full`. You only need to configure `enableAppliancePlugin`, provide worker URLs, and keep importing `@netless/appliance-plugin`; do not manually switch your app import to `@netless/appliance-plugin/bridge`.
 
 #### Multi-window (Direct integration with window-manager)
 
