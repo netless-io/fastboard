@@ -19,7 +19,7 @@
     "@netless/synced-store": "^2.0.7"
   },
   "peerDependencies": {
-    "@netless/app-in-mainview-plugin": ">=0.0.9",
+    "@netless/app-in-mainview-plugin": ">=0.0.10",
     "@netless/appliance-plugin": ">=1.1.35",
     "@netless/window-manager": ">=1.0.14",
     "white-web-sdk": ">=2.16.54"
@@ -30,7 +30,7 @@
     "@netless/window-manager": "^1.0.14"
   },
   "optionalDependencies": {
-    "@netless/app-in-mainview-plugin": "^0.0.9",
+    "@netless/app-in-mainview-plugin": "^0.0.10",
     "@netless/appliance-plugin": "^1.1.35"
   },
   "publishConfig": {

@@ -7,7 +7,7 @@ settings:
 overrides:
   '@netless/window-manager': ^1.0.14
   '@netless/appliance-plugin': ^1.1.35
-  '@netless/app-in-mainview-plugin': ^0.0.9
+  '@netless/app-in-mainview-plugin': ^0.0.10
   white-web-sdk: ^2.16.54
 
 importers:
@@ -27,8 +27,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0
       '@netless/app-in-mainview-plugin':
-        specifier: ^0.0.9
-        version: 0.0.9(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        specifier: ^0.0.10
+        version: 0.0.10(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
       '@netless/appliance-plugin':
         specifier: ^1.1.35
         version: 1.1.35(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-common@0.18.9)(white-web-sdk@2.16.54)
@@ -149,8 +149,8 @@ importers:
         version: 2.16.54
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
-        specifier: ^0.0.9
-        version: 0.0.9(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        specifier: ^0.0.10
+        version: 0.0.10(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
       '@netless/appliance-plugin':
         specifier: ^1.1.35
         version: 1.1.35(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-common@0.18.9)(white-web-sdk@2.16.54)
@@ -178,8 +178,8 @@ importers:
         version: 2.16.54
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
-        specifier: ^0.0.9
-        version: 0.0.9(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        specifier: ^0.0.10
+        version: 0.0.10(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
       '@netless/appliance-plugin':
         specifier: ^1.1.35
         version: 1.1.35(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-common@0.18.9)(white-web-sdk@2.16.54)
@@ -204,8 +204,8 @@ importers:
         version: 2.16.54
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
-        specifier: ^0.0.9
-        version: 0.0.9(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        specifier: ^0.0.10
+        version: 0.0.10(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
       '@netless/appliance-plugin':
         specifier: ^1.1.35
         version: 1.1.35(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-common@0.18.9)(white-web-sdk@2.16.54)
@@ -797,8 +797,8 @@ packages:
   '@mesh.js/core@1.1.25':
     resolution: {integrity: sha512-Jxn0EGEbADruAVSgpLbX9S6j3GVeat7QvElc+zU8boFI4TyR5MhAMDTKM5VnCnWmExJByS5KN1EHs5tvYocFnA==}
 
-  '@netless/app-in-mainview-plugin@0.0.9':
-    resolution: {integrity: sha512-WDtAZdMNB/kEB471kS8PNTgM0+4zW9Qkg49GYaMav1P733A9XUOn3KzYMehZIiKx59H87os201gynzjnVJB0Gw==}
+  '@netless/app-in-mainview-plugin@0.0.10':
+    resolution: {integrity: sha512-uzSy8VxunxitjPsZ+acGapmFc1Z7B9mwYWoJMVQfaYNFJd/ZB0hDxBimdhqq2QXJN1HgcbG/o8idivFowN1xrQ==}
     peerDependencies:
       '@netless/window-manager': ^1.0.14
       white-web-sdk: ^2.16.54
@@ -3501,7 +3501,7 @@ snapshots:
       tess2: 1.0.0
       xtend: 4.0.2
 
-  '@netless/app-in-mainview-plugin@0.0.9(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)':
+  '@netless/app-in-mainview-plugin@0.0.10(@netless/window-manager@1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)':
     dependencies:
       '@netless/window-manager': 1.0.14(jspdf@2.5.2)(white-web-sdk@2.16.54)
       eventemitter2: 6.4.9

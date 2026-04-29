@@ -20,7 +20,7 @@
     "@hyrious/esbuild-dev": "^0.10.3",
     "@hyrious/esbuild-plugin-svelte": "^0.2.0",
     "@hyrious/rimraf": "^0.1.0",
-    "@netless/app-in-mainview-plugin": "^0.0.9",
+    "@netless/app-in-mainview-plugin": "^0.0.10",
     "@netless/appliance-plugin": "^1.1.35",
     "@netless/window-manager": "^1.0.14",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
@@ -50,7 +50,7 @@
     "overrides": {
       "@netless/window-manager": "^1.0.14",
       "@netless/appliance-plugin": "^1.1.35",
-      "@netless/app-in-mainview-plugin": "^0.0.9",
+      "@netless/app-in-mainview-plugin": "^0.0.10",
       "white-web-sdk": "^2.16.54"
     },
     "peerDependencyRules": {
