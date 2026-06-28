@@ -63,35 +63,13 @@ import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
 import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 ```
 
-> **worker.js files: CDN & static assets**
->
-> We use dual workers for higher drawing efficiency (40%+ over the main thread). The two worker files share duplicated dependencies, so bundling them would significantly increase package size. We recommend providing worker URLs via `options.cdn`. Two common approaches:
->
-> 1. **CDN**: Deploy `fullWorker.js` and `subWorker.js` from `@netless/appliance-plugin/cdn` to your CDN, then pass their URLs as `fullWorkerUrl` and `subWorkerUrl` in the plugin’s `getInstance` second argument `options.cdn`.
-> ***Note***: CDN URLs must be same-origin with your app, or the workers will fail to load.
->
-> 2. **Static assets**: Put `fullWorker.js` and `subWorker.js` in your project’s static directory (e.g. Vite’s `public/`), so they are not bundled. In code, build full URLs from `import.meta.env.BASE_URL` (or your publicPath) and pass them to `options.cdn`. Same-origin, no bundle bloat, no Blob inline, lower memory use.
->
-> To keep bundle size down, configure `options.cdn` using one of the above.
-
 ### Access Mode Reference
 
-#### Introducing worker.js
+#### Preparing worker URLs
 ```js
-// Choose one of three ways to provide worker URLs:
-
-// Option 1: Static assets (recommended) — put fullWorker.js & subWorker.js in public (or similar); same-origin, no bundle cost
-const workerBase = (import.meta.env.BASE_URL || '/').replace(/\/?$/, '/');
-const fullWorkerUrl = workerBase + 'fullWorker.js';
-const subWorkerUrl = workerBase + 'subWorker.js';
-
-// Option 2: CDN — after deploying files from @netless/appliance-plugin/cdn to your CDN, set URLs here. Note: must be same-origin
-const fullWorkerUrl = 'https://your-cdn.com/fullWorker.js';
-const subWorkerUrl = 'https://your-cdn.com/subWorker.js';
-
-// Option 3: Inline via ?raw as Blob (requires ?raw support, e.g. Vite or webpack raw-loader). Uses more memory.
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+
 const fullWorkerUrl = URL.createObjectURL(new Blob([fullWorkerString], { type: 'text/javascript' }));
 const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'text/javascript' }));
 ```
@@ -100,12 +78,11 @@ const subWorkerUrl = URL.createObjectURL(new Blob([subWorkerString], { type: 'te
 ```js
 // Integration with fastboard-react
 // Full package mode reference
-// Use the standalone package name, not the old subpath form.
-// import { useFastboard, Fastboard } from "@netless/fastboard-react-full";
+// import { useFastboard, Fastboard } from "@netless/fastboard-react/full";
 // Subpackage reference
 import { useFastboard, Fastboard } from "@netless/fastboard-react";
 
-// Use one of the three worker options from "Introducing worker.js" above:
+// Prepare worker URLs as shown above:
 const fullWorkerUrl = ...;
 const subWorkerUrl = ...;
 
@@ -132,12 +109,11 @@ const app = useFastboard(() => ({
 
 // Integration with fastboard
 // Full package mode reference
-// Use the standalone package name, not the old subpath form.
-// import { createFastboard, createUI } from "@netless/fastboard-full";
+// import { createFastboard, createUI } from "@netless/fastboard/full";
 // Subpackage reference
 import { createFastboard, createUI } from "@netless/fastboard";
 
-// Use one of the three worker options from "Introducing worker.js" above:
+// Prepare worker URLs as shown above:
 const fullWorkerUrl = ...;
 const subWorkerUrl = ...;
 
@@ -163,7 +139,7 @@ const fastboard = await createFastboard({
   });
 ```
 
-> **Note:** In fastboard full mode, `@netless/appliance-plugin/bridge` is loaded internally by `@netless/fastboard-full` / `@netless/fastboard-react-full`. You only need to configure `enableAppliancePlugin`, provide worker URLs, and keep importing `@netless/appliance-plugin`; do not manually switch your app import to `@netless/appliance-plugin/bridge`.
+> **Note:** In fastboard full mode, `@netless/fastboard-full` / `@netless/fastboard-react-full` load `@netless/appliance-plugin/bridge` internally. App code only needs to configure `enableAppliancePlugin`, provide worker URLs, and keep importing `@netless/appliance-plugin`; do not manually switch your import to `@netless/appliance-plugin/bridge`.
 
 #### Multi-window (Direct integration with window-manager)
 
@@ -176,7 +152,7 @@ import { WhiteWebSdk } from "white-web-sdk";
 import { WindowManager } from "@netless/window-manager";
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
 
-// Use one of the three worker options from "Introducing worker.js" above:
+// Prepare worker URLs as shown above:
 const fullWorkerUrl = ...;
 const subWorkerUrl = ...;
 
@@ -213,7 +189,7 @@ import '@netless/appliance-plugin/dist/style.css';
 
 import { WhiteWebSdk } from "white-web-sdk";
 import { ApplianceSinglePlugin, ApplianceSigleWrapper } from '@netless/appliance-plugin';
-// Use one of the three worker options from "Introducing worker.js" above:
+// Prepare worker URLs as shown above:
 const fullWorkerUrl = ...;
 const subWorkerUrl = ...;
 
@@ -331,7 +307,51 @@ The following interfaces are involved:
 - `updateMarkmap` - Update markdown text in whiteboard (Version >=1.1.32) **This method requires enabling extras.useBackgroundThread**
 - `insertBackgroundImage` - Insert whiteboard background image (Version >=1.1.32) **This method requires enabling extras.useBackgroundThread**
 
-5. Incompatible interfaces
+5. Selector / Element extension APIs
+- `getSelectedElements(viewId?)` - Get the current selector snapshot
+- `isElementPropertySupported(toolsType, field)` - Check whether a property field is supported by a specific tools type, useful for custom floatbar button visibility
+- `blurSelector(viewId?)` - Clear the current selector selection
+- `updateSelectedElements(viewId?, changes)` - Update properties of the current selector selection set
+- `copySelectedElements(viewId?)` - Copy the current selector selection set
+- `deleteSelectedElements(viewId?)` - Delete the current selector selection set
+- `updateElement(elementId, scenePath, viewId, updateElementInfo, useUndoRedoStack?)` - Single-element final-state update API, returns `Promise<boolean>`
+- `getFloatbarContainer(viewId?)` - Get the built-in custom floatbar mount container for the current view
+- `getViewOffsetToContainer(container, viewId?)` - Convert coordinates from the current view to an external container, useful when mounting to a business overlay root
+
+Notes:
+
+- `updateSelectedElements(...)` is selector-only and only operates on the current selection set
+- `blurSelector(...)`, `updateSelectedElements(...)`, `copySelectedElements(...)`, `deleteSelectedElements(...)`, and `updateElement(...)` should be called only when the room is writable
+- `updateElement(...)` is a storage-first single-element final-state update API
+- `updateElement(...)` does not imply rendering has finished when the Promise resolves
+- `updateElement(...)` does not support selector itself
+- `updateElementInfo` must explicitly include `toolsType`, and fields must match that tools type
+- `updateElement(...)` returning `Promise<boolean>` only means the call passed validation and the update flow was started successfully
+- `getFloatbarContainer(...)` is the recommended mount point for a custom floatbar; when mounted there, `selectorGeometryChange.viewRect` can be used directly for positioning
+- If you must mount to an external container, use `getViewOffsetToContainer(...)` to convert coordinates
+
+6. Selector extension events
+- `selectedElementsChange`
+  - Fires only when `selectedIds` change
+  - Represents only the final selection set change
+- `selectorGeometryChange`
+  - Represents only the final geometry change
+  - Coordinates are unified as `viewRect`
+- `selectorTransformChange`
+  - Represents only transform process states such as drag, resize, rotate, and endpoint editing
+  - Exposes only `viewId + emitEventType + workState`
+- `remoteSelectorChange`
+  - Represents selector sync result changes from remote / synced clients
+
+7. Custom selector / floatbar capability
+- You can disable the built-in floatbar while keeping selector selection, drag, resize, rotate, and endpoint-edit interactions
+- You can render your own custom UI based on `selectedElementsChange`, `selectorGeometryChange`, `selectorTransformChange`, and `remoteSelectorChange`
+- You can override selector visuals such as the highlight box, control points, endpoint dots, and locked icon through `overwriteSelectorStyles`
+- You can mount your custom floatbar into the plugin-provided internal container or your own external overlay container
+- Recommended reading:
+  - [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md)
+
+8. Incompatible interfaces
 - [`exportScene`](https://api-ref.agora.io/en/interactive-whiteboard-sdk/web/2.x/interfaces/room.html#exportscene) - After appliance-plugin is enabled, notes cannot be exported in room mode
 - [Server-side screenshot](https://docs.agora.io/en/interactive-whiteboard/reference/whiteboard-api/screenshots?platform=web#screenshot-a-scene-post) - After appliance-plugin is enabled, notes cannot be obtained by calling server-side screenshot, but need to use `screenshotToCanvasAsync` to obtain the screenshot
 
@@ -372,6 +392,42 @@ Recommendations:
 - Complete the gesture in one stroke
 - Draw `Rectangle`, `Ellipse / Circle`, `Triangle`, and `Five-point Star` as closed strokes
 - Draw `Arrow` and `Straight` as open single strokes
+
+##### Custom Selector / Floatbar and Selector Extension APIs (Version >=1.1.36-beta.2)
+
+This version adds a selector-focused event and imperative API set so that integrators can build custom selector UI, floatbar UI, and selected-element property panels in `white-web-sdk` / `@netless/window-manager` scenarios.
+
+New events:
+
+- `selectedElementsChange` - final selection set changes only
+- `selectorGeometryChange` - final geometry changes only, with unified `viewRect`
+- `selectorTransformChange` - process states for drag, resize, rotate, and endpoint editing
+- `remoteSelectorChange` - selector sync result changes from remote / synced clients
+
+New APIs:
+
+- `getSelectedElements(viewId?)`
+- `isElementPropertySupported(toolsType, field)`
+- `blurSelector(viewId?)`
+- `updateSelectedElements(viewId?, changes)`
+- `copySelectedElements(viewId?)`
+- `deleteSelectedElements(viewId?)`
+- `updateElement(elementId, scenePath, viewId, updateElementInfo, useUndoRedoStack?)`
+- `getFloatbarContainer(viewId?)`
+- `getViewOffsetToContainer(container, viewId?)`
+
+Typical usage:
+
+- Disable the built-in floatbar and render your own buttons, palettes, font-size, and text-style UI
+- Use `getSelectedElements()` to read the current selector snapshot
+- Use `updateSelectedElements()` to batch-update the current selection
+- Use `updateElement()` to update a specific element outside the current selection
+- Use `getFloatbarContainer()` or `getViewOffsetToContainer()` to decide where custom floatbar UI should be mounted
+- Use `overwriteSelectorStyles` to customize selector visuals
+
+For design details and integration examples, see:
+
+- [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md)
 
 ##### Extended Tools (Version >=1.1.1)
 On the original [whiteboard tools](https://api-ref.agora.io/en/interactive-whiteboard-sdk/web/2.x/globals.html#memberstate) type, some extended function attributes have been added, as follows:
@@ -782,10 +838,10 @@ plugin.usePlugin(autoDrawPlugin);
 `getInstance(wm: WindowManager | Room | Player, adaptor: ApplianceAdaptor)`
 - `wm`: `WindowManager | Room | Player`. In multi-window mode, pass `WindowManager`, in single-window mode, pass `Room` or `Player` (whiteboard playback mode).
 - `adaptor`: Configuration adapter.
-    - `options: AppliancePluginOptions` - Must be configured, where `cdn` is required.
+    - `options: AppliancePluginOptions` - Must be configured, where `cdn` contains worker URLs.
         ```js
         export type AppliancePluginOptions = {
-            /** CDN configuration item */
+            /** Worker URL configuration item */
             cdn: CdnOpt;
             /** Additional configuration items */
             extras?: ExtrasOptions;
@@ -858,19 +914,9 @@ appliancePlugin.currentManager.consoleWorkerInfo()  // Can view drawing informat
 import { ApplianceSinglePlugin } from '@netless/appliance-plugin';
 import '@netless/appliance-plugin/dist/style.css';
 
-// Method 1: Using CDN (recommended for production)
-const plugin = await ApplianceSinglePlugin.getInstance(room, {
-  options: {
-    cdn: {
-      fullWorkerUrl: 'https://your-cdn.com/fullWorker.js',
-      subWorkerUrl: 'https://your-cdn.com/subWorker.js',
-    },
-  },
-});
-
-// Method 2: Using local worker files (suitable for development)
 import fullWorkerString from '@netless/appliance-plugin/dist/fullWorker.js?raw';
 import subWorkerString from '@netless/appliance-plugin/dist/subWorker.js?raw';
+
 const fullWorkerBlob = new Blob([fullWorkerString], {type: 'text/javascript'});
 const fullWorkerUrl = URL.createObjectURL(fullWorkerBlob);
 const subWorkerBlob = new Blob([subWorkerString], {type: 'text/javascript'});
@@ -976,19 +1022,13 @@ const canRedo = plugin.canRedoSteps() > 0;
 - **Multi-window scenario**: If you need multi-window functionality, use `ApplianceMultiPlugin`
 - **Single whiteboard scenario**: If you only need single whiteboard functionality, use `ApplianceSinglePlugin`
 
-### 2. Worker file deployment method selection?
+### 2. Performance optimization recommendations
 
-- **CDN deployment** (recommended): Suitable for production environments, can reduce main package size (main package ~400kB, two workers ~800kB each)
-- **Local packaging**: Suitable for development environments or scenarios where package size is not a concern
-
-### 3. Performance optimization recommendations
-
-- Use CDN deployment for worker files to reduce main package size
 - Reasonably configure `bufferSize` to adjust canvas cache size according to device performance
 - On mobile or low-performance devices, consider using `useSimple: true` simple mode
 - If there are unnecessary features, you can avoid enabling `useBackgroundThread: true`
 
-### 4. Compatibility notes
+### 3. Compatibility notes
 
 - Supports modern browsers (Chrome, Firefox, Safari, Edge)
 - Mobile browser support depends on OffscreenCanvas support
