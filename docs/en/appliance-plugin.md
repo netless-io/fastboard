@@ -349,7 +349,7 @@ Notes:
 - You can override selector visuals such as the highlight box, control points, endpoint dots, and locked icon through `overwriteSelectorStyles`
 - You can mount your custom floatbar into the plugin-provided internal container or your own external overlay container
 - Recommended reading:
-  - [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md)
+  - [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/netless-io/fastboard/blob/main/docs/zh/customer-custom-selector-floatbar-integration.zh-CN.md)
 
 8. Incompatible interfaces
 - [`exportScene`](https://api-ref.agora.io/en/interactive-whiteboard-sdk/web/2.x/interfaces/room.html#exportscene) - After appliance-plugin is enabled, notes cannot be exported in room mode
@@ -427,7 +427,7 @@ Typical usage:
 
 For design details and integration examples, see:
 
-- [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md)
+- [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/netless-io/fastboard/blob/main/docs/zh/customer-custom-selector-floatbar-integration.zh-CN.md)
 
 ##### Extended Tools (Version >=1.1.1)
 On the original [whiteboard tools](https://api-ref.agora.io/en/interactive-whiteboard-sdk/web/2.x/globals.html#memberstate) type, some extended function attributes have been added, as follows:

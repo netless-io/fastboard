@@ -356,7 +356,7 @@ injectMethodToObject(windowmanager.mainView,'setMemberState');
 - 支持基于 `selectedElementsChange`、`selectorGeometryChange`、`selectorTransformChange`、`remoteSelectorChange` 事件渲染业务自定义 UI
 - 支持通过 `overwriteSelectorStyles` 覆盖 selector 外框、控制点、端点和锁态图标样式
 - 支持将自定义 floatbar 挂到 plugin 内部容器，或挂到业务自己的外部 overlay 容器
-- 推荐结合 [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md) 接入
+- 推荐结合 [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/netless-io/fastboard/blob/main/docs/zh/customer-custom-selector-floatbar-integration.zh-CN.md) 接入
 
 9. 不兼容接口
 - [`exportScene`](https://doc.shengwang.cn/api-ref/whiteboard/javascript/interfaces/room#exportScene) - appliance-plugin 开启后，笔记不能按 room 的方式导出
@@ -433,7 +433,7 @@ room.setMemberState({
 - 通过 `overwriteSelectorStyles` 统一覆盖 selector 视觉样式
 
 详细设计与接入示例请参考：
-- [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/user-attachments/files/29439912/customer-custom-selector-floatbar-integration.zh-CN.md)
+- [customer-custom-selector-floatbar-integration.zh-CN.md](https://github.com/netless-io/fastboard/blob/main/docs/zh/customer-custom-selector-floatbar-integration.zh-CN.md)
 
 ##### 扩展教具 (Version >=1.1.1)
 在原来的[白板教具](https://doc.shengwang.cn/api-ref/whiteboard/javascript/globals.html#memberstate)类型上,增加了一些扩展功能属性,如下:
