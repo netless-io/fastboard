@@ -76,16 +76,10 @@ const plugin = await ApplianceMultiPlugin.getInstance(manager as any, {
       subWorkerUrl,
     },
     extras: {
-      useSimple: true,
-      useWorker: "auto",
       textEditor: {
         showFloatBar: false,
         canSelectorSwitch: true,
         rightBoundBreak: true,
-      },
-      undoRedo: {
-        enableGlobal: false,
-        maxStackLength: 20,
       },
       overwriteSelectorStyles: {
         highlightBox: {
