@@ -311,8 +311,8 @@ injectMethodToObject(windowmanager.mainView,'setMemberState');
 - `getElements` - 获取场景下的所有元素 (Version >=1.1.19)
 - `stopDraw` - 停止Draw事件 (Version >=1.1.19)
 - `setViewLocalScenePathChange` - 设置白板本地场景路径变化 (Version >=1.1.27)
-- `insertMarkmap` - 插入markdow文本到白板 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
-- `updateMarkmap` - 修改白板中的markdow文本 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
+- `insertMarkmap` - 插入 markdown 文本到白板 (Version >=1.1.32) **该方法需要开启 extras.useBackgroundThread。不能仅通过默认入口直接使用；业务项目如需使用 Markmap，需要自行依赖 `markmap-lib`、`markmap-view`、`mermaid`，并在调用前先导入 `@netless/appliance-plugin/markmap`。**
+- `updateMarkmap` - 修改白板中的 markdown 文本 (Version >=1.1.32) **该方法需要开启 extras.useBackgroundThread。不能仅通过默认入口直接使用；业务项目如需使用 Markmap，需要自行依赖 `markmap-lib`、`markmap-view`、`mermaid`，并在调用前先导入 `@netless/appliance-plugin/markmap`。**
 - `insertBackgroundImage` - 插入白板的背景图片 (Version >=1.1.32) **该方法需要开启extras.useBackgroundThread**
 
 6. Selector / Element 扩展接口
@@ -751,8 +751,13 @@ plugin.usePlugin(autoDrawPlugin);
 ![Image](https://github.com/user-attachments/assets/c388691c-ae72-44ec-bbb7-e92c3a73c9c7)
 
 ##### 插入思维导图(需要markdown文本) (Version >=1.1.32)
+
+> `insertMarkmap`、`updateMarkmap` 属于可选 Markmap 能力，不能只导入 `@netless/appliance-plugin` 后直接使用。业务项目如需使用，需要自行安装 `markmap-lib`、`markmap-view`、`mermaid`，并在调用前先导入一次 `@netless/appliance-plugin/markmap`。
+
 ```ts
 import { ApplianceMultiPlugin } from '@netless/appliance-plugin';
+import '@netless/appliance-plugin/markmap';
+
 const plugin = await ApplianceMultiPlugin.getInstance(manager, {
     options: {
         cdn: {...}
