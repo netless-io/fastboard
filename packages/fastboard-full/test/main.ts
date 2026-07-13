@@ -1,4 +1,4 @@
-import { resizable } from "@netless/fastboard-ui/test/resizable";
+import { resizable } from "../../fastboard-ui/test/resizable";
 
 import { createFastboard, createUI, genUID, register, apps } from "@netless/fastboard-full";
 import "./style.scss";

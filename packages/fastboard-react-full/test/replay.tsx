@@ -3,7 +3,7 @@ import type { FastboardPlayer, Theme, Language } from "@netless/fastboard-react-
 
 import React, { useCallback, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { resizable } from "@netless/fastboard-ui/test/resizable";
+import { resizable } from "../../fastboard-ui/test/resizable";
 import { replayFastboard, ReplayFastboard } from "@netless/fastboard-react-full";
 import "./style.scss";
 

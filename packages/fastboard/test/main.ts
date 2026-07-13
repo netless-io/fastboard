@@ -1,6 +1,6 @@
-import { resizable } from "@netless/fastboard-ui/test/resizable";
+import { resizable } from "../../fastboard-ui/test/resizable";
 
-import { createFastboard, createUI, genUID, register, apps } from "../src";
+import { SlideApp, addSlideHooks, apps, createFastboard, createUI, genUID, register } from "../src";
 import "./style.scss";
 
 import fullWorkerString from "@netless/appliance-plugin/dist/fullWorker.js?raw";
@@ -11,6 +11,80 @@ const subWorkerBlob = new Blob([subWorkerString], { type: "text/javascript" });
 const subWorkerUrl = URL.createObjectURL(subWorkerBlob);
 
 const root = document.getElementById("app") as HTMLDivElement;
+
+register({
+  kind: "Slide",
+  src: SlideApp,
+  addHooks: addSlideHooks,
+  appOptions: {
+    enableScale: true,
+    minFPS: 10,
+    maxFPS: 20,
+    resolution: 1,
+    maxResolutionLevel: 2,
+    skipActionWhenFrozen: true,
+    antialias: false,
+  },
+});
+
+apps.push({
+  icon: "https://api.iconify.design/mdi:file-powerpoint-box.svg?color=%237f7f7f",
+  kind: "Slide",
+  label: "Slide",
+  onClick(app) {
+    let taskId: string;
+    let url: string | undefined;
+    if (app.room.region === "cn-hz") {
+      taskId = "82d16c40b15745f0b5fad096ac721773";
+    } else {
+      taskId = "1bd92aa00e28413c8668cffdbc97116f";
+      url = "https://convertcdn-sg.netless.link/dynamicConvert";
+    }
+    app.insertDocs({
+      fileType: "pptx",
+      scenePath: `/pptx/${taskId}`,
+      taskId,
+      title: "a.pptx",
+      url,
+    });
+  },
+});
+
+// Presentation is built into Window Manager, so only add its toolbar entry.
+apps.push({
+  icon: "https://api.iconify.design/mdi:file-word-box.svg?color=%237f7f7f",
+  kind: "Presentation",
+  label: "Presentation",
+  onClick(app) {
+    app.insertDocs(
+      {
+        fileType: "pdf",
+        scenePath: "/pdf/18140800fe8a11eb8cb787b1c376634e",
+        title: "a.pdf",
+        scenes: [
+          {
+            name: "a.pdf - 1",
+            ppt: {
+              width: 714,
+              height: 1010,
+              src: "https://convertcdn.netless.link/staticConvert/18140800fe8a11eb8cb787b1c376634e/1.png",
+            },
+          },
+          {
+            name: "a.pdf - 2",
+            ppt: {
+              width: 714,
+              height: 1010,
+              src: "https://convertcdn.netless.link/staticConvert/18140800fe8a11eb8cb787b1c376634e/2.png",
+            },
+          },
+        ],
+      },
+      { staticRenderer: "presentation" }
+    );
+  },
+});
+
 apps.push({
   icon: "https://api.iconify.design/mdi:file-pdf.svg?color=%237f7f7f",
   kind: "PDFjs",
