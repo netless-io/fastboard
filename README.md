@@ -302,6 +302,20 @@ const appId = await fastboard.insertDocs("filename.pptx", conversionResponse);
 
 The `conversionResponse` is the result of [this api](https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress).
 
+`insertDocs()` renders static documents with `DocsViewer` by default. To use the new `Presentation` app, set `staticRenderer`. This option only affects static documents; dynamic PPTX documents always use `Slide`:
+
+```js
+const appId = await fastboard.insertDocs(
+  {
+    fileType: "pdf",
+    scenePath: `/pdf/${response.uuid}`,
+    scenes,
+    title: "filename.pdf",
+  },
+  { staticRenderer: "presentation" }
+);
+```
+
 > **Note**: If you're using the new [projector](https://developer.netless.link/server-zh/home/server-projector) api, there's another way:
 >
 > ```js

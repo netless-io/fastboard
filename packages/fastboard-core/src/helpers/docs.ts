@@ -18,6 +18,7 @@ type DocsEventManager = WindowManager & {
 /**
  * Send specific command to the DocsViewer / Presentation / Slide app.
  * This is a compatibility wrapper around `WindowManager.dispatchDocsEvent()`.
+ * Works for documents created by `insertDocs()`.
  *
  * Returns false if failed to find the app or not writable.
  *

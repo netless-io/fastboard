@@ -208,6 +208,11 @@ export interface InsertDocsDynamic {
 
 export type InsertDocsParams = InsertDocsStatic | InsertDocsDynamic;
 
+export interface InsertDocsOptions {
+  /** Renderer for static documents. Dynamic documents always use Slide. @default "docsViewer" */
+  readonly staticRenderer?: "docsViewer" | "presentation";
+}
+
 export interface ProjectorResponse {
   uuid: string;
   status: "Waiting" | "Converting" | "Finished" | "Fail";
@@ -602,13 +607,21 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    * Insert PDF/PPTX from conversion result.
    * @param status https://developer.netless.link/server-en/home/server-conversion#get-query-task-conversion-progress
    */
-  insertDocs(filename: string, status: ConversionResponse): Promise<string | undefined>;
+  insertDocs(
+    filename: string,
+    status: ConversionResponse,
+    options?: InsertDocsOptions
+  ): Promise<string | undefined>;
 
   /**
    * Insert PDF/PPTX from projector conversion result.
    * @param response https://developer.netless.link/server-zh/home/server-projector#get-%E6%9F%A5%E8%AF%A2%E4%BB%BB%E5%8A%A1%E8%BD%AC%E6%8D%A2%E8%BF%9B%E5%BA%A6
    */
-  insertDocs(filename: string, response: ProjectorResponse): Promise<string | undefined>;
+  insertDocs(
+    filename: string,
+    response: ProjectorResponse,
+    options?: InsertDocsOptions
+  ): Promise<string | undefined>;
 
   /**
    * Manual way.
@@ -620,12 +633,27 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
    *   title: 'Title',
    * })
    */
-  insertDocs(params: InsertDocsParams): Promise<string | undefined>;
+  insertDocs(params: InsertDocsParams, options?: InsertDocsOptions): Promise<string | undefined>;
 
-  insertDocs(arg1: string | InsertDocsParams, arg2?: ConversionResponse | ProjectorResponse) {
+  insertDocs(
+    arg1: string | InsertDocsParams,
+    arg2?: ConversionResponse | ProjectorResponse | InsertDocsOptions,
+    arg3?: InsertDocsOptions
+  ) {
+    const response = typeof arg1 === "string" ? (arg2 as ConversionResponse | ProjectorResponse) : undefined;
+    const options = typeof arg1 === "string" ? arg3 : (arg2 as InsertDocsOptions | undefined);
+    const staticAppKind = options?.staticRenderer === "presentation" ? "Presentation" : "DocsViewer";
+    return this._insertDocs(arg1, response, staticAppKind);
+  }
+
+  private _insertDocs(
+    arg1: string | InsertDocsParams,
+    arg2: ConversionResponse | ProjectorResponse | undefined,
+    staticAppKind: "DocsViewer" | "Presentation"
+  ) {
     this._assertNotDestroyed();
     if (typeof arg1 === "object" && "fileType" in arg1) {
-      return this._insertDocsImpl(arg1);
+      return this._insertDocsImpl(arg1, staticAppKind);
     } else if (arg2 && arg2.status !== "Finished") {
       throw new Error("FastboardApp cannot insert a converting doc.");
     } else if (arg2 && "progress" in arg2) {
@@ -634,9 +662,12 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       const scenes1 = arg2.progress.convertedFileList.map(convertedFileToScene);
       const { scenes, taskId, url } = makeSlideParams(scenes1);
       if (taskId && url) {
-        return this._insertDocsImpl({ fileType: "pptx", scenePath, scenes, title, taskId, url });
+        return this._insertDocsImpl(
+          { fileType: "pptx", scenePath, scenes, title, taskId, url },
+          staticAppKind
+        );
       } else {
-        return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes: scenes1, title });
+        return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes: scenes1, title }, staticAppKind);
       }
     } else if (arg2 && arg2.images) {
       const title = arg1;
@@ -646,25 +677,28 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
         const { width, height, url } = arg2.images[name];
         scenes.push({ name, ppt: { width, height, src: url } });
       }
-      return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title });
+      return this._insertDocsImpl({ fileType: "pdf", scenePath, scenes, title }, staticAppKind);
     } else if (arg2 && arg2.prefix) {
       const title = arg1;
       const scenePath = `/${arg2.uuid}/${genUID()}`;
       const taskId = arg2.uuid;
       const url = arg2.prefix;
-      this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url });
+      return this._insertDocsImpl({ fileType: "pptx", scenePath, taskId, title, url }, staticAppKind);
     } else {
       throw new Error("Invalid input: not found 'progress', 'prefix' nor 'images'");
     }
   }
 
   /** @internal */
-  private _insertDocsImpl({ fileType, scenePath, title, scenes, ...attributes }: InsertDocsParams) {
+  private _insertDocsImpl(
+    { fileType, scenePath, title, scenes, ...attributes }: InsertDocsParams,
+    staticAppKind: "DocsViewer" | "Presentation"
+  ) {
     this._assertNotDestroyed();
     switch (fileType) {
       case "pdf":
         return this.manager.addApp({
-          kind: "DocsViewer",
+          kind: staticAppKind,
           options: { scenePath, title, scenes },
         });
       case "pptx":
