@@ -1,12 +1,13 @@
-import type { WindowManager } from "@netless/window-manager";
+import type { ExtendPlugin, WindowManager } from "@netless/window-manager";
+import type { autorun, toJS } from "white-web-sdk";
 
 export interface FastboardBridgeRuntime {
   whiteWebSdk: {
-    autorun: typeof import("white-web-sdk").autorun;
-    toJS: typeof import("white-web-sdk").toJS;
+    autorun: typeof autorun;
+    toJS: typeof toJS;
   };
   windowManager: {
-    ExtendPlugin: typeof import("@netless/window-manager").ExtendPlugin;
+    ExtendPlugin: typeof ExtendPlugin;
   };
 }
 
