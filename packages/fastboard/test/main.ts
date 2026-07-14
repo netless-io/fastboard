@@ -55,11 +55,11 @@ apps.push({
   icon: "https://api.iconify.design/mdi:file-word-box.svg?color=%237f7f7f",
   kind: "Presentation",
   label: "Presentation",
-  onClick(app) {
-    app.insertDocs(
+  async onClick(app) {
+    const appId = await app.insertDocs(
       {
         fileType: "pdf",
-        scenePath: "/pdf/18140800fe8a11eb8cb787b1c376634e",
+        scenePath: `/presentation/${Date.now()}`,
         title: "a.pdf",
         scenes: [
           {
@@ -82,6 +82,10 @@ apps.push({
       },
       { staticRenderer: "presentation" }
     );
+    console.info("[fastboard-demo] static document opened", {
+      appId,
+      kind: appId ? app.manager.queryOne(appId)?.kind : undefined,
+    });
   },
 });
 

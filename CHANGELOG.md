@@ -1,4 +1,9 @@
 # Changelog
+## 1.1.7 (2026-07-14)
+- update `@netless/appliance-plugin` to `^1.0.38`.
+- update `@netless/window-manager` to `^1.0.15`.
+- add `staticRenderer: presentation` for `insertDocs`
+
 ## 1.1.6 (2026-07-03)
 - update `@netless/appliance-plugin` to `^1.0.37`.
 - update `@netless/app-slide` to `^0.2.99`.
