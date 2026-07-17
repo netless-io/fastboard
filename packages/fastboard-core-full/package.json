@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core-full",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Full version of @netless/fastboard-core, with all dependencies bundled.",
   "source": "../fastboard-core/src/full.ts",
   "main": "dist/index.js",
@@ -25,8 +25,8 @@
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
     "jspdf": "^2.5.1",
-    "white-web-sdk": "^2.16.54",
-    "@netless/window-manager": "^1.0.15"
+    "white-web-sdk": "^2.16.56",
+    "@netless/window-manager": "^1.0.17"
   },
   "optionalDependencies": {
     "@netless/app-in-mainview-plugin": "^0.0.10",

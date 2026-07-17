@@ -1,6 +1,6 @@
 {
   "name": "@netless/fastboard-core-lite",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Lite version of @netless/fastboard-core, without heavy dependencies bundled.",
   "source": "../fastboard-core/src/lite.ts",
   "main": "dist/index.js",
@@ -21,13 +21,13 @@
   "peerDependencies": {
     "@netless/app-in-mainview-plugin": ">=0.0.10",
     "@netless/appliance-plugin": ">=1.1.38",
-    "@netless/window-manager": ">=1.0.15",
-    "white-web-sdk": ">=2.16.54"
+    "@netless/window-manager": ">=1.0.17",
+    "white-web-sdk": ">=2.16.56"
   },
   "devDependencies": {
     "@netless/buildtool": "workspace:*",
-    "white-web-sdk": "^2.16.54",
-    "@netless/window-manager": "^1.0.15"
+    "white-web-sdk": "^2.16.56",
+    "@netless/window-manager": "^1.0.17"
   },
   "optionalDependencies": {
     "@netless/app-in-mainview-plugin": "^0.0.10",

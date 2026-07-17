@@ -1,6 +1,11 @@
 # Changelog
+## 1.1.8 (2026-07-17)
+- update `@netless/window-manager` to `^1.0.17`.
+- update `white-web-sdk` to `^2.16.56`.
+- document `managerConfig.builtinAppOptions.Presentation` configuration.
+
 ## 1.1.7 (2026-07-14)
-- update `@netless/appliance-plugin` to `^1.0.38`.
+- update `@netless/appliance-plugin` to `^1.1.38`.
 - update `@netless/window-manager` to `^1.0.15`.
 - add `staticRenderer: presentation` for `insertDocs`
 

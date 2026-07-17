@@ -5,10 +5,10 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@netless/window-manager': ^1.0.15
+  '@netless/window-manager': ^1.0.17
   '@netless/appliance-plugin': ^1.1.38
   '@netless/app-in-mainview-plugin': ^0.0.10
-  white-web-sdk: ^2.16.54
+  white-web-sdk: ^2.16.56
 
 importers:
 
@@ -28,13 +28,13 @@ importers:
         version: 0.1.0
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.10
-        version: 0.0.10(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        version: 0.0.10(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(white-web-sdk@2.16.56)
       '@netless/appliance-plugin':
         specifier: ^1.1.38
-        version: 1.1.38(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.54)
+        version: 1.1.38(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.56)
       '@netless/window-manager':
-        specifier: ^1.0.15
-        version: 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+        specifier: ^1.0.17
+        version: 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       '@sveltejs/vite-plugin-svelte':
         specifier: 2.4.2
         version: 2.4.2(svelte@3.59.2)(vite@4.5.14(@types/node@18.19.130)(sass@1.63.6))
@@ -133,27 +133,27 @@ importers:
         version: 0.2.99(jspdf@2.5.2)
       '@netless/synced-store':
         specifier: ^2.0.7
-        version: 2.0.9(white-web-sdk@2.16.54)
+        version: 2.0.9(white-web-sdk@2.16.56)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
         version: link:../buildtool
       '@netless/window-manager':
-        specifier: ^1.0.15
-        version: 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+        specifier: ^1.0.17
+        version: 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       jspdf:
         specifier: ^2.5.1
         version: 2.5.2
       white-web-sdk:
-        specifier: ^2.16.54
-        version: 2.16.54
+        specifier: ^2.16.56
+        version: 2.16.56
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.10
-        version: 0.0.10(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        version: 0.0.10(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(white-web-sdk@2.16.56)
       '@netless/appliance-plugin':
         specifier: ^1.1.38
-        version: 1.1.38(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.54)
+        version: 1.1.38(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.56)
 
   packages/fastboard-core-full:
     dependencies:
@@ -162,27 +162,27 @@ importers:
         version: 0.2.99(jspdf@2.5.2)
       '@netless/synced-store':
         specifier: ^2.0.7
-        version: 2.0.9(white-web-sdk@2.16.54)
+        version: 2.0.9(white-web-sdk@2.16.56)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
         version: link:../buildtool
       '@netless/window-manager':
-        specifier: ^1.0.15
-        version: 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+        specifier: ^1.0.17
+        version: 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       jspdf:
         specifier: ^2.5.1
         version: 2.5.2
       white-web-sdk:
-        specifier: ^2.16.54
-        version: 2.16.54
+        specifier: ^2.16.56
+        version: 2.16.56
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.10
-        version: 0.0.10(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        version: 0.0.10(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(white-web-sdk@2.16.56)
       '@netless/appliance-plugin':
         specifier: ^1.1.38
-        version: 1.1.38(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.54)
+        version: 1.1.38(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.56)
 
   packages/fastboard-core-lite:
     dependencies:
@@ -191,24 +191,24 @@ importers:
         version: 0.2.99(jspdf@2.5.2)
       '@netless/synced-store':
         specifier: ^2.0.7
-        version: 2.0.9(white-web-sdk@2.16.54)
+        version: 2.0.9(white-web-sdk@2.16.56)
     devDependencies:
       '@netless/buildtool':
         specifier: workspace:*
         version: link:../buildtool
       '@netless/window-manager':
-        specifier: ^1.0.15
-        version: 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+        specifier: ^1.0.17
+        version: 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       white-web-sdk:
-        specifier: ^2.16.54
-        version: 2.16.54
+        specifier: ^2.16.56
+        version: 2.16.56
     optionalDependencies:
       '@netless/app-in-mainview-plugin':
         specifier: ^0.0.10
-        version: 0.0.10(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)
+        version: 0.0.10(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(white-web-sdk@2.16.56)
       '@netless/appliance-plugin':
         specifier: ^1.1.38
-        version: 1.1.38(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.54)
+        version: 1.1.38(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.56)
 
   packages/fastboard-full:
     dependencies:
@@ -800,8 +800,8 @@ packages:
   '@netless/app-in-mainview-plugin@0.0.10':
     resolution: {integrity: sha512-uzSy8VxunxitjPsZ+acGapmFc1Z7B9mwYWoJMVQfaYNFJd/ZB0hDxBimdhqq2QXJN1HgcbG/o8idivFowN1xrQ==}
     peerDependencies:
-      '@netless/window-manager': ^1.0.15
-      white-web-sdk: ^2.16.54
+      '@netless/window-manager': ^1.0.17
+      white-web-sdk: ^2.16.56
 
   '@netless/app-slide@0.2.99':
     resolution: {integrity: sha512-GFzjoWh/Jp/bh5dXO+coszQmPioRvp/vK+Ac8N/OCry7AS2Oh8RTscNRnVg9j08+7L7m9GjK1JZA8NqcORXFBQ==}
@@ -814,11 +814,11 @@ packages:
   '@netless/appliance-plugin@1.1.38':
     resolution: {integrity: sha512-qZyzDv2OjqIYj8Q6acMhGIQFJQx7lbeDp9ITI6B6CMbj6ClXaPrHBlkGdPnWFWFUhoDZKcm3BV2mY2vqtzpdqA==}
     peerDependencies:
-      '@netless/window-manager': ^1.0.15
+      '@netless/window-manager': ^1.0.17
       markmap-lib: ^0.18.12
       markmap-view: ^0.18.12
       mermaid: ^11.12.2
-      white-web-sdk: ^2.16.54
+      white-web-sdk: ^2.16.56
     peerDependenciesMeta:
       markmap-lib:
         optional: true
@@ -833,16 +833,16 @@ packages:
   '@netless/synced-store@2.0.9':
     resolution: {integrity: sha512-0MMEC62SRYEmOrd3OhqfGPp75GX4obiwnIFLDGnaYLz2cRurSoe5xtmhKJwoiIAzL8DSPfchqCmFYyZE0Ptgsw==}
     peerDependencies:
-      white-web-sdk: ^2.16.54
+      white-web-sdk: ^2.16.56
 
   '@netless/telebox-insider@0.3.0':
     resolution: {integrity: sha512-KoQg5SmUdIA/XV520jVR9pKZlf5GbTwVUbkmTfOIrXBingwYBQIbX/W4ISPWpCO98De5YXgciidbDh3vx9Ppnw==}
 
-  '@netless/window-manager@1.0.15':
-    resolution: {integrity: sha512-gdsrQ37MWfrPbAphpuFimNKLqpRIlaiYvnq5BVmPVDRm64S2sSxf/llUm3xg0iHoZZUlXH5YtAQIXOv4ghem4A==}
+  '@netless/window-manager@1.0.17':
+    resolution: {integrity: sha512-VuV71zJKUZaeV9orV16t3rVCxDi/ge5hZABVgP9rsRpMTBz/DqKTz7T3/jFaZYzkeDcl24wC7hdznAGOHprcLQ==}
     peerDependencies:
       jspdf: 2.5.1
-      white-web-sdk: ^2.16.54
+      white-web-sdk: ^2.16.56
     peerDependenciesMeta:
       jspdf:
         optional: true
@@ -3096,8 +3096,14 @@ packages:
     engines: {node: '>= 8'}
     hasBin: true
 
-  white-web-sdk@2.16.54:
-    resolution: {integrity: sha512-1C4irCa8tSvoknanwJUdQ9e0zFK9rh3lKG+7B4ETGYlWFvI0vhCgW2fiaT5ZjDOc9TyrveX3Cdu5NrhWxdmRkA==}
+  white-web-sdk@2.16.56:
+    resolution: {integrity: sha512-hPBO72XkDWO/JXUXb85gU0A8I+pkmA/CyqmRcsxjxmFaN1ZQowIZZacJ5UOsn7Vwxpr4VQHf2rRHm+wJd00YCA==}
+    hasBin: true
+    peerDependencies:
+      agora-foundation: 3.11.1-rc.1 || 3.11.1
+    peerDependenciesMeta:
+      agora-foundation:
+        optional: true
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -3522,20 +3528,20 @@ snapshots:
       tess2: 1.0.0
       xtend: 4.0.2
 
-  '@netless/app-in-mainview-plugin@0.0.10(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(white-web-sdk@2.16.54)':
+  '@netless/app-in-mainview-plugin@0.0.10(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(white-web-sdk@2.16.56)':
     dependencies:
-      '@netless/window-manager': 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+      '@netless/window-manager': 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       eventemitter2: 6.4.9
       lodash: 4.18.1
-      white-web-sdk: 2.16.54
+      white-web-sdk: 2.16.56
 
   '@netless/app-slide@0.2.99(jspdf@2.5.2)':
     optionalDependencies:
       jspdf: 2.5.2
 
-  '@netless/appliance-plugin@1.1.38(@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.54)':
+  '@netless/appliance-plugin@1.1.38(@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56))(markmap-lib@0.18.12(markmap-common@0.18.9))(markmap-view@0.18.12(markmap-common@0.18.9))(mermaid@11.14.0)(white-web-sdk@2.16.56)':
     dependencies:
-      '@netless/window-manager': 1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)
+      '@netless/window-manager': 1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)
       clipper-lib: 6.4.2
       dom-to-image: 2.6.0
       eventemitter2: 6.4.9
@@ -3547,7 +3553,7 @@ snapshots:
       react-dom: 16.14.0(react@16.14.0)
       react-draggable: 4.5.0(react-dom@16.14.0(react@16.14.0))(react@16.14.0)
       spritejs: 3.8.3
-      white-web-sdk: 2.16.54
+      white-web-sdk: 2.16.56
       xss: 1.0.15
     optionalDependencies:
       markmap-lib: 0.18.12(markmap-common@0.18.9)
@@ -3556,17 +3562,17 @@ snapshots:
 
   '@netless/canvas-polyfill@0.0.4': {}
 
-  '@netless/synced-store@2.0.9(white-web-sdk@2.16.54)':
+  '@netless/synced-store@2.0.9(white-web-sdk@2.16.56)':
     dependencies:
       lodash-es: 4.18.1
       remitter: 0.3.6
       side-effect-manager: 1.2.2
       value-enhancer: 3.1.5
-      white-web-sdk: 2.16.54
+      white-web-sdk: 2.16.56
 
   '@netless/telebox-insider@0.3.0': {}
 
-  '@netless/window-manager@1.0.15(jspdf@2.5.2)(white-web-sdk@2.16.54)':
+  '@netless/window-manager@1.0.17(jspdf@2.5.2)(white-web-sdk@2.16.56)':
     dependencies:
       '@juggle/resize-observer': 3.4.0
       '@netless/telebox-insider': 0.3.0
@@ -3575,7 +3581,7 @@ snapshots:
       p-retry: 4.6.2
       uuid: 7.0.3
       video.js: 8.23.7
-      white-web-sdk: 2.16.54
+      white-web-sdk: 2.16.56
     optionalDependencies:
       jspdf: 2.5.2
 
@@ -6045,7 +6051,7 @@ snapshots:
     dependencies:
       isexe: 2.0.0
 
-  white-web-sdk@2.16.54:
+  white-web-sdk@2.16.56:
     dependencies:
       '@juggle/resize-observer': 3.4.0
       '@netless/canvas-polyfill': 0.0.4

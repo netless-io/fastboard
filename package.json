@@ -23,7 +23,7 @@
     "@hyrious/rimraf": "^0.1.0",
     "@netless/app-in-mainview-plugin": "^0.0.10",
     "@netless/appliance-plugin": "^1.1.38",
-    "@netless/window-manager": "^1.0.15",
+    "@netless/window-manager": "^1.0.17",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -49,10 +49,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@netless/window-manager": "^1.0.15",
+      "@netless/window-manager": "^1.0.17",
       "@netless/appliance-plugin": "^1.1.38",
       "@netless/app-in-mainview-plugin": "^0.0.10",
-      "white-web-sdk": "^2.16.54"
+      "white-web-sdk": "^2.16.56"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

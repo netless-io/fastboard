@@ -18,6 +18,12 @@ createFastboard({
   },
   managerConfig: {
     cursor: true,
+    builtinAppOptions: {
+      Presentation: {
+        useScrollbar: true,
+        debounceSync: true,
+      },
+    },
   },
 }).then(app => {
   createUI(app, document.getElementById("app"));
