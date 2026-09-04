@@ -4,6 +4,7 @@
 
 - [顶层方法](#top-level-functions)
   - [`createFastboard`](#createfastboard)
+  - [`dispatchDocsEvent`](#dispatchdocsevent)
   - [`createUI`](#createUI)
   - [`replayFastboard`](#replayfastboard)
 - [Fastboard 组件相关](#react-hooks)
@@ -71,6 +72,23 @@ let app = await createFastboard({
 | sdkConfig     | [required] WhiteWebSdkConfiguration | [SDK 配置](https://developer.netless.link/javascript-zh/home/construct-white-web-sdk)                         |
 | joinRoom      | [required] JoinRoomParams           | [加入房间配置](https://developer.netless.link/javascript-zh/home/construct-room-and-player)                   |
 | managerConfig | [optional] MountParams              | [WindowManager 配置](https://github.com/netless-io/window-manager/blob/master/docs/api.md#windowmanagermount) |
+
+### dispatchDocsEvent
+
+> 统一控制 mainView、DocsViewer、Slide 和 Presentation 的翻页、动画步骤或缩放。
+
+```ts
+import { dispatchDocsEvent } from "@netless/fastboard";
+
+const result = await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
+await dispatchDocsEvent(fastboard, "scalePage", { target: "mainView", scale: 1.5 });
+```
+
+`target` 可以是 `"mainView"` 或具体 appId。未传时优先使用当前 focused App，没有 focused
+App 时回退到 mainView。`page` 使用 1-based 页码。`scale` 是相对适配尺寸的倍率，`1` 表示
+适配尺寸。返回结果中的 `accepted` 表示命令是否被接受；拒绝结果同时包含稳定的 `reason`
+和可读的 `message`。命令接受后的实际状态通过 WindowManager 的 `unifiedPageStateChange` 观察。
 
 ### createUI
 

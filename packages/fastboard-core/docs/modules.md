@@ -54,6 +54,7 @@
 - [JoinRoomParams](modules.md#joinroomparams)
 - [MemberState](modules.md#memberstate)
 - [MountParams](modules.md#mountparams)
+- [DocsEvent](modules.md#pageevent)
 - [PlayerPhase](modules.md#playerphase)
 - [PublicEvent](modules.md#publicevent)
 - [Rectangle](modules.md#rectangle)
@@ -336,6 +337,16 @@ ___
 #### Defined in
 
 node_modules/.pnpm/@netless+window-manager@0.4.58_white-web-sdk@2.16.44/node_modules/@netless/window-manager/dist/index.d.ts:76
+
+___
+
+### DocsEvent
+
+Ƭ **DocsEvent**: ``"prevPage"`` | ``"nextPage"`` | ``"prevStep"`` | ``"nextStep"`` | ``"jumpToPage"`` | ``"scalePage"``
+
+#### Defined in
+
+[packages/fastboard-core/src/helpers/docs.ts:3](https://github.com/netless-io/fastboard/blob/c9ccce0/packages/fastboard-core/src/helpers/docs.ts#L3)
 
 ___
 
@@ -937,23 +948,22 @@ ___
 
 ### dispatchDocsEvent
 
-▸ **dispatchDocsEvent**(`fastboard`, `event`, `options?`): `boolean`
+▸ **dispatchDocsEvent**(`fastboard`, `event`, `options?`): `Promise`<`DispatchDocsEventResult`>
 
-Send specific command to the static docs / slide app.
-Only works for apps that were created by `insertDocs()`.
+Send a page or scale command to mainView, DocsViewer, Presentation, or Slide.
+This is a wrapper around `WindowManager.dispatchDocsEvent()`.
 
-Returns false if failed to find the app or not writable.
-
-For static docs, `nextPage` equals to `nextStep`, as with `prevPage` and `prevStep`.
+The Promise resolves to a structured acceptance result. Observe
+`unifiedPageStateChange` for the actual page or relative scale.
 
 **`Example`**
 
 ```js
 // send "next page" to the focused app
-dispatchDocsEvent(fastboard, "nextPage")
+await dispatchDocsEvent(fastboard, "nextPage")
 
-// send "prev page" to some app
-dispatchDocsEvent(fastboard, "prevPage", {appId:"Slide-1a2b3c4d"})
+// send "prev page" to a concrete app
+await dispatchDocsEvent(fastboard, "prevPage", { target: "Slide-1a2b3c4d" })
 ```
 
 #### Parameters
@@ -961,16 +971,16 @@ dispatchDocsEvent(fastboard, "prevPage", {appId:"Slide-1a2b3c4d"})
 | Name | Type |
 | :------ | :------ |
 | `fastboard` | [`WindowManager`](classes/WindowManager.md) \| [`FastboardApp`](classes/FastboardApp.md)<`any`\> |
-| `event` | ``"prevPage"`` \| ``"nextPage"`` \| ``"prevStep"`` \| ``"nextStep"`` \| ``"jumpToPage"`` |
+| `event` | ``"prevPage"`` \| ``"nextPage"`` \| ``"prevStep"`` \| ``"nextStep"`` \| ``"jumpToPage"`` \| ``"scalePage"`` |
 | `options` | [`DocsEventOptions`](interfaces/DocsEventOptions.md) |
 
 #### Returns
 
-`boolean`
+`Promise`<`DispatchDocsEventResult`>
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/docs.ts:28](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/docs.ts#L28)
+[packages/fastboard-core/src/helpers/docs.ts:34](https://github.com/netless-io/fastboard/blob/c9ccce0/packages/fastboard-core/src/helpers/docs.ts#L34)
 
 ___
 

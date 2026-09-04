@@ -253,16 +253,16 @@ Slide-fdf169a0
 ```ts
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
 ```
 
 如果需要控制动画步骤，也可以使用：
 
 ```ts
-dispatchDocsEvent(fastboard, "prevStep", { appId });
-dispatchDocsEvent(fastboard, "nextStep", { appId });
+await dispatchDocsEvent(fastboard, "prevStep", { target: appId });
+await dispatchDocsEvent(fastboard, "nextStep", { target: appId });
 ```
 
 说明：
@@ -359,9 +359,9 @@ const appId = await fastboard.insertDocs({
 ```ts
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
 ```
 
 说明：
@@ -377,29 +377,36 @@ dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
 | 场景 | 推荐公共接口 | 适用范围 | 说明 |
 | --- | --- | --- | --- |
 | 注册动态 PPT | `register({ kind: "Slide", src: () => import("@netless/app-slide") })` | 动态 PPT | 对应 App Kind 为 `Slide` |
-| 注册静态文档 | `install(register, { as: "DocsViewer" })` | 静态 PPT / PDF | 必须安装为 `DocsViewer`，这样才能被 `insertDocs()` 和 `dispatchDocsEvent()` 统一处理 |
+| 注册静态文档 | `install(register, { as: "DocsViewer" })` | 静态 PPT / PDF | Fastboard 既有 `insertDocs()` 静态文档流程仍安装为 `DocsViewer`；`dispatchDocsEvent()` 也识别默认的 `Presentation` kind |
 | 打开文档 | `fastboard.insertDocs(params)` | 动态 PPT / 静态 PPT / PDF | 动态传 `fileType: "pptx"`；静态传 `fileType: "pdf"` 和 `scenes` |
-| 控制文档 | `dispatchDocsEvent(fastboard, event, { appId, page })` | 动态 PPT / 静态 PPT / PDF | 推荐业务侧统一使用 |
+| 控制文档 | `dispatchDocsEvent(fastboard, event, { target: appId, page })` | 动态 PPT / 静态 PPT / PDF | 推荐业务侧统一使用 |
 | 查询底层实例 | `fastboard.manager.queryOne(appId)` | 所有窗口 App | 用于插图、截图、调试等高级场景 |
 | 窗口展示控制 | `fastboard.manager.setFullscreen(true / false)` | Fastboard / `window-manager` 容器 | 这是 `window-manager` 的 fullscreen 模式，不是浏览器原生 Fullscreen API |
 
 统一文档控制接口支持：
 
 ```ts
-type DocsEvent = "prevPage" | "nextPage" | "jumpToPage" | "prevStep" | "nextStep";
+type DocsEvent =
+  | "prevPage"
+  | "nextPage"
+  | "jumpToPage"
+  | "prevStep"
+  | "nextStep"
+  | "scalePage";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
-dispatchDocsEvent(fastboard, "prevStep", { appId });
-dispatchDocsEvent(fastboard, "nextStep", { appId });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevStep", { target: appId });
+await dispatchDocsEvent(fastboard, "nextStep", { target: appId });
+await dispatchDocsEvent(fastboard, "scalePage", { target: appId, scale: 1.5 });
 ```
 
 结论：
 
 - 对“上一页 / 下一页 / 跳页”，动态 PPT 和静态 PPT / PDF 可以统一调用 `dispatchDocsEvent()`
 - 对“上一动画 / 下一动画”，动态 PPT 有真实动画步骤；静态文档会退化为上一页 / 下一页
-- 如果 `@netless/app-presentation` 没有通过 `{ as: "DocsViewer" }` 安装，而是保留默认 `Presentation` kind，则 `dispatchDocsEvent()` 不会识别它
+- `dispatchDocsEvent()` 同时识别独立的 `DocsViewer` kind 和默认的 `Presentation` kind；将 `@netless/app-presentation` 安装为 `DocsViewer` 仍是 Fastboard `insertDocs()` 的静态文档接入方式
 - `window-manager.nextPage()` / `prevPage()` 控制的是主白板页，不是指定 PPT 窗口；指定文档窗口时不要用它们
 
 ## 10. PPT 窗口全屏展开
@@ -604,23 +611,23 @@ export function fullscreen(manager: any) {
 }
 
 export function prevDocsPage(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "prevPage", { appId });
+  return dispatchDocsEvent(fastboard, "prevPage", { target: appId });
 }
 
 export function nextDocsPage(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "nextPage", { appId });
+  return dispatchDocsEvent(fastboard, "nextPage", { target: appId });
 }
 
 export function jumpDocsPage(fastboard: any, appId: string, page: number) {
-  return dispatchDocsEvent(fastboard, "jumpToPage", { appId, page });
+  return dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page });
 }
 
 export function prevDocsStep(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "prevStep", { appId });
+  return dispatchDocsEvent(fastboard, "prevStep", { target: appId });
 }
 
 export function nextDocsStep(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "nextStep", { appId });
+  return dispatchDocsEvent(fastboard, "nextStep", { target: appId });
 }
 
 export function insertImageToSlide(manager: any, appId: string, params: {
@@ -661,4 +668,4 @@ export function insertImageToSlide(manager: any, appId: string, params: {
 - 使用 `@netless/app-presentation` 并以 `DocsViewer` 方式处理静态 PPT / PDF
 - 通过 Agora 文件转换服务先生成动态或静态文档资源
 - 前端用转换结果调用 `insertDocs()` 打开文档
-- 通过 `dispatchDocsEvent()` + `appId` 精确控制指定动态 PPT / 静态 PPT / PDF
+- 通过 `dispatchDocsEvent()` 的 `{ target: appId }` 精确控制指定动态 PPT / 静态 PPT / PDF

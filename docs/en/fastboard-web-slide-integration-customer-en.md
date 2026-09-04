@@ -253,16 +253,16 @@ We recommend using the unified document control API:
 ```ts
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
 ```
 
 If you need to control animation steps, you can also use:
 
 ```ts
-dispatchDocsEvent(fastboard, "prevStep", { appId });
-dispatchDocsEvent(fastboard, "nextStep", { appId });
+await dispatchDocsEvent(fastboard, "prevStep", { target: appId });
+await dispatchDocsEvent(fastboard, "nextStep", { target: appId });
 ```
 
 Notes:
@@ -359,9 +359,9 @@ If the static document is opened via `DocsViewer`, we recommend using the same d
 ```ts
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
 ```
 
 Notes:
@@ -377,29 +377,36 @@ Based on the implementations of `fastboard`, `@netless/app-slide`, `@netless/app
 | Scenario | Recommended public API | Applies to | Notes |
 | --- | --- | --- | --- |
 | Register dynamic PPT | `register({ kind: "Slide", src: () => import("@netless/app-slide") })` | Dynamic PPT | The app kind is `Slide` |
-| Register static documents | `install(register, { as: "DocsViewer" })` | Static PPT / PDF | It must be installed as `DocsViewer` so that `insertDocs()` and `dispatchDocsEvent()` can handle it uniformly |
+| Register static documents | `install(register, { as: "DocsViewer" })` | Static PPT / PDF | Install as `DocsViewer` for Fastboard's existing `insertDocs()` static-document workflow; `dispatchDocsEvent()` also recognizes the default `Presentation` kind |
 | Open documents | `fastboard.insertDocs(params)` | Dynamic PPT / static PPT / PDF | Use `fileType: "pptx"` for dynamic PPT; use `fileType: "pdf"` and `scenes` for static documents |
-| Control documents | `dispatchDocsEvent(fastboard, event, { appId, page })` | Dynamic PPT / static PPT / PDF | Recommended as the unified business-side control API |
+| Control documents | `dispatchDocsEvent(fastboard, event, { target: appId, page })` | Dynamic PPT / static PPT / PDF | Recommended as the unified business-side control API |
 | Query lower-level instance | `fastboard.manager.queryOne(appId)` | All window apps | Useful for advanced scenarios such as inserting images, screenshots, and debugging |
 | Presentation layout control | `fastboard.manager.setFullscreen(true / false)` | Fastboard / `window-manager` container | This is `window-manager` fullscreen mode, not the browser's native Fullscreen API |
 
 The unified document control API supports:
 
 ```ts
-type DocsEvent = "prevPage" | "nextPage" | "jumpToPage" | "prevStep" | "nextStep";
+type DocsEvent =
+  | "prevPage"
+  | "nextPage"
+  | "jumpToPage"
+  | "prevStep"
+  | "nextStep"
+  | "scalePage";
 
-dispatchDocsEvent(fastboard, "prevPage", { appId });
-dispatchDocsEvent(fastboard, "nextPage", { appId });
-dispatchDocsEvent(fastboard, "jumpToPage", { appId, page: 3 });
-dispatchDocsEvent(fastboard, "prevStep", { appId });
-dispatchDocsEvent(fastboard, "nextStep", { appId });
+await dispatchDocsEvent(fastboard, "prevPage", { target: appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
+await dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page: 3 });
+await dispatchDocsEvent(fastboard, "prevStep", { target: appId });
+await dispatchDocsEvent(fastboard, "nextStep", { target: appId });
+await dispatchDocsEvent(fastboard, "scalePage", { target: appId, scale: 1.5 });
 ```
 
 Conclusion:
 
 - For previous page / next page / page jump, dynamic PPT and static PPT / PDF can both use `dispatchDocsEvent()`
 - For previous animation / next animation, dynamic PPT has real animation steps; static documents degrade to previous page / next page
-- If `@netless/app-presentation` is not installed with `{ as: "DocsViewer" }` and keeps its default `Presentation` kind, `dispatchDocsEvent()` will not recognize it
+- `dispatchDocsEvent()` recognizes both the independent `DocsViewer` kind and the default `Presentation` kind. Installing `@netless/app-presentation` as `DocsViewer` remains the Fastboard `insertDocs()` static-document workflow
 - `window-manager.nextPage()` / `prevPage()` controls the main whiteboard page, not a specific PPT window; do not use them for controlling a specified document window
 
 ## 10. Expand PPT to Fullscreen
@@ -604,23 +611,23 @@ export function fullscreen(manager: any) {
 }
 
 export function prevDocsPage(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "prevPage", { appId });
+  return dispatchDocsEvent(fastboard, "prevPage", { target: appId });
 }
 
 export function nextDocsPage(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "nextPage", { appId });
+  return dispatchDocsEvent(fastboard, "nextPage", { target: appId });
 }
 
 export function jumpDocsPage(fastboard: any, appId: string, page: number) {
-  return dispatchDocsEvent(fastboard, "jumpToPage", { appId, page });
+  return dispatchDocsEvent(fastboard, "jumpToPage", { target: appId, page });
 }
 
 export function prevDocsStep(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "prevStep", { appId });
+  return dispatchDocsEvent(fastboard, "prevStep", { target: appId });
 }
 
 export function nextDocsStep(fastboard: any, appId: string) {
-  return dispatchDocsEvent(fastboard, "nextStep", { appId });
+  return dispatchDocsEvent(fastboard, "nextStep", { target: appId });
 }
 
 export function insertImageToSlide(manager: any, appId: string, params: {
@@ -661,4 +668,4 @@ For Web integration scenarios, the recommended standard approach is:
 - Use `@netless/app-presentation` as `DocsViewer` for static PPT / PDF
 - Use Agora file conversion service to generate dynamic or static document resources first
 - Let the frontend call `insertDocs()` with the conversion result to open the document
-- Use `dispatchDocsEvent()` + `appId` to precisely control a specific dynamic PPT / static PPT / PDF instance
+- Use `dispatchDocsEvent()` with `{ target: appId }` to precisely control a specific dynamic PPT / static PPT / PDF instance
