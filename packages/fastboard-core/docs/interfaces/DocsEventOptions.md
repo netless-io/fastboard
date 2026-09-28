@@ -6,8 +6,10 @@
 
 ### Properties
 
-- [appId](DocsEventOptions.md#appid)
 - [page](DocsEventOptions.md#page)
+- [scale](DocsEventOptions.md#scale)
+- [target](DocsEventOptions.md#target)
+- [appId](DocsEventOptions.md#appid)
 
 ## Properties
 
@@ -15,11 +17,7 @@
 
 • `Optional` **appId**: `string`
 
-If provided, will dispatch to the specific app. Default to the focused app.
-
-#### Defined in
-
-[packages/fastboard-core/src/helpers/docs.ts:6](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/docs.ts#L6)
+Deprecated alias for `target`.
 
 ___
 
@@ -31,4 +29,28 @@ Used by `jumpToPage` event, range from 1 to total pages count.
 
 #### Defined in
 
-[packages/fastboard-core/src/helpers/docs.ts:8](https://github.com/netless-io/fastboard/blob/c480e1b/packages/fastboard-core/src/helpers/docs.ts#L8)
+[packages/fastboard-core/src/helpers/docs.ts:8](https://github.com/netless-io/fastboard/blob/c9ccce0/packages/fastboard-core/src/helpers/docs.ts#L8)
+
+___
+
+### scale
+
+• `Optional` **scale**: `number`
+
+Used by `scalePage`. Relative to fitted size; `1` means fitted size.
+
+#### Defined in
+
+[packages/fastboard-core/src/helpers/docs.ts:10](https://github.com/netless-io/fastboard/blob/c9ccce0/packages/fastboard-core/src/helpers/docs.ts#L10)
+
+___
+
+### target
+
+• `Optional` **target**: `string`
+
+`mainView` or a concrete appId. Defaults to the focused app, then mainView.
+
+#### Defined in
+
+[packages/fastboard-core/src/helpers/docs.ts:6](https://github.com/netless-io/fastboard/blob/c9ccce0/packages/fastboard-core/src/helpers/docs.ts#L6)

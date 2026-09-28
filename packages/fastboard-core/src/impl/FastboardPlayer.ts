@@ -20,10 +20,12 @@ import { register } from "../behaviors/lite";
 import { loadApplianceMultiPluginModule } from "@fastboard-internal/appliance-plugin-loader";
 import { loadAppInMainViewPluginModule } from "@fastboard-internal/app-in-mainview-plugin-loader";
 import { attachFastboardBridgeRuntime } from "./bridge-runtime";
+import { disposeRuntime, type RuntimeDisposer } from "./dispose-runtime";
 import type {
   AppliancePluginOptions,
   AppliancePluginInstance,
   ApplianceMultiPlugin,
+  ApplianceAdaptor,
 } from "@netless/appliance-plugin";
 import type {
   AppInMainViewPlugin,
@@ -43,6 +45,7 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   ) {}
 
   protected _destroyed = false;
+  private _destroyTask?: Promise<void>;
   /** @internal */
   protected _assertNotDestroyed() {
     if (this._destroyed) {
@@ -75,11 +78,16 @@ class FastboardPlayerBase<TEventData extends Record<string, any> = any> {
   }
 
   public destroy() {
+    if (this._destroyTask) return this._destroyTask;
+    if (this._destroyed) return Promise.resolve();
     this._destroyed = true;
-    this.manager.destroy();
-    this.appliancePlugin?.destroy();
-    this.appInMainViewPlugin?.destroy();
-    return this.player.callbacks.off();
+    return (this._destroyTask = disposeRuntime([
+      () => this.player.callbacks.off(),
+      () => this.manager.destroy(),
+      () => this.appInMainViewPlugin?.destroy(),
+      () => this.appliancePlugin?.destroy(),
+      () => this.player.stop(),
+    ]));
   }
 }
 
@@ -115,7 +123,10 @@ export class FastboardPlayer<
       set(this.player.progressTime);
       return this._addPlayerListener("onProgressTimeChanged", set);
     },
-    this.player.seekToProgressTime.bind(this.player)
+    value => {
+      this._assertNotDestroyed();
+      return this.player.seekToProgressTime(value);
+    }
   );
 
   /**
@@ -146,8 +157,9 @@ export class FastboardPlayer<
       set(this.player.playbackSpeed);
     },
     value => {
+      this._assertNotDestroyed();
       this.player.playbackSpeed = value;
-      this._setPlaybackRate(value);
+      this._setPlaybackRate?.(value);
     }
   );
 
@@ -217,6 +229,7 @@ export interface FastboardReplayOptions {
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
   enableAppliancePlugin?: AppliancePluginOptions;
+  appliancePluginAdaptor?: Omit<ApplianceAdaptor, "options">;
   enableAppInMainViewPlugin?: true | AppInMainViewOptions;
 }
 
@@ -242,10 +255,16 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
   managerConfig,
   netlessApps,
   enableAppliancePlugin,
+  appliancePluginAdaptor,
   enableAppInMainViewPlugin,
 }: FastboardReplayOptions) {
-  const isEnableAppliancePlugin =
-    enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
+  const isEnableAppliancePlugin = enableAppliancePlugin !== undefined;
+  if (
+    isEnableAppliancePlugin &&
+    (!enableAppliancePlugin?.cdn?.fullWorkerUrl || !enableAppliancePlugin?.cdn?.subWorkerUrl)
+  ) {
+    throw new Error("Appliance Plugin requires fullWorkerUrl and subWorkerUrl from the same package version");
+  }
 
   const replayRoomParamsWithPlugin = ensure_official_plugins(replayRoomParams);
   let _ApplianceMultiPlugin: typeof ApplianceMultiPlugin | undefined;
@@ -257,10 +276,6 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
         ...replayRoomParamsWithPlugin.invisiblePlugins,
         _ApplianceMultiPlugin,
       ];
-    }
-
-    if (managerConfig) {
-      managerConfig.supportAppliancePlugin = true;
     }
   }
   let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
@@ -291,47 +306,57 @@ export async function replayFastboard<TEventData extends Record<string, any> = a
     },
     callbacks
   );
+  const disposers: RuntimeDisposer[] = [() => player.callbacks.off(), () => player.stop()];
+  try {
+    const syncedStore = await SyncedStorePlugin.init<TEventData>(player);
 
-  const syncedStore = await SyncedStorePlugin.init<TEventData>(player);
-
-  const managerPromise = WindowManager.mount({
-    cursor: true,
-    ...managerConfig,
-    room: player,
-  });
-  player.play();
-  const manager = await managerPromise;
-  attachFastboardBridgeRuntime(manager, {
-    whiteWebSdk: {
-      autorun,
-      toJS,
-    },
-    windowManager: {
-      ExtendPlugin,
-    },
-  });
-  let appliancePluginInstance: AppliancePluginInstance | undefined;
-  if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
-    appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
-      options: enableAppliancePlugin,
+    const managerPromise = WindowManager.mount({
+      cursor: true,
+      ...managerConfig,
+      ...(isEnableAppliancePlugin ? { supportAppliancePlugin: true } : {}),
+      room: player,
     });
-  }
-  let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
-  if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
-    appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
-      manager,
-      enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
-    );
-  }
-  player.pause();
-  await player.seekToProgressTime(0);
+    player.play();
+    const manager = await managerPromise;
+    disposers.push(() => manager.destroy());
+    attachFastboardBridgeRuntime(manager, {
+      whiteWebSdk: {
+        autorun,
+        toJS,
+      },
+      windowManager: {
+        ExtendPlugin,
+      },
+    });
+    let appliancePluginInstance: AppliancePluginInstance | undefined;
+    if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
+      appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
+        ...appliancePluginAdaptor,
+        options: enableAppliancePlugin,
+      });
+      disposers.push(() => appliancePluginInstance?.destroy());
+    }
+    let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
+    if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
+      appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
+        manager,
+        enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
+      );
+      disposers.push(() => appInMainViewPluginInstance?.destroy());
+    }
+    player.pause();
+    await player.seekToProgressTime(0);
 
-  return new FastboardPlayer<TEventData>(
-    sdk,
-    player,
-    manager,
-    syncedStore,
-    appliancePluginInstance,
-    appInMainViewPluginInstance
-  );
+    return new FastboardPlayer<TEventData>(
+      sdk,
+      player,
+      manager,
+      syncedStore,
+      appliancePluginInstance,
+      appInMainViewPluginInstance
+    );
+  } catch (error) {
+    await disposeRuntime(disposers);
+    throw error;
+  }
 }

@@ -1,4 +1,13 @@
 # Changelog
+## 1.1.9 (2026-09-28)
+- update `white-web-sdk` to `^2.16.58`, `@netless/window-manager` to `^1.0.23`, `@netless/appliance-plugin` to `^1.1.44`, and `@netless/app-slide` to `^0.2.106`.
+- align unified document events, page queries and structured results with Window Manager; preserve the default DocsViewer renderer and opt-in Presentation renderer.
+- support extended appliance member state and forward plugin runtime callbacks separately from serializable options.
+- enable Appliance Plugin without requiring `managerConfig`, and validate Worker URLs before joining.
+- await plugin cleanup on destruction and initialization failure; make cleanup idempotent and prevent pending image loads from writing after destruction.
+- catch rejected toolbar app creation and allow setting replay rate before subscribing.
+- add room and replay API regression tests and include them in CI.
+
 ## 1.1.8 (2026-07-17)
 - update `@netless/window-manager` to `^1.0.17`.
 - update `white-web-sdk` to `^2.16.56`.

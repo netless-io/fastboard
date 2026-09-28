@@ -392,14 +392,14 @@ onExitRoom(() => dispose());
 ```js
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
-dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
+await dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
+await dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
 ```
 
-默认情况下会发送事件给当前焦点所在的文档，如果需要指定文档，可以传入 `appId`：
+默认发送给当前焦点文档，没有焦点文档时回退到 mainView。如果需要指定文档，可以传入 `target`：
 
 ```js
-dispatchDocsEvent(fastboard, "nextPage", { appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
 ```
 
 #### 设置 PPTX 渲染参数

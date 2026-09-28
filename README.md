@@ -378,14 +378,14 @@ The `dispose` above is a function to stop listening.
 ```js
 import { dispatchDocsEvent } from "@netless/fastboard";
 
-dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
-dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
+await dispatchDocsEvent(fastboard, "nextPage"); // prevPage, nextStep, prevStep
+await dispatchDocsEvent(fastboard, "jumpToPage", { page: 2 });
 ```
 
-By default it will dispatch event to the focused PDF/PPTX app, you can also specify the appId:
+By default it dispatches to the focused PDF/PPTX app, then falls back to mainView. You can also specify a target appId:
 
 ```js
-dispatchDocsEvent(fastboard, "nextPage", { appId });
+await dispatchDocsEvent(fastboard, "nextPage", { target: appId });
 ```
 
 #### Set PPTX Render Options
