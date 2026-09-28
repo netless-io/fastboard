@@ -1,4 +1,14 @@
-import type { AddPageParams, PublicEvent, MountParams, NetlessApp } from "@netless/window-manager";
+import type {
+  AddPageParams,
+  PublicEvent,
+  MountParams,
+  NetlessApp,
+  DocsEvent,
+  DocsEventOptions,
+  PageStateOptions,
+  UnifiedPageState,
+  DispatchDocsEventResult,
+} from "@netless/window-manager";
 import type {
   AnimationMode,
   Camera,
@@ -40,6 +50,7 @@ import { register } from "../behaviors/lite";
 import { loadApplianceMultiPluginModule } from "@fastboard-internal/appliance-plugin-loader";
 import { loadAppInMainViewPluginModule } from "@fastboard-internal/app-in-mainview-plugin-loader";
 import { attachFastboardBridgeRuntime } from "./bridge-runtime";
+import { disposeRuntime, type RuntimeDisposer } from "./dispose-runtime";
 
 import type {
   AppliancePluginOptions,
@@ -49,6 +60,8 @@ import type {
   PublicEvent as AppliancePublicEvent,
   PublicListener as AppliancePublicListener,
   ApplianceMultiPlugin,
+  ApplianceAdaptor,
+  ShapeType as ExtendShapeType,
 } from "@netless/appliance-plugin";
 
 import type {
@@ -75,6 +88,7 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
   ) {}
 
   protected _destroyed = false;
+  private _destroyTask?: Promise<void>;
   /** @internal */
   protected _assertNotDestroyed() {
     if (this._destroyed) {
@@ -130,12 +144,16 @@ class FastboardAppBase<TEventData extends Record<string, any> = any> {
   /**
    * Destroy fastboard (disconnect from the whiteboard room).
    */
-  public async destroy() {
+  public destroy() {
+    if (this._destroyTask) return this._destroyTask;
+    if (this._destroyed) return Promise.resolve();
     this._destroyed = true;
-    this.manager.destroy();
-    this.appliancePlugin?.destroy();
-    this.appInMainViewPlugin?.destroy();
-    await this.room.disconnect().catch(console.warn);
+    return (this._destroyTask = disposeRuntime([
+      () => this.room.disconnect(),
+      () => this.manager.destroy(),
+      () => this.appInMainViewPlugin?.destroy(),
+      () => this.appliancePlugin?.destroy(),
+    ]));
   }
 }
 
@@ -173,12 +191,18 @@ export type {
   WindowManager,
   ExtendApplianceNames,
   ExtendMemberState,
+  PageStateOptions,
+  UnifiedPageState,
+  AppliancePluginOptions,
+  AppliancePluginInstance,
+  ApplianceAdaptor,
+  ExtendShapeType,
 };
 
 /** pencil, eraser, rectangle... */
 export type Appliance = `${ExtendApplianceNames}`;
 /** triangle, star... */
-export type Shape = `${ShapeType}`;
+export type Shape = `${ShapeType | ExtendShapeType}`;
 
 /** Params for static docs, they are rendered as many images. */
 export interface InsertDocsStatic {
@@ -272,7 +296,10 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       set(this.room.isWritable);
       return this._addRoomListener("onEnableWriteNowChanged", () => set(this.room.isWritable));
     },
-    this.room.setWritable.bind(this.room)
+    value => {
+      this._assertNotDestroyed();
+      return this.room.setWritable(value);
+    }
   );
 
   /**
@@ -345,7 +372,10 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
       set(this.manager.mainViewSceneIndex);
       return this._addManagerListener("mainViewSceneIndexChange", set);
     },
-    this.manager.setMainViewSceneIndex.bind(this.manager)
+    value => {
+      this._assertNotDestroyed();
+      return this.manager.setMainViewSceneIndex(value);
+    }
   );
 
   /**
@@ -449,7 +479,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   /**
    * Set current tool, like "pencil".
    */
-  setAppliance(appliance: ExtendApplianceNames | Appliance, shape?: ShapeType | Shape) {
+  setAppliance(appliance: ExtendApplianceNames | Appliance, shape?: ShapeType | ExtendShapeType | Shape) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({
       currentApplianceName: appliance as ApplianceNames,
@@ -463,6 +493,16 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   setStrokeWidth(strokeWidth: number) {
     this._assertNotDestroyed();
     this.manager.mainView.setMemberState({ strokeWidth });
+  }
+
+  /** Extended stroke, polygon, star, text/background and eraser configuration. */
+  setMemberState(state: Partial<ExtendMemberState>) {
+    this._assertNotDestroyed();
+    if (this.appliancePlugin) {
+      this.appliancePlugin.setMemberState(state);
+    } else {
+      this.manager.mainView.setMemberState(state as Partial<MemberState>);
+    }
   }
 
   /**
@@ -568,6 +608,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
   async insertImage(url: string, crossOrigin?: boolean | string) {
     this._assertNotDestroyed();
     await this.manager.switchMainViewToWriter();
+    this._assertNotDestroyed();
 
     const { divElement } = this.manager.mainView;
     const containerSize = {
@@ -578,6 +619,7 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
     // 1. shrink the image a little to fit container **width**
     const maxWidth = containerSize.width * 0.8;
     let { width, height } = await getImageSize(url, containerSize, crossOrigin);
+    this._assertNotDestroyed();
     const scale = Math.min(maxWidth / width, 1);
     const uuid = genUID();
     const { centerX, centerY } = this.manager.camera;
@@ -725,6 +767,23 @@ export class FastboardApp<TEventData extends Record<string, any> = any> extends 
     });
   }
 
+  /** Controls mainView/DocsViewer/Presentation/Slide. Pages are one-based. */
+  dispatchDocsEvent(event: DocsEvent, options?: DocsEventOptions): Promise<DispatchDocsEventResult> {
+    this._assertNotDestroyed();
+    return this.manager.dispatchDocsEvent(event, options);
+  }
+
+  getPageState(options?: PageStateOptions): Promise<UnifiedPageState> {
+    this._assertNotDestroyed();
+    return this.manager.getPageState(options);
+  }
+
+  /** Focus commit, not a guarantee that the App has rendered successfully. */
+  focusApp(appId: string) {
+    this._assertNotDestroyed();
+    return this.manager.focusApp(appId);
+  }
+
   /**
    * Insert the Monaco Code Editor app.
    * @deprecated Use `app.manager.addApp({ kind: 'Monaco' })` instead.
@@ -778,6 +837,8 @@ export interface FastboardOptions {
   managerConfig?: Omit<MountParams, "room">;
   netlessApps?: NetlessApp[];
   enableAppliancePlugin?: AppliancePluginOptions;
+  /** Runtime callbacks/logger/cursor adapter; functions must not be placed in options.extras. */
+  appliancePluginAdaptor?: Omit<ApplianceAdaptor, "options">;
   enableAppInMainViewPlugin?: true | AppInMainViewOptions;
 }
 
@@ -802,10 +863,16 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   managerConfig,
   netlessApps,
   enableAppliancePlugin,
+  appliancePluginAdaptor,
   enableAppInMainViewPlugin,
 }: FastboardOptions) {
-  const isEnableAppliancePlugin =
-    enableAppliancePlugin?.cdn.fullWorkerUrl && enableAppliancePlugin?.cdn.subWorkerUrl ? true : false;
+  const isEnableAppliancePlugin = enableAppliancePlugin !== undefined;
+  if (
+    isEnableAppliancePlugin &&
+    (!enableAppliancePlugin?.cdn?.fullWorkerUrl || !enableAppliancePlugin?.cdn?.subWorkerUrl)
+  ) {
+    throw new Error("Appliance Plugin requires fullWorkerUrl and subWorkerUrl from the same package version");
+  }
 
   const joinRoomParamsWithPlugin = ensure_official_plugins(joinRoomParams);
   let _ApplianceMultiPlugin: typeof ApplianceMultiPlugin | undefined;
@@ -817,9 +884,6 @@ export async function createFastboard<TEventData extends Record<string, any> = a
         ...joinRoomParamsWithPlugin.invisiblePlugins,
         _ApplianceMultiPlugin,
       ];
-    }
-    if (managerConfig) {
-      managerConfig.supportAppliancePlugin = true;
     }
   }
   let _AppInMainViewPlugin: typeof AppInMainViewPlugin | undefined;
@@ -868,56 +932,67 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     },
     callbacks
   );
-  const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
-  const manager = await WindowManager.mount({
-    cursor: true,
-    ...managerConfig,
-    room,
-  });
-  attachFastboardBridgeRuntime(manager, {
-    whiteWebSdk: {
-      autorun,
-      toJS,
-    },
-    windowManager: {
-      ExtendPlugin,
-    },
-  });
-  let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
-  if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
-    appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
-      manager,
-      enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
-    );
-  }
-  let appliancePluginInstance: AppliancePluginInstance | undefined;
-  if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
-    appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
-      options: enableAppliancePlugin,
+  const disposers: RuntimeDisposer[] = [() => room.disconnect()];
+  try {
+    const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
+    const manager = await WindowManager.mount({
+      cursor: true,
+      ...managerConfig,
+      ...(isEnableAppliancePlugin ? { supportAppliancePlugin: true } : {}),
+      room,
     });
-  }
-  if (room.isWritable && ((room as any).floatBarOptions as FloatBarOptions)?.colors.length) {
-    const colors = (room as any).floatBarOptions?.colors;
-    const length = colors.length;
-    const index = room.observerId % length;
-    const color = colors[index];
-    manager.mainView.setMemberState({
-      strokeColor: color,
-      textColor: color,
+    disposers.push(() => manager.destroy());
+    attachFastboardBridgeRuntime(manager, {
+      whiteWebSdk: {
+        autorun,
+        toJS,
+      },
+      windowManager: {
+        ExtendPlugin,
+      },
     });
-  }
-  manager.mainView.setCameraBound({
-    minContentMode: contentModeScale(0.3),
-    maxContentMode: contentModeScale(3),
-  });
+    let appInMainViewPluginInstance: AppInMainViewInstance | undefined;
+    if (enableAppInMainViewPlugin && _AppInMainViewPlugin) {
+      appInMainViewPluginInstance = await _AppInMainViewPlugin.getInstance(
+        manager,
+        enableAppInMainViewPlugin === true ? undefined : enableAppInMainViewPlugin
+      );
+      disposers.push(() => appInMainViewPluginInstance?.destroy());
+    }
+    let appliancePluginInstance: AppliancePluginInstance | undefined;
+    if (isEnableAppliancePlugin && enableAppliancePlugin && _ApplianceMultiPlugin) {
+      appliancePluginInstance = await _ApplianceMultiPlugin.getInstance(manager, {
+        ...appliancePluginAdaptor,
+        options: enableAppliancePlugin,
+      });
+      disposers.push(() => appliancePluginInstance?.destroy());
+    }
+    if (room.isWritable && ((room as any).floatBarOptions as FloatBarOptions)?.colors.length) {
+      const colors = (room as any).floatBarOptions?.colors;
+      const length = colors.length;
+      const index = room.observerId % length;
+      const color = colors[index];
+      manager.mainView.setMemberState({
+        strokeColor: color,
+        textColor: color,
+      });
+    }
+    manager.mainView.setCameraBound({
+      minContentMode: contentModeScale(0.3),
+      maxContentMode: contentModeScale(3),
+    });
 
-  return new FastboardApp<TEventData>(
-    sdk,
-    room,
-    manager,
-    hotKeys,
-    syncedStore,
-    appliancePluginInstance,
-    appInMainViewPluginInstance
-  );
+    return new FastboardApp<TEventData>(
+      sdk,
+      room,
+      manager,
+      hotKeys,
+      syncedStore,
+      appliancePluginInstance,
+      appInMainViewPluginInstance
+    );
+  } catch (error) {
+    await disposeRuntime(disposers);
+    throw error;
+  }
 }

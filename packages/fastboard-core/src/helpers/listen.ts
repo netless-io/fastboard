@@ -38,7 +38,7 @@ export function addPlayerListener<K extends keyof PlayerCallbacks>(
 export function addViewListener<K extends keyof ViewCallbacks>(
   view: View,
   name: K,
-  listener: (value: ViewCallbacks[K]) => void
+  listener: ViewCallbacks[K]
 ) {
   view.callbacks.on(name, listener);
   return () => view.callbacks.off(name, listener);

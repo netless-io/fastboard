@@ -7,7 +7,7 @@ export interface AppInToolbar {
   kind: string;
   icon: string;
   label: string;
-  onClick: (app: FastboardApp) => void;
+  onClick: (app: FastboardApp) => void | Promise<unknown>;
 }
 
 class AppsInToolbar {
@@ -52,7 +52,7 @@ export const apps = new AppsInToolbar([
     icon: code_editor_svg,
     label: "Code Editor",
     onClick(app) {
-      app.manager.addApp({
+      return app.manager.addApp({
         kind: "Monaco",
         options: { title: "Code Editor" },
       });
@@ -63,7 +63,7 @@ export const apps = new AppsInToolbar([
     icon: geogebra_svg,
     label: "GeoGebra",
     onClick(app) {
-      app.manager.addApp({
+      return app.manager.addApp({
         kind: "GeoGebra",
         options: { title: "GeoGebra" },
       });
@@ -74,7 +74,7 @@ export const apps = new AppsInToolbar([
     icon: countdown_svg,
     label: "Countdown",
     onClick(app) {
-      app.manager.addApp({
+      return app.manager.addApp({
         kind: "Countdown",
         options: { title: "Countdown" },
       });

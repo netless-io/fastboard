@@ -4,6 +4,42 @@
 
 该插件基于 white-web-sdk 的插件机制，实现了一套功能丰富的白板教具绘制工具。同时也基于 @netless/window-manager，实现了可在多窗口上使用。
 
+## 2026-09-28 接入对齐
+
+当前源码要求 `@netless/appliance-plugin >=1.1.44 <2`、`@netless/window-manager >=1.0.23 <2`、`white-web-sdk >=2.16.58 <3`。测试锁文件使用上述正式版本，Full 模式继续使用插件的 `/bridge` 导出复用 SDK runtime。
+
+`createFastboard` 和 `replayFastboard` 开启插件后会自动设置 `supportAppliancePlugin: true`，无需额外传 `managerConfig`，也不会修改调用方传入的配置对象。必须提供来自同一插件版本的两份 Worker 地址，否则在入房前抛错。
+
+初始化和背景图事件放在运行时 adaptor，不能放在 `enableAppliancePlugin.extras`：
+
+```ts
+const app = await createFastboard({
+  sdkConfig,
+  joinRoom,
+  enableAppliancePlugin: {
+    cdn: { fullWorkerUrl, subWorkerUrl },
+    extras: { useBackgroundThread: true },
+  },
+  appliancePluginAdaptor: {
+    callbacks: {
+      onInitLoadingChange: info => reportInit(info),
+      onBackgroundImageLoadEvent: event => reportBackgroundImage(event),
+    },
+  },
+});
+
+// Extended shapes, text background and stroke styles use the plugin's MemberState type.
+app.setAppliance("shape", "polygon");
+app.setMemberState({ vertices: 6 });
+
+// Wait for plugin drain before revoking Worker Blob URLs.
+await app.destroy();
+URL.revokeObjectURL(fullWorkerUrl);
+URL.revokeObjectURL(subWorkerUrl);
+```
+
+插件 CSS、Worker MIME/CSP/同源交付仍由业务构建负责。`getInstance` 返回不等于所有 App 的首帧已绘制；延迟绑定容器时，继续观察初始化回调。背景图、Selector/Floatbar、字体、筛选笔迹、小地图等完整 API 通过 `app.appliancePlugin` 直接公开，不另定义一套参数模型。
+
 ## 简介
 
 appliance-plugin 是一个高性能的白板绘制插件，依赖 [white-web-sdk](https://www.npmjs.com/package/white-web-sdk) 和 [@netless/window-manager](https://www.npmjs.com/package/@netless/window-manager)，并基于 Web API 对 [OffscreenCanvas](https://developer.mozilla.org/zh-CN/docs/Web/API/OffscreenCanvas) 的支持。
@@ -47,7 +83,7 @@ appliance-plugin 是一个高性能的白板绘制插件，依赖 [white-web-sdk
 npm install @netless/appliance-plugin
 ```
 
-> **Fastboard full 包说明：** 如果你是通过 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 配合 `enableAppliancePlugin` 使用，请安装带有 `./bridge` 导出的 `@netless/appliance-plugin` 版本，建议 `>= 1.1.35`（`./bridge` 首次出现在 `>= 1.1.34-beta.2`）。
+> **Fastboard full 包说明：** 如果你是通过 `@netless/fastboard-full` 或 `@netless/fastboard-react-full` 配合 `enableAppliancePlugin` 使用，请安装 `>=1.1.44 <2` 的插件正式版（`./bridge` 首次出现在 `>= 1.1.34-beta.2`）。
 >
 > 业务代码继续引用 `@netless/appliance-plugin` 即可，不需要也不建议手动改成 `@netless/appliance-plugin/bridge`。`@netless/appliance-plugin/bridge` 由 fastboard full 在内部加载，用来复用 full 内部已经 bundled 的 `white-web-sdk` runtime。
 
@@ -95,7 +131,7 @@ const app = useFastboard(() => ({
     },
     managerConfig: {
       cursor: true,
-      enableAppliancePlugin: true,
+      supportAppliancePlugin: true,
       ...
     },
     enableAppliancePlugin: {

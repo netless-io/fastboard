@@ -348,9 +348,13 @@
     {#each $apps as netless_app}
       {@const { icon, label, kind, onClick } = netless_app}
       {@const state = $status && $status[kind]}
-      {@const on_click = () => {
-        app && onClick(app);
+      {@const on_click = async () => {
         tippy_hide_all();
+        try {
+          if (app) await onClick(app);
+        } catch (error) {
+          console.warn("Fastboard app creation failed", error);
+        }
       }}
       <button
         class="{name}-app-btn {kind} {theme}"

@@ -1,6 +1,6 @@
 {
   "extends": "../../tsconfig-base.json",
-  "include": ["src"],
+  "include": ["src", "test"],
   "exclude": ["node_modules", "**/node_modules/**", "**/.svelte2tsx-language-server-files/**"],
   "compilerOptions": {
     "types": [],

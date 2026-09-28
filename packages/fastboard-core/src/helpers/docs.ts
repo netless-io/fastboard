@@ -1,36 +1,12 @@
 import type { FastboardApp, WindowManager } from "../impl";
+import type { DocsEvent, DocsEventOptions, DispatchDocsEventResult } from "@netless/window-manager";
 
-export type DocsEvent = "prevPage" | "nextPage" | "prevStep" | "nextStep" | "jumpToPage" | "scalePage";
-
-export interface DocsEventOptions {
-  /** `mainView` or a concrete appId. Defaults to the focused app, then mainView. */
-  target?: string;
-  /** @deprecated Use `target` instead. */
-  appId?: string;
-  /** Used by `jumpToPage` event, range from 1 to total pages count. */
-  page?: number;
-  /** Used by `scalePage`. Relative to fitted size; `1` means fitted size. */
-  scale?: number;
-}
-
-export type DispatchDocsEventFailureReason =
-  | "invalidEvent"
-  | "invalidOptions"
-  | "targetNotFound"
-  | "targetNotSupported"
-  | "eventNotSupported"
-  | "notWritable"
-  | "stateUnavailable"
-  | "outOfRange"
-  | "commandFailed";
-
-export type DispatchDocsEventResult =
-  | { accepted: true }
-  | {
-      accepted: false;
-      reason: DispatchDocsEventFailureReason;
-      message: string;
-    };
+export type {
+  DocsEvent,
+  DocsEventOptions,
+  DispatchDocsEventFailureReason,
+  DispatchDocsEventResult,
+} from "@netless/window-manager";
 
 type DocsEventManager = WindowManager & {
   dispatchDocsEvent?: (event: DocsEvent, options?: DocsEventOptions) => Promise<DispatchDocsEventResult>;
