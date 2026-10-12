@@ -23,8 +23,8 @@
     "@hyrious/esbuild-plugin-svelte": "^0.2.0",
     "@hyrious/rimraf": "^0.1.0",
     "@netless/app-in-mainview-plugin": "^0.0.10",
-    "@netless/appliance-plugin": "^1.1.44",
-    "@netless/window-manager": "^1.0.23",
+    "@netless/appliance-plugin": "^1.1.45",
+    "@netless/window-manager": "^1.0.25",
     "@sveltejs/vite-plugin-svelte": "2.4.2",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
@@ -50,10 +50,10 @@
   },
   "pnpm": {
     "overrides": {
-      "@netless/window-manager": "1.0.23",
-      "@netless/appliance-plugin": "1.1.44",
+      "@netless/window-manager": "^1.0.25",
+      "@netless/appliance-plugin": "^1.1.45",
       "@netless/app-in-mainview-plugin": "^0.0.10",
-      "white-web-sdk": "2.16.58",
+      "white-web-sdk": "^2.16.59",
       "jspdf": "2.5.1"
     },
     "peerDependencyRules": {

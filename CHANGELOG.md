@@ -1,4 +1,11 @@
 # Changelog
+## 1.1.10 (2026-10-12)
+- update `white-web-sdk` to `^2.16.59`, `@netless/window-manager` to `^1.0.25`, `@netless/appliance-plugin` to `^1.1.45`, and `@netless/app-slide` to `^0.2.107`.
+- preserve factory-default parameter sources so dynamic configuration can override Fastboard defaults while explicit host parameters retain priority.
+- apply resolved remote hotkeys to the Fastboard UI when the host does not provide hotkeys.
+- reject incompatible multi-view or appliance-plugin settings and clean up acquired room and manager resources.
+- add dynamic-configuration priority and cleanup regression coverage.
+
 ## 1.1.9 (2026-09-28)
 - update `white-web-sdk` to `^2.16.58`, `@netless/window-manager` to `^1.0.23`, `@netless/appliance-plugin` to `^1.1.44`, and `@netless/app-slide` to `^0.2.106`.
 - align unified document events, page queries and structured results with Window Manager; preserve the default DocsViewer renderer and opt-in Presentation renderer.

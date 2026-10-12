@@ -1,3 +1,4 @@
+import { withDynamicConfigDefaults } from "./dynamic-config-parameters";
 import type {
   AddPageParams,
   PublicEvent,
@@ -901,7 +902,7 @@ export async function createFastboard<TEventData extends Record<string, any> = a
     useMobXState: true,
   });
 
-  const hotKeys = joinRoomParams.hotKeys || {
+  let hotKeys = joinRoomParams.hotKeys || {
     ...DefaultHotKeys,
     changeToSelector: "s",
     changeToLaserPointer: "z",
@@ -922,26 +923,41 @@ export async function createFastboard<TEventData extends Record<string, any> = a
   }
 
   const room = await sdk.joinRoom(
-    {
-      floatBar: true,
-      hotKeys,
-      ...joinRoomParamsWithPlugin,
-      useMultiViews: true,
-      disableNewPencil: false,
-      disableMagixEventDispatchLimit: true,
-    },
+    withDynamicConfigDefaults(
+      {
+        floatBar: true,
+        hotKeys,
+        useMultiViews: true,
+        disableNewPencil: false,
+        disableMagixEventDispatchLimit: true,
+      },
+      joinRoomParamsWithPlugin
+    ),
     callbacks
   );
   const disposers: RuntimeDisposer[] = [() => room.disconnect()];
   try {
+    if (room.useMultiViews === false) {
+      throw new Error("Fastboard requires useMultiViews=true");
+    }
+    const remoteHotKeys = (
+      room as unknown as { dynamicConfig?: { joinRoom?: { hotKeys?: Partial<HotKeys> } } }
+    ).dynamicConfig?.joinRoom?.hotKeys;
+    if (joinRoomParams.hotKeys === undefined && remoteHotKeys !== undefined) hotKeys = remoteHotKeys;
     const syncedStore = await SyncedStorePlugin.init<TEventData>(room);
-    const manager = await WindowManager.mount({
-      cursor: true,
-      ...managerConfig,
-      ...(isEnableAppliancePlugin ? { supportAppliancePlugin: true } : {}),
-      room,
-    });
+    const manager = await WindowManager.mount(
+      withDynamicConfigDefaults(
+        {
+          cursor: true,
+          ...(isEnableAppliancePlugin ? { supportAppliancePlugin: true } : {}),
+        },
+        { ...managerConfig, room }
+      )
+    );
     disposers.push(() => manager.destroy());
+    if (isEnableAppliancePlugin && WindowManager.supportAppliancePlugin === false) {
+      throw new Error("Appliance Plugin requires supportAppliancePlugin=true");
+    }
     attachFastboardBridgeRuntime(manager, {
       whiteWebSdk: {
         autorun,
