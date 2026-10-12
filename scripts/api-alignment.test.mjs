@@ -1,7 +1,54 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import vm from "node:vm";
+import { existsSync } from "node:fs";
 import { build } from "esbuild";
+
+// These integration cases use sibling candidate sources in the managed workspace.
+// Standalone Fastboard CI still runs all factory/lifecycle tests without sibling repositories.
+const hasCandidateConsumers = [
+  "../white-sdk/web-sdk/src/dynamicConfig/Parameters.ts",
+  "../window-manager/src/Utils/dynamicConfig.ts",
+  "../appliance-plugin/src/plugin/dynamicConfig.ts",
+  "../Whiteboard-bridge/src/bridge/DynamicConfigParameters.ts",
+].every(existsSync);
+const parameterBundle = hasCandidateConsumers
+  ? await build({
+      stdin: {
+        contents: `
+    export { mergeDynamicJoinRoomParameters } from "../white-sdk/web-sdk/src/dynamicConfig/Parameters";
+    export { applyDynamicMountParams } from "../window-manager/src/Utils/dynamicConfig";
+    export { mergeApplianceDynamicExtras } from "../appliance-plugin/src/plugin/dynamicConfig";
+    export { mergeDefaultAppliancePluginExtras } from "../Whiteboard-bridge/src/bridge/AppliancePluginDefaults";
+    export { withDynamicConfigDefaults } from "../Whiteboard-bridge/src/bridge/DynamicConfigParameters";
+  `,
+        resolveDir: process.cwd(),
+        loader: "ts",
+      },
+      bundle: true,
+      write: false,
+      platform: "node",
+      format: "cjs",
+    })
+  : undefined;
+const parameterModule = {
+  exports: {
+    mergeDynamicJoinRoomParameters: (_remote, local) => local,
+    applyDynamicMountParams: local => local,
+    mergeApplianceDynamicExtras: (_room, local) => local,
+  },
+};
+if (parameterBundle)
+  new Function("module", "exports", parameterBundle.outputFiles[0].text)(
+    parameterModule,
+    parameterModule.exports
+  );
+const {
+  mergeDynamicJoinRoomParameters,
+  applyDynamicMountParams,
+  mergeApplianceDynamicExtras,
+  mergeDefaultAppliancePluginExtras,
+  withDynamicConfigDefaults,
+} = parameterModule.exports;
 
 const sources = ["FastboardApp", "FastboardPlayer"];
 const bundles = await Promise.all(
@@ -19,9 +66,9 @@ const bundles = await Promise.all(
   })
 );
 
-function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup } = {}) {
+function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup, dynamicConfig } = {}) {
   const events = [];
-  let mountParams, adaptor, image;
+  let mountParams, adaptor, image, joinParams;
   const callbacks = {
     on() {},
     off() {
@@ -87,8 +134,11 @@ function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup 
   };
   const sdk = {
     WhiteWebSdk: class {
-      async joinRoom() {
+      async joinRoom(params) {
         events.push("join");
+        joinParams = mergeDynamicJoinRoomParameters(dynamicConfig?.joinRoom, params);
+        displayer.useMultiViews = joinParams.useMultiViews;
+        displayer.dynamicConfig = dynamicConfig;
         return displayer;
       }
       async replayRoom() {
@@ -107,7 +157,9 @@ function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup 
       WindowManager: {
         register() {},
         mount: async params => {
-          mountParams = params;
+          mountParams = applyDynamicMountParams(params, !events.includes("replay"));
+          modules["@netless/window-manager"].WindowManager.supportAppliancePlugin =
+            mountParams.supportAppliancePlugin;
           if (failMount) throw new Error("mount");
           return manager;
         },
@@ -127,7 +179,15 @@ function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup 
       loadApplianceMultiPluginModule: async () => ({
         ApplianceMultiPlugin: {
           getInstance: async (_manager, input) => {
-            adaptor = input;
+            adaptor = dynamicConfig?.appliancePlugin?.extras
+              ? {
+                  ...input,
+                  options: {
+                    ...input.options,
+                    extras: mergeApplianceDynamicExtras(displayer, input.options.extras),
+                  },
+                }
+              : input;
             if (failPlugin) throw new Error("plugin");
             return plugin;
           },
@@ -147,21 +207,22 @@ function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup 
   };
   const load = code => {
     const module = { exports: {} };
-    vm.runInNewContext(code, {
+    // Factory parameters and actual consumers share one realm, as in the browser.
+    new Function("module", "exports", "console", "window", "Image", "require", code)(
       module,
-      exports: module.exports,
-      console: { warn() {} },
-      window: { innerWidth: 100, innerHeight: 100 },
-      Image: class {
+      module.exports,
+      { warn() {} },
+      { innerWidth: 100, innerHeight: 100 },
+      class {
         constructor() {
           image = this;
         }
       },
-      require: name => {
+      name => {
         if (!modules[name]) throw new Error(`Unexpected import ${name}`);
         return modules[name];
-      },
-    });
+      }
+    );
     return module.exports;
   };
   return {
@@ -171,6 +232,7 @@ function runtime({ failStore, failMount, failPlugin, failAppPlugin, failCleanup 
     manager,
     displayer,
     params: () => mountParams,
+    joinParams: () => joinParams,
     adaptor: () => adaptor,
     image: () => image,
   };
@@ -199,7 +261,7 @@ for (const replay of [false, true]) {
     assert.equal(r.adaptor().options, opts.enableAppliancePlugin);
     await app.destroy();
   });
-  test(`${name}: managerConfig is immutable and support flag cannot disable an enabled plugin`, async () => {
+  test(`${name}: managerConfig remains immutable and incompatible support is handled`, async () => {
     const r = runtime();
     const opts = options();
     opts.managerConfig = Object.freeze({
@@ -207,11 +269,18 @@ for (const replay of [false, true]) {
       forceMaximized: true,
       lazySetupInMaximizedMode: true,
     });
-    const app = await create(r, opts);
-    assert.equal(r.params().supportAppliancePlugin, true);
+    if (replay) {
+      const app = await create(r, opts);
+      assert.equal(r.params().supportAppliancePlugin, true);
+      await app.destroy();
+    } else {
+      await assert.rejects(create(r, opts), /requires supportAppliancePlugin=true/);
+      assert.equal(r.params().supportAppliancePlugin, false);
+      assert.ok(r.events.includes("manager.destroy"));
+      assert.ok(r.events.includes("disconnect"));
+    }
     assert.equal(opts.managerConfig.supportAppliancePlugin, false);
     assert.equal(r.params().lazySetupInMaximizedMode, true);
-    await app.destroy();
   });
   test(`${name}: incomplete worker configuration fails before joining`, async () => {
     const r = runtime();
@@ -279,3 +348,157 @@ test("replay rate can be set before the first subscription", async () => {
   await app.destroy();
   assert.throws(() => app.playbackRate.set(1), /destroyed/);
 });
+
+test(
+  "remote configuration replaces factory defaults and updates UI hotkeys",
+  { skip: !hasCandidateConsumers },
+  async () => {
+    const r = runtime({
+      dynamicConfig: {
+        joinRoom: { floatBar: false, hotKeys: {}, disableNewPencil: true },
+        windowManager: { cursor: false },
+        appliancePlugin: { extras: { useWorker: "mainThread" } },
+      },
+    });
+    const app = await r.createFastboard(options());
+    assert.equal(r.joinParams().floatBar, false);
+    assert.equal(r.joinParams().disableNewPencil, true);
+    assert.deepEqual(r.joinParams().hotKeys, {});
+    assert.deepEqual(app.hotKeys, {});
+    assert.equal(r.params().cursor, false);
+    assert.equal(r.adaptor().options.extras.useWorker, "mainThread");
+    assert.ok(!JSON.stringify(r.joinParams()).includes("__netlessDynamicConfigLayers"));
+    await app.destroy();
+  }
+);
+
+test(
+  "host explicit false, zero, atomic empty and default-equal values remain highest",
+  { skip: !hasCandidateConsumers },
+  async () => {
+    const r = runtime({
+      dynamicConfig: {
+        joinRoom: { floatBar: false, undoCacheScenesCount: 32, hotKeys: { changeToPencil: "x" } },
+        windowManager: { cursor: false },
+        appliancePlugin: { extras: { useWorker: "mainThread" } },
+      },
+    });
+    const opts = options();
+    opts.joinRoom = { ...opts.joinRoom, floatBar: true, undoCacheScenesCount: 0, hotKeys: {} };
+    opts.managerConfig = { cursor: true };
+    opts.enableAppliancePlugin.extras = { useWorker: "auto" };
+    const app = await r.createFastboard(opts);
+    assert.equal(r.joinParams().floatBar, true);
+    assert.equal(r.joinParams().undoCacheScenesCount, 0);
+    assert.deepEqual(r.joinParams().hotKeys, {});
+    assert.equal(r.params().cursor, true);
+    assert.equal(r.adaptor().options.extras.useWorker, "auto");
+    await app.destroy();
+  }
+);
+
+test(
+  "incompatible multi-view mode rejects and releases the room instead of overriding it",
+  { skip: !hasCandidateConsumers },
+  async () => {
+    const r = runtime({ dynamicConfig: { joinRoom: { useMultiViews: false } } });
+    await assert.rejects(r.createFastboard(options()), /requires useMultiViews=true/);
+    assert.equal(r.joinParams().useMultiViews, false);
+    assert.deepEqual(r.events, ["join", "disconnect"]);
+  }
+);
+
+test(
+  "Bridge defaults, remote rules and explicit nested host values stay distinct",
+  { skip: !hasCandidateConsumers },
+  () => {
+    const room = {
+      dynamicConfig: {
+        appliancePlugin: {
+          extras: {
+            allowImageBitmapFallback: true,
+            backgroundImageLoadOptions: { maxRetries: 3, timeoutMs: 15000 },
+          },
+        },
+        windowManager: {
+          chessboard: false,
+          containerSizeRatio: 1,
+          pageScaleRange: { minScale: 1, maxScale: 4 },
+        },
+      },
+    };
+    assert.equal(
+      mergeApplianceDynamicExtras(room, mergeDefaultAppliancePluginExtras()).allowImageBitmapFallback,
+      true
+    );
+    const host = mergeApplianceDynamicExtras(
+      room,
+      mergeDefaultAppliancePluginExtras(
+        { allowImageBitmapFallback: false, backgroundImageLoadOptions: { maxRetries: 0 } },
+        { backgroundImageLoadOptions: { timeoutMs: 20000 } }
+      )
+    );
+    assert.equal(host.allowImageBitmapFallback, false);
+    assert.deepEqual(host.backgroundImageLoadOptions, { maxRetries: 0, timeoutMs: 20000 });
+    const overrides = [];
+    const result = applyDynamicMountParams(
+      withDynamicConfigDefaults(
+        {
+          chessboard: true,
+          containerSizeRatio: 9 / 16,
+          pageScaleRange: { minScale: 0.5, maxScale: 2 },
+          builtinAppOptions: { Presentation: { onReady() {} } },
+        },
+        { room, pageScaleRange: { maxScale: 3 } }
+      ),
+      true,
+      path => overrides.push(path)
+    );
+    assert.equal(result.chessboard, false);
+    assert.equal(result.containerSizeRatio, 1);
+    assert.deepEqual(result.pageScaleRange, { minScale: 1, maxScale: 3 });
+    assert.equal(typeof result.builtinAppOptions.Presentation.onReady, "function");
+    assert.deepEqual(overrides, ["windowManager.pageScaleRange.maxScale"]);
+    assert.equal(
+      mergeApplianceDynamicExtras({}, mergeDefaultAppliancePluginExtras()).allowImageBitmapFallback,
+      false
+    );
+    // Blacklist version keys are literal keys, including dots. Only host overrides
+    // of actual remote keys belong in diagnostics, never inherited defaults.
+    const remote = { blacklist: { "122.0": 1 } };
+    const local = () =>
+      withDynamicConfigDefaults(
+        { blacklist: { "122.0": 1, "121.0": 1 } },
+        { blacklist: { "122.0": 0, "121.0": 0 } }
+      );
+    const consumers = [
+      ["joinRoom", observe => mergeDynamicJoinRoomParameters(remote, local(), observe)],
+      [
+        "windowManager",
+        observe =>
+          applyDynamicMountParams(
+            withDynamicConfigDefaults(
+              { blacklist: { "122.0": 1, "121.0": 1 } },
+              { blacklist: { "122.0": 0, "121.0": 0 }, room: { dynamicConfig: { windowManager: remote } } }
+            ),
+            true,
+            observe
+          ),
+      ],
+      [
+        "appliancePlugin.extras",
+        observe =>
+          mergeApplianceDynamicExtras(
+            { dynamicConfig: { appliancePlugin: { extras: remote } } },
+            local(),
+            observe
+          ),
+      ],
+    ];
+    for (const [prefix, consume] of consumers) {
+      const observed = [];
+      assert.deepEqual(consume(path => observed.push(path)).blacklist, { "122.0": 0, "121.0": 0 });
+      assert.deepEqual(observed, [`${prefix}.blacklist.122.0`]);
+    }
+  }
+);
